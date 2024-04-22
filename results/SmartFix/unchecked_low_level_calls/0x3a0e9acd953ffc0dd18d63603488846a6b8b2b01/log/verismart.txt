@@ -1,0 +1,191 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 21
+[INFO] reachable : 11
+[INFO] Generating Paths ... took 0.000183s
+[INFO] # path : 22
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000395s
+Generating VCs ... took 0.000871s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.0383
+[
+0 -> true
+]
+[
+]
+1/4 ... [IO] line 72, (Holders[msg.sender] + msg.value) ... unproven
+2/4 ... [IO] line 98, (Holders[_addr] - _wei) ... proven
+3/4 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
+4/4 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
+took 0.107634s
+
+Generating VCs ... took 0.000384s
+Checking validity of VCs ... took 0.017585s
+
+Generating VCs ... took 0.000405s
+Checking validity of VCs ... took 0.012962s
+
+Generating VCs ... took 0.000438s
+Checking validity of VCs ... took 0.0129s
+
+Generating VCs ... took 0.000437s
+Checking validity of VCs ... took 0.18286s
+
+Generating VCs ... took 0.000403s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 6 Total elapsed : 0.543248
+[
+0 -> ((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true))
+]
+[
+]
+1/4 ... [IO] line 72, (Holders[msg.sender] + msg.value) ... unproven
+2/4 ... [IO] line 98, (Holders[_addr] - _wei) ... proven
+3/4 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
+4/4 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
+took 0.304418s
+
+Generating VCs ... took 0.000448s
+Checking validity of VCs ... took 0.189254s
+
+Generating VCs ... took 0.000688s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 8 Total elapsed : 6.287361
+[
+0 -> (((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true)) /\ @Invest_sum >= Σ_u Holders__@82)
+]
+[
+]
+1/4 ... [IO] line 72, (Holders[msg.sender] + msg.value) ... unproven
+2/4 ... [IO] line 98, (Holders[_addr] - _wei) ... proven
+3/4 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
+4/4 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
+took 5.54064s
+
+Generating VCs ... took 0.000466000000001s
+Checking validity of VCs ... took 7.168053s
+
+Iter : 10 To explore : 10 Explored : 55 Total elapsed : 13.58028
+Generating VCs ... took 0.001618s
+Checking validity of VCs ... took 21.28766s
+
+Generating VCs ... took 0.000624000000002s
+Checking validity of VCs ... took 21.261556s
+
+Generating VCs ... took 0.000689999999999s
+Checking validity of VCs ... took 0.748845s
+
+Generating VCs ... took 0.000403999999996s
+Checking validity of VCs ... took 2.21688s
+
+Generating VCs ... took 0.000506000000001s
+Checking validity of VCs ... took 1.049854s
+
+Generating VCs ... took 0.00074s
+Checking validity of VCs ... took 1.774018s
+
+Generating VCs ... took 0.000407000000003s
+Checking validity of VCs ... took 0.727752s
+
+Generating VCs ... took 0.000414999999997s
+Checking validity of VCs ... took 2.673062s
+
+Generating VCs ... took 0.000437000000005s
+Checking validity of VCs ... took 22.294619s
+
+Generating VCs ... took 0.000412999999995s
+Checking validity of VCs ... took 2.337828s
+
+Iter : 20 To explore : 46 Explored : 101 Total elapsed : 89.975571
+Generating VCs ... took 0.000454999999988s
+Checking validity of VCs ... took 21.822178s
+
+Generating VCs ... took 0.000412999999995s
+Checking validity of VCs ... took 3.478783s
+
+Generating VCs ... took 0.000520000000009s
+Checking validity of VCs ... took 5.546568s
+
+Generating VCs ... took 0.00056699999999s
+Checking validity of VCs ... took 0.013378s
+
+Generating VCs ... took 0.000654999999995s
+Checking validity of VCs ... took 5.885652s
+
+Generating VCs ... took 0.000425000000007s
+Checking validity of VCs ... took 4.587078s
+
+Generating VCs ... took 0.000418999999994s
+Checking validity of VCs ... took 6.775589s
+
+Generating VCs ... took 0.00042000000002s
+Checking validity of VCs ... took 5.347422s
+
+Generating VCs ... took 0.000461999999999s
+Checking validity of VCs ... took 21.045111s
+
+Generating VCs ... took 0.000204999999994s
+Checking validity of VCs ... 
+1/15 ... [NO_EFFECT] line 18, (@pre8 == newOwner) ... unproven
+2/15 ... [NO_EFFECT] line 26, (@pre9 == owner) ... unproven
+3/15 ... [NO_EFFECT] line 57, (@pre5 == owner) ... unproven
+4/15 ... [NO_EFFECT] line 72, (@pre6 == Holders[msg.sender]) ... unproven
+5/15 ... [NO_EFFECT] line 98, (@pre7 == Holders[_addr]) ... unproven
+6/15 ... [ASSIGN_CONST] line 72, (Holders[msg.sender] == 0) ... unproven
+7/15 ... [ASSIGN_CONST] line 98, (Holders[_addr] == 0) ... unproven
+8/15 ... [DEAD] line 24, false ... unproven
+9/15 ... [DEAD] line 32, false ... unproven
+10/15 ... [DEAD] line 64, false ... unproven
+11/15 ... [DEAD] line 70, false ... unproven
+12/15 ... [DEAD] line 80, false ... unproven
+13/15 ... [DEAD] line 83, false ... unproven
+14/15 ... [DEAD] line 92, false ... unproven
+15/15 ... [DEAD] line 94, false ... unproven
+took 1.054248s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 72, (Holders[msg.sender] + msg.value) : unproven
+[2] [IO] line 98, (Holders[_addr] - _wei) : proven
+[3] [TX_ORG] line 24, assume((msg.sender == newOwner)); : proven
+[4] [TX_ORG] line 32, assume((owner == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 18, (@pre8 == newOwner) : unproven
+[2] [NO_EFFECT] line 26, (@pre9 == owner) : unproven
+[3] [NO_EFFECT] line 57, (@pre5 == owner) : unproven
+[4] [NO_EFFECT] line 72, (@pre6 == Holders[msg.sender]) : unproven
+[5] [NO_EFFECT] line 98, (@pre7 == Holders[_addr]) : unproven
+[6] [ASSIGN_CONST] line 72, (Holders[msg.sender] == 0) : unproven
+[7] [ASSIGN_CONST] line 98, (Holders[_addr] == 0) : unproven
+[8] [DEAD] line 24, false : unproven
+[9] [DEAD] line 32, false : unproven
+[10] [DEAD] line 64, false : unproven
+[11] [DEAD] line 70, false : unproven
+[12] [DEAD] line 80, false : unproven
+[13] [DEAD] line 83, false : unproven
+[14] [DEAD] line 92, false : unproven
+[15] [DEAD] line 94, false : unproven
+
+============ Statistics ============
+# Iter                    : 28
+# Alarm / Query           : 1 / 4
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 2
+
+Time Elapsed (Real) : 165.607914925
+Time Elapsed (CPU)  : 165.545225

@@ -1,0 +1,186 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 14
+[INFO] reachable : 11
+[INFO] Generating Paths ... took 0.066871s
+[INFO] # path : 923
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.151101s
+Generating VCs ... took 1.748019s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 4.681156
+[
+0 -> true
+]
+[
+]
+1/22 ... [IO] line 74, (msg.value - 1000000000000000000) ... proven
+2/22 ... [IO] line 87, (dValue * multiplier) ... unproven
+3/22 ... [IO] line 88, (users[msg.sender].deposits + 1) ... unproven
+4/22 ... [IO] line 89, (entries.length - 1) ... proven
+5/22 ... [IO] line 92, (100 - fee) ... unproven
+6/22 ... [IO] line 92, (balance + ((dValue * (100 - fee)) / 100)) ... unproven
+7/22 ... [IO] line 92, (dValue * (100 - fee)) ... unproven
+8/22 ... [IO] line 104, (users[theEntry.entryAddress].payoutsReceived + 1) ... unproven
+9/22 ... [IO] line 106, (balance - payout) ... unproven
+10/22 ... [IO] line 108, (unpaidEntries.length - 1) ... proven
+11/22 ... [IO] line 109, (unpaidEntries.length - 1) ... proven
+12/22 ... [IO] line 111, (unpaidEntries.length - 1) ... unproven
+13/22 ... [IO] line 116, (this.balance - balance) ... unproven
+14/22 ... [IO] line 128, (FACTOR * 100) ... proven
+15/22 ... [IO] line 129, (block.number - 1) ... unproven
+16/22 ... [ETH_LEAK] line 60, msg.sender.send(msg.value); ... unproven
+17/22 ... [ETH_LEAK] line 74, msg.sender.send((msg.value - 1000000000000000000)); ... unproven
+18/22 ... [ETH_LEAK] line 102, theEntry.entryAddress.send(payout); ... unproven
+19/22 ... [ETH_LEAK] line 119, owner.send(fees); ... unproven
+20/22 ... [TX_ORG] line 37, assume((msg.sender == owner)); ... proven
+21/22 ... [TX_ORG] line 79, assume((users[msg.sender].id == address(0))); ... proven
+22/22 ... [TX_ORG] line 172, assume((users[user].id != address(0))); ... proven
+took 837.913725s
+
+Generating VCs ... took 0.736205s
+Checking validity of VCs ... 
+1/48 ... [NO_EFFECT] line 81, (@pre13 == users[msg.sender].id) ... unproven
+2/48 ... [NO_EFFECT] line 87, (@pre10 == struct_init(Entry, msg.sender, dValue, ((dValue * multiplier) / 100), false).payout) ... unproven
+3/48 ... [NO_EFFECT] line 87, (@pre11 == struct_init(Entry, msg.sender, dValue, ((dValue * multiplier) / 100), false).deposit) ... unproven
+4/48 ... [NO_EFFECT] line 87, (@pre12 == struct_init(Entry, msg.sender, dValue, ((dValue * multiplier) / 100), false).entryAddress) ... unproven
+5/48 ... [NO_EFFECT] line 88, (@pre9 == users[msg.sender].deposits) ... unproven
+6/48 ... [NO_EFFECT] line 92, (@pre8 == balance) ... unproven
+7/48 ... [NO_EFFECT] line 94, (@pre7 == index) ... unproven
+8/48 ... [NO_EFFECT] line 100, (@pre6 == payout) ... unproven
+9/48 ... [NO_EFFECT] line 104, (@pre5 == users[theEntry.entryAddress].payoutsReceived) ... unproven
+10/48 ... [NO_EFFECT] line 106, (@pre4 == balance) ... unproven
+11/48 ... [NO_EFFECT] line 109, (@pre3 == unpaidEntries[index]) ... unproven
+12/48 ... [NO_EFFECT] line 111, (@pre2 == unpaidEntries.length) ... unproven
+13/48 ... [NO_EFFECT] line 116, (@pre1 == fees) ... unproven
+14/48 ... [NO_EFFECT] line 128, (@pre17 == factor) ... unproven
+15/48 ... [NO_EFFECT] line 129, (@pre16 == lastBlockNumber) ... unproven
+16/48 ... [NO_EFFECT] line 130, (@pre15 == hashVal) ... unproven
+17/48 ... [NO_EFFECT] line 132, (@pre14 == result) ... unproven
+18/48 ... [NO_EFFECT] line 138, (@pre18 == owner) ... unproven
+19/48 ... [NO_EFFECT] line 144, (@pre19 == multiplier) ... unproven
+20/48 ... [NO_EFFECT] line 150, (@pre20 == fee) ... unproven
+21/48 ... [NO_EFFECT] line 156, (@pre21 == factor) ... unproven
+22/48 ... [NO_EFFECT] line 161, (@pre22 == feePercentage) ... unproven
+23/48 ... [NO_EFFECT] line 166, (@pre23 == count) ... unproven
+24/48 ... [NO_EFFECT] line 174, (@pre25 == deposits) ... unproven
+25/48 ... [NO_EFFECT] line 175, (@pre24 == payouts) ... unproven
+26/48 ... [NO_EFFECT] line 183, (@pre27 == user) ... unproven
+27/48 ... [NO_EFFECT] line 184, (@pre26 == payout) ... unproven
+28/48 ... [ASSIGN_CONST] line 88, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (users[msg.sender].deposits == 0)) ... unproven
+29/48 ... [ASSIGN_CONST] line 92, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (balance == 0)) ... unproven
+30/48 ... [ASSIGN_CONST] line 104, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (users[theEntry.entryAddress].payoutsReceived == 0)) ... unproven
+31/48 ... [ASSIGN_CONST] line 106, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (balance == 0)) ... unproven
+32/48 ... [ASSIGN_CONST] line 111, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (unpaidEntries.length == 0)) ... unproven
+33/48 ... [ASSIGN_CONST] line 116, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (fees == 0)) ... unproven
+34/48 ... [ASSIGN_CONST] line 129, (lastBlockNumber == 0) ... unproven
+35/48 ... [DEAD] line 37, false ... unproven
+36/48 ... [DEAD] line 54, false ... unproven
+37/48 ... [DEAD] line 59, false ... unproven
+38/48 ... [DEAD] line 64, false ... unproven
+39/48 ... [DEAD] line 72, false ... unproven
+40/48 ... [DEAD] line 79, false ... unproven
+41/48 ... [DEAD] line 94, false ... unproven
+42/48 ... [DEAD] line 98, false ... unproven
+43/48 ... [DEAD] line 108, false ... unproven
+44/48 ... [DEAD] line 117, false ... unproven
+45/48 ... [DEAD] line 142, false ... unproven
+46/48 ... [DEAD] line 148, false ... unproven
+47/48 ... [DEAD] line 172, false ... unproven
+48/48 ... [DEAD] line 182, false ... unproven
+took 86.380165s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 74, (msg.value - 1000000000000000000) : proven
+[2] [IO] line 87, (dValue * multiplier) : unproven
+[3] [IO] line 88, (users[msg.sender].deposits + 1) : unproven
+[4] [IO] line 89, (entries.length - 1) : proven
+[5] [IO] line 92, (100 - fee) : unproven
+[6] [IO] line 92, (balance + ((dValue * (100 - fee)) / 100)) : unproven
+[7] [IO] line 92, (dValue * (100 - fee)) : unproven
+[8] [IO] line 104, (users[theEntry.entryAddress].payoutsReceived + 1) : unproven
+[9] [IO] line 106, (balance - payout) : unproven
+[10] [IO] line 108, (unpaidEntries.length - 1) : proven
+[11] [IO] line 109, (unpaidEntries.length - 1) : proven
+[12] [IO] line 111, (unpaidEntries.length - 1) : unproven
+[13] [IO] line 116, (this.balance - balance) : unproven
+[14] [IO] line 128, (FACTOR * 100) : proven
+[15] [IO] line 129, (block.number - 1) : unproven
+[16] [ETH_LEAK] line 60, msg.sender.send(msg.value); : unproven
+[17] [ETH_LEAK] line 74, msg.sender.send((msg.value - 1000000000000000000)); : unproven
+[18] [ETH_LEAK] line 102, theEntry.entryAddress.send(payout); : unproven
+[19] [ETH_LEAK] line 119, owner.send(fees); : unproven
+[20] [TX_ORG] line 37, assume((msg.sender == owner)); : proven
+[21] [TX_ORG] line 79, assume((users[msg.sender].id == address(0))); : proven
+[22] [TX_ORG] line 172, assume((users[user].id != address(0))); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 81, (@pre13 == users[msg.sender].id) : unproven
+[2] [NO_EFFECT] line 87, (@pre10 == struct_init(Entry, msg.sender, dValue, ((dValue * multiplier) / 100), false).payout) : unproven
+[3] [NO_EFFECT] line 87, (@pre11 == struct_init(Entry, msg.sender, dValue, ((dValue * multiplier) / 100), false).deposit) : unproven
+[4] [NO_EFFECT] line 87, (@pre12 == struct_init(Entry, msg.sender, dValue, ((dValue * multiplier) / 100), false).entryAddress) : unproven
+[5] [NO_EFFECT] line 88, (@pre9 == users[msg.sender].deposits) : unproven
+[6] [NO_EFFECT] line 92, (@pre8 == balance) : unproven
+[7] [NO_EFFECT] line 94, (@pre7 == index) : unproven
+[8] [NO_EFFECT] line 100, (@pre6 == payout) : unproven
+[9] [NO_EFFECT] line 104, (@pre5 == users[theEntry.entryAddress].payoutsReceived) : unproven
+[10] [NO_EFFECT] line 106, (@pre4 == balance) : unproven
+[11] [NO_EFFECT] line 109, (@pre3 == unpaidEntries[index]) : unproven
+[12] [NO_EFFECT] line 111, (@pre2 == unpaidEntries.length) : unproven
+[13] [NO_EFFECT] line 116, (@pre1 == fees) : unproven
+[14] [NO_EFFECT] line 128, (@pre17 == factor) : unproven
+[15] [NO_EFFECT] line 129, (@pre16 == lastBlockNumber) : unproven
+[16] [NO_EFFECT] line 130, (@pre15 == hashVal) : unproven
+[17] [NO_EFFECT] line 132, (@pre14 == result) : unproven
+[18] [NO_EFFECT] line 138, (@pre18 == owner) : unproven
+[19] [NO_EFFECT] line 144, (@pre19 == multiplier) : unproven
+[20] [NO_EFFECT] line 150, (@pre20 == fee) : unproven
+[21] [NO_EFFECT] line 156, (@pre21 == factor) : unproven
+[22] [NO_EFFECT] line 161, (@pre22 == feePercentage) : unproven
+[23] [NO_EFFECT] line 166, (@pre23 == count) : unproven
+[24] [NO_EFFECT] line 174, (@pre25 == deposits) : unproven
+[25] [NO_EFFECT] line 175, (@pre24 == payouts) : unproven
+[26] [NO_EFFECT] line 183, (@pre27 == user) : unproven
+[27] [NO_EFFECT] line 184, (@pre26 == payout) : unproven
+[28] [ASSIGN_CONST] line 88, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (users[msg.sender].deposits == 0)) : unproven
+[29] [ASSIGN_CONST] line 92, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (balance == 0)) : unproven
+[30] [ASSIGN_CONST] line 104, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (users[theEntry.entryAddress].payoutsReceived == 0)) : unproven
+[31] [ASSIGN_CONST] line 106, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (balance == 0)) : unproven
+[32] [ASSIGN_CONST] line 111, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (unpaidEntries.length == 0)) : unproven
+[33] [ASSIGN_CONST] line 116, ((!(((msg.sender != owner) && (msg.sender != theEntry.entryAddress)) && (owner != theEntry.entryAddress))) || (fees == 0)) : unproven
+[34] [ASSIGN_CONST] line 129, (lastBlockNumber == 0) : unproven
+[35] [DEAD] line 37, false : unproven
+[36] [DEAD] line 54, false : unproven
+[37] [DEAD] line 59, false : unproven
+[38] [DEAD] line 64, false : unproven
+[39] [DEAD] line 72, false : unproven
+[40] [DEAD] line 79, false : unproven
+[41] [DEAD] line 94, false : unproven
+[42] [DEAD] line 98, false : unproven
+[43] [DEAD] line 108, false : unproven
+[44] [DEAD] line 117, false : unproven
+[45] [DEAD] line 142, false : unproven
+[46] [DEAD] line 148, false : unproven
+[47] [DEAD] line 172, false : unproven
+[48] [DEAD] line 182, false : unproven
+
+============ Statistics ============
+# Iter                    : 1
+# Alarm / Query           : 14 / 22
+- integer over/underflow  : 10 / 15
+- kill-anyone             : 0 / 0
+- ether-leaking           : 4 / 4
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 3
+
+Time Elapsed (Real) : 929.271082878
+Time Elapsed (CPU)  : 929.230852

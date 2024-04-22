@@ -1,0 +1,233 @@
+{
+  "fileName": "results/reentrancy/reentrancy_dao/candidates/cand_4/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 17,
+  "time": 120.12056,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(sigeq(credit__@5:mapping(address => uint256),balance__@7:uint256),usum(@Invest_sum:uint256,credit__@5:mapping(address => uint256)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(sigeq(credit__@5:mapping(address => uint256),balance__@7:uint256),usum(@Invest_sum:uint256,credit__@5:mapping(address => uint256)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "withdrawAll",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balance - oCredit)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(credit[msg.sender] + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balance + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "withdrawAll",
+          "argTypes": []
+        }
+      ],
+      "exp": "callResult = msg.sender.call.value(oCredit)();",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE_EL",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "withdrawAll",
+          "argTypes": []
+        }
+      ],
+      "exp": "callResult = msg.sender.call.value(oCredit)();",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 13,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "withdrawAll",
+          "argTypes": []
+        }
+      ],
+      "exp": "(ReentrancyDAO, withdrawAll, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "RE",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(ReentrancyDAO, deposit, [])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "withdrawAll",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == oCredit)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "withdrawAll",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre4 == credit[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre3 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ASSIGN_CONST",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "withdrawAll",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "ASSIGN_CONST",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(credit[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "ASSIGN_CONST",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "ReentrancyDAO",
+          "methodName": "withdrawAll",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

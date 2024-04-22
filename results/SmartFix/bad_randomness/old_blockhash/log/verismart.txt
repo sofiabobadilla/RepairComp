@@ -1,0 +1,67 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 3
+[INFO] reachable : 3
+[INFO] Generating Paths ... took 0.000146s
+[INFO] # path : 11
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000234s
+Generating VCs ... took 0.00065s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.031584
+[
+0 -> true
+]
+[
+]
+1/2 ... [IO] line 29, (block.number + 1) ... unproven
+2/2 ... [ETH_LEAK] line 39, msg.sender.transfer(2000000000000000000); ... unproven
+took 0.458952s
+
+Generating VCs ... took 0.000218s
+Checking validity of VCs ... took 0.330732s
+
+Generating VCs ... took 0.000124s
+Checking validity of VCs ... 
+1/7 ... [NO_EFFECT] line 29, (@pre1 == guesses[msg.sender].block) ... unproven
+2/7 ... [ASSIGN_CONST] line 29, (guesses[msg.sender].block == 0) ... unproven
+3/7 ... [DEAD] line 25, false ... unproven
+4/7 ... [DEAD] line 26, false ... unproven
+5/7 ... [DEAD] line 33, false ... unproven
+6/7 ... [DEAD] line 38, false ... unproven
+7/7 ... [DEAD] line 39, false ... unproven
+took 0.178332s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 29, (block.number + 1) : unproven
+[2] [ETH_LEAK] line 39, msg.sender.transfer(2000000000000000000); : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 29, (@pre1 == guesses[msg.sender].block) : unproven
+[2] [ASSIGN_CONST] line 29, (guesses[msg.sender].block == 0) : unproven
+[3] [DEAD] line 25, false : unproven
+[4] [DEAD] line 26, false : unproven
+[5] [DEAD] line 33, false : unproven
+[6] [DEAD] line 38, false : unproven
+[7] [DEAD] line 39, false : unproven
+
+============ Statistics ============
+# Iter                    : 3
+# Alarm / Query           : 2 / 2
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 1.02361822128
+Time Elapsed (CPU)  : 0.999069

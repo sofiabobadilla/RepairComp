@@ -1,0 +1,394 @@
+{
+  "fileName": "results/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/candidates/cand_6/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 17,
+  "time": 174.770116,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "usum2(@Invest_sum:uint256,Acc__@10:mapping(address => struct PENNY_BY_PENNY.Holder),balance__@5:mapping2(struct PENNY_BY_PENNY.Holder => uint256))"
+    },
+    {
+      "key": "0",
+      "formula": "usum2(@Invest_sum:uint256,Acc__@10:mapping(address => struct PENNY_BY_PENNY.Holder),balance__@5:mapping2(struct PENNY_BY_PENNY.Holder => uint256))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 50,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.balance + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 51,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(now + _lockTime)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 63,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.balance - _am)",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 64,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE_EL",
+      "line": 64,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "SetMinSum",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(PENNY_BY_PENNY, SetMinSum, [uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "RE",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "SetLogFile",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(PENNY_BY_PENNY, SetLogFile, [address])",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "RE",
+      "line": 39,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Initialized",
+          "argTypes": []
+        }
+      ],
+      "exp": "(PENNY_BY_PENNY, Initialized, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "RE",
+      "line": 45,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(PENNY_BY_PENNY, Put, [uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "RE",
+      "line": 55,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(PENNY_BY_PENNY, Collect, [uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "RE",
+      "line": 72,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(PENNY_BY_PENNY, @fallback, [])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "SetMinSum",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == MinSum)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 50,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == acc.balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 51,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == acc.unlockTime)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 63,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre4 == acc.balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 99,
+      "signatures": [
+        {
+          "contractName": "LogFile",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre7 == LastMsg.Sender)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 100,
+      "signatures": [
+        {
+          "contractName": "LogFile",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre6 == LastMsg.Time)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "NO_EFFECT",
+      "line": 101,
+      "signatures": [
+        {
+          "contractName": "LogFile",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre5 == LastMsg.Val)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "ASSIGN_CONST",
+      "line": 50,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "ASSIGN_CONST",
+      "line": 51,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.unlockTime == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "ASSIGN_CONST",
+      "line": 63,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "DEAD",
+      "line": 51,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "DEAD",
+      "line": 60,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "DEAD",
+      "line": 76,
+      "signatures": [
+        {
+          "contractName": "PENNY_BY_PENNY",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

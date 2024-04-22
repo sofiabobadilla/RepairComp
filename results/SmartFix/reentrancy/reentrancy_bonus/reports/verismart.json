@@ -1,0 +1,164 @@
+{
+  "fileName": "smartbugs/dataset/reentrancy/reentrancy_bonus.sol",
+  "baseName": "reentrancy_bonus.sol",
+  "iter": 26,
+  "time": 146.269532,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(land(land(sigeq(rewardsForA__@13:mapping(address => uint256),0),sigeq(userBalances__@5:mapping(address => uint256),0)),noflow(rewardsForA__@13:mapping(address => uint256))),noflow(userBalances__@5:mapping(address => uint256)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(land(land(sigeq(rewardsForA__@13:mapping(address => uint256),0),sigeq(userBalances__@5:mapping(address => uint256),0)),noflow(rewardsForA__@13:mapping(address => uint256))),noflow(userBalances__@5:mapping(address => uint256)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(rewardsForA[recipient] + 100)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "withdrawReward",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(success,  ) = recipient.call.value(amountToWithdraw)(\"\");",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "RE_EL",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "withdrawReward",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(success,  ) = recipient.call.value(amountToWithdraw)(\"\");",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "RE",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "withdrawReward",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(Reentrancy_bonus, withdrawReward, [address])",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(Reentrancy_bonus, getFirstWithdrawalBonus, [address])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "withdrawReward",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre1 == amountToWithdraw)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre2 == rewardsForA[recipient])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(rewardsForA[recipient] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

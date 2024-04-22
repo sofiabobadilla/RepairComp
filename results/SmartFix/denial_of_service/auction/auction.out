@@ -1,0 +1,17 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 2
+[INFO] reachable : 2
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (ETH_LEAK, (DosAuction/bid/[]), 23, currentFrontrunner.send(currentBid))
+
+[INFO] # of basic patch components : 2
+[INFO] extracted components
+[
+InsertLine (16, assume((currentFrontrunner == msg.sender));),
+Change (DosAuction, bid, []) to constructor
+]
+- Regression found, results/denial_of_service/auction/candidates/cand_1/patch.sol

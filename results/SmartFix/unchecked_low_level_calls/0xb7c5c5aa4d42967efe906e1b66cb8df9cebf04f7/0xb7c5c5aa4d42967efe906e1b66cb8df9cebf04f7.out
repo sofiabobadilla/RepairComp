@@ -1,0 +1,27 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 3
+[INFO] reachable : 3
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (keepMyEther/@fallback/[]), 20, (balances[msg.sender] + msg.value)),
+    (ETH_LEAK, (keepMyEther/withdraw/[]), 25, msg.sender.call.value(balances[msg.sender])();),
+    (RE_EL, (keepMyEther/withdraw/[]), 25, msg.sender.call.value(balances[msg.sender])();)
+
+[INFO] # of basic patch components : 3
+[INFO] extracted components
+[
+InsertLine (20, assume(((balances[msg.sender] + msg.value) >= balances[msg.sender]));),
+AtomLst [
+Replace (25, balances[msg.sender], tmp__1)
+Move ([26] -> 25)
+InsertLine (25, tmp__1 = balances[msg.sender];)
+],
+AtomLst [
+Add @nonReentrant to (keepMyEther, @fallback, []) (line 19)
+Add @nonReentrant to (keepMyEther, withdraw, []) (line 23)
+]
+]
+- New best candidate, iter 1, 76.400550127s : results/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7/candidates/cand_2/patch.sol

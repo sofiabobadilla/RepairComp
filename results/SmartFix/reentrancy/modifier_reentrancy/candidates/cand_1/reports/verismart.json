@@ -1,0 +1,128 @@
+{
+  "fileName": "results/reentrancy/modifier_reentrancy/candidates/cand_1/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 17,
+  "time": 9.792231999999998,
+  "errMsg": null,
+  "invmap": [
+    { "key": "-1", "formula": "true" }, { "key": "0", "formula": "true" }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "ModifierEntrancy",
+          "methodName": "airDrop",
+          "argTypes": []
+        }
+      ],
+      "exp": "(tokenBalance[msg.sender] + 20)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "ModifierEntrancy",
+          "methodName": "airDrop",
+          "argTypes": []
+        }
+      ],
+      "exp": "(tokenBalance[msg.sender] + 20)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "RE",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "ModifierEntrancy",
+          "methodName": "airDrop",
+          "argTypes": []
+        }
+      ],
+      "exp": "(ModifierEntrancy, airDrop, [])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "ModifierEntrancy",
+          "methodName": "airDrop",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == tokenBalance[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "ASSIGN_CONST",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "ModifierEntrancy",
+          "methodName": "airDrop",
+          "argTypes": []
+        }
+      ],
+      "exp": "(tokenBalance[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "ModifierEntrancy",
+          "methodName": "airDrop",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "ModifierEntrancy",
+          "methodName": "airDrop",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "ModifierEntrancy",
+          "methodName": "airDrop",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

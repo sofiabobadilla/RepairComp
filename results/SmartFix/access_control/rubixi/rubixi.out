@@ -1,0 +1,44 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 20
+[INFO] reachable : 18
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (Rubixi/addPayout/[uint256]), 61, (msg.value * pyramidMultiplier)),
+    (IO, (Rubixi/addPayout/[uint256]), 68, (100 - _fee)),
+    (IO, (Rubixi/addPayout/[uint256]), 68, (balance + ((msg.value * (100 - _fee)) / 100))),
+    (IO, (Rubixi/addPayout/[uint256]), 68, (msg.value * (100 - _fee))),
+    (IO, (Rubixi/addPayout/[uint256]), 69, (collectedFees + ((msg.value * _fee) / 100))),
+    (IO, (Rubixi/addPayout/[uint256]), 69, (msg.value * _fee)),
+    (IO, (Rubixi/collectFeesInEther/[uint256]), 90, (_amt * 1000000000000000000)),
+    (IO, (Rubixi/collectPercentOfFees/[uint256]), 102, ((collectedFees / 100) * _pcent)),
+    (IO, (Rubixi/collectPercentOfFees/[uint256]), 104, (collectedFees - feesToCollect)),
+    (IO, (Rubixi/init/[]), 47, (collectedFees + msg.value)),
+    (IO, (Rubixi/numberOfParticipantsWaitingForPayout/[]), 153, (participants.length - payoutOrder)),
+    (ETH_LEAK, (Rubixi/addPayout/[uint256]), 74, participants[payoutOrder].etherAddress.send(payoutToSend);),
+    (ETH_LEAK, (Rubixi/collectAllFees/[]), 85, creator.send(collectedFees);),
+    (ETH_LEAK, (Rubixi/collectFeesInEther/[uint256]), 95, creator.send(_amt);),
+    (ETH_LEAK, (Rubixi/collectPercentOfFees/[uint256]), 103, creator.send(feesToCollect);)
+
+[INFO] # of basic patch components : 15
+[INFO] extracted components
+[
+InsertLine (47, assume(((collectedFees + msg.value) >= collectedFees));),
+InsertLine (61, assume(((msg.value == 0) || (((msg.value * pyramidMultiplier) / msg.value) == pyramidMultiplier)));),
+InsertLine (68, assume(((balance + ((msg.value * (100 - _fee)) / 100)) >= balance));),
+InsertLine (68, assume(((msg.value == 0) || (((msg.value * (100 - _fee)) / msg.value) == (100 - _fee))));),
+InsertLine (68, assume((100 >= _fee));),
+InsertLine (69, assume(((collectedFees + ((msg.value * _fee) / 100)) >= collectedFees));),
+InsertLine (69, assume(((msg.value == 0) || (((msg.value * _fee) / msg.value) == _fee)));),
+InsertLine (90, assume(((_amt == 0) || (((_amt * 1000000000000000000) / _amt) == 1000000000000000000)));),
+InsertLine (102, assume((((collectedFees / 100) == 0) || ((((collectedFees / 100) * _pcent) / (collectedFees / 100)) == _pcent)));),
+InsertLine (104, assume((collectedFees >= feesToCollect));),
+InsertLine (153, assume((participants.length >= payoutOrder));),
+Replace (28, (msg.sender == creator), (msg.sender != creator)),
+Change (Rubixi, DynamicPyramid, []) to constructor,
+Change (Rubixi, changeOwner, [address]) to constructor,
+Add onlyowner to (Rubixi, DynamicPyramid, []) (line 23)
+]
+- Regression found, results/access_control/rubixi/candidates/cand_15/patch.sol

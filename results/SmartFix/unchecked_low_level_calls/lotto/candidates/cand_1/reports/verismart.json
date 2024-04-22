@@ -1,0 +1,75 @@
+{
+  "fileName": "results/unchecked_low_level_calls/lotto/candidates/cand_1/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 2,
+  "time": 0.20099099999999998,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),winner__@6:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "sendToWinner",
+          "argTypes": []
+        }
+      ],
+      "exp": "winner.send(winAmount);",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "withdrawLeftOver",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.send(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "TX_ORG",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "withdrawLeftOver",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((winner == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "DEAD",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "withdrawLeftOver",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

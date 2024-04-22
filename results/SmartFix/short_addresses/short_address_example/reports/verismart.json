@@ -1,0 +1,131 @@
+{
+  "fileName": "smartbugs/dataset/short_addresses/short_address_example.sol",
+  "baseName": "short_address_example.sol",
+  "iter": 3,
+  "time": 3.347604,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "noflow(balances__@5:mapping(address => uint256))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "MyToken",
+          "methodName": "sendCoin",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] - amount)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "MyToken",
+          "methodName": "sendCoin",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(balances[to] + amount)",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "MyToken",
+          "methodName": "sendCoin",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "MyToken",
+          "methodName": "sendCoin",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == balances[to])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "MyToken",
+          "methodName": "sendCoin",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "((!(msg.sender != to)) || (balances[msg.sender] == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ASSIGN_CONST",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "MyToken",
+          "methodName": "sendCoin",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "((!(msg.sender != to)) || (balances[to] == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "MyToken",
+          "methodName": "sendCoin",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "MyToken",
+          "methodName": "sendCoin",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

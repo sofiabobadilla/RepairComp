@@ -1,0 +1,169 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 13
+[INFO] reachable : 8
+[INFO] Generating Paths ... took 0.000251s
+[INFO] # path : 23
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000637s
+Generating VCs ... took 0.00321s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.042864
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/7 ... [IO] line 33, (Deposits[msg.sender] + msg.value) ... unproven
+2/7 ... [ETH_LEAK] line 14, target.call.value(msg.value)(data); ... proven
+3/7 ... [ETH_LEAK] line 39, msg.sender.transfer(amount); ... unproven
+4/7 ... [RE_EL] line 14, target.call.value(msg.value)(data); ... proven
+5/7 ... [RE_EL] line 39, msg.sender.transfer(amount); ... unproven
+6/7 ... [TX_ORG] line 10, assume((msg.sender == Owner)); ... proven
+7/7 ... [TX_ORG] line 25, assume((msg.sender == tx.origin)); ... proven
+took 1.670967s
+
+Generating VCs ... took 0.000955s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 1.730113
+[
+-1 -> (Read(@TU, Owner__@14) == true)
+0 -> (Read(@TU, Owner__@14) == true)
+]
+[
+]
+1/7 ... [IO] line 33, (Deposits[msg.sender] + msg.value) ... unproven
+2/7 ... [ETH_LEAK] line 14, target.call.value(msg.value)(data); ... proven
+3/7 ... [ETH_LEAK] line 39, msg.sender.transfer(amount); ... proven
+4/7 ... [RE_EL] line 14, target.call.value(msg.value)(data); ... proven
+5/7 ... [RE_EL] line 39, msg.sender.transfer(amount); ... proven
+6/7 ... [TX_ORG] line 10, assume((msg.sender == Owner)); ... proven
+7/7 ... [TX_ORG] line 25, assume((msg.sender == tx.origin)); ... proven
+took 0.135276s
+
+Generating VCs ... took 0.000982s
+Checking validity of VCs ... took 0.460793s
+
+Generating VCs ... took 0.001015s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 25.034578
+[
+-1 -> ((Read(@TU, Owner__@14) == true) /\ @Invest_sum >= Σ_u Deposits__@54)
+0 -> ((Read(@TU, Owner__@14) == true) /\ @Invest_sum >= Σ_u Deposits__@54)
+]
+[
+]
+1/7 ... [IO] line 33, (Deposits[msg.sender] + msg.value) ... unproven
+2/7 ... [ETH_LEAK] line 14, target.call.value(msg.value)(data); ... proven
+3/7 ... [ETH_LEAK] line 39, msg.sender.transfer(amount); ... proven
+4/7 ... [RE_EL] line 14, target.call.value(msg.value)(data); ... proven
+5/7 ... [RE_EL] line 39, msg.sender.transfer(amount); ... proven
+6/7 ... [TX_ORG] line 10, assume((msg.sender == Owner)); ... proven
+7/7 ... [TX_ORG] line 25, assume((msg.sender == tx.origin)); ... proven
+took 23.015423s
+
+Generating VCs ... took 0.000978s
+Checking validity of VCs ... took 7.265784s
+
+Generating VCs ... took 0.001004s
+Checking validity of VCs ... took 1.802763s
+
+Generating VCs ... took 0.000999999999998s
+Checking validity of VCs ... took 1.715944s
+
+Generating VCs ... took 0.001153s
+Checking validity of VCs ... took 1.498833s
+
+Generating VCs ... took 0.001496s
+Checking validity of VCs ... took 1.449834s
+
+Iter : 10 To explore : 7 Explored : 27 Total elapsed : 39.072297
+Generating VCs ... took 0.001525s
+Checking validity of VCs ... took 1.561067s
+
+Generating VCs ... took 0.001002s
+Checking validity of VCs ... took 1.218569s
+
+Generating VCs ... took 0.001049s
+Checking validity of VCs ... took 3.814899s
+
+Generating VCs ... took 0.000996000000001s
+Checking validity of VCs ... took 3.270203s
+
+Generating VCs ... took 0.00108900000001s
+Checking validity of VCs ... took 3.291411s
+
+Generating VCs ... took 0.001237s
+Checking validity of VCs ... took 3.671273s
+
+Generating VCs ... took 0.00105800000001s
+Checking validity of VCs ... took 0.73594s
+
+Generating VCs ... took 0.001236s
+Checking validity of VCs ... took 0.737621s
+
+Generating VCs ... took 0.001193s
+Checking validity of VCs ... took 0.92862s
+
+Generating VCs ... took 0.001151s
+Checking validity of VCs ... took 0.938678s
+
+Iter : 20 To explore : 0 Explored : 30 Total elapsed : 59.259577
+Generating VCs ... took 0.000594999999997s
+Checking validity of VCs ... 
+1/10 ... [NO_EFFECT] line 11, (@pre4 == Owner) ... unproven
+2/10 ... [NO_EFFECT] line 26, (@pre2 == Owner) ... unproven
+3/10 ... [NO_EFFECT] line 33, (@pre3 == Deposits[msg.sender]) ... unproven
+4/10 ... [ASSIGN_CONST] line 33, (Deposits[msg.sender] == 0) ... unproven
+5/10 ... [DEAD] line 10, false ... unproven
+6/10 ... [DEAD] line 25, false ... unproven
+7/10 ... [DEAD] line 27, false ... unproven
+8/10 ... [DEAD] line 32, false ... unproven
+9/10 ... [DEAD] line 38, false ... unproven
+10/10 ... [DEAD] line 39, false ... unproven
+took 1.01995s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 33, (Deposits[msg.sender] + msg.value) : unproven
+[2] [ETH_LEAK] line 14, target.call.value(msg.value)(data); : proven
+[3] [ETH_LEAK] line 39, msg.sender.transfer(amount); : proven
+[4] [RE_EL] line 14, target.call.value(msg.value)(data); : proven
+[5] [RE_EL] line 39, msg.sender.transfer(amount); : proven
+[6] [TX_ORG] line 10, assume((msg.sender == Owner)); : proven
+[7] [TX_ORG] line 25, assume((msg.sender == tx.origin)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 11, (@pre4 == Owner) : unproven
+[2] [NO_EFFECT] line 26, (@pre2 == Owner) : unproven
+[3] [NO_EFFECT] line 33, (@pre3 == Deposits[msg.sender]) : unproven
+[4] [ASSIGN_CONST] line 33, (Deposits[msg.sender] == 0) : unproven
+[5] [DEAD] line 10, false : unproven
+[6] [DEAD] line 25, false : unproven
+[7] [DEAD] line 27, false : unproven
+[8] [DEAD] line 32, false : unproven
+[9] [DEAD] line 38, false : unproven
+[10] [DEAD] line 39, false : unproven
+
+============ Statistics ============
+# Iter                    : 20
+# Alarm / Query           : 1 / 7
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 2
+- reentrancy-leaking      : 0 / 2
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 2
+
+Time Elapsed (Real) : 60.2878029346
+Time Elapsed (CPU)  : 60.280287

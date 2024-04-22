@@ -1,0 +1,75 @@
+{
+  "fileName": "results/access_control/simple_suicide/candidates/cand_1/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 2,
+  "time": 0.08865100000000001,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),smartfix_owner__@4:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "KA",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "SimpleSuicide",
+          "methodName": "sudicideAnyone",
+          "argTypes": []
+        }
+      ],
+      "exp": "selfdestruct(msg.sender);",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "SimpleSuicide",
+          "methodName": "sudicideAnyone",
+          "argTypes": []
+        }
+      ],
+      "exp": "selfdestruct(msg.sender);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "TX_ORG",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "SimpleSuicide",
+          "methodName": "sudicideAnyone",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((smartfix_owner == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "DEAD",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "SimpleSuicide",
+          "methodName": "sudicideAnyone",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 5
+[INFO] reachable : 5
+[INFO] Generating Paths ... took 0.000191s
+[INFO] # path : 14
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000311s
+Generating VCs ... took 0.001014s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.032503
+[
+0 -> true
+]
+[
+]
+1/6 ... [IO] line 24, (balances[msg.sender] + msg.value) ... proven
+2/6 ... [IO] line 25, (balances[msg.sender] + msg.value) ... proven
+3/6 ... [IO] line 31, (balances[msg.sender] - amount) ... proven
+4/6 ... [ETH_LEAK] line 30, msg.sender.transfer(amount); ... unproven
+5/6 ... [ETH_LEAK] line 38, to.transfer(this.balance); ... unproven
+6/6 ... [TX_ORG] line 37, assume((creator == msg.sender)); ... proven
+took 0.113001s
+
+Generating VCs ... took 0.000294s
+Checking validity of VCs ... took 0.010902s
+
+Generating VCs ... took 0.000343s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 3 Total elapsed : 0.173863
+[
+0 -> @Invest_sum >= Σ_u balances__@7
+]
+[
+]
+1/6 ... [IO] line 24, (balances[msg.sender] + msg.value) ... proven
+2/6 ... [IO] line 25, (balances[msg.sender] + msg.value) ... proven
+3/6 ... [IO] line 31, (balances[msg.sender] - amount) ... proven
+4/6 ... [ETH_LEAK] line 30, msg.sender.transfer(amount); ... proven
+5/6 ... [ETH_LEAK] line 38, to.transfer(this.balance); ... unproven
+6/6 ... [TX_ORG] line 37, assume((creator == msg.sender)); ... proven
+took 0.373012s
+
+Generating VCs ... took 0.000584s
+Checking validity of VCs ... took 0.062791s
+
+Generating VCs ... took 0.000298s
+Checking validity of VCs ... took 28.569095s
+
+Generating VCs ... took 0.000332s
+Checking validity of VCs ... took 21.508367s
+
+Generating VCs ... took 0.000330999999996s
+Checking validity of VCs ... took 1.021523s
+
+Generating VCs ... took 0.000395999999995s
+Checking validity of VCs ... took 0.612836s
+
+Generating VCs ... took 0.000289000000002s
+Checking validity of VCs ... took 2.622692s
+
+Iter : 10 To explore : 1 Explored : 13 Total elapsed : 54.930492
+Generating VCs ... took 0.000293999999997s
+Checking validity of VCs ... took 2.841847s
+
+Generating VCs ... took 0.00018s
+Checking validity of VCs ... 
+1/10 ... [NO_EFFECT] line 20, (@pre1 == creator) ... unproven
+2/10 ... [NO_EFFECT] line 25, (@pre2 == balances[msg.sender]) ... unproven
+3/10 ... [NO_EFFECT] line 31, (@pre3 == balances[msg.sender]) ... unproven
+4/10 ... [ASSIGN_CONST] line 25, (balances[msg.sender] == 0) ... unproven
+5/10 ... [ASSIGN_CONST] line 31, (balances[msg.sender] == 0) ... unproven
+6/10 ... [DEAD] line 24, false ... unproven
+7/10 ... [DEAD] line 29, false ... unproven
+8/10 ... [DEAD] line 30, false ... unproven
+9/10 ... [DEAD] line 37, false ... unproven
+10/10 ... [DEAD] line 38, false ... unproven
+took 1.174136s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 24, (balances[msg.sender] + msg.value) : proven
+[2] [IO] line 25, (balances[msg.sender] + msg.value) : proven
+[3] [IO] line 31, (balances[msg.sender] - amount) : proven
+[4] [ETH_LEAK] line 30, msg.sender.transfer(amount); : proven
+[5] [ETH_LEAK] line 38, to.transfer(this.balance); : unproven
+[6] [TX_ORG] line 37, assume((creator == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 20, (@pre1 == creator) : unproven
+[2] [NO_EFFECT] line 25, (@pre2 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 31, (@pre3 == balances[msg.sender]) : unproven
+[4] [ASSIGN_CONST] line 25, (balances[msg.sender] == 0) : unproven
+[5] [ASSIGN_CONST] line 31, (balances[msg.sender] == 0) : unproven
+[6] [DEAD] line 24, false : unproven
+[7] [DEAD] line 29, false : unproven
+[8] [DEAD] line 30, false : unproven
+[9] [DEAD] line 37, false : unproven
+[10] [DEAD] line 38, false : unproven
+
+============ Statistics ============
+# Iter                    : 11
+# Alarm / Query           : 1 / 6
+- integer over/underflow  : 0 / 3
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 2
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 58.9752838612
+Time Elapsed (CPU)  : 58.947311

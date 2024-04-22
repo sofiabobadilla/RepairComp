@@ -1,0 +1,104 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 42
+[INFO] reachable : 26
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (FiftyFlip/checkContractHealth/[]), 103, ((lockedInBets + jackpotSize) + devFeeSize)),
+    (IO, (FiftyFlip/checkContractHealth/[]), 103, (lockedInBets + jackpotSize)),
+    (IO, (FiftyFlip/clearProcessedBet/[uint256]), 354, (bet.blockNumber + BET_EXPIRATION_BLOCKS)),
+    (IO, (FiftyFlip/donateForContractHealth/[]), 213, (donateAmount[msg.sender] + msg.value)),
+    (IO, (FiftyFlip/getCollateralBalance/[]), 286, ((lockedInBets + jackpotSize) + devFeeSize)),
+    (IO, (FiftyFlip/getCollateralBalance/[]), 286, (lockedInBets + jackpotSize)),
+    (IO, (FiftyFlip/getCollateralBalance/[]), 287, (((address(this).balance - lockedInBets) - jackpotSize) - devFeeSize)),
+    (IO, (FiftyFlip/getCollateralBalance/[]), 287, ((address(this).balance - lockedInBets) - jackpotSize)),
+    (IO, (FiftyFlip/getCollateralBalance/[]), 287, (address(this).balance - lockedInBets)),
+    (IO, (FiftyFlip/play/[uint256]), 177, (bet.amount * WIN_X)),
+    (IO, (FiftyFlip/play/[uint256]), 192, (tossWin + jackpotWin)),
+    (IO, (FiftyFlip/play/[uint256]), 194, (tossWin + jackpotWin)),
+    (IO, (FiftyFlip/play/[uint256]), 200, (lockedInBets - tossWinAmount)),
+    (IO, (FiftyFlip/refund/[uint256]), 234, (bet.blockNumber + BET_EXPIRATION_BLOCKS)),
+    (IO, (FiftyFlip/sendRefund/[uint256]), 315, (bet.amount * WIN_X)),
+    (IO, (FiftyFlip/sendRefund/[uint256]), 316, (lockedInBets - tossWinAmount)),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 138, (2 * amount)),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 144, (amount * JACKPOT_FEE)),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 144, (jackpotSize + ((amount * JACKPOT_FEE) / 1000))),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 145, (amount * DEV_FEE)),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 145, (devFeeSize + ((amount * DEV_FEE) / 1000))),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 146, (amount * WIN_X)),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 146, (lockedInBets + ((amount * WIN_X) / 1000))),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 148, (amount * DONATING_X)),
+    (IO, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 151, (totalAmountToWhale + donate_amount)),
+    (ETH_LEAK, (FiftyFlip/payout/[address_uint256_uint256_bool_uint256]), 302, winner.transfer(ethToTransfer);),
+    (ETH_LEAK, (FiftyFlip/sendFunds/[address_uint256]), 324, success = paidUser.send(amount);),
+    (ETH_LEAK, (FiftyFlip/sendRefund/[uint256]), 313, requester.transfer(ethToTransfer);),
+    (ETH_LEAK, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 150, whale.call.value(donate_amount)(bytes4(keccak256("donate()")));),
+    (RE_EL, (FiftyFlip/payout/[address_uint256_uint256_bool_uint256]), 302, winner.transfer(ethToTransfer);),
+    (RE_EL, (FiftyFlip/sendFunds/[address_uint256]), 324, success = paidUser.send(amount);),
+    (RE_EL, (FiftyFlip/sendRefund/[uint256]), 313, requester.transfer(ethToTransfer);),
+    (RE_EL, (FiftyFlip/wager/[bool_uint256_uint256_uint8_bytes32_bytes32]), 150, whale.call.value(donate_amount)(bytes4(keccak256("donate()")));)
+
+[INFO] # of basic patch components : 34
+[INFO] extracted components
+[
+InsertLine (103, assume((((lockedInBets + jackpotSize) + devFeeSize) >= (lockedInBets + jackpotSize)));),
+InsertLine (103, assume(((lockedInBets + jackpotSize) >= lockedInBets));),
+InsertLine (138, assume(((2 == 0) || (((2 * amount) / 2) == amount)));),
+InsertLine (144, assume(((amount == 0) || (((amount * JACKPOT_FEE) / amount) == JACKPOT_FEE)));),
+InsertLine (144, assume(((jackpotSize + ((amount * JACKPOT_FEE) / 1000)) >= jackpotSize));),
+InsertLine (145, assume(((amount == 0) || (((amount * DEV_FEE) / amount) == DEV_FEE)));),
+InsertLine (145, assume(((devFeeSize + ((amount * DEV_FEE) / 1000)) >= devFeeSize));),
+InsertLine (146, assume(((amount == 0) || (((amount * WIN_X) / amount) == WIN_X)));),
+InsertLine (146, assume(((lockedInBets + ((amount * WIN_X) / 1000)) >= lockedInBets));),
+InsertLine (148, assume(((amount == 0) || (((amount * DONATING_X) / amount) == DONATING_X)));),
+InsertLine (151, assume(((totalAmountToWhale + donate_amount) >= totalAmountToWhale));),
+InsertLine (177, assume(((bet.amount == 0) || (((bet.amount * WIN_X) / bet.amount) == WIN_X)));),
+InsertLine (192, assume(((tossWin + jackpotWin) >= tossWin));),
+InsertLine (194, assume(((tossWin + jackpotWin) >= tossWin));),
+InsertLine (200, assume((lockedInBets >= tossWinAmount));),
+InsertLine (213, assume(((donateAmount[msg.sender] + msg.value) >= donateAmount[msg.sender]));),
+InsertLine (234, assume(((bet.blockNumber + BET_EXPIRATION_BLOCKS) >= bet.blockNumber));),
+InsertLine (286, assume((((lockedInBets + jackpotSize) + devFeeSize) >= (lockedInBets + jackpotSize)));),
+InsertLine (286, assume(((lockedInBets + jackpotSize) >= lockedInBets));),
+InsertLine (287, assume((((address(this).balance - lockedInBets) - jackpotSize) >= devFeeSize));),
+InsertLine (287, assume(((address(this).balance - lockedInBets) >= jackpotSize));),
+InsertLine (287, assume((address(this).balance >= lockedInBets));),
+InsertLine (315, assume(((bet.amount == 0) || (((bet.amount * WIN_X) / bet.amount) == WIN_X)));),
+InsertLine (316, assume((lockedInBets >= tossWinAmount));),
+InsertLine (354, assume(((bet.blockNumber + BET_EXPIRATION_BLOCKS) >= bet.blockNumber));),
+Replace (103, (address(this).balance >= ((lockedInBets + jackpotSize) + devFeeSize)), (address(this).balance <= ((lockedInBets + jackpotSize) + devFeeSize))),
+Replace (234, (block.number > (bet.blockNumber + BET_EXPIRATION_BLOCKS)), (block.number <= (bet.blockNumber + BET_EXPIRATION_BLOCKS))),
+Replace (286, (address(this).balance > ((lockedInBets + jackpotSize) + devFeeSize)), (address(this).balance <= ((lockedInBets + jackpotSize) + devFeeSize))),
+Replace (354, (block.number <= (bet.blockNumber + BET_EXPIRATION_BLOCKS)), (block.number > (bet.blockNumber + BET_EXPIRATION_BLOCKS))),
+Add onlyBot to (FiftyFlip, setBotAddress, [address]) (line 113),
+Add onlyBot to (FiftyFlip, setSecretSigner, [address]) (line 120),
+AtomLst [
+Move ([151, 153, 154, 155, 156] -> 150)
+],
+AtomLst [
+Add @nonReentrant to (FiftyFlip, transferAnyERC20Token, [address, address, uint256]) (line 364)
+Add @nonReentrant to (FiftyFlip, @fallback, []) (line 110)
+Add @nonReentrant to (FiftyFlip, setBotAddress, [address]) (line 113)
+Add @nonReentrant to (FiftyFlip, setSecretSigner, [address]) (line 120)
+Add @nonReentrant to (FiftyFlip, wager, [bool, uint256, uint256, uint8, bytes32, bytes32]) (line 128)
+Add @nonReentrant to (FiftyFlip, play, [uint256]) (line 162)
+Add @nonReentrant to (FiftyFlip, donateForContractHealth, []) (line 209)
+Add @nonReentrant to (FiftyFlip, withdrawDonation, [uint256]) (line 217)
+Add @nonReentrant to (FiftyFlip, refund, [uint256]) (line 228)
+Add @nonReentrant to (FiftyFlip, withdrawDevFee, [address, uint256]) (line 239)
+Add @nonReentrant to (FiftyFlip, withdrawBotFee, [uint256]) (line 252)
+Add @nonReentrant to (FiftyFlip, clearStorage, [uint256[]]) (line 340)
+],
+AtomLst [
+Add @nonReentrant to (FiftyFlip, wager, [bool, uint256, uint256, uint8, bytes32, bytes32]) (line 128)
+Add @nonReentrant to (FiftyFlip, transferAnyERC20Token, [address, address, uint256]) (line 364)
+Add @nonReentrant to (FiftyFlip, @fallback, []) (line 110)
+Add @nonReentrant to (FiftyFlip, play, [uint256]) (line 162)
+Add @nonReentrant to (FiftyFlip, donateForContractHealth, []) (line 209)
+Add @nonReentrant to (FiftyFlip, withdrawDonation, [uint256]) (line 217)
+Add @nonReentrant to (FiftyFlip, refund, [uint256]) (line 228)
+Add @nonReentrant to (FiftyFlip, clearStorage, [uint256[]]) (line 340)
+]
+]

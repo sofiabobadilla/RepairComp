@@ -1,0 +1,30 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 7
+[INFO] reachable : 6
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (PrivateBank/CashOut/[uint256]), 40, (balances[msg.sender] - _am)),
+    (IO, (PrivateBank/Deposit/[]), 28, (balances[msg.sender] + msg.value)),
+    (ETH_LEAK, (PrivateBank/CashOut/[uint256]), 38, msg.sender.call.value(_am)()),
+    (RE_EL, (PrivateBank/CashOut/[uint256]), 38, msg.sender.call.value(_am)())
+
+[INFO] # of basic patch components : 5
+[INFO] extracted components
+[
+InsertLine (28, assume(((balances[msg.sender] + msg.value) >= balances[msg.sender]));),
+InsertLine (40, assume((balances[msg.sender] >= _am));),
+Replace (35, (_am <= balances[msg.sender]), (_am > balances[msg.sender])),
+AtomLst [
+Move ([40] -> 38)
+ElseRevert (line 42)
+],
+AtomLst [
+Add @nonReentrant to (PrivateBank, Deposit, []) (line 22)
+Add @nonReentrant to (PrivateBank, CashOut, [uint256]) (line 33)
+Add @nonReentrant to (PrivateBank, @fallback, []) (line 46)
+]
+]
+- New best candidate, iter 1, 267.945356846s : results/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4/candidates/cand_4/patch.sol

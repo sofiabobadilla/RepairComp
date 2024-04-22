@@ -1,0 +1,24 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 4
+[INFO] reachable : 4
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (EtherBank/addToBalance/[]), 15, (userBalances[msg.sender] + msg.value)),
+    (ETH_LEAK, (EtherBank/withdrawBalance/[]), 21, msg.sender.call.value(amountToWithdraw)()),
+    (RE_EL, (EtherBank/withdrawBalance/[]), 21, msg.sender.call.value(amountToWithdraw)())
+
+[INFO] # of basic patch components : 3
+[INFO] extracted components
+[
+InsertLine (15, assume(((userBalances[msg.sender] + msg.value) >= userBalances[msg.sender]));),
+AtomLst [
+Move ([22] -> 21)
+],
+AtomLst [
+Add @nonReentrant to (EtherBank, addToBalance, []) (line 14)
+Add @nonReentrant to (EtherBank, withdrawBalance, []) (line 18)
+]
+]

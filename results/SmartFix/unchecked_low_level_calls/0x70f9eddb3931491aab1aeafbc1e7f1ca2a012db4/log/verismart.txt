@@ -1,0 +1,108 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 6
+[INFO] reachable : 6
+[INFO] Generating Paths ... took 0.000336s
+[INFO] # path : 31
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000752s
+Generating VCs ... took 0.004885s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.050031
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/11 ... [ETH_LEAK] line 16, Owner.transfer(this.balance); ... unproven
+2/11 ... [ETH_LEAK] line 17, msg.sender.transfer(this.balance); ... proven
+3/11 ... [ETH_LEAK] line 23, Owner.transfer(this.balance); ... unproven
+4/11 ... [ETH_LEAK] line 29, adr.call.value(msg.value)(data); ... proven
+5/11 ... [RE_EL] line 16, Owner.transfer(this.balance); ... unproven
+6/11 ... [RE_EL] line 17, msg.sender.transfer(this.balance); ... proven
+7/11 ... [RE_EL] line 23, Owner.transfer(this.balance); ... unproven
+8/11 ... [RE_EL] line 29, adr.call.value(msg.value)(data); ... proven
+9/11 ... [TX_ORG] line 21, assume((msg.sender == address(270505938017529460771666562100699264921101603511))); ... proven
+10/11 ... [TX_ORG] line 22, assume((msg.sender == Owner)); ... proven
+11/11 ... [TX_ORG] line 27, assume((msg.sender == Owner)); ... proven
+took 2.271022s
+
+Generating VCs ... took 0.001957s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 2.316115
+[
+-1 -> (Read(@TU, Owner__@5) == true)
+0 -> (Read(@TU, Owner__@5) == true)
+]
+[
+]
+1/11 ... [ETH_LEAK] line 16, Owner.transfer(this.balance); ... proven
+2/11 ... [ETH_LEAK] line 17, msg.sender.transfer(this.balance); ... proven
+3/11 ... [ETH_LEAK] line 23, Owner.transfer(this.balance); ... proven
+4/11 ... [ETH_LEAK] line 29, adr.call.value(msg.value)(data); ... proven
+5/11 ... [RE_EL] line 16, Owner.transfer(this.balance); ... proven
+6/11 ... [RE_EL] line 17, msg.sender.transfer(this.balance); ... proven
+7/11 ... [RE_EL] line 23, Owner.transfer(this.balance); ... proven
+8/11 ... [RE_EL] line 29, adr.call.value(msg.value)(data); ... proven
+9/11 ... [TX_ORG] line 21, assume((msg.sender == address(270505938017529460771666562100699264921101603511))); ... proven
+10/11 ... [TX_ORG] line 22, assume((msg.sender == Owner)); ... proven
+11/11 ... [TX_ORG] line 27, assume((msg.sender == Owner)); ... proven
+took 0.20261s
+
+Generating VCs ... took 0.0011s
+Checking validity of VCs ... 
+1/8 ... [NO_EFFECT] line 21, (@pre1 == Owner) ... unproven
+2/8 ... [DEAD] line 15, false ... unproven
+3/8 ... [DEAD] line 16, false ... unproven
+4/8 ... [DEAD] line 17, false ... unproven
+5/8 ... [DEAD] line 21, false ... unproven
+6/8 ... [DEAD] line 22, false ... unproven
+7/8 ... [DEAD] line 23, false ... unproven
+8/8 ... [DEAD] line 27, false ... unproven
+took 0.401827s
+
+
+===== Vulnerability Report =====
+[1] [ETH_LEAK] line 16, Owner.transfer(this.balance); : proven
+[2] [ETH_LEAK] line 17, msg.sender.transfer(this.balance); : proven
+[3] [ETH_LEAK] line 23, Owner.transfer(this.balance); : proven
+[4] [ETH_LEAK] line 29, adr.call.value(msg.value)(data); : proven
+[5] [RE_EL] line 16, Owner.transfer(this.balance); : proven
+[6] [RE_EL] line 17, msg.sender.transfer(this.balance); : proven
+[7] [RE_EL] line 23, Owner.transfer(this.balance); : proven
+[8] [RE_EL] line 29, adr.call.value(msg.value)(data); : proven
+[9] [TX_ORG] line 21, assume((msg.sender == address(270505938017529460771666562100699264921101603511))); : proven
+[10] [TX_ORG] line 22, assume((msg.sender == Owner)); : proven
+[11] [TX_ORG] line 27, assume((msg.sender == Owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 21, (@pre1 == Owner) : unproven
+[2] [DEAD] line 15, false : unproven
+[3] [DEAD] line 16, false : unproven
+[4] [DEAD] line 17, false : unproven
+[5] [DEAD] line 21, false : unproven
+[6] [DEAD] line 22, false : unproven
+[7] [DEAD] line 23, false : unproven
+[8] [DEAD] line 27, false : unproven
+
+============ Statistics ============
+# Iter                    : 2
+# Alarm / Query           : 0 / 11
+- integer over/underflow  : 0 / 0
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 4
+- reentrancy-leaking      : 0 / 4
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 3
+
+Time Elapsed (Real) : 2.94130992889
+Time Elapsed (CPU)  : 2.917199

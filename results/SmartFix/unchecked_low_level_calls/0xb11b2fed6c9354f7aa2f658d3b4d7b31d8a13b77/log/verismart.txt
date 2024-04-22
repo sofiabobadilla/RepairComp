@@ -1,0 +1,169 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 13
+[INFO] reachable : 8
+[INFO] Generating Paths ... took 0.000163s
+[INFO] # path : 23
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000296s
+Generating VCs ... took 0.002052s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.028308
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/7 ... [IO] line 33, (Deposits[msg.sender] + msg.value) ... unproven
+2/7 ... [ETH_LEAK] line 14, target.call.value(msg.value)(data); ... proven
+3/7 ... [ETH_LEAK] line 39, msg.sender.transfer(amount); ... unproven
+4/7 ... [RE_EL] line 14, target.call.value(msg.value)(data); ... proven
+5/7 ... [RE_EL] line 39, msg.sender.transfer(amount); ... unproven
+6/7 ... [TX_ORG] line 10, assume((msg.sender == Owner)); ... proven
+7/7 ... [TX_ORG] line 25, assume((msg.sender == tx.origin)); ... proven
+took 1.762818s
+
+Generating VCs ... took 0.000962s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 1.809573
+[
+-1 -> (Read(@TU, Owner__@14) == true)
+0 -> (Read(@TU, Owner__@14) == true)
+]
+[
+]
+1/7 ... [IO] line 33, (Deposits[msg.sender] + msg.value) ... unproven
+2/7 ... [ETH_LEAK] line 14, target.call.value(msg.value)(data); ... proven
+3/7 ... [ETH_LEAK] line 39, msg.sender.transfer(amount); ... proven
+4/7 ... [RE_EL] line 14, target.call.value(msg.value)(data); ... proven
+5/7 ... [RE_EL] line 39, msg.sender.transfer(amount); ... proven
+6/7 ... [TX_ORG] line 10, assume((msg.sender == Owner)); ... proven
+7/7 ... [TX_ORG] line 25, assume((msg.sender == tx.origin)); ... proven
+took 0.158688s
+
+Generating VCs ... took 0.001001s
+Checking validity of VCs ... took 0.464513s
+
+Generating VCs ... took 0.000981s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 13.603634
+[
+-1 -> ((Read(@TU, Owner__@14) == true) /\ @Invest_sum >= Σ_u Deposits__@54)
+0 -> ((Read(@TU, Owner__@14) == true) /\ @Invest_sum >= Σ_u Deposits__@54)
+]
+[
+]
+1/7 ... [IO] line 33, (Deposits[msg.sender] + msg.value) ... unproven
+2/7 ... [ETH_LEAK] line 14, target.call.value(msg.value)(data); ... proven
+3/7 ... [ETH_LEAK] line 39, msg.sender.transfer(amount); ... proven
+4/7 ... [RE_EL] line 14, target.call.value(msg.value)(data); ... proven
+5/7 ... [RE_EL] line 39, msg.sender.transfer(amount); ... proven
+6/7 ... [TX_ORG] line 10, assume((msg.sender == Owner)); ... proven
+7/7 ... [TX_ORG] line 25, assume((msg.sender == tx.origin)); ... proven
+took 11.560343s
+
+Generating VCs ... took 0.00115s
+Checking validity of VCs ... took 7.359424s
+
+Generating VCs ... took 0.001186s
+Checking validity of VCs ... took 1.795291s
+
+Generating VCs ... took 0.001017s
+Checking validity of VCs ... took 1.431708s
+
+Generating VCs ... took 0.00102s
+Checking validity of VCs ... took 1.064891s
+
+Generating VCs ... took 0.000993000000001s
+Checking validity of VCs ... took 1.292681s
+
+Iter : 10 To explore : 7 Explored : 27 Total elapsed : 26.932789
+Generating VCs ... took 0.00101s
+Checking validity of VCs ... took 1.300636s
+
+Generating VCs ... took 0.001065s
+Checking validity of VCs ... took 1.316944s
+
+Generating VCs ... took 0.001055s
+Checking validity of VCs ... took 3.388874s
+
+Generating VCs ... took 0.001192s
+Checking validity of VCs ... took 3.124509s
+
+Generating VCs ... took 0.001103s
+Checking validity of VCs ... took 3.286053s
+
+Generating VCs ... took 0.001147s
+Checking validity of VCs ... took 3.618019s
+
+Generating VCs ... took 0.001076s
+Checking validity of VCs ... took 0.696739s
+
+Generating VCs ... took 0.001118s
+Checking validity of VCs ... took 0.695226s
+
+Generating VCs ... took 0.001003s
+Checking validity of VCs ... took 0.821749s
+
+Generating VCs ... took 0.00102800000001s
+Checking validity of VCs ... took 0.806007s
+
+Iter : 20 To explore : 0 Explored : 30 Total elapsed : 46.005823
+Generating VCs ... took 0.00054500000001s
+Checking validity of VCs ... 
+1/10 ... [NO_EFFECT] line 11, (@pre4 == Owner) ... unproven
+2/10 ... [NO_EFFECT] line 26, (@pre2 == Owner) ... unproven
+3/10 ... [NO_EFFECT] line 33, (@pre3 == Deposits[msg.sender]) ... unproven
+4/10 ... [ASSIGN_CONST] line 33, (Deposits[msg.sender] == 0) ... unproven
+5/10 ... [DEAD] line 10, false ... unproven
+6/10 ... [DEAD] line 25, false ... unproven
+7/10 ... [DEAD] line 27, false ... unproven
+8/10 ... [DEAD] line 32, false ... unproven
+9/10 ... [DEAD] line 38, false ... unproven
+10/10 ... [DEAD] line 39, false ... unproven
+took 0.842315s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 33, (Deposits[msg.sender] + msg.value) : unproven
+[2] [ETH_LEAK] line 14, target.call.value(msg.value)(data); : proven
+[3] [ETH_LEAK] line 39, msg.sender.transfer(amount); : proven
+[4] [RE_EL] line 14, target.call.value(msg.value)(data); : proven
+[5] [RE_EL] line 39, msg.sender.transfer(amount); : proven
+[6] [TX_ORG] line 10, assume((msg.sender == Owner)); : proven
+[7] [TX_ORG] line 25, assume((msg.sender == tx.origin)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 11, (@pre4 == Owner) : unproven
+[2] [NO_EFFECT] line 26, (@pre2 == Owner) : unproven
+[3] [NO_EFFECT] line 33, (@pre3 == Deposits[msg.sender]) : unproven
+[4] [ASSIGN_CONST] line 33, (Deposits[msg.sender] == 0) : unproven
+[5] [DEAD] line 10, false : unproven
+[6] [DEAD] line 25, false : unproven
+[7] [DEAD] line 27, false : unproven
+[8] [DEAD] line 32, false : unproven
+[9] [DEAD] line 38, false : unproven
+[10] [DEAD] line 39, false : unproven
+
+============ Statistics ============
+# Iter                    : 20
+# Alarm / Query           : 1 / 7
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 2
+- reentrancy-leaking      : 0 / 2
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 2
+
+Time Elapsed (Real) : 46.8329811096
+Time Elapsed (CPU)  : 46.84884

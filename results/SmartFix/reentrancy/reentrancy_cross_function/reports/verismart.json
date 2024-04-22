@@ -1,0 +1,191 @@
+{
+  "fileName": "smartbugs/dataset/reentrancy/reentrancy_cross_function.sol",
+  "baseName": "reentrancy_cross_function.sol",
+  "iter": 7,
+  "time": 111.590223,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(land(sigeq(userBalances__@5:mapping(address => uint256),0),noflow(userBalances__@5:mapping(address => uint256))),usum(@Invest_sum:uint256,userBalances__@5:mapping(address => uint256)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(land(sigeq(userBalances__@5:mapping(address => uint256),0),noflow(userBalances__@5:mapping(address => uint256))),usum(@Invest_sum:uint256,userBalances__@5:mapping(address => uint256)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(userBalances[to] + amount)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(userBalances[msg.sender] - amount)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(success,  ) = msg.sender.call.value(amountToWithdraw)(\"\");",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "RE_EL",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(success,  ) = msg.sender.call.value(amountToWithdraw)(\"\");",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(Reentrancy_cross_function, transfer, [address, uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(Reentrancy_cross_function, withdrawBalance, [])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == userBalances[to])",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == userBalances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre3 == amountToWithdraw)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ASSIGN_CONST",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "((!(msg.sender != to)) || (userBalances[to] == 0))",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "ASSIGN_CONST",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "((!(msg.sender != to)) || (userBalances[msg.sender] == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_cross_function",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

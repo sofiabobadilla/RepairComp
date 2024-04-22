@@ -1,0 +1,121 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 3
+[INFO] Generating Paths ... took 0.001044s
+[INFO] # path : 27
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001886s
+Generating VCs ... took 0.003324s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.047376
+[
+0 -> true
+]
+[
+]
+1/4 ... [IO] line 13, (now - rand) ... unproven
+2/4 ... [ETH_LEAK] line 14, msg.sender.send(msg.value); ... unproven
+3/4 ... [ETH_LEAK] line 17, leader.send(this.balance); ... unproven
+4/4 ... [TX_ORG] line 30, assume((leader == msg.sender)); ... proven
+took 0.543857s
+
+Generating VCs ... took 0.002251s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.594384
+[
+0 -> (Read(@TU, leader__@3) == true)
+]
+[
+]
+1/4 ... [IO] line 13, (now - rand) ... unproven
+2/4 ... [ETH_LEAK] line 14, msg.sender.send(msg.value); ... proven
+3/4 ... [ETH_LEAK] line 17, leader.send(this.balance); ... proven
+4/4 ... [TX_ORG] line 30, assume((leader == msg.sender)); ... proven
+took 0.29836s
+
+Generating VCs ... took 0.002289s
+Checking validity of VCs ... took 0.240803s
+
+Generating VCs ... took 0.002262s
+Checking validity of VCs ... took 0.013526s
+
+Generating VCs ... took 0.002225s
+Checking validity of VCs ... took 0.229896s
+
+Generating VCs ... took 0.002168s
+Checking validity of VCs ... took 0.227442s
+
+Generating VCs ... took 0.002469s
+Checking validity of VCs ... took 0.227807s
+
+Generating VCs ... took 0.002511s
+Checking validity of VCs ... took 0.230262s
+
+Generating VCs ... took 0.002334s
+Checking validity of VCs ... took 0.246063s
+
+Iter : 10 To explore : 4 Explored : 20 Total elapsed : 2.324868
+Generating VCs ... took 0.002454s
+Checking validity of VCs ... took 0.258447s
+
+Generating VCs ... took 0.004595s
+Checking validity of VCs ... took 0.262811s
+
+Generating VCs ... took 0.003543s
+Checking validity of VCs ... took 0.285106s
+
+Generating VCs ... took 0.002752s
+Checking validity of VCs ... took 0.28852s
+
+Generating VCs ... took 0.001104s
+Checking validity of VCs ... 
+1/9 ... [NO_EFFECT] line 21, (@pre2 == leader) ... proven
+2/9 ... [NO_EFFECT] line 22, (@pre1 == timestamp) ... unproven
+3/9 ... [NO_EFFECT] line 27, (@pre3 == randomNumber) ... unproven
+4/9 ... [DEAD] line 13, false ... unproven
+5/9 ... [DEAD] line 16, false ... unproven
+6/9 ... [DEAD] line 20, false ... unproven
+7/9 ... [DEAD] line 30, false ... unproven
+8/9 ... [DEAD] line 31, false ... unproven
+9/9 ... [DEAD] line 32, false ... unproven
+took 2.535317s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 13, (now - rand) : unproven
+[2] [ETH_LEAK] line 14, msg.sender.send(msg.value); : proven
+[3] [ETH_LEAK] line 17, leader.send(this.balance); : proven
+[4] [TX_ORG] line 30, assume((leader == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 21, (@pre2 == leader) : proven
+[2] [NO_EFFECT] line 22, (@pre1 == timestamp) : unproven
+[3] [NO_EFFECT] line 27, (@pre3 == randomNumber) : unproven
+[4] [DEAD] line 13, false : unproven
+[5] [DEAD] line 16, false : unproven
+[6] [DEAD] line 20, false : unproven
+[7] [DEAD] line 30, false : unproven
+[8] [DEAD] line 31, false : unproven
+[9] [DEAD] line 32, false : unproven
+
+============ Statistics ============
+# Iter                    : 14
+# Alarm / Query           : 1 / 4
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 2
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 5.98597121239
+Time Elapsed (CPU)  : 5.971494

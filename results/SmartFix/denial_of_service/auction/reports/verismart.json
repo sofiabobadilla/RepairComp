@@ -1,0 +1,64 @@
+{
+  "fileName": "smartbugs/dataset/denial_of_service/auction.sol",
+  "baseName": "auction.sol",
+  "iter": 5,
+  "time": 1.238046,
+  "errMsg": null,
+  "invmap": [ { "key": "0", "formula": "true" } ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 23,
+      "signatures": [
+        { "contractName": "DosAuction", "methodName": "bid", "argTypes": [] }
+      ],
+      "exp": "currentFrontrunner.send(currentBid)",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 26,
+      "signatures": [
+        { "contractName": "DosAuction", "methodName": "bid", "argTypes": [] }
+      ],
+      "exp": "(@pre2 == currentFrontrunner)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 27,
+      "signatures": [
+        { "contractName": "DosAuction", "methodName": "bid", "argTypes": [] }
+      ],
+      "exp": "(@pre1 == currentBid)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 16,
+      "signatures": [
+        { "contractName": "DosAuction", "methodName": "bid", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 20,
+      "signatures": [
+        { "contractName": "DosAuction", "methodName": "bid", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

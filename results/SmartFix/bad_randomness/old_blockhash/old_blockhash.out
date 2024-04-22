@@ -1,0 +1,17 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 3
+[INFO] reachable : 3
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (PredictTheBlockHashChallenge/lockInGuess/[bytes32]), 29, (block.number + 1)),
+    (ETH_LEAK, (PredictTheBlockHashChallenge/settle/[]), 39, msg.sender.transfer(2000000000000000000);)
+
+[INFO] # of basic patch components : 1
+[INFO] extracted components
+[
+InsertLine (29, assume(((block.number + 1) >= block.number));)
+]
+- New best candidate, iter 1, 2.30802488327s : results/bad_randomness/old_blockhash/candidates/cand_1/patch.sol

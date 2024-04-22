@@ -1,0 +1,192 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 6
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 9.4e-05s
+[INFO] # path : 11
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000118s
+Generating VCs ... took 0.000404s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.027259
+[
+0 -> true
+]
+[
+]
+1/3 ... [IO] line 19, (block.number - 1) ... unproven
+2/3 ... [ETH_LEAK] line 31, msg.sender.transfer(2000000000000000000); ... unproven
+3/3 ... [TX_ORG] line 27, assume((smartfix_owner == msg.sender)); ... proven
+took 0.115969s
+
+Generating VCs ... took 0.000616s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.141938
+[
+0 -> (Read(@TU, smartfix_owner__@4) == true)
+]
+[
+]
+1/3 ... [IO] line 19, (block.number - 1) ... unproven
+2/3 ... [ETH_LEAK] line 31, msg.sender.transfer(2000000000000000000); ... proven
+3/3 ... [TX_ORG] line 27, assume((smartfix_owner == msg.sender)); ... proven
+took 0.031367s
+
+Generating VCs ... took 0.000533s
+Checking validity of VCs ... took 0.059208s
+
+Generating VCs ... took 0.00024s
+Checking validity of VCs ... took 0.05995s
+
+Generating VCs ... took 0.000235s
+Checking validity of VCs ... took 0.058151s
+
+Generating VCs ... took 0.000242s
+Checking validity of VCs ... took 0.059103s
+
+Generating VCs ... took 0.000232s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 7 Total elapsed : 0.46992
+[
+0 -> ((2000000000000000000 >= answer__@10) /\ (Read(@TU, smartfix_owner__@4) == true))
+]
+[
+]
+1/3 ... [IO] line 19, (block.number - 1) ... unproven
+2/3 ... [ETH_LEAK] line 31, msg.sender.transfer(2000000000000000000); ... proven
+3/3 ... [TX_ORG] line 27, assume((smartfix_owner == msg.sender)); ... proven
+took 0.07287s
+
+Generating VCs ... took 0.000236s
+Checking validity of VCs ... took 0.05255s
+
+Generating VCs ... took 0.000213s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 9 Total elapsed : 0.593823
+[
+0 -> (((1000000000000000000 >= answer__@10) /\ (2000000000000000000 >= answer__@10)) /\ (Read(@TU, smartfix_owner__@4) == true))
+]
+[
+]
+1/3 ... [IO] line 19, (block.number - 1) ... unproven
+2/3 ... [ETH_LEAK] line 31, msg.sender.transfer(2000000000000000000); ... proven
+3/3 ... [TX_ORG] line 27, assume((smartfix_owner == msg.sender)); ... proven
+took 0.064414s
+
+Iter : 10 To explore : 9 Explored : 41 Total elapsed : 0.604702
+Generating VCs ... took 0.000254s
+Checking validity of VCs ... took 0.054126s
+
+Generating VCs ... took 0.000215s
+Checking validity of VCs ... took 0.052861s
+
+Generating VCs ... took 0.000221s
+Checking validity of VCs ... took 0.052018s
+
+Generating VCs ... took 0.000234s
+Checking validity of VCs ... took 0.053488s
+
+Generating VCs ... took 0.000214s
+Checking validity of VCs ... took 0.05152s
+
+Generating VCs ... took 0.000218s
+Checking validity of VCs ... took 0.051069s
+
+Generating VCs ... took 0.000217s
+Checking validity of VCs ... took 0.052406s
+
+Generating VCs ... took 0.000216s
+Checking validity of VCs ... took 0.051399s
+
+Generating VCs ... took 0.000218s
+Checking validity of VCs ... took 0.052663s
+
+Generating VCs ... took 0.000219s
+Checking validity of VCs ... took 0.051105s
+
+Iter : 20 To explore : 10 Explored : 52 Total elapsed : 1.134675
+Generating VCs ... took 0.000252s
+Checking validity of VCs ... took 0.050667s
+
+Generating VCs ... took 0.000217s
+Checking validity of VCs ... took 0.050616s
+
+Generating VCs ... took 0.000215s
+Checking validity of VCs ... took 0.050874s
+
+Generating VCs ... took 0.000213s
+Checking validity of VCs ... took 0.050803s
+
+Generating VCs ... took 0.000214s
+Checking validity of VCs ... took 0.049885s
+
+Generating VCs ... took 0.000278s
+Checking validity of VCs ... took 0.051773s
+
+Generating VCs ... took 0.00022s
+Checking validity of VCs ... took 0.049543s
+
+Generating VCs ... took 0.000217s
+Checking validity of VCs ... took 0.049997s
+
+Generating VCs ... took 0.000281s
+Checking validity of VCs ... took 0.04982s
+
+Generating VCs ... took 0.000219s
+Checking validity of VCs ... took 0.052874s
+
+Iter : 30 To explore : 4 Explored : 56 Total elapsed : 1.647515
+Generating VCs ... took 0.000268s
+Checking validity of VCs ... took 0.054331s
+
+Generating VCs ... took 0.000222s
+Checking validity of VCs ... took 0.052317s
+
+Generating VCs ... took 0.000218s
+Checking validity of VCs ... took 0.053538s
+
+Generating VCs ... took 0.00026s
+Checking validity of VCs ... took 0.053594s
+
+Generating VCs ... took 0.000112s
+Checking validity of VCs ... 
+1/4 ... [DEAD] line 27, false ... unproven
+2/4 ... [DEAD] line 28, false ... unproven
+3/4 ... [DEAD] line 30, false ... unproven
+4/4 ... [DEAD] line 31, false ... unproven
+took 0.182386s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 19, (block.number - 1) : unproven
+[2] [ETH_LEAK] line 31, msg.sender.transfer(2000000000000000000); : proven
+[3] [TX_ORG] line 27, assume((smartfix_owner == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [DEAD] line 27, false : unproven
+[2] [DEAD] line 28, false : unproven
+[3] [DEAD] line 30, false : unproven
+[4] [DEAD] line 31, false : unproven
+
+============ Statistics ============
+# Iter                    : 34
+# Alarm / Query           : 1 / 3
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 2.05318593979
+Time Elapsed (CPU)  : 2.04588

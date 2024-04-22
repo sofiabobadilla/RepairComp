@@ -1,0 +1,26 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 8
+[INFO] reachable : 8
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (IntegerOverflowSingleTransaction/overflowaddtostate/[uint256]), 18, (count + input)),
+    (IO, (IntegerOverflowSingleTransaction/overflowlocalonly/[uint256]), 36, (count + input)),
+    (IO, (IntegerOverflowSingleTransaction/overflowmulocalonly/[uint256]), 42, (count * input)),
+    (IO, (IntegerOverflowSingleTransaction/overflowmultostate/[uint256]), 24, (count * input)),
+    (IO, (IntegerOverflowSingleTransaction/underflowlocalonly/[uint256]), 48, (count - input)),
+    (IO, (IntegerOverflowSingleTransaction/underflowtostate/[uint256]), 30, (count - input))
+
+[INFO] # of basic patch components : 6
+[INFO] extracted components
+[
+InsertLine (18, assume(((count + input) >= count));),
+InsertLine (24, assume(((count == 0) || (((count * input) / count) == input)));),
+InsertLine (30, assume((count >= input));),
+InsertLine (36, assume(((count + input) >= count));),
+InsertLine (42, assume(((count == 0) || (((count * input) / count) == input)));),
+InsertLine (48, assume((count >= input));)
+]
+- New best candidate, iter 1, 1.07992696762s : results/arithmetic/overflow_single_tx/candidates/cand_6/patch.sol

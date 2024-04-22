@@ -1,0 +1,43 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 10
+[INFO] reachable : 9
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (PENNY_BY_PENNY/Collect/[uint256]), 65, (acc.balance - _am)),
+    (IO, (PENNY_BY_PENNY/Put/[uint256]), 50, (acc.balance + msg.value)),
+    (IO, (PENNY_BY_PENNY/Put/[uint256]), 51, (now + _lockTime)),
+    (ETH_LEAK, (PENNY_BY_PENNY/Collect/[uint256]), 63, msg.sender.call.value(_am)()),
+    (RE_EL, (PENNY_BY_PENNY/Collect/[uint256]), 63, msg.sender.call.value(_am)())
+
+[INFO] # of basic patch components : 8
+[INFO] extracted components
+[
+InsertLine (50, assume(((acc.balance + msg.value) >= acc.balance));),
+InsertLine (51, assume(((now + _lockTime) >= now));),
+InsertLine (65, assume((acc.balance >= _am));),
+Replace (51, ((now + _lockTime) > acc.unlockTime), ((now + _lockTime) < acc.unlockTime)),
+Replace (60, (acc.balance >= _am), (acc.balance < _am)),
+AtomLst [
+Move ([65] -> 63)
+ElseRevert (line 67)
+],
+AtomLst [
+Add @nonReentrant to (PENNY_BY_PENNY, SetMinSum, [uint256]) (line 25)
+Add @nonReentrant to (PENNY_BY_PENNY, SetLogFile, [address]) (line 32)
+Add @nonReentrant to (PENNY_BY_PENNY, Initialized, []) (line 39)
+Add @nonReentrant to (PENNY_BY_PENNY, Put, [uint256]) (line 45)
+Add @nonReentrant to (PENNY_BY_PENNY, Collect, [uint256]) (line 55)
+],
+AtomLst [
+Add @nonReentrant to (PENNY_BY_PENNY, SetMinSum, [uint256]) (line 25)
+Add @nonReentrant to (PENNY_BY_PENNY, SetLogFile, [address]) (line 32)
+Add @nonReentrant to (PENNY_BY_PENNY, Initialized, []) (line 39)
+Add @nonReentrant to (PENNY_BY_PENNY, Put, [uint256]) (line 45)
+Add @nonReentrant to (PENNY_BY_PENNY, Collect, [uint256]) (line 55)
+Add @nonReentrant to (PENNY_BY_PENNY, @fallback, []) (line 71)
+]
+]
+- New best candidate, iter 1, 330.564226151s : results/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/candidates/cand_6/patch.sol

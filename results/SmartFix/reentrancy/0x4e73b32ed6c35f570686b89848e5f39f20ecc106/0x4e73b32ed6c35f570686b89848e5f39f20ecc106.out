@@ -1,0 +1,40 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 10
+[INFO] reachable : 9
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (PRIVATE_ETH_CELL/Collect/[uint256]), 56, (balances[msg.sender] - _am)),
+    (IO, (PRIVATE_ETH_CELL/Deposit/[]), 43, (balances[msg.sender] + msg.value)),
+    (ETH_LEAK, (PRIVATE_ETH_CELL/Collect/[uint256]), 54, msg.sender.call.value(_am)()),
+    (RE_EL, (PRIVATE_ETH_CELL/Collect/[uint256]), 54, msg.sender.call.value(_am)())
+
+[INFO] # of basic patch components : 6
+[INFO] extracted components
+[
+InsertLine (43, assume(((balances[msg.sender] + msg.value) >= balances[msg.sender]));),
+InsertLine (56, assume((balances[msg.sender] >= _am));),
+Replace (51, (balances[msg.sender] >= _am), (balances[msg.sender] < _am)),
+AtomLst [
+Move ([56] -> 54)
+ElseRevert (line 58)
+],
+AtomLst [
+Add @nonReentrant to (PRIVATE_ETH_CELL, SetMinSum, [uint256]) (line 19)
+Add @nonReentrant to (PRIVATE_ETH_CELL, SetLogFile, [address]) (line 26)
+Add @nonReentrant to (PRIVATE_ETH_CELL, Initialized, []) (line 33)
+Add @nonReentrant to (PRIVATE_ETH_CELL, Deposit, []) (line 39)
+Add @nonReentrant to (PRIVATE_ETH_CELL, Collect, [uint256]) (line 47)
+],
+AtomLst [
+Add @nonReentrant to (PRIVATE_ETH_CELL, SetMinSum, [uint256]) (line 19)
+Add @nonReentrant to (PRIVATE_ETH_CELL, SetLogFile, [address]) (line 26)
+Add @nonReentrant to (PRIVATE_ETH_CELL, Initialized, []) (line 33)
+Add @nonReentrant to (PRIVATE_ETH_CELL, Deposit, []) (line 39)
+Add @nonReentrant to (PRIVATE_ETH_CELL, Collect, [uint256]) (line 47)
+Add @nonReentrant to (PRIVATE_ETH_CELL, @fallback, []) (line 62)
+]
+]
+- New best candidate, iter 1, 308.922826052s : results/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106/candidates/cand_4/patch.sol

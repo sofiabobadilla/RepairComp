@@ -1,0 +1,161 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 10
+[INFO] reachable : 9
+[INFO] Generating Paths ... took 0.000343s
+[INFO] # path : 28
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001668s
+Generating VCs ... took 0.008378s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.051382
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/10 ... [IO] line 43, (balances[msg.sender] + msg.value) ... unproven
+2/10 ... [IO] line 54, (balances[msg.sender] - _am) ... proven
+3/10 ... [ETH_LEAK] line 55, msg.sender.call.value(_am)() ... unproven
+4/10 ... [RE_EL] line 55, msg.sender.call.value(_am)() ... unproven
+5/10 ... [RE] line 19, (ACCURAL_DEPOSIT, SetMinSum, [uint256]) ... unproven
+6/10 ... [RE] line 26, (ACCURAL_DEPOSIT, SetLogFile, [address]) ... unproven
+7/10 ... [RE] line 33, (ACCURAL_DEPOSIT, Initialized, []) ... unproven
+8/10 ... [RE] line 39, (ACCURAL_DEPOSIT, Deposit, []) ... unproven
+9/10 ... [RE] line 47, (ACCURAL_DEPOSIT, Collect, [uint256]) ... unproven
+10/10 ... [RE] line 63, (ACCURAL_DEPOSIT, @fallback, []) ... unproven
+took 0.544946s
+
+Generating VCs ... took 0.004508s
+Checking validity of VCs ... took 0.166599s
+
+Generating VCs ... took 0.007928s
+Checking validity of VCs ... took 0.188649s
+
+Generating VCs ... took 0.008532s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 11.631129
+[
+-1 -> @Invest_sum >= Σ_u balances__@5
+0 -> @Invest_sum >= Σ_u balances__@5
+]
+[
+]
+1/10 ... [IO] line 43, (balances[msg.sender] + msg.value) ... unproven
+2/10 ... [IO] line 54, (balances[msg.sender] - _am) ... proven
+3/10 ... [ETH_LEAK] line 55, msg.sender.call.value(_am)() ... proven
+4/10 ... [RE_EL] line 55, msg.sender.call.value(_am)() ... proven
+5/10 ... [RE] line 19, (ACCURAL_DEPOSIT, SetMinSum, [uint256]) ... unproven
+6/10 ... [RE] line 26, (ACCURAL_DEPOSIT, SetLogFile, [address]) ... unproven
+7/10 ... [RE] line 33, (ACCURAL_DEPOSIT, Initialized, []) ... unproven
+8/10 ... [RE] line 39, (ACCURAL_DEPOSIT, Deposit, []) ... unproven
+9/10 ... [RE] line 47, (ACCURAL_DEPOSIT, Collect, [uint256]) ... unproven
+10/10 ... [RE] line 63, (ACCURAL_DEPOSIT, @fallback, []) ... unproven
+took 16.974569s
+
+Generating VCs ... took 0.003953s
+Checking validity of VCs ... took 6.8249s
+
+Generating VCs ... took 0.004597s
+Checking validity of VCs ... took 6.274743s
+
+Generating VCs ... took 0.003965s
+Checking validity of VCs ... took 46.831168s
+
+Generating VCs ... took 0.004643s
+Checking validity of VCs ... took 31.394193s
+
+Generating VCs ... took 0.00403899999999s
+Checking validity of VCs ... took 6.118004s
+
+Iter : 10 To explore : 63 Explored : 109 Total elapsed : 115.430883
+Generating VCs ... took 0.00625700000001s
+Checking validity of VCs ... took 2.092849s
+
+Generating VCs ... took 0.00452300000001s
+Checking validity of VCs ... took 2.249281s
+
+Generating VCs ... took 0.00382900000001s
+Checking validity of VCs ... took 2.142474s
+
+Generating VCs ... took 0.004007s
+Checking validity of VCs ... took 6.112401s
+
+Generating VCs ... took 0.00480899999999s
+Checking validity of VCs ... took 6.741734s
+
+Generating VCs ... took 0.00394399999999s
+Checking validity of VCs ... took 6.682433s
+
+Generating VCs ... took 0.00422499999999s
+Checking validity of VCs ... took 2.636555s
+
+Generating VCs ... took 0.00401600000001s
+Checking validity of VCs ... took 2.307767s
+
+Generating VCs ... took 0.00400200000001s
+Checking validity of VCs ... took 1.906985s
+
+Generating VCs ... took 0.00411600000001s
+Checking validity of VCs ... took 8.745811s
+
+Generating VCs ... took 0.00227000000001s
+Checking validity of VCs ... 
+1/10 ... [NO_EFFECT] line 23, (@pre1 == MinSum) ... unproven
+2/10 ... [NO_EFFECT] line 43, (@pre2 == balances[msg.sender]) ... unproven
+3/10 ... [NO_EFFECT] line 54, (@pre3 == balances[msg.sender]) ... unproven
+4/10 ... [NO_EFFECT] line 91, (@pre6 == LastMsg.Sender) ... unproven
+5/10 ... [NO_EFFECT] line 92, (@pre5 == LastMsg.Time) ... unproven
+6/10 ... [NO_EFFECT] line 93, (@pre4 == LastMsg.Val) ... unproven
+7/10 ... [ASSIGN_CONST] line 43, (balances[msg.sender] == 0) ... unproven
+8/10 ... [ASSIGN_CONST] line 54, (balances[msg.sender] == 0) ... unproven
+9/10 ... [DEAD] line 51, false ... unproven
+10/10 ... [DEAD] line 67, false ... unproven
+took 0.963634s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 43, (balances[msg.sender] + msg.value) : unproven
+[2] [IO] line 54, (balances[msg.sender] - _am) : proven
+[3] [ETH_LEAK] line 55, msg.sender.call.value(_am)() : proven
+[4] [RE_EL] line 55, msg.sender.call.value(_am)() : proven
+[5] [RE] line 19, (ACCURAL_DEPOSIT, SetMinSum, [uint256]) : unproven
+[6] [RE] line 26, (ACCURAL_DEPOSIT, SetLogFile, [address]) : unproven
+[7] [RE] line 33, (ACCURAL_DEPOSIT, Initialized, []) : unproven
+[8] [RE] line 39, (ACCURAL_DEPOSIT, Deposit, []) : unproven
+[9] [RE] line 47, (ACCURAL_DEPOSIT, Collect, [uint256]) : unproven
+[10] [RE] line 63, (ACCURAL_DEPOSIT, @fallback, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 23, (@pre1 == MinSum) : unproven
+[2] [NO_EFFECT] line 43, (@pre2 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 54, (@pre3 == balances[msg.sender]) : unproven
+[4] [NO_EFFECT] line 91, (@pre6 == LastMsg.Sender) : unproven
+[5] [NO_EFFECT] line 92, (@pre5 == LastMsg.Time) : unproven
+[6] [NO_EFFECT] line 93, (@pre4 == LastMsg.Val) : unproven
+[7] [ASSIGN_CONST] line 43, (balances[msg.sender] == 0) : unproven
+[8] [ASSIGN_CONST] line 54, (balances[msg.sender] == 0) : unproven
+[9] [DEAD] line 51, false : unproven
+[10] [DEAD] line 67, false : unproven
+
+============ Statistics ============
+# Iter                    : 19
+# Alarm / Query           : 7 / 10
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 1
+- reentrancy              : 6 / 6
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 158.094890118
+Time Elapsed (CPU)  : 158.090491
