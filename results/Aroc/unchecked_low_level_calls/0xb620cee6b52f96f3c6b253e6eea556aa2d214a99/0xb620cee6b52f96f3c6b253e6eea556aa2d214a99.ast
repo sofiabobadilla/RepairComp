@@ -1,0 +1,1068 @@
+Syntax trees:
+
+
+======= /smartbugs-curated/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol =======
+PragmaDirective
+   Gas costs: 0
+   Source: "pragma solidity ^0.4.23;"
+ContractDefinition "DrainMe"
+   Source: "contract DrainMe {\n\n//constants\n\naddress public winner = 0x0;\naddress public owner;\naddress public firstTarget = 0x461ec7309F187dd4650EE6b4D25D93c922d7D56b;\naddress public secondTarget = 0x1C3E062c77f09fC61550703bDd1D59842C22c766;\naddress[] public players;\n\nmapping(address=>bool) approvedPlayers;\n\nuint256 public secret;\nuint256[] public seed = [951828771,158769871220];\nuint256[] public balance;\n\n//constructor\n\nfunction DranMe() public payable{\n\towner = msg.sender;\n}\n\n//modifiers\n\nmodifier onlyOwner() {\n    require(msg.sender == owner);\n    _;\n}\n\nmodifier onlyWinner() {\n    require(msg.sender == winner);\n    _;\n}\n\nmodifier onlyPlayers() {\n    require(approvedPlayers[msg.sender]);\n    _;\n}\n\n//functions\n\nfunction getLength() public constant returns(uint256) {\n\treturn seed.length;\n}\n\nfunction setSecret(uint256 _secret) public payable onlyOwner{\n\tsecret = _secret;\n}\n\nfunction getPlayerCount() public constant returns(uint256) {\n\treturn players.length;\n}\n\nfunction getPrize() public constant returns(uint256) {\n\treturn address(this).balance;\n}\n\nfunction becomePlayer() public payable{\n\trequire(msg.value >= 0.02 ether);\n\tplayers.push(msg.sender);\n\tapprovedPlayers[msg.sender]=true;\n}\n\nfunction manipulateSecret() public payable onlyPlayers{\n\trequire (msg.value >= 0.01 ether);\n\tif(msg.sender!=owner || unlockSecret()){\n\t    uint256 amount = 0;\n        msg.sender.transfer(amount);\n\t}\n}\n\nfunction unlockSecret() private returns(bool){\n    bytes32 hash = keccak256(blockhash(block.number-1));\n    uint256 secret = uint256(hash);\n        if(secret%5==0){\n            winner = msg.sender;\n            return true;\n        }\n        else{\n            return false;\n        }\n    }\n\nfunction callFirstTarget () public payable onlyPlayers {\n\trequire (msg.value >= 0.005 ether);\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\tfirstTarget.call.value(msg.value)();\n}\n\nfunction callSecondTarget () public payable onlyPlayers {\n\trequire (msg.value >= 0.005 ether);\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\tsecondTarget.call.value(msg.value)();\n}\n\nfunction setSeed (uint256 _index, uint256 _value) public payable onlyPlayers {\n\tseed[_index] = _value;\n}\n\t\nfunction addSeed (uint256 _add) public payable onlyPlayers {\n\tseed.length = _add;\n}\n\nfunction guessSeed (uint256 _seed) public payable onlyPlayers returns(uint256) {\n\treturn (_seed / (seed[0]*seed[1]));\n\tif((_seed / (seed[0]*seed[1])) == secret) {\n\t\towner = winner;\n\t}\n}\n\nfunction checkSecret () public payable onlyPlayers returns(bool) {\n    require(msg.value >= 0.01 ether);\n    if(msg.value == secret){\n        return true;\n    }\n}\n\nfunction winPrize() public payable onlyOwner {\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\towner.call.value(1 wei)();\n}\n\nfunction claimPrize() public payable onlyWinner {\n\twinner.transfer(address(this).balance);\n}\n\n//fallback function\n\nfunction() public payable{\n\t}\n}"
+  VariableDeclaration "winner"
+     Type: address
+     Gas costs: 335
+     Source: "address public winner = 0x0"
+    ElementaryTypeName address
+       Source: "address"
+    Literal, token: [no token] value: 0x0
+       Type: int_const 0
+       Source: "0x0"
+  VariableDeclaration "owner"
+     Type: address
+     Gas costs: 335
+     Source: "address public owner"
+    ElementaryTypeName address
+       Source: "address"
+  VariableDeclaration "firstTarget"
+     Type: address
+     Gas costs: 335
+     Source: "address public firstTarget = 0x461ec7309F187dd4650EE6b4D25D93c922d7D56b"
+    ElementaryTypeName address
+       Source: "address"
+    Literal, token: [no token] value: 0x461ec7309F187dd4650EE6b4D25D93c922d7D56b
+       Type: address
+       Source: "0x461ec7309F187dd4650EE6b4D25D93c922d7D56b"
+  VariableDeclaration "secondTarget"
+     Type: address
+     Gas costs: 335
+     Source: "address public secondTarget = 0x1C3E062c77f09fC61550703bDd1D59842C22c766"
+    ElementaryTypeName address
+       Source: "address"
+    Literal, token: [no token] value: 0x1C3E062c77f09fC61550703bDd1D59842C22c766
+       Type: address
+       Source: "0x1C3E062c77f09fC61550703bDd1D59842C22c766"
+  VariableDeclaration "players"
+     Type: address[] storage ref
+     Gas costs: 682
+     Source: "address[] public players"
+    ArrayTypeName
+       Source: "address[]"
+      ElementaryTypeName address
+         Source: "address"
+  VariableDeclaration "approvedPlayers"
+     Type: mapping(address => bool)
+     Gas costs: 0
+     Source: "mapping(address=>bool) approvedPlayers"
+    Mapping
+       Source: "mapping(address=>bool)"
+      ElementaryTypeName address
+         Source: "address"
+      ElementaryTypeName bool
+         Source: "bool"
+  VariableDeclaration "secret"
+     Type: uint256
+     Gas costs: 287
+     Source: "uint256 public secret"
+    ElementaryTypeName uint256
+       Source: "uint256"
+  VariableDeclaration "seed"
+     Type: uint256[] storage ref
+     Gas costs: 645
+     Source: "uint256[] public seed = [951828771,158769871220]"
+    ArrayTypeName
+       Source: "uint256[]"
+      ElementaryTypeName uint256
+         Source: "uint256"
+    TupleExpression
+       Type: uint40[2] memory
+       Source: "[951828771,158769871220]"
+      Literal, token: [no token] value: 951828771
+         Type: int_const 951828771
+         Source: "951828771"
+      Literal, token: [no token] value: 158769871220
+         Type: int_const 158769871220
+         Source: "158769871220"
+  VariableDeclaration "balance"
+     Type: uint256[] storage ref
+     Gas costs: 645
+     Source: "uint256[] public balance"
+    ArrayTypeName
+       Source: "uint256[]"
+      ElementaryTypeName uint256
+         Source: "uint256"
+  FunctionDefinition "DranMe" - public
+     Source: "function DranMe() public payable{\n\towner = msg.sender;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    Block
+       Source: "{\n\towner = msg.sender;\n}"
+      ExpressionStatement
+         Gas costs: 20266
+         Source: "owner = msg.sender"
+        Assignment using operator =
+           Type: address
+           Source: "owner = msg.sender"
+          Identifier owner
+             Type: address
+             Source: "owner"
+          MemberAccess to member sender
+             Type: address
+             Source: "msg.sender"
+            Identifier msg
+               Type: msg
+               Source: "msg"
+  ModifierDefinition "onlyOwner"
+     Source: "modifier onlyOwner() {\n    require(msg.sender == owner);\n    _;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    Block
+       Source: "{\n    require(msg.sender == owner);\n    _;\n}"
+      ExpressionStatement
+         Gas costs: 564
+         Source: "require(msg.sender == owner)"
+        FunctionCall
+           Type: tuple()
+           Source: "require(msg.sender == owner)"
+          Identifier require
+             Type: function (bool) pure
+             Source: "require"
+          BinaryOperation using operator ==
+             Type: bool
+             Source: "msg.sender == owner"
+            MemberAccess to member sender
+               Type: address
+               Source: "msg.sender"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+            Identifier owner
+               Type: address
+               Source: "owner"
+      PlaceholderStatement
+         Gas costs: 0
+         Source: "_"
+  ModifierDefinition "onlyWinner"
+     Source: "modifier onlyWinner() {\n    require(msg.sender == winner);\n    _;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    Block
+       Source: "{\n    require(msg.sender == winner);\n    _;\n}"
+      ExpressionStatement
+         Gas costs: 282
+         Source: "require(msg.sender == winner)"
+        FunctionCall
+           Type: tuple()
+           Source: "require(msg.sender == winner)"
+          Identifier require
+             Type: function (bool) pure
+             Source: "require"
+          BinaryOperation using operator ==
+             Type: bool
+             Source: "msg.sender == winner"
+            MemberAccess to member sender
+               Type: address
+               Source: "msg.sender"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+            Identifier winner
+               Type: address
+               Source: "winner"
+      PlaceholderStatement
+         Gas costs: 0
+         Source: "_"
+  ModifierDefinition "onlyPlayers"
+     Source: "modifier onlyPlayers() {\n    require(approvedPlayers[msg.sender]);\n    _;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    Block
+       Source: "{\n    require(approvedPlayers[msg.sender]);\n    _;\n}"
+      ExpressionStatement
+         Gas costs: 2520
+         Source: "require(approvedPlayers[msg.sender])"
+        FunctionCall
+           Type: tuple()
+           Source: "require(approvedPlayers[msg.sender])"
+          Identifier require
+             Type: function (bool) pure
+             Source: "require"
+          IndexAccess
+             Type: bool
+             Source: "approvedPlayers[msg.sender]"
+            Identifier approvedPlayers
+               Type: mapping(address => bool)
+               Source: "approvedPlayers"
+            MemberAccess to member sender
+               Type: address
+               Source: "msg.sender"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+      PlaceholderStatement
+         Gas costs: 1
+         Source: "_"
+  FunctionDefinition "getLength" - public - const
+     Source: "function getLength() public constant returns(uint256) {\n\treturn seed.length;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 3
+       Source: "(uint256)"
+      VariableDeclaration ""
+         Type: uint256
+         Source: "uint256"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    Block
+       Source: "{\n\treturn seed.length;\n}"
+      Return
+         Gas costs: 216
+         Source: "return seed.length"
+        MemberAccess to member length
+           Type: uint256
+           Source: "seed.length"
+          Identifier seed
+             Type: uint256[] storage ref
+             Source: "seed"
+  FunctionDefinition "setSecret" - public
+     Source: "function setSecret(uint256 _secret) public payable onlyOwner{\n\tsecret = _secret;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "(uint256 _secret)"
+      VariableDeclaration "_secret"
+         Type: uint256
+         Source: "uint256 _secret"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    ModifierInvocation "onlyOwner"
+       Gas costs: 0
+       Source: "onlyOwner"
+      Identifier onlyOwner
+         Type: modifier ()
+         Source: "onlyOwner"
+    Block
+       Source: "{\n\tsecret = _secret;\n}"
+      ExpressionStatement
+         Gas costs: 20014
+         Source: "secret = _secret"
+        Assignment using operator =
+           Type: uint256
+           Source: "secret = _secret"
+          Identifier secret
+             Type: uint256
+             Source: "secret"
+          Identifier _secret
+             Type: uint256
+             Source: "_secret"
+  FunctionDefinition "getPlayerCount" - public - const
+     Source: "function getPlayerCount() public constant returns(uint256) {\n\treturn players.length;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 3
+       Source: "(uint256)"
+      VariableDeclaration ""
+         Type: uint256
+         Source: "uint256"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    Block
+       Source: "{\n\treturn players.length;\n}"
+      Return
+         Gas costs: 216
+         Source: "return players.length"
+        MemberAccess to member length
+           Type: uint256
+           Source: "players.length"
+          Identifier players
+             Type: address[] storage ref
+             Source: "players"
+  FunctionDefinition "getPrize" - public - const
+     Source: "function getPrize() public constant returns(uint256) {\n\treturn address(this).balance;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 3
+       Source: "(uint256)"
+      VariableDeclaration ""
+         Type: uint256
+         Source: "uint256"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    Block
+       Source: "{\n\treturn address(this).balance;\n}"
+      Return
+         Gas costs: 413
+         Source: "return address(this).balance"
+        MemberAccess to member balance
+           Type: uint256
+           Source: "address(this).balance"
+          FunctionCall
+             Type: address
+             Source: "address(this)"
+            ElementaryTypeNameExpression address
+               Type: type(address)
+               Source: "address"
+            Identifier this
+               Type: contract DrainMe
+               Source: "this"
+  FunctionDefinition "becomePlayer" - public
+     Source: "function becomePlayer() public payable{\n\trequire(msg.value >= 0.02 ether);\n\tplayers.push(msg.sender);\n\tapprovedPlayers[msg.sender]=true;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    Block
+       Source: "{\n\trequire(msg.value >= 0.02 ether);\n\tplayers.push(msg.sender);\n\tapprovedPlayers[msg.sender]=true;\n}"
+      ExpressionStatement
+         Gas costs: 37
+         Source: "require(msg.value >= 0.02 ether)"
+        FunctionCall
+           Type: tuple()
+           Source: "require(msg.value >= 0.02 ether)"
+          Identifier require
+             Type: function (bool) pure
+             Source: "require"
+          BinaryOperation using operator >=
+             Type: bool
+             Source: "msg.value >= 0.02 ether"
+            MemberAccess to member value
+               Type: uint256
+               Source: "msg.value"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+            Literal, token: [no token] value: 0.02
+               Type: int_const 20000000000000000
+               Source: "0.02 ether"
+      ExpressionStatement
+         Gas costs: 20364
+         Source: "players.push(msg.sender)"
+        FunctionCall
+           Type: uint256
+           Source: "players.push(msg.sender)"
+          MemberAccess to member push
+             Type: function (address) returns (uint256)
+             Source: "players.push"
+            Identifier players
+               Type: address[] storage ref
+               Source: "players"
+          MemberAccess to member sender
+             Type: address
+             Source: "msg.sender"
+            Identifier msg
+               Type: msg
+               Source: "msg"
+      ExpressionStatement
+         Gas costs: 20359
+         Source: "approvedPlayers[msg.sender]=true"
+        Assignment using operator =
+           Type: bool
+           Source: "approvedPlayers[msg.sender]=true"
+          IndexAccess
+             Type: bool
+             Source: "approvedPlayers[msg.sender]"
+            Identifier approvedPlayers
+               Type: mapping(address => bool)
+               Source: "approvedPlayers"
+            MemberAccess to member sender
+               Type: address
+               Source: "msg.sender"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+          Literal, token: true value: true
+             Type: bool
+             Source: "true"
+  FunctionDefinition "manipulateSecret" - public
+     Source: "function manipulateSecret() public payable onlyPlayers{\n\trequire (msg.value >= 0.01 ether);\n\tif(msg.sender!=owner || unlockSecret()){\n\t    uint256 amount = 0;\n        msg.sender.transfer(amount);\n\t}\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    ModifierInvocation "onlyPlayers"
+       Gas costs: 0
+       Source: "onlyPlayers"
+      Identifier onlyPlayers
+         Type: modifier ()
+         Source: "onlyPlayers"
+    Block
+       Source: "{\n\trequire (msg.value >= 0.01 ether);\n\tif(msg.sender!=owner || unlockSecret()){\n\t    uint256 amount = 0;\n        msg.sender.transfer(amount);\n\t}\n}"
+      ExpressionStatement
+         Gas costs: 37
+         Source: "require (msg.value >= 0.01 ether)"
+        FunctionCall
+           Type: tuple()
+           Source: "require (msg.value >= 0.01 ether)"
+          Identifier require
+             Type: function (bool) pure
+             Source: "require"
+          BinaryOperation using operator >=
+             Type: bool
+             Source: "msg.value >= 0.01 ether"
+            MemberAccess to member value
+               Type: uint256
+               Source: "msg.value"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+            Literal, token: [no token] value: 0.01
+               Type: int_const 10000000000000000
+               Source: "0.01 ether"
+      IfStatement
+         Source: "if(msg.sender!=owner || unlockSecret()){\n\t    uint256 amount = 0;\n        msg.sender.transfer(amount);\n\t}"
+        BinaryOperation using operator ||
+           Type: bool
+           Gas costs: 282
+           Source: "msg.sender!=owner || unlockSecret()"
+          BinaryOperation using operator !=
+             Type: bool
+             Source: "msg.sender!=owner"
+            MemberAccess to member sender
+               Type: address
+               Source: "msg.sender"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+            Identifier owner
+               Type: address
+               Source: "owner"
+          FunctionCall
+             Type: bool
+             Source: "unlockSecret()"
+            Identifier unlockSecret
+               Type: function () returns (bool)
+               Source: "unlockSecret"
+        Block
+           Source: "{\n\t    uint256 amount = 0;\n        msg.sender.transfer(amount);\n\t}"
+          VariableDeclarationStatement
+             Gas costs: 11
+             Source: "uint256 amount = 0"
+            VariableDeclaration "amount"
+               Type: uint256
+               Source: "uint256 amount"
+              ElementaryTypeName uint256
+                 Source: "uint256"
+            Literal, token: [no token] value: 0
+               Type: int_const 0
+               Source: "0"
+          ExpressionStatement
+             Gas costs: [???]
+             Source: "msg.sender.transfer(amount)"
+            FunctionCall
+               Type: tuple()
+               Source: "msg.sender.transfer(amount)"
+              MemberAccess to member transfer
+                 Type: function (uint256)
+                 Source: "msg.sender.transfer"
+                MemberAccess to member sender
+                   Type: address
+                   Source: "msg.sender"
+                  Identifier msg
+                     Type: msg
+                     Source: "msg"
+              Identifier amount
+                 Type: uint256
+                 Source: "amount"
+  FunctionDefinition "unlockSecret"
+     Source: "function unlockSecret() private returns(bool){\n    bytes32 hash = keccak256(blockhash(block.number-1));\n    uint256 secret = uint256(hash);\n        if(secret%5==0){\n            winner = msg.sender;\n            return true;\n        }\n        else{\n            return false;\n        }\n    }"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 3
+       Source: "(bool)"
+      VariableDeclaration ""
+         Type: bool
+         Source: "bool"
+        ElementaryTypeName bool
+           Source: "bool"
+    Block
+       Source: "{\n    bytes32 hash = keccak256(blockhash(block.number-1));\n    uint256 secret = uint256(hash);\n        if(secret%5==0){\n            winner = msg.sender;\n            return true;\n        }\n        else{\n            return false;\n        }\n    }"
+      VariableDeclarationStatement
+         Gas costs: 154
+         Source: "bytes32 hash = keccak256(blockhash(block.number-1))"
+        VariableDeclaration "hash"
+           Type: bytes32
+           Source: "bytes32 hash"
+          ElementaryTypeName bytes32
+             Source: "bytes32"
+        FunctionCall
+           Type: bytes32
+           Source: "keccak256(blockhash(block.number-1))"
+          Identifier keccak256
+             Type: function () pure returns (bytes32)
+             Source: "keccak256"
+          FunctionCall
+             Type: bytes32
+             Source: "blockhash(block.number-1)"
+            Identifier blockhash
+               Type: function (uint256) view returns (bytes32)
+               Source: "blockhash"
+            BinaryOperation using operator -
+               Type: uint256
+               Source: "block.number-1"
+              MemberAccess to member number
+                 Type: uint256
+                 Source: "block.number"
+                Identifier block
+                   Type: block
+                   Source: "block"
+              Literal, token: [no token] value: 1
+                 Type: int_const 1
+                 Source: "1"
+      VariableDeclarationStatement
+         Gas costs: 22
+         Source: "uint256 secret = uint256(hash)"
+        VariableDeclaration "secret"
+           Type: uint256
+           Source: "uint256 secret"
+          ElementaryTypeName uint256
+             Source: "uint256"
+        FunctionCall
+           Type: uint256
+           Source: "uint256(hash)"
+          ElementaryTypeNameExpression uint256
+             Type: type(uint256)
+             Source: "uint256"
+          Identifier hash
+             Type: bytes32
+             Source: "hash"
+      IfStatement
+         Source: "if(secret%5==0){\n            winner = msg.sender;\n            return true;\n        }\n        else{\n            return false;\n        }"
+        BinaryOperation using operator ==
+           Type: bool
+           Gas costs: 40
+           Source: "secret%5==0"
+          BinaryOperation using operator %
+             Type: uint256
+             Source: "secret%5"
+            Identifier secret
+               Type: uint256
+               Source: "secret"
+            Literal, token: [no token] value: 5
+               Type: int_const 5
+               Source: "5"
+          Literal, token: [no token] value: 0
+             Type: int_const 0
+             Source: "0"
+        Block
+           Source: "{\n            winner = msg.sender;\n            return true;\n        }"
+          ExpressionStatement
+             Gas costs: 20266
+             Source: "winner = msg.sender"
+            Assignment using operator =
+               Type: address
+               Source: "winner = msg.sender"
+              Identifier winner
+                 Type: address
+                 Source: "winner"
+              MemberAccess to member sender
+                 Type: address
+                 Source: "msg.sender"
+                Identifier msg
+                   Type: msg
+                   Source: "msg"
+          Return
+             Gas costs: 19
+             Source: "return true"
+            Literal, token: true value: true
+               Type: bool
+               Source: "true"
+        Block
+           Source: "{\n            return false;\n        }"
+          Return
+             Gas costs: 8
+             Source: "return false"
+            Literal, token: false value: false
+               Type: bool
+               Source: "false"
+  FunctionDefinition "callFirstTarget" - public
+     Source: "function callFirstTarget () public payable onlyPlayers {\n\trequire (msg.value >= 0.005 ether);\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\tfirstTarget.call.value(msg.value)();\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    ModifierInvocation "onlyPlayers"
+       Gas costs: 0
+       Source: "onlyPlayers"
+      Identifier onlyPlayers
+         Type: modifier ()
+         Source: "onlyPlayers"
+    Block
+       Source: "{\n\trequire (msg.value >= 0.005 ether);\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\tfirstTarget.call.value(msg.value)();\n}"
+      ExpressionStatement
+         Gas costs: 37
+         Source: "require (msg.value >= 0.005 ether)"
+        FunctionCall
+           Type: tuple()
+           Source: "require (msg.value >= 0.005 ether)"
+          Identifier require
+             Type: function (bool) pure
+             Source: "require"
+          BinaryOperation using operator >=
+             Type: bool
+             Source: "msg.value >= 0.005 ether"
+            MemberAccess to member value
+               Type: uint256
+               Source: "msg.value"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+            Literal, token: [no token] value: 0.005
+               Type: int_const 5000000000000000
+               Source: "0.005 ether"
+      ExpressionStatement
+         Gas costs: [???]
+         Source: "firstTarget.call.value(msg.value)()"
+        FunctionCall
+           Type: bool
+           Source: "firstTarget.call.value(msg.value)()"
+          FunctionCall
+             Type: function () payable returns (bool)
+             Source: "firstTarget.call.value(msg.value)"
+            MemberAccess to member value
+               Type: function (uint256) returns (function () payable returns (bool))
+               Source: "firstTarget.call.value"
+              MemberAccess to member call
+                 Type: function () payable returns (bool)
+                 Source: "firstTarget.call"
+                Identifier firstTarget
+                   Type: address
+                   Source: "firstTarget"
+            MemberAccess to member value
+               Type: uint256
+               Source: "msg.value"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+  FunctionDefinition "callSecondTarget" - public
+     Source: "function callSecondTarget () public payable onlyPlayers {\n\trequire (msg.value >= 0.005 ether);\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\tsecondTarget.call.value(msg.value)();\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    ModifierInvocation "onlyPlayers"
+       Gas costs: 0
+       Source: "onlyPlayers"
+      Identifier onlyPlayers
+         Type: modifier ()
+         Source: "onlyPlayers"
+    Block
+       Source: "{\n\trequire (msg.value >= 0.005 ether);\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\tsecondTarget.call.value(msg.value)();\n}"
+      ExpressionStatement
+         Gas costs: 37
+         Source: "require (msg.value >= 0.005 ether)"
+        FunctionCall
+           Type: tuple()
+           Source: "require (msg.value >= 0.005 ether)"
+          Identifier require
+             Type: function (bool) pure
+             Source: "require"
+          BinaryOperation using operator >=
+             Type: bool
+             Source: "msg.value >= 0.005 ether"
+            MemberAccess to member value
+               Type: uint256
+               Source: "msg.value"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+            Literal, token: [no token] value: 0.005
+               Type: int_const 5000000000000000
+               Source: "0.005 ether"
+      ExpressionStatement
+         Gas costs: [???]
+         Source: "secondTarget.call.value(msg.value)()"
+        FunctionCall
+           Type: bool
+           Source: "secondTarget.call.value(msg.value)()"
+          FunctionCall
+             Type: function () payable returns (bool)
+             Source: "secondTarget.call.value(msg.value)"
+            MemberAccess to member value
+               Type: function (uint256) returns (function () payable returns (bool))
+               Source: "secondTarget.call.value"
+              MemberAccess to member call
+                 Type: function () payable returns (bool)
+                 Source: "secondTarget.call"
+                Identifier secondTarget
+                   Type: address
+                   Source: "secondTarget"
+            MemberAccess to member value
+               Type: uint256
+               Source: "msg.value"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+  FunctionDefinition "setSeed" - public
+     Source: "function setSeed (uint256 _index, uint256 _value) public payable onlyPlayers {\n\tseed[_index] = _value;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "(uint256 _index, uint256 _value)"
+      VariableDeclaration "_index"
+         Type: uint256
+         Source: "uint256 _index"
+        ElementaryTypeName uint256
+           Source: "uint256"
+      VariableDeclaration "_value"
+         Type: uint256
+         Source: "uint256 _value"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    ModifierInvocation "onlyPlayers"
+       Gas costs: 0
+       Source: "onlyPlayers"
+      Identifier onlyPlayers
+         Type: modifier ()
+         Source: "onlyPlayers"
+    Block
+       Source: "{\n\tseed[_index] = _value;\n}"
+      ExpressionStatement
+         Gas costs: 20303
+         Source: "seed[_index] = _value"
+        Assignment using operator =
+           Type: uint256
+           Source: "seed[_index] = _value"
+          IndexAccess
+             Type: uint256
+             Source: "seed[_index]"
+            Identifier seed
+               Type: uint256[] storage ref
+               Source: "seed"
+            Identifier _index
+               Type: uint256
+               Source: "_index"
+          Identifier _value
+             Type: uint256
+             Source: "_value"
+  FunctionDefinition "addSeed" - public
+     Source: "function addSeed (uint256 _add) public payable onlyPlayers {\n\tseed.length = _add;\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "(uint256 _add)"
+      VariableDeclaration "_add"
+         Type: uint256
+         Source: "uint256 _add"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    ModifierInvocation "onlyPlayers"
+       Gas costs: 0
+       Source: "onlyPlayers"
+      Identifier onlyPlayers
+         Type: modifier ()
+         Source: "onlyPlayers"
+    Block
+       Source: "{\n\tseed.length = _add;\n}"
+      ExpressionStatement
+         Gas costs: 21
+         Source: "seed.length = _add"
+        Assignment using operator =
+           Type: uint256
+           Source: "seed.length = _add"
+          MemberAccess to member length
+             Type: uint256
+             Source: "seed.length"
+            Identifier seed
+               Type: uint256[] storage ref
+               Source: "seed"
+          Identifier _add
+             Type: uint256
+             Source: "_add"
+  FunctionDefinition "guessSeed" - public
+     Source: "function guessSeed (uint256 _seed) public payable onlyPlayers returns(uint256) {\n\treturn (_seed / (seed[0]*seed[1]));\n\tif((_seed / (seed[0]*seed[1])) == secret) {\n\t\towner = winner;\n\t}\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "(uint256 _seed)"
+      VariableDeclaration "_seed"
+         Type: uint256
+         Source: "uint256 _seed"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    ParameterList
+       Gas costs: 3
+       Source: "(uint256)"
+      VariableDeclaration ""
+         Type: uint256
+         Source: "uint256"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    ModifierInvocation "onlyPlayers"
+       Gas costs: 0
+       Source: "onlyPlayers"
+      Identifier onlyPlayers
+         Type: modifier ()
+         Source: "onlyPlayers"
+    Block
+       Source: "{\n\treturn (_seed / (seed[0]*seed[1]));\n\tif((_seed / (seed[0]*seed[1])) == secret) {\n\t\towner = winner;\n\t}\n}"
+      Return
+         Gas costs: 1025
+         Source: "return (_seed / (seed[0]*seed[1]))"
+        TupleExpression
+           Type: uint256
+           Source: "(_seed / (seed[0]*seed[1]))"
+          BinaryOperation using operator /
+             Type: uint256
+             Source: "_seed / (seed[0]*seed[1])"
+            Identifier _seed
+               Type: uint256
+               Source: "_seed"
+            TupleExpression
+               Type: uint256
+               Source: "(seed[0]*seed[1])"
+              BinaryOperation using operator *
+                 Type: uint256
+                 Source: "seed[0]*seed[1]"
+                IndexAccess
+                   Type: uint256
+                   Source: "seed[0]"
+                  Identifier seed
+                     Type: uint256[] storage ref
+                     Source: "seed"
+                  Literal, token: [no token] value: 0
+                     Type: int_const 0
+                     Source: "0"
+                IndexAccess
+                   Type: uint256
+                   Source: "seed[1]"
+                  Identifier seed
+                     Type: uint256[] storage ref
+                     Source: "seed"
+                  Literal, token: [no token] value: 1
+                     Type: int_const 1
+                     Source: "1"
+      IfStatement
+         Source: "if((_seed / (seed[0]*seed[1])) == secret) {\n\t\towner = winner;\n\t}"
+        BinaryOperation using operator ==
+           Type: bool
+           Gas costs: 0
+           Source: "(_seed / (seed[0]*seed[1])) == secret"
+          TupleExpression
+             Type: uint256
+             Source: "(_seed / (seed[0]*seed[1]))"
+            BinaryOperation using operator /
+               Type: uint256
+               Source: "_seed / (seed[0]*seed[1])"
+              Identifier _seed
+                 Type: uint256
+                 Source: "_seed"
+              TupleExpression
+                 Type: uint256
+                 Source: "(seed[0]*seed[1])"
+                BinaryOperation using operator *
+                   Type: uint256
+                   Source: "seed[0]*seed[1]"
+                  IndexAccess
+                     Type: uint256
+                     Source: "seed[0]"
+                    Identifier seed
+                       Type: uint256[] storage ref
+                       Source: "seed"
+                    Literal, token: [no token] value: 0
+                       Type: int_const 0
+                       Source: "0"
+                  IndexAccess
+                     Type: uint256
+                     Source: "seed[1]"
+                    Identifier seed
+                       Type: uint256[] storage ref
+                       Source: "seed"
+                    Literal, token: [no token] value: 1
+                       Type: int_const 1
+                       Source: "1"
+          Identifier secret
+             Type: uint256
+             Source: "secret"
+        Block
+           Source: "{\n\t\towner = winner;\n\t}"
+          ExpressionStatement
+             Gas costs: 0
+             Source: "owner = winner"
+            Assignment using operator =
+               Type: address
+               Source: "owner = winner"
+              Identifier owner
+                 Type: address
+                 Source: "owner"
+              Identifier winner
+                 Type: address
+                 Source: "winner"
+  FunctionDefinition "checkSecret" - public
+     Source: "function checkSecret () public payable onlyPlayers returns(bool) {\n    require(msg.value >= 0.01 ether);\n    if(msg.value == secret){\n        return true;\n    }\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 3
+       Source: "(bool)"
+      VariableDeclaration ""
+         Type: bool
+         Source: "bool"
+        ElementaryTypeName bool
+           Source: "bool"
+    ModifierInvocation "onlyPlayers"
+       Gas costs: 0
+       Source: "onlyPlayers"
+      Identifier onlyPlayers
+         Type: modifier ()
+         Source: "onlyPlayers"
+    Block
+       Source: "{\n    require(msg.value >= 0.01 ether);\n    if(msg.value == secret){\n        return true;\n    }\n}"
+      ExpressionStatement
+         Gas costs: 37
+         Source: "require(msg.value >= 0.01 ether)"
+        FunctionCall
+           Type: tuple()
+           Source: "require(msg.value >= 0.01 ether)"
+          Identifier require
+             Type: function (bool) pure
+             Source: "require"
+          BinaryOperation using operator >=
+             Type: bool
+             Source: "msg.value >= 0.01 ether"
+            MemberAccess to member value
+               Type: uint256
+               Source: "msg.value"
+              Identifier msg
+                 Type: msg
+                 Source: "msg"
+            Literal, token: [no token] value: 0.01
+               Type: int_const 10000000000000000
+               Source: "0.01 ether"
+      IfStatement
+         Source: "if(msg.value == secret){\n        return true;\n    }"
+        BinaryOperation using operator ==
+           Type: bool
+           Gas costs: 208
+           Source: "msg.value == secret"
+          MemberAccess to member value
+             Type: uint256
+             Source: "msg.value"
+            Identifier msg
+               Type: msg
+               Source: "msg"
+          Identifier secret
+             Type: uint256
+             Source: "secret"
+        Block
+           Source: "{\n        return true;\n    }"
+          Return
+             Gas costs: 19
+             Source: "return true"
+            Literal, token: true value: true
+               Type: bool
+               Source: "true"
+  FunctionDefinition "winPrize" - public
+     Source: "function winPrize() public payable onlyOwner {\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\towner.call.value(1 wei)();\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    ModifierInvocation "onlyOwner"
+       Gas costs: 0
+       Source: "onlyOwner"
+      Identifier onlyOwner
+         Type: modifier ()
+         Source: "onlyOwner"
+    Block
+       Source: "{\n\t// <yes> <report> UNCHECKED_LL_CALLS\n\towner.call.value(1 wei)();\n}"
+      ExpressionStatement
+         Gas costs: [???]
+         Source: "owner.call.value(1 wei)()"
+        FunctionCall
+           Type: bool
+           Source: "owner.call.value(1 wei)()"
+          FunctionCall
+             Type: function () payable returns (bool)
+             Source: "owner.call.value(1 wei)"
+            MemberAccess to member value
+               Type: function (uint256) returns (function () payable returns (bool))
+               Source: "owner.call.value"
+              MemberAccess to member call
+                 Type: function () payable returns (bool)
+                 Source: "owner.call"
+                Identifier owner
+                   Type: address
+                   Source: "owner"
+            Literal, token: [no token] value: 1
+               Type: int_const 1
+               Source: "1 wei"
+  FunctionDefinition "claimPrize" - public
+     Source: "function claimPrize() public payable onlyWinner {\n\twinner.transfer(address(this).balance);\n}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    ModifierInvocation "onlyWinner"
+       Gas costs: 0
+       Source: "onlyWinner"
+      Identifier onlyWinner
+         Type: modifier ()
+         Source: "onlyWinner"
+    Block
+       Source: "{\n\twinner.transfer(address(this).balance);\n}"
+      ExpressionStatement
+         Gas costs: [???]
+         Source: "winner.transfer(address(this).balance)"
+        FunctionCall
+           Type: tuple()
+           Source: "winner.transfer(address(this).balance)"
+          MemberAccess to member transfer
+             Type: function (uint256)
+             Source: "winner.transfer"
+            Identifier winner
+               Type: address
+               Source: "winner"
+          MemberAccess to member balance
+             Type: uint256
+             Source: "address(this).balance"
+            FunctionCall
+               Type: address
+               Source: "address(this)"
+              ElementaryTypeNameExpression address
+                 Type: type(address)
+                 Source: "address"
+              Identifier this
+                 Type: contract DrainMe
+                 Source: "this"
+  FunctionDefinition "" - public
+     Source: "function() public payable{\n\t}"
+    ParameterList
+       Gas costs: 0
+       Source: "()"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    Block
+       Gas costs: 0
+       Source: "{\n\t}"

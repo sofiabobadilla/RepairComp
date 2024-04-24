@@ -1,0 +1,45 @@
+Syntax trees:
+
+
+======= /smartbugs-curated/dataset/arithmetic/overflow_simple_add.sol =======
+PragmaDirective
+   Gas costs: 0
+   Source: "pragma solidity 0.4.25;"
+ContractDefinition "Overflow_Add"
+   Source: "contract Overflow_Add {\n    uint public balance = 1;\n\n    function add(uint256 deposit) public {\n        // <yes> <report> ARITHMETIC\n        balance += deposit;\n    }\n}"
+  VariableDeclaration "balance"
+     Type: uint256
+     Gas costs: 287
+     Source: "uint public balance = 1"
+    ElementaryTypeName uint
+       Source: "uint"
+    Literal, token: [no token] value: 1
+       Type: int_const 1
+       Source: "1"
+  FunctionDefinition "add" - public
+     Source: "function add(uint256 deposit) public {\n        // <yes> <report> ARITHMETIC\n        balance += deposit;\n    }"
+    ParameterList
+       Gas costs: 0
+       Source: "(uint256 deposit)"
+      VariableDeclaration "deposit"
+         Type: uint256
+         Source: "uint256 deposit"
+        ElementaryTypeName uint256
+           Source: "uint256"
+    ParameterList
+       Gas costs: 0
+       Source: ""
+    Block
+       Source: "{\n        // <yes> <report> ARITHMETIC\n        balance += deposit;\n    }"
+      ExpressionStatement
+         Gas costs: 20233
+         Source: "balance += deposit"
+        Assignment using operator +=
+           Type: uint256
+           Source: "balance += deposit"
+          Identifier balance
+             Type: uint256
+             Source: "balance"
+          Identifier deposit
+             Type: uint256
+             Source: "deposit"
