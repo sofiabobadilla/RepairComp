@@ -9,3 +9,6 @@ Tools:
 - [TIPS](https://github.com/ASSERT-KTH/TIPS)
 - [SmartFix](https://github.com/ASSERT-KTH/SmartFix-Artifact)
 - [SGuard+](https://github.com/ASSERT-KTH/sGuardPlus)
+
+Datasets:
+- [Smartbugs-curated](https://github.com/ASSERT-KTH/smartbugs-curated)
