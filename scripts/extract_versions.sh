@@ -15,6 +15,5 @@ for dir in "$directory"/*; do
                 fi
             fi
         done
-
     fi
 done
