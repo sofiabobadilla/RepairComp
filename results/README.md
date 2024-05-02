@@ -10,3 +10,15 @@
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
 |TIPS                                |141        |2         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
 |Smartshield (asked for the detector)|           |          |               |                       |                         |                 |   |                                                                  |
+
+
+## Patches overview
+| Tool        | #patches |
+|-------------|----------|
+| Elysium     |      112 |
+| sGuard      |      102 |
+| sGuardPlus  |       78 |
+| SmartFix    |      564 |
+| Aroc        |       96 |
+| TIPS        |      231 |
+| Smartshield |          |
