@@ -1,0 +1,46 @@
+{
+  "fileName": "smartbugs/dataset/unchecked_low_level_calls/lotto.sol",
+  "baseName": "lotto.sol",
+  "iter": 3,
+  "time": 0.186103,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),winner__@6:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "sendToWinner",
+          "argTypes": []
+        }
+      ],
+      "exp": "winner.send(winAmount);",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "withdrawLeftOver",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.send(this.balance);",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": []
+}

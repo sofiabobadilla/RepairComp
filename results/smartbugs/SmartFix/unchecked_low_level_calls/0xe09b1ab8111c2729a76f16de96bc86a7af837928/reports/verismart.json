@@ -1,0 +1,2123 @@
+{
+  "fileName": "smartbugs/dataset/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol",
+  "baseName": "0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol",
+  "iter": 4,
+  "time": 215.650573,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(eq(read(@TU:mapping(address => bool),autoPlayBot__@29:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@27:address),cond(true)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(eq(read(@TU:mapping(address => bool),autoPlayBot__@29:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@27:address),cond(true)))"
+    },
+    {
+      "key": "517",
+      "formula": "land(eq(read(@TU:mapping(address => bool),autoPlayBot__@29:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@27:address),cond(true)))"
+    },
+    {
+      "key": "(-1,517)",
+      "formula": "land(eq(read(@TU:mapping(address => bool),autoPlayBot__@29:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@27:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 103,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "refund",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "((lockedInBets + jackpotSize) + devFeeSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 103,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "refund",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(lockedInBets + jackpotSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 138,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(2 * amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 144,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(amount * JACKPOT_FEE)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "IO",
+      "line": 144,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(jackpotSize + ((amount * JACKPOT_FEE) / 1000))",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "IO",
+      "line": 145,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(amount * DEV_FEE)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "IO",
+      "line": 145,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(devFeeSize + ((amount * DEV_FEE) / 1000))",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "IO",
+      "line": 146,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(amount * WIN_X)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "IO",
+      "line": 146,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(lockedInBets + ((amount * WIN_X) / 1000))",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "IO",
+      "line": 148,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(amount * DONATING_X)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "IO",
+      "line": 151,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(totalAmountToWhale + donate_amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "IO",
+      "line": 171,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(block.number - BET_EXPIRATION_BLOCKS)",
+      "status": "proven"
+    },
+    {
+      "no": "13",
+      "kind": "IO",
+      "line": 177,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(bet.amount * WIN_X)",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "IO",
+      "line": 192,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(tossWin + jackpotWin)",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "IO",
+      "line": 194,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(tossWin + jackpotWin)",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "IO",
+      "line": 200,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(lockedInBets - tossWinAmount)",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "IO",
+      "line": 213,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "donateForContractHealth",
+          "argTypes": []
+        }
+      ],
+      "exp": "(donateAmount[msg.sender] + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "IO",
+      "line": 223,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDonation",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(donateAmount[msg.sender] - amount)",
+      "status": "proven"
+    },
+    {
+      "no": "19",
+      "kind": "IO",
+      "line": 234,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "refund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(bet.blockNumber + BET_EXPIRATION_BLOCKS)",
+      "status": "unproven"
+    },
+    {
+      "no": "20",
+      "kind": "IO",
+      "line": 247,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(devFeeSize - withdrawAmount)",
+      "status": "proven"
+    },
+    {
+      "no": "21",
+      "kind": "IO",
+      "line": 260,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(devFeeSize - withdrawAmount)",
+      "status": "proven"
+    },
+    {
+      "no": "22",
+      "kind": "IO",
+      "line": 286,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "getCollateralBalance",
+          "argTypes": []
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "((lockedInBets + jackpotSize) + devFeeSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "23",
+      "kind": "IO",
+      "line": 286,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "getCollateralBalance",
+          "argTypes": []
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(lockedInBets + jackpotSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "24",
+      "kind": "IO",
+      "line": 287,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "getCollateralBalance",
+          "argTypes": []
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(((address(this).balance - lockedInBets) - jackpotSize) - devFeeSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "25",
+      "kind": "IO",
+      "line": 287,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "getCollateralBalance",
+          "argTypes": []
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "((address(this).balance - lockedInBets) - jackpotSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "26",
+      "kind": "IO",
+      "line": 287,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "getCollateralBalance",
+          "argTypes": []
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(address(this).balance - lockedInBets)",
+      "status": "unproven"
+    },
+    {
+      "no": "27",
+      "kind": "IO",
+      "line": 315,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(bet.amount * WIN_X)",
+      "status": "unproven"
+    },
+    {
+      "no": "28",
+      "kind": "IO",
+      "line": 316,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(lockedInBets - tossWinAmount)",
+      "status": "unproven"
+    },
+    {
+      "no": "29",
+      "kind": "IO",
+      "line": 343,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "(i + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "30",
+      "kind": "IO",
+      "line": 354,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "(bet.blockNumber + BET_EXPIRATION_BLOCKS)",
+      "status": "unproven"
+    },
+    {
+      "no": "31",
+      "kind": "KA",
+      "line": 295,
+      "signatures": [
+        { "contractName": "FiftyFlip", "methodName": "kill", "argTypes": [] }
+      ],
+      "exp": "selfdestruct(owner);",
+      "status": "proven"
+    },
+    {
+      "no": "32",
+      "kind": "ETH_LEAK",
+      "line": 150,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "whale.call.value(donate_amount)(bytes4(keccak256(\"donate()\")));",
+      "status": "unproven"
+    },
+    {
+      "no": "33",
+      "kind": "ETH_LEAK",
+      "line": 295,
+      "signatures": [
+        { "contractName": "FiftyFlip", "methodName": "kill", "argTypes": [] }
+      ],
+      "exp": "selfdestruct(owner);",
+      "status": "proven"
+    },
+    {
+      "no": "34",
+      "kind": "ETH_LEAK",
+      "line": 302,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "winner.transfer(ethToTransfer);",
+      "status": "unproven"
+    },
+    {
+      "no": "35",
+      "kind": "ETH_LEAK",
+      "line": 313,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "requester.transfer(ethToTransfer);",
+      "status": "unproven"
+    },
+    {
+      "no": "36",
+      "kind": "ETH_LEAK",
+      "line": 324,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDonation",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "success = paidUser.send(amount);",
+      "status": "unproven"
+    },
+    {
+      "no": "37",
+      "kind": "RE_EL",
+      "line": 150,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "whale.call.value(donate_amount)(bytes4(keccak256(\"donate()\")));",
+      "status": "unproven"
+    },
+    {
+      "no": "38",
+      "kind": "RE_EL",
+      "line": 302,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "winner.transfer(ethToTransfer);",
+      "status": "unproven"
+    },
+    {
+      "no": "39",
+      "kind": "RE_EL",
+      "line": 313,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "requester.transfer(ethToTransfer);",
+      "status": "unproven"
+    },
+    {
+      "no": "40",
+      "kind": "RE_EL",
+      "line": 324,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDonation",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "success = paidUser.send(amount);",
+      "status": "unproven"
+    },
+    {
+      "no": "41",
+      "kind": "RE",
+      "line": 113,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "setBotAddress",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(FiftyFlip, setBotAddress, [address])",
+      "status": "proven"
+    },
+    {
+      "no": "42",
+      "kind": "RE",
+      "line": 120,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "setSecretSigner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(FiftyFlip, setSecretSigner, [address])",
+      "status": "proven"
+    },
+    {
+      "no": "43",
+      "kind": "RE",
+      "line": 128,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(FiftyFlip, wager, [bool, uint256, uint256, uint8, bytes32, bytes32])",
+      "status": "unproven"
+    },
+    {
+      "no": "44",
+      "kind": "RE",
+      "line": 162,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(FiftyFlip, play, [uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "45",
+      "kind": "RE",
+      "line": 209,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "donateForContractHealth",
+          "argTypes": []
+        }
+      ],
+      "exp": "(FiftyFlip, donateForContractHealth, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "46",
+      "kind": "RE",
+      "line": 217,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDonation",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(FiftyFlip, withdrawDonation, [uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "47",
+      "kind": "RE",
+      "line": 239,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(FiftyFlip, withdrawDevFee, [address, uint256])",
+      "status": "proven"
+    },
+    {
+      "no": "48",
+      "kind": "RE",
+      "line": 252,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(FiftyFlip, withdrawBotFee, [uint256])",
+      "status": "proven"
+    },
+    {
+      "no": "49",
+      "kind": "RE",
+      "line": 307,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(FiftyFlip, sendRefund, [uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "50",
+      "kind": "RE",
+      "line": 340,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "(FiftyFlip, clearStorage, [uint256[]])",
+      "status": "unproven"
+    },
+    {
+      "no": "51",
+      "kind": "TX_ORG",
+      "line": 93,
+      "signatures": [
+        { "contractName": "FiftyFlip", "methodName": "kill", "argTypes": [] },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "setBotAddress",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "setSecretSigner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "transferAnyERC20Token",
+          "argTypes": [ "address", "address", "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    },
+    {
+      "no": "52",
+      "kind": "TX_ORG",
+      "line": 98,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "assume((msg.sender == autoPlayBot));",
+      "status": "proven"
+    },
+    {
+      "no": "53",
+      "kind": "TX_ORG",
+      "line": 135,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "assume((bet.player == address(0)));",
+      "status": "proven"
+    },
+    {
+      "no": "54",
+      "kind": "TX_ORG",
+      "line": 142,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "assume((secretSigner == ecrecover(signatureHash, v, r, s)));",
+      "status": "proven"
+    },
+    {
+      "no": "55",
+      "kind": "TX_ORG",
+      "line": 168,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "assume((bet.player != address(0)));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 117,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "setBotAddress",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre1 == autoPlayBot)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 124,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "setSecretSigner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre2 == secretSigner)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 133,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre12 == amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 134,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre11 == player)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 144,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre10 == jackpotSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 145,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre9 == devFeeSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "NO_EFFECT",
+      "line": 146,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre8 == lockedInBets)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "NO_EFFECT",
+      "line": 148,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre7 == donate_amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "NO_EFFECT",
+      "line": 151,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre6 == totalAmountToWhale)",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "NO_EFFECT",
+      "line": 153,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre5 == bet.amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "NO_EFFECT",
+      "line": 154,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre4 == bet.blockNumber)",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "NO_EFFECT",
+      "line": 156,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(@pre3 == bet.player)",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "NO_EFFECT",
+      "line": 166,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre20 == ticketID)",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "NO_EFFECT",
+      "line": 170,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre19 == blockNumber)",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "NO_EFFECT",
+      "line": 173,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre18 == random)",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "NO_EFFECT",
+      "line": 175,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre17 == jackpotRes)",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "NO_EFFECT",
+      "line": 177,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre16 == tossWinAmount)",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "NO_EFFECT",
+      "line": 183,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre15 == tossWin)",
+      "status": "unproven"
+    },
+    {
+      "no": "19",
+      "kind": "NO_EFFECT",
+      "line": 186,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre14 == jackpotWin)",
+      "status": "unproven"
+    },
+    {
+      "no": "20",
+      "kind": "NO_EFFECT",
+      "line": 200,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre13 == lockedInBets)",
+      "status": "unproven"
+    },
+    {
+      "no": "21",
+      "kind": "NO_EFFECT",
+      "line": 213,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "donateForContractHealth",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre21 == donateAmount[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "22",
+      "kind": "NO_EFFECT",
+      "line": 223,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDonation",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre22 == donateAmount[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "23",
+      "kind": "NO_EFFECT",
+      "line": 247,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre23 == devFeeSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "24",
+      "kind": "NO_EFFECT",
+      "line": 260,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre24 == devFeeSize)",
+      "status": "unproven"
+    },
+    {
+      "no": "25",
+      "kind": "NO_EFFECT",
+      "line": 311,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre28 == requester)",
+      "status": "unproven"
+    },
+    {
+      "no": "26",
+      "kind": "NO_EFFECT",
+      "line": 312,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre27 == ethToTransfer)",
+      "status": "unproven"
+    },
+    {
+      "no": "27",
+      "kind": "NO_EFFECT",
+      "line": 315,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre26 == tossWinAmount)",
+      "status": "unproven"
+    },
+    {
+      "no": "28",
+      "kind": "NO_EFFECT",
+      "line": 316,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre25 == lockedInBets)",
+      "status": "unproven"
+    },
+    {
+      "no": "29",
+      "kind": "NO_EFFECT",
+      "line": 341,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "(@pre30 == length)",
+      "status": "unproven"
+    },
+    {
+      "no": "30",
+      "kind": "NO_EFFECT",
+      "line": 343,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "(@pre29 == i)",
+      "status": "unproven"
+    },
+    {
+      "no": "31",
+      "kind": "NO_EFFECT",
+      "line": 360,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "(@pre31 == bet.player)",
+      "status": "unproven"
+    },
+    {
+      "no": "32",
+      "kind": "ASSIGN_CONST",
+      "line": 144,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(jackpotSize == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "33",
+      "kind": "ASSIGN_CONST",
+      "line": 145,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(devFeeSize == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "34",
+      "kind": "ASSIGN_CONST",
+      "line": 146,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(lockedInBets == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "35",
+      "kind": "ASSIGN_CONST",
+      "line": 151,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "(totalAmountToWhale == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "36",
+      "kind": "ASSIGN_CONST",
+      "line": 200,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(lockedInBets == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "37",
+      "kind": "ASSIGN_CONST",
+      "line": 213,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "donateForContractHealth",
+          "argTypes": []
+        }
+      ],
+      "exp": "(donateAmount[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "38",
+      "kind": "ASSIGN_CONST",
+      "line": 223,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDonation",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(donateAmount[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "39",
+      "kind": "ASSIGN_CONST",
+      "line": 247,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(devFeeSize == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "40",
+      "kind": "ASSIGN_CONST",
+      "line": 260,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(devFeeSize == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "41",
+      "kind": "ASSIGN_CONST",
+      "line": 316,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(lockedInBets == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "42",
+      "kind": "ASSIGN_CONST",
+      "line": 343,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "(i == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "43",
+      "kind": "DEAD",
+      "line": 93,
+      "signatures": [
+        { "contractName": "FiftyFlip", "methodName": "kill", "argTypes": [] },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "setBotAddress",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "setSecretSigner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "transferAnyERC20Token",
+          "argTypes": [ "address", "address", "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "44",
+      "kind": "DEAD",
+      "line": 98,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "45",
+      "kind": "DEAD",
+      "line": 103,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "refund",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "46",
+      "kind": "DEAD",
+      "line": 135,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "47",
+      "kind": "DEAD",
+      "line": 136,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "48",
+      "kind": "DEAD",
+      "line": 137,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "49",
+      "kind": "DEAD",
+      "line": 138,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "50",
+      "kind": "DEAD",
+      "line": 140,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "51",
+      "kind": "DEAD",
+      "line": 142,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "52",
+      "kind": "DEAD",
+      "line": 168,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "53",
+      "kind": "DEAD",
+      "line": 169,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "54",
+      "kind": "DEAD",
+      "line": 171,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "55",
+      "kind": "DEAD",
+      "line": 182,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "56",
+      "kind": "DEAD",
+      "line": 185,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "57",
+      "kind": "DEAD",
+      "line": 189,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "58",
+      "kind": "DEAD",
+      "line": 192,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "59",
+      "kind": "DEAD",
+      "line": 194,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "60",
+      "kind": "DEAD",
+      "line": 198,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "61",
+      "kind": "DEAD",
+      "line": 220,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDonation",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "62",
+      "kind": "DEAD",
+      "line": 222,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDonation",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "63",
+      "kind": "DEAD",
+      "line": 233,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "refund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "64",
+      "kind": "DEAD",
+      "line": 234,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "refund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "65",
+      "kind": "DEAD",
+      "line": 235,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "refund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "66",
+      "kind": "DEAD",
+      "line": 243,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "67",
+      "kind": "DEAD",
+      "line": 244,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "68",
+      "kind": "DEAD",
+      "line": 245,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "69",
+      "kind": "DEAD",
+      "line": 246,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawDevFee",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "70",
+      "kind": "DEAD",
+      "line": 256,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "71",
+      "kind": "DEAD",
+      "line": 257,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "72",
+      "kind": "DEAD",
+      "line": 258,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "73",
+      "kind": "DEAD",
+      "line": 259,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "withdrawBotFee",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "74",
+      "kind": "DEAD",
+      "line": 286,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "getCollateralBalance",
+          "argTypes": []
+        },
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "wager",
+          "argTypes": [
+            "bool", "uint256", "uint256", "uint8", "bytes32", "bytes32"
+          ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "75",
+      "kind": "DEAD",
+      "line": 294,
+      "signatures": [
+        { "contractName": "FiftyFlip", "methodName": "kill", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "76",
+      "kind": "DEAD",
+      "line": 302,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "77",
+      "kind": "DEAD",
+      "line": 313,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "sendRefund",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "78",
+      "kind": "DEAD",
+      "line": 344,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "79",
+      "kind": "DEAD",
+      "line": 354,
+      "signatures": [
+        {
+          "contractName": "FiftyFlip",
+          "methodName": "clearStorage",
+          "argTypes": [ "uint256[]" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

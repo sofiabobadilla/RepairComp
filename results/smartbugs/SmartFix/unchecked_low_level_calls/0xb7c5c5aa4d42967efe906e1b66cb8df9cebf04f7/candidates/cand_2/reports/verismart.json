@@ -1,0 +1,135 @@
+{
+  "fileName": "results/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7/candidates/cand_2/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 6,
+  "time": 53.211739,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "usum(@Invest_sum:uint256,balances__@5:mapping(address => uint256))"
+    },
+    {
+      "key": "0",
+      "formula": "usum(@Invest_sum:uint256,balances__@5:mapping(address => uint256))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "keepMyEther",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "keepMyEther",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.call.value(tmp__1)();",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "RE_EL",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "keepMyEther",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.call.value(tmp__1)();",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "RE",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "keepMyEther",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(keepMyEther, @fallback, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "keepMyEther",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "(keepMyEther, withdraw, [])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "keepMyEther",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "keepMyEther",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == tmp__1)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "keepMyEther",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    }
+  ]
+}

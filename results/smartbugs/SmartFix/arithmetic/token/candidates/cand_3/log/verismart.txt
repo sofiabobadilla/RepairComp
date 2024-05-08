@@ -1,0 +1,132 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 6.2e-05s
+[INFO] # path : 6
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000172s
+Generating VCs ... took 0.000296s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.021509
+[
+0 -> true
+]
+[
+]
+1/4 ... [IO] line 20, (balances[msg.sender] - _value) ... unproven
+2/4 ... [IO] line 22, (balances[msg.sender] - _value) ... unproven
+3/4 ... [IO] line 23, (balances[_to] + _value) ... proven
+4/4 ... [IO] line 24, (balances[_to] + _value) ... proven
+took 0.567096s
+
+Generating VCs ... took 0.000125s
+Checking validity of VCs ... took 7.236937s
+
+Generating VCs ... took 0.000127s
+Checking validity of VCs ... took 1.236697s
+
+Generating VCs ... took 0.00014s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 9.072721
+[
+0 -> (Σbalances__@5 == totalSupply__@7)
+]
+[
+]
+1/4 ... [IO] line 20, (balances[msg.sender] - _value) ... unproven
+2/4 ... [IO] line 22, (balances[msg.sender] - _value) ... unproven
+3/4 ... [IO] line 23, (balances[_to] + _value) ... proven
+4/4 ... [IO] line 24, (balances[_to] + _value) ... proven
+took 0.754525s
+
+Generating VCs ... took 0.000142999999998s
+Checking validity of VCs ... took 2.052138s
+
+Generating VCs ... took 0.000126000000002s
+Checking validity of VCs ... took 0.486844s
+
+Generating VCs ... took 0.000123s
+Checking validity of VCs ... took 4.481197s
+
+Generating VCs ... took 0.000241000000003s
+Checking validity of VCs ... took 0.042755s
+
+Generating VCs ... took 0.000229999999998s
+Checking validity of VCs ... took 2.548524s
+
+Iter : 10 To explore : 7 Explored : 23 Total elapsed : 19.432403
+Generating VCs ... took 0.000124s
+Checking validity of VCs ... took 20.053673s
+
+Generating VCs ... took 0.000145000000003s
+Checking validity of VCs ... took 20.085723s
+
+Generating VCs ... took 0.000205000000001s
+Checking validity of VCs ... took 0.043817s
+
+Generating VCs ... took 0.000140999999999s
+Checking validity of VCs ... took 4.007681s
+
+Generating VCs ... took 0.000126000000002s
+Checking validity of VCs ... took 4.735041s
+
+Generating VCs ... took 0.000126999999992s
+Checking validity of VCs ... took 20.067768s
+
+Generating VCs ... took 0.000127000000006s
+Checking validity of VCs ... took 2.679701s
+
+Generating VCs ... took 0.000141999999997s
+Checking validity of VCs ... took 9.898764s
+
+Generating VCs ... took 0.000126999999992s
+Checking validity of VCs ... took 20.071456s
+
+Generating VCs ... took 7.70000000045e-05s
+Checking validity of VCs ... 
+1/7 ... [NO_EFFECT] line 22, (@pre2 == balances[msg.sender]) ... unproven
+2/7 ... [NO_EFFECT] line 24, (@pre1 == balances[_to]) ... unproven
+3/7 ... [NO_EFFECT] line 29, (@pre3 == balance) ... unproven
+4/7 ... [ASSIGN_CONST] line 22, ((!(_to != msg.sender)) || (balances[msg.sender] == 0)) ... unproven
+5/7 ... [ASSIGN_CONST] line 24, ((!(_to != msg.sender)) || (balances[_to] == 0)) ... unproven
+6/7 ... [DEAD] line 20, false ... unproven
+7/7 ... [DEAD] line 23, false ... unproven
+took 1.315388s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 20, (balances[msg.sender] - _value) : unproven
+[2] [IO] line 22, (balances[msg.sender] - _value) : unproven
+[3] [IO] line 23, (balances[_to] + _value) : proven
+[4] [IO] line 24, (balances[_to] + _value) : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 22, (@pre2 == balances[msg.sender]) : unproven
+[2] [NO_EFFECT] line 24, (@pre1 == balances[_to]) : unproven
+[3] [NO_EFFECT] line 29, (@pre3 == balance) : unproven
+[4] [ASSIGN_CONST] line 22, ((!(_to != msg.sender)) || (balances[msg.sender] == 0)) : unproven
+[5] [ASSIGN_CONST] line 24, ((!(_to != msg.sender)) || (balances[_to] == 0)) : unproven
+[6] [DEAD] line 20, false : unproven
+[7] [DEAD] line 23, false : unproven
+
+============ Statistics ============
+# Iter                    : 19
+# Alarm / Query           : 2 / 4
+- integer over/underflow  : 2 / 4
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 122.420473099
+Time Elapsed (CPU)  : 122.396137

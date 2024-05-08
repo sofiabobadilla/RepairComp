@@ -1,0 +1,93 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 8
+[INFO] reachable : 8
+[INFO] Generating Paths ... took 3.8e-05s
+[INFO] # path : 8
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000132s
+Generating VCs ... took 0.000133s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.021822
+[
+0 -> true
+]
+[
+]
+1/6 ... [IO] line 18, (count + input) ... unproven
+2/6 ... [IO] line 24, (count * input) ... unproven
+3/6 ... [IO] line 30, (count - input) ... unproven
+4/6 ... [IO] line 36, (count + input) ... unproven
+5/6 ... [IO] line 42, (count * input) ... unproven
+6/6 ... [IO] line 48, (count - input) ... unproven
+took 0.064067s
+
+Generating VCs ... took 8.3e-05s
+Checking validity of VCs ... took 0.036808s
+
+Generating VCs ... took 7.3e-05s
+Checking validity of VCs ... took 0.008632s
+
+Generating VCs ... took 7.4e-05s
+Checking validity of VCs ... took 0.031681s
+
+Generating VCs ... took 6.4e-05s
+Checking validity of VCs ... took 0.030612s
+
+Generating VCs ... took 7.7e-05s
+Checking validity of VCs ... took 0.042267s
+
+Generating VCs ... took 3.7e-05s
+Checking validity of VCs ... 
+1/10 ... [NO_EFFECT] line 18, (@pre1 == count) ... unproven
+2/10 ... [NO_EFFECT] line 24, (@pre2 == count) ... unproven
+3/10 ... [NO_EFFECT] line 30, (@pre3 == count) ... unproven
+4/10 ... [NO_EFFECT] line 36, (@pre4 == res) ... unproven
+5/10 ... [NO_EFFECT] line 42, (@pre5 == res) ... unproven
+6/10 ... [NO_EFFECT] line 48, (@pre6 == res) ... unproven
+7/10 ... [ASSIGN_CONST] line 18, (count == 0) ... unproven
+8/10 ... [ASSIGN_CONST] line 30, (count == 0) ... unproven
+9/10 ... [ASSIGN_CONST] line 36, (res == 0) ... unproven
+10/10 ... [ASSIGN_CONST] line 48, (res == 0) ... unproven
+took 0.088472s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 18, (count + input) : unproven
+[2] [IO] line 24, (count * input) : unproven
+[3] [IO] line 30, (count - input) : unproven
+[4] [IO] line 36, (count + input) : unproven
+[5] [IO] line 42, (count * input) : unproven
+[6] [IO] line 48, (count - input) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 18, (@pre1 == count) : unproven
+[2] [NO_EFFECT] line 24, (@pre2 == count) : unproven
+[3] [NO_EFFECT] line 30, (@pre3 == count) : unproven
+[4] [NO_EFFECT] line 36, (@pre4 == res) : unproven
+[5] [NO_EFFECT] line 42, (@pre5 == res) : unproven
+[6] [NO_EFFECT] line 48, (@pre6 == res) : unproven
+[7] [ASSIGN_CONST] line 18, (count == 0) : unproven
+[8] [ASSIGN_CONST] line 30, (count == 0) : unproven
+[9] [ASSIGN_CONST] line 36, (res == 0) : unproven
+[10] [ASSIGN_CONST] line 48, (res == 0) : unproven
+
+============ Statistics ============
+# Iter                    : 7
+# Alarm / Query           : 6 / 6
+- integer over/underflow  : 6 / 6
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 0.338060855865
+Time Elapsed (CPU)  : 0.325585

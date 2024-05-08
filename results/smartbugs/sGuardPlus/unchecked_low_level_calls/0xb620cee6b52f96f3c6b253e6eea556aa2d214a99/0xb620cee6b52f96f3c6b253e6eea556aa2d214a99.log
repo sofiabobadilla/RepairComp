@@ -1,0 +1,40 @@
+Compilation warnings/errors on smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:
+smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:87:5: Warning: This declaration shadows an existing declaration.
+    uint256 secret = uint256(hash);
+    ^------------^
+smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:26:1: The shadowed declaration is here:
+uint256 public secret;
+^-------------------^
+
+smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:86:20: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    bytes32 hash = keccak256(blockhash(block.number-1));
+                   ^----------------------------------^
+smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:86:20: Warning: The provided argument of type bytes32 is not implicitly convertible to expected type bytes memory.
+    bytes32 hash = keccak256(blockhash(block.number-1));
+                   ^----------------------------------^
+smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:100:2: Warning: Return value of low-level calls not used.
+	firstTarget.call.value(msg.value)();
+	^---------------------------------^
+smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:106:2: Warning: Return value of low-level calls not used.
+	secondTarget.call.value(msg.value)();
+	^----------------------------------^
+smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:133:2: Warning: Return value of low-level calls not used.
+	owner.call.value(1 wei)();
+	^-----------------------^
+
+smartbugs/dataset/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol analyzed (1 contracts)
+/sGuardPlus/src/revert2src.js:373
+			throw new Error(`${ast.type} unimpl`)
+			^
+
+Error: ElementaryTypeName unimpl
+    at RevertExp.start (/sGuardPlus/src/revert2src.js:373:10)
+    at FunctionCall (/sGuardPlus/src/revert2src.js:285:10)
+    at RevertExp.start (/sGuardPlus/src/revert2src.js:371:4)
+    at VariableDeclarationStatement (/sGuardPlus/src/revert2src.js:518:10)
+    at RevertStmt.start (/sGuardPlus/src/revert2src.js:572:4)
+    at /sGuardPlus/src/revert2src.js:398:11
+    at Array.forEach (<anonymous>)
+    at Block (/sGuardPlus/src/revert2src.js:397:20)
+    at RevertStmt.start (/sGuardPlus/src/revert2src.js:572:4)
+    at FunctionDefinition (/sGuardPlus/src/revert2src.js:171:16)

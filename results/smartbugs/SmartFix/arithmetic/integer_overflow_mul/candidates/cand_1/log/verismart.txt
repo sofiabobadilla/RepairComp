@@ -1,0 +1,69 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 3
+[INFO] reachable : 3
+[INFO] Generating Paths ... took 3.9e-05s
+[INFO] # path : 5
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 6e-05s
+Generating VCs ... took 0.000126s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.020628
+[
+0 -> true
+]
+[
+]
+1/2 ... [IO] line 17, (count * input) ... proven
+2/2 ... [IO] line 18, (count * input) ... unproven
+took 0.028814s
+
+Generating VCs ... took 7.5e-05s
+Checking validity of VCs ... took 0.026598s
+
+Generating VCs ... took 6.8e-05s
+Checking validity of VCs ... took 0.008383s
+
+Generating VCs ... took 7.9e-05s
+Checking validity of VCs ... took 0.017814s
+
+Generating VCs ... took 8.7e-05s
+Checking validity of VCs ... took 0.039227s
+
+Generating VCs ... took 8.6e-05s
+Checking validity of VCs ... took 0.040857s
+
+Generating VCs ... took 3.5e-05s
+Checking validity of VCs ... 
+1/2 ... [NO_EFFECT] line 18, (@pre1 == count) ... unproven
+2/2 ... [DEAD] line 17, false ... unproven
+took 0.016684s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 17, (count * input) : proven
+[2] [IO] line 18, (count * input) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 18, (@pre1 == count) : unproven
+[2] [DEAD] line 17, false : unproven
+
+============ Statistics ============
+# Iter                    : 7
+# Alarm / Query           : 1 / 2
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 0.214127063751
+Time Elapsed (CPU)  : 0.200053

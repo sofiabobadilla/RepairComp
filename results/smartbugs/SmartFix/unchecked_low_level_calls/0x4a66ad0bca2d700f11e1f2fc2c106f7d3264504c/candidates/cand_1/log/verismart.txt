@@ -1,0 +1,65 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.000177s
+[INFO] # path : 10
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000299s
+Generating VCs ... took 0.005236s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.033523
+[
+0 -> true
+19 -> true
+]
+[
+]
+1/4 ... [IO] line 17, (i + 1) ... proven
+2/4 ... [IO] line 19, (v[i] * 1000000000000000000) ... proven
+3/4 ... [IO] line 20, (v[i] * 1000000000000000000) ... proven
+4/4 ... [TX_ORG] line 14, assume((msg.sender == address(865425485585769974049089044510914178452745414345))); ... proven
+took 0.369765s
+
+Generating VCs ... took 9.8e-05s
+Checking validity of VCs ... 
+1/5 ... [NO_EFFECT] line 17, (@pre1 == i) ... unproven
+2/5 ... [ASSIGN_CONST] line 17, (i == 0) ... unproven
+3/5 ... [DEAD] line 14, false ... unproven
+4/5 ... [DEAD] line 15, false ... unproven
+5/5 ... [DEAD] line 19, false ... unproven
+took 0.054673s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 17, (i + 1) : proven
+[2] [IO] line 19, (v[i] * 1000000000000000000) : proven
+[3] [IO] line 20, (v[i] * 1000000000000000000) : proven
+[4] [TX_ORG] line 14, assume((msg.sender == address(865425485585769974049089044510914178452745414345))); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 17, (@pre1 == i) : unproven
+[2] [ASSIGN_CONST] line 17, (i == 0) : unproven
+[3] [DEAD] line 14, false : unproven
+[4] [DEAD] line 15, false : unproven
+[5] [DEAD] line 19, false : unproven
+
+============ Statistics ============
+# Iter                    : 1
+# Alarm / Query           : 0 / 4
+- integer over/underflow  : 0 / 3
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 0.484622001648
+Time Elapsed (CPU)  : 0.457315

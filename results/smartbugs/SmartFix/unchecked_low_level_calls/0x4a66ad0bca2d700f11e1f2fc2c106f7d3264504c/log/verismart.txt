@@ -1,0 +1,144 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 8.6e-05s
+[INFO] # path : 8
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000186s
+Generating VCs ... took 0.000342s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.025225
+[
+0 -> true
+19 -> true
+]
+[
+]
+1/3 ... [IO] line 17, (i + 1) ... proven
+2/3 ... [IO] line 19, (v[i] * 1000000000000000000) ... unproven
+3/3 ... [TX_ORG] line 14, assume((msg.sender == address(865425485585769974049089044510914178452745414345))); ... proven
+took 0.074515s
+
+Generating VCs ... took 0.000111s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.107115
+[
+0 -> true
+19 -> (forAll [@i].(Read(@TU, Read(_tos__@10, @i)) == true))
+]
+[
+]
+1/3 ... [IO] line 17, (i + 1) ... proven
+2/3 ... [IO] line 19, (v[i] * 1000000000000000000) ... unproven
+3/3 ... [TX_ORG] line 14, assume((msg.sender == address(865425485585769974049089044510914178452745414345))); ... proven
+took 0.021927s
+
+Generating VCs ... took 0.000114s
+Checking validity of VCs ... took 0.021055s
+
+Generating VCs ... took 0.000112s
+Checking validity of VCs ... took 0.011699s
+
+Generating VCs ... took 0.000107s
+Checking validity of VCs ... took 0.007073s
+
+Generating VCs ... took 0.000107s
+Checking validity of VCs ... took 0.019236s
+
+Generating VCs ... took 0.000112s
+Checking validity of VCs ... took 0.023136s
+
+Generating VCs ... took 0.000111s
+Checking validity of VCs ... took 0.03221s
+
+Generating VCs ... took 0.000113s
+Checking validity of VCs ... took 0.025492s
+
+Iter : 10 To explore : 10 Explored : 27 Total elapsed : 0.26454
+Generating VCs ... took 0.000116s
+Checking validity of VCs ... took 0.028479s
+
+Generating VCs ... took 0.000117s
+Checking validity of VCs ... took 0.028259s
+
+Generating VCs ... took 0.000117s
+Checking validity of VCs ... took 0.026483s
+
+Generating VCs ... took 0.000109s
+Checking validity of VCs ... took 0.022345s
+
+Generating VCs ... took 0.000114s
+Checking validity of VCs ... took 0.024589s
+
+Generating VCs ... took 0.000112s
+Checking validity of VCs ... took 0.022088s
+
+Generating VCs ... took 0.000113s
+Checking validity of VCs ... took 0.033528s
+
+Generating VCs ... took 0.000117s
+Checking validity of VCs ... took 0.036336s
+
+Generating VCs ... took 0.000334s
+Checking validity of VCs ... took 0.03324s
+
+Generating VCs ... took 0.000115s
+Checking validity of VCs ... took 0.040165s
+
+Iter : 20 To explore : 5 Explored : 32 Total elapsed : 0.565883
+Generating VCs ... took 0.000111s
+Checking validity of VCs ... took 0.030553s
+
+Generating VCs ... took 0.000162s
+Checking validity of VCs ... took 0.035033s
+
+Generating VCs ... took 0.000113s
+Checking validity of VCs ... took 0.034309s
+
+Generating VCs ... took 0.000211s
+Checking validity of VCs ... took 0.036644s
+
+Generating VCs ... took 0.000113s
+Checking validity of VCs ... took 0.041085s
+
+Generating VCs ... took 6.4e-05s
+Checking validity of VCs ... 
+1/4 ... [NO_EFFECT] line 17, (@pre1 == i) ... unproven
+2/4 ... [ASSIGN_CONST] line 17, (i == 0) ... unproven
+3/4 ... [DEAD] line 14, false ... unproven
+4/4 ... [DEAD] line 15, false ... unproven
+took 0.044639s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 17, (i + 1) : proven
+[2] [IO] line 19, (v[i] * 1000000000000000000) : unproven
+[3] [TX_ORG] line 14, assume((msg.sender == address(865425485585769974049089044510914178452745414345))); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 17, (@pre1 == i) : unproven
+[2] [ASSIGN_CONST] line 17, (i == 0) : unproven
+[3] [DEAD] line 14, false : unproven
+[4] [DEAD] line 15, false : unproven
+
+============ Statistics ============
+# Iter                    : 25
+# Alarm / Query           : 1 / 3
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 0.811808109283
+Time Elapsed (CPU)  : 0.791032

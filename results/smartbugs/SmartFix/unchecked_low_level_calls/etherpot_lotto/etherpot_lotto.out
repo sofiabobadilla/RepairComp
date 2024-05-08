@@ -1,0 +1,39 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 18
+[INFO] reachable : 18
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (Lotto/@fallback/[]), 135, (msg.value - (msg.value % ticketPrice))),
+    (IO, (Lotto/@fallback/[]), 146, (rounds[roundIndex].ticketsCount + ticketsCount)),
+    (IO, (Lotto/@fallback/[]), 153, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount)),
+    (IO, (Lotto/@fallback/[]), 154, (rounds[roundIndex].ticketsCount + ticketsCount)),
+    (IO, (Lotto/@fallback/[]), 157, (rounds[roundIndex].pot + value)),
+    (IO, (Lotto/calculateWinner/[uint256_uint256]), 62, (buyerIndex + 1)),
+    (IO, (Lotto/calculateWinner/[uint256_uint256]), 64, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer])),
+    (IO, (Lotto/getDecisionBlockNumber/[uint256_uint256]), 73, (((roundIndex + 1) * blocksPerRound) + subpotIndex)),
+    (IO, (Lotto/getDecisionBlockNumber/[uint256_uint256]), 73, ((roundIndex + 1) * blocksPerRound)),
+    (IO, (Lotto/getDecisionBlockNumber/[uint256_uint256]), 73, (roundIndex + 1)),
+    (IO, (Lotto/getSubpotsCount/[uint256]), 80, (subpotsCount + 1)),
+    (ETH_LEAK, (Lotto/@fallback/[]), 141, msg.sender.send((msg.value - value));),
+    (ETH_LEAK, (Lotto/cash/[uint256_uint256]), 109, winner.send(subpot);)
+
+[INFO] # of basic patch components : 12
+[INFO] extracted components
+[
+InsertLine (62, assume(((buyerIndex + 1) >= buyerIndex));),
+InsertLine (64, assume(((ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) >= ticketIndex));),
+InsertLine (73, assume(((((roundIndex + 1) * blocksPerRound) + subpotIndex) >= ((roundIndex + 1) * blocksPerRound)));),
+InsertLine (73, assume((((roundIndex + 1) == 0) || ((((roundIndex + 1) * blocksPerRound) / (roundIndex + 1)) == blocksPerRound)));),
+InsertLine (73, assume(((roundIndex + 1) >= roundIndex));),
+InsertLine (80, assume(((subpotsCount + 1) >= subpotsCount));),
+InsertLine (91, assume((smartfix_owner == msg.sender));),
+InsertLine (135, assume((msg.value >= (msg.value % ticketPrice)));),
+InsertLine (146, assume(((rounds[roundIndex].ticketsCount + ticketsCount) >= rounds[roundIndex].ticketsCount));),
+InsertLine (153, assume(((rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) >= rounds[roundIndex].ticketsCountByBuyer[msg.sender]));),
+InsertLine (154, assume(((rounds[roundIndex].ticketsCount + ticketsCount) >= rounds[roundIndex].ticketsCount));),
+InsertLine (157, assume(((rounds[roundIndex].pot + value) >= rounds[roundIndex].pot));)
+]
+- New best candidate, iter 1, 410.786829948s : results/unchecked_low_level_calls/etherpot_lotto/candidates/cand_12/patch.sol

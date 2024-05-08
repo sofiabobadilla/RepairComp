@@ -1,0 +1,233 @@
+{
+  "fileName": "results/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12/candidates/cand_4/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 11,
+  "time": 181.367567,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(eq(MinDeposit__@8:uint256,1000000000000000000),usum(@Invest_sum:uint256,balances__@5:mapping(address => uint256)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(eq(MinDeposit__@8:uint256,1000000000000000000),usum(@Invest_sum:uint256,balances__@5:mapping(address => uint256)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] - _am)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "RE_EL",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(Private_Bank, Deposit, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(Private_Bank, CashOut, [uint256])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 71,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre5 == LastMsg.Sender)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 72,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre4 == LastMsg.Time)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 73,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre3 == LastMsg.Val)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "ASSIGN_CONST",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "ASSIGN_CONST",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 37,
+      "signatures": [
+        {
+          "contractName": "Private_Bank",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

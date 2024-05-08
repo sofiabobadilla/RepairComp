@@ -1,0 +1,81 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 6
+[INFO] reachable : 6
+[INFO] Generating Paths ... took 7.6e-05s
+[INFO] # path : 9
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000124s
+Generating VCs ... took 0.000238s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.02435
+[
+0 -> true
+]
+[
+]
+1/4 ... [IO] line 28, (bonusCodes.length - 1) ... unproven
+2/4 ... [KA] line 38, selfdestruct(msg.sender); ... unproven
+3/4 ... [ETH_LEAK] line 38, selfdestruct(msg.sender); ... unproven
+4/4 ... [TX_ORG] line 37, assume((msg.sender == owner)); ... proven
+took 0.05083s
+
+Generating VCs ... took 8.2e-05s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.075235
+[
+0 -> (Read(@TU, owner__@6) == true)
+]
+[
+]
+1/4 ... [IO] line 28, (bonusCodes.length - 1) ... unproven
+2/4 ... [KA] line 38, selfdestruct(msg.sender); ... proven
+3/4 ... [ETH_LEAK] line 38, selfdestruct(msg.sender); ... proven
+4/4 ... [TX_ORG] line 37, assume((msg.sender == owner)); ... proven
+took 0.015807s
+
+Generating VCs ... took 5.2e-05s
+Checking validity of VCs ... 
+1/6 ... [NO_EFFECT] line 28, (@pre1 == bonusCodes.length) ... unproven
+2/6 ... [NO_EFFECT] line 33, (@pre2 == bonusCodes[idx]) ... unproven
+3/6 ... [ASSIGN_CONST] line 28, (bonusCodes.length == 0) ... unproven
+4/6 ... [DEAD] line 27, false ... unproven
+5/6 ... [DEAD] line 32, false ... unproven
+6/6 ... [DEAD] line 37, false ... unproven
+took 0.055225s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 28, (bonusCodes.length - 1) : unproven
+[2] [KA] line 38, selfdestruct(msg.sender); : proven
+[3] [ETH_LEAK] line 38, selfdestruct(msg.sender); : proven
+[4] [TX_ORG] line 37, assume((msg.sender == owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 28, (@pre1 == bonusCodes.length) : unproven
+[2] [NO_EFFECT] line 33, (@pre2 == bonusCodes[idx]) : unproven
+[3] [ASSIGN_CONST] line 28, (bonusCodes.length == 0) : unproven
+[4] [DEAD] line 27, false : unproven
+[5] [DEAD] line 32, false : unproven
+[6] [DEAD] line 37, false : unproven
+
+============ Statistics ============
+# Iter                    : 3
+# Alarm / Query           : 1 / 4
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 1
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 0.168735027313
+Time Elapsed (CPU)  : 0.14624

@@ -1,0 +1,20 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 4
+[INFO] reachable : 4
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (ETH_LEAK, (Phishable/withdrawAll/[address]), 21, _recipient.transfer(this.balance);),
+    (TX_ORG, (Phishable/withdrawAll/[address]), 20, assume((tx.origin == owner));)
+
+[INFO] # of basic patch components : 3
+[INFO] extracted components
+[
+InsertLine (20, assume((owner == msg.sender));),
+Replace (20, (tx.origin == owner), (tx.origin != owner)),
+Replace (20, tx.origin, msg.sender)
+]
+- New best candidate, iter 1, 0.9460978508s : results/access_control/phishable/candidates/cand_3/patch.sol
+- Solution found, iter 1, 0.9460978508s : results/access_control/phishable/candidates/cand_3/patch.sol

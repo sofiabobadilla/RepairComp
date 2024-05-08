@@ -1,0 +1,117 @@
+{
+  "fileName": "smartbugs/dataset/arithmetic/insecure_transfer.sol",
+  "baseName": "insecure_transfer.sol",
+  "iter": 3,
+  "time": 10.018519000000001,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "land(noflow(balanceOf__@5:mapping(address => uint256)),usum(@Invest_sum:uint256,balanceOf__@5:mapping(address => uint256)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "IntegerOverflowAdd",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(balanceOf[msg.sender] - _value)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "IntegerOverflowAdd",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(balanceOf[_to] + _value)",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "IntegerOverflowAdd",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == balanceOf[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "IntegerOverflowAdd",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == balanceOf[_to])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "IntegerOverflowAdd",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "((!(_to != msg.sender)) || (balanceOf[msg.sender] == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ASSIGN_CONST",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "IntegerOverflowAdd",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "((!(_to != msg.sender)) || (balanceOf[_to] == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "IntegerOverflowAdd",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

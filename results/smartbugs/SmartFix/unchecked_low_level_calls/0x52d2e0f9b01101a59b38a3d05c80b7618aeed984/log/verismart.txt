@@ -1,0 +1,90 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 7
+[INFO] reachable : 6
+[INFO] Generating Paths ... took 0.000195s
+[INFO] # path : 17
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000553s
+Generating VCs ... took 0.001961s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.036005
+[
+-1 -> true
+0 -> true
+29 -> true
+(-1,29) -> true
+]
+[
+]
+1/7 ... [IO] line 25, (i + 1) ... proven
+2/7 ... [ETH_LEAK] line 22, owner.transfer(this.balance); ... unproven
+3/7 ... [ETH_LEAK] line 27, addr.call.value(0)(); ... proven
+4/7 ... [RE_EL] line 22, owner.transfer(this.balance); ... unproven
+5/7 ... [RE_EL] line 27, addr.call.value(0)(); ... proven
+6/7 ... [RE] line 21, (EtherGet, withdrawEther, []) ... unproven
+7/7 ... [RE] line 24, (EtherGet, getTokens, [uint256, address]) ... unproven
+took 0.768488s
+
+Generating VCs ... took 0.000658s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.804604
+[
+-1 -> (Read(@TU, owner__@20) == true)
+0 -> (Read(@TU, owner__@20) == true)
+29 -> (Read(@TU, owner__@20) == true)
+(-1,29) -> (Read(@TU, owner__@20) == true)
+]
+[
+]
+1/7 ... [IO] line 25, (i + 1) ... proven
+2/7 ... [ETH_LEAK] line 22, owner.transfer(this.balance); ... proven
+3/7 ... [ETH_LEAK] line 27, addr.call.value(0)(); ... proven
+4/7 ... [RE_EL] line 22, owner.transfer(this.balance); ... proven
+5/7 ... [RE_EL] line 27, addr.call.value(0)(); ... proven
+6/7 ... [RE] line 21, (EtherGet, withdrawEther, []) ... proven
+7/7 ... [RE] line 24, (EtherGet, getTokens, [uint256, address]) ... unproven
+took 0.085122s
+
+Generating VCs ... took 0.000313s
+Checking validity of VCs ... 
+1/3 ... [NO_EFFECT] line 25, (@pre1 == i) ... unproven
+2/3 ... [ASSIGN_CONST] line 25, (i == 0) ... unproven
+3/3 ... [DEAD] line 22, false ... unproven
+took 0.1047s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 25, (i + 1) : proven
+[2] [ETH_LEAK] line 22, owner.transfer(this.balance); : proven
+[3] [ETH_LEAK] line 27, addr.call.value(0)(); : proven
+[4] [RE_EL] line 22, owner.transfer(this.balance); : proven
+[5] [RE_EL] line 27, addr.call.value(0)(); : proven
+[6] [RE] line 21, (EtherGet, withdrawEther, []) : proven
+[7] [RE] line 24, (EtherGet, getTokens, [uint256, address]) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 25, (@pre1 == i) : unproven
+[2] [ASSIGN_CONST] line 25, (i == 0) : unproven
+[3] [DEAD] line 22, false : unproven
+
+============ Statistics ============
+# Iter                    : 3
+# Alarm / Query           : 1 / 7
+- integer over/underflow  : 0 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 2
+- reentrancy-leaking      : 0 / 2
+- reentrancy              : 1 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 1.01452302933
+Time Elapsed (CPU)  : 0.993138

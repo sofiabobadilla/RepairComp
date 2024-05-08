@@ -1,0 +1,25 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 3
+[INFO] reachable : 3
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (ETH_LEAK, (Reentrancy_bonus/withdrawReward/[address]), 19, (success,  ) = recipient.call.value(amountToWithdraw)("");),
+    (RE_EL, (Reentrancy_bonus/withdrawReward/[address]), 19, (success,  ) = recipient.call.value(amountToWithdraw)("");)
+
+[INFO] # of basic patch components : 3
+[INFO] extracted components
+[
+AtomLst [
+Move ([29] -> 28)
+],
+AtomLst [
+Add @nonReentrant to (Reentrancy_bonus, withdrawReward, [address]) (line 16)
+],
+AtomLst [
+Add @nonReentrant to (Reentrancy_bonus, withdrawReward, [address]) (line 16)
+Add @nonReentrant to (Reentrancy_bonus, getFirstWithdrawalBonus, [address]) (line 23)
+]
+]

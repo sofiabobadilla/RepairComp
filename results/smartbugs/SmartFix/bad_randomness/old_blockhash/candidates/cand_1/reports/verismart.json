@@ -1,0 +1,168 @@
+{
+  "fileName": "results/bad_randomness/old_blockhash/candidates/cand_1/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 3,
+  "time": 0.963737,
+  "errMsg": null,
+  "invmap": [ { "key": "0", "formula": "true" } ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "lockInGuess",
+          "argTypes": [ "bytes32" ]
+        }
+      ],
+      "exp": "(block.number + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "lockInGuess",
+          "argTypes": [ "bytes32" ]
+        }
+      ],
+      "exp": "(block.number + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "settle",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.transfer(2000000000000000000);",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "lockInGuess",
+          "argTypes": [ "bytes32" ]
+        }
+      ],
+      "exp": "(@pre1 == guesses[msg.sender].block)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "ASSIGN_CONST",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "lockInGuess",
+          "argTypes": [ "bytes32" ]
+        }
+      ],
+      "exp": "(guesses[msg.sender].block == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "lockInGuess",
+          "argTypes": [ "bytes32" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "lockInGuess",
+          "argTypes": [ "bytes32" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "lockInGuess",
+          "argTypes": [ "bytes32" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 34,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "settle",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 39,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "settle",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "PredictTheBlockHashChallenge",
+          "methodName": "settle",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "fileName": "smartbugs/dataset/unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol",
+  "baseName": "0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol",
+  "iter": 3,
+  "time": 0.9931380000000001,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@20:address),cond(true))"
+    },
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@20:address),cond(true))"
+    },
+    {
+      "key": "29",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@20:address),cond(true))"
+    },
+    {
+      "key": "(-1,29)",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@20:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "getTokens",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(i + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "withdrawEther",
+          "argTypes": []
+        }
+      ],
+      "exp": "owner.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "getTokens",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "addr.call.value(0)();",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "RE_EL",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "withdrawEther",
+          "argTypes": []
+        }
+      ],
+      "exp": "owner.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE_EL",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "getTokens",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "addr.call.value(0)();",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "withdrawEther",
+          "argTypes": []
+        }
+      ],
+      "exp": "(EtherGet, withdrawEther, [])",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "RE",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "getTokens",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(EtherGet, getTokens, [uint256, address])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "getTokens",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre1 == i)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "ASSIGN_CONST",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "getTokens",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(i == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "EtherGet",
+          "methodName": "withdrawEther",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

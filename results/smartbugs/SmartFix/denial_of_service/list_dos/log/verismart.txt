@@ -1,0 +1,211 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 14
+[INFO] reachable : 14
+[INFO] Generating Paths ... took 0.021564s
+[INFO] # path : 287
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.036815s
+Generating VCs ... took 0.348592s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 1.019406
+[
+0 -> true
+222 -> true
+237 -> true
+]
+[
+216 -> (true, true)
+]
+1/27 ... [IO] line 35, (lastTimeOfNewCredit + TWELVE_HOURS) ... unproven
+2/27 ... [IO] line 39, (creditorAddresses.length - 1) ... proven
+3/27 ... [IO] line 49, (round + 1) ... unproven
+4/27 ... [IO] line 59, (amount * 110) ... unproven
+5/27 ... [IO] line 62, (amount * 5) ... unproven
+6/27 ... [IO] line 64, (10000 * (10 ** 18)) ... proven
+7/27 ... [IO] line 65, (amount * 5) ... unproven
+8/27 ... [IO] line 65, (profitFromCrash + ((amount * 5) / 100)) ... unproven
+9/27 ... [IO] line 70, (amount * 5) ... unproven
+10/27 ... [IO] line 72, (amount * 110) ... unproven
+11/27 ... [IO] line 72, (buddies[msg.sender] + ((amount * 110) / 100)) ... unproven
+12/27 ... [IO] line 74, (address(this).balance - profitFromCrash) ... unproven
+13/27 ... [IO] line 76, (buddies[creditorAddresses[lastCreditorPayedOut]] - creditorAmounts[lastCreditorPayedOut]) ... unproven
+14/27 ... [IO] line 77, (lastCreditorPayedOut + 1) ... unproven
+15/27 ... [IO] line 94, (i + 1) ... proven
+16/27 ... [IO] line 95, (debt + creditorAmounts[i]) ... unproven
+17/27 ... [IO] line 100, (i + 1) ... proven
+18/27 ... [IO] line 101, (payout + creditorAmounts[i]) ... unproven
+19/27 ... [IO] line 107, (profitFromCrash + msg.value) ... unproven
+20/27 ... [ETH_LEAK] line 37, msg.sender.send(amount); ... unproven
+21/27 ... [ETH_LEAK] line 39, creditorAddresses[(creditorAddresses.length - 1)].send(profitFromCrash); ... unproven
+22/27 ... [ETH_LEAK] line 40, corruptElite.send(this.balance); ... unproven
+23/27 ... [ETH_LEAK] line 62, corruptElite.send(((amount * 5) / 100)); ... unproven
+24/27 ... [ETH_LEAK] line 70, buddy.send(((amount * 5) / 100)); ... unproven
+25/27 ... [ETH_LEAK] line 75, creditorAddresses[lastCreditorPayedOut].send(creditorAmounts[lastCreditorPayedOut]); ... unproven
+26/27 ... [ETH_LEAK] line 82, msg.sender.send(amount); ... unproven
+27/27 ... [TX_ORG] line 112, assume((msg.sender == corruptElite)); ... proven
+took 37.048329s
+
+Generating VCs ... took 0.338224s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 39.193398
+[
+0 -> (Read(@TU, corruptElite__@15) == true)
+222 -> (Read(@TU, corruptElite__@15) == true)
+237 -> (Read(@TU, corruptElite__@15) == true)
+]
+[
+216 -> ((Read(@TU, corruptElite__@15) == true), (Read(@TU, corruptElite__@15) == true))
+]
+1/27 ... [IO] line 35, (lastTimeOfNewCredit + TWELVE_HOURS) ... unproven
+2/27 ... [IO] line 39, (creditorAddresses.length - 1) ... proven
+3/27 ... [IO] line 49, (round + 1) ... unproven
+4/27 ... [IO] line 59, (amount * 110) ... unproven
+5/27 ... [IO] line 62, (amount * 5) ... unproven
+6/27 ... [IO] line 64, (10000 * (10 ** 18)) ... proven
+7/27 ... [IO] line 65, (amount * 5) ... unproven
+8/27 ... [IO] line 65, (profitFromCrash + ((amount * 5) / 100)) ... unproven
+9/27 ... [IO] line 70, (amount * 5) ... unproven
+10/27 ... [IO] line 72, (amount * 110) ... unproven
+11/27 ... [IO] line 72, (buddies[msg.sender] + ((amount * 110) / 100)) ... unproven
+12/27 ... [IO] line 74, (address(this).balance - profitFromCrash) ... unproven
+13/27 ... [IO] line 76, (buddies[creditorAddresses[lastCreditorPayedOut]] - creditorAmounts[lastCreditorPayedOut]) ... unproven
+14/27 ... [IO] line 77, (lastCreditorPayedOut + 1) ... unproven
+15/27 ... [IO] line 94, (i + 1) ... proven
+16/27 ... [IO] line 95, (debt + creditorAmounts[i]) ... unproven
+17/27 ... [IO] line 100, (i + 1) ... proven
+18/27 ... [IO] line 101, (payout + creditorAmounts[i]) ... unproven
+19/27 ... [IO] line 107, (profitFromCrash + msg.value) ... unproven
+20/27 ... [ETH_LEAK] line 37, msg.sender.send(amount); ... unproven
+21/27 ... [ETH_LEAK] line 39, creditorAddresses[(creditorAddresses.length - 1)].send(profitFromCrash); ... unproven
+22/27 ... [ETH_LEAK] line 40, corruptElite.send(this.balance); ... proven
+23/27 ... [ETH_LEAK] line 62, corruptElite.send(((amount * 5) / 100)); ... proven
+24/27 ... [ETH_LEAK] line 70, buddy.send(((amount * 5) / 100)); ... unproven
+25/27 ... [ETH_LEAK] line 75, creditorAddresses[lastCreditorPayedOut].send(creditorAmounts[lastCreditorPayedOut]); ... unproven
+26/27 ... [ETH_LEAK] line 82, msg.sender.send(amount); ... unproven
+27/27 ... [TX_ORG] line 112, assume((msg.sender == corruptElite)); ... proven
+took 26.238903s
+
+Generating VCs ... took 0.36345s
+Checking validity of VCs ... took 774.534162s
+
+Generating VCs ... took 0.156968s
+Checking validity of VCs ... 
+1/32 ... [NO_EFFECT] line 32, (@pre10 == amount) ... unproven
+2/32 ... [NO_EFFECT] line 39, (@pre9 == creditorAddresses[(creditorAddresses.length - 1)]) ... unproven
+3/32 ... [NO_EFFECT] line 43, (@pre8 == lastTimeOfNewCredit) ... unproven
+4/32 ... [NO_EFFECT] line 49, (@pre7 == round) ... unproven
+5/32 ... [NO_EFFECT] line 56, (@pre6 == lastTimeOfNewCredit) ... unproven
+6/32 ... [NO_EFFECT] line 65, (@pre5 == profitFromCrash) ... unproven
+7/32 ... [NO_EFFECT] line 72, (@pre4 == buddies[msg.sender]) ... unproven
+8/32 ... [NO_EFFECT] line 75, (@pre3 == creditorAddresses[lastCreditorPayedOut]) ... unproven
+9/32 ... [NO_EFFECT] line 76, (@pre2 == buddies[creditorAddresses[lastCreditorPayedOut]]) ... unproven
+10/32 ... [NO_EFFECT] line 77, (@pre1 == lastCreditorPayedOut) ... unproven
+11/32 ... [NO_EFFECT] line 94, (@pre11 == i) ... unproven
+12/32 ... [NO_EFFECT] line 94, (@pre13 == i) ... unproven
+13/32 ... [NO_EFFECT] line 95, (@pre12 == debt) ... unproven
+14/32 ... [NO_EFFECT] line 100, (@pre14 == i) ... unproven
+15/32 ... [NO_EFFECT] line 101, (@pre15 == payout) ... unproven
+16/32 ... [NO_EFFECT] line 107, (@pre16 == profitFromCrash) ... unproven
+17/32 ... [NO_EFFECT] line 113, (@pre17 == corruptElite) ... unproven
+18/32 ... [ASSIGN_CONST] line 49, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (round == 0)) ... unproven
+19/32 ... [ASSIGN_CONST] line 65, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (profitFromCrash == 0)) ... unproven
+20/32 ... [ASSIGN_CONST] line 72, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (buddies[msg.sender] == 0)) ... unproven
+21/32 ... [ASSIGN_CONST] line 76, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (buddies[creditorAddresses[lastCreditorPayedOut]] == 0)) ... proven
+22/32 ... [ASSIGN_CONST] line 77, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (lastCreditorPayedOut == 0)) ... unproven
+23/32 ... [ASSIGN_CONST] line 94, (i == 0) ... unproven
+24/32 ... [ASSIGN_CONST] line 95, (debt == 0) ... unproven
+25/32 ... [ASSIGN_CONST] line 100, (i == 0) ... unproven
+26/32 ... [ASSIGN_CONST] line 101, (payout == 0) ... unproven
+27/32 ... [ASSIGN_CONST] line 107, (profitFromCrash == 0) ... unproven
+28/32 ... [DEAD] line 64, false ... unproven
+29/32 ... [DEAD] line 69, false ... unproven
+30/32 ... [DEAD] line 74, false ... unproven
+31/32 ... [DEAD] line 90, false ... unproven
+32/32 ... [DEAD] line 112, false ... unproven
+took 18.252628s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 35, (lastTimeOfNewCredit + TWELVE_HOURS) : unproven
+[2] [IO] line 39, (creditorAddresses.length - 1) : proven
+[3] [IO] line 49, (round + 1) : unproven
+[4] [IO] line 59, (amount * 110) : unproven
+[5] [IO] line 62, (amount * 5) : unproven
+[6] [IO] line 64, (10000 * (10 ** 18)) : proven
+[7] [IO] line 65, (amount * 5) : unproven
+[8] [IO] line 65, (profitFromCrash + ((amount * 5) / 100)) : unproven
+[9] [IO] line 70, (amount * 5) : unproven
+[10] [IO] line 72, (amount * 110) : unproven
+[11] [IO] line 72, (buddies[msg.sender] + ((amount * 110) / 100)) : unproven
+[12] [IO] line 74, (address(this).balance - profitFromCrash) : unproven
+[13] [IO] line 76, (buddies[creditorAddresses[lastCreditorPayedOut]] - creditorAmounts[lastCreditorPayedOut]) : unproven
+[14] [IO] line 77, (lastCreditorPayedOut + 1) : unproven
+[15] [IO] line 94, (i + 1) : proven
+[16] [IO] line 95, (debt + creditorAmounts[i]) : unproven
+[17] [IO] line 100, (i + 1) : proven
+[18] [IO] line 101, (payout + creditorAmounts[i]) : unproven
+[19] [IO] line 107, (profitFromCrash + msg.value) : unproven
+[20] [ETH_LEAK] line 37, msg.sender.send(amount); : unproven
+[21] [ETH_LEAK] line 39, creditorAddresses[(creditorAddresses.length - 1)].send(profitFromCrash); : unproven
+[22] [ETH_LEAK] line 40, corruptElite.send(this.balance); : proven
+[23] [ETH_LEAK] line 62, corruptElite.send(((amount * 5) / 100)); : proven
+[24] [ETH_LEAK] line 70, buddy.send(((amount * 5) / 100)); : unproven
+[25] [ETH_LEAK] line 75, creditorAddresses[lastCreditorPayedOut].send(creditorAmounts[lastCreditorPayedOut]); : unproven
+[26] [ETH_LEAK] line 82, msg.sender.send(amount); : unproven
+[27] [TX_ORG] line 112, assume((msg.sender == corruptElite)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 32, (@pre10 == amount) : unproven
+[2] [NO_EFFECT] line 39, (@pre9 == creditorAddresses[(creditorAddresses.length - 1)]) : unproven
+[3] [NO_EFFECT] line 43, (@pre8 == lastTimeOfNewCredit) : unproven
+[4] [NO_EFFECT] line 49, (@pre7 == round) : unproven
+[5] [NO_EFFECT] line 56, (@pre6 == lastTimeOfNewCredit) : unproven
+[6] [NO_EFFECT] line 65, (@pre5 == profitFromCrash) : unproven
+[7] [NO_EFFECT] line 72, (@pre4 == buddies[msg.sender]) : unproven
+[8] [NO_EFFECT] line 75, (@pre3 == creditorAddresses[lastCreditorPayedOut]) : unproven
+[9] [NO_EFFECT] line 76, (@pre2 == buddies[creditorAddresses[lastCreditorPayedOut]]) : unproven
+[10] [NO_EFFECT] line 77, (@pre1 == lastCreditorPayedOut) : unproven
+[11] [NO_EFFECT] line 94, (@pre11 == i) : unproven
+[12] [NO_EFFECT] line 94, (@pre13 == i) : unproven
+[13] [NO_EFFECT] line 95, (@pre12 == debt) : unproven
+[14] [NO_EFFECT] line 100, (@pre14 == i) : unproven
+[15] [NO_EFFECT] line 101, (@pre15 == payout) : unproven
+[16] [NO_EFFECT] line 107, (@pre16 == profitFromCrash) : unproven
+[17] [NO_EFFECT] line 113, (@pre17 == corruptElite) : unproven
+[18] [ASSIGN_CONST] line 49, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (round == 0)) : unproven
+[19] [ASSIGN_CONST] line 65, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (profitFromCrash == 0)) : unproven
+[20] [ASSIGN_CONST] line 72, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (buddies[msg.sender] == 0)) : unproven
+[21] [ASSIGN_CONST] line 76, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (buddies[creditorAddresses[lastCreditorPayedOut]] == 0)) : proven
+[22] [ASSIGN_CONST] line 77, ((!(((((((((((((((creditorAddresses[lastCreditorPayedOut] != creditorAddresses[(creditorAddresses.length - 1)]) && (creditorAddresses[lastCreditorPayedOut] != buddy)) && (creditorAddresses[lastCreditorPayedOut] != corruptElite)) && (creditorAddresses[lastCreditorPayedOut] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[lastCreditorPayedOut] != msg.sender)) && (creditorAddresses[(creditorAddresses.length - 1)] != buddy)) && (creditorAddresses[(creditorAddresses.length - 1)] != corruptElite)) && (creditorAddresses[(creditorAddresses.length - 1)] != creditorAddresses[lastCreditorPayedOut])) && (creditorAddresses[(creditorAddresses.length - 1)] != msg.sender)) && (buddy != corruptElite)) && (buddy != creditorAddresses[lastCreditorPayedOut])) && (buddy != msg.sender)) && (corruptElite != creditorAddresses[lastCreditorPayedOut])) && (corruptElite != msg.sender)) && (creditorAddresses[lastCreditorPayedOut] != msg.sender))) || (lastCreditorPayedOut == 0)) : unproven
+[23] [ASSIGN_CONST] line 94, (i == 0) : unproven
+[24] [ASSIGN_CONST] line 95, (debt == 0) : unproven
+[25] [ASSIGN_CONST] line 100, (i == 0) : unproven
+[26] [ASSIGN_CONST] line 101, (payout == 0) : unproven
+[27] [ASSIGN_CONST] line 107, (profitFromCrash == 0) : unproven
+[28] [DEAD] line 64, false : unproven
+[29] [DEAD] line 69, false : unproven
+[30] [DEAD] line 74, false : unproven
+[31] [DEAD] line 90, false : unproven
+[32] [DEAD] line 112, false : unproven
+
+============ Statistics ============
+# Iter                    : 3
+# Alarm / Query           : 20 / 27
+- integer over/underflow  : 15 / 19
+- kill-anyone             : 0 / 0
+- ether-leaking           : 5 / 7
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 859.678814173
+Time Elapsed (CPU)  : 859.683949
