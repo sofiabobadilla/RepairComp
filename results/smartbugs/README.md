@@ -9,7 +9,7 @@
 |SmartFix                            |140        |0         |3              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
 |TIPS                                |141        |2         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
-|Smartshield (asked for the detector)|           |          |               |                       |                         |                 |   |                                                                  |
+|Smartshield                         |134        |9         |0              |0                      |0                        |0                |0  |1: code errors                                                    |
 
 
 ## Patches overview
@@ -21,4 +21,4 @@
 | SmartFix    |      564 |
 | Aroc        |       96 |
 | TIPS        |      231 |
-| Smartshield |          |
+| Smartshield |      134 |
