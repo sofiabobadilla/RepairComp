@@ -1,1 +1,66 @@
--1
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 14
+[INFO] reachable : 11
+[INFO] Generating Paths ... took 0.06503s
+[INFO] # path : 923
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.064118s
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (LuckyDoubler/join/[]), 87, (dValue * multiplier)),
+    (IO, (LuckyDoubler/join/[]), 88, (users[msg.sender].deposits + 1)),
+    (IO, (LuckyDoubler/join/[]), 92, (100 - fee)),
+    (IO, (LuckyDoubler/join/[]), 92, (balance + ((dValue * (100 - fee)) / 100))),
+    (IO, (LuckyDoubler/join/[]), 92, (dValue * (100 - fee))),
+    (IO, (LuckyDoubler/join/[]), 104, (users[theEntry.entryAddress].payoutsReceived + 1)),
+    (IO, (LuckyDoubler/join/[]), 106, (balance - payout)),
+    (IO, (LuckyDoubler/join/[]), 111, (unpaidEntries.length - 1)),
+    (IO, (LuckyDoubler/join/[]), 116, (this.balance - balance)),
+    (IO, (LuckyDoubler/rand/[uint256]), 129, (block.number - 1)),
+    (ETH_LEAK, (LuckyDoubler/init/[]), 60, msg.sender.send(msg.value);),
+    (ETH_LEAK, (LuckyDoubler/join/[]), 74, msg.sender.send((msg.value - 1000000000000000000));),
+    (ETH_LEAK, (LuckyDoubler/join/[]), 102, theEntry.entryAddress.send(payout);),
+    (ETH_LEAK, (LuckyDoubler/join/[]), 119, owner.send(fees);)
+
+[INFO] # of basic patch components : 12
+[INFO] extracted components
+[
+InsertLine (87, assume(((dValue == 0) || (((dValue * multiplier) / dValue) == multiplier)));),
+InsertLine (88, assume(((users[msg.sender].deposits + 1) >= users[msg.sender].deposits));),
+InsertLine (92, assume(((balance + ((dValue * (100 - fee)) / 100)) >= balance));),
+InsertLine (92, assume(((dValue == 0) || (((dValue * (100 - fee)) / dValue) == (100 - fee))));),
+InsertLine (92, assume((100 >= fee));),
+InsertLine (104, assume(((users[theEntry.entryAddress].payoutsReceived + 1) >= users[theEntry.entryAddress].payoutsReceived));),
+InsertLine (106, assume((balance >= payout));),
+InsertLine (111, assume((unpaidEntries.length >= 1));),
+InsertLine (116, assume((this.balance >= balance));),
+InsertLine (129, assume((block.number >= 1));),
+Replace (37, (msg.sender == owner), (msg.sender != owner)),
+Replace (98, (balance > theEntry.payout), (balance <= theEntry.payout))
+]
+Iter : 1, # of Workset Elements : 12, Total elapsed : 813.029821157
+/home/opam/.local/lib/python3.8/site-packages/sklearn/metrics/_regression.py:682: UndefinedMetricWarning: R^2 score is not well-defined with less than two samples.
+  warnings.warn(msg, UndefinedMetricWarning)
+- New best candidate, iter 2, 2747.45013118s : ../fix_result/lucky_doubler/candidates/cand_1/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 2
+# Alarm (orginal)         : 14
+# Alarm (patch)           : 13
+# Alarm wo leak (patch)   : 9
+# Edit (min,max)          : 1, 1
+# Patch                   : 1
+- First solution          : n/a
+- First solution (iter)   : n/a
+- First solution (time)   : n/a
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 1., Edit: 1, Iter: 2, Time: 2747.45013118, ../fix_result/lucky_doubler/candidates/cand_1/patch.sol
+
+Time Elapsed (Real) : 2748.30749798
+Time Elapsed (CPU)  : 7.006736
