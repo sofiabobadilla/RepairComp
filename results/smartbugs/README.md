@@ -18,12 +18,12 @@ Each contract is labeled with only one category. For more details, refer to the 
 
 
 ## Patches overview
-| Tool        | #patches |
-|-------------|----------|
-| Elysium     |      126 |
-| sGuard      |      102 |
-| sGuardPlus  |       78 |
-| SmartFix    |      564 |
-| Aroc        |       96 |
-| TIPS        |      231 |
-| Smartshield |      134 |
+| Tool        | #outputs | #patches |
+|-------------|----------|----------|
+| Elysium     |      126 |       106|
+| sGuard      |      102 |          |
+| sGuardPlus  |       78 |          |
+| SmartFix    |      564 |          |
+| Aroc        |       96 |          |
+| TIPS        |      231 |          |
+| Smartshield |      134 |          |
