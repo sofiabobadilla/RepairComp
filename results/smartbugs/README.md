@@ -3,7 +3,7 @@
 ## Results from runnning the APR tools
 |Tool\Return code                    |0 (success)|1 (errors)|timeout (20min)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
 |------------------------------------|-----------|----------|---------------|-----------------------|-------------------------|-----------------|---|------------------------------------------------------------------|
-|Elysium                             |118        |15        |4              |0                      |0                        |5                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
+|Elysium                             |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
 |sGuard                              |129        |0         |3              |11                     |0                        |0                |0  |                                                                  |
 |sGuardPlus                          |111        |32        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
 |SmartFix                            |140        |0         |3              |0                      |0                        |0                |0  |                                                                  |
@@ -15,7 +15,7 @@
 ## Patches overview
 | Tool        | #patches |
 |-------------|----------|
-| Elysium     |      112 |
+| Elysium     |      126 |
 | sGuard      |      102 |
 | sGuardPlus  |       78 |
 | SmartFix    |      564 |
