@@ -1,5 +1,10 @@
 # APR on Smartbugs-curated overview
 
+Each contract is labeled with only one category. For more details, refer to the file _contracts.csv_
+
+
+
+
 ## Results from runnning the APR tools
 |Tool\Return code                    |0 (success)|1 (errors)|timeout (20min)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
 |------------------------------------|-----------|----------|---------------|-----------------------|-------------------------|-----------------|---|------------------------------------------------------------------|
