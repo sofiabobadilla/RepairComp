@@ -17,10 +17,10 @@ The directory structure of the project is as follows:
 
 
 ## Results from runnning the APR tools
-|Tool\Return code                    |0 (success)|1 (errors)|timeout (20min)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
+|Tool\Return code                    |0 (success)|1 (errors)|timeout (4hr)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
 |------------------------------------|-----------|----------|---------------|-----------------------|-------------------------|-----------------|---|------------------------------------------------------------------|
 |Elysium                             |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
-|sGuard                              |129        |0         |3              |11                     |0                        |0                |0  |                                                                  |
+|sGuard                              |129        |0         |2              |11                     |0                        |0                |0  |                                                                  |
 |sGuardPlus                          |111        |32        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
 |SmartFix                            |142        |1         |0              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
