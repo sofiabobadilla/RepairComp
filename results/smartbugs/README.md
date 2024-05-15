@@ -32,7 +32,7 @@ The directory structure of the project is as follows:
 | Tool        | #outputs | #patches |
 |-------------|----------|----------|
 | Elysium     |      126 |       106|
-| sGuard      |      102 |          |
+| sGuard      |      102 |        69|
 | sGuardPlus  |       81 |          |
 | SmartFix    |      621 |          |
 | Aroc        |       96 |          |
