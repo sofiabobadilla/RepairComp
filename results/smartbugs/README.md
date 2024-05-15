@@ -33,7 +33,7 @@ The directory structure of the project is as follows:
 |-------------|----------|----------|
 | Elysium     |      126 |       106|
 | sGuard      |      102 |        69|
-| sGuardPlus  |       81 |          |
+| sGuardPlus  |       81 |        81|
 | SmartFix    |      621 |          |
 | Aroc        |       96 |          |
 | TIPS        |      231 |          |
