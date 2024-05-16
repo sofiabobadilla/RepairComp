@@ -36,5 +36,5 @@ The directory structure of the project is as follows:
 | sGuardPlus  |       81 |        81|
 | SmartFix    |      621 |          |
 | Aroc        |       96 |          |
-| TIPS        |      231 |          |
+| TIPS        |      231 |       231|
 | Smartshield |      134 |          |
