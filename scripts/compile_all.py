@@ -33,16 +33,20 @@ def check_compilability(file_path):
                 file.write(line)
     return compile_contract(temp)
 
-def get_files(directory):
+def get_files(directory, max_depth=3):
     files = []
     for root, _, file_names in os.walk(directory):
+        depth = root.count(os.sep) - directory.count(os.sep)
+        if depth > max_depth:
+            continue
         for file_name in file_names:
             if file_name.endswith('.sol') and not file_name.endswith('_temp.sol'):
                 files.append(os.path.join(root, file_name))
-    print(files)
+                # print(os.path.join(root, file_name))
+    # print(files)
     return files
 
-def compile_all(directory, version):
+def compile_all(directory, version, depth=3):
     files = get_files(directory)
     results = os.path.join(directory, f'compilation_results_{version}.csv')
     with open(results, 'w') as file:
@@ -67,7 +71,7 @@ if __name__ == '__main__':
 
     ret = use_solc_version(pragma_version)
 
-    directory = sys.argv[2]
+    directory = os.path.abspath(sys.argv[2])
     compile_all(directory, pragma_version)
     remove_all_temp_files(directory)
 

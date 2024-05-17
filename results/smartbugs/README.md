@@ -22,7 +22,7 @@ The directory structure of the project is as follows:
 |Elysium                             |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
 |sGuard                              |130        |0         |2              |11                     |0                        |0                |0  |                                                                  |
 |sGuardPlus                          |111        |33        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
-|SmartFix                            |142        |1         |0              |0                      |0                        |0                |0  |                                                                  |
+|SmartFix                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
 |TIPS                                |141        |2         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
 |Smartshield                         |134        |9         |0              |0                      |0                        |0                |0  |1: code errors                                                    |
@@ -34,7 +34,7 @@ The directory structure of the project is as follows:
 | Elysium     |      126 |            106|           -|
 | sGuard      |      103 |             69|         103|
 | sGuardPlus  |       81 |             81|          81|
-| SmartFix    |      621 |               |            |
+| SmartFix    |       86 |             86|          86|
 | Aroc        |       96 |             96|           0|
 | TIPS        |      231 |            231|         223|
 | Smartshield |      134 |            131|           -|

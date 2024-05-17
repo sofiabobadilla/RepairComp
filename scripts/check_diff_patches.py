@@ -17,10 +17,13 @@ def different_content(file_path1, file_path2):
         print(f"Error: {e}")
         return False
     
-def get_files(smartbugs, results):
+def get_files(smartbugs, results, max_depth=3):
     smartbugs = os.path.join(smartbugs, "dataset")
     files = []
     for root, _, filenames in os.walk(results):
+        depth = root.count(os.sep) - results.count(os.sep)
+        if depth > max_depth:
+            continue
         for filename in filenames:
                 if filename.endswith(".sol"):
                     pair = []
@@ -37,8 +40,8 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: python3 check_diff_patches.py <smartbugs_directory> <results>")
         sys.exit(1)
-    smartbugs = sys.argv[1]
-    results = sys.argv[2]
+    smartbugs = os.path.abspath(sys.argv[1])
+    results = os.path.abspath(sys.argv[2])
     l = get_files(smartbugs, results)
     results_file = os.path.join(results, "patches_diff.csv")
     with open(results_file, "w") as f:
