@@ -1,0 +1,972 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 116
+[INFO] reachable : 57
+[INFO] Generating Paths ... took 0.020479s
+[INFO] # path : 923
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.108074s
+Generating VCs ... took 1.39364s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 3.220948
+[
+0 -> true
+795 -> true
+1218 -> true
+1336 -> true
+]
+[
+605 -> (true, true)
+1063 -> (true, true)
+1086 -> (true, true)
+1090 -> (true, true)
+1095 -> (true, true)
+1099 -> (true, true)
+1185 -> (true, true)
+1243 -> (true, true)
+1339 -> (true, true)
+2017 -> (true, true)
+]
+1/122 ... [IO] line 12, (a - b) ... proven
+2/122 ... [IO] line 15, (a + b) ... proven
+3/122 ... [IO] line 43, (size + 4) ... proven
+4/122 ... [IO] line 51, (2 * 32) ... proven
+5/122 ... [IO] line 84, (3 * 32) ... proven
+6/122 ... [IO] line 255, (10 * hashesSize) ... proven
+7/122 ... [IO] line 255, (block.number - hashFirst) ... proven
+8/122 ... [IO] line 259, ((10 * hashesSize) - ((block.number - hashFirst) % (10 * hashesSize))) ... unproven
+9/122 ... [IO] line 259, (10 * hashesSize) ... proven
+10/122 ... [IO] line 259, (block.number - hashFirst) ... proven
+11/122 ... [IO] line 307, (block.number + 3) ... unproven
+12/122 ... [IO] line 319, ((((investBalance * 9) / 10) + walletBalance) + _amount) ... unproven
+13/122 ... [IO] line 319, (((investBalance * 9) / 10) + walletBalance) ... unproven
+14/122 ... [IO] line 319, (investBalance * 9) ... unproven
+15/122 ... [IO] line 321, (((4 * 60) * 24) * 7) ... proven
+16/122 ... [IO] line 321, ((4 * 60) * 24) ... proven
+17/122 ... [IO] line 321, (4 * 60) ... proven
+18/122 ... [IO] line 321, (coldStoreLast + (((4 * 60) * 24) * 7)) ... unproven
+19/122 ... [IO] line 340, (hashesSize * 5) ... proven
+20/122 ... [IO] line 340, (investStart + (hashesSize * 5)) ... unproven
+21/122 ... [IO] line 345, (10 * hashesSize) ... proven
+22/122 ... [IO] line 345, (block.number - hashFirst) ... unproven
+23/122 ... [IO] line 346, (dividends.length - 2) ... unproven
+24/122 ... [IO] line 349, (dividends.length - 1) ... unproven
+25/122 ... [IO] line 350, (dividendPeriod + 1) ... proven
+26/122 ... [IO] line 365, (walletBalance - balance) ... unproven
+27/122 ... [IO] line 379, (_amount - maxpay) ... proven
+28/122 ... [IO] line 380, (walletBalance + keepbalance) ... unproven
+29/122 ... [IO] line 381, (wallets[msg.sender].balance + uint208(keepbalance)) ... unproven
+30/122 ... [IO] line 382, (((4 * 60) * 24) * 30) ... proven
+31/122 ... [IO] line 382, ((4 * 60) * 24) ... proven
+32/122 ... [IO] line 382, (4 * 60) ... proven
+33/122 ... [IO] line 382, (block.number + (((4 * 60) * 24) * 30)) ... unproven
+34/122 ... [IO] line 402, (hashesSize * 5) ... proven
+35/122 ... [IO] line 402, (investStart + (hashesSize * 5)) ... unproven
+36/122 ... [IO] line 404, (investBalanceMax - investBalance) ... proven
+37/122 ... [IO] line 405, (investBalanceMax - investBalance) ... proven
+38/122 ... [IO] line 411, (investBalance + investing) ... proven
+39/122 ... [IO] line 414, (walletBalance + (investing / 10)) ... unproven
+40/122 ... [IO] line 415, (wallets[owner].balance + uint208((investing / 10))) ... unproven
+41/122 ... [IO] line 417, (((investing * 5) / 100) * 2) ... unproven
+42/122 ... [IO] line 417, (investing * 5) ... unproven
+43/122 ... [IO] line 417, (walletBalance + (((investing * 5) / 100) * 2)) ... unproven
+44/122 ... [IO] line 418, (investing * 5) ... unproven
+45/122 ... [IO] line 418, (wallets[owner].balance + uint208(((investing * 5) / 100))) ... unproven
+46/122 ... [IO] line 419, (investing * 5) ... unproven
+47/122 ... [IO] line 419, (wallets[_partner].balance + uint208(((investing * 5) / 100))) ... unproven
+48/122 ... [IO] line 422, (investing * 16) ... unproven
+49/122 ... [IO] line 423, (investing * 10) ... unproven
+50/122 ... [IO] line 424, (balances[msg.sender] + senderBalance) ... unproven
+51/122 ... [IO] line 425, (balances[owner] + ownerBalance) ... unproven
+52/122 ... [IO] line 426, (balances[animator] + animatorBalance) ... unproven
+53/122 ... [IO] line 427, ((senderBalance + ownerBalance) + animatorBalance) ... unproven
+54/122 ... [IO] line 427, (senderBalance + ownerBalance) ... unproven
+55/122 ... [IO] line 427, (totalSupply + ((senderBalance + ownerBalance) + animatorBalance)) ... unproven
+56/122 ... [IO] line 440, (balances[msg.sender] * (10 ** 15)) ... unproven
+57/122 ... [IO] line 443, (investBalance - initialInvestment) ... unproven
+58/122 ... [IO] line 444, (initialInvestment * 9) ... unproven
+59/122 ... [IO] line 444, (wallets[msg.sender].balance + uint208(((initialInvestment * 9) / 10))) ... unproven
+60/122 ... [IO] line 469, (balances[_who] * 4294967295) ... unproven
+61/122 ... [IO] line 471, (last + 1) ... proven
+62/122 ... [IO] line 472, (balance + (share * dividends[last])) ... unproven
+63/122 ... [IO] line 472, (share * dividends[last]) ... unproven
+64/122 ... [IO] line 475, (walletBalance + balance) ... unproven
+65/122 ... [IO] line 476, (wallets[_who].balance + uint208(balance)) ... unproven
+66/122 ... [IO] line 487, ((((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) + (((hit & 15728640) == 0) ? 1 : 0)) ... proven
+67/122 ... [IO] line 487, (((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) ... proven
+68/122 ... [IO] line 487, ((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) ... proven
+69/122 ... [IO] line 487, (((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) ... proven
+70/122 ... [IO] line 487, ((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) ... proven
+71/122 ... [IO] line 494, (uint256(_player.value) * 7000000) ... unproven
+72/122 ... [IO] line 497, (uint256(_player.value) * 20000) ... unproven
+73/122 ... [IO] line 500, (uint256(_player.value) * 500) ... unproven
+74/122 ... [IO] line 503, (uint256(_player.value) * 25) ... unproven
+75/122 ... [IO] line 506, (uint256(_player.value) * 3) ... unproven
+76/122 ... [IO] line 519, (10 * hashesSize) ... proven
+77/122 ... [IO] line 519, (player.blockNum + (10 * hashesSize)) ... proven
+78/122 ... [IO] line 522, (player.blockNum + 256) ... unproven
+79/122 ... [IO] line 552, (10 * hashesSize) ... proven
+80/122 ... [IO] line 552, (player.blockNum + (10 * hashesSize)) ... proven
+81/122 ... [IO] line 559, (player.blockNum + 256) ... unproven
+82/122 ... [IO] line 640, (dividends[dividendPeriod] + (msg.value / 20)) ... unproven
+83/122 ... [IO] line 644, (walletBalance + fee) ... unproven
+84/122 ... [IO] line 645, (wallets[_partner].balance + uint208(fee)) ... unproven
+85/122 ... [IO] line 647, (block.number + 3) ... unproven
+86/122 ... [IO] line 648, (block.number + 3) ... unproven
+87/122 ... [IO] line 653, (hashNext + 1) ... unproven
+88/122 ... [IO] line 657, (hashBetSum + msg.value) ... unproven
+89/122 ... [IO] line 676, (n + _sadd) ... unproven
+90/122 ... [IO] line 680, (hashes.length + _sadd) ... unproven
+91/122 ... [IO] line 682, (n + 1) ... proven
+92/122 ... [IO] line 686, (block.number - (block.number % 10)) ... unproven
+93/122 ... [IO] line 703, (_lastb + 1) ... unproven
+94/122 ... [IO] line 705, (_lastb + 2) ... unproven
+95/122 ... [IO] line 707, (_lastb + 3) ... unproven
+96/122 ... [IO] line 709, (_lastb + 4) ... unproven
+97/122 ... [IO] line 711, (_lastb + 5) ... unproven
+98/122 ... [IO] line 713, (_lastb + 6) ... unproven
+99/122 ... [IO] line 715, (_lastb + 7) ... unproven
+100/122 ... [IO] line 717, (_lastb + 8) ... unproven
+101/122 ... [IO] line 719, (_lastb + 9) ... unproven
+102/122 ... [IO] line 724, (_block - hashFirst) ... unproven
+103/122 ... [IO] line 729, (_block - hashFirst) ... unproven
+104/122 ... [IO] line 730, (24 * slotp) ... unproven
+105/122 ... [IO] line 738, (lastb + 10) ... unproven
+106/122 ... [IO] line 746, (block.number - 256) ... proven
+107/122 ... [IO] line 750, (num + (num % 10)) ... unproven
+108/122 ... [IO] line 753, (lastb - hashFirst) ... unproven
+109/122 ... [IO] line 755, (lastb + 10) ... unproven
+110/122 ... [IO] line 765, (n + 1) ... proven
+111/122 ... [ETH_LEAK] line 323, msg.sender.transfer(_amount); ... unproven
+112/122 ... [ETH_LEAK] line 373, msg.sender.transfer(_amount); ... unproven
+113/122 ... [ETH_LEAK] line 383, msg.sender.transfer(maxpay); ... unproven
+114/122 ... [ETH_LEAK] line 408, msg.sender.transfer(msg.value.sub(investing)); ... unproven
+115/122 ... [TX_ORG] line 54, assume((_to == address(this))); ... proven
+116/122 ... [TX_ORG] line 172, assume((msg.sender == owner)); ... proven
+117/122 ... [TX_ORG] line 177, assume((msg.sender == animator)); ... proven
+118/122 ... [TX_ORG] line 269, assume((_who != address(0))); ... proven
+119/122 ... [TX_ORG] line 280, assume((_who != address(0))); ... proven
+120/122 ... [TX_ORG] line 413, assume((_partner == address(0))); ... proven
+121/122 ... [TX_ORG] line 413, assume((_partner == owner)); ... proven
+122/122 ... [TX_ORG] line 642, assume((_partner != address(0))); ... proven
+took 89.131996s
+
+Generating VCs ... took 1.414717s
+Checking validity of VCs ... took 0.267882s
+
+Generating VCs ... took 1.417262s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 3 Total elapsed : 143.803891
+[
+0 -> (Read(@TU, owner__@50) == true)
+795 -> (Read(@TU, owner__@50) == true)
+1218 -> (Read(@TU, owner__@50) == true)
+1336 -> (Read(@TU, owner__@50) == true)
+]
+[
+605 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1063 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1086 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1090 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1095 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1099 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1185 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1243 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1339 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+2017 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+]
+1/122 ... [IO] line 12, (a - b) ... proven
+2/122 ... [IO] line 15, (a + b) ... proven
+3/122 ... [IO] line 43, (size + 4) ... proven
+4/122 ... [IO] line 51, (2 * 32) ... proven
+5/122 ... [IO] line 84, (3 * 32) ... proven
+6/122 ... [IO] line 255, (10 * hashesSize) ... proven
+7/122 ... [IO] line 255, (block.number - hashFirst) ... proven
+8/122 ... [IO] line 259, ((10 * hashesSize) - ((block.number - hashFirst) % (10 * hashesSize))) ... unproven
+9/122 ... [IO] line 259, (10 * hashesSize) ... proven
+10/122 ... [IO] line 259, (block.number - hashFirst) ... proven
+11/122 ... [IO] line 307, (block.number + 3) ... unproven
+12/122 ... [IO] line 319, ((((investBalance * 9) / 10) + walletBalance) + _amount) ... unproven
+13/122 ... [IO] line 319, (((investBalance * 9) / 10) + walletBalance) ... unproven
+14/122 ... [IO] line 319, (investBalance * 9) ... unproven
+15/122 ... [IO] line 321, (((4 * 60) * 24) * 7) ... proven
+16/122 ... [IO] line 321, ((4 * 60) * 24) ... proven
+17/122 ... [IO] line 321, (4 * 60) ... proven
+18/122 ... [IO] line 321, (coldStoreLast + (((4 * 60) * 24) * 7)) ... unproven
+19/122 ... [IO] line 340, (hashesSize * 5) ... proven
+20/122 ... [IO] line 340, (investStart + (hashesSize * 5)) ... unproven
+21/122 ... [IO] line 345, (10 * hashesSize) ... proven
+22/122 ... [IO] line 345, (block.number - hashFirst) ... unproven
+23/122 ... [IO] line 346, (dividends.length - 2) ... unproven
+24/122 ... [IO] line 349, (dividends.length - 1) ... unproven
+25/122 ... [IO] line 350, (dividendPeriod + 1) ... proven
+26/122 ... [IO] line 365, (walletBalance - balance) ... unproven
+27/122 ... [IO] line 379, (_amount - maxpay) ... proven
+28/122 ... [IO] line 380, (walletBalance + keepbalance) ... unproven
+29/122 ... [IO] line 381, (wallets[msg.sender].balance + uint208(keepbalance)) ... unproven
+30/122 ... [IO] line 382, (((4 * 60) * 24) * 30) ... proven
+31/122 ... [IO] line 382, ((4 * 60) * 24) ... proven
+32/122 ... [IO] line 382, (4 * 60) ... proven
+33/122 ... [IO] line 382, (block.number + (((4 * 60) * 24) * 30)) ... unproven
+34/122 ... [IO] line 402, (hashesSize * 5) ... proven
+35/122 ... [IO] line 402, (investStart + (hashesSize * 5)) ... unproven
+36/122 ... [IO] line 404, (investBalanceMax - investBalance) ... proven
+37/122 ... [IO] line 405, (investBalanceMax - investBalance) ... proven
+38/122 ... [IO] line 411, (investBalance + investing) ... proven
+39/122 ... [IO] line 414, (walletBalance + (investing / 10)) ... unproven
+40/122 ... [IO] line 415, (wallets[owner].balance + uint208((investing / 10))) ... unproven
+41/122 ... [IO] line 417, (((investing * 5) / 100) * 2) ... unproven
+42/122 ... [IO] line 417, (investing * 5) ... unproven
+43/122 ... [IO] line 417, (walletBalance + (((investing * 5) / 100) * 2)) ... unproven
+44/122 ... [IO] line 418, (investing * 5) ... unproven
+45/122 ... [IO] line 418, (wallets[owner].balance + uint208(((investing * 5) / 100))) ... unproven
+46/122 ... [IO] line 419, (investing * 5) ... unproven
+47/122 ... [IO] line 419, (wallets[_partner].balance + uint208(((investing * 5) / 100))) ... unproven
+48/122 ... [IO] line 422, (investing * 16) ... unproven
+49/122 ... [IO] line 423, (investing * 10) ... unproven
+50/122 ... [IO] line 424, (balances[msg.sender] + senderBalance) ... unproven
+51/122 ... [IO] line 425, (balances[owner] + ownerBalance) ... unproven
+52/122 ... [IO] line 426, (balances[animator] + animatorBalance) ... unproven
+53/122 ... [IO] line 427, ((senderBalance + ownerBalance) + animatorBalance) ... unproven
+54/122 ... [IO] line 427, (senderBalance + ownerBalance) ... unproven
+55/122 ... [IO] line 427, (totalSupply + ((senderBalance + ownerBalance) + animatorBalance)) ... unproven
+56/122 ... [IO] line 440, (balances[msg.sender] * (10 ** 15)) ... unproven
+57/122 ... [IO] line 443, (investBalance - initialInvestment) ... unproven
+58/122 ... [IO] line 444, (initialInvestment * 9) ... unproven
+59/122 ... [IO] line 444, (wallets[msg.sender].balance + uint208(((initialInvestment * 9) / 10))) ... unproven
+60/122 ... [IO] line 469, (balances[_who] * 4294967295) ... unproven
+61/122 ... [IO] line 471, (last + 1) ... proven
+62/122 ... [IO] line 472, (balance + (share * dividends[last])) ... unproven
+63/122 ... [IO] line 472, (share * dividends[last]) ... unproven
+64/122 ... [IO] line 475, (walletBalance + balance) ... unproven
+65/122 ... [IO] line 476, (wallets[_who].balance + uint208(balance)) ... unproven
+66/122 ... [IO] line 487, ((((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) + (((hit & 15728640) == 0) ? 1 : 0)) ... proven
+67/122 ... [IO] line 487, (((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) ... proven
+68/122 ... [IO] line 487, ((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) ... proven
+69/122 ... [IO] line 487, (((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) ... proven
+70/122 ... [IO] line 487, ((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) ... proven
+71/122 ... [IO] line 494, (uint256(_player.value) * 7000000) ... unproven
+72/122 ... [IO] line 497, (uint256(_player.value) * 20000) ... unproven
+73/122 ... [IO] line 500, (uint256(_player.value) * 500) ... unproven
+74/122 ... [IO] line 503, (uint256(_player.value) * 25) ... unproven
+75/122 ... [IO] line 506, (uint256(_player.value) * 3) ... unproven
+76/122 ... [IO] line 519, (10 * hashesSize) ... proven
+77/122 ... [IO] line 519, (player.blockNum + (10 * hashesSize)) ... proven
+78/122 ... [IO] line 522, (player.blockNum + 256) ... unproven
+79/122 ... [IO] line 552, (10 * hashesSize) ... proven
+80/122 ... [IO] line 552, (player.blockNum + (10 * hashesSize)) ... proven
+81/122 ... [IO] line 559, (player.blockNum + 256) ... unproven
+82/122 ... [IO] line 640, (dividends[dividendPeriod] + (msg.value / 20)) ... unproven
+83/122 ... [IO] line 644, (walletBalance + fee) ... unproven
+84/122 ... [IO] line 645, (wallets[_partner].balance + uint208(fee)) ... unproven
+85/122 ... [IO] line 647, (block.number + 3) ... unproven
+86/122 ... [IO] line 648, (block.number + 3) ... unproven
+87/122 ... [IO] line 653, (hashNext + 1) ... unproven
+88/122 ... [IO] line 657, (hashBetSum + msg.value) ... unproven
+89/122 ... [IO] line 676, (n + _sadd) ... unproven
+90/122 ... [IO] line 680, (hashes.length + _sadd) ... unproven
+91/122 ... [IO] line 682, (n + 1) ... proven
+92/122 ... [IO] line 686, (block.number - (block.number % 10)) ... unproven
+93/122 ... [IO] line 703, (_lastb + 1) ... unproven
+94/122 ... [IO] line 705, (_lastb + 2) ... unproven
+95/122 ... [IO] line 707, (_lastb + 3) ... unproven
+96/122 ... [IO] line 709, (_lastb + 4) ... unproven
+97/122 ... [IO] line 711, (_lastb + 5) ... unproven
+98/122 ... [IO] line 713, (_lastb + 6) ... unproven
+99/122 ... [IO] line 715, (_lastb + 7) ... unproven
+100/122 ... [IO] line 717, (_lastb + 8) ... unproven
+101/122 ... [IO] line 719, (_lastb + 9) ... unproven
+102/122 ... [IO] line 724, (_block - hashFirst) ... unproven
+103/122 ... [IO] line 729, (_block - hashFirst) ... unproven
+104/122 ... [IO] line 730, (24 * slotp) ... unproven
+105/122 ... [IO] line 738, (lastb + 10) ... unproven
+106/122 ... [IO] line 746, (block.number - 256) ... proven
+107/122 ... [IO] line 750, (num + (num % 10)) ... unproven
+108/122 ... [IO] line 753, (lastb - hashFirst) ... unproven
+109/122 ... [IO] line 755, (lastb + 10) ... unproven
+110/122 ... [IO] line 765, (n + 1) ... proven
+111/122 ... [ETH_LEAK] line 323, msg.sender.transfer(_amount); ... proven
+112/122 ... [ETH_LEAK] line 373, msg.sender.transfer(_amount); ... unproven
+113/122 ... [ETH_LEAK] line 383, msg.sender.transfer(maxpay); ... unproven
+114/122 ... [ETH_LEAK] line 408, msg.sender.transfer(msg.value.sub(investing)); ... unproven
+115/122 ... [TX_ORG] line 54, assume((_to == address(this))); ... proven
+116/122 ... [TX_ORG] line 172, assume((msg.sender == owner)); ... proven
+117/122 ... [TX_ORG] line 177, assume((msg.sender == animator)); ... proven
+118/122 ... [TX_ORG] line 269, assume((_who != address(0))); ... proven
+119/122 ... [TX_ORG] line 280, assume((_who != address(0))); ... proven
+120/122 ... [TX_ORG] line 413, assume((_partner == address(0))); ... proven
+121/122 ... [TX_ORG] line 413, assume((_partner == owner)); ... proven
+122/122 ... [TX_ORG] line 642, assume((_partner != address(0))); ... proven
+took 44.856971s
+
+Generating VCs ... took 0.173518s
+Checking validity of VCs ... 
+1/260 ... [NO_EFFECT] line 15, (@pre1 == c) ... unproven
+2/260 ... [NO_EFFECT] line 53, (@pre103 == balances[msg.sender]) ... unproven
+3/260 ... [NO_EFFECT] line 56, (@pre102 == balances[owner]) ... unproven
+4/260 ... [NO_EFFECT] line 61, (@pre101 == balances[_to]) ... unproven
+5/260 ... [NO_EFFECT] line 71, (@pre104 == balance) ... unproven
+6/260 ... [NO_EFFECT] line 85, (@pre98 == _allowance) ... unproven
+7/260 ... [NO_EFFECT] line 88, (@pre97 == balances[_to]) ... unproven
+8/260 ... [NO_EFFECT] line 89, (@pre96 == balances[_from]) ... unproven
+9/260 ... [NO_EFFECT] line 101, (@pre99 == allowed[msg.sender][_spender]) ... unproven
+10/260 ... [NO_EFFECT] line 111, (@pre100 == remaining) ... unproven
+11/260 ... [NO_EFFECT] line 255, (@pre15 == period) ... unproven
+12/260 ... [NO_EFFECT] line 272, (@pre16 == owner) ... unproven
+13/260 ... [NO_EFFECT] line 283, (@pre17 == animator) ... unproven
+14/260 ... [NO_EFFECT] line 292, (@pre18 == investStart) ... unproven
+15/260 ... [NO_EFFECT] line 300, (@pre19 == hashBetMax) ... unproven
+16/260 ... [NO_EFFECT] line 307, (@pre20 == hashNext) ... unproven
+17/260 ... [NO_EFFECT] line 324, (@pre21 == coldStoreLast) ... unproven
+18/260 ... [NO_EFFECT] line 345, (@pre23 == period) ... unproven
+19/260 ... [NO_EFFECT] line 350, (@pre22 == dividendPeriod) ... unproven
+20/260 ... [NO_EFFECT] line 363, (@pre25 == balance) ... unproven
+21/260 ... [NO_EFFECT] line 365, (@pre24 == walletBalance) ... unproven
+22/260 ... [NO_EFFECT] line 371, (@pre30 == maxpay) ... unproven
+23/260 ... [NO_EFFECT] line 379, (@pre29 == keepbalance) ... unproven
+24/260 ... [NO_EFFECT] line 380, (@pre28 == walletBalance) ... unproven
+25/260 ... [NO_EFFECT] line 381, (@pre27 == wallets[msg.sender].balance) ... unproven
+26/260 ... [NO_EFFECT] line 382, (@pre26 == wallets[msg.sender].nextWithdrawBlock) ... unproven
+27/260 ... [NO_EFFECT] line 403, (@pre47 == investing) ... unproven
+28/260 ... [NO_EFFECT] line 405, (@pre46 == investing) ... unproven
+29/260 ... [NO_EFFECT] line 406, (@pre45 == investBalance) ... unproven
+30/260 ... [NO_EFFECT] line 411, (@pre44 == investBalance) ... unproven
+31/260 ... [NO_EFFECT] line 414, (@pre43 == walletBalance) ... unproven
+32/260 ... [NO_EFFECT] line 415, (@pre42 == wallets[owner].balance) ... unproven
+33/260 ... [NO_EFFECT] line 417, (@pre41 == walletBalance) ... unproven
+34/260 ... [NO_EFFECT] line 418, (@pre40 == wallets[owner].balance) ... unproven
+35/260 ... [NO_EFFECT] line 419, (@pre39 == wallets[_partner].balance) ... unproven
+36/260 ... [NO_EFFECT] line 420, (@pre38 == wallets[msg.sender].lastDividendPeriod) ... unproven
+37/260 ... [NO_EFFECT] line 421, (@pre37 == senderBalance) ... unproven
+38/260 ... [NO_EFFECT] line 422, (@pre36 == ownerBalance) ... unproven
+39/260 ... [NO_EFFECT] line 423, (@pre35 == animatorBalance) ... unproven
+40/260 ... [NO_EFFECT] line 424, (@pre34 == balances[msg.sender]) ... unproven
+41/260 ... [NO_EFFECT] line 425, (@pre33 == balances[owner]) ... unproven
+42/260 ... [NO_EFFECT] line 426, (@pre32 == balances[animator]) ... unproven
+43/260 ... [NO_EFFECT] line 427, (@pre31 == totalSupply) ... unproven
+44/260 ... [NO_EFFECT] line 440, (@pre50 == initialInvestment) ... unproven
+45/260 ... [NO_EFFECT] line 443, (@pre49 == investBalance) ... unproven
+46/260 ... [NO_EFFECT] line 444, (@pre48 == wallets[msg.sender].balance) ... unproven
+47/260 ... [NO_EFFECT] line 461, (@pre59 == last) ... unproven
+48/260 ... [NO_EFFECT] line 463, (@pre58 == wallets[_who].lastDividendPeriod) ... unproven
+49/260 ... [NO_EFFECT] line 469, (@pre57 == share) ... unproven
+50/260 ... [NO_EFFECT] line 471, (@pre55 == last) ... unproven
+51/260 ... [NO_EFFECT] line 472, (@pre56 == balance) ... unproven
+52/260 ... [NO_EFFECT] line 474, (@pre54 == balance) ... unproven
+53/260 ... [NO_EFFECT] line 475, (@pre53 == walletBalance) ... unproven
+54/260 ... [NO_EFFECT] line 476, (@pre52 == wallets[_who].balance) ... unproven
+55/260 ... [NO_EFFECT] line 477, (@pre51 == wallets[_who].lastDividendPeriod) ... unproven
+56/260 ... [NO_EFFECT] line 484, (@pre62 == bethash) ... unproven
+57/260 ... [NO_EFFECT] line 485, (@pre61 == hit) ... unproven
+58/260 ... [NO_EFFECT] line 486, (@pre60 == matches) ... unproven
+59/260 ... [NO_EFFECT] line 561, (@pre65 == hash) ... unproven
+60/260 ... [NO_EFFECT] line 568, (@pre64 == prize) ... unproven
+61/260 ... [NO_EFFECT] line 584, (@pre63 == maxWin) ... unproven
+62/260 ... [NO_EFFECT] line 636, (@pre78 == bethash) ... unproven
+63/260 ... [NO_EFFECT] line 640, (@pre77 == dividends[dividendPeriod]) ... unproven
+64/260 ... [NO_EFFECT] line 643, (@pre76 == fee) ... unproven
+65/260 ... [NO_EFFECT] line 644, (@pre75 == walletBalance) ... unproven
+66/260 ... [NO_EFFECT] line 645, (@pre74 == wallets[_partner].balance) ... unproven
+67/260 ... [NO_EFFECT] line 648, (@pre73 == hashNext) ... unproven
+68/260 ... [NO_EFFECT] line 649, (@pre72 == hashBetSum) ... unproven
+69/260 ... [NO_EFFECT] line 653, (@pre71 == hashNext) ... unproven
+70/260 ... [NO_EFFECT] line 654, (@pre70 == hashBetSum) ... unproven
+71/260 ... [NO_EFFECT] line 657, (@pre69 == hashBetSum) ... unproven
+72/260 ... [NO_EFFECT] line 660, (@pre66 == bets[msg.sender].blockNum) ... unproven
+73/260 ... [NO_EFFECT] line 660, (@pre67 == bets[msg.sender].betHash) ... unproven
+74/260 ... [NO_EFFECT] line 660, (@pre68 == bets[msg.sender].value) ... unproven
+75/260 ... [NO_EFFECT] line 675, (@pre84 == n) ... unproven
+76/260 ... [NO_EFFECT] line 677, (@pre83 == hashes.length) ... unproven
+77/260 ... [NO_EFFECT] line 680, (@pre82 == hashes.length) ... unproven
+78/260 ... [NO_EFFECT] line 682, (@pre81 == n) ... unproven
+79/260 ... [NO_EFFECT] line 686, (@pre80 == hashFirst) ... unproven
+80/260 ... [NO_EFFECT] line 687, (@pre79 == hashLast) ... unproven
+81/260 ... [NO_EFFECT] line 724, (@pre87 == delta) ... unproven
+82/260 ... [NO_EFFECT] line 725, (@pre86 == hash) ... unproven
+83/260 ... [NO_EFFECT] line 729, (@pre85 == slotp) ... unproven
+84/260 ... [NO_EFFECT] line 737, (@pre94 == lastb) ... unproven
+85/260 ... [NO_EFFECT] line 746, (@pre93 == blockn256) ... unproven
+86/260 ... [NO_EFFECT] line 749, (@pre92 == num) ... unproven
+87/260 ... [NO_EFFECT] line 750, (@pre91 == num) ... unproven
+88/260 ... [NO_EFFECT] line 751, (@pre90 == lastb) ... unproven
+89/260 ... [NO_EFFECT] line 753, (@pre89 == delta) ... unproven
+90/260 ... [NO_EFFECT] line 755, (@pre88 == hashLast) ... unproven
+91/260 ... [NO_EFFECT] line 765, (@pre95 == n) ... unproven
+92/260 ... [ASSIGN_CONST] line 15, (c == 0) ... unproven
+93/260 ... [ASSIGN_CONST] line 307, (hashNext == 0) ... unproven
+94/260 ... [ASSIGN_CONST] line 350, (dividendPeriod == 0) ... unproven
+95/260 ... [ASSIGN_CONST] line 365, (walletBalance == 0) ... unproven
+96/260 ... [ASSIGN_CONST] line 379, (keepbalance == 0) ... unproven
+97/260 ... [ASSIGN_CONST] line 380, (walletBalance == 0) ... unproven
+98/260 ... [ASSIGN_CONST] line 381, (wallets[msg.sender].balance == 0) ... unproven
+99/260 ... [ASSIGN_CONST] line 405, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (investing == 0)) ... unproven
+100/260 ... [ASSIGN_CONST] line 411, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (investBalance == 0)) ... unproven
+101/260 ... [ASSIGN_CONST] line 414, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (walletBalance == 0)) ... unproven
+102/260 ... [ASSIGN_CONST] line 415, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[owner].balance == 0)) ... unproven
+103/260 ... [ASSIGN_CONST] line 417, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (walletBalance == 0)) ... unproven
+104/260 ... [ASSIGN_CONST] line 418, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[owner].balance == 0)) ... unproven
+105/260 ... [ASSIGN_CONST] line 419, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[_partner].balance == 0)) ... unproven
+106/260 ... [ASSIGN_CONST] line 424, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[msg.sender] == 0)) ... unproven
+107/260 ... [ASSIGN_CONST] line 425, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[owner] == 0)) ... unproven
+108/260 ... [ASSIGN_CONST] line 426, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[animator] == 0)) ... unproven
+109/260 ... [ASSIGN_CONST] line 427, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (totalSupply == 0)) ... unproven
+110/260 ... [ASSIGN_CONST] line 443, (investBalance == 0) ... unproven
+111/260 ... [ASSIGN_CONST] line 444, (wallets[msg.sender].balance == 0) ... unproven
+112/260 ... [ASSIGN_CONST] line 471, (last == 0) ... unproven
+113/260 ... [ASSIGN_CONST] line 472, (balance == 0) ... unproven
+114/260 ... [ASSIGN_CONST] line 475, (walletBalance == 0) ... unproven
+115/260 ... [ASSIGN_CONST] line 476, (wallets[_who].balance == 0) ... unproven
+116/260 ... [ASSIGN_CONST] line 486, (matches == 0) ... unproven
+117/260 ... [ASSIGN_CONST] line 640, (dividends[dividendPeriod] == 0) ... unproven
+118/260 ... [ASSIGN_CONST] line 644, (walletBalance == 0) ... unproven
+119/260 ... [ASSIGN_CONST] line 645, (wallets[_partner].balance == 0) ... unproven
+120/260 ... [ASSIGN_CONST] line 648, (hashNext == 0) ... unproven
+121/260 ... [ASSIGN_CONST] line 653, (hashNext == 0) ... unproven
+122/260 ... [ASSIGN_CONST] line 657, (hashBetSum == 0) ... unproven
+123/260 ... [ASSIGN_CONST] line 680, (hashes.length == 0) ... unproven
+124/260 ... [ASSIGN_CONST] line 682, (n == 0) ... unproven
+125/260 ... [ASSIGN_CONST] line 686, (hashFirst == 0) ... unproven
+126/260 ... [ASSIGN_CONST] line 746, (blockn256 == 0) ... unproven
+127/260 ... [ASSIGN_CONST] line 750, (num == 0) ... unproven
+128/260 ... [ASSIGN_CONST] line 755, (hashLast == 0) ... unproven
+129/260 ... [ASSIGN_CONST] line 765, (n == 0) ... unproven
+130/260 ... [DEAD] line 11, false ... unproven
+131/260 ... [DEAD] line 16, false ... unproven
+132/260 ... [DEAD] line 43, false ... unproven
+133/260 ... [DEAD] line 52, false ... unproven
+134/260 ... [DEAD] line 53, false ... unproven
+135/260 ... [DEAD] line 54, false ... unproven
+136/260 ... [DEAD] line 55, false ... unproven
+137/260 ... [DEAD] line 56, false ... unproven
+138/260 ... [DEAD] line 57, false ... unproven
+139/260 ... [DEAD] line 60, false ... unproven
+140/260 ... [DEAD] line 61, false ... unproven
+141/260 ... [DEAD] line 62, false ... unproven
+142/260 ... [DEAD] line 86, false ... unproven
+143/260 ... [DEAD] line 87, false ... unproven
+144/260 ... [DEAD] line 88, false ... unproven
+145/260 ... [DEAD] line 89, false ... unproven
+146/260 ... [DEAD] line 90, false ... unproven
+147/260 ... [DEAD] line 91, false ... unproven
+148/260 ... [DEAD] line 102, false ... unproven
+149/260 ... [DEAD] line 172, false ... unproven
+150/260 ... [DEAD] line 177, false ... unproven
+151/260 ... [DEAD] line 251, false ... unproven
+152/260 ... [DEAD] line 254, false ... unproven
+153/260 ... [DEAD] line 256, false ... unproven
+154/260 ... [DEAD] line 269, false ... unproven
+155/260 ... [DEAD] line 270, false ... unproven
+156/260 ... [DEAD] line 271, false ... unproven
+157/260 ... [DEAD] line 280, false ... unproven
+158/260 ... [DEAD] line 281, false ... unproven
+159/260 ... [DEAD] line 282, false ... unproven
+160/260 ... [DEAD] line 291, false ... unproven
+161/260 ... [DEAD] line 318, false ... unproven
+162/260 ... [DEAD] line 319, false ... unproven
+163/260 ... [DEAD] line 320, false ... unproven
+164/260 ... [DEAD] line 321, false ... unproven
+165/260 ... [DEAD] line 323, false ... unproven
+166/260 ... [DEAD] line 331, false ... unproven
+167/260 ... [DEAD] line 340, false ... unproven
+168/260 ... [DEAD] line 344, false ... unproven
+169/260 ... [DEAD] line 346, false ... unproven
+170/260 ... [DEAD] line 349, false ... unproven
+171/260 ... [DEAD] line 362, false ... unproven
+172/260 ... [DEAD] line 366, false ... unproven
+173/260 ... [DEAD] line 372, false ... unproven
+174/260 ... [DEAD] line 373, false ... unproven
+175/260 ... [DEAD] line 374, false ... unproven
+176/260 ... [DEAD] line 375, false ... unproven
+177/260 ... [DEAD] line 383, false ... unproven
+178/260 ... [DEAD] line 393, false ... unproven
+179/260 ... [DEAD] line 402, false ... unproven
+180/260 ... [DEAD] line 404, false ... unproven
+181/260 ... [DEAD] line 408, false ... unproven
+182/260 ... [DEAD] line 413, false ... unproven
+183/260 ... [DEAD] line 428, false ... unproven
+184/260 ... [DEAD] line 429, false ... unproven
+185/260 ... [DEAD] line 430, false ... unproven
+186/260 ... [DEAD] line 431, false ... unproven
+187/260 ... [DEAD] line 438, false ... unproven
+188/260 ... [DEAD] line 439, false ... unproven
+189/260 ... [DEAD] line 441, false ... unproven
+190/260 ... [DEAD] line 445, false ... unproven
+191/260 ... [DEAD] line 452, false ... unproven
+192/260 ... [DEAD] line 453, false ... unproven
+193/260 ... [DEAD] line 454, false ... unproven
+194/260 ... [DEAD] line 462, false ... unproven
+195/260 ... [DEAD] line 466, false ... unproven
+196/260 ... [DEAD] line 478, false ... unproven
+197/260 ... [DEAD] line 487, false ... unproven
+198/260 ... [DEAD] line 488, false ... unproven
+199/260 ... [DEAD] line 489, false ... unproven
+200/260 ... [DEAD] line 490, false ... unproven
+201/260 ... [DEAD] line 491, false ... unproven
+202/260 ... [DEAD] line 492, false ... unproven
+203/260 ... [DEAD] line 493, false ... unproven
+204/260 ... [DEAD] line 496, false ... unproven
+205/260 ... [DEAD] line 499, false ... unproven
+206/260 ... [DEAD] line 502, false ... unproven
+207/260 ... [DEAD] line 505, false ... unproven
+208/260 ... [DEAD] line 516, false ... unproven
+209/260 ... [DEAD] line 522, false ... unproven
+210/260 ... [DEAD] line 524, false ... unproven
+211/260 ... [DEAD] line 526, false ... unproven
+212/260 ... [DEAD] line 527, false ... unproven
+213/260 ... [DEAD] line 532, false ... unproven
+214/260 ... [DEAD] line 543, false ... unproven
+215/260 ... [DEAD] line 547, false ... unproven
+216/260 ... [DEAD] line 548, false ... unproven
+217/260 ... [DEAD] line 551, false ... unproven
+218/260 ... [DEAD] line 552, false ... unproven
+219/260 ... [DEAD] line 553, false ... unproven
+220/260 ... [DEAD] line 559, false ... unproven
+221/260 ... [DEAD] line 562, false ... unproven
+222/260 ... [DEAD] line 565, false ... unproven
+223/260 ... [DEAD] line 566, false ... unproven
+224/260 ... [DEAD] line 567, false ... unproven
+225/260 ... [DEAD] line 571, false ... unproven
+226/260 ... [DEAD] line 575, false ... unproven
+227/260 ... [DEAD] line 581, false ... unproven
+228/260 ... [DEAD] line 582, false ... unproven
+229/260 ... [DEAD] line 583, false ... unproven
+230/260 ... [DEAD] line 585, false ... unproven
+231/260 ... [DEAD] line 587, false ... unproven
+232/260 ... [DEAD] line 590, false ... unproven
+233/260 ... [DEAD] line 600, false ... unproven
+234/260 ... [DEAD] line 601, false ... unproven
+235/260 ... [DEAD] line 602, false ... unproven
+236/260 ... [DEAD] line 605, false ... unproven
+237/260 ... [DEAD] line 610, false ... unproven
+238/260 ... [DEAD] line 611, false ... unproven
+239/260 ... [DEAD] line 612, false ... unproven
+240/260 ... [DEAD] line 619, false ... unproven
+241/260 ... [DEAD] line 627, false ... unproven
+242/260 ... [DEAD] line 635, false ... unproven
+243/260 ... [DEAD] line 637, false ... unproven
+244/260 ... [DEAD] line 638, false ... unproven
+245/260 ... [DEAD] line 639, false ... unproven
+246/260 ... [DEAD] line 642, false ... unproven
+247/260 ... [DEAD] line 647, false ... unproven
+248/260 ... [DEAD] line 652, false ... unproven
+249/260 ... [DEAD] line 661, false ... unproven
+250/260 ... [DEAD] line 663, false ... unproven
+251/260 ... [DEAD] line 674, false ... unproven
+252/260 ... [DEAD] line 676, false ... unproven
+253/260 ... [DEAD] line 685, false ... unproven
+254/260 ... [DEAD] line 696, false ... unproven
+255/260 ... [DEAD] line 726, false ... unproven
+256/260 ... [DEAD] line 738, false ... unproven
+257/260 ... [DEAD] line 742, false ... unproven
+258/260 ... [DEAD] line 748, false ... unproven
+259/260 ... [DEAD] line 754, false ... unproven
+260/260 ... [DEAD] line 766, false ... unproven
+took 38.900049s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 12, (a - b) : proven
+[2] [IO] line 15, (a + b) : proven
+[3] [IO] line 43, (size + 4) : proven
+[4] [IO] line 51, (2 * 32) : proven
+[5] [IO] line 84, (3 * 32) : proven
+[6] [IO] line 255, (10 * hashesSize) : proven
+[7] [IO] line 255, (block.number - hashFirst) : proven
+[8] [IO] line 259, ((10 * hashesSize) - ((block.number - hashFirst) % (10 * hashesSize))) : unproven
+[9] [IO] line 259, (10 * hashesSize) : proven
+[10] [IO] line 259, (block.number - hashFirst) : proven
+[11] [IO] line 307, (block.number + 3) : unproven
+[12] [IO] line 319, ((((investBalance * 9) / 10) + walletBalance) + _amount) : unproven
+[13] [IO] line 319, (((investBalance * 9) / 10) + walletBalance) : unproven
+[14] [IO] line 319, (investBalance * 9) : unproven
+[15] [IO] line 321, (((4 * 60) * 24) * 7) : proven
+[16] [IO] line 321, ((4 * 60) * 24) : proven
+[17] [IO] line 321, (4 * 60) : proven
+[18] [IO] line 321, (coldStoreLast + (((4 * 60) * 24) * 7)) : unproven
+[19] [IO] line 340, (hashesSize * 5) : proven
+[20] [IO] line 340, (investStart + (hashesSize * 5)) : unproven
+[21] [IO] line 345, (10 * hashesSize) : proven
+[22] [IO] line 345, (block.number - hashFirst) : unproven
+[23] [IO] line 346, (dividends.length - 2) : unproven
+[24] [IO] line 349, (dividends.length - 1) : unproven
+[25] [IO] line 350, (dividendPeriod + 1) : proven
+[26] [IO] line 365, (walletBalance - balance) : unproven
+[27] [IO] line 379, (_amount - maxpay) : proven
+[28] [IO] line 380, (walletBalance + keepbalance) : unproven
+[29] [IO] line 381, (wallets[msg.sender].balance + uint208(keepbalance)) : unproven
+[30] [IO] line 382, (((4 * 60) * 24) * 30) : proven
+[31] [IO] line 382, ((4 * 60) * 24) : proven
+[32] [IO] line 382, (4 * 60) : proven
+[33] [IO] line 382, (block.number + (((4 * 60) * 24) * 30)) : unproven
+[34] [IO] line 402, (hashesSize * 5) : proven
+[35] [IO] line 402, (investStart + (hashesSize * 5)) : unproven
+[36] [IO] line 404, (investBalanceMax - investBalance) : proven
+[37] [IO] line 405, (investBalanceMax - investBalance) : proven
+[38] [IO] line 411, (investBalance + investing) : proven
+[39] [IO] line 414, (walletBalance + (investing / 10)) : unproven
+[40] [IO] line 415, (wallets[owner].balance + uint208((investing / 10))) : unproven
+[41] [IO] line 417, (((investing * 5) / 100) * 2) : unproven
+[42] [IO] line 417, (investing * 5) : unproven
+[43] [IO] line 417, (walletBalance + (((investing * 5) / 100) * 2)) : unproven
+[44] [IO] line 418, (investing * 5) : unproven
+[45] [IO] line 418, (wallets[owner].balance + uint208(((investing * 5) / 100))) : unproven
+[46] [IO] line 419, (investing * 5) : unproven
+[47] [IO] line 419, (wallets[_partner].balance + uint208(((investing * 5) / 100))) : unproven
+[48] [IO] line 422, (investing * 16) : unproven
+[49] [IO] line 423, (investing * 10) : unproven
+[50] [IO] line 424, (balances[msg.sender] + senderBalance) : unproven
+[51] [IO] line 425, (balances[owner] + ownerBalance) : unproven
+[52] [IO] line 426, (balances[animator] + animatorBalance) : unproven
+[53] [IO] line 427, ((senderBalance + ownerBalance) + animatorBalance) : unproven
+[54] [IO] line 427, (senderBalance + ownerBalance) : unproven
+[55] [IO] line 427, (totalSupply + ((senderBalance + ownerBalance) + animatorBalance)) : unproven
+[56] [IO] line 440, (balances[msg.sender] * (10 ** 15)) : unproven
+[57] [IO] line 443, (investBalance - initialInvestment) : unproven
+[58] [IO] line 444, (initialInvestment * 9) : unproven
+[59] [IO] line 444, (wallets[msg.sender].balance + uint208(((initialInvestment * 9) / 10))) : unproven
+[60] [IO] line 469, (balances[_who] * 4294967295) : unproven
+[61] [IO] line 471, (last + 1) : proven
+[62] [IO] line 472, (balance + (share * dividends[last])) : unproven
+[63] [IO] line 472, (share * dividends[last]) : unproven
+[64] [IO] line 475, (walletBalance + balance) : unproven
+[65] [IO] line 476, (wallets[_who].balance + uint208(balance)) : unproven
+[66] [IO] line 487, ((((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) + (((hit & 15728640) == 0) ? 1 : 0)) : proven
+[67] [IO] line 487, (((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) : proven
+[68] [IO] line 487, ((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) : proven
+[69] [IO] line 487, (((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) : proven
+[70] [IO] line 487, ((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) : proven
+[71] [IO] line 494, (uint256(_player.value) * 7000000) : unproven
+[72] [IO] line 497, (uint256(_player.value) * 20000) : unproven
+[73] [IO] line 500, (uint256(_player.value) * 500) : unproven
+[74] [IO] line 503, (uint256(_player.value) * 25) : unproven
+[75] [IO] line 506, (uint256(_player.value) * 3) : unproven
+[76] [IO] line 519, (10 * hashesSize) : proven
+[77] [IO] line 519, (player.blockNum + (10 * hashesSize)) : proven
+[78] [IO] line 522, (player.blockNum + 256) : unproven
+[79] [IO] line 552, (10 * hashesSize) : proven
+[80] [IO] line 552, (player.blockNum + (10 * hashesSize)) : proven
+[81] [IO] line 559, (player.blockNum + 256) : unproven
+[82] [IO] line 640, (dividends[dividendPeriod] + (msg.value / 20)) : unproven
+[83] [IO] line 644, (walletBalance + fee) : unproven
+[84] [IO] line 645, (wallets[_partner].balance + uint208(fee)) : unproven
+[85] [IO] line 647, (block.number + 3) : unproven
+[86] [IO] line 648, (block.number + 3) : unproven
+[87] [IO] line 653, (hashNext + 1) : unproven
+[88] [IO] line 657, (hashBetSum + msg.value) : unproven
+[89] [IO] line 676, (n + _sadd) : unproven
+[90] [IO] line 680, (hashes.length + _sadd) : unproven
+[91] [IO] line 682, (n + 1) : proven
+[92] [IO] line 686, (block.number - (block.number % 10)) : unproven
+[93] [IO] line 703, (_lastb + 1) : unproven
+[94] [IO] line 705, (_lastb + 2) : unproven
+[95] [IO] line 707, (_lastb + 3) : unproven
+[96] [IO] line 709, (_lastb + 4) : unproven
+[97] [IO] line 711, (_lastb + 5) : unproven
+[98] [IO] line 713, (_lastb + 6) : unproven
+[99] [IO] line 715, (_lastb + 7) : unproven
+[100] [IO] line 717, (_lastb + 8) : unproven
+[101] [IO] line 719, (_lastb + 9) : unproven
+[102] [IO] line 724, (_block - hashFirst) : unproven
+[103] [IO] line 729, (_block - hashFirst) : unproven
+[104] [IO] line 730, (24 * slotp) : unproven
+[105] [IO] line 738, (lastb + 10) : unproven
+[106] [IO] line 746, (block.number - 256) : proven
+[107] [IO] line 750, (num + (num % 10)) : unproven
+[108] [IO] line 753, (lastb - hashFirst) : unproven
+[109] [IO] line 755, (lastb + 10) : unproven
+[110] [IO] line 765, (n + 1) : proven
+[111] [ETH_LEAK] line 323, msg.sender.transfer(_amount); : proven
+[112] [ETH_LEAK] line 373, msg.sender.transfer(_amount); : unproven
+[113] [ETH_LEAK] line 383, msg.sender.transfer(maxpay); : unproven
+[114] [ETH_LEAK] line 408, msg.sender.transfer(msg.value.sub(investing)); : unproven
+[115] [TX_ORG] line 54, assume((_to == address(this))); : proven
+[116] [TX_ORG] line 172, assume((msg.sender == owner)); : proven
+[117] [TX_ORG] line 177, assume((msg.sender == animator)); : proven
+[118] [TX_ORG] line 269, assume((_who != address(0))); : proven
+[119] [TX_ORG] line 280, assume((_who != address(0))); : proven
+[120] [TX_ORG] line 413, assume((_partner == address(0))); : proven
+[121] [TX_ORG] line 413, assume((_partner == owner)); : proven
+[122] [TX_ORG] line 642, assume((_partner != address(0))); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 15, (@pre1 == c) : unproven
+[2] [NO_EFFECT] line 53, (@pre103 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 56, (@pre102 == balances[owner]) : unproven
+[4] [NO_EFFECT] line 61, (@pre101 == balances[_to]) : unproven
+[5] [NO_EFFECT] line 71, (@pre104 == balance) : unproven
+[6] [NO_EFFECT] line 85, (@pre98 == _allowance) : unproven
+[7] [NO_EFFECT] line 88, (@pre97 == balances[_to]) : unproven
+[8] [NO_EFFECT] line 89, (@pre96 == balances[_from]) : unproven
+[9] [NO_EFFECT] line 101, (@pre99 == allowed[msg.sender][_spender]) : unproven
+[10] [NO_EFFECT] line 111, (@pre100 == remaining) : unproven
+[11] [NO_EFFECT] line 255, (@pre15 == period) : unproven
+[12] [NO_EFFECT] line 272, (@pre16 == owner) : unproven
+[13] [NO_EFFECT] line 283, (@pre17 == animator) : unproven
+[14] [NO_EFFECT] line 292, (@pre18 == investStart) : unproven
+[15] [NO_EFFECT] line 300, (@pre19 == hashBetMax) : unproven
+[16] [NO_EFFECT] line 307, (@pre20 == hashNext) : unproven
+[17] [NO_EFFECT] line 324, (@pre21 == coldStoreLast) : unproven
+[18] [NO_EFFECT] line 345, (@pre23 == period) : unproven
+[19] [NO_EFFECT] line 350, (@pre22 == dividendPeriod) : unproven
+[20] [NO_EFFECT] line 363, (@pre25 == balance) : unproven
+[21] [NO_EFFECT] line 365, (@pre24 == walletBalance) : unproven
+[22] [NO_EFFECT] line 371, (@pre30 == maxpay) : unproven
+[23] [NO_EFFECT] line 379, (@pre29 == keepbalance) : unproven
+[24] [NO_EFFECT] line 380, (@pre28 == walletBalance) : unproven
+[25] [NO_EFFECT] line 381, (@pre27 == wallets[msg.sender].balance) : unproven
+[26] [NO_EFFECT] line 382, (@pre26 == wallets[msg.sender].nextWithdrawBlock) : unproven
+[27] [NO_EFFECT] line 403, (@pre47 == investing) : unproven
+[28] [NO_EFFECT] line 405, (@pre46 == investing) : unproven
+[29] [NO_EFFECT] line 406, (@pre45 == investBalance) : unproven
+[30] [NO_EFFECT] line 411, (@pre44 == investBalance) : unproven
+[31] [NO_EFFECT] line 414, (@pre43 == walletBalance) : unproven
+[32] [NO_EFFECT] line 415, (@pre42 == wallets[owner].balance) : unproven
+[33] [NO_EFFECT] line 417, (@pre41 == walletBalance) : unproven
+[34] [NO_EFFECT] line 418, (@pre40 == wallets[owner].balance) : unproven
+[35] [NO_EFFECT] line 419, (@pre39 == wallets[_partner].balance) : unproven
+[36] [NO_EFFECT] line 420, (@pre38 == wallets[msg.sender].lastDividendPeriod) : unproven
+[37] [NO_EFFECT] line 421, (@pre37 == senderBalance) : unproven
+[38] [NO_EFFECT] line 422, (@pre36 == ownerBalance) : unproven
+[39] [NO_EFFECT] line 423, (@pre35 == animatorBalance) : unproven
+[40] [NO_EFFECT] line 424, (@pre34 == balances[msg.sender]) : unproven
+[41] [NO_EFFECT] line 425, (@pre33 == balances[owner]) : unproven
+[42] [NO_EFFECT] line 426, (@pre32 == balances[animator]) : unproven
+[43] [NO_EFFECT] line 427, (@pre31 == totalSupply) : unproven
+[44] [NO_EFFECT] line 440, (@pre50 == initialInvestment) : unproven
+[45] [NO_EFFECT] line 443, (@pre49 == investBalance) : unproven
+[46] [NO_EFFECT] line 444, (@pre48 == wallets[msg.sender].balance) : unproven
+[47] [NO_EFFECT] line 461, (@pre59 == last) : unproven
+[48] [NO_EFFECT] line 463, (@pre58 == wallets[_who].lastDividendPeriod) : unproven
+[49] [NO_EFFECT] line 469, (@pre57 == share) : unproven
+[50] [NO_EFFECT] line 471, (@pre55 == last) : unproven
+[51] [NO_EFFECT] line 472, (@pre56 == balance) : unproven
+[52] [NO_EFFECT] line 474, (@pre54 == balance) : unproven
+[53] [NO_EFFECT] line 475, (@pre53 == walletBalance) : unproven
+[54] [NO_EFFECT] line 476, (@pre52 == wallets[_who].balance) : unproven
+[55] [NO_EFFECT] line 477, (@pre51 == wallets[_who].lastDividendPeriod) : unproven
+[56] [NO_EFFECT] line 484, (@pre62 == bethash) : unproven
+[57] [NO_EFFECT] line 485, (@pre61 == hit) : unproven
+[58] [NO_EFFECT] line 486, (@pre60 == matches) : unproven
+[59] [NO_EFFECT] line 561, (@pre65 == hash) : unproven
+[60] [NO_EFFECT] line 568, (@pre64 == prize) : unproven
+[61] [NO_EFFECT] line 584, (@pre63 == maxWin) : unproven
+[62] [NO_EFFECT] line 636, (@pre78 == bethash) : unproven
+[63] [NO_EFFECT] line 640, (@pre77 == dividends[dividendPeriod]) : unproven
+[64] [NO_EFFECT] line 643, (@pre76 == fee) : unproven
+[65] [NO_EFFECT] line 644, (@pre75 == walletBalance) : unproven
+[66] [NO_EFFECT] line 645, (@pre74 == wallets[_partner].balance) : unproven
+[67] [NO_EFFECT] line 648, (@pre73 == hashNext) : unproven
+[68] [NO_EFFECT] line 649, (@pre72 == hashBetSum) : unproven
+[69] [NO_EFFECT] line 653, (@pre71 == hashNext) : unproven
+[70] [NO_EFFECT] line 654, (@pre70 == hashBetSum) : unproven
+[71] [NO_EFFECT] line 657, (@pre69 == hashBetSum) : unproven
+[72] [NO_EFFECT] line 660, (@pre66 == bets[msg.sender].blockNum) : unproven
+[73] [NO_EFFECT] line 660, (@pre67 == bets[msg.sender].betHash) : unproven
+[74] [NO_EFFECT] line 660, (@pre68 == bets[msg.sender].value) : unproven
+[75] [NO_EFFECT] line 675, (@pre84 == n) : unproven
+[76] [NO_EFFECT] line 677, (@pre83 == hashes.length) : unproven
+[77] [NO_EFFECT] line 680, (@pre82 == hashes.length) : unproven
+[78] [NO_EFFECT] line 682, (@pre81 == n) : unproven
+[79] [NO_EFFECT] line 686, (@pre80 == hashFirst) : unproven
+[80] [NO_EFFECT] line 687, (@pre79 == hashLast) : unproven
+[81] [NO_EFFECT] line 724, (@pre87 == delta) : unproven
+[82] [NO_EFFECT] line 725, (@pre86 == hash) : unproven
+[83] [NO_EFFECT] line 729, (@pre85 == slotp) : unproven
+[84] [NO_EFFECT] line 737, (@pre94 == lastb) : unproven
+[85] [NO_EFFECT] line 746, (@pre93 == blockn256) : unproven
+[86] [NO_EFFECT] line 749, (@pre92 == num) : unproven
+[87] [NO_EFFECT] line 750, (@pre91 == num) : unproven
+[88] [NO_EFFECT] line 751, (@pre90 == lastb) : unproven
+[89] [NO_EFFECT] line 753, (@pre89 == delta) : unproven
+[90] [NO_EFFECT] line 755, (@pre88 == hashLast) : unproven
+[91] [NO_EFFECT] line 765, (@pre95 == n) : unproven
+[92] [ASSIGN_CONST] line 15, (c == 0) : unproven
+[93] [ASSIGN_CONST] line 307, (hashNext == 0) : unproven
+[94] [ASSIGN_CONST] line 350, (dividendPeriod == 0) : unproven
+[95] [ASSIGN_CONST] line 365, (walletBalance == 0) : unproven
+[96] [ASSIGN_CONST] line 379, (keepbalance == 0) : unproven
+[97] [ASSIGN_CONST] line 380, (walletBalance == 0) : unproven
+[98] [ASSIGN_CONST] line 381, (wallets[msg.sender].balance == 0) : unproven
+[99] [ASSIGN_CONST] line 405, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (investing == 0)) : unproven
+[100] [ASSIGN_CONST] line 411, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (investBalance == 0)) : unproven
+[101] [ASSIGN_CONST] line 414, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (walletBalance == 0)) : unproven
+[102] [ASSIGN_CONST] line 415, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[owner].balance == 0)) : unproven
+[103] [ASSIGN_CONST] line 417, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (walletBalance == 0)) : unproven
+[104] [ASSIGN_CONST] line 418, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[owner].balance == 0)) : unproven
+[105] [ASSIGN_CONST] line 419, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[_partner].balance == 0)) : unproven
+[106] [ASSIGN_CONST] line 424, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[msg.sender] == 0)) : unproven
+[107] [ASSIGN_CONST] line 425, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[owner] == 0)) : unproven
+[108] [ASSIGN_CONST] line 426, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[animator] == 0)) : unproven
+[109] [ASSIGN_CONST] line 427, ((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (totalSupply == 0)) : unproven
+[110] [ASSIGN_CONST] line 443, (investBalance == 0) : unproven
+[111] [ASSIGN_CONST] line 444, (wallets[msg.sender].balance == 0) : unproven
+[112] [ASSIGN_CONST] line 471, (last == 0) : unproven
+[113] [ASSIGN_CONST] line 472, (balance == 0) : unproven
+[114] [ASSIGN_CONST] line 475, (walletBalance == 0) : unproven
+[115] [ASSIGN_CONST] line 476, (wallets[_who].balance == 0) : unproven
+[116] [ASSIGN_CONST] line 486, (matches == 0) : unproven
+[117] [ASSIGN_CONST] line 640, (dividends[dividendPeriod] == 0) : unproven
+[118] [ASSIGN_CONST] line 644, (walletBalance == 0) : unproven
+[119] [ASSIGN_CONST] line 645, (wallets[_partner].balance == 0) : unproven
+[120] [ASSIGN_CONST] line 648, (hashNext == 0) : unproven
+[121] [ASSIGN_CONST] line 653, (hashNext == 0) : unproven
+[122] [ASSIGN_CONST] line 657, (hashBetSum == 0) : unproven
+[123] [ASSIGN_CONST] line 680, (hashes.length == 0) : unproven
+[124] [ASSIGN_CONST] line 682, (n == 0) : unproven
+[125] [ASSIGN_CONST] line 686, (hashFirst == 0) : unproven
+[126] [ASSIGN_CONST] line 746, (blockn256 == 0) : unproven
+[127] [ASSIGN_CONST] line 750, (num == 0) : unproven
+[128] [ASSIGN_CONST] line 755, (hashLast == 0) : unproven
+[129] [ASSIGN_CONST] line 765, (n == 0) : unproven
+[130] [DEAD] line 11, false : unproven
+[131] [DEAD] line 16, false : unproven
+[132] [DEAD] line 43, false : unproven
+[133] [DEAD] line 52, false : unproven
+[134] [DEAD] line 53, false : unproven
+[135] [DEAD] line 54, false : unproven
+[136] [DEAD] line 55, false : unproven
+[137] [DEAD] line 56, false : unproven
+[138] [DEAD] line 57, false : unproven
+[139] [DEAD] line 60, false : unproven
+[140] [DEAD] line 61, false : unproven
+[141] [DEAD] line 62, false : unproven
+[142] [DEAD] line 86, false : unproven
+[143] [DEAD] line 87, false : unproven
+[144] [DEAD] line 88, false : unproven
+[145] [DEAD] line 89, false : unproven
+[146] [DEAD] line 90, false : unproven
+[147] [DEAD] line 91, false : unproven
+[148] [DEAD] line 102, false : unproven
+[149] [DEAD] line 172, false : unproven
+[150] [DEAD] line 177, false : unproven
+[151] [DEAD] line 251, false : unproven
+[152] [DEAD] line 254, false : unproven
+[153] [DEAD] line 256, false : unproven
+[154] [DEAD] line 269, false : unproven
+[155] [DEAD] line 270, false : unproven
+[156] [DEAD] line 271, false : unproven
+[157] [DEAD] line 280, false : unproven
+[158] [DEAD] line 281, false : unproven
+[159] [DEAD] line 282, false : unproven
+[160] [DEAD] line 291, false : unproven
+[161] [DEAD] line 318, false : unproven
+[162] [DEAD] line 319, false : unproven
+[163] [DEAD] line 320, false : unproven
+[164] [DEAD] line 321, false : unproven
+[165] [DEAD] line 323, false : unproven
+[166] [DEAD] line 331, false : unproven
+[167] [DEAD] line 340, false : unproven
+[168] [DEAD] line 344, false : unproven
+[169] [DEAD] line 346, false : unproven
+[170] [DEAD] line 349, false : unproven
+[171] [DEAD] line 362, false : unproven
+[172] [DEAD] line 366, false : unproven
+[173] [DEAD] line 372, false : unproven
+[174] [DEAD] line 373, false : unproven
+[175] [DEAD] line 374, false : unproven
+[176] [DEAD] line 375, false : unproven
+[177] [DEAD] line 383, false : unproven
+[178] [DEAD] line 393, false : unproven
+[179] [DEAD] line 402, false : unproven
+[180] [DEAD] line 404, false : unproven
+[181] [DEAD] line 408, false : unproven
+[182] [DEAD] line 413, false : unproven
+[183] [DEAD] line 428, false : unproven
+[184] [DEAD] line 429, false : unproven
+[185] [DEAD] line 430, false : unproven
+[186] [DEAD] line 431, false : unproven
+[187] [DEAD] line 438, false : unproven
+[188] [DEAD] line 439, false : unproven
+[189] [DEAD] line 441, false : unproven
+[190] [DEAD] line 445, false : unproven
+[191] [DEAD] line 452, false : unproven
+[192] [DEAD] line 453, false : unproven
+[193] [DEAD] line 454, false : unproven
+[194] [DEAD] line 462, false : unproven
+[195] [DEAD] line 466, false : unproven
+[196] [DEAD] line 478, false : unproven
+[197] [DEAD] line 487, false : unproven
+[198] [DEAD] line 488, false : unproven
+[199] [DEAD] line 489, false : unproven
+[200] [DEAD] line 490, false : unproven
+[201] [DEAD] line 491, false : unproven
+[202] [DEAD] line 492, false : unproven
+[203] [DEAD] line 493, false : unproven
+[204] [DEAD] line 496, false : unproven
+[205] [DEAD] line 499, false : unproven
+[206] [DEAD] line 502, false : unproven
+[207] [DEAD] line 505, false : unproven
+[208] [DEAD] line 516, false : unproven
+[209] [DEAD] line 522, false : unproven
+[210] [DEAD] line 524, false : unproven
+[211] [DEAD] line 526, false : unproven
+[212] [DEAD] line 527, false : unproven
+[213] [DEAD] line 532, false : unproven
+[214] [DEAD] line 543, false : unproven
+[215] [DEAD] line 547, false : unproven
+[216] [DEAD] line 548, false : unproven
+[217] [DEAD] line 551, false : unproven
+[218] [DEAD] line 552, false : unproven
+[219] [DEAD] line 553, false : unproven
+[220] [DEAD] line 559, false : unproven
+[221] [DEAD] line 562, false : unproven
+[222] [DEAD] line 565, false : unproven
+[223] [DEAD] line 566, false : unproven
+[224] [DEAD] line 567, false : unproven
+[225] [DEAD] line 571, false : unproven
+[226] [DEAD] line 575, false : unproven
+[227] [DEAD] line 581, false : unproven
+[228] [DEAD] line 582, false : unproven
+[229] [DEAD] line 583, false : unproven
+[230] [DEAD] line 585, false : unproven
+[231] [DEAD] line 587, false : unproven
+[232] [DEAD] line 590, false : unproven
+[233] [DEAD] line 600, false : unproven
+[234] [DEAD] line 601, false : unproven
+[235] [DEAD] line 602, false : unproven
+[236] [DEAD] line 605, false : unproven
+[237] [DEAD] line 610, false : unproven
+[238] [DEAD] line 611, false : unproven
+[239] [DEAD] line 612, false : unproven
+[240] [DEAD] line 619, false : unproven
+[241] [DEAD] line 627, false : unproven
+[242] [DEAD] line 635, false : unproven
+[243] [DEAD] line 637, false : unproven
+[244] [DEAD] line 638, false : unproven
+[245] [DEAD] line 639, false : unproven
+[246] [DEAD] line 642, false : unproven
+[247] [DEAD] line 647, false : unproven
+[248] [DEAD] line 652, false : unproven
+[249] [DEAD] line 661, false : unproven
+[250] [DEAD] line 663, false : unproven
+[251] [DEAD] line 674, false : unproven
+[252] [DEAD] line 676, false : unproven
+[253] [DEAD] line 685, false : unproven
+[254] [DEAD] line 696, false : unproven
+[255] [DEAD] line 726, false : unproven
+[256] [DEAD] line 738, false : unproven
+[257] [DEAD] line 742, false : unproven
+[258] [DEAD] line 748, false : unproven
+[259] [DEAD] line 754, false : unproven
+[260] [DEAD] line 766, false : unproven
+
+============ Statistics ============
+# Iter                    : 3
+# Alarm / Query           : 77 / 122
+- integer over/underflow  : 74 / 110
+- kill-anyone             : 0 / 0
+- ether-leaking           : 3 / 4
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 8
+
+Time Elapsed (Real) : 282.386555195
+Time Elapsed (CPU)  : 282.233974

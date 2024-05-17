@@ -1,0 +1,121 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 7
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.00025s
+[INFO] # path : 15
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.00049s
+Generating VCs ... took 0.002676s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.039983
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/5 ... [IO] line 28, (userBalance[msg.sender] + msg.value) ... unproven
+2/5 ... [ETH_LEAK] line 35, msg.sender.call.value(userBalance[msg.sender])() ... unproven
+3/5 ... [RE_EL] line 35, msg.sender.call.value(userBalance[msg.sender])() ... unproven
+4/5 ... [RE] line 27, (Reentrance, addToBalance, []) ... unproven
+5/5 ... [RE] line 31, (Reentrance, withdrawBalance, []) ... unproven
+took 0.325551s
+
+Generating VCs ... took 0.001023s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.38811
+[
+-1 -> (_locked__@3 == true)
+0 -> true
+]
+[
+]
+1/5 ... [IO] line 28, (userBalance[msg.sender] + msg.value) ... unproven
+2/5 ... [ETH_LEAK] line 35, msg.sender.call.value(userBalance[msg.sender])() ... unproven
+3/5 ... [RE_EL] line 35, msg.sender.call.value(userBalance[msg.sender])() ... unproven
+4/5 ... [RE] line 27, (Reentrance, addToBalance, []) ... proven
+5/5 ... [RE] line 31, (Reentrance, withdrawBalance, []) ... proven
+took 0.393081s
+
+Generating VCs ... took 0.00151s
+Checking validity of VCs ... took 2.612634s
+
+Generating VCs ... took 0.000988s
+Checking validity of VCs ... took 0.227692s
+
+Generating VCs ... took 0.001202s
+Checking validity of VCs ... took 0.133231s
+
+Generating VCs ... took 0.000971s
+Checking validity of VCs ... took 0.827116s
+
+Generating VCs ... took 0.000949s
+Checking validity of VCs ... took 0.829119s
+
+Generating VCs ... took 0.000900000000001s
+Checking validity of VCs ... took 0.44825s
+
+Generating VCs ... took 0.000952s
+Checking validity of VCs ... took 2.055927s
+
+Iter : 10 To explore : 4 Explored : 17 Total elapsed : 7.903128
+Generating VCs ... took 0.000954s
+Checking validity of VCs ... took 0.086107s
+
+Generating VCs ... took 0.000981s
+Checking validity of VCs ... took 2.40939s
+
+Generating VCs ... took 0.000881000000001s
+Checking validity of VCs ... took 0.314578s
+
+Generating VCs ... took 0.000884000000001s
+Checking validity of VCs ... took 0.775368s
+
+Generating VCs ... took 0.000933999999999s
+Checking validity of VCs ... took 0.271877s
+
+Generating VCs ... took 0.000882999999998s
+Checking validity of VCs ... took 1.019139s
+
+Generating VCs ... took 0.000973999999999s
+Checking validity of VCs ... took 1.917077s
+
+Generating VCs ... took 0.000484999999999s
+Checking validity of VCs ... 
+1/2 ... [NO_EFFECT] line 28, (@pre1 == userBalance[msg.sender]) ... unproven
+2/2 ... [ASSIGN_CONST] line 28, (userBalance[msg.sender] == 0) ... unproven
+took 0.070325s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 28, (userBalance[msg.sender] + msg.value) : unproven
+[2] [ETH_LEAK] line 35, msg.sender.call.value(userBalance[msg.sender])() : unproven
+[3] [RE_EL] line 35, msg.sender.call.value(userBalance[msg.sender])() : unproven
+[4] [RE] line 27, (Reentrance, addToBalance, []) : proven
+[5] [RE] line 31, (Reentrance, withdrawBalance, []) : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 28, (@pre1 == userBalance[msg.sender]) : unproven
+[2] [ASSIGN_CONST] line 28, (userBalance[msg.sender] == 0) : unproven
+
+============ Statistics ============
+# Iter                    : 17
+# Alarm / Query           : 3 / 5
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 0 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 14.7874150276
+Time Elapsed (CPU)  : 14.776712

@@ -6,16 +6,16 @@
 
 [INFO] all funcs : 20
 [INFO] reachable : 10
-[INFO] Generating Paths ... took 0.000373s
+[INFO] Generating Paths ... took 0.000355s
 [INFO] # path : 33
 
 [INFO] Violate CEI: true
 [INFO] msg.sender = this possible: false
-[INFO] Performing Interval Analysis ... took 0.001003s
-Generating VCs ... took 0.005675s
+[INFO] Performing Interval Analysis ... took 0.00094s
+Generating VCs ... took 0.005738s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 1 Total elapsed : 0.051502
+Iter: 1 Total elapsed : 0.055819
 [
 -1 -> true
 0 -> true
@@ -35,21 +35,21 @@ Iter: 1 Total elapsed : 0.051502
 11/13 ... [RE] line 87, (TokenBank, WithdrawToHolder, [address, uint256]) ... unproven
 12/13 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
 13/13 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
-took 0.462735s
+took 0.467178s
 
-Generating VCs ... took 0.003306s
-Checking validity of VCs ... took 0.040921s
+Generating VCs ... took 0.002968s
+Checking validity of VCs ... took 0.038029s
 
-Generating VCs ... took 0.003251s
-Checking validity of VCs ... took 0.032366s
+Generating VCs ... took 0.003123s
+Checking validity of VCs ... took 0.029366s
 
-Generating VCs ... took 0.003648s
-Checking validity of VCs ... took 0.034399s
+Generating VCs ... took 0.003199s
+Checking validity of VCs ... took 0.029617s
 
-Generating VCs ... took 0.003518s
+Generating VCs ... took 0.003013s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 5 Total elapsed : 1.109638
+Iter: 5 Total elapsed : 1.067391
 [
 -1 -> ((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true))
 0 -> ((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true))
@@ -69,15 +69,15 @@ Iter: 5 Total elapsed : 1.109638
 11/13 ... [RE] line 87, (TokenBank, WithdrawToHolder, [address, uint256]) ... unproven
 12/13 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
 13/13 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
-took 1.119266s
+took 1.041746s
 
-Generating VCs ... took 0.003641s
-Checking validity of VCs ... took 0.552516s
+Generating VCs ... took 0.00328s
+Checking validity of VCs ... took 0.466194s
 
-Generating VCs ... took 0.004397s
+Generating VCs ... took 0.003169s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 7 Total elapsed : 15.808929
+Iter: 7 Total elapsed : 15.197869
 [
 -1 -> (((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true)) /\ @Invest_sum >= Σ_u Holders__@82)
 0 -> (((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true)) /\ @Invest_sum >= Σ_u Holders__@82)
@@ -97,22 +97,28 @@ Iter: 7 Total elapsed : 15.808929
 11/13 ... [RE] line 87, (TokenBank, WithdrawToHolder, [address, uint256]) ... unproven
 12/13 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
 13/13 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
-took 14.498944s
+took 14.046186s
 
-Generating VCs ... took 0.003519s
-Checking validity of VCs ... took 12.405089s
+Generating VCs ... took 0.00314s
+Checking validity of VCs ... took 11.719438s
 
-Generating VCs ... took 0.003064s
-Checking validity of VCs ... took 56.831491s
+Generating VCs ... took 0.003249s
+Checking validity of VCs ... took 54.01699s
 
-Iter : 10 To explore : 21 Explored : 76 Total elapsed : 86.072051
-Generating VCs ... took 0.004311s
-Checking validity of VCs ... took 53.322911s
+Iter : 10 To explore : 21 Explored : 76 Total elapsed : 81.946345
+Generating VCs ... took 0.00313199999999s
+Checking validity of VCs ... took 51.407069s
 
-Generating VCs ... took 0.00345200000001s
-Checking validity of VCs ... took 12.810571s
+Generating VCs ... took 0.00321600000001s
+Checking validity of VCs ... took 11.857053s
 
-Generating VCs ... took 0.00142400000001s
+Generating VCs ... took 0.003128s
+Checking validity of VCs ... took 2.133968s
+
+Generating VCs ... took 0.00324499999999s
+Checking validity of VCs ... took 12.113102s
+
+Generating VCs ... took 0.001667s
 Checking validity of VCs ... 
 1/15 ... [NO_EFFECT] line 18, (@pre8 == newOwner) ... unproven
 2/15 ... [NO_EFFECT] line 26, (@pre9 == owner) ... unproven
@@ -129,7 +135,7 @@ Checking validity of VCs ...
 13/15 ... [DEAD] line 83, false ... unproven
 14/15 ... [DEAD] line 92, false ... unproven
 15/15 ... [DEAD] line 96, false ... unproven
-took 1.01418s
+took 0.771161s
 
 
 ===== Vulnerability Report =====
@@ -165,7 +171,7 @@ took 1.01418s
 [15] [DEAD] line 96, false : unproven
 
 ============ Statistics ============
-# Iter                    : 11
+# Iter                    : 13
 # Alarm / Query           : 5 / 13
 - integer over/underflow  : 1 / 2
 - kill-anyone             : 0 / 0
@@ -174,5 +180,5 @@ took 1.01418s
 - reentrancy              : 4 / 7
 - tx.origin               : 0 / 2
 
-Time Elapsed (Real) : 153.26174593
-Time Elapsed (CPU)  : 153.235432
+Time Elapsed (Real) : 160.276137114
+Time Elapsed (CPU)  : 160.255748

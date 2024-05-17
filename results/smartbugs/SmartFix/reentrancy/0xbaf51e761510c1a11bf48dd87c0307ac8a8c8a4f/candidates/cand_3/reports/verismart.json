@@ -1,0 +1,233 @@
+{
+  "fileName": "results/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f/candidates/cand_3/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 72,
+  "time": 101.196444,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "eq(MinDeposit__@8:uint256,1000000000000000000)"
+    },
+    {
+      "key": "0",
+      "formula": "eq(MinDeposit__@8:uint256,1000000000000000000)"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] - _am)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "RE_EL",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(ETH_VAULT, Deposit, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 34,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(ETH_VAULT, CashOut, [uint256])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 71,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre5 == LastMsg.Sender)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 72,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre4 == LastMsg.Time)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 73,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre3 == LastMsg.Val)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "ASSIGN_CONST",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "ASSIGN_CONST",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 38,
+      "signatures": [
+        {
+          "contractName": "ETH_VAULT",
+          "methodName": "CashOut",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

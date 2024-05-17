@@ -1,0 +1,503 @@
+{
+  "fileName": "results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_103/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 102,
+  "time": 152.038524,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(land(land(eq(read(@TU:mapping(address => bool),firstTarget__@9:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@6:address),cond(true))),eq(read(@TU:mapping(address => bool),secondTarget__@12:address),cond(true))),eq(read(@TU:mapping(address => bool),winner__@4:address),cond(true)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(land(land(eq(read(@TU:mapping(address => bool),firstTarget__@9:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@6:address),cond(true))),eq(read(@TU:mapping(address => bool),secondTarget__@12:address),cond(true))),eq(read(@TU:mapping(address => bool),winner__@4:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 87,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "(block.number - 1)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 119,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "guessSeed",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(seed[0] * seed[1])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 81,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.transfer(amount);",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 101,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "callFirstTarget",
+          "argTypes": []
+        }
+      ],
+      "exp": "firstTarget.call.value(msg.value)();",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "ETH_LEAK",
+      "line": 107,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "callSecondTarget",
+          "argTypes": []
+        }
+      ],
+      "exp": "secondTarget.call.value(msg.value)();",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "ETH_LEAK",
+      "line": 134,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "winPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "owner.call.value(1)();",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "ETH_LEAK",
+      "line": 138,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "claimPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "winner.transfer(address(this).balance);",
+      "status": "proven"
+    },
+    {
+      "no": "8",
+      "kind": "RE_EL",
+      "line": 81,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.transfer(amount);",
+      "status": "proven"
+    },
+    {
+      "no": "9",
+      "kind": "RE_EL",
+      "line": 101,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "callFirstTarget",
+          "argTypes": []
+        }
+      ],
+      "exp": "firstTarget.call.value(msg.value)();",
+      "status": "proven"
+    },
+    {
+      "no": "10",
+      "kind": "RE_EL",
+      "line": 107,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "callSecondTarget",
+          "argTypes": []
+        }
+      ],
+      "exp": "secondTarget.call.value(msg.value)();",
+      "status": "proven"
+    },
+    {
+      "no": "11",
+      "kind": "RE_EL",
+      "line": 134,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "winPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "owner.call.value(1)();",
+      "status": "proven"
+    },
+    {
+      "no": "12",
+      "kind": "RE_EL",
+      "line": 138,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "claimPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "winner.transfer(address(this).balance);",
+      "status": "proven"
+    },
+    {
+      "no": "13",
+      "kind": "TX_ORG",
+      "line": 39,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        },
+        {
+          "contractName": "DrainMe",
+          "methodName": "setSecret",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "DrainMe",
+          "methodName": "winPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    },
+    {
+      "no": "14",
+      "kind": "TX_ORG",
+      "line": 44,
+      "signatures": [
+        { "contractName": "DrainMe", "methodName": "DranMe", "argTypes": [] },
+        {
+          "contractName": "DrainMe",
+          "methodName": "claimPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == winner));",
+      "status": "proven"
+    },
+    {
+      "no": "15",
+      "kind": "TX_ORG",
+      "line": 79,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender != owner));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 33,
+      "signatures": [
+        { "contractName": "DrainMe", "methodName": "DranMe", "argTypes": [] }
+      ],
+      "exp": "(@pre1 == owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 60,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "setSecret",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == secret)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 88,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre4 == secret)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 90,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre3 == winner)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 111,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "setSeed",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(@pre5 == seed[_index])",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 115,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "addSeed",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre6 == seed.length)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 39,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        },
+        {
+          "contractName": "DrainMe",
+          "methodName": "setSecret",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "DrainMe",
+          "methodName": "winPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 44,
+      "signatures": [
+        { "contractName": "DrainMe", "methodName": "DranMe", "argTypes": [] },
+        {
+          "contractName": "DrainMe",
+          "methodName": "claimPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 72,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "becomePlayer",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "DEAD",
+      "line": 78,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "DEAD",
+      "line": 79,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "DEAD",
+      "line": 81,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "DEAD",
+      "line": 86,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "manipulateSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "DEAD",
+      "line": 99,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "callFirstTarget",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "DEAD",
+      "line": 105,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "callSecondTarget",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "DEAD",
+      "line": 126,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "checkSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "DEAD",
+      "line": 127,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "checkSecret",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "DEAD",
+      "line": 138,
+      "signatures": [
+        {
+          "contractName": "DrainMe",
+          "methodName": "claimPrize",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

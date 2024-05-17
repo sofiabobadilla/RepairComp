@@ -1,0 +1,123 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 7
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.000275s
+[INFO] # path : 15
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000631s
+Generating VCs ... took 0.00318s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.042152
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/5 ... [IO] line 26, (userBalances[msg.sender] + msg.value) ... unproven
+2/5 ... [ETH_LEAK] line 32, msg.sender.call.value(amountToWithdraw)() ... unproven
+3/5 ... [RE_EL] line 32, msg.sender.call.value(amountToWithdraw)() ... unproven
+4/5 ... [RE] line 25, (EtherBank, addToBalance, []) ... unproven
+5/5 ... [RE] line 29, (EtherBank, withdrawBalance, []) ... unproven
+took 0.253837s
+
+Generating VCs ... took 0.001108s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.321087
+[
+-1 -> (_locked__@3 == true)
+0 -> true
+]
+[
+]
+1/5 ... [IO] line 26, (userBalances[msg.sender] + msg.value) ... unproven
+2/5 ... [ETH_LEAK] line 32, msg.sender.call.value(amountToWithdraw)() ... unproven
+3/5 ... [RE_EL] line 32, msg.sender.call.value(amountToWithdraw)() ... unproven
+4/5 ... [RE] line 25, (EtherBank, addToBalance, []) ... proven
+5/5 ... [RE] line 29, (EtherBank, withdrawBalance, []) ... proven
+took 0.370184s
+
+Generating VCs ... took 0.001057s
+Checking validity of VCs ... took 0.50957s
+
+Generating VCs ... took 0.001092s
+Checking validity of VCs ... took 0.092285s
+
+Generating VCs ... took 0.001194s
+Checking validity of VCs ... took 0.157653s
+
+Generating VCs ... took 0.001435s
+Checking validity of VCs ... took 0.81613s
+
+Generating VCs ... took 0.001076s
+Checking validity of VCs ... took 0.598164s
+
+Generating VCs ... took 0.000979s
+Checking validity of VCs ... took 0.425963s
+
+Generating VCs ... took 0.001058s
+Checking validity of VCs ... took 1.696105s
+
+Iter : 10 To explore : 4 Explored : 17 Total elapsed : 4.972529
+Generating VCs ... took 0.00115s
+Checking validity of VCs ... took 0.082482s
+
+Generating VCs ... took 0.001054s
+Checking validity of VCs ... took 0.115772s
+
+Generating VCs ... took 0.000966999999999s
+Checking validity of VCs ... took 0.211381s
+
+Generating VCs ... took 0.000987s
+Checking validity of VCs ... took 0.597564s
+
+Generating VCs ... took 0.001025s
+Checking validity of VCs ... took 0.228512s
+
+Generating VCs ... took 0.000978s
+Checking validity of VCs ... took 0.848479s
+
+Generating VCs ... took 0.001019s
+Checking validity of VCs ... took 1.207582s
+
+Generating VCs ... took 0.000565s
+Checking validity of VCs ... 
+1/3 ... [NO_EFFECT] line 26, (@pre1 == userBalances[msg.sender]) ... unproven
+2/3 ... [NO_EFFECT] line 30, (@pre2 == amountToWithdraw) ... unproven
+3/3 ... [ASSIGN_CONST] line 26, (userBalances[msg.sender] == 0) ... unproven
+took 0.115468s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 26, (userBalances[msg.sender] + msg.value) : unproven
+[2] [ETH_LEAK] line 32, msg.sender.call.value(amountToWithdraw)() : unproven
+[3] [RE_EL] line 32, msg.sender.call.value(amountToWithdraw)() : unproven
+[4] [RE] line 25, (EtherBank, addToBalance, []) : proven
+[5] [RE] line 29, (EtherBank, withdrawBalance, []) : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 26, (@pre1 == userBalances[msg.sender]) : unproven
+[2] [NO_EFFECT] line 30, (@pre2 == amountToWithdraw) : unproven
+[3] [ASSIGN_CONST] line 26, (userBalances[msg.sender] == 0) : unproven
+
+============ Statistics ============
+# Iter                    : 17
+# Alarm / Query           : 3 / 5
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 0 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 8.4114780426
+Time Elapsed (CPU)  : 8.3902

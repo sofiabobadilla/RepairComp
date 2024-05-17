@@ -1,0 +1,205 @@
+{
+  "fileName": "results/reentrancy/simple_dao/candidates/cand_6/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 6,
+  "time": 55.300201,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "usum(@Invest_sum:uint256,credit__@5:mapping(address => uint256))"
+    },
+    {
+      "key": "0",
+      "formula": "usum(@Invest_sum:uint256,credit__@5:mapping(address => uint256))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 13,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "donate",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(credit[to] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "donate",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(credit[to] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(credit[msg.sender] - amount)",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "res = msg.sender.call.value(amount)();",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE_EL",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "res = msg.sender.call.value(amount)();",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 12,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "donate",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(SimpleDAO, donate, [address])",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "RE",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(SimpleDAO, withdraw, [uint256])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "donate",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre1 == credit[to])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == credit[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "donate",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(credit[to] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ASSIGN_CONST",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(credit[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 13,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "donate",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "SimpleDAO",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

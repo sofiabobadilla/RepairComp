@@ -6,16 +6,16 @@
 
 [INFO] all funcs : 116
 [INFO] reachable : 57
-[INFO] Generating Paths ... took 0.023753s
+[INFO] Generating Paths ... took 0.021634s
 [INFO] # path : 922
 
 [INFO] Violate CEI: false
 [INFO] msg.sender = this possible: false
-[INFO] Performing Interval Analysis ... took 0.115459s
-Generating VCs ... took 1.508079s
+[INFO] Performing Interval Analysis ... took 0.106476s
+Generating VCs ... took 1.385993s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 1 Total elapsed : 3.48454
+Iter: 1 Total elapsed : 3.181254
 [
 0 -> true
 789 -> true
@@ -156,9 +156,158 @@ Iter: 1 Total elapsed : 3.48454
 120/122 ... [TX_ORG] line 412, assume((_partner == address(0))); ... proven
 121/122 ... [TX_ORG] line 412, assume((_partner == owner)); ... proven
 122/122 ... [TX_ORG] line 641, assume((_partner != address(0))); ... proven
-took 113.036851s
+took 85.010509s
 
-Generating VCs ... took 0.149114s
+Generating VCs ... took 1.40425s
+Checking validity of VCs ... took 0.276058s
+
+Generating VCs ... took 1.404841s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 3 Total elapsed : 137.87581
+[
+0 -> (Read(@TU, owner__@50) == true)
+789 -> (Read(@TU, owner__@50) == true)
+1212 -> (Read(@TU, owner__@50) == true)
+1330 -> (Read(@TU, owner__@50) == true)
+]
+[
+599 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1057 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1080 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1084 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1089 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1093 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1179 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1237 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+1333 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+2011 -> ((Read(@TU, owner__@50) == true), (Read(@TU, owner__@50) == true))
+]
+1/122 ... [IO] line 12, (a - b) ... proven
+2/122 ... [IO] line 15, (a + b) ... proven
+3/122 ... [IO] line 43, (size + 4) ... proven
+4/122 ... [IO] line 51, (2 * 32) ... proven
+5/122 ... [IO] line 84, (3 * 32) ... proven
+6/122 ... [IO] line 254, (10 * hashesSize) ... proven
+7/122 ... [IO] line 254, (block.number - hashFirst) ... unproven
+8/122 ... [IO] line 258, ((10 * hashesSize) - ((block.number - hashFirst) % (10 * hashesSize))) ... unproven
+9/122 ... [IO] line 258, (10 * hashesSize) ... proven
+10/122 ... [IO] line 258, (block.number - hashFirst) ... unproven
+11/122 ... [IO] line 306, (block.number + 3) ... unproven
+12/122 ... [IO] line 318, ((((investBalance * 9) / 10) + walletBalance) + _amount) ... unproven
+13/122 ... [IO] line 318, (((investBalance * 9) / 10) + walletBalance) ... unproven
+14/122 ... [IO] line 318, (investBalance * 9) ... unproven
+15/122 ... [IO] line 320, (((4 * 60) * 24) * 7) ... proven
+16/122 ... [IO] line 320, ((4 * 60) * 24) ... proven
+17/122 ... [IO] line 320, (4 * 60) ... proven
+18/122 ... [IO] line 320, (coldStoreLast + (((4 * 60) * 24) * 7)) ... unproven
+19/122 ... [IO] line 339, (hashesSize * 5) ... proven
+20/122 ... [IO] line 339, (investStart + (hashesSize * 5)) ... unproven
+21/122 ... [IO] line 344, (10 * hashesSize) ... proven
+22/122 ... [IO] line 344, (block.number - hashFirst) ... unproven
+23/122 ... [IO] line 345, (dividends.length - 2) ... unproven
+24/122 ... [IO] line 348, (dividends.length - 1) ... unproven
+25/122 ... [IO] line 349, (dividendPeriod + 1) ... proven
+26/122 ... [IO] line 364, (walletBalance - balance) ... unproven
+27/122 ... [IO] line 378, (_amount - maxpay) ... proven
+28/122 ... [IO] line 379, (walletBalance + keepbalance) ... unproven
+29/122 ... [IO] line 380, (wallets[msg.sender].balance + uint208(keepbalance)) ... unproven
+30/122 ... [IO] line 381, (((4 * 60) * 24) * 30) ... proven
+31/122 ... [IO] line 381, ((4 * 60) * 24) ... proven
+32/122 ... [IO] line 381, (4 * 60) ... proven
+33/122 ... [IO] line 381, (block.number + (((4 * 60) * 24) * 30)) ... unproven
+34/122 ... [IO] line 401, (hashesSize * 5) ... proven
+35/122 ... [IO] line 401, (investStart + (hashesSize * 5)) ... unproven
+36/122 ... [IO] line 403, (investBalanceMax - investBalance) ... proven
+37/122 ... [IO] line 404, (investBalanceMax - investBalance) ... proven
+38/122 ... [IO] line 410, (investBalance + investing) ... proven
+39/122 ... [IO] line 413, (walletBalance + (investing / 10)) ... unproven
+40/122 ... [IO] line 414, (wallets[owner].balance + uint208((investing / 10))) ... unproven
+41/122 ... [IO] line 416, (((investing * 5) / 100) * 2) ... unproven
+42/122 ... [IO] line 416, (investing * 5) ... unproven
+43/122 ... [IO] line 416, (walletBalance + (((investing * 5) / 100) * 2)) ... unproven
+44/122 ... [IO] line 417, (investing * 5) ... unproven
+45/122 ... [IO] line 417, (wallets[owner].balance + uint208(((investing * 5) / 100))) ... unproven
+46/122 ... [IO] line 418, (investing * 5) ... unproven
+47/122 ... [IO] line 418, (wallets[_partner].balance + uint208(((investing * 5) / 100))) ... unproven
+48/122 ... [IO] line 421, (investing * 16) ... unproven
+49/122 ... [IO] line 422, (investing * 10) ... unproven
+50/122 ... [IO] line 423, (balances[msg.sender] + senderBalance) ... unproven
+51/122 ... [IO] line 424, (balances[owner] + ownerBalance) ... unproven
+52/122 ... [IO] line 425, (balances[animator] + animatorBalance) ... unproven
+53/122 ... [IO] line 426, ((senderBalance + ownerBalance) + animatorBalance) ... unproven
+54/122 ... [IO] line 426, (senderBalance + ownerBalance) ... unproven
+55/122 ... [IO] line 426, (totalSupply + ((senderBalance + ownerBalance) + animatorBalance)) ... unproven
+56/122 ... [IO] line 439, (balances[msg.sender] * (10 ** 15)) ... unproven
+57/122 ... [IO] line 442, (investBalance - initialInvestment) ... unproven
+58/122 ... [IO] line 443, (initialInvestment * 9) ... unproven
+59/122 ... [IO] line 443, (wallets[msg.sender].balance + uint208(((initialInvestment * 9) / 10))) ... unproven
+60/122 ... [IO] line 468, (balances[_who] * 4294967295) ... unproven
+61/122 ... [IO] line 470, (last + 1) ... proven
+62/122 ... [IO] line 471, (balance + (share * dividends[last])) ... unproven
+63/122 ... [IO] line 471, (share * dividends[last]) ... unproven
+64/122 ... [IO] line 474, (walletBalance + balance) ... unproven
+65/122 ... [IO] line 475, (wallets[_who].balance + uint208(balance)) ... unproven
+66/122 ... [IO] line 486, ((((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) + (((hit & 15728640) == 0) ? 1 : 0)) ... proven
+67/122 ... [IO] line 486, (((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) ... proven
+68/122 ... [IO] line 486, ((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) ... proven
+69/122 ... [IO] line 486, (((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) ... proven
+70/122 ... [IO] line 486, ((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) ... proven
+71/122 ... [IO] line 493, (uint256(_player.value) * 7000000) ... unproven
+72/122 ... [IO] line 496, (uint256(_player.value) * 20000) ... unproven
+73/122 ... [IO] line 499, (uint256(_player.value) * 500) ... unproven
+74/122 ... [IO] line 502, (uint256(_player.value) * 25) ... unproven
+75/122 ... [IO] line 505, (uint256(_player.value) * 3) ... unproven
+76/122 ... [IO] line 518, (10 * hashesSize) ... proven
+77/122 ... [IO] line 518, (player.blockNum + (10 * hashesSize)) ... proven
+78/122 ... [IO] line 521, (player.blockNum + 256) ... unproven
+79/122 ... [IO] line 551, (10 * hashesSize) ... proven
+80/122 ... [IO] line 551, (player.blockNum + (10 * hashesSize)) ... proven
+81/122 ... [IO] line 558, (player.blockNum + 256) ... unproven
+82/122 ... [IO] line 639, (dividends[dividendPeriod] + (msg.value / 20)) ... unproven
+83/122 ... [IO] line 643, (walletBalance + fee) ... unproven
+84/122 ... [IO] line 644, (wallets[_partner].balance + uint208(fee)) ... unproven
+85/122 ... [IO] line 646, (block.number + 3) ... unproven
+86/122 ... [IO] line 647, (block.number + 3) ... unproven
+87/122 ... [IO] line 652, (hashNext + 1) ... unproven
+88/122 ... [IO] line 656, (hashBetSum + msg.value) ... unproven
+89/122 ... [IO] line 675, (n + _sadd) ... unproven
+90/122 ... [IO] line 679, (hashes.length + _sadd) ... unproven
+91/122 ... [IO] line 681, (n + 1) ... proven
+92/122 ... [IO] line 685, (block.number - (block.number % 10)) ... unproven
+93/122 ... [IO] line 702, (_lastb + 1) ... unproven
+94/122 ... [IO] line 704, (_lastb + 2) ... unproven
+95/122 ... [IO] line 706, (_lastb + 3) ... unproven
+96/122 ... [IO] line 708, (_lastb + 4) ... unproven
+97/122 ... [IO] line 710, (_lastb + 5) ... unproven
+98/122 ... [IO] line 712, (_lastb + 6) ... unproven
+99/122 ... [IO] line 714, (_lastb + 7) ... unproven
+100/122 ... [IO] line 716, (_lastb + 8) ... unproven
+101/122 ... [IO] line 718, (_lastb + 9) ... unproven
+102/122 ... [IO] line 723, (_block - hashFirst) ... unproven
+103/122 ... [IO] line 728, (_block - hashFirst) ... unproven
+104/122 ... [IO] line 729, (24 * slotp) ... unproven
+105/122 ... [IO] line 737, (lastb + 10) ... unproven
+106/122 ... [IO] line 745, (block.number - 256) ... proven
+107/122 ... [IO] line 749, (num + (num % 10)) ... unproven
+108/122 ... [IO] line 752, (lastb - hashFirst) ... unproven
+109/122 ... [IO] line 754, (lastb + 10) ... unproven
+110/122 ... [IO] line 764, (n + 1) ... proven
+111/122 ... [ETH_LEAK] line 322, msg.sender.transfer(_amount); ... proven
+112/122 ... [ETH_LEAK] line 372, msg.sender.transfer(_amount); ... unproven
+113/122 ... [ETH_LEAK] line 382, msg.sender.transfer(maxpay); ... unproven
+114/122 ... [ETH_LEAK] line 407, msg.sender.transfer(msg.value.sub(investing)); ... unproven
+115/122 ... [TX_ORG] line 54, assume((_to == address(this))); ... proven
+116/122 ... [TX_ORG] line 172, assume((msg.sender == owner)); ... proven
+117/122 ... [TX_ORG] line 177, assume((msg.sender == animator)); ... proven
+118/122 ... [TX_ORG] line 268, assume((_who != address(0))); ... proven
+119/122 ... [TX_ORG] line 279, assume((_who != address(0))); ... proven
+120/122 ... [TX_ORG] line 412, assume((_partner == address(0))); ... proven
+121/122 ... [TX_ORG] line 412, assume((_partner == owner)); ... proven
+122/122 ... [TX_ORG] line 641, assume((_partner != address(0))); ... proven
+took 44.979742s
+
+Generating VCs ... took 0.118747s
 Checking validity of VCs ... 
 1/259 ... [NO_EFFECT] line 15, (@pre1 == c) ... unproven
 2/259 ... [NO_EFFECT] line 53, (@pre103 == balances[msg.sender]) ... unproven
@@ -419,7 +568,7 @@ Checking validity of VCs ...
 257/259 ... [DEAD] line 747, false ... unproven
 258/259 ... [DEAD] line 753, false ... unproven
 259/259 ... [DEAD] line 765, false ... unproven
-took 61.177522s
+took 40.925697s
 
 
 ===== Vulnerability Report =====
@@ -533,7 +682,7 @@ took 61.177522s
 [108] [IO] line 752, (lastb - hashFirst) : unproven
 [109] [IO] line 754, (lastb + 10) : unproven
 [110] [IO] line 764, (n + 1) : proven
-[111] [ETH_LEAK] line 322, msg.sender.transfer(_amount); : unproven
+[111] [ETH_LEAK] line 322, msg.sender.transfer(_amount); : proven
 [112] [ETH_LEAK] line 372, msg.sender.transfer(_amount); : unproven
 [113] [ETH_LEAK] line 382, msg.sender.transfer(maxpay); : unproven
 [114] [ETH_LEAK] line 407, msg.sender.transfer(msg.value.sub(investing)); : unproven
@@ -808,14 +957,14 @@ took 61.177522s
 [259] [DEAD] line 765, false : unproven
 
 ============ Statistics ============
-# Iter                    : 1
-# Alarm / Query           : 80 / 122
+# Iter                    : 3
+# Alarm / Query           : 79 / 122
 - integer over/underflow  : 76 / 110
 - kill-anyone             : 0 / 0
-- ether-leaking           : 4 / 4
+- ether-leaking           : 3 / 4
 - reentrancy-leaking      : 0 / 0
 - reentrancy              : 0 / 0
 - tx.origin               : 0 / 8
 
-Time Elapsed (Real) : 228.797424078
-Time Elapsed (CPU)  : 228.650604
+Time Elapsed (Real) : 276.468523026
+Time Elapsed (CPU)  : 276.357002

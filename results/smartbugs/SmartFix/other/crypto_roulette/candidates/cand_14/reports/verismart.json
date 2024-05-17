@@ -1,0 +1,353 @@
+{
+  "fileName": "results/other/crypto_roulette/candidates/cand_14/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 354,
+  "time": 151.084046,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "land(land(land(land(geq(86400,secretNumber__@3:uint256),geq(100000000000000000,secretNumber__@3:uint256)),geq(betPrice__@8:uint256,secretNumber__@3:uint256)),eq(betPrice__@8:uint256,100000000000000000)),eq(read(@TU:mapping(address => bool),ownerAddr__@10:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 35,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "CryptoRoulette",
+          "argTypes": []
+        },
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "((uint8(sha3(now, block.blockhash((block.number - 1)))) % 20) + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 35,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "CryptoRoulette",
+          "argTypes": []
+        },
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(block.number - 1)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "CryptoRoulette",
+          "argTypes": []
+        },
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "((uint8(sha3(now, block.blockhash((block.number - 1)))) % 20) + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "CryptoRoulette",
+          "argTypes": []
+        },
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(block.number - 1)",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "IO",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "kill",
+          "argTypes": []
+        }
+      ],
+      "exp": "(lastPlayed + 86400)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "KA",
+      "line": 58,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "kill",
+          "argTypes": []
+        }
+      ],
+      "exp": "suicide(msg.sender);",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "ETH_LEAK",
+      "line": 49,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.transfer(this.balance);",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "ETH_LEAK",
+      "line": 58,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "kill",
+          "argTypes": []
+        }
+      ],
+      "exp": "suicide(msg.sender);",
+      "status": "proven"
+    },
+    {
+      "no": "9",
+      "kind": "TX_ORG",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "kill",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == ownerAddr));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "CryptoRoulette",
+          "argTypes": []
+        },
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == secretNumber)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre4 == game.player)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 44,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == game.number)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 53,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == lastPlayed)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ASSIGN_CONST",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "CryptoRoulette",
+          "argTypes": []
+        },
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(secretNumber == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 34,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "CryptoRoulette",
+          "argTypes": []
+        },
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 35,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "CryptoRoulette",
+          "argTypes": []
+        },
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 47,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "DEAD",
+      "line": 49,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "DEAD",
+      "line": 52,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "DEAD",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "CryptoRoulette",
+          "methodName": "kill",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

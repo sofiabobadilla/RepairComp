@@ -1,0 +1,177 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 10
+[INFO] reachable : 9
+[INFO] Generating Paths ... took 0.000658s
+[INFO] # path : 37
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001758s
+Generating VCs ... took 0.010175s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.063671
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/11 ... [IO] line 50, (acc.balance + msg.value) ... unproven
+2/11 ... [IO] line 51, (now + _lockTime) ... unproven
+3/11 ... [IO] line 66, (acc.balance - _am) ... proven
+4/11 ... [ETH_LEAK] line 63, msg.sender.call.value(_am)() ... unproven
+5/11 ... [RE_EL] line 63, msg.sender.call.value(_am)() ... unproven
+6/11 ... [RE] line 25, (PENNY_BY_PENNY, SetMinSum, [uint256]) ... unproven
+7/11 ... [RE] line 32, (PENNY_BY_PENNY, SetLogFile, [address]) ... unproven
+8/11 ... [RE] line 39, (PENNY_BY_PENNY, Initialized, []) ... unproven
+9/11 ... [RE] line 45, (PENNY_BY_PENNY, Put, [uint256]) ... unproven
+10/11 ... [RE] line 55, (PENNY_BY_PENNY, Collect, [uint256]) ... unproven
+11/11 ... [RE] line 72, (PENNY_BY_PENNY, @fallback, []) ... unproven
+took 0.774138s
+
+Generating VCs ... took 0.007553s
+Checking validity of VCs ... took 0.249648s
+
+Generating VCs ... took 0.007484s
+Checking validity of VCs ... took 5.043388s
+
+Generating VCs ... took 0.007274s
+Checking validity of VCs ... took 3.454055s
+
+Generating VCs ... took 0.007219s
+Checking validity of VCs ... took 4.630633s
+
+Generating VCs ... took 0.007853s
+Checking validity of VCs ... took 2.418717s
+
+Generating VCs ... took 0.007298s
+Checking validity of VCs ... took 4.360087s
+
+Generating VCs ... took 0.007145s
+Checking validity of VCs ... took 4.156532s
+
+Generating VCs ... took 0.007166s
+Checking validity of VCs ... took 0.257979s
+
+Iter : 10 To explore : 30 Explored : 39 Total elapsed : 25.474705
+Generating VCs ... took 0.007182s
+Checking validity of VCs ... took 9.574837s
+
+Generating VCs ... took 0.007219s
+Checking validity of VCs ... took 11.248304s
+
+Generating VCs ... took 0.007449s
+Checking validity of VCs ... took 4.880685s
+
+Generating VCs ... took 0.00838s
+Checking validity of VCs ... took 5.352552s
+
+Generating VCs ... took 0.007141s
+Checking validity of VCs ... took 0.244202s
+
+Generating VCs ... took 0.007351s
+Checking validity of VCs ... took 0.497365s
+
+Generating VCs ... took 0.007343s
+Checking validity of VCs ... took 15.230233s
+
+Generating VCs ... took 0.007608s
+Checking validity of VCs ... took 4.498778s
+
+Generating VCs ... took 0.00858099999999s
+Checking validity of VCs ... took 9.210572s
+
+Generating VCs ... took 0.007887s
+Checking validity of VCs ... took 3.507175s
+
+Iter : 20 To explore : 44 Explored : 63 Total elapsed : 89.812458
+Generating VCs ... took 0.007642s
+Checking validity of VCs ... took 9.717205s
+
+Generating VCs ... took 0.007378s
+Checking validity of VCs ... took 15.824086s
+
+Generating VCs ... took 0.007204s
+Checking validity of VCs ... took 3.779253s
+
+Generating VCs ... took 0.007536s
+Checking validity of VCs ... took 4.170105s
+
+Generating VCs ... took 0.00773100000001s
+Checking validity of VCs ... took 3.567051s
+
+Generating VCs ... took 0.00724799999999s
+Checking validity of VCs ... took 3.691361s
+
+Generating VCs ... took 0.007465s
+Checking validity of VCs ... took 5.25571s
+
+Generating VCs ... took 0.00733600000001s
+Checking validity of VCs ... took 15.188651s
+
+Generating VCs ... took 0.00348s
+Checking validity of VCs ... 
+1/14 ... [NO_EFFECT] line 29, (@pre1 == MinSum) ... unproven
+2/14 ... [NO_EFFECT] line 50, (@pre3 == acc.balance) ... unproven
+3/14 ... [NO_EFFECT] line 51, (@pre2 == acc.unlockTime) ... unproven
+4/14 ... [NO_EFFECT] line 66, (@pre4 == acc.balance) ... unproven
+5/14 ... [NO_EFFECT] line 99, (@pre7 == LastMsg.Sender) ... unproven
+6/14 ... [NO_EFFECT] line 100, (@pre6 == LastMsg.Time) ... unproven
+7/14 ... [NO_EFFECT] line 101, (@pre5 == LastMsg.Val) ... unproven
+8/14 ... [ASSIGN_CONST] line 50, (acc.balance == 0) ... unproven
+9/14 ... [ASSIGN_CONST] line 51, (acc.unlockTime == 0) ... unproven
+10/14 ... [ASSIGN_CONST] line 66, (acc.balance == 0) ... unproven
+11/14 ... [DEAD] line 51, false ... unproven
+12/14 ... [DEAD] line 60, false ... unproven
+13/14 ... [DEAD] line 65, false ... unproven
+14/14 ... [DEAD] line 76, false ... unproven
+took 0.438659s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 50, (acc.balance + msg.value) : unproven
+[2] [IO] line 51, (now + _lockTime) : unproven
+[3] [IO] line 66, (acc.balance - _am) : proven
+[4] [ETH_LEAK] line 63, msg.sender.call.value(_am)() : unproven
+[5] [RE_EL] line 63, msg.sender.call.value(_am)() : unproven
+[6] [RE] line 25, (PENNY_BY_PENNY, SetMinSum, [uint256]) : unproven
+[7] [RE] line 32, (PENNY_BY_PENNY, SetLogFile, [address]) : unproven
+[8] [RE] line 39, (PENNY_BY_PENNY, Initialized, []) : unproven
+[9] [RE] line 45, (PENNY_BY_PENNY, Put, [uint256]) : unproven
+[10] [RE] line 55, (PENNY_BY_PENNY, Collect, [uint256]) : unproven
+[11] [RE] line 72, (PENNY_BY_PENNY, @fallback, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 29, (@pre1 == MinSum) : unproven
+[2] [NO_EFFECT] line 50, (@pre3 == acc.balance) : unproven
+[3] [NO_EFFECT] line 51, (@pre2 == acc.unlockTime) : unproven
+[4] [NO_EFFECT] line 66, (@pre4 == acc.balance) : unproven
+[5] [NO_EFFECT] line 99, (@pre7 == LastMsg.Sender) : unproven
+[6] [NO_EFFECT] line 100, (@pre6 == LastMsg.Time) : unproven
+[7] [NO_EFFECT] line 101, (@pre5 == LastMsg.Val) : unproven
+[8] [ASSIGN_CONST] line 50, (acc.balance == 0) : unproven
+[9] [ASSIGN_CONST] line 51, (acc.unlockTime == 0) : unproven
+[10] [ASSIGN_CONST] line 66, (acc.balance == 0) : unproven
+[11] [DEAD] line 51, false : unproven
+[12] [DEAD] line 60, false : unproven
+[13] [DEAD] line 65, false : unproven
+[14] [DEAD] line 76, false : unproven
+
+============ Statistics ============
+# Iter                    : 27
+# Alarm / Query           : 10 / 11
+- integer over/underflow  : 2 / 3
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 6 / 6
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 151.532925844
+Time Elapsed (CPU)  : 151.521173

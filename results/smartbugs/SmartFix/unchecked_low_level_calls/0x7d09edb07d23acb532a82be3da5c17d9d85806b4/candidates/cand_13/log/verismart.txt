@@ -1,0 +1,368 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 32
+[INFO] reachable : 15
+[INFO] Generating Paths ... took 0.000572s
+[INFO] # path : 53
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.002076s
+Generating VCs ... took 0.014863s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.079183
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/20 ... [IO] line 161, ((uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty) + 1) ... unproven
+2/20 ... [IO] line 210, (totalDonated + amount) ... unproven
+3/20 ... [IO] line 222, (totalDonated + amount) ... proven
+4/20 ... [IO] line 223, (totalDonated + amount) ... proven
+5/20 ... [ETH_LEAK] line 198, winner.transfer(ethToTransfer); ... unproven
+6/20 ... [ETH_LEAK] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... unproven
+7/20 ... [ETH_LEAK] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... unproven
+8/20 ... [RE_EL] line 198, winner.transfer(ethToTransfer); ... unproven
+9/20 ... [RE_EL] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... unproven
+10/20 ... [RE_EL] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... unproven
+11/20 ... [RE] line 94, (PoCGame, OpenToThePublic, []) ... unproven
+12/20 ... [RE] line 104, (PoCGame, AdjustBetAmounts, [uint256]) ... unproven
+13/20 ... [RE] line 116, (PoCGame, AdjustDifficulty, [uint256]) ... unproven
+14/20 ... [RE] line 126, (PoCGame, @fallback, []) ... unproven
+15/20 ... [RE] line 131, (PoCGame, wager, []) ... unproven
+16/20 ... [RE] line 149, (PoCGame, play, []) ... unproven
+17/20 ... [RE] line 182, (PoCGame, donate, []) ... unproven
+18/20 ... [RE] line 293, (PoCGame, transferAnyERC20Token, [address, address, uint256]) ... unproven
+19/20 ... [TX_ORG] line 29, assume((msg.sender == owner)); ... proven
+20/20 ... [TX_ORG] line 41, assume((msg.sender == tx.origin)); ... proven
+took 1.893299s
+
+Generating VCs ... took 0.014833s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 2.037469
+[
+-1 -> (Read(@TU, owner__@112) == true)
+0 -> (Read(@TU, owner__@112) == true)
+]
+[
+]
+1/20 ... [IO] line 161, ((uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty) + 1) ... unproven
+2/20 ... [IO] line 210, (totalDonated + amount) ... unproven
+3/20 ... [IO] line 222, (totalDonated + amount) ... proven
+4/20 ... [IO] line 223, (totalDonated + amount) ... proven
+5/20 ... [ETH_LEAK] line 198, winner.transfer(ethToTransfer); ... unproven
+6/20 ... [ETH_LEAK] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... unproven
+7/20 ... [ETH_LEAK] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... unproven
+8/20 ... [RE_EL] line 198, winner.transfer(ethToTransfer); ... unproven
+9/20 ... [RE_EL] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... unproven
+10/20 ... [RE_EL] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... unproven
+11/20 ... [RE] line 94, (PoCGame, OpenToThePublic, []) ... proven
+12/20 ... [RE] line 104, (PoCGame, AdjustBetAmounts, [uint256]) ... proven
+13/20 ... [RE] line 116, (PoCGame, AdjustDifficulty, [uint256]) ... proven
+14/20 ... [RE] line 126, (PoCGame, @fallback, []) ... unproven
+15/20 ... [RE] line 131, (PoCGame, wager, []) ... unproven
+16/20 ... [RE] line 149, (PoCGame, play, []) ... unproven
+17/20 ... [RE] line 182, (PoCGame, donate, []) ... unproven
+18/20 ... [RE] line 293, (PoCGame, transferAnyERC20Token, [address, address, uint256]) ... proven
+19/20 ... [TX_ORG] line 29, assume((msg.sender == owner)); ... proven
+20/20 ... [TX_ORG] line 41, assume((msg.sender == tx.origin)); ... proven
+took 1.797004s
+
+Generating VCs ... took 0.014724s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 3 Total elapsed : 4.375788
+[
+-1 -> ((Read(@TU, owner__@112) == true) /\ (Read(@TU, whale__@104) == true))
+0 -> ((Read(@TU, owner__@112) == true) /\ (Read(@TU, whale__@104) == true))
+]
+[
+]
+1/20 ... [IO] line 161, ((uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty) + 1) ... unproven
+2/20 ... [IO] line 210, (totalDonated + amount) ... unproven
+3/20 ... [IO] line 222, (totalDonated + amount) ... proven
+4/20 ... [IO] line 223, (totalDonated + amount) ... proven
+5/20 ... [ETH_LEAK] line 198, winner.transfer(ethToTransfer); ... unproven
+6/20 ... [ETH_LEAK] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... proven
+7/20 ... [ETH_LEAK] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... proven
+8/20 ... [RE_EL] line 198, winner.transfer(ethToTransfer); ... unproven
+9/20 ... [RE_EL] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... proven
+10/20 ... [RE_EL] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... proven
+11/20 ... [RE] line 94, (PoCGame, OpenToThePublic, []) ... proven
+12/20 ... [RE] line 104, (PoCGame, AdjustBetAmounts, [uint256]) ... proven
+13/20 ... [RE] line 116, (PoCGame, AdjustDifficulty, [uint256]) ... proven
+14/20 ... [RE] line 126, (PoCGame, @fallback, []) ... unproven
+15/20 ... [RE] line 131, (PoCGame, wager, []) ... unproven
+16/20 ... [RE] line 149, (PoCGame, play, []) ... unproven
+17/20 ... [RE] line 182, (PoCGame, donate, []) ... unproven
+18/20 ... [RE] line 293, (PoCGame, transferAnyERC20Token, [address, address, uint256]) ... proven
+19/20 ... [TX_ORG] line 29, assume((msg.sender == owner)); ... proven
+20/20 ... [TX_ORG] line 41, assume((msg.sender == tx.origin)); ... proven
+took 2.282577s
+
+Generating VCs ... took 0.015166s
+Checking validity of VCs ... took 0.482061s
+
+Generating VCs ... took 0.015968s
+Checking validity of VCs ... took 0.472296s
+
+Generating VCs ... took 0.01503s
+Checking validity of VCs ... took 0.483976s
+
+Generating VCs ... took 0.015175s
+Checking validity of VCs ... took 0.660227s
+
+Generating VCs ... took 0.015034s
+Checking validity of VCs ... took 6.934732s
+
+Generating VCs ... took 0.014758s
+Checking validity of VCs ... took 16.201434s
+
+Iter : 10 To explore : 700 Explored : 963 Total elapsed : 31.676601
+Generating VCs ... took 0.015289s
+Checking validity of VCs ... took 1.584549s
+
+Generating VCs ... took 0.014954s
+Checking validity of VCs ... took 8.11246s
+
+Generating VCs ... took 0.017271s
+Checking validity of VCs ... took 4.674966s
+
+Generating VCs ... took 0.015312s
+Checking validity of VCs ... took 17.129677s
+
+Generating VCs ... took 0.014852s
+Checking validity of VCs ... took 8.034196s
+
+Generating VCs ... took 0.014903s
+Checking validity of VCs ... took 1.454553s
+
+Generating VCs ... took 0.014919s
+Checking validity of VCs ... took 8.398707s
+
+Generating VCs ... took 0.015492s
+Checking validity of VCs ... took 4.182866s
+
+Generating VCs ... took 0.016162s
+Checking validity of VCs ... took 0.654839s
+
+Generating VCs ... took 0.016004s
+Checking validity of VCs ... took 0.71969s
+
+Iter : 20 To explore : 1751 Explored : 2024 Total elapsed : 87.047284
+Generating VCs ... took 0.016418s
+Checking validity of VCs ... took 0.495229s
+
+Generating VCs ... took 0.014978s
+Checking validity of VCs ... took 0.714486s
+
+Generating VCs ... took 0.014958s
+Checking validity of VCs ... took 0.501921s
+
+Generating VCs ... took 0.01485s
+Checking validity of VCs ... took 0.599349s
+
+Generating VCs ... took 0.015075s
+Checking validity of VCs ... took 0.500259s
+
+Generating VCs ... took 0.015271s
+Checking validity of VCs ... took 0.711912s
+
+Generating VCs ... took 0.016528s
+Checking validity of VCs ... took 1.317031s
+
+Generating VCs ... took 0.015433s
+Checking validity of VCs ... took 0.619128s
+
+Generating VCs ... took 0.016266s
+Checking validity of VCs ... took 0.589856s
+
+Generating VCs ... took 0.015442s
+Checking validity of VCs ... took 1.242047s
+
+Iter : 30 To explore : 2645 Explored : 2928 Total elapsed : 94.698855
+Generating VCs ... took 0.015041s
+Checking validity of VCs ... took 0.613012s
+
+Generating VCs ... took 0.015253s
+Checking validity of VCs ... took 0.641453s
+
+Generating VCs ... took 0.014908s
+Checking validity of VCs ... took 1.063016s
+
+Generating VCs ... took 0.015663s
+Checking validity of VCs ... took 1.06517s
+
+Generating VCs ... took 0.016913s
+Checking validity of VCs ... took 1.284461s
+
+Generating VCs ... took 0.015314s
+Checking validity of VCs ... took 0.9758s
+
+Generating VCs ... took 0.017236s
+Checking validity of VCs ... took 1.849776s
+
+Generating VCs ... took 0.015319s
+Checking validity of VCs ... took 1.847276s
+
+Generating VCs ... took 0.015928s
+Checking validity of VCs ... took 2.066793s
+
+Generating VCs ... took 0.015095s
+Checking validity of VCs ... took 3.869242s
+
+Iter : 40 To explore : 3708 Explored : 4001 Total elapsed : 110.478912
+Generating VCs ... took 0.015024s
+Checking validity of VCs ... took 0.574613s
+
+Generating VCs ... took 0.01733s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 41 Total elapsed : 111.602284
+[
+-1 -> (((randomSeed__@110 == 0) /\ (Read(@TU, owner__@112) == true)) /\ (Read(@TU, whale__@104) == true))
+0 -> ((Read(@TU, owner__@112) == true) /\ (Read(@TU, whale__@104) == true))
+]
+[
+]
+1/20 ... [IO] line 161, ((uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty) + 1) ... unproven
+2/20 ... [IO] line 210, (totalDonated + amount) ... unproven
+3/20 ... [IO] line 222, (totalDonated + amount) ... proven
+4/20 ... [IO] line 223, (totalDonated + amount) ... proven
+5/20 ... [ETH_LEAK] line 198, winner.transfer(ethToTransfer); ... unproven
+6/20 ... [ETH_LEAK] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... proven
+7/20 ... [ETH_LEAK] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... proven
+8/20 ... [RE_EL] line 198, winner.transfer(ethToTransfer); ... unproven
+9/20 ... [RE_EL] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... proven
+10/20 ... [RE_EL] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); ... proven
+11/20 ... [RE] line 94, (PoCGame, OpenToThePublic, []) ... proven
+12/20 ... [RE] line 104, (PoCGame, AdjustBetAmounts, [uint256]) ... proven
+13/20 ... [RE] line 116, (PoCGame, AdjustDifficulty, [uint256]) ... proven
+14/20 ... [RE] line 126, (PoCGame, @fallback, []) ... unproven
+15/20 ... [RE] line 131, (PoCGame, wager, []) ... unproven
+16/20 ... [RE] line 149, (PoCGame, play, []) ... unproven
+17/20 ... [RE] line 182, (PoCGame, donate, []) ... unproven
+18/20 ... [RE] line 293, (PoCGame, transferAnyERC20Token, [address, address, uint256]) ... proven
+19/20 ... [TX_ORG] line 29, assume((msg.sender == owner)); ... proven
+20/20 ... [TX_ORG] line 41, assume((msg.sender == tx.origin)); ... proven
+took 2.151506s
+
+Generating VCs ... took 0.015163s
+Checking validity of VCs ... took 0.486915s
+
+Generating VCs ... took 0.015475s
+Checking validity of VCs ... took 0.495997s
+
+Generating VCs ... took 0.016186s
+Checking validity of VCs ... took 0.502021s
+
+Generating VCs ... took 0.016353s
+Checking validity of VCs ... took 16.150512s
+
+Generating VCs ... took 0.015104s
+Checking validity of VCs ... took 1.782848s
+
+Generating VCs ... took 0.015092s
+Checking validity of VCs ... took 0.603697s
+
+Generating VCs ... took 0.015037s
+Checking validity of VCs ... took 7.547683s
+
+Generating VCs ... took 0.015332s
+Checking validity of VCs ... took 15.498045s
+
+Generating VCs ... took 0.00419499999998s
+Checking validity of VCs ... 
+1/23 ... [NO_EFFECT] line 108, (@pre1 == betLimit) ... unproven
+2/23 ... [NO_EFFECT] line 120, (@pre2 == difficulty) ... unproven
+3/23 ... [NO_EFFECT] line 141, (@pre4 == timestamps[msg.sender]) ... unproven
+4/23 ... [NO_EFFECT] line 142, (@pre3 == wagers[msg.sender]) ... unproven
+5/23 ... [NO_EFFECT] line 155, (@pre6 == blockNumber) ... unproven
+6/23 ... [NO_EFFECT] line 161, (@pre5 == winningNumber) ... unproven
+7/23 ... [NO_EFFECT] line 196, (@pre7 == ethToTransfer) ... unproven
+8/23 ... [NO_EFFECT] line 210, (@pre8 == totalDonated) ... unproven
+9/23 ... [NO_EFFECT] line 223, (@pre9 == totalDonated) ... unproven
+10/23 ... [ASSIGN_CONST] line 161, (winningNumber == 0) ... unproven
+11/23 ... [ASSIGN_CONST] line 210, (totalDonated == 0) ... unproven
+12/23 ... [ASSIGN_CONST] line 223, (totalDonated == 0) ... unproven
+13/23 ... [DEAD] line 29, false ... unproven
+14/23 ... [DEAD] line 41, false ... unproven
+15/23 ... [DEAD] line 47, false ... unproven
+16/23 ... [DEAD] line 138, false ... unproven
+17/23 ... [DEAD] line 156, false ... unproven
+18/23 ... [DEAD] line 163, false ... unproven
+19/23 ... [DEAD] line 165, false ... unproven
+20/23 ... [DEAD] line 170, false ... unproven
+21/23 ... [DEAD] line 187, false ... unproven
+22/23 ... [DEAD] line 198, false ... unproven
+23/23 ... [DEAD] line 222, false ... unproven
+took 1.088638s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 161, ((uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty) + 1) : unproven
+[2] [IO] line 210, (totalDonated + amount) : unproven
+[3] [IO] line 222, (totalDonated + amount) : proven
+[4] [IO] line 223, (totalDonated + amount) : proven
+[5] [ETH_LEAK] line 198, winner.transfer(ethToTransfer); : unproven
+[6] [ETH_LEAK] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); : proven
+[7] [ETH_LEAK] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); : proven
+[8] [RE_EL] line 198, winner.transfer(ethToTransfer); : unproven
+[9] [RE_EL] line 209, whale.call.value(amount)(bytes4(keccak256("donate()"))); : proven
+[10] [RE_EL] line 221, whale.call.value(amount)(bytes4(keccak256("donate()"))); : proven
+[11] [RE] line 94, (PoCGame, OpenToThePublic, []) : proven
+[12] [RE] line 104, (PoCGame, AdjustBetAmounts, [uint256]) : proven
+[13] [RE] line 116, (PoCGame, AdjustDifficulty, [uint256]) : proven
+[14] [RE] line 126, (PoCGame, @fallback, []) : unproven
+[15] [RE] line 131, (PoCGame, wager, []) : unproven
+[16] [RE] line 149, (PoCGame, play, []) : unproven
+[17] [RE] line 182, (PoCGame, donate, []) : unproven
+[18] [RE] line 293, (PoCGame, transferAnyERC20Token, [address, address, uint256]) : proven
+[19] [TX_ORG] line 29, assume((msg.sender == owner)); : proven
+[20] [TX_ORG] line 41, assume((msg.sender == tx.origin)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 108, (@pre1 == betLimit) : unproven
+[2] [NO_EFFECT] line 120, (@pre2 == difficulty) : unproven
+[3] [NO_EFFECT] line 141, (@pre4 == timestamps[msg.sender]) : unproven
+[4] [NO_EFFECT] line 142, (@pre3 == wagers[msg.sender]) : unproven
+[5] [NO_EFFECT] line 155, (@pre6 == blockNumber) : unproven
+[6] [NO_EFFECT] line 161, (@pre5 == winningNumber) : unproven
+[7] [NO_EFFECT] line 196, (@pre7 == ethToTransfer) : unproven
+[8] [NO_EFFECT] line 210, (@pre8 == totalDonated) : unproven
+[9] [NO_EFFECT] line 223, (@pre9 == totalDonated) : unproven
+[10] [ASSIGN_CONST] line 161, (winningNumber == 0) : unproven
+[11] [ASSIGN_CONST] line 210, (totalDonated == 0) : unproven
+[12] [ASSIGN_CONST] line 223, (totalDonated == 0) : unproven
+[13] [DEAD] line 29, false : unproven
+[14] [DEAD] line 41, false : unproven
+[15] [DEAD] line 47, false : unproven
+[16] [DEAD] line 138, false : unproven
+[17] [DEAD] line 156, false : unproven
+[18] [DEAD] line 163, false : unproven
+[19] [DEAD] line 165, false : unproven
+[20] [DEAD] line 170, false : unproven
+[21] [DEAD] line 187, false : unproven
+[22] [DEAD] line 198, false : unproven
+[23] [DEAD] line 222, false : unproven
+
+============ Statistics ============
+# Iter                    : 49
+# Alarm / Query           : 8 / 20
+- integer over/underflow  : 2 / 4
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 3
+- reentrancy-leaking      : 1 / 3
+- reentrancy              : 4 / 8
+- tx.origin               : 0 / 2
+
+Time Elapsed (Real) : 158.43811512
+Time Elapsed (CPU)  : 158.462684

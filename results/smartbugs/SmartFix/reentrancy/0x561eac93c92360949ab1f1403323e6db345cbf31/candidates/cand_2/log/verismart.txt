@@ -1,0 +1,144 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 10
+[INFO] reachable : 9
+[INFO] Generating Paths ... took 0.000318s
+[INFO] # path : 32
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000992s
+Generating VCs ... took 0.008255s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.051973
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/10 ... [IO] line 43, (balances[msg.sender] + msg.value) ... unproven
+2/10 ... [IO] line 57, (balances[msg.sender] - _am) ... proven
+3/10 ... [ETH_LEAK] line 54, msg.sender.call.value(_am)() ... unproven
+4/10 ... [RE_EL] line 54, msg.sender.call.value(_am)() ... unproven
+5/10 ... [RE] line 19, (BANK_SAFE, SetMinSum, [uint256]) ... unproven
+6/10 ... [RE] line 26, (BANK_SAFE, SetLogFile, [address]) ... unproven
+7/10 ... [RE] line 33, (BANK_SAFE, Initialized, []) ... unproven
+8/10 ... [RE] line 39, (BANK_SAFE, Deposit, []) ... unproven
+9/10 ... [RE] line 47, (BANK_SAFE, Collect, [uint256]) ... unproven
+10/10 ... [RE] line 63, (BANK_SAFE, @fallback, []) ... unproven
+took 0.430756s
+
+Generating VCs ... took 0.004687s
+Checking validity of VCs ... took 0.095971s
+
+Generating VCs ... took 0.005009s
+Checking validity of VCs ... took 0.178375s
+
+Generating VCs ... took 0.004902s
+Checking validity of VCs ... took 11.943902s
+
+Generating VCs ... took 0.004935s
+Checking validity of VCs ... took 7.528325s
+
+Generating VCs ... took 0.004812s
+Checking validity of VCs ... took 25.907397s
+
+Generating VCs ... took 0.004844s
+Checking validity of VCs ... took 20.584162s
+
+Generating VCs ... took 0.004768s
+Checking validity of VCs ... took 0.111425s
+
+Generating VCs ... took 0.004881s
+Checking validity of VCs ... took 0.479669s
+
+Iter : 10 To explore : 35 Explored : 44 Total elapsed : 67.357569
+Generating VCs ... took 0.00488799999999s
+Checking validity of VCs ... took 0.486002s
+
+Generating VCs ... took 0.004818s
+Checking validity of VCs ... took 0.71356s
+
+Generating VCs ... took 0.00480399999999s
+Checking validity of VCs ... took 0.679085s
+
+Generating VCs ... took 0.004852s
+Checking validity of VCs ... took 0.326551s
+
+Generating VCs ... took 0.00506299999999s
+Checking validity of VCs ... took 7.538006s
+
+Generating VCs ... took 0.00474699999999s
+Checking validity of VCs ... took 16.618932s
+
+Generating VCs ... took 0.004822s
+Checking validity of VCs ... took 23.124998s
+
+Generating VCs ... took 0.00482599999999s
+Checking validity of VCs ... took 24.178491s
+
+Generating VCs ... took 0.00489400000001s
+Checking validity of VCs ... took 4.627289s
+
+Generating VCs ... took 0.00481300000001s
+Checking validity of VCs ... took 7.55444s
+
+Generating VCs ... took 0.003894s
+Checking validity of VCs ... 
+1/11 ... [NO_EFFECT] line 23, (@pre1 == MinSum) ... unproven
+2/11 ... [NO_EFFECT] line 43, (@pre2 == balances[msg.sender]) ... unproven
+3/11 ... [NO_EFFECT] line 57, (@pre3 == balances[msg.sender]) ... unproven
+4/11 ... [NO_EFFECT] line 91, (@pre6 == LastMsg.Sender) ... unproven
+5/11 ... [NO_EFFECT] line 92, (@pre5 == LastMsg.Time) ... unproven
+6/11 ... [NO_EFFECT] line 93, (@pre4 == LastMsg.Val) ... unproven
+7/11 ... [ASSIGN_CONST] line 43, (balances[msg.sender] == 0) ... unproven
+8/11 ... [ASSIGN_CONST] line 57, (balances[msg.sender] == 0) ... unproven
+9/11 ... [DEAD] line 51, false ... unproven
+10/11 ... [DEAD] line 56, false ... unproven
+11/11 ... [DEAD] line 67, false ... unproven
+took 0.404493s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 43, (balances[msg.sender] + msg.value) : unproven
+[2] [IO] line 57, (balances[msg.sender] - _am) : proven
+[3] [ETH_LEAK] line 54, msg.sender.call.value(_am)() : unproven
+[4] [RE_EL] line 54, msg.sender.call.value(_am)() : unproven
+[5] [RE] line 19, (BANK_SAFE, SetMinSum, [uint256]) : unproven
+[6] [RE] line 26, (BANK_SAFE, SetLogFile, [address]) : unproven
+[7] [RE] line 33, (BANK_SAFE, Initialized, []) : unproven
+[8] [RE] line 39, (BANK_SAFE, Deposit, []) : unproven
+[9] [RE] line 47, (BANK_SAFE, Collect, [uint256]) : unproven
+[10] [RE] line 63, (BANK_SAFE, @fallback, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 23, (@pre1 == MinSum) : unproven
+[2] [NO_EFFECT] line 43, (@pre2 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 57, (@pre3 == balances[msg.sender]) : unproven
+[4] [NO_EFFECT] line 91, (@pre6 == LastMsg.Sender) : unproven
+[5] [NO_EFFECT] line 92, (@pre5 == LastMsg.Time) : unproven
+[6] [NO_EFFECT] line 93, (@pre4 == LastMsg.Val) : unproven
+[7] [ASSIGN_CONST] line 43, (balances[msg.sender] == 0) : unproven
+[8] [ASSIGN_CONST] line 57, (balances[msg.sender] == 0) : unproven
+[9] [DEAD] line 51, false : unproven
+[10] [DEAD] line 56, false : unproven
+[11] [DEAD] line 67, false : unproven
+
+============ Statistics ============
+# Iter                    : 19
+# Alarm / Query           : 9 / 10
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 6 / 6
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 153.713822126
+Time Elapsed (CPU)  : 153.67929

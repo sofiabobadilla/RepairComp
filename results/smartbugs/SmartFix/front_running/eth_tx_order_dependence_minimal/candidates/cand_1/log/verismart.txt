@@ -1,0 +1,81 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 5
+[INFO] reachable : 5
+[INFO] Generating Paths ... took 0.000194s
+[INFO] # path : 16
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.00037s
+Generating VCs ... took 0.001088s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.029266
+[
+0 -> true
+]
+[
+]
+1/4 ... [ETH_LEAK] line 23, owner.transfer(reward); ... unproven
+2/4 ... [ETH_LEAK] line 32, msg.sender.transfer(reward); ... unproven
+3/4 ... [TX_ORG] line 21, assume((msg.sender == owner)); ... proven
+4/4 ... [TX_ORG] line 28, assume((owner == msg.sender)); ... proven
+took 0.168186s
+
+Generating VCs ... took 0.000337s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.197178
+[
+0 -> (Read(@TU, owner__@3) == true)
+]
+[
+]
+1/4 ... [ETH_LEAK] line 23, owner.transfer(reward); ... proven
+2/4 ... [ETH_LEAK] line 32, msg.sender.transfer(reward); ... proven
+3/4 ... [TX_ORG] line 21, assume((msg.sender == owner)); ... proven
+4/4 ... [TX_ORG] line 28, assume((owner == msg.sender)); ... proven
+took 0.032154s
+
+Generating VCs ... took 0.000161s
+Checking validity of VCs ... 
+1/6 ... [NO_EFFECT] line 24, (@pre1 == reward) ... unproven
+2/6 ... [DEAD] line 21, false ... unproven
+3/6 ... [DEAD] line 23, false ... unproven
+4/6 ... [DEAD] line 28, false ... unproven
+5/6 ... [DEAD] line 30, false ... unproven
+6/6 ... [DEAD] line 32, false ... unproven
+took 0.18199s
+
+
+===== Vulnerability Report =====
+[1] [ETH_LEAK] line 23, owner.transfer(reward); : proven
+[2] [ETH_LEAK] line 32, msg.sender.transfer(reward); : proven
+[3] [TX_ORG] line 21, assume((msg.sender == owner)); : proven
+[4] [TX_ORG] line 28, assume((owner == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 24, (@pre1 == reward) : unproven
+[2] [DEAD] line 21, false : unproven
+[3] [DEAD] line 23, false : unproven
+[4] [DEAD] line 28, false : unproven
+[5] [DEAD] line 30, false : unproven
+[6] [DEAD] line 32, false : unproven
+
+============ Statistics ============
+# Iter                    : 2
+# Alarm / Query           : 0 / 4
+- integer over/underflow  : 0 / 0
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 2
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 2
+
+Time Elapsed (Real) : 0.431480884552
+Time Elapsed (CPU)  : 0.411032

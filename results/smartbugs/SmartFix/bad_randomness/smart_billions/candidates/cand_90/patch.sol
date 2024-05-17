@@ -251,6 +251,7 @@ contract SmartBillions is StandardToken {
         if(investStart > 0) {
             return(0);
         }
+        require((block.number >= hashFirst)); /* <FIX> Insert:BC */
         uint period = (block.number - hashFirst) / (10 * hashesSize);
         if(period > dividendPeriod) {
             return(0);
@@ -313,7 +314,7 @@ contract SmartBillions is StandardToken {
      * @dev if funding is > 50% admin can withdraw only 0.25% of balance weakly
      * @param _amount The amount of wei to move to cold storage
      */
-    function coldStore(uint _amount) onlyAnimator /* <FIX> Add Modifier */ external onlyOwner {
+    function coldStore(uint _amount) external onlyOwner {
         houseKeeping();
         require(_amount > 0 && this.balance >= (investBalance * 9 / 10) + walletBalance + _amount);
         if(investBalance >= investBalanceMax / 2){ // additional jackpot protection
@@ -734,7 +735,7 @@ contract SmartBillions is StandardToken {
      */
     function putHash() public returns (bool) {
         uint lastb = hashLast;
-        if(lastb == 0 || block.number <= lastb + 10) {
+        if(lastb == 0 || (block.number > (lastb + 10))) { /* <FIX> Replace: "(block.number <= (lastb + 10))" => "(block.number > (lastb + 10))" */
             return(false);
         }
         uint blockn256;

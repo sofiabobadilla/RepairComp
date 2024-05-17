@@ -1,0 +1,172 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 3
+[INFO] reachable : 3
+[INFO] Generating Paths ... took 9.1e-05s
+[INFO] # path : 10
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000112s
+Generating VCs ... took 0.000405s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.02624
+[
+0 -> true
+]
+[
+]
+1/2 ... [IO] line 16, (block.number - 1) ... proven
+2/2 ... [ETH_LEAK] line 27, msg.sender.transfer(2000000000000000000); ... unproven
+took 0.087195s
+
+Generating VCs ... took 0.00019s
+Checking validity of VCs ... took 0.010823s
+
+Generating VCs ... took 0.000169s
+Checking validity of VCs ... took 0.012529s
+
+Generating VCs ... took 0.000168s
+Checking validity of VCs ... took 0.011172s
+
+Generating VCs ... took 0.000169s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 5 Total elapsed : 0.15846
+[
+0 -> (1000000000000000000 >= answer__@3)
+]
+[
+]
+1/2 ... [IO] line 16, (block.number - 1) ... proven
+2/2 ... [ETH_LEAK] line 27, msg.sender.transfer(2000000000000000000); ... unproven
+took 0.111251s
+
+Generating VCs ... took 0.00018s
+Checking validity of VCs ... took 0.041861s
+
+Generating VCs ... took 0.000173s
+Checking validity of VCs ... took 0.044879s
+
+Generating VCs ... took 0.000195s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 8 Total elapsed : 0.393531
+[
+0 -> ((1000000000000000000 >= answer__@3) /\ (2000000000000000000 >= answer__@3))
+]
+[
+]
+1/2 ... [IO] line 16, (block.number - 1) ... proven
+2/2 ... [ETH_LEAK] line 27, msg.sender.transfer(2000000000000000000); ... unproven
+took 0.159018s
+
+Generating VCs ... took 0.000331s
+Checking validity of VCs ... took 0.046813s
+
+Iter : 10 To explore : 9 Explored : 34 Total elapsed : 0.555028
+Generating VCs ... took 0.000155s
+Checking validity of VCs ... took 0.04716s
+
+Generating VCs ... took 0.000175s
+Checking validity of VCs ... took 0.045762s
+
+Generating VCs ... took 0.000196s
+Checking validity of VCs ... took 0.06969s
+
+Generating VCs ... took 0.000316s
+Checking validity of VCs ... took 0.057913s
+
+Generating VCs ... took 0.000164s
+Checking validity of VCs ... took 0.059291s
+
+Generating VCs ... took 0.000321s
+Checking validity of VCs ... took 0.059194s
+
+Generating VCs ... took 0.000209s
+Checking validity of VCs ... took 0.046285s
+
+Generating VCs ... took 0.000178s
+Checking validity of VCs ... took 0.044181s
+
+Generating VCs ... took 0.000181s
+Checking validity of VCs ... took 0.04357s
+
+Generating VCs ... took 0.000161s
+Checking validity of VCs ... took 0.044875s
+
+Iter : 20 To explore : 10 Explored : 45 Total elapsed : 1.078708
+Generating VCs ... took 0.000161s
+Checking validity of VCs ... took 0.044084s
+
+Generating VCs ... took 0.000159s
+Checking validity of VCs ... took 0.044832s
+
+Generating VCs ... took 0.000214s
+Checking validity of VCs ... took 0.044111s
+
+Generating VCs ... took 0.000165s
+Checking validity of VCs ... took 0.045372s
+
+Generating VCs ... took 0.000177s
+Checking validity of VCs ... took 0.044151s
+
+Generating VCs ... took 0.000163s
+Checking validity of VCs ... took 0.045535s
+
+Generating VCs ... took 0.000167s
+Checking validity of VCs ... took 0.045017s
+
+Generating VCs ... took 0.000164s
+Checking validity of VCs ... took 0.046295s
+
+Generating VCs ... took 0.000164s
+Checking validity of VCs ... took 0.045679s
+
+Generating VCs ... took 0.000162s
+Checking validity of VCs ... took 0.047224s
+
+Iter : 30 To explore : 3 Explored : 48 Total elapsed : 1.535153
+Generating VCs ... took 0.000176s
+Checking validity of VCs ... took 0.045723s
+
+Generating VCs ... took 0.000157s
+Checking validity of VCs ... took 0.046872s
+
+Generating VCs ... took 0.000178s
+Checking validity of VCs ... took 0.047523s
+
+Generating VCs ... took 9.09999999998e-05s
+Checking validity of VCs ... 
+1/3 ... [DEAD] line 24, false ... unproven
+2/3 ... [DEAD] line 26, false ... unproven
+3/3 ... [DEAD] line 27, false ... unproven
+took 0.169937s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 16, (block.number - 1) : proven
+[2] [ETH_LEAK] line 27, msg.sender.transfer(2000000000000000000); : unproven
+
+===== Regression Report =====
+[1] [DEAD] line 24, false : unproven
+[2] [DEAD] line 26, false : unproven
+[3] [DEAD] line 27, false : unproven
+
+============ Statistics ============
+# Iter                    : 33
+# Alarm / Query           : 1 / 2
+- integer over/underflow  : 0 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 1.86352086067
+Time Elapsed (CPU)  : 1.846846

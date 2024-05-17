@@ -1,0 +1,220 @@
+{
+  "fileName": "results/time_manipulation/lottopollo/candidates/cand_4/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 2,
+  "time": 3.947438,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),leader__@3:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(now - rand)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.send(msg.value);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "leader.send(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "TX_ORG",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "assume((leader == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == leader)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == timestamp)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "lottopollo",
+          "methodName": "randomGen",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre3 == randomNumber)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 13,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "DEAD",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "lottopollo",
+          "methodName": "draw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

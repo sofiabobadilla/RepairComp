@@ -1,0 +1,335 @@
+{
+  "fileName": "results/reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e/candidates/cand_6/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 39,
+  "time": 67.66175699999999,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(eq(MinSum__@144:uint256,1000000000000000000),eq(_locked__@3:bool,cond(true)))"
+    },
+    { "key": "0", "formula": "eq(MinSum__@144:uint256,1000000000000000000)" }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "WALLET",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.balance + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 42,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.balance - _am)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "RE_EL",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(WALLET, Put, [uint256])",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(WALLET, Collect, [uint256])",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "RE",
+      "line": 48,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(WALLET, @fallback, [])",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "WALLET",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre4 == acc.balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "WALLET",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == acc.unlockTime)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "WALLET",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == ((_unlockTime > now) ? _unlockTime : now))",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "WALLET",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == ((_unlockTime > now) ? _unlockTime : now))",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 42,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre5 == acc.balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 90,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre8 == LastMsg.Sender)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "NO_EFFECT",
+      "line": 91,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre7 == LastMsg.Time)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "NO_EFFECT",
+      "line": 92,
+      "signatures": [
+        {
+          "contractName": "Log",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre6 == LastMsg.Val)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "ASSIGN_CONST",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "WALLET",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "ASSIGN_CONST",
+      "line": 42,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(acc.balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "DEAD",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "WALLET",
+          "methodName": "Put",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "DEAD",
+      "line": 37,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "DEAD",
+      "line": 52,
+      "signatures": [
+        {
+          "contractName": "WALLET",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "proven"
+    }
+  ]
+}

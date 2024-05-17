@@ -11,11 +11,11 @@
 
 [INFO] Violate CEI: false
 [INFO] msg.sender = this possible: false
-[INFO] Performing Interval Analysis ... took 0.000301s
-Generating VCs ... took 0.000965s
+[INFO] Performing Interval Analysis ... took 0.000304s
+Generating VCs ... took 0.000976s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 1 Total elapsed : 0.032793
+Iter: 1 Total elapsed : 0.032613
 [
 0 -> true
 ]
@@ -27,12 +27,12 @@ Iter: 1 Total elapsed : 0.032793
 4/6 ... [ETH_LEAK] line 31, msg.sender.transfer(amount); ... unproven
 5/6 ... [ETH_LEAK] line 39, to.transfer(this.balance); ... unproven
 6/6 ... [TX_ORG] line 38, assume((creator == msg.sender)); ... proven
-took 0.105123s
+took 0.104869s
 
-Generating VCs ... took 0.000275s
+Generating VCs ... took 0.000278s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 2 Total elapsed : 0.137508
+Iter: 2 Total elapsed : 0.137076
 [
 0 -> (Read(@TU, creator__@3) == true)
 ]
@@ -44,12 +44,12 @@ Iter: 2 Total elapsed : 0.137508
 4/6 ... [ETH_LEAK] line 31, msg.sender.transfer(amount); ... unproven
 5/6 ... [ETH_LEAK] line 39, to.transfer(this.balance); ... proven
 6/6 ... [TX_ORG] line 38, assume((creator == msg.sender)); ... proven
-took 0.070816s
+took 0.072426s
 
-Generating VCs ... took 0.000279s
+Generating VCs ... took 0.000282s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 3 Total elapsed : 0.259472
+Iter: 3 Total elapsed : 0.261489
 [
 0 -> ((Read(@TU, creator__@3) == true) /\ @Invest_sum >= Σ_u balances__@7)
 ]
@@ -61,9 +61,9 @@ Iter: 3 Total elapsed : 0.259472
 4/6 ... [ETH_LEAK] line 31, msg.sender.transfer(amount); ... proven
 5/6 ... [ETH_LEAK] line 39, to.transfer(this.balance); ... proven
 6/6 ... [TX_ORG] line 38, assume((creator == msg.sender)); ... proven
-took 0.299239s
+took 0.307015s
 
-Generating VCs ... took 0.000158s
+Generating VCs ... took 0.000157s
 Checking validity of VCs ... 
 1/9 ... [NO_EFFECT] line 25, (@pre1 == balances[msg.sender]) ... unproven
 2/9 ... [NO_EFFECT] line 32, (@pre2 == balances[msg.sender]) ... unproven
@@ -74,7 +74,7 @@ Checking validity of VCs ...
 7/9 ... [DEAD] line 31, false ... unproven
 8/9 ... [DEAD] line 38, false ... unproven
 9/9 ... [DEAD] line 39, false ... unproven
-took 1.083326s
+took 1.118401s
 
 
 ===== Vulnerability Report =====
@@ -106,5 +106,5 @@ took 1.083326s
 - reentrancy              : 0 / 0
 - tx.origin               : 0 / 1
 
-Time Elapsed (Real) : 1.61270809174
-Time Elapsed (CPU)  : 1.59124
+Time Elapsed (Real) : 1.65669488907
+Time Elapsed (CPU)  : 1.635284

@@ -1,0 +1,261 @@
+{
+  "fileName": "results/reentrancy/etherstore/candidates/cand_1/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 90,
+  "time": 151.08726399999998,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "eq(withdrawalLimit__@4:uint256,1000000000000000000)"
+    },
+    {
+      "key": "0",
+      "formula": "eq(withdrawalLimit__@4:uint256,1000000000000000000)"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "depositFunds",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "depositFunds",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(lastWithdrawTime[msg.sender] + 604800)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] - _weiToWithdraw)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ETH_LEAK",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_weiToWithdraw)()",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "RE_EL",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_weiToWithdraw)()",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "RE",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "depositFunds",
+          "argTypes": []
+        }
+      ],
+      "exp": "(EtherStore, depositFunds, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "RE",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(EtherStore, withdrawFunds, [uint256])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "depositFunds",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == lastWithdrawTime[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ASSIGN_CONST",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "depositFunds",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ASSIGN_CONST",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "depositFunds",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "EtherStore",
+          "methodName": "withdrawFunds",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

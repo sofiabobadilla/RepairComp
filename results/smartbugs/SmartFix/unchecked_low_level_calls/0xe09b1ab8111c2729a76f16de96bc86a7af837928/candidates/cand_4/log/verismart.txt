@@ -1,0 +1,464 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 42
+[INFO] reachable : 26
+[INFO] Generating Paths ... took 0.004765s
+[INFO] # path : 179
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.018338s
+Generating VCs ... took 0.30272s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.745903
+[
+-1 -> true
+0 -> true
+528 -> true
+(-1,528) -> true
+]
+[
+]
+1/56 ... [IO] line 103, ((lockedInBets + jackpotSize) + devFeeSize) ... unproven
+2/56 ... [IO] line 103, (lockedInBets + jackpotSize) ... unproven
+3/56 ... [IO] line 138, (2 * amount) ... unproven
+4/56 ... [IO] line 144, (amount * JACKPOT_FEE) ... proven
+5/56 ... [IO] line 145, (amount * JACKPOT_FEE) ... proven
+6/56 ... [IO] line 145, (jackpotSize + ((amount * JACKPOT_FEE) / 1000)) ... unproven
+7/56 ... [IO] line 146, (amount * DEV_FEE) ... unproven
+8/56 ... [IO] line 146, (devFeeSize + ((amount * DEV_FEE) / 1000)) ... unproven
+9/56 ... [IO] line 147, (amount * WIN_X) ... unproven
+10/56 ... [IO] line 147, (lockedInBets + ((amount * WIN_X) / 1000)) ... unproven
+11/56 ... [IO] line 149, (amount * DONATING_X) ... unproven
+12/56 ... [IO] line 152, (totalAmountToWhale + donate_amount) ... unproven
+13/56 ... [IO] line 172, (block.number - BET_EXPIRATION_BLOCKS) ... proven
+14/56 ... [IO] line 178, (bet.amount * WIN_X) ... unproven
+15/56 ... [IO] line 193, (tossWin + jackpotWin) ... unproven
+16/56 ... [IO] line 195, (tossWin + jackpotWin) ... unproven
+17/56 ... [IO] line 201, (lockedInBets - tossWinAmount) ... unproven
+18/56 ... [IO] line 214, (donateAmount[msg.sender] + msg.value) ... unproven
+19/56 ... [IO] line 224, (donateAmount[msg.sender] - amount) ... proven
+20/56 ... [IO] line 235, (bet.blockNumber + BET_EXPIRATION_BLOCKS) ... unproven
+21/56 ... [IO] line 248, (devFeeSize - withdrawAmount) ... proven
+22/56 ... [IO] line 261, (devFeeSize - withdrawAmount) ... proven
+23/56 ... [IO] line 287, ((lockedInBets + jackpotSize) + devFeeSize) ... unproven
+24/56 ... [IO] line 287, (lockedInBets + jackpotSize) ... unproven
+25/56 ... [IO] line 288, (((address(this).balance - lockedInBets) - jackpotSize) - devFeeSize) ... unproven
+26/56 ... [IO] line 288, ((address(this).balance - lockedInBets) - jackpotSize) ... unproven
+27/56 ... [IO] line 288, (address(this).balance - lockedInBets) ... unproven
+28/56 ... [IO] line 316, (bet.amount * WIN_X) ... unproven
+29/56 ... [IO] line 317, (lockedInBets - tossWinAmount) ... unproven
+30/56 ... [IO] line 344, (i + 1) ... proven
+31/56 ... [IO] line 355, (bet.blockNumber + BET_EXPIRATION_BLOCKS) ... unproven
+32/56 ... [KA] line 296, selfdestruct(owner); ... unproven
+33/56 ... [ETH_LEAK] line 151, whale.call.value(donate_amount)(bytes4(keccak256("donate()"))); ... unproven
+34/56 ... [ETH_LEAK] line 296, selfdestruct(owner); ... unproven
+35/56 ... [ETH_LEAK] line 303, winner.transfer(ethToTransfer); ... unproven
+36/56 ... [ETH_LEAK] line 314, requester.transfer(ethToTransfer); ... unproven
+37/56 ... [ETH_LEAK] line 325, success = paidUser.send(amount); ... unproven
+38/56 ... [RE_EL] line 151, whale.call.value(donate_amount)(bytes4(keccak256("donate()"))); ... unproven
+39/56 ... [RE_EL] line 303, winner.transfer(ethToTransfer); ... unproven
+40/56 ... [RE_EL] line 314, requester.transfer(ethToTransfer); ... unproven
+41/56 ... [RE_EL] line 325, success = paidUser.send(amount); ... unproven
+42/56 ... [RE] line 113, (FiftyFlip, setBotAddress, [address]) ... unproven
+43/56 ... [RE] line 120, (FiftyFlip, setSecretSigner, [address]) ... unproven
+44/56 ... [RE] line 128, (FiftyFlip, wager, [bool, uint256, uint256, uint8, bytes32, bytes32]) ... unproven
+45/56 ... [RE] line 163, (FiftyFlip, play, [uint256]) ... unproven
+46/56 ... [RE] line 210, (FiftyFlip, donateForContractHealth, []) ... unproven
+47/56 ... [RE] line 218, (FiftyFlip, withdrawDonation, [uint256]) ... unproven
+48/56 ... [RE] line 240, (FiftyFlip, withdrawDevFee, [address, uint256]) ... unproven
+49/56 ... [RE] line 253, (FiftyFlip, withdrawBotFee, [uint256]) ... unproven
+50/56 ... [RE] line 308, (FiftyFlip, sendRefund, [uint256]) ... unproven
+51/56 ... [RE] line 341, (FiftyFlip, clearStorage, [uint256[]]) ... unproven
+52/56 ... [TX_ORG] line 93, assume((msg.sender == owner)); ... proven
+53/56 ... [TX_ORG] line 98, assume((msg.sender == autoPlayBot)); ... proven
+54/56 ... [TX_ORG] line 135, assume((bet.player == address(0))); ... proven
+55/56 ... [TX_ORG] line 142, assume((secretSigner == ecrecover(signatureHash, v, r, s))); ... proven
+56/56 ... [TX_ORG] line 169, assume((bet.player != address(0))); ... proven
+took 35.257824s
+
+Generating VCs ... took 0.303413s
+Checking validity of VCs ... took 0.233201s
+
+Generating VCs ... took 0.297017s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 3 Total elapsed : 54.578417
+[
+-1 -> (Read(@TU, owner__@27) == true)
+0 -> (Read(@TU, owner__@27) == true)
+528 -> (Read(@TU, owner__@27) == true)
+(-1,528) -> (Read(@TU, owner__@27) == true)
+]
+[
+]
+1/56 ... [IO] line 103, ((lockedInBets + jackpotSize) + devFeeSize) ... unproven
+2/56 ... [IO] line 103, (lockedInBets + jackpotSize) ... unproven
+3/56 ... [IO] line 138, (2 * amount) ... unproven
+4/56 ... [IO] line 144, (amount * JACKPOT_FEE) ... proven
+5/56 ... [IO] line 145, (amount * JACKPOT_FEE) ... proven
+6/56 ... [IO] line 145, (jackpotSize + ((amount * JACKPOT_FEE) / 1000)) ... unproven
+7/56 ... [IO] line 146, (amount * DEV_FEE) ... unproven
+8/56 ... [IO] line 146, (devFeeSize + ((amount * DEV_FEE) / 1000)) ... unproven
+9/56 ... [IO] line 147, (amount * WIN_X) ... unproven
+10/56 ... [IO] line 147, (lockedInBets + ((amount * WIN_X) / 1000)) ... unproven
+11/56 ... [IO] line 149, (amount * DONATING_X) ... unproven
+12/56 ... [IO] line 152, (totalAmountToWhale + donate_amount) ... unproven
+13/56 ... [IO] line 172, (block.number - BET_EXPIRATION_BLOCKS) ... proven
+14/56 ... [IO] line 178, (bet.amount * WIN_X) ... unproven
+15/56 ... [IO] line 193, (tossWin + jackpotWin) ... unproven
+16/56 ... [IO] line 195, (tossWin + jackpotWin) ... unproven
+17/56 ... [IO] line 201, (lockedInBets - tossWinAmount) ... unproven
+18/56 ... [IO] line 214, (donateAmount[msg.sender] + msg.value) ... unproven
+19/56 ... [IO] line 224, (donateAmount[msg.sender] - amount) ... proven
+20/56 ... [IO] line 235, (bet.blockNumber + BET_EXPIRATION_BLOCKS) ... unproven
+21/56 ... [IO] line 248, (devFeeSize - withdrawAmount) ... proven
+22/56 ... [IO] line 261, (devFeeSize - withdrawAmount) ... proven
+23/56 ... [IO] line 287, ((lockedInBets + jackpotSize) + devFeeSize) ... unproven
+24/56 ... [IO] line 287, (lockedInBets + jackpotSize) ... unproven
+25/56 ... [IO] line 288, (((address(this).balance - lockedInBets) - jackpotSize) - devFeeSize) ... unproven
+26/56 ... [IO] line 288, ((address(this).balance - lockedInBets) - jackpotSize) ... unproven
+27/56 ... [IO] line 288, (address(this).balance - lockedInBets) ... unproven
+28/56 ... [IO] line 316, (bet.amount * WIN_X) ... unproven
+29/56 ... [IO] line 317, (lockedInBets - tossWinAmount) ... unproven
+30/56 ... [IO] line 344, (i + 1) ... proven
+31/56 ... [IO] line 355, (bet.blockNumber + BET_EXPIRATION_BLOCKS) ... unproven
+32/56 ... [KA] line 296, selfdestruct(owner); ... proven
+33/56 ... [ETH_LEAK] line 151, whale.call.value(donate_amount)(bytes4(keccak256("donate()"))); ... unproven
+34/56 ... [ETH_LEAK] line 296, selfdestruct(owner); ... proven
+35/56 ... [ETH_LEAK] line 303, winner.transfer(ethToTransfer); ... unproven
+36/56 ... [ETH_LEAK] line 314, requester.transfer(ethToTransfer); ... unproven
+37/56 ... [ETH_LEAK] line 325, success = paidUser.send(amount); ... unproven
+38/56 ... [RE_EL] line 151, whale.call.value(donate_amount)(bytes4(keccak256("donate()"))); ... unproven
+39/56 ... [RE_EL] line 303, winner.transfer(ethToTransfer); ... unproven
+40/56 ... [RE_EL] line 314, requester.transfer(ethToTransfer); ... unproven
+41/56 ... [RE_EL] line 325, success = paidUser.send(amount); ... unproven
+42/56 ... [RE] line 113, (FiftyFlip, setBotAddress, [address]) ... proven
+43/56 ... [RE] line 120, (FiftyFlip, setSecretSigner, [address]) ... proven
+44/56 ... [RE] line 128, (FiftyFlip, wager, [bool, uint256, uint256, uint8, bytes32, bytes32]) ... unproven
+45/56 ... [RE] line 163, (FiftyFlip, play, [uint256]) ... unproven
+46/56 ... [RE] line 210, (FiftyFlip, donateForContractHealth, []) ... unproven
+47/56 ... [RE] line 218, (FiftyFlip, withdrawDonation, [uint256]) ... unproven
+48/56 ... [RE] line 240, (FiftyFlip, withdrawDevFee, [address, uint256]) ... proven
+49/56 ... [RE] line 253, (FiftyFlip, withdrawBotFee, [uint256]) ... unproven
+50/56 ... [RE] line 308, (FiftyFlip, sendRefund, [uint256]) ... unproven
+51/56 ... [RE] line 341, (FiftyFlip, clearStorage, [uint256[]]) ... unproven
+52/56 ... [TX_ORG] line 93, assume((msg.sender == owner)); ... proven
+53/56 ... [TX_ORG] line 98, assume((msg.sender == autoPlayBot)); ... proven
+54/56 ... [TX_ORG] line 135, assume((bet.player == address(0))); ... proven
+55/56 ... [TX_ORG] line 142, assume((secretSigner == ecrecover(signatureHash, v, r, s))); ... proven
+56/56 ... [TX_ORG] line 169, assume((bet.player != address(0))); ... proven
+took 41.108873s
+
+Generating VCs ... took 0.305633s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 119.098164
+[
+-1 -> ((Read(@TU, autoPlayBot__@29) == true) /\ (Read(@TU, owner__@27) == true))
+0 -> ((Read(@TU, autoPlayBot__@29) == true) /\ (Read(@TU, owner__@27) == true))
+528 -> ((Read(@TU, autoPlayBot__@29) == true) /\ (Read(@TU, owner__@27) == true))
+(-1,528) -> ((Read(@TU, autoPlayBot__@29) == true) /\ (Read(@TU, owner__@27) == true))
+]
+[
+]
+1/56 ... [IO] line 103, ((lockedInBets + jackpotSize) + devFeeSize) ... unproven
+2/56 ... [IO] line 103, (lockedInBets + jackpotSize) ... unproven
+3/56 ... [IO] line 138, (2 * amount) ... unproven
+4/56 ... [IO] line 144, (amount * JACKPOT_FEE) ... proven
+5/56 ... [IO] line 145, (amount * JACKPOT_FEE) ... proven
+6/56 ... [IO] line 145, (jackpotSize + ((amount * JACKPOT_FEE) / 1000)) ... unproven
+7/56 ... [IO] line 146, (amount * DEV_FEE) ... unproven
+8/56 ... [IO] line 146, (devFeeSize + ((amount * DEV_FEE) / 1000)) ... unproven
+9/56 ... [IO] line 147, (amount * WIN_X) ... unproven
+10/56 ... [IO] line 147, (lockedInBets + ((amount * WIN_X) / 1000)) ... unproven
+11/56 ... [IO] line 149, (amount * DONATING_X) ... unproven
+12/56 ... [IO] line 152, (totalAmountToWhale + donate_amount) ... unproven
+13/56 ... [IO] line 172, (block.number - BET_EXPIRATION_BLOCKS) ... proven
+14/56 ... [IO] line 178, (bet.amount * WIN_X) ... unproven
+15/56 ... [IO] line 193, (tossWin + jackpotWin) ... unproven
+16/56 ... [IO] line 195, (tossWin + jackpotWin) ... unproven
+17/56 ... [IO] line 201, (lockedInBets - tossWinAmount) ... unproven
+18/56 ... [IO] line 214, (donateAmount[msg.sender] + msg.value) ... unproven
+19/56 ... [IO] line 224, (donateAmount[msg.sender] - amount) ... proven
+20/56 ... [IO] line 235, (bet.blockNumber + BET_EXPIRATION_BLOCKS) ... unproven
+21/56 ... [IO] line 248, (devFeeSize - withdrawAmount) ... proven
+22/56 ... [IO] line 261, (devFeeSize - withdrawAmount) ... proven
+23/56 ... [IO] line 287, ((lockedInBets + jackpotSize) + devFeeSize) ... unproven
+24/56 ... [IO] line 287, (lockedInBets + jackpotSize) ... unproven
+25/56 ... [IO] line 288, (((address(this).balance - lockedInBets) - jackpotSize) - devFeeSize) ... unproven
+26/56 ... [IO] line 288, ((address(this).balance - lockedInBets) - jackpotSize) ... unproven
+27/56 ... [IO] line 288, (address(this).balance - lockedInBets) ... unproven
+28/56 ... [IO] line 316, (bet.amount * WIN_X) ... unproven
+29/56 ... [IO] line 317, (lockedInBets - tossWinAmount) ... unproven
+30/56 ... [IO] line 344, (i + 1) ... proven
+31/56 ... [IO] line 355, (bet.blockNumber + BET_EXPIRATION_BLOCKS) ... unproven
+32/56 ... [KA] line 296, selfdestruct(owner); ... proven
+33/56 ... [ETH_LEAK] line 151, whale.call.value(donate_amount)(bytes4(keccak256("donate()"))); ... unproven
+34/56 ... [ETH_LEAK] line 296, selfdestruct(owner); ... proven
+35/56 ... [ETH_LEAK] line 303, winner.transfer(ethToTransfer); ... unproven
+36/56 ... [ETH_LEAK] line 314, requester.transfer(ethToTransfer); ... unproven
+37/56 ... [ETH_LEAK] line 325, success = paidUser.send(amount); ... unproven
+38/56 ... [RE_EL] line 151, whale.call.value(donate_amount)(bytes4(keccak256("donate()"))); ... unproven
+39/56 ... [RE_EL] line 303, winner.transfer(ethToTransfer); ... unproven
+40/56 ... [RE_EL] line 314, requester.transfer(ethToTransfer); ... unproven
+41/56 ... [RE_EL] line 325, success = paidUser.send(amount); ... unproven
+42/56 ... [RE] line 113, (FiftyFlip, setBotAddress, [address]) ... proven
+43/56 ... [RE] line 120, (FiftyFlip, setSecretSigner, [address]) ... proven
+44/56 ... [RE] line 128, (FiftyFlip, wager, [bool, uint256, uint256, uint8, bytes32, bytes32]) ... unproven
+45/56 ... [RE] line 163, (FiftyFlip, play, [uint256]) ... unproven
+46/56 ... [RE] line 210, (FiftyFlip, donateForContractHealth, []) ... unproven
+47/56 ... [RE] line 218, (FiftyFlip, withdrawDonation, [uint256]) ... unproven
+48/56 ... [RE] line 240, (FiftyFlip, withdrawDevFee, [address, uint256]) ... proven
+49/56 ... [RE] line 253, (FiftyFlip, withdrawBotFee, [uint256]) ... proven
+50/56 ... [RE] line 308, (FiftyFlip, sendRefund, [uint256]) ... unproven
+51/56 ... [RE] line 341, (FiftyFlip, clearStorage, [uint256[]]) ... unproven
+52/56 ... [TX_ORG] line 93, assume((msg.sender == owner)); ... proven
+53/56 ... [TX_ORG] line 98, assume((msg.sender == autoPlayBot)); ... proven
+54/56 ... [TX_ORG] line 135, assume((bet.player == address(0))); ... proven
+55/56 ... [TX_ORG] line 142, assume((secretSigner == ecrecover(signatureHash, v, r, s))); ... proven
+56/56 ... [TX_ORG] line 169, assume((bet.player != address(0))); ... proven
+took 34.532291s
+
+Generating VCs ... took 0.040538s
+Checking validity of VCs ... 
+1/80 ... [NO_EFFECT] line 117, (@pre1 == autoPlayBot) ... unproven
+2/80 ... [NO_EFFECT] line 124, (@pre2 == secretSigner) ... unproven
+3/80 ... [NO_EFFECT] line 133, (@pre12 == amount) ... unproven
+4/80 ... [NO_EFFECT] line 134, (@pre11 == player) ... unproven
+5/80 ... [NO_EFFECT] line 145, (@pre10 == jackpotSize) ... unproven
+6/80 ... [NO_EFFECT] line 146, (@pre9 == devFeeSize) ... unproven
+7/80 ... [NO_EFFECT] line 147, (@pre8 == lockedInBets) ... unproven
+8/80 ... [NO_EFFECT] line 149, (@pre7 == donate_amount) ... unproven
+9/80 ... [NO_EFFECT] line 152, (@pre6 == totalAmountToWhale) ... unproven
+10/80 ... [NO_EFFECT] line 154, (@pre5 == bet.amount) ... unproven
+11/80 ... [NO_EFFECT] line 155, (@pre4 == bet.blockNumber) ... unproven
+12/80 ... [NO_EFFECT] line 157, (@pre3 == bet.player) ... unproven
+13/80 ... [NO_EFFECT] line 167, (@pre20 == ticketID) ... unproven
+14/80 ... [NO_EFFECT] line 171, (@pre19 == blockNumber) ... unproven
+15/80 ... [NO_EFFECT] line 174, (@pre18 == random) ... unproven
+16/80 ... [NO_EFFECT] line 176, (@pre17 == jackpotRes) ... unproven
+17/80 ... [NO_EFFECT] line 178, (@pre16 == tossWinAmount) ... unproven
+18/80 ... [NO_EFFECT] line 184, (@pre15 == tossWin) ... unproven
+19/80 ... [NO_EFFECT] line 187, (@pre14 == jackpotWin) ... unproven
+20/80 ... [NO_EFFECT] line 201, (@pre13 == lockedInBets) ... unproven
+21/80 ... [NO_EFFECT] line 214, (@pre21 == donateAmount[msg.sender]) ... unproven
+22/80 ... [NO_EFFECT] line 224, (@pre22 == donateAmount[msg.sender]) ... unproven
+23/80 ... [NO_EFFECT] line 248, (@pre23 == devFeeSize) ... unproven
+24/80 ... [NO_EFFECT] line 261, (@pre24 == devFeeSize) ... unproven
+25/80 ... [NO_EFFECT] line 312, (@pre28 == requester) ... unproven
+26/80 ... [NO_EFFECT] line 313, (@pre27 == ethToTransfer) ... unproven
+27/80 ... [NO_EFFECT] line 316, (@pre26 == tossWinAmount) ... unproven
+28/80 ... [NO_EFFECT] line 317, (@pre25 == lockedInBets) ... unproven
+29/80 ... [NO_EFFECT] line 342, (@pre30 == length) ... unproven
+30/80 ... [NO_EFFECT] line 344, (@pre29 == i) ... unproven
+31/80 ... [NO_EFFECT] line 361, (@pre31 == bet.player) ... unproven
+32/80 ... [ASSIGN_CONST] line 145, (jackpotSize == 0) ... unproven
+33/80 ... [ASSIGN_CONST] line 146, (devFeeSize == 0) ... unproven
+34/80 ... [ASSIGN_CONST] line 147, (lockedInBets == 0) ... unproven
+35/80 ... [ASSIGN_CONST] line 152, (totalAmountToWhale == 0) ... unproven
+36/80 ... [ASSIGN_CONST] line 201, (lockedInBets == 0) ... unproven
+37/80 ... [ASSIGN_CONST] line 214, (donateAmount[msg.sender] == 0) ... unproven
+38/80 ... [ASSIGN_CONST] line 224, (donateAmount[msg.sender] == 0) ... unproven
+39/80 ... [ASSIGN_CONST] line 248, (devFeeSize == 0) ... unproven
+40/80 ... [ASSIGN_CONST] line 261, (devFeeSize == 0) ... unproven
+41/80 ... [ASSIGN_CONST] line 317, (lockedInBets == 0) ... unproven
+42/80 ... [ASSIGN_CONST] line 344, (i == 0) ... unproven
+43/80 ... [DEAD] line 93, false ... unproven
+44/80 ... [DEAD] line 98, false ... unproven
+45/80 ... [DEAD] line 103, false ... unproven
+46/80 ... [DEAD] line 135, false ... unproven
+47/80 ... [DEAD] line 136, false ... unproven
+48/80 ... [DEAD] line 137, false ... unproven
+49/80 ... [DEAD] line 138, false ... unproven
+50/80 ... [DEAD] line 140, false ... unproven
+51/80 ... [DEAD] line 142, false ... unproven
+52/80 ... [DEAD] line 144, false ... unproven
+53/80 ... [DEAD] line 169, false ... unproven
+54/80 ... [DEAD] line 170, false ... unproven
+55/80 ... [DEAD] line 172, false ... unproven
+56/80 ... [DEAD] line 183, false ... unproven
+57/80 ... [DEAD] line 186, false ... unproven
+58/80 ... [DEAD] line 190, false ... unproven
+59/80 ... [DEAD] line 193, false ... unproven
+60/80 ... [DEAD] line 195, false ... unproven
+61/80 ... [DEAD] line 199, false ... unproven
+62/80 ... [DEAD] line 221, false ... unproven
+63/80 ... [DEAD] line 223, false ... unproven
+64/80 ... [DEAD] line 234, false ... unproven
+65/80 ... [DEAD] line 235, false ... unproven
+66/80 ... [DEAD] line 236, false ... unproven
+67/80 ... [DEAD] line 244, false ... unproven
+68/80 ... [DEAD] line 245, false ... unproven
+69/80 ... [DEAD] line 246, false ... unproven
+70/80 ... [DEAD] line 247, false ... unproven
+71/80 ... [DEAD] line 257, false ... unproven
+72/80 ... [DEAD] line 258, false ... unproven
+73/80 ... [DEAD] line 259, false ... unproven
+74/80 ... [DEAD] line 260, false ... unproven
+75/80 ... [DEAD] line 287, false ... unproven
+76/80 ... [DEAD] line 295, false ... unproven
+77/80 ... [DEAD] line 303, false ... unproven
+78/80 ... [DEAD] line 314, false ... unproven
+79/80 ... [DEAD] line 345, false ... unproven
+80/80 ... [DEAD] line 355, false ... unproven
+took 16.342914s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 103, ((lockedInBets + jackpotSize) + devFeeSize) : unproven
+[2] [IO] line 103, (lockedInBets + jackpotSize) : unproven
+[3] [IO] line 138, (2 * amount) : unproven
+[4] [IO] line 144, (amount * JACKPOT_FEE) : proven
+[5] [IO] line 145, (amount * JACKPOT_FEE) : proven
+[6] [IO] line 145, (jackpotSize + ((amount * JACKPOT_FEE) / 1000)) : unproven
+[7] [IO] line 146, (amount * DEV_FEE) : unproven
+[8] [IO] line 146, (devFeeSize + ((amount * DEV_FEE) / 1000)) : unproven
+[9] [IO] line 147, (amount * WIN_X) : unproven
+[10] [IO] line 147, (lockedInBets + ((amount * WIN_X) / 1000)) : unproven
+[11] [IO] line 149, (amount * DONATING_X) : unproven
+[12] [IO] line 152, (totalAmountToWhale + donate_amount) : unproven
+[13] [IO] line 172, (block.number - BET_EXPIRATION_BLOCKS) : proven
+[14] [IO] line 178, (bet.amount * WIN_X) : unproven
+[15] [IO] line 193, (tossWin + jackpotWin) : unproven
+[16] [IO] line 195, (tossWin + jackpotWin) : unproven
+[17] [IO] line 201, (lockedInBets - tossWinAmount) : unproven
+[18] [IO] line 214, (donateAmount[msg.sender] + msg.value) : unproven
+[19] [IO] line 224, (donateAmount[msg.sender] - amount) : proven
+[20] [IO] line 235, (bet.blockNumber + BET_EXPIRATION_BLOCKS) : unproven
+[21] [IO] line 248, (devFeeSize - withdrawAmount) : proven
+[22] [IO] line 261, (devFeeSize - withdrawAmount) : proven
+[23] [IO] line 287, ((lockedInBets + jackpotSize) + devFeeSize) : unproven
+[24] [IO] line 287, (lockedInBets + jackpotSize) : unproven
+[25] [IO] line 288, (((address(this).balance - lockedInBets) - jackpotSize) - devFeeSize) : unproven
+[26] [IO] line 288, ((address(this).balance - lockedInBets) - jackpotSize) : unproven
+[27] [IO] line 288, (address(this).balance - lockedInBets) : unproven
+[28] [IO] line 316, (bet.amount * WIN_X) : unproven
+[29] [IO] line 317, (lockedInBets - tossWinAmount) : unproven
+[30] [IO] line 344, (i + 1) : proven
+[31] [IO] line 355, (bet.blockNumber + BET_EXPIRATION_BLOCKS) : unproven
+[32] [KA] line 296, selfdestruct(owner); : proven
+[33] [ETH_LEAK] line 151, whale.call.value(donate_amount)(bytes4(keccak256("donate()"))); : unproven
+[34] [ETH_LEAK] line 296, selfdestruct(owner); : proven
+[35] [ETH_LEAK] line 303, winner.transfer(ethToTransfer); : unproven
+[36] [ETH_LEAK] line 314, requester.transfer(ethToTransfer); : unproven
+[37] [ETH_LEAK] line 325, success = paidUser.send(amount); : unproven
+[38] [RE_EL] line 151, whale.call.value(donate_amount)(bytes4(keccak256("donate()"))); : unproven
+[39] [RE_EL] line 303, winner.transfer(ethToTransfer); : unproven
+[40] [RE_EL] line 314, requester.transfer(ethToTransfer); : unproven
+[41] [RE_EL] line 325, success = paidUser.send(amount); : unproven
+[42] [RE] line 113, (FiftyFlip, setBotAddress, [address]) : proven
+[43] [RE] line 120, (FiftyFlip, setSecretSigner, [address]) : proven
+[44] [RE] line 128, (FiftyFlip, wager, [bool, uint256, uint256, uint8, bytes32, bytes32]) : unproven
+[45] [RE] line 163, (FiftyFlip, play, [uint256]) : unproven
+[46] [RE] line 210, (FiftyFlip, donateForContractHealth, []) : unproven
+[47] [RE] line 218, (FiftyFlip, withdrawDonation, [uint256]) : unproven
+[48] [RE] line 240, (FiftyFlip, withdrawDevFee, [address, uint256]) : proven
+[49] [RE] line 253, (FiftyFlip, withdrawBotFee, [uint256]) : proven
+[50] [RE] line 308, (FiftyFlip, sendRefund, [uint256]) : unproven
+[51] [RE] line 341, (FiftyFlip, clearStorage, [uint256[]]) : unproven
+[52] [TX_ORG] line 93, assume((msg.sender == owner)); : proven
+[53] [TX_ORG] line 98, assume((msg.sender == autoPlayBot)); : proven
+[54] [TX_ORG] line 135, assume((bet.player == address(0))); : proven
+[55] [TX_ORG] line 142, assume((secretSigner == ecrecover(signatureHash, v, r, s))); : proven
+[56] [TX_ORG] line 169, assume((bet.player != address(0))); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 117, (@pre1 == autoPlayBot) : unproven
+[2] [NO_EFFECT] line 124, (@pre2 == secretSigner) : unproven
+[3] [NO_EFFECT] line 133, (@pre12 == amount) : unproven
+[4] [NO_EFFECT] line 134, (@pre11 == player) : unproven
+[5] [NO_EFFECT] line 145, (@pre10 == jackpotSize) : unproven
+[6] [NO_EFFECT] line 146, (@pre9 == devFeeSize) : unproven
+[7] [NO_EFFECT] line 147, (@pre8 == lockedInBets) : unproven
+[8] [NO_EFFECT] line 149, (@pre7 == donate_amount) : unproven
+[9] [NO_EFFECT] line 152, (@pre6 == totalAmountToWhale) : unproven
+[10] [NO_EFFECT] line 154, (@pre5 == bet.amount) : unproven
+[11] [NO_EFFECT] line 155, (@pre4 == bet.blockNumber) : unproven
+[12] [NO_EFFECT] line 157, (@pre3 == bet.player) : unproven
+[13] [NO_EFFECT] line 167, (@pre20 == ticketID) : unproven
+[14] [NO_EFFECT] line 171, (@pre19 == blockNumber) : unproven
+[15] [NO_EFFECT] line 174, (@pre18 == random) : unproven
+[16] [NO_EFFECT] line 176, (@pre17 == jackpotRes) : unproven
+[17] [NO_EFFECT] line 178, (@pre16 == tossWinAmount) : unproven
+[18] [NO_EFFECT] line 184, (@pre15 == tossWin) : unproven
+[19] [NO_EFFECT] line 187, (@pre14 == jackpotWin) : unproven
+[20] [NO_EFFECT] line 201, (@pre13 == lockedInBets) : unproven
+[21] [NO_EFFECT] line 214, (@pre21 == donateAmount[msg.sender]) : unproven
+[22] [NO_EFFECT] line 224, (@pre22 == donateAmount[msg.sender]) : unproven
+[23] [NO_EFFECT] line 248, (@pre23 == devFeeSize) : unproven
+[24] [NO_EFFECT] line 261, (@pre24 == devFeeSize) : unproven
+[25] [NO_EFFECT] line 312, (@pre28 == requester) : unproven
+[26] [NO_EFFECT] line 313, (@pre27 == ethToTransfer) : unproven
+[27] [NO_EFFECT] line 316, (@pre26 == tossWinAmount) : unproven
+[28] [NO_EFFECT] line 317, (@pre25 == lockedInBets) : unproven
+[29] [NO_EFFECT] line 342, (@pre30 == length) : unproven
+[30] [NO_EFFECT] line 344, (@pre29 == i) : unproven
+[31] [NO_EFFECT] line 361, (@pre31 == bet.player) : unproven
+[32] [ASSIGN_CONST] line 145, (jackpotSize == 0) : unproven
+[33] [ASSIGN_CONST] line 146, (devFeeSize == 0) : unproven
+[34] [ASSIGN_CONST] line 147, (lockedInBets == 0) : unproven
+[35] [ASSIGN_CONST] line 152, (totalAmountToWhale == 0) : unproven
+[36] [ASSIGN_CONST] line 201, (lockedInBets == 0) : unproven
+[37] [ASSIGN_CONST] line 214, (donateAmount[msg.sender] == 0) : unproven
+[38] [ASSIGN_CONST] line 224, (donateAmount[msg.sender] == 0) : unproven
+[39] [ASSIGN_CONST] line 248, (devFeeSize == 0) : unproven
+[40] [ASSIGN_CONST] line 261, (devFeeSize == 0) : unproven
+[41] [ASSIGN_CONST] line 317, (lockedInBets == 0) : unproven
+[42] [ASSIGN_CONST] line 344, (i == 0) : unproven
+[43] [DEAD] line 93, false : unproven
+[44] [DEAD] line 98, false : unproven
+[45] [DEAD] line 103, false : unproven
+[46] [DEAD] line 135, false : unproven
+[47] [DEAD] line 136, false : unproven
+[48] [DEAD] line 137, false : unproven
+[49] [DEAD] line 138, false : unproven
+[50] [DEAD] line 140, false : unproven
+[51] [DEAD] line 142, false : unproven
+[52] [DEAD] line 144, false : unproven
+[53] [DEAD] line 169, false : unproven
+[54] [DEAD] line 170, false : unproven
+[55] [DEAD] line 172, false : unproven
+[56] [DEAD] line 183, false : unproven
+[57] [DEAD] line 186, false : unproven
+[58] [DEAD] line 190, false : unproven
+[59] [DEAD] line 193, false : unproven
+[60] [DEAD] line 195, false : unproven
+[61] [DEAD] line 199, false : unproven
+[62] [DEAD] line 221, false : unproven
+[63] [DEAD] line 223, false : unproven
+[64] [DEAD] line 234, false : unproven
+[65] [DEAD] line 235, false : unproven
+[66] [DEAD] line 236, false : unproven
+[67] [DEAD] line 244, false : unproven
+[68] [DEAD] line 245, false : unproven
+[69] [DEAD] line 246, false : unproven
+[70] [DEAD] line 247, false : unproven
+[71] [DEAD] line 257, false : unproven
+[72] [DEAD] line 258, false : unproven
+[73] [DEAD] line 259, false : unproven
+[74] [DEAD] line 260, false : unproven
+[75] [DEAD] line 287, false : unproven
+[76] [DEAD] line 295, false : unproven
+[77] [DEAD] line 303, false : unproven
+[78] [DEAD] line 314, false : unproven
+[79] [DEAD] line 345, false : unproven
+[80] [DEAD] line 355, false : unproven
+
+============ Statistics ============
+# Iter                    : 4
+# Alarm / Query           : 38 / 56
+- integer over/underflow  : 24 / 31
+- kill-anyone             : 0 / 1
+- ether-leaking           : 4 / 5
+- reentrancy-leaking      : 4 / 4
+- reentrancy              : 6 / 10
+- tx.origin               : 0 / 5
+
+Time Elapsed (Real) : 190.971877098
+Time Elapsed (CPU)  : 190.922799

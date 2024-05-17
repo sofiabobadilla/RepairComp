@@ -1,0 +1,183 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 10
+[INFO] reachable : 9
+[INFO] Generating Paths ... took 0.000265s
+[INFO] # path : 26
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.00099s
+Generating VCs ... took 0.006003s
+Generating VCs ... took 0.00367s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 9.857729
+[
+-1 -> (((MinDeposit__@8 == 1000000000000000000) /\ (Read(@TU, owner__@10) == true)) /\ @Invest_sum >= Σ_u balances__@5)
+0 -> (((MinDeposit__@8 == 1000000000000000000) /\ (Read(@TU, owner__@10) == true)) /\ @Invest_sum >= Σ_u balances__@5)
+]
+[
+]
+1/8 ... [IO] line 42, (balances[msg.sender] + msg.value) ... unproven
+2/8 ... [IO] line 52, (balances[msg.sender] - _am) ... proven
+3/8 ... [ETH_LEAK] line 53, msg.sender.call.value(_am)() ... proven
+4/8 ... [RE_EL] line 53, msg.sender.call.value(_am)() ... proven
+5/8 ... [RE] line 31, (PrivateDeposit, setLog, [address]) ... proven
+6/8 ... [RE] line 36, (PrivateDeposit, Deposit, []) ... unproven
+7/8 ... [RE] line 47, (PrivateDeposit, CashOut, [uint256]) ... unproven
+8/8 ... [TX_ORG] line 19, assume((msg.sender == owner)); ... proven
+took 9.134982s
+
+Generating VCs ... took 0.003258s
+Checking validity of VCs ... took 35.109218s
+
+Generating VCs ... took 0.003132s
+Checking validity of VCs ... took 2.168055s
+
+Generating VCs ... took 0.003677s
+Checking validity of VCs ... took 0.896764s
+
+Generating VCs ... took 0.00354400000001s
+Checking validity of VCs ... took 1.490565s
+
+Generating VCs ... took 0.003326s
+Checking validity of VCs ... took 4.780771s
+
+Generating VCs ... took 0.00408700000001s
+Checking validity of VCs ... took 3.895695s
+
+Generating VCs ... took 0.003438s
+Checking validity of VCs ... took 3.831763s
+
+Generating VCs ... took 0.00331700000001s
+Checking validity of VCs ... took 0.012304s
+
+Iter : 10 To explore : 14 Explored : 23 Total elapsed : 66.461972
+Generating VCs ... took 0.00337399999999s
+Checking validity of VCs ... took 0.224272s
+
+Generating VCs ... took 0.003311s
+Checking validity of VCs ... took 0.402599s
+
+Generating VCs ... took 0.003242s
+Checking validity of VCs ... took 0.216648s
+
+Generating VCs ... took 0.00317999999999s
+Checking validity of VCs ... took 0.230611s
+
+Generating VCs ... took 0.003137s
+Checking validity of VCs ... took 0.221701s
+
+Generating VCs ... took 0.003578s
+Checking validity of VCs ... took 0.723297s
+
+Generating VCs ... took 0.00355499999999s
+Checking validity of VCs ... took 0.612012s
+
+Generating VCs ... took 0.00327900000001s
+Checking validity of VCs ... took 0.689144s
+
+Generating VCs ... took 0.00328499999999s
+Checking validity of VCs ... took 0.219722s
+
+Generating VCs ... took 0.00318899999999s
+Checking validity of VCs ... took 0.094493s
+
+Iter : 20 To explore : 11 Explored : 30 Total elapsed : 70.141111
+Generating VCs ... took 0.003292s
+Checking validity of VCs ... took 0.095591s
+
+Generating VCs ... took 0.00314999999999s
+Checking validity of VCs ... took 0.179676s
+
+Generating VCs ... took 0.00320600000001s
+Checking validity of VCs ... took 0.177407s
+
+Generating VCs ... took 0.00318200000001s
+Checking validity of VCs ... took 0.700309s
+
+Generating VCs ... took 0.003894s
+Checking validity of VCs ... took 0.094797s
+
+Generating VCs ... took 0.003456s
+Checking validity of VCs ... took 0.17878s
+
+Generating VCs ... took 0.003246s
+Checking validity of VCs ... took 0.59831s
+
+Generating VCs ... took 0.00335199999999s
+Checking validity of VCs ... took 1.074752s
+
+Generating VCs ... took 0.00331100000001s
+Checking validity of VCs ... took 0.605958s
+
+Generating VCs ... took 0.003362s
+Checking validity of VCs ... took 0.760427s
+
+Iter : 30 To explore : 4 Explored : 33 Total elapsed : 74.651936
+Generating VCs ... took 0.003339s
+Checking validity of VCs ... took 0.773989s
+
+Generating VCs ... took 0.00328500000001s
+Checking validity of VCs ... took 4.160634s
+
+Generating VCs ... took 0.003372s
+Checking validity of VCs ... took 0.622646s
+
+Generating VCs ... took 0.003457s
+Checking validity of VCs ... took 0.776413s
+
+Generating VCs ... took 0.00174800000001s
+Checking validity of VCs ... 
+1/10 ... [NO_EFFECT] line 42, (@pre1 == balances[msg.sender]) ... unproven
+2/10 ... [NO_EFFECT] line 52, (@pre2 == balances[msg.sender]) ... unproven
+3/10 ... [NO_EFFECT] line 83, (@pre5 == LastMsg.Sender) ... unproven
+4/10 ... [NO_EFFECT] line 84, (@pre4 == LastMsg.Time) ... unproven
+5/10 ... [NO_EFFECT] line 85, (@pre3 == LastMsg.Val) ... unproven
+6/10 ... [ASSIGN_CONST] line 42, (balances[msg.sender] == 0) ... unproven
+7/10 ... [ASSIGN_CONST] line 52, (balances[msg.sender] == 0) ... unproven
+8/10 ... [DEAD] line 19, false ... unproven
+9/10 ... [DEAD] line 40, false ... unproven
+10/10 ... [DEAD] line 49, false ... unproven
+took 1.020515s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 42, (balances[msg.sender] + msg.value) : unproven
+[2] [IO] line 52, (balances[msg.sender] - _am) : proven
+[3] [ETH_LEAK] line 53, msg.sender.call.value(_am)() : proven
+[4] [RE_EL] line 53, msg.sender.call.value(_am)() : proven
+[5] [RE] line 31, (PrivateDeposit, setLog, [address]) : proven
+[6] [RE] line 36, (PrivateDeposit, Deposit, []) : unproven
+[7] [RE] line 47, (PrivateDeposit, CashOut, [uint256]) : unproven
+[8] [TX_ORG] line 19, assume((msg.sender == owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 42, (@pre1 == balances[msg.sender]) : unproven
+[2] [NO_EFFECT] line 52, (@pre2 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 83, (@pre5 == LastMsg.Sender) : unproven
+[4] [NO_EFFECT] line 84, (@pre4 == LastMsg.Time) : unproven
+[5] [NO_EFFECT] line 85, (@pre3 == LastMsg.Val) : unproven
+[6] [ASSIGN_CONST] line 42, (balances[msg.sender] == 0) : unproven
+[7] [ASSIGN_CONST] line 52, (balances[msg.sender] == 0) : unproven
+[8] [DEAD] line 19, false : unproven
+[9] [DEAD] line 40, false : unproven
+[10] [DEAD] line 49, false : unproven
+
+============ Statistics ============
+# Iter                    : 34
+# Alarm / Query           : 3 / 8
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 1
+- reentrancy              : 2 / 3
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 82.0363478661
+Time Elapsed (CPU)  : 82.028466

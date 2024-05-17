@@ -15,7 +15,7 @@ contract SmartFix {
  * @vulnerable_at_lines: 28
  */
 
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.24;
 
 contract Reentrancy_bonus is SmartFix {
 

@@ -5,113 +5,81 @@
 [CHECKER] Ether-Leaking
 
 [INFO] all funcs : 24
-[INFO] reachable : 13
-[INFO] Generating Paths ... took 0.000368s
-[INFO] # path : 33
+[INFO] reachable : 6
+[INFO] Generating Paths ... took 9.7e-05s
+[INFO] # path : 14
 
 [INFO] Violate CEI: false
 [INFO] msg.sender = this possible: false
-[INFO] Performing Interval Analysis ... took 0.00151s
-Generating VCs ... took 0.007058s
+[INFO] Performing Interval Analysis ... took 0.000295s
+Generating VCs ... took 0.001928s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 1 Total elapsed : 0.059787
+Iter: 1 Total elapsed : 0.043345
 [
 -1 -> true
 0 -> true
 ]
 [
 ]
-1/6 ... [ETH_LEAK] line 55, _dst.call.value(_value)(_data); ... unproven
-2/6 ... [ETH_LEAK] line 138, owner.transfer(this.balance); ... unproven
-3/6 ... [RE_EL] line 55, _dst.call.value(_value)(_data); ... unproven
-4/6 ... [RE_EL] line 138, owner.transfer(this.balance); ... unproven
-5/6 ... [TX_ORG] line 21, assume((msg.sender == owner)); ... proven
-6/6 ... [TX_ORG] line 45, assume((msg.sender == newOwner)); ... proven
-took 0.455138s
+1/4 ... [ETH_LEAK] line 55, _dst.call.value(_value)(_data); ... unproven
+2/4 ... [RE_EL] line 55, _dst.call.value(_value)(_data); ... unproven
+3/4 ... [TX_ORG] line 21, assume((msg.sender == owner)); ... proven
+4/4 ... [TX_ORG] line 45, assume((msg.sender == newOwner)); ... proven
+took 0.216966s
 
-Generating VCs ... took 0.005391s
-Checking validity of VCs ... took 0.038448s
+Generating VCs ... took 0.001002s
+Checking validity of VCs ... took 0.035509s
 
-Generating VCs ... took 0.005148s
-Checking validity of VCs ... took 0.0266s
+Generating VCs ... took 0.001387s
+Checking validity of VCs ... took 0.02559s
 
-Generating VCs ... took 0.005293s
+Generating VCs ... took 0.001036s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 4 Total elapsed : 0.916566
+Iter: 4 Total elapsed : 0.497992
 [
 -1 -> ((Read(@TU, newOwner__@25) == true) /\ (Read(@TU, owner__@14) == true))
 0 -> ((Read(@TU, newOwner__@25) == true) /\ (Read(@TU, owner__@14) == true))
 ]
 [
 ]
-1/6 ... [ETH_LEAK] line 55, _dst.call.value(_value)(_data); ... proven
-2/6 ... [ETH_LEAK] line 138, owner.transfer(this.balance); ... proven
-3/6 ... [RE_EL] line 55, _dst.call.value(_value)(_data); ... proven
-4/6 ... [RE_EL] line 138, owner.transfer(this.balance); ... proven
-5/6 ... [TX_ORG] line 21, assume((msg.sender == owner)); ... proven
-6/6 ... [TX_ORG] line 45, assume((msg.sender == newOwner)); ... proven
-took 0.509159s
+1/4 ... [ETH_LEAK] line 55, _dst.call.value(_value)(_data); ... proven
+2/4 ... [RE_EL] line 55, _dst.call.value(_value)(_data); ... proven
+3/4 ... [TX_ORG] line 21, assume((msg.sender == owner)); ... proven
+4/4 ... [TX_ORG] line 45, assume((msg.sender == newOwner)); ... proven
+took 0.317896s
 
-Generating VCs ... took 0.001643s
+Generating VCs ... took 0.001005s
 Checking validity of VCs ... 
-1/17 ... [NO_EFFECT] line 38, (@pre8 == newOwner) ... unproven
-2/17 ... [NO_EFFECT] line 46, (@pre9 == owner) ... unproven
-3/17 ... [NO_EFFECT] line 115, (@pre4 == marriageDate) ... unproven
-4/17 ... [NO_EFFECT] line 118, (@pre3 == struct_init(Event, now, "Marriage", vows, url).date) ... unproven
-5/17 ... [NO_EFFECT] line 132, (@pre5 == struct_init(Event, now, name, description, url).date) ... unproven
-6/17 ... [NO_EFFECT] line 140, (@pre6 == struct_init(Message, now, nameFrom, text, url, msg.value).value) ... unproven
-7/17 ... [NO_EFFECT] line 140, (@pre7 == struct_init(Message, now, nameFrom, text, url, msg.value).date) ... unproven
-8/17 ... [DEAD] line 21, false ... unproven
-9/17 ... [DEAD] line 45, false ... unproven
-10/17 ... [DEAD] line 88, false ... unproven
-11/17 ... [DEAD] line 112, false ... unproven
-12/17 ... [DEAD] line 119, false ... unproven
-13/17 ... [DEAD] line 126, false ... unproven
-14/17 ... [DEAD] line 133, false ... unproven
-15/17 ... [DEAD] line 137, false ... unproven
-16/17 ... [DEAD] line 138, false ... unproven
-17/17 ... [DEAD] line 141, false ... unproven
-took 0.201819s
+1/4 ... [NO_EFFECT] line 38, (@pre1 == newOwner) ... unproven
+2/4 ... [NO_EFFECT] line 46, (@pre2 == owner) ... unproven
+3/4 ... [DEAD] line 21, false ... unproven
+4/4 ... [DEAD] line 45, false ... unproven
+took 0.037563s
 
 
 ===== Vulnerability Report =====
 [1] [ETH_LEAK] line 55, _dst.call.value(_value)(_data); : proven
-[2] [ETH_LEAK] line 138, owner.transfer(this.balance); : proven
-[3] [RE_EL] line 55, _dst.call.value(_value)(_data); : proven
-[4] [RE_EL] line 138, owner.transfer(this.balance); : proven
-[5] [TX_ORG] line 21, assume((msg.sender == owner)); : proven
-[6] [TX_ORG] line 45, assume((msg.sender == newOwner)); : proven
+[2] [RE_EL] line 55, _dst.call.value(_value)(_data); : proven
+[3] [TX_ORG] line 21, assume((msg.sender == owner)); : proven
+[4] [TX_ORG] line 45, assume((msg.sender == newOwner)); : proven
 
 ===== Regression Report =====
-[1] [NO_EFFECT] line 38, (@pre8 == newOwner) : unproven
-[2] [NO_EFFECT] line 46, (@pre9 == owner) : unproven
-[3] [NO_EFFECT] line 115, (@pre4 == marriageDate) : unproven
-[4] [NO_EFFECT] line 118, (@pre3 == struct_init(Event, now, "Marriage", vows, url).date) : unproven
-[5] [NO_EFFECT] line 132, (@pre5 == struct_init(Event, now, name, description, url).date) : unproven
-[6] [NO_EFFECT] line 140, (@pre6 == struct_init(Message, now, nameFrom, text, url, msg.value).value) : unproven
-[7] [NO_EFFECT] line 140, (@pre7 == struct_init(Message, now, nameFrom, text, url, msg.value).date) : unproven
-[8] [DEAD] line 21, false : unproven
-[9] [DEAD] line 45, false : unproven
-[10] [DEAD] line 88, false : unproven
-[11] [DEAD] line 112, false : unproven
-[12] [DEAD] line 119, false : unproven
-[13] [DEAD] line 126, false : unproven
-[14] [DEAD] line 133, false : unproven
-[15] [DEAD] line 137, false : unproven
-[16] [DEAD] line 138, false : unproven
-[17] [DEAD] line 141, false : unproven
+[1] [NO_EFFECT] line 38, (@pre1 == newOwner) : unproven
+[2] [NO_EFFECT] line 46, (@pre2 == owner) : unproven
+[3] [DEAD] line 21, false : unproven
+[4] [DEAD] line 45, false : unproven
 
 ============ Statistics ============
 # Iter                    : 4
-# Alarm / Query           : 0 / 6
+# Alarm / Query           : 0 / 4
 - integer over/underflow  : 0 / 0
 - kill-anyone             : 0 / 0
-- ether-leaking           : 0 / 2
-- reentrancy-leaking      : 0 / 2
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 1
 - reentrancy              : 0 / 0
 - tx.origin               : 0 / 2
 
-Time Elapsed (Real) : 1.37069201469
-Time Elapsed (CPU)  : 1.307926
+Time Elapsed (Real) : 0.746563196182
+Time Elapsed (CPU)  : 0.680241

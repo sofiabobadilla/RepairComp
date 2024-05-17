@@ -1,0 +1,88 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.000217s
+[INFO] # path : 14
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000536s
+Generating VCs ... took 0.002264s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.040173
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/6 ... [IO] line 15, (userBalances[msg.sender] + msg.value) ... proven
+2/6 ... [IO] line 16, (userBalances[msg.sender] + msg.value) ... proven
+3/6 ... [ETH_LEAK] line 23, msg.sender.call.value(amountToWithdraw)() ... unproven
+4/6 ... [RE_EL] line 23, msg.sender.call.value(amountToWithdraw)() ... unproven
+5/6 ... [RE] line 14, (EtherBank, addToBalance, []) ... unproven
+6/6 ... [RE] line 19, (EtherBank, withdrawBalance, []) ... unproven
+took 0.23289s
+
+Generating VCs ... took 0.00079s
+Checking validity of VCs ... took 16.554541s
+
+Generating VCs ... took 0.00076s
+Checking validity of VCs ... took 0.202431s
+
+Generating VCs ... took 0.000795s
+Checking validity of VCs ... took 0.329102s
+
+Generating VCs ... took 0.000844000000001s
+Checking validity of VCs ... took 14.011204s
+
+Generating VCs ... took 0.000854s
+Checking validity of VCs ... took 1.227617s
+
+Generating VCs ... took 0.00076700000001s
+Checking validity of VCs ... took 2.169557s
+
+Generating VCs ... took 0.000832000000003s
+Checking validity of VCs ... took 3.146108s
+
+Generating VCs ... took 0.000474000000004s
+Checking validity of VCs ... 
+1/4 ... [NO_EFFECT] line 16, (@pre1 == userBalances[msg.sender]) ... unproven
+2/4 ... [NO_EFFECT] line 20, (@pre2 == amountToWithdraw) ... unproven
+3/4 ... [ASSIGN_CONST] line 16, (userBalances[msg.sender] == 0) ... unproven
+4/4 ... [DEAD] line 15, false ... unproven
+took 0.20234s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 15, (userBalances[msg.sender] + msg.value) : proven
+[2] [IO] line 16, (userBalances[msg.sender] + msg.value) : proven
+[3] [ETH_LEAK] line 23, msg.sender.call.value(amountToWithdraw)() : unproven
+[4] [RE_EL] line 23, msg.sender.call.value(amountToWithdraw)() : unproven
+[5] [RE] line 14, (EtherBank, addToBalance, []) : unproven
+[6] [RE] line 19, (EtherBank, withdrawBalance, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 16, (@pre1 == userBalances[msg.sender]) : unproven
+[2] [NO_EFFECT] line 20, (@pre2 == amountToWithdraw) : unproven
+[3] [ASSIGN_CONST] line 16, (userBalances[msg.sender] == 0) : unproven
+[4] [DEAD] line 15, false : unproven
+
+============ Statistics ============
+# Iter                    : 9
+# Alarm / Query           : 4 / 6
+- integer over/underflow  : 0 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 2 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 38.1472270489
+Time Elapsed (CPU)  : 38.122961

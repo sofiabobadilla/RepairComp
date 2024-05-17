@@ -1,0 +1,153 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 9
+[INFO] reachable : 7
+[INFO] Generating Paths ... took 0.021086s
+[INFO] # path : 221
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.028624s
+Generating VCs ... took 0.41328s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 1.02253
+[
+0 -> true
+]
+[
+28 -> (true, true)
+]
+1/17 ... [IO] line 116, (valuePaid - currentClaimPrice) ... proven
+2/17 ... [IO] line 119, (valuePaid - excessPaid) ... proven
+3/17 ... [IO] line 126, (valuePaid * wizardCommissionFractionNum) ... unproven
+4/17 ... [IO] line 129, (valuePaid - wizardCommission) ... proven
+5/17 ... [IO] line 149, (currentClaimPrice * claimPriceAdjustNum) ... unproven
+6/17 ... [IO] line 153, (100000000000000 * (rawNewClaimPrice / 100000000000000)) ... unproven
+7/17 ... [IO] line 155, (1000000000000000 * (rawNewClaimPrice / 1000000000000000)) ... unproven
+8/17 ... [IO] line 157, (10000000000000000 * (rawNewClaimPrice / 10000000000000000)) ... unproven
+9/17 ... [IO] line 159, (100000000000000000 * (rawNewClaimPrice / 100000000000000000)) ... unproven
+10/17 ... [IO] line 161, (1000000000000000000 * (rawNewClaimPrice / 1000000000000000000)) ... unproven
+11/17 ... [IO] line 163, (10000000000000000000 * (rawNewClaimPrice / 10000000000000000000)) ... unproven
+12/17 ... [ETH_LEAK] line 110, msg.sender.send(valuePaid); ... unproven
+13/17 ... [ETH_LEAK] line 118, msg.sender.send(excessPaid); ... unproven
+14/17 ... [ETH_LEAK] line 133, currentMonarch.etherAddress.send(compensation); ... unproven
+15/17 ... [ETH_LEAK] line 175, wizardAddress.send(amount); ... unproven
+16/17 ... [TX_ORG] line 45, assume((msg.sender == wizardAddress)); ... proven
+17/17 ... [TX_ORG] line 131, assume((currentMonarch.etherAddress != wizardAddress)); ... proven
+took 511.859512s
+
+Generating VCs ... took 0.103332s
+Checking validity of VCs ... 
+1/36 ... [NO_EFFECT] line 85, (@pre1 == n) ... unproven
+2/36 ... [NO_EFFECT] line 105, (@pre18 == valuePaid) ... unproven
+3/36 ... [NO_EFFECT] line 116, (@pre17 == excessPaid) ... unproven
+4/36 ... [NO_EFFECT] line 119, (@pre16 == valuePaid) ... unproven
+5/36 ... [NO_EFFECT] line 126, (@pre15 == wizardCommission) ... unproven
+6/36 ... [NO_EFFECT] line 129, (@pre14 == compensation) ... unproven
+7/36 ... [NO_EFFECT] line 140, (@pre11 == currentMonarch.coronationTimestamp) ... unproven
+8/36 ... [NO_EFFECT] line 140, (@pre12 == currentMonarch.claimPrice) ... unproven
+9/36 ... [NO_EFFECT] line 140, (@pre13 == currentMonarch.etherAddress) ... unproven
+10/36 ... [NO_EFFECT] line 149, (@pre10 == rawNewClaimPrice) ... unproven
+11/36 ... [NO_EFFECT] line 151, (@pre9 == currentClaimPrice) ... unproven
+12/36 ... [NO_EFFECT] line 153, (@pre8 == currentClaimPrice) ... unproven
+13/36 ... [NO_EFFECT] line 155, (@pre7 == currentClaimPrice) ... unproven
+14/36 ... [NO_EFFECT] line 157, (@pre6 == currentClaimPrice) ... unproven
+15/36 ... [NO_EFFECT] line 159, (@pre5 == currentClaimPrice) ... unproven
+16/36 ... [NO_EFFECT] line 161, (@pre4 == currentClaimPrice) ... unproven
+17/36 ... [NO_EFFECT] line 163, (@pre3 == currentClaimPrice) ... unproven
+18/36 ... [NO_EFFECT] line 165, (@pre2 == currentClaimPrice) ... unproven
+19/36 ... [NO_EFFECT] line 180, (@pre19 == wizardAddress) ... unproven
+20/36 ... [ASSIGN_CONST] line 116, ((!(currentMonarch.etherAddress != msg.sender)) || (excessPaid == 0)) ... unproven
+21/36 ... [ASSIGN_CONST] line 119, ((!(currentMonarch.etherAddress != msg.sender)) || (valuePaid == 0)) ... unproven
+22/36 ... [ASSIGN_CONST] line 129, ((!(currentMonarch.etherAddress != msg.sender)) || (compensation == 0)) ... unproven
+23/36 ... [DEAD] line 45, false ... unproven
+24/36 ... [DEAD] line 99, false ... unproven
+25/36 ... [DEAD] line 108, false ... unproven
+26/36 ... [DEAD] line 115, false ... unproven
+27/36 ... [DEAD] line 128, false ... unproven
+28/36 ... [DEAD] line 131, false ... unproven
+29/36 ... [DEAD] line 150, false ... unproven
+30/36 ... [DEAD] line 152, false ... unproven
+31/36 ... [DEAD] line 154, false ... unproven
+32/36 ... [DEAD] line 156, false ... unproven
+33/36 ... [DEAD] line 158, false ... unproven
+34/36 ... [DEAD] line 160, false ... unproven
+35/36 ... [DEAD] line 162, false ... unproven
+36/36 ... [DEAD] line 169, false ... unproven
+took 2.605839s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 116, (valuePaid - currentClaimPrice) : proven
+[2] [IO] line 119, (valuePaid - excessPaid) : proven
+[3] [IO] line 126, (valuePaid * wizardCommissionFractionNum) : unproven
+[4] [IO] line 129, (valuePaid - wizardCommission) : proven
+[5] [IO] line 149, (currentClaimPrice * claimPriceAdjustNum) : unproven
+[6] [IO] line 153, (100000000000000 * (rawNewClaimPrice / 100000000000000)) : unproven
+[7] [IO] line 155, (1000000000000000 * (rawNewClaimPrice / 1000000000000000)) : unproven
+[8] [IO] line 157, (10000000000000000 * (rawNewClaimPrice / 10000000000000000)) : unproven
+[9] [IO] line 159, (100000000000000000 * (rawNewClaimPrice / 100000000000000000)) : unproven
+[10] [IO] line 161, (1000000000000000000 * (rawNewClaimPrice / 1000000000000000000)) : unproven
+[11] [IO] line 163, (10000000000000000000 * (rawNewClaimPrice / 10000000000000000000)) : unproven
+[12] [ETH_LEAK] line 110, msg.sender.send(valuePaid); : unproven
+[13] [ETH_LEAK] line 118, msg.sender.send(excessPaid); : unproven
+[14] [ETH_LEAK] line 133, currentMonarch.etherAddress.send(compensation); : unproven
+[15] [ETH_LEAK] line 175, wizardAddress.send(amount); : unproven
+[16] [TX_ORG] line 45, assume((msg.sender == wizardAddress)); : proven
+[17] [TX_ORG] line 131, assume((currentMonarch.etherAddress != wizardAddress)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 85, (@pre1 == n) : unproven
+[2] [NO_EFFECT] line 105, (@pre18 == valuePaid) : unproven
+[3] [NO_EFFECT] line 116, (@pre17 == excessPaid) : unproven
+[4] [NO_EFFECT] line 119, (@pre16 == valuePaid) : unproven
+[5] [NO_EFFECT] line 126, (@pre15 == wizardCommission) : unproven
+[6] [NO_EFFECT] line 129, (@pre14 == compensation) : unproven
+[7] [NO_EFFECT] line 140, (@pre11 == currentMonarch.coronationTimestamp) : unproven
+[8] [NO_EFFECT] line 140, (@pre12 == currentMonarch.claimPrice) : unproven
+[9] [NO_EFFECT] line 140, (@pre13 == currentMonarch.etherAddress) : unproven
+[10] [NO_EFFECT] line 149, (@pre10 == rawNewClaimPrice) : unproven
+[11] [NO_EFFECT] line 151, (@pre9 == currentClaimPrice) : unproven
+[12] [NO_EFFECT] line 153, (@pre8 == currentClaimPrice) : unproven
+[13] [NO_EFFECT] line 155, (@pre7 == currentClaimPrice) : unproven
+[14] [NO_EFFECT] line 157, (@pre6 == currentClaimPrice) : unproven
+[15] [NO_EFFECT] line 159, (@pre5 == currentClaimPrice) : unproven
+[16] [NO_EFFECT] line 161, (@pre4 == currentClaimPrice) : unproven
+[17] [NO_EFFECT] line 163, (@pre3 == currentClaimPrice) : unproven
+[18] [NO_EFFECT] line 165, (@pre2 == currentClaimPrice) : unproven
+[19] [NO_EFFECT] line 180, (@pre19 == wizardAddress) : unproven
+[20] [ASSIGN_CONST] line 116, ((!(currentMonarch.etherAddress != msg.sender)) || (excessPaid == 0)) : unproven
+[21] [ASSIGN_CONST] line 119, ((!(currentMonarch.etherAddress != msg.sender)) || (valuePaid == 0)) : unproven
+[22] [ASSIGN_CONST] line 129, ((!(currentMonarch.etherAddress != msg.sender)) || (compensation == 0)) : unproven
+[23] [DEAD] line 45, false : unproven
+[24] [DEAD] line 99, false : unproven
+[25] [DEAD] line 108, false : unproven
+[26] [DEAD] line 115, false : unproven
+[27] [DEAD] line 128, false : unproven
+[28] [DEAD] line 131, false : unproven
+[29] [DEAD] line 150, false : unproven
+[30] [DEAD] line 152, false : unproven
+[31] [DEAD] line 154, false : unproven
+[32] [DEAD] line 156, false : unproven
+[33] [DEAD] line 158, false : unproven
+[34] [DEAD] line 160, false : unproven
+[35] [DEAD] line 162, false : unproven
+[36] [DEAD] line 169, false : unproven
+
+============ Statistics ============
+# Iter                    : 1
+# Alarm / Query           : 12 / 17
+- integer over/underflow  : 8 / 11
+- kill-anyone             : 0 / 0
+- ether-leaking           : 4 / 4
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 2
+
+Time Elapsed (Real) : 516.586595058
+Time Elapsed (CPU)  : 516.496432

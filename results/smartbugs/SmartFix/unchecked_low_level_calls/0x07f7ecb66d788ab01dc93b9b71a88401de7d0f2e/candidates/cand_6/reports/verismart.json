@@ -1,0 +1,516 @@
+{
+  "fileName": "results/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e/candidates/cand_6/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 61,
+  "time": 151.369526,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(land(eq(randomSeed__@110:uint256,0),eq(read(@TU:mapping(address => bool),owner__@112:address),cond(true))),eq(read(@TU:mapping(address => bool),whale__@104:address),cond(true)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(eq(read(@TU:mapping(address => bool),owner__@112:address),cond(true)),eq(read(@TU:mapping(address => bool),whale__@104:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 164,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "((uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty) + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 213,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "donate", "argTypes": [] }
+      ],
+      "exp": "(totalDonated + amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 225,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "(totalDonated + amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 201,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "winner.transfer(ethToTransfer);",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ETH_LEAK",
+      "line": 212,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "donate", "argTypes": [] }
+      ],
+      "exp": "whale.call.value(amount)(bytes4(keccak256(\"donate()\")));",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "ETH_LEAK",
+      "line": 224,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "whale.call.value(amount)(bytes4(keccak256(\"donate()\")));",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "RE_EL",
+      "line": 201,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "winner.transfer(ethToTransfer);",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "RE_EL",
+      "line": 212,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "donate", "argTypes": [] }
+      ],
+      "exp": "whale.call.value(amount)(bytes4(keccak256(\"donate()\")));",
+      "status": "proven"
+    },
+    {
+      "no": "9",
+      "kind": "RE_EL",
+      "line": 224,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "whale.call.value(amount)(bytes4(keccak256(\"donate()\")));",
+      "status": "proven"
+    },
+    {
+      "no": "10",
+      "kind": "RE",
+      "line": 94,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "OpenToThePublic",
+          "argTypes": []
+        }
+      ],
+      "exp": "(PoCGame, OpenToThePublic, [])",
+      "status": "proven"
+    },
+    {
+      "no": "11",
+      "kind": "RE",
+      "line": 104,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "AdjustBetAmounts",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(PoCGame, AdjustBetAmounts, [uint256])",
+      "status": "proven"
+    },
+    {
+      "no": "12",
+      "kind": "RE",
+      "line": 116,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "AdjustDifficulty",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(PoCGame, AdjustDifficulty, [uint256])",
+      "status": "proven"
+    },
+    {
+      "no": "13",
+      "kind": "RE",
+      "line": 126,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(PoCGame, @fallback, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "RE",
+      "line": 131,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "wager", "argTypes": [] }
+      ],
+      "exp": "(PoCGame, wager, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "RE",
+      "line": 152,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "(PoCGame, play, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "RE",
+      "line": 185,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "donate", "argTypes": [] }
+      ],
+      "exp": "(PoCGame, donate, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "RE",
+      "line": 295,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "transferAnyERC20Token",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(PoCGame, transferAnyERC20Token, [address, address, uint256])",
+      "status": "proven"
+    },
+    {
+      "no": "18",
+      "kind": "TX_ORG",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "AdjustBetAmounts",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "PoCGame",
+          "methodName": "AdjustDifficulty",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "PoCGame",
+          "methodName": "OpenToThePublic",
+          "argTypes": []
+        },
+        {
+          "contractName": "PoCGame",
+          "methodName": "transferAnyERC20Token",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    },
+    {
+      "no": "19",
+      "kind": "TX_ORG",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "PoCGame",
+          "argTypes": [ "address", "uint256" ]
+        },
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] },
+        { "contractName": "PoCGame", "methodName": "wager", "argTypes": [] }
+      ],
+      "exp": "assume((msg.sender == tx.origin));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 108,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "AdjustBetAmounts",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == betLimit)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 120,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "AdjustDifficulty",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == difficulty)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 144,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "wager", "argTypes": [] }
+      ],
+      "exp": "(@pre4 == timestamps[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 145,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "wager", "argTypes": [] }
+      ],
+      "exp": "(@pre3 == wagers[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 158,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "(@pre6 == blockNumber)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 164,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "(@pre5 == winningNumber)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "NO_EFFECT",
+      "line": 199,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "(@pre7 == ethToTransfer)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "NO_EFFECT",
+      "line": 213,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "donate", "argTypes": [] }
+      ],
+      "exp": "(@pre8 == totalDonated)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "NO_EFFECT",
+      "line": 225,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "(@pre9 == totalDonated)",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "ASSIGN_CONST",
+      "line": 164,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "(winningNumber == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "ASSIGN_CONST",
+      "line": 213,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "donate", "argTypes": [] }
+      ],
+      "exp": "(totalDonated == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "ASSIGN_CONST",
+      "line": 225,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "(totalDonated == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "DEAD",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "PoCGame",
+          "methodName": "AdjustBetAmounts",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "PoCGame",
+          "methodName": "AdjustDifficulty",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "PoCGame",
+          "methodName": "OpenToThePublic",
+          "argTypes": []
+        },
+        {
+          "contractName": "PoCGame",
+          "methodName": "transferAnyERC20Token",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "DEAD",
+      "line": 41,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] },
+        { "contractName": "PoCGame", "methodName": "wager", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "DEAD",
+      "line": 47,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "DEAD",
+      "line": 138,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "wager", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "DEAD",
+      "line": 141,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "wager", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "DEAD",
+      "line": 159,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "19",
+      "kind": "DEAD",
+      "line": 166,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "20",
+      "kind": "DEAD",
+      "line": 168,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "21",
+      "kind": "DEAD",
+      "line": 173,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "22",
+      "kind": "DEAD",
+      "line": 190,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "donate", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "23",
+      "kind": "DEAD",
+      "line": 201,
+      "signatures": [
+        { "contractName": "PoCGame", "methodName": "play", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

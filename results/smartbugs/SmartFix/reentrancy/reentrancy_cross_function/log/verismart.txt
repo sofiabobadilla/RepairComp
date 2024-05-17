@@ -6,16 +6,16 @@
 
 [INFO] all funcs : 3
 [INFO] reachable : 3
-[INFO] Generating Paths ... took 0.00015s
+[INFO] Generating Paths ... took 0.000171s
 [INFO] # path : 13
 
 [INFO] Violate CEI: true
 [INFO] msg.sender = this possible: false
-[INFO] Performing Interval Analysis ... took 0.000376s
-Generating VCs ... took 0.005664s
+[INFO] Performing Interval Analysis ... took 0.000434s
+Generating VCs ... took 0.005632s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 1 Total elapsed : 0.031947
+Iter: 1 Total elapsed : 0.033841
 [
 -1 -> true
 0 -> true
@@ -28,15 +28,15 @@ Iter: 1 Total elapsed : 0.031947
 4/6 ... [RE_EL] line 24, (success,  ) = msg.sender.call.value(amountToWithdraw)(""); ... unproven
 5/6 ... [RE] line 14, (Reentrancy_cross_function, transfer, [address, uint256]) ... unproven
 6/6 ... [RE] line 21, (Reentrancy_cross_function, withdrawBalance, []) ... unproven
-took 0.48s
+took 0.478676s
 
-Generating VCs ... took 0.000949s
-Checking validity of VCs ... took 0.809007s
+Generating VCs ... took 0.000965s
+Checking validity of VCs ... took 0.818846s
 
-Generating VCs ... took 0.000823s
+Generating VCs ... took 0.000826s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 3 Total elapsed : 1.362505
+Iter: 3 Total elapsed : 1.373952
 [
 -1 -> NoOverFlow (ΣuserBalances__@5)
 0 -> NoOverFlow (ΣuserBalances__@5)
@@ -49,15 +49,15 @@ Iter: 3 Total elapsed : 1.362505
 4/6 ... [RE_EL] line 24, (success,  ) = msg.sender.call.value(amountToWithdraw)(""); ... unproven
 5/6 ... [RE] line 14, (Reentrancy_cross_function, transfer, [address, uint256]) ... unproven
 6/6 ... [RE] line 21, (Reentrancy_cross_function, withdrawBalance, []) ... unproven
-took 1.868591s
+took 1.87761s
 
-Generating VCs ... took 0.000742s
-Checking validity of VCs ... took 1.179116s
+Generating VCs ... took 0.000752s
+Checking validity of VCs ... took 1.155448s
 
-Generating VCs ... took 0.000823s
+Generating VCs ... took 0.000819000000001s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 5 Total elapsed : 4.483623
+Iter: 5 Total elapsed : 4.481737
 [
 -1 -> ((ΣuserBalances__@5 == 0) /\ NoOverFlow (ΣuserBalances__@5))
 0 -> ((ΣuserBalances__@5 == 0) /\ NoOverFlow (ΣuserBalances__@5))
@@ -70,12 +70,12 @@ Iter: 5 Total elapsed : 4.483623
 4/6 ... [RE_EL] line 24, (success,  ) = msg.sender.call.value(amountToWithdraw)(""); ... proven
 5/6 ... [RE] line 14, (Reentrancy_cross_function, transfer, [address, uint256]) ... unproven
 6/6 ... [RE] line 21, (Reentrancy_cross_function, withdrawBalance, []) ... unproven
-took 30.054254s
+took 29.432751s
 
-Generating VCs ... took 0.000909999999998s
+Generating VCs ... took 0.000794999999997s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 6 Total elapsed : 37.609927
+Iter: 6 Total elapsed : 36.321361
 [
 -1 -> (((ΣuserBalances__@5 == 0) /\ NoOverFlow (ΣuserBalances__@5)) /\ @Invest_sum >= Σ_u userBalances__@5)
 0 -> (((ΣuserBalances__@5 == 0) /\ NoOverFlow (ΣuserBalances__@5)) /\ @Invest_sum >= Σ_u userBalances__@5)
@@ -88,9 +88,9 @@ Iter: 6 Total elapsed : 37.609927
 4/6 ... [RE_EL] line 24, (success,  ) = msg.sender.call.value(amountToWithdraw)(""); ... proven
 5/6 ... [RE] line 14, (Reentrancy_cross_function, transfer, [address, uint256]) ... unproven
 6/6 ... [RE] line 21, (Reentrancy_cross_function, withdrawBalance, []) ... unproven
-took 11.698015s
+took 10.587292s
 
-Generating VCs ... took 0.000554999999999s
+Generating VCs ... took 0.000550999999994s
 Checking validity of VCs ... 
 1/6 ... [NO_EFFECT] line 16, (@pre2 == userBalances[to]) ... proven
 2/6 ... [NO_EFFECT] line 17, (@pre1 == userBalances[msg.sender]) ... unproven
@@ -98,7 +98,7 @@ Checking validity of VCs ...
 4/6 ... [ASSIGN_CONST] line 16, ((!(msg.sender != to)) || (userBalances[to] == 0)) ... proven
 5/6 ... [ASSIGN_CONST] line 17, ((!(msg.sender != to)) || (userBalances[msg.sender] == 0)) ... unproven
 6/6 ... [DEAD] line 15, false ... unproven
-took 65.463202s
+took 62.646678s
 
 
 ===== Vulnerability Report =====
@@ -127,5 +127,5 @@ took 65.463202s
 - reentrancy              : 2 / 2
 - tx.origin               : 0 / 0
 
-Time Elapsed (Real) : 111.604918957
-Time Elapsed (CPU)  : 111.590223
+Time Elapsed (Real) : 107.052086115
+Time Elapsed (CPU)  : 107.037796

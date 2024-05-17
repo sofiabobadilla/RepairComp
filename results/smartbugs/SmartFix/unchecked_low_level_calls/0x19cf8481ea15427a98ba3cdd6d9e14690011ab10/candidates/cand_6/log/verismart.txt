@@ -1,0 +1,1036 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 94
+[INFO] reachable : 51
+[INFO] Generating Paths ... took 0.0009s
+[INFO] # path : 126
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.004773s
+Generating VCs ... took 0.033163s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.152881
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/74 ... [IO] line 50, (a - b) ... proven
+2/74 ... [IO] line 54, (a + b) ... proven
+3/74 ... [IO] line 261, (balances[msg.sender] - _value) ... proven
+4/74 ... [IO] line 262, (totalSupply - _value) ... unproven
+5/74 ... [IO] line 278, (balances[_from] - _value) ... proven
+6/74 ... [IO] line 279, (allowed[_from][msg.sender] - _value) ... proven
+7/74 ... [IO] line 280, (totalSupply - _value) ... unproven
+8/74 ... [IO] line 289, (balances[_to] + _value) ... 
+Warning : conditional safety checking
+
+Warning : conditional safety checking
+proven
+9/74 ... [IO] line 291, (balances[msg.sender] - _value) ... proven
+10/74 ... [IO] line 292, (balances[_to] + _value) ... proven
+11/74 ... [IO] line 300, (balances[_to] + _value) ... 
+Warning : conditional safety checking
+
+Warning : conditional safety checking
+proven
+12/74 ... [IO] line 302, (balances[_to] + _value) ... proven
+13/74 ... [IO] line 303, (balances[_from] - _value) ... proven
+14/74 ... [IO] line 304, (allowed[_from][msg.sender] - _value) ... proven
+15/74 ... [IO] line 329, (balances[msg.sender] + msg.value) ... unproven
+16/74 ... [IO] line 376, (numTransfers + 1) ... unproven
+17/74 ... [IO] line 395, (supplylimit - totalSupply) ... unproven
+18/74 ... [IO] line 406, (msg.value * CreationRate) ... unproven
+19/74 ... [IO] line 407, (totalSupply + numTokens) ... unproven
+20/74 ... [IO] line 410, (balances[holder] + numTokens) ... unproven
+21/74 ... [IO] line 411, (balancesRAW[holder] + numTokensRAW) ... unproven
+22/74 ... [IO] line 417, (numTokens * percentOfTotal) ... unproven
+23/74 ... [IO] line 419, (totalSupply + additionalTokens) ... unproven
+24/74 ... [IO] line 421, (balances[migrationMaster] + additionalTokens) ... unproven
+25/74 ... [IO] line 428, (tokenCreationRate + bonusCreationRate) ... unproven
+26/74 ... [IO] line 440, (this.balance - SubX) ... unproven
+27/74 ... [IO] line 459, (8 * oneweek) ... proven
+28/74 ... [IO] line 459, (fundingEndBlock + (8 * oneweek)) ... proven
+29/74 ... [IO] line 477, (balances[msg.sender] - _value) ... proven
+30/74 ... [IO] line 478, (totalSupply - _value) ... unproven
+31/74 ... [IO] line 479, (totalMigrated + _value) ... unproven
+32/74 ... [IO] line 493, (totalSupply - DAOPLTokenValue) ... unproven
+33/74 ... [ETH_LEAK] line 434, owner.send(this.balance) ... unproven
+34/74 ... [ETH_LEAK] line 440, owner.send((this.balance - SubX)); ... unproven
+35/74 ... [ETH_LEAK] line 466, owner.send(this.balance); ... unproven
+36/74 ... [ETH_LEAK] line 496, msg.sender.transfer(ETHValue); ... unproven
+37/74 ... [RE_EL] line 434, owner.send(this.balance) ... unproven
+38/74 ... [RE_EL] line 440, owner.send((this.balance - SubX)); ... unproven
+39/74 ... [RE_EL] line 466, owner.send(this.balance); ... unproven
+40/74 ... [RE_EL] line 496, msg.sender.transfer(ETHValue); ... unproven
+41/74 ... [RE] line 209, (daoPOLSKAtokens, setSupply, [uint256]) ... unproven
+42/74 ... [RE] line 221, (daoPOLSKAtokens, setotherchainstotalsupply, [uint256]) ... unproven
+43/74 ... [RE] line 242, (daoPOLSKAtokens, approveAndCall, [address, uint256, dbytes]) ... unproven
+44/74 ... [RE] line 259, (daoPOLSKAtokens, burn, [uint256]) ... unproven
+45/74 ... [RE] line 275, (daoPOLSKAtokens, burnFrom, [address, uint256]) ... unproven
+46/74 ... [RE] line 285, (daoPOLSKAtokens, transfer, [address, uint256]) ... unproven
+47/74 ... [RE] line 298, (daoPOLSKAtokens, transferFrom, [address, address, uint256]) ... unproven
+48/74 ... [RE] line 314, (daoPOLSKAtokens, approve, [address, uint256]) ... unproven
+49/74 ... [RE] line 326, (daoPOLSKAtokens, @fallback, []) ... unproven
+50/74 ... [RE] line 338, (daoPOLSKAtokens, setTokenInformation, [string, string]) ... unproven
+51/74 ... [RE] line 349, (daoPOLSKAtokens, setChainsAddresses, [address, int256]) ... unproven
+52/74 ... [RE] line 367, (daoPOLSKAtokens, sendTokenAw, [address, address, uint256]) ... unproven
+53/74 ... [RE] line 388, (daoPOLSKAtokens, createDaoPOLSKAtokens, [address]) ... unproven
+54/74 ... [RE] line 425, (daoPOLSKAtokens, setBonusCreationRate, [uint256]) ... unproven
+55/74 ... [RE] line 432, (daoPOLSKAtokens, FundsTransfer, []) ... unproven
+56/74 ... [RE] line 437, (daoPOLSKAtokens, PartialFundsTransfer, [uint256]) ... unproven
+57/74 ... [RE] line 442, (daoPOLSKAtokens, turnrefund, []) ... unproven
+58/74 ... [RE] line 447, (daoPOLSKAtokens, fundingState, []) ... unproven
+59/74 ... [RE] line 451, (daoPOLSKAtokens, turnmigrate, []) ... unproven
+60/74 ... [RE] line 458, (daoPOLSKAtokens, finalize, []) ... unproven
+61/74 ... [RE] line 468, (daoPOLSKAtokens, migrate, [uint256]) ... unproven
+62/74 ... [RE] line 484, (daoPOLSKAtokens, refundTRA, []) ... unproven
+63/74 ... [TX_ORG] line 210, assume((msg.sender != owner)); ... proven
+64/74 ... [TX_ORG] line 222, assume((msg.sender != owner)); ... proven
+65/74 ... [TX_ORG] line 340, assume((msg.sender != owner)); ... proven
+66/74 ... [TX_ORG] line 351, assume((Chain3 == msg.sender)); ... proven
+67/74 ... [TX_ORG] line 352, assume((msg.sender != owner)); ... proven
+68/74 ... [TX_ORG] line 368, assume((msg.sender != owner)); ... proven
+69/74 ... [TX_ORG] line 426, assume((msg.sender == owner)); ... proven
+70/74 ... [TX_ORG] line 438, assume((msg.sender != owner)); ... proven
+71/74 ... [TX_ORG] line 443, assume((msg.sender != owner)); ... proven
+72/74 ... [TX_ORG] line 448, assume((msg.sender != owner)); ... proven
+73/74 ... [TX_ORG] line 452, assume((msg.sender != migrationMaster)); ... proven
+74/74 ... [TX_ORG] line 464, assume((msg.sender == owner)); ... proven
+took 6.121896s
+
+Generating VCs ... took 0.034085s
+Checking validity of VCs ... took 0.174555s
+
+Generating VCs ... took 0.033196s
+Checking validity of VCs ... took 0.177621s
+
+Generating VCs ... took 0.032369s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 10.504071
+[
+-1 -> (Read(@TU, Chain3__@521) == true)
+0 -> (Read(@TU, Chain3__@521) == true)
+]
+[
+]
+1/74 ... [IO] line 50, (a - b) ... proven
+2/74 ... [IO] line 54, (a + b) ... proven
+3/74 ... [IO] line 261, (balances[msg.sender] - _value) ... proven
+4/74 ... [IO] line 262, (totalSupply - _value) ... unproven
+5/74 ... [IO] line 278, (balances[_from] - _value) ... proven
+6/74 ... [IO] line 279, (allowed[_from][msg.sender] - _value) ... proven
+7/74 ... [IO] line 280, (totalSupply - _value) ... unproven
+8/74 ... [IO] line 289, (balances[_to] + _value) ... proven
+9/74 ... [IO] line 291, (balances[msg.sender] - _value) ... proven
+10/74 ... [IO] line 292, (balances[_to] + _value) ... proven
+11/74 ... [IO] line 300, (balances[_to] + _value) ... proven
+12/74 ... [IO] line 302, (balances[_to] + _value) ... proven
+13/74 ... [IO] line 303, (balances[_from] - _value) ... proven
+14/74 ... [IO] line 304, (allowed[_from][msg.sender] - _value) ... proven
+15/74 ... [IO] line 329, (balances[msg.sender] + msg.value) ... unproven
+16/74 ... [IO] line 376, (numTransfers + 1) ... unproven
+17/74 ... [IO] line 395, (supplylimit - totalSupply) ... unproven
+18/74 ... [IO] line 406, (msg.value * CreationRate) ... unproven
+19/74 ... [IO] line 407, (totalSupply + numTokens) ... unproven
+20/74 ... [IO] line 410, (balances[holder] + numTokens) ... unproven
+21/74 ... [IO] line 411, (balancesRAW[holder] + numTokensRAW) ... unproven
+22/74 ... [IO] line 417, (numTokens * percentOfTotal) ... unproven
+23/74 ... [IO] line 419, (totalSupply + additionalTokens) ... unproven
+24/74 ... [IO] line 421, (balances[migrationMaster] + additionalTokens) ... unproven
+25/74 ... [IO] line 428, (tokenCreationRate + bonusCreationRate) ... unproven
+26/74 ... [IO] line 440, (this.balance - SubX) ... unproven
+27/74 ... [IO] line 459, (8 * oneweek) ... proven
+28/74 ... [IO] line 459, (fundingEndBlock + (8 * oneweek)) ... proven
+29/74 ... [IO] line 477, (balances[msg.sender] - _value) ... proven
+30/74 ... [IO] line 478, (totalSupply - _value) ... unproven
+31/74 ... [IO] line 479, (totalMigrated + _value) ... unproven
+32/74 ... [IO] line 493, (totalSupply - DAOPLTokenValue) ... unproven
+33/74 ... [ETH_LEAK] line 434, owner.send(this.balance) ... unproven
+34/74 ... [ETH_LEAK] line 440, owner.send((this.balance - SubX)); ... unproven
+35/74 ... [ETH_LEAK] line 466, owner.send(this.balance); ... unproven
+36/74 ... [ETH_LEAK] line 496, msg.sender.transfer(ETHValue); ... unproven
+37/74 ... [RE_EL] line 434, owner.send(this.balance) ... unproven
+38/74 ... [RE_EL] line 440, owner.send((this.balance - SubX)); ... unproven
+39/74 ... [RE_EL] line 466, owner.send(this.balance); ... unproven
+40/74 ... [RE_EL] line 496, msg.sender.transfer(ETHValue); ... unproven
+41/74 ... [RE] line 209, (daoPOLSKAtokens, setSupply, [uint256]) ... unproven
+42/74 ... [RE] line 221, (daoPOLSKAtokens, setotherchainstotalsupply, [uint256]) ... unproven
+43/74 ... [RE] line 242, (daoPOLSKAtokens, approveAndCall, [address, uint256, dbytes]) ... unproven
+44/74 ... [RE] line 259, (daoPOLSKAtokens, burn, [uint256]) ... unproven
+45/74 ... [RE] line 275, (daoPOLSKAtokens, burnFrom, [address, uint256]) ... unproven
+46/74 ... [RE] line 285, (daoPOLSKAtokens, transfer, [address, uint256]) ... unproven
+47/74 ... [RE] line 298, (daoPOLSKAtokens, transferFrom, [address, address, uint256]) ... unproven
+48/74 ... [RE] line 314, (daoPOLSKAtokens, approve, [address, uint256]) ... unproven
+49/74 ... [RE] line 326, (daoPOLSKAtokens, @fallback, []) ... unproven
+50/74 ... [RE] line 338, (daoPOLSKAtokens, setTokenInformation, [string, string]) ... unproven
+51/74 ... [RE] line 349, (daoPOLSKAtokens, setChainsAddresses, [address, int256]) ... proven
+52/74 ... [RE] line 367, (daoPOLSKAtokens, sendTokenAw, [address, address, uint256]) ... unproven
+53/74 ... [RE] line 388, (daoPOLSKAtokens, createDaoPOLSKAtokens, [address]) ... unproven
+54/74 ... [RE] line 425, (daoPOLSKAtokens, setBonusCreationRate, [uint256]) ... unproven
+55/74 ... [RE] line 432, (daoPOLSKAtokens, FundsTransfer, []) ... unproven
+56/74 ... [RE] line 437, (daoPOLSKAtokens, PartialFundsTransfer, [uint256]) ... unproven
+57/74 ... [RE] line 442, (daoPOLSKAtokens, turnrefund, []) ... unproven
+58/74 ... [RE] line 447, (daoPOLSKAtokens, fundingState, []) ... unproven
+59/74 ... [RE] line 451, (daoPOLSKAtokens, turnmigrate, []) ... unproven
+60/74 ... [RE] line 458, (daoPOLSKAtokens, finalize, []) ... unproven
+61/74 ... [RE] line 468, (daoPOLSKAtokens, migrate, [uint256]) ... unproven
+62/74 ... [RE] line 484, (daoPOLSKAtokens, refundTRA, []) ... unproven
+63/74 ... [TX_ORG] line 210, assume((msg.sender != owner)); ... proven
+64/74 ... [TX_ORG] line 222, assume((msg.sender != owner)); ... proven
+65/74 ... [TX_ORG] line 340, assume((msg.sender != owner)); ... proven
+66/74 ... [TX_ORG] line 351, assume((Chain3 == msg.sender)); ... proven
+67/74 ... [TX_ORG] line 352, assume((msg.sender != owner)); ... proven
+68/74 ... [TX_ORG] line 368, assume((msg.sender != owner)); ... proven
+69/74 ... [TX_ORG] line 426, assume((msg.sender == owner)); ... proven
+70/74 ... [TX_ORG] line 438, assume((msg.sender != owner)); ... proven
+71/74 ... [TX_ORG] line 443, assume((msg.sender != owner)); ... proven
+72/74 ... [TX_ORG] line 448, assume((msg.sender != owner)); ... proven
+73/74 ... [TX_ORG] line 452, assume((msg.sender != migrationMaster)); ... proven
+74/74 ... [TX_ORG] line 464, assume((msg.sender == owner)); ... proven
+took 5.426214s
+
+Generating VCs ... took 0.033414s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 5 Total elapsed : 20.284684
+[
+-1 -> ((Read(@TU, Chain2__@518) == true) /\ (Read(@TU, Chain3__@521) == true))
+0 -> ((Read(@TU, Chain2__@518) == true) /\ (Read(@TU, Chain3__@521) == true))
+]
+[
+]
+1/74 ... [IO] line 50, (a - b) ... proven
+2/74 ... [IO] line 54, (a + b) ... proven
+3/74 ... [IO] line 261, (balances[msg.sender] - _value) ... proven
+4/74 ... [IO] line 262, (totalSupply - _value) ... unproven
+5/74 ... [IO] line 278, (balances[_from] - _value) ... proven
+6/74 ... [IO] line 279, (allowed[_from][msg.sender] - _value) ... proven
+7/74 ... [IO] line 280, (totalSupply - _value) ... unproven
+8/74 ... [IO] line 289, (balances[_to] + _value) ... proven
+9/74 ... [IO] line 291, (balances[msg.sender] - _value) ... proven
+10/74 ... [IO] line 292, (balances[_to] + _value) ... proven
+11/74 ... [IO] line 300, (balances[_to] + _value) ... proven
+12/74 ... [IO] line 302, (balances[_to] + _value) ... proven
+13/74 ... [IO] line 303, (balances[_from] - _value) ... proven
+14/74 ... [IO] line 304, (allowed[_from][msg.sender] - _value) ... proven
+15/74 ... [IO] line 329, (balances[msg.sender] + msg.value) ... unproven
+16/74 ... [IO] line 376, (numTransfers + 1) ... unproven
+17/74 ... [IO] line 395, (supplylimit - totalSupply) ... unproven
+18/74 ... [IO] line 406, (msg.value * CreationRate) ... unproven
+19/74 ... [IO] line 407, (totalSupply + numTokens) ... unproven
+20/74 ... [IO] line 410, (balances[holder] + numTokens) ... unproven
+21/74 ... [IO] line 411, (balancesRAW[holder] + numTokensRAW) ... unproven
+22/74 ... [IO] line 417, (numTokens * percentOfTotal) ... unproven
+23/74 ... [IO] line 419, (totalSupply + additionalTokens) ... unproven
+24/74 ... [IO] line 421, (balances[migrationMaster] + additionalTokens) ... unproven
+25/74 ... [IO] line 428, (tokenCreationRate + bonusCreationRate) ... unproven
+26/74 ... [IO] line 440, (this.balance - SubX) ... unproven
+27/74 ... [IO] line 459, (8 * oneweek) ... proven
+28/74 ... [IO] line 459, (fundingEndBlock + (8 * oneweek)) ... proven
+29/74 ... [IO] line 477, (balances[msg.sender] - _value) ... proven
+30/74 ... [IO] line 478, (totalSupply - _value) ... unproven
+31/74 ... [IO] line 479, (totalMigrated + _value) ... unproven
+32/74 ... [IO] line 493, (totalSupply - DAOPLTokenValue) ... unproven
+33/74 ... [ETH_LEAK] line 434, owner.send(this.balance) ... unproven
+34/74 ... [ETH_LEAK] line 440, owner.send((this.balance - SubX)); ... unproven
+35/74 ... [ETH_LEAK] line 466, owner.send(this.balance); ... unproven
+36/74 ... [ETH_LEAK] line 496, msg.sender.transfer(ETHValue); ... unproven
+37/74 ... [RE_EL] line 434, owner.send(this.balance) ... unproven
+38/74 ... [RE_EL] line 440, owner.send((this.balance - SubX)); ... unproven
+39/74 ... [RE_EL] line 466, owner.send(this.balance); ... unproven
+40/74 ... [RE_EL] line 496, msg.sender.transfer(ETHValue); ... unproven
+41/74 ... [RE] line 209, (daoPOLSKAtokens, setSupply, [uint256]) ... unproven
+42/74 ... [RE] line 221, (daoPOLSKAtokens, setotherchainstotalsupply, [uint256]) ... unproven
+43/74 ... [RE] line 242, (daoPOLSKAtokens, approveAndCall, [address, uint256, dbytes]) ... unproven
+44/74 ... [RE] line 259, (daoPOLSKAtokens, burn, [uint256]) ... unproven
+45/74 ... [RE] line 275, (daoPOLSKAtokens, burnFrom, [address, uint256]) ... unproven
+46/74 ... [RE] line 285, (daoPOLSKAtokens, transfer, [address, uint256]) ... unproven
+47/74 ... [RE] line 298, (daoPOLSKAtokens, transferFrom, [address, address, uint256]) ... unproven
+48/74 ... [RE] line 314, (daoPOLSKAtokens, approve, [address, uint256]) ... unproven
+49/74 ... [RE] line 326, (daoPOLSKAtokens, @fallback, []) ... unproven
+50/74 ... [RE] line 338, (daoPOLSKAtokens, setTokenInformation, [string, string]) ... unproven
+51/74 ... [RE] line 349, (daoPOLSKAtokens, setChainsAddresses, [address, int256]) ... proven
+52/74 ... [RE] line 367, (daoPOLSKAtokens, sendTokenAw, [address, address, uint256]) ... unproven
+53/74 ... [RE] line 388, (daoPOLSKAtokens, createDaoPOLSKAtokens, [address]) ... unproven
+54/74 ... [RE] line 425, (daoPOLSKAtokens, setBonusCreationRate, [uint256]) ... unproven
+55/74 ... [RE] line 432, (daoPOLSKAtokens, FundsTransfer, []) ... unproven
+56/74 ... [RE] line 437, (daoPOLSKAtokens, PartialFundsTransfer, [uint256]) ... unproven
+57/74 ... [RE] line 442, (daoPOLSKAtokens, turnrefund, []) ... unproven
+58/74 ... [RE] line 447, (daoPOLSKAtokens, fundingState, []) ... unproven
+59/74 ... [RE] line 451, (daoPOLSKAtokens, turnmigrate, []) ... unproven
+60/74 ... [RE] line 458, (daoPOLSKAtokens, finalize, []) ... unproven
+61/74 ... [RE] line 468, (daoPOLSKAtokens, migrate, [uint256]) ... unproven
+62/74 ... [RE] line 484, (daoPOLSKAtokens, refundTRA, []) ... unproven
+63/74 ... [TX_ORG] line 210, assume((msg.sender != owner)); ... proven
+64/74 ... [TX_ORG] line 222, assume((msg.sender != owner)); ... proven
+65/74 ... [TX_ORG] line 340, assume((msg.sender != owner)); ... proven
+66/74 ... [TX_ORG] line 351, assume((Chain3 == msg.sender)); ... proven
+67/74 ... [TX_ORG] line 352, assume((msg.sender != owner)); ... proven
+68/74 ... [TX_ORG] line 368, assume((msg.sender != owner)); ... proven
+69/74 ... [TX_ORG] line 426, assume((msg.sender == owner)); ... proven
+70/74 ... [TX_ORG] line 438, assume((msg.sender != owner)); ... proven
+71/74 ... [TX_ORG] line 443, assume((msg.sender != owner)); ... proven
+72/74 ... [TX_ORG] line 448, assume((msg.sender != owner)); ... proven
+73/74 ... [TX_ORG] line 452, assume((msg.sender != migrationMaster)); ... proven
+74/74 ... [TX_ORG] line 464, assume((msg.sender == owner)); ... proven
+took 6.22085s
+
+Generating VCs ... took 0.037961s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 6 Total elapsed : 29.767118
+[
+-1 -> (((Read(@TU, Chain2__@518) == true) /\ (Read(@TU, Chain3__@521) == true)) /\ (Read(@TU, Chain4__@524) == true))
+0 -> (((Read(@TU, Chain2__@518) == true) /\ (Read(@TU, Chain3__@521) == true)) /\ (Read(@TU, Chain4__@524) == true))
+]
+[
+]
+1/74 ... [IO] line 50, (a - b) ... proven
+2/74 ... [IO] line 54, (a + b) ... proven
+3/74 ... [IO] line 261, (balances[msg.sender] - _value) ... proven
+4/74 ... [IO] line 262, (totalSupply - _value) ... unproven
+5/74 ... [IO] line 278, (balances[_from] - _value) ... proven
+6/74 ... [IO] line 279, (allowed[_from][msg.sender] - _value) ... proven
+7/74 ... [IO] line 280, (totalSupply - _value) ... unproven
+8/74 ... [IO] line 289, (balances[_to] + _value) ... proven
+9/74 ... [IO] line 291, (balances[msg.sender] - _value) ... proven
+10/74 ... [IO] line 292, (balances[_to] + _value) ... proven
+11/74 ... [IO] line 300, (balances[_to] + _value) ... proven
+12/74 ... [IO] line 302, (balances[_to] + _value) ... proven
+13/74 ... [IO] line 303, (balances[_from] - _value) ... proven
+14/74 ... [IO] line 304, (allowed[_from][msg.sender] - _value) ... proven
+15/74 ... [IO] line 329, (balances[msg.sender] + msg.value) ... unproven
+16/74 ... [IO] line 376, (numTransfers + 1) ... unproven
+17/74 ... [IO] line 395, (supplylimit - totalSupply) ... unproven
+18/74 ... [IO] line 406, (msg.value * CreationRate) ... unproven
+19/74 ... [IO] line 407, (totalSupply + numTokens) ... unproven
+20/74 ... [IO] line 410, (balances[holder] + numTokens) ... unproven
+21/74 ... [IO] line 411, (balancesRAW[holder] + numTokensRAW) ... unproven
+22/74 ... [IO] line 417, (numTokens * percentOfTotal) ... unproven
+23/74 ... [IO] line 419, (totalSupply + additionalTokens) ... unproven
+24/74 ... [IO] line 421, (balances[migrationMaster] + additionalTokens) ... unproven
+25/74 ... [IO] line 428, (tokenCreationRate + bonusCreationRate) ... unproven
+26/74 ... [IO] line 440, (this.balance - SubX) ... unproven
+27/74 ... [IO] line 459, (8 * oneweek) ... proven
+28/74 ... [IO] line 459, (fundingEndBlock + (8 * oneweek)) ... proven
+29/74 ... [IO] line 477, (balances[msg.sender] - _value) ... proven
+30/74 ... [IO] line 478, (totalSupply - _value) ... unproven
+31/74 ... [IO] line 479, (totalMigrated + _value) ... unproven
+32/74 ... [IO] line 493, (totalSupply - DAOPLTokenValue) ... unproven
+33/74 ... [ETH_LEAK] line 434, owner.send(this.balance) ... unproven
+34/74 ... [ETH_LEAK] line 440, owner.send((this.balance - SubX)); ... unproven
+35/74 ... [ETH_LEAK] line 466, owner.send(this.balance); ... unproven
+36/74 ... [ETH_LEAK] line 496, msg.sender.transfer(ETHValue); ... unproven
+37/74 ... [RE_EL] line 434, owner.send(this.balance) ... unproven
+38/74 ... [RE_EL] line 440, owner.send((this.balance - SubX)); ... unproven
+39/74 ... [RE_EL] line 466, owner.send(this.balance); ... unproven
+40/74 ... [RE_EL] line 496, msg.sender.transfer(ETHValue); ... unproven
+41/74 ... [RE] line 209, (daoPOLSKAtokens, setSupply, [uint256]) ... unproven
+42/74 ... [RE] line 221, (daoPOLSKAtokens, setotherchainstotalsupply, [uint256]) ... unproven
+43/74 ... [RE] line 242, (daoPOLSKAtokens, approveAndCall, [address, uint256, dbytes]) ... unproven
+44/74 ... [RE] line 259, (daoPOLSKAtokens, burn, [uint256]) ... unproven
+45/74 ... [RE] line 275, (daoPOLSKAtokens, burnFrom, [address, uint256]) ... unproven
+46/74 ... [RE] line 285, (daoPOLSKAtokens, transfer, [address, uint256]) ... unproven
+47/74 ... [RE] line 298, (daoPOLSKAtokens, transferFrom, [address, address, uint256]) ... unproven
+48/74 ... [RE] line 314, (daoPOLSKAtokens, approve, [address, uint256]) ... unproven
+49/74 ... [RE] line 326, (daoPOLSKAtokens, @fallback, []) ... unproven
+50/74 ... [RE] line 338, (daoPOLSKAtokens, setTokenInformation, [string, string]) ... unproven
+51/74 ... [RE] line 349, (daoPOLSKAtokens, setChainsAddresses, [address, int256]) ... proven
+52/74 ... [RE] line 367, (daoPOLSKAtokens, sendTokenAw, [address, address, uint256]) ... unproven
+53/74 ... [RE] line 388, (daoPOLSKAtokens, createDaoPOLSKAtokens, [address]) ... unproven
+54/74 ... [RE] line 425, (daoPOLSKAtokens, setBonusCreationRate, [uint256]) ... unproven
+55/74 ... [RE] line 432, (daoPOLSKAtokens, FundsTransfer, []) ... unproven
+56/74 ... [RE] line 437, (daoPOLSKAtokens, PartialFundsTransfer, [uint256]) ... unproven
+57/74 ... [RE] line 442, (daoPOLSKAtokens, turnrefund, []) ... unproven
+58/74 ... [RE] line 447, (daoPOLSKAtokens, fundingState, []) ... unproven
+59/74 ... [RE] line 451, (daoPOLSKAtokens, turnmigrate, []) ... unproven
+60/74 ... [RE] line 458, (daoPOLSKAtokens, finalize, []) ... unproven
+61/74 ... [RE] line 468, (daoPOLSKAtokens, migrate, [uint256]) ... unproven
+62/74 ... [RE] line 484, (daoPOLSKAtokens, refundTRA, []) ... unproven
+63/74 ... [TX_ORG] line 210, assume((msg.sender != owner)); ... proven
+64/74 ... [TX_ORG] line 222, assume((msg.sender != owner)); ... proven
+65/74 ... [TX_ORG] line 340, assume((msg.sender != owner)); ... proven
+66/74 ... [TX_ORG] line 351, assume((Chain3 == msg.sender)); ... proven
+67/74 ... [TX_ORG] line 352, assume((msg.sender != owner)); ... proven
+68/74 ... [TX_ORG] line 368, assume((msg.sender != owner)); ... proven
+69/74 ... [TX_ORG] line 426, assume((msg.sender == owner)); ... proven
+70/74 ... [TX_ORG] line 438, assume((msg.sender != owner)); ... proven
+71/74 ... [TX_ORG] line 443, assume((msg.sender != owner)); ... proven
+72/74 ... [TX_ORG] line 448, assume((msg.sender != owner)); ... proven
+73/74 ... [TX_ORG] line 452, assume((msg.sender != migrationMaster)); ... proven
+74/74 ... [TX_ORG] line 464, assume((msg.sender == owner)); ... proven
+took 7.382057s
+
+Generating VCs ... took 0.032753s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 7 Total elapsed : 41.140295
+[
+-1 -> ((((Read(@TU, Chain1__@515) == true) /\ (Read(@TU, Chain2__@518) == true)) /\ (Read(@TU, Chain3__@521) == true)) /\ (Read(@TU, Chain4__@524) == true))
+0 -> ((((Read(@TU, Chain1__@515) == true) /\ (Read(@TU, Chain2__@518) == true)) /\ (Read(@TU, Chain3__@521) == true)) /\ (Read(@TU, Chain4__@524) == true))
+]
+[
+]
+1/74 ... [IO] line 50, (a - b) ... proven
+2/74 ... [IO] line 54, (a + b) ... proven
+3/74 ... [IO] line 261, (balances[msg.sender] - _value) ... proven
+4/74 ... [IO] line 262, (totalSupply - _value) ... unproven
+5/74 ... [IO] line 278, (balances[_from] - _value) ... proven
+6/74 ... [IO] line 279, (allowed[_from][msg.sender] - _value) ... proven
+7/74 ... [IO] line 280, (totalSupply - _value) ... unproven
+8/74 ... [IO] line 289, (balances[_to] + _value) ... proven
+9/74 ... [IO] line 291, (balances[msg.sender] - _value) ... proven
+10/74 ... [IO] line 292, (balances[_to] + _value) ... proven
+11/74 ... [IO] line 300, (balances[_to] + _value) ... proven
+12/74 ... [IO] line 302, (balances[_to] + _value) ... proven
+13/74 ... [IO] line 303, (balances[_from] - _value) ... proven
+14/74 ... [IO] line 304, (allowed[_from][msg.sender] - _value) ... proven
+15/74 ... [IO] line 329, (balances[msg.sender] + msg.value) ... unproven
+16/74 ... [IO] line 376, (numTransfers + 1) ... unproven
+17/74 ... [IO] line 395, (supplylimit - totalSupply) ... unproven
+18/74 ... [IO] line 406, (msg.value * CreationRate) ... unproven
+19/74 ... [IO] line 407, (totalSupply + numTokens) ... unproven
+20/74 ... [IO] line 410, (balances[holder] + numTokens) ... unproven
+21/74 ... [IO] line 411, (balancesRAW[holder] + numTokensRAW) ... unproven
+22/74 ... [IO] line 417, (numTokens * percentOfTotal) ... unproven
+23/74 ... [IO] line 419, (totalSupply + additionalTokens) ... unproven
+24/74 ... [IO] line 421, (balances[migrationMaster] + additionalTokens) ... unproven
+25/74 ... [IO] line 428, (tokenCreationRate + bonusCreationRate) ... unproven
+26/74 ... [IO] line 440, (this.balance - SubX) ... unproven
+27/74 ... [IO] line 459, (8 * oneweek) ... proven
+28/74 ... [IO] line 459, (fundingEndBlock + (8 * oneweek)) ... proven
+29/74 ... [IO] line 477, (balances[msg.sender] - _value) ... proven
+30/74 ... [IO] line 478, (totalSupply - _value) ... unproven
+31/74 ... [IO] line 479, (totalMigrated + _value) ... unproven
+32/74 ... [IO] line 493, (totalSupply - DAOPLTokenValue) ... unproven
+33/74 ... [ETH_LEAK] line 434, owner.send(this.balance) ... unproven
+34/74 ... [ETH_LEAK] line 440, owner.send((this.balance - SubX)); ... unproven
+35/74 ... [ETH_LEAK] line 466, owner.send(this.balance); ... unproven
+36/74 ... [ETH_LEAK] line 496, msg.sender.transfer(ETHValue); ... unproven
+37/74 ... [RE_EL] line 434, owner.send(this.balance) ... unproven
+38/74 ... [RE_EL] line 440, owner.send((this.balance - SubX)); ... unproven
+39/74 ... [RE_EL] line 466, owner.send(this.balance); ... unproven
+40/74 ... [RE_EL] line 496, msg.sender.transfer(ETHValue); ... unproven
+41/74 ... [RE] line 209, (daoPOLSKAtokens, setSupply, [uint256]) ... unproven
+42/74 ... [RE] line 221, (daoPOLSKAtokens, setotherchainstotalsupply, [uint256]) ... unproven
+43/74 ... [RE] line 242, (daoPOLSKAtokens, approveAndCall, [address, uint256, dbytes]) ... unproven
+44/74 ... [RE] line 259, (daoPOLSKAtokens, burn, [uint256]) ... unproven
+45/74 ... [RE] line 275, (daoPOLSKAtokens, burnFrom, [address, uint256]) ... unproven
+46/74 ... [RE] line 285, (daoPOLSKAtokens, transfer, [address, uint256]) ... unproven
+47/74 ... [RE] line 298, (daoPOLSKAtokens, transferFrom, [address, address, uint256]) ... unproven
+48/74 ... [RE] line 314, (daoPOLSKAtokens, approve, [address, uint256]) ... unproven
+49/74 ... [RE] line 326, (daoPOLSKAtokens, @fallback, []) ... unproven
+50/74 ... [RE] line 338, (daoPOLSKAtokens, setTokenInformation, [string, string]) ... unproven
+51/74 ... [RE] line 349, (daoPOLSKAtokens, setChainsAddresses, [address, int256]) ... proven
+52/74 ... [RE] line 367, (daoPOLSKAtokens, sendTokenAw, [address, address, uint256]) ... unproven
+53/74 ... [RE] line 388, (daoPOLSKAtokens, createDaoPOLSKAtokens, [address]) ... unproven
+54/74 ... [RE] line 425, (daoPOLSKAtokens, setBonusCreationRate, [uint256]) ... unproven
+55/74 ... [RE] line 432, (daoPOLSKAtokens, FundsTransfer, []) ... unproven
+56/74 ... [RE] line 437, (daoPOLSKAtokens, PartialFundsTransfer, [uint256]) ... unproven
+57/74 ... [RE] line 442, (daoPOLSKAtokens, turnrefund, []) ... unproven
+58/74 ... [RE] line 447, (daoPOLSKAtokens, fundingState, []) ... unproven
+59/74 ... [RE] line 451, (daoPOLSKAtokens, turnmigrate, []) ... unproven
+60/74 ... [RE] line 458, (daoPOLSKAtokens, finalize, []) ... unproven
+61/74 ... [RE] line 468, (daoPOLSKAtokens, migrate, [uint256]) ... unproven
+62/74 ... [RE] line 484, (daoPOLSKAtokens, refundTRA, []) ... unproven
+63/74 ... [TX_ORG] line 210, assume((msg.sender != owner)); ... proven
+64/74 ... [TX_ORG] line 222, assume((msg.sender != owner)); ... proven
+65/74 ... [TX_ORG] line 340, assume((msg.sender != owner)); ... proven
+66/74 ... [TX_ORG] line 351, assume((Chain3 == msg.sender)); ... proven
+67/74 ... [TX_ORG] line 352, assume((msg.sender != owner)); ... proven
+68/74 ... [TX_ORG] line 368, assume((msg.sender != owner)); ... proven
+69/74 ... [TX_ORG] line 426, assume((msg.sender == owner)); ... proven
+70/74 ... [TX_ORG] line 438, assume((msg.sender != owner)); ... proven
+71/74 ... [TX_ORG] line 443, assume((msg.sender != owner)); ... proven
+72/74 ... [TX_ORG] line 448, assume((msg.sender != owner)); ... proven
+73/74 ... [TX_ORG] line 452, assume((msg.sender != migrationMaster)); ... proven
+74/74 ... [TX_ORG] line 464, assume((msg.sender == owner)); ... proven
+took 8.107125s
+
+Generating VCs ... took 0.033106s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 8 Total elapsed : 53.552361
+[
+-1 -> (((((Read(@TU, Chain1__@515) == true) /\ (Read(@TU, Chain2__@518) == true)) /\ (Read(@TU, Chain3__@521) == true)) /\ (Read(@TU, Chain4__@524) == true)) /\ (Read(@TU, migrationMaster__@503) == true))
+0 -> (((((Read(@TU, Chain1__@515) == true) /\ (Read(@TU, Chain2__@518) == true)) /\ (Read(@TU, Chain3__@521) == true)) /\ (Read(@TU, Chain4__@524) == true)) /\ (Read(@TU, migrationMaster__@503) == true))
+]
+[
+]
+1/74 ... [IO] line 50, (a - b) ... proven
+2/74 ... [IO] line 54, (a + b) ... proven
+3/74 ... [IO] line 261, (balances[msg.sender] - _value) ... proven
+4/74 ... [IO] line 262, (totalSupply - _value) ... unproven
+5/74 ... [IO] line 278, (balances[_from] - _value) ... proven
+6/74 ... [IO] line 279, (allowed[_from][msg.sender] - _value) ... proven
+7/74 ... [IO] line 280, (totalSupply - _value) ... unproven
+8/74 ... [IO] line 289, (balances[_to] + _value) ... proven
+9/74 ... [IO] line 291, (balances[msg.sender] - _value) ... proven
+10/74 ... [IO] line 292, (balances[_to] + _value) ... proven
+11/74 ... [IO] line 300, (balances[_to] + _value) ... proven
+12/74 ... [IO] line 302, (balances[_to] + _value) ... proven
+13/74 ... [IO] line 303, (balances[_from] - _value) ... proven
+14/74 ... [IO] line 304, (allowed[_from][msg.sender] - _value) ... proven
+15/74 ... [IO] line 329, (balances[msg.sender] + msg.value) ... unproven
+16/74 ... [IO] line 376, (numTransfers + 1) ... unproven
+17/74 ... [IO] line 395, (supplylimit - totalSupply) ... unproven
+18/74 ... [IO] line 406, (msg.value * CreationRate) ... unproven
+19/74 ... [IO] line 407, (totalSupply + numTokens) ... unproven
+20/74 ... [IO] line 410, (balances[holder] + numTokens) ... unproven
+21/74 ... [IO] line 411, (balancesRAW[holder] + numTokensRAW) ... unproven
+22/74 ... [IO] line 417, (numTokens * percentOfTotal) ... unproven
+23/74 ... [IO] line 419, (totalSupply + additionalTokens) ... unproven
+24/74 ... [IO] line 421, (balances[migrationMaster] + additionalTokens) ... unproven
+25/74 ... [IO] line 428, (tokenCreationRate + bonusCreationRate) ... unproven
+26/74 ... [IO] line 440, (this.balance - SubX) ... unproven
+27/74 ... [IO] line 459, (8 * oneweek) ... proven
+28/74 ... [IO] line 459, (fundingEndBlock + (8 * oneweek)) ... proven
+29/74 ... [IO] line 477, (balances[msg.sender] - _value) ... proven
+30/74 ... [IO] line 478, (totalSupply - _value) ... unproven
+31/74 ... [IO] line 479, (totalMigrated + _value) ... unproven
+32/74 ... [IO] line 493, (totalSupply - DAOPLTokenValue) ... unproven
+33/74 ... [ETH_LEAK] line 434, owner.send(this.balance) ... unproven
+34/74 ... [ETH_LEAK] line 440, owner.send((this.balance - SubX)); ... unproven
+35/74 ... [ETH_LEAK] line 466, owner.send(this.balance); ... unproven
+36/74 ... [ETH_LEAK] line 496, msg.sender.transfer(ETHValue); ... unproven
+37/74 ... [RE_EL] line 434, owner.send(this.balance) ... unproven
+38/74 ... [RE_EL] line 440, owner.send((this.balance - SubX)); ... unproven
+39/74 ... [RE_EL] line 466, owner.send(this.balance); ... unproven
+40/74 ... [RE_EL] line 496, msg.sender.transfer(ETHValue); ... unproven
+41/74 ... [RE] line 209, (daoPOLSKAtokens, setSupply, [uint256]) ... unproven
+42/74 ... [RE] line 221, (daoPOLSKAtokens, setotherchainstotalsupply, [uint256]) ... unproven
+43/74 ... [RE] line 242, (daoPOLSKAtokens, approveAndCall, [address, uint256, dbytes]) ... unproven
+44/74 ... [RE] line 259, (daoPOLSKAtokens, burn, [uint256]) ... unproven
+45/74 ... [RE] line 275, (daoPOLSKAtokens, burnFrom, [address, uint256]) ... unproven
+46/74 ... [RE] line 285, (daoPOLSKAtokens, transfer, [address, uint256]) ... unproven
+47/74 ... [RE] line 298, (daoPOLSKAtokens, transferFrom, [address, address, uint256]) ... unproven
+48/74 ... [RE] line 314, (daoPOLSKAtokens, approve, [address, uint256]) ... unproven
+49/74 ... [RE] line 326, (daoPOLSKAtokens, @fallback, []) ... unproven
+50/74 ... [RE] line 338, (daoPOLSKAtokens, setTokenInformation, [string, string]) ... unproven
+51/74 ... [RE] line 349, (daoPOLSKAtokens, setChainsAddresses, [address, int256]) ... proven
+52/74 ... [RE] line 367, (daoPOLSKAtokens, sendTokenAw, [address, address, uint256]) ... unproven
+53/74 ... [RE] line 388, (daoPOLSKAtokens, createDaoPOLSKAtokens, [address]) ... unproven
+54/74 ... [RE] line 425, (daoPOLSKAtokens, setBonusCreationRate, [uint256]) ... unproven
+55/74 ... [RE] line 432, (daoPOLSKAtokens, FundsTransfer, []) ... unproven
+56/74 ... [RE] line 437, (daoPOLSKAtokens, PartialFundsTransfer, [uint256]) ... unproven
+57/74 ... [RE] line 442, (daoPOLSKAtokens, turnrefund, []) ... unproven
+58/74 ... [RE] line 447, (daoPOLSKAtokens, fundingState, []) ... unproven
+59/74 ... [RE] line 451, (daoPOLSKAtokens, turnmigrate, []) ... proven
+60/74 ... [RE] line 458, (daoPOLSKAtokens, finalize, []) ... unproven
+61/74 ... [RE] line 468, (daoPOLSKAtokens, migrate, [uint256]) ... unproven
+62/74 ... [RE] line 484, (daoPOLSKAtokens, refundTRA, []) ... unproven
+63/74 ... [TX_ORG] line 210, assume((msg.sender != owner)); ... proven
+64/74 ... [TX_ORG] line 222, assume((msg.sender != owner)); ... proven
+65/74 ... [TX_ORG] line 340, assume((msg.sender != owner)); ... proven
+66/74 ... [TX_ORG] line 351, assume((Chain3 == msg.sender)); ... proven
+67/74 ... [TX_ORG] line 352, assume((msg.sender != owner)); ... proven
+68/74 ... [TX_ORG] line 368, assume((msg.sender != owner)); ... proven
+69/74 ... [TX_ORG] line 426, assume((msg.sender == owner)); ... proven
+70/74 ... [TX_ORG] line 438, assume((msg.sender != owner)); ... proven
+71/74 ... [TX_ORG] line 443, assume((msg.sender != owner)); ... proven
+72/74 ... [TX_ORG] line 448, assume((msg.sender != owner)); ... proven
+73/74 ... [TX_ORG] line 452, assume((msg.sender != migrationMaster)); ... proven
+74/74 ... [TX_ORG] line 464, assume((msg.sender == owner)); ... proven
+took 6.859893s
+
+Generating VCs ... took 0.032726s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 9 Total elapsed : 64.972483
+[
+-1 -> ((((((Read(@TU, Chain1__@515) == true) /\ (Read(@TU, Chain2__@518) == true)) /\ (Read(@TU, Chain3__@521) == true)) /\ (Read(@TU, Chain4__@524) == true)) /\ (Read(@TU, migrationMaster__@503) == true)) /\ (Read(@TU, owner__@501) == true))
+0 -> ((((((Read(@TU, Chain1__@515) == true) /\ (Read(@TU, Chain2__@518) == true)) /\ (Read(@TU, Chain3__@521) == true)) /\ (Read(@TU, Chain4__@524) == true)) /\ (Read(@TU, migrationMaster__@503) == true)) /\ (Read(@TU, owner__@501) == true))
+]
+[
+]
+1/74 ... [IO] line 50, (a - b) ... proven
+2/74 ... [IO] line 54, (a + b) ... proven
+3/74 ... [IO] line 261, (balances[msg.sender] - _value) ... proven
+4/74 ... [IO] line 262, (totalSupply - _value) ... unproven
+5/74 ... [IO] line 278, (balances[_from] - _value) ... proven
+6/74 ... [IO] line 279, (allowed[_from][msg.sender] - _value) ... proven
+7/74 ... [IO] line 280, (totalSupply - _value) ... unproven
+8/74 ... [IO] line 289, (balances[_to] + _value) ... proven
+9/74 ... [IO] line 291, (balances[msg.sender] - _value) ... proven
+10/74 ... [IO] line 292, (balances[_to] + _value) ... proven
+11/74 ... [IO] line 300, (balances[_to] + _value) ... proven
+12/74 ... [IO] line 302, (balances[_to] + _value) ... proven
+13/74 ... [IO] line 303, (balances[_from] - _value) ... proven
+14/74 ... [IO] line 304, (allowed[_from][msg.sender] - _value) ... proven
+15/74 ... [IO] line 329, (balances[msg.sender] + msg.value) ... unproven
+16/74 ... [IO] line 376, (numTransfers + 1) ... unproven
+17/74 ... [IO] line 395, (supplylimit - totalSupply) ... unproven
+18/74 ... [IO] line 406, (msg.value * CreationRate) ... unproven
+19/74 ... [IO] line 407, (totalSupply + numTokens) ... unproven
+20/74 ... [IO] line 410, (balances[holder] + numTokens) ... unproven
+21/74 ... [IO] line 411, (balancesRAW[holder] + numTokensRAW) ... unproven
+22/74 ... [IO] line 417, (numTokens * percentOfTotal) ... unproven
+23/74 ... [IO] line 419, (totalSupply + additionalTokens) ... unproven
+24/74 ... [IO] line 421, (balances[migrationMaster] + additionalTokens) ... unproven
+25/74 ... [IO] line 428, (tokenCreationRate + bonusCreationRate) ... unproven
+26/74 ... [IO] line 440, (this.balance - SubX) ... unproven
+27/74 ... [IO] line 459, (8 * oneweek) ... proven
+28/74 ... [IO] line 459, (fundingEndBlock + (8 * oneweek)) ... proven
+29/74 ... [IO] line 477, (balances[msg.sender] - _value) ... proven
+30/74 ... [IO] line 478, (totalSupply - _value) ... unproven
+31/74 ... [IO] line 479, (totalMigrated + _value) ... unproven
+32/74 ... [IO] line 493, (totalSupply - DAOPLTokenValue) ... unproven
+33/74 ... [ETH_LEAK] line 434, owner.send(this.balance) ... proven
+34/74 ... [ETH_LEAK] line 440, owner.send((this.balance - SubX)); ... proven
+35/74 ... [ETH_LEAK] line 466, owner.send(this.balance); ... proven
+36/74 ... [ETH_LEAK] line 496, msg.sender.transfer(ETHValue); ... unproven
+37/74 ... [RE_EL] line 434, owner.send(this.balance) ... proven
+38/74 ... [RE_EL] line 440, owner.send((this.balance - SubX)); ... proven
+39/74 ... [RE_EL] line 466, owner.send(this.balance); ... proven
+40/74 ... [RE_EL] line 496, msg.sender.transfer(ETHValue); ... unproven
+41/74 ... [RE] line 209, (daoPOLSKAtokens, setSupply, [uint256]) ... proven
+42/74 ... [RE] line 221, (daoPOLSKAtokens, setotherchainstotalsupply, [uint256]) ... proven
+43/74 ... [RE] line 242, (daoPOLSKAtokens, approveAndCall, [address, uint256, dbytes]) ... unproven
+44/74 ... [RE] line 259, (daoPOLSKAtokens, burn, [uint256]) ... unproven
+45/74 ... [RE] line 275, (daoPOLSKAtokens, burnFrom, [address, uint256]) ... unproven
+46/74 ... [RE] line 285, (daoPOLSKAtokens, transfer, [address, uint256]) ... unproven
+47/74 ... [RE] line 298, (daoPOLSKAtokens, transferFrom, [address, address, uint256]) ... unproven
+48/74 ... [RE] line 314, (daoPOLSKAtokens, approve, [address, uint256]) ... unproven
+49/74 ... [RE] line 326, (daoPOLSKAtokens, @fallback, []) ... unproven
+50/74 ... [RE] line 338, (daoPOLSKAtokens, setTokenInformation, [string, string]) ... proven
+51/74 ... [RE] line 349, (daoPOLSKAtokens, setChainsAddresses, [address, int256]) ... proven
+52/74 ... [RE] line 367, (daoPOLSKAtokens, sendTokenAw, [address, address, uint256]) ... proven
+53/74 ... [RE] line 388, (daoPOLSKAtokens, createDaoPOLSKAtokens, [address]) ... unproven
+54/74 ... [RE] line 425, (daoPOLSKAtokens, setBonusCreationRate, [uint256]) ... proven
+55/74 ... [RE] line 432, (daoPOLSKAtokens, FundsTransfer, []) ... proven
+56/74 ... [RE] line 437, (daoPOLSKAtokens, PartialFundsTransfer, [uint256]) ... proven
+57/74 ... [RE] line 442, (daoPOLSKAtokens, turnrefund, []) ... proven
+58/74 ... [RE] line 447, (daoPOLSKAtokens, fundingState, []) ... proven
+59/74 ... [RE] line 451, (daoPOLSKAtokens, turnmigrate, []) ... proven
+60/74 ... [RE] line 458, (daoPOLSKAtokens, finalize, []) ... unproven
+61/74 ... [RE] line 468, (daoPOLSKAtokens, migrate, [uint256]) ... unproven
+62/74 ... [RE] line 484, (daoPOLSKAtokens, refundTRA, []) ... unproven
+63/74 ... [TX_ORG] line 210, assume((msg.sender != owner)); ... proven
+64/74 ... [TX_ORG] line 222, assume((msg.sender != owner)); ... proven
+65/74 ... [TX_ORG] line 340, assume((msg.sender != owner)); ... proven
+66/74 ... [TX_ORG] line 351, assume((Chain3 == msg.sender)); ... proven
+67/74 ... [TX_ORG] line 352, assume((msg.sender != owner)); ... proven
+68/74 ... [TX_ORG] line 368, assume((msg.sender != owner)); ... proven
+69/74 ... [TX_ORG] line 426, assume((msg.sender == owner)); ... proven
+70/74 ... [TX_ORG] line 438, assume((msg.sender != owner)); ... proven
+71/74 ... [TX_ORG] line 443, assume((msg.sender != owner)); ... proven
+72/74 ... [TX_ORG] line 448, assume((msg.sender != owner)); ... proven
+73/74 ... [TX_ORG] line 452, assume((msg.sender != migrationMaster)); ... proven
+74/74 ... [TX_ORG] line 464, assume((msg.sender == owner)); ... proven
+took 5.813481s
+
+Iter : 10 To explore : 1367 Explored : 14036 Total elapsed : 73.157518
+Generating VCs ... took 0.032444s
+Checking validity of VCs ... took 1.371263s
+
+Generating VCs ... took 0.032016s
+Checking validity of VCs ... took 1.424115s
+
+Generating VCs ... took 0.034622s
+Checking validity of VCs ... took 1.345631s
+
+Generating VCs ... took 0.032443s
+Checking validity of VCs ... took 1.367799s
+
+Generating VCs ... took 0.033464s
+Checking validity of VCs ... took 1.369597s
+
+Generating VCs ... took 0.035764s
+Checking validity of VCs ... took 1.403644s
+
+Generating VCs ... took 0.032879s
+Checking validity of VCs ... took 1.403783s
+
+Generating VCs ... took 0.036998s
+Checking validity of VCs ... took 1.393729s
+
+Generating VCs ... took 0.033032s
+Checking validity of VCs ... took 1.411517s
+
+Generating VCs ... took 0.033475s
+Checking validity of VCs ... took 1.413322s
+
+Iter : 20 To explore : 10410 Explored : 23089 Total elapsed : 96.605392
+Generating VCs ... took 0.03643s
+Checking validity of VCs ... took 1.450196s
+
+Generating VCs ... took 0.033573s
+Checking validity of VCs ... took 1.416872s
+
+Generating VCs ... took 0.033856s
+Checking validity of VCs ... took 1.40713s
+
+Generating VCs ... took 0.033141s
+Checking validity of VCs ... took 1.371034s
+
+Generating VCs ... took 0.032933s
+Checking validity of VCs ... took 1.410636s
+
+Generating VCs ... took 0.032999s
+Checking validity of VCs ... took 1.445913s
+
+Generating VCs ... took 0.032784s
+Checking validity of VCs ... took 1.452853s
+
+Generating VCs ... took 0.033255s
+Checking validity of VCs ... took 1.44636s
+
+Generating VCs ... took 0.037324s
+Checking validity of VCs ... took 1.449545s
+
+Generating VCs ... took 0.032948s
+Checking validity of VCs ... took 1.450893s
+
+Iter : 30 To explore : 19486 Explored : 32175 Total elapsed : 122.907616
+Generating VCs ... took 0.03382s
+Checking validity of VCs ... took 1.476836s
+
+Generating VCs ... took 0.033057s
+Checking validity of VCs ... took 1.484728s
+
+Generating VCs ... took 0.037627s
+Checking validity of VCs ... took 1.440493s
+
+Generating VCs ... took 0.032954s
+Checking validity of VCs ... took 1.477549s
+
+Generating VCs ... took 0.032702s
+Checking validity of VCs ... took 1.454187s
+
+Generating VCs ... took 0.037202s
+Checking validity of VCs ... took 1.487193s
+
+Generating VCs ... took 0.036629s
+Checking validity of VCs ... took 1.483364s
+
+Generating VCs ... took 0.032582s
+Checking validity of VCs ... took 1.498075s
+
+Generating VCs ... took 0.03774s
+Checking validity of VCs ... took 1.443343s
+
+Generating VCs ... took 0.03797s
+Checking validity of VCs ... took 1.461068s
+
+Generating VCs ... took 0.012945s
+Checking validity of VCs ... 
+1/109 ... [NO_EFFECT] line 54, (@pre18 == c) ... unproven
+2/109 ... [NO_EFFECT] line 218, (@pre27 == supplylimit) ... unproven
+3/109 ... [NO_EFFECT] line 230, (@pre28 == otherchainstotalsupply) ... unproven
+4/109 ... [NO_EFFECT] line 261, (@pre30 == balances[msg.sender]) ... unproven
+5/109 ... [NO_EFFECT] line 262, (@pre29 == totalSupply) ... unproven
+6/109 ... [NO_EFFECT] line 278, (@pre33 == balances[_from]) ... unproven
+7/109 ... [NO_EFFECT] line 279, (@pre32 == allowed[_from][msg.sender]) ... unproven
+8/109 ... [NO_EFFECT] line 280, (@pre31 == totalSupply) ... unproven
+9/109 ... [NO_EFFECT] line 291, (@pre35 == balances[msg.sender]) ... unproven
+10/109 ... [NO_EFFECT] line 292, (@pre34 == balances[_to]) ... unproven
+11/109 ... [NO_EFFECT] line 302, (@pre38 == balances[_to]) ... unproven
+12/109 ... [NO_EFFECT] line 303, (@pre37 == balances[_from]) ... unproven
+13/109 ... [NO_EFFECT] line 304, (@pre36 == allowed[_from][msg.sender]) ... unproven
+14/109 ... [NO_EFFECT] line 311, (@pre39 == balance) ... unproven
+15/109 ... [NO_EFFECT] line 315, (@pre40 == allowed[msg.sender][_spender]) ... unproven
+16/109 ... [NO_EFFECT] line 321, (@pre41 == remaining) ... unproven
+17/109 ... [NO_EFFECT] line 329, (@pre42 == balances[msg.sender]) ... unproven
+18/109 ... [NO_EFFECT] line 355, (@pre46 == Chain1) ... unproven
+19/109 ... [NO_EFFECT] line 356, (@pre45 == Chain2) ... unproven
+20/109 ... [NO_EFFECT] line 357, (@pre44 == Chain3) ... unproven
+21/109 ... [NO_EFFECT] line 358, (@pre43 == Chain4) ... unproven
+22/109 ... [NO_EFFECT] line 373, (@pre49 == t.amount) ... unproven
+23/109 ... [NO_EFFECT] line 374, (@pre48 == t.recipient) ... unproven
+24/109 ... [NO_EFFECT] line 376, (@pre47 == numTransfers) ... unproven
+25/109 ... [NO_EFFECT] line 404, (@pre57 == numTokensRAW) ... unproven
+26/109 ... [NO_EFFECT] line 406, (@pre56 == numTokens) ... unproven
+27/109 ... [NO_EFFECT] line 407, (@pre55 == totalSupply) ... unproven
+28/109 ... [NO_EFFECT] line 410, (@pre54 == balances[holder]) ... unproven
+29/109 ... [NO_EFFECT] line 411, (@pre53 == balancesRAW[holder]) ... unproven
+30/109 ... [NO_EFFECT] line 417, (@pre52 == additionalTokens) ... unproven
+31/109 ... [NO_EFFECT] line 419, (@pre51 == totalSupply) ... unproven
+32/109 ... [NO_EFFECT] line 421, (@pre50 == balances[migrationMaster]) ... unproven
+33/109 ... [NO_EFFECT] line 427, (@pre59 == bonusCreationRate) ... unproven
+34/109 ... [NO_EFFECT] line 428, (@pre58 == CreationRate) ... unproven
+35/109 ... [NO_EFFECT] line 477, (@pre62 == balances[msg.sender]) ... unproven
+36/109 ... [NO_EFFECT] line 478, (@pre61 == totalSupply) ... unproven
+37/109 ... [NO_EFFECT] line 479, (@pre60 == totalMigrated) ... unproven
+38/109 ... [NO_EFFECT] line 489, (@pre65 == DAOPLTokenValue) ... unproven
+39/109 ... [NO_EFFECT] line 490, (@pre64 == ETHValue) ... unproven
+40/109 ... [NO_EFFECT] line 493, (@pre63 == totalSupply) ... unproven
+41/109 ... [ASSIGN_CONST] line 54, (c == 0) ... unproven
+42/109 ... [ASSIGN_CONST] line 261, (balances[msg.sender] == 0) ... unproven
+43/109 ... [ASSIGN_CONST] line 262, (totalSupply == 0) ... unproven
+44/109 ... [ASSIGN_CONST] line 278, (balances[_from] == 0) ... unproven
+45/109 ... [ASSIGN_CONST] line 279, (allowed[_from][msg.sender] == 0) ... unproven
+46/109 ... [ASSIGN_CONST] line 280, (totalSupply == 0) ... unproven
+47/109 ... [ASSIGN_CONST] line 291, ((!(_to != msg.sender)) || (balances[msg.sender] == 0)) ... unproven
+48/109 ... [ASSIGN_CONST] line 292, ((!(_to != msg.sender)) || (balances[_to] == 0)) ... unproven
+49/109 ... [ASSIGN_CONST] line 302, ((!(_from != _to)) || (balances[_to] == 0)) ... unproven
+50/109 ... [ASSIGN_CONST] line 303, ((!(_from != _to)) || (balances[_from] == 0)) ... unproven
+51/109 ... [ASSIGN_CONST] line 304, ((!(_from != _to)) || (allowed[_from][msg.sender] == 0)) ... unproven
+52/109 ... [ASSIGN_CONST] line 329, (balances[msg.sender] == 0) ... unproven
+53/109 ... [ASSIGN_CONST] line 376, (numTransfers == 0) ... unproven
+54/109 ... [ASSIGN_CONST] line 407, ((!(holder != migrationMaster)) || (totalSupply == 0)) ... unproven
+55/109 ... [ASSIGN_CONST] line 410, ((!(holder != migrationMaster)) || (balances[holder] == 0)) ... unproven
+56/109 ... [ASSIGN_CONST] line 411, ((!(holder != migrationMaster)) || (balancesRAW[holder] == 0)) ... unproven
+57/109 ... [ASSIGN_CONST] line 419, ((!(holder != migrationMaster)) || (totalSupply == 0)) ... unproven
+58/109 ... [ASSIGN_CONST] line 421, ((!(holder != migrationMaster)) || (balances[migrationMaster] == 0)) ... unproven
+59/109 ... [ASSIGN_CONST] line 428, (CreationRate == 0) ... unproven
+60/109 ... [ASSIGN_CONST] line 477, (balances[msg.sender] == 0) ... unproven
+61/109 ... [ASSIGN_CONST] line 478, (totalSupply == 0) ... unproven
+62/109 ... [ASSIGN_CONST] line 479, (totalMigrated == 0) ... unproven
+63/109 ... [ASSIGN_CONST] line 493, (totalSupply == 0) ... unproven
+64/109 ... [DEAD] line 49, false ... unproven
+65/109 ... [DEAD] line 55, false ... unproven
+66/109 ... [DEAD] line 108, false ... unproven
+67/109 ... [DEAD] line 109, false ... unproven
+68/109 ... [DEAD] line 110, false ... unproven
+69/109 ... [DEAD] line 210, false ... unproven
+70/109 ... [DEAD] line 213, false ... unproven
+71/109 ... [DEAD] line 222, false ... unproven
+72/109 ... [DEAD] line 225, false ... unproven
+73/109 ... [DEAD] line 246, false ... unproven
+74/109 ... [DEAD] line 260, false ... unproven
+75/109 ... [DEAD] line 263, false ... unproven
+76/109 ... [DEAD] line 276, false ... unproven
+77/109 ... [DEAD] line 277, false ... unproven
+78/109 ... [DEAD] line 281, false ... unproven
+79/109 ... [DEAD] line 293, false ... unproven
+80/109 ... [DEAD] line 305, false ... unproven
+81/109 ... [DEAD] line 316, false ... unproven
+82/109 ... [DEAD] line 328, false ... unproven
+83/109 ... [DEAD] line 340, false ... unproven
+84/109 ... [DEAD] line 346, false ... unproven
+85/109 ... [DEAD] line 351, false ... unproven
+86/109 ... [DEAD] line 352, false ... unproven
+87/109 ... [DEAD] line 355, false ... unproven
+88/109 ... [DEAD] line 356, false ... unproven
+89/109 ... [DEAD] line 357, false ... unproven
+90/109 ... [DEAD] line 358, false ... unproven
+91/109 ... [DEAD] line 368, false ... unproven
+92/109 ... [DEAD] line 393, false ... unproven
+93/109 ... [DEAD] line 395, false ... unproven
+94/109 ... [DEAD] line 413, false ... unproven
+95/109 ... [DEAD] line 422, false ... unproven
+96/109 ... [DEAD] line 426, false ... unproven
+97/109 ... [DEAD] line 433, false ... unproven
+98/109 ... [DEAD] line 438, false ... unproven
+99/109 ... [DEAD] line 443, false ... unproven
+100/109 ... [DEAD] line 448, false ... unproven
+101/109 ... [DEAD] line 452, false ... unproven
+102/109 ... [DEAD] line 459, false ... unproven
+103/109 ... [DEAD] line 464, false ... unproven
+104/109 ... [DEAD] line 474, false ... unproven
+105/109 ... [DEAD] line 475, false ... unproven
+106/109 ... [DEAD] line 481, false ... unproven
+107/109 ... [DEAD] line 491, false ... unproven
+108/109 ... [DEAD] line 495, false ... unproven
+109/109 ... [DEAD] line 496, false ... unproven
+took 6.179957s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 50, (a - b) : proven
+[2] [IO] line 54, (a + b) : proven
+[3] [IO] line 261, (balances[msg.sender] - _value) : proven
+[4] [IO] line 262, (totalSupply - _value) : unproven
+[5] [IO] line 278, (balances[_from] - _value) : proven
+[6] [IO] line 279, (allowed[_from][msg.sender] - _value) : proven
+[7] [IO] line 280, (totalSupply - _value) : unproven
+[8] [IO] line 289, (balances[_to] + _value) : proven
+[9] [IO] line 291, (balances[msg.sender] - _value) : proven
+[10] [IO] line 292, (balances[_to] + _value) : proven
+[11] [IO] line 300, (balances[_to] + _value) : proven
+[12] [IO] line 302, (balances[_to] + _value) : proven
+[13] [IO] line 303, (balances[_from] - _value) : proven
+[14] [IO] line 304, (allowed[_from][msg.sender] - _value) : proven
+[15] [IO] line 329, (balances[msg.sender] + msg.value) : unproven
+[16] [IO] line 376, (numTransfers + 1) : unproven
+[17] [IO] line 395, (supplylimit - totalSupply) : unproven
+[18] [IO] line 406, (msg.value * CreationRate) : unproven
+[19] [IO] line 407, (totalSupply + numTokens) : unproven
+[20] [IO] line 410, (balances[holder] + numTokens) : unproven
+[21] [IO] line 411, (balancesRAW[holder] + numTokensRAW) : unproven
+[22] [IO] line 417, (numTokens * percentOfTotal) : unproven
+[23] [IO] line 419, (totalSupply + additionalTokens) : unproven
+[24] [IO] line 421, (balances[migrationMaster] + additionalTokens) : unproven
+[25] [IO] line 428, (tokenCreationRate + bonusCreationRate) : unproven
+[26] [IO] line 440, (this.balance - SubX) : unproven
+[27] [IO] line 459, (8 * oneweek) : proven
+[28] [IO] line 459, (fundingEndBlock + (8 * oneweek)) : proven
+[29] [IO] line 477, (balances[msg.sender] - _value) : proven
+[30] [IO] line 478, (totalSupply - _value) : unproven
+[31] [IO] line 479, (totalMigrated + _value) : unproven
+[32] [IO] line 493, (totalSupply - DAOPLTokenValue) : unproven
+[33] [ETH_LEAK] line 434, owner.send(this.balance) : proven
+[34] [ETH_LEAK] line 440, owner.send((this.balance - SubX)); : proven
+[35] [ETH_LEAK] line 466, owner.send(this.balance); : proven
+[36] [ETH_LEAK] line 496, msg.sender.transfer(ETHValue); : unproven
+[37] [RE_EL] line 434, owner.send(this.balance) : proven
+[38] [RE_EL] line 440, owner.send((this.balance - SubX)); : proven
+[39] [RE_EL] line 466, owner.send(this.balance); : proven
+[40] [RE_EL] line 496, msg.sender.transfer(ETHValue); : unproven
+[41] [RE] line 209, (daoPOLSKAtokens, setSupply, [uint256]) : proven
+[42] [RE] line 221, (daoPOLSKAtokens, setotherchainstotalsupply, [uint256]) : proven
+[43] [RE] line 242, (daoPOLSKAtokens, approveAndCall, [address, uint256, dbytes]) : unproven
+[44] [RE] line 259, (daoPOLSKAtokens, burn, [uint256]) : unproven
+[45] [RE] line 275, (daoPOLSKAtokens, burnFrom, [address, uint256]) : unproven
+[46] [RE] line 285, (daoPOLSKAtokens, transfer, [address, uint256]) : unproven
+[47] [RE] line 298, (daoPOLSKAtokens, transferFrom, [address, address, uint256]) : unproven
+[48] [RE] line 314, (daoPOLSKAtokens, approve, [address, uint256]) : unproven
+[49] [RE] line 326, (daoPOLSKAtokens, @fallback, []) : unproven
+[50] [RE] line 338, (daoPOLSKAtokens, setTokenInformation, [string, string]) : proven
+[51] [RE] line 349, (daoPOLSKAtokens, setChainsAddresses, [address, int256]) : proven
+[52] [RE] line 367, (daoPOLSKAtokens, sendTokenAw, [address, address, uint256]) : proven
+[53] [RE] line 388, (daoPOLSKAtokens, createDaoPOLSKAtokens, [address]) : unproven
+[54] [RE] line 425, (daoPOLSKAtokens, setBonusCreationRate, [uint256]) : proven
+[55] [RE] line 432, (daoPOLSKAtokens, FundsTransfer, []) : proven
+[56] [RE] line 437, (daoPOLSKAtokens, PartialFundsTransfer, [uint256]) : proven
+[57] [RE] line 442, (daoPOLSKAtokens, turnrefund, []) : proven
+[58] [RE] line 447, (daoPOLSKAtokens, fundingState, []) : proven
+[59] [RE] line 451, (daoPOLSKAtokens, turnmigrate, []) : proven
+[60] [RE] line 458, (daoPOLSKAtokens, finalize, []) : unproven
+[61] [RE] line 468, (daoPOLSKAtokens, migrate, [uint256]) : unproven
+[62] [RE] line 484, (daoPOLSKAtokens, refundTRA, []) : unproven
+[63] [TX_ORG] line 210, assume((msg.sender != owner)); : proven
+[64] [TX_ORG] line 222, assume((msg.sender != owner)); : proven
+[65] [TX_ORG] line 340, assume((msg.sender != owner)); : proven
+[66] [TX_ORG] line 351, assume((Chain3 == msg.sender)); : proven
+[67] [TX_ORG] line 352, assume((msg.sender != owner)); : proven
+[68] [TX_ORG] line 368, assume((msg.sender != owner)); : proven
+[69] [TX_ORG] line 426, assume((msg.sender == owner)); : proven
+[70] [TX_ORG] line 438, assume((msg.sender != owner)); : proven
+[71] [TX_ORG] line 443, assume((msg.sender != owner)); : proven
+[72] [TX_ORG] line 448, assume((msg.sender != owner)); : proven
+[73] [TX_ORG] line 452, assume((msg.sender != migrationMaster)); : proven
+[74] [TX_ORG] line 464, assume((msg.sender == owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 54, (@pre18 == c) : unproven
+[2] [NO_EFFECT] line 218, (@pre27 == supplylimit) : unproven
+[3] [NO_EFFECT] line 230, (@pre28 == otherchainstotalsupply) : unproven
+[4] [NO_EFFECT] line 261, (@pre30 == balances[msg.sender]) : unproven
+[5] [NO_EFFECT] line 262, (@pre29 == totalSupply) : unproven
+[6] [NO_EFFECT] line 278, (@pre33 == balances[_from]) : unproven
+[7] [NO_EFFECT] line 279, (@pre32 == allowed[_from][msg.sender]) : unproven
+[8] [NO_EFFECT] line 280, (@pre31 == totalSupply) : unproven
+[9] [NO_EFFECT] line 291, (@pre35 == balances[msg.sender]) : unproven
+[10] [NO_EFFECT] line 292, (@pre34 == balances[_to]) : unproven
+[11] [NO_EFFECT] line 302, (@pre38 == balances[_to]) : unproven
+[12] [NO_EFFECT] line 303, (@pre37 == balances[_from]) : unproven
+[13] [NO_EFFECT] line 304, (@pre36 == allowed[_from][msg.sender]) : unproven
+[14] [NO_EFFECT] line 311, (@pre39 == balance) : unproven
+[15] [NO_EFFECT] line 315, (@pre40 == allowed[msg.sender][_spender]) : unproven
+[16] [NO_EFFECT] line 321, (@pre41 == remaining) : unproven
+[17] [NO_EFFECT] line 329, (@pre42 == balances[msg.sender]) : unproven
+[18] [NO_EFFECT] line 355, (@pre46 == Chain1) : unproven
+[19] [NO_EFFECT] line 356, (@pre45 == Chain2) : unproven
+[20] [NO_EFFECT] line 357, (@pre44 == Chain3) : unproven
+[21] [NO_EFFECT] line 358, (@pre43 == Chain4) : unproven
+[22] [NO_EFFECT] line 373, (@pre49 == t.amount) : unproven
+[23] [NO_EFFECT] line 374, (@pre48 == t.recipient) : unproven
+[24] [NO_EFFECT] line 376, (@pre47 == numTransfers) : unproven
+[25] [NO_EFFECT] line 404, (@pre57 == numTokensRAW) : unproven
+[26] [NO_EFFECT] line 406, (@pre56 == numTokens) : unproven
+[27] [NO_EFFECT] line 407, (@pre55 == totalSupply) : unproven
+[28] [NO_EFFECT] line 410, (@pre54 == balances[holder]) : unproven
+[29] [NO_EFFECT] line 411, (@pre53 == balancesRAW[holder]) : unproven
+[30] [NO_EFFECT] line 417, (@pre52 == additionalTokens) : unproven
+[31] [NO_EFFECT] line 419, (@pre51 == totalSupply) : unproven
+[32] [NO_EFFECT] line 421, (@pre50 == balances[migrationMaster]) : unproven
+[33] [NO_EFFECT] line 427, (@pre59 == bonusCreationRate) : unproven
+[34] [NO_EFFECT] line 428, (@pre58 == CreationRate) : unproven
+[35] [NO_EFFECT] line 477, (@pre62 == balances[msg.sender]) : unproven
+[36] [NO_EFFECT] line 478, (@pre61 == totalSupply) : unproven
+[37] [NO_EFFECT] line 479, (@pre60 == totalMigrated) : unproven
+[38] [NO_EFFECT] line 489, (@pre65 == DAOPLTokenValue) : unproven
+[39] [NO_EFFECT] line 490, (@pre64 == ETHValue) : unproven
+[40] [NO_EFFECT] line 493, (@pre63 == totalSupply) : unproven
+[41] [ASSIGN_CONST] line 54, (c == 0) : unproven
+[42] [ASSIGN_CONST] line 261, (balances[msg.sender] == 0) : unproven
+[43] [ASSIGN_CONST] line 262, (totalSupply == 0) : unproven
+[44] [ASSIGN_CONST] line 278, (balances[_from] == 0) : unproven
+[45] [ASSIGN_CONST] line 279, (allowed[_from][msg.sender] == 0) : unproven
+[46] [ASSIGN_CONST] line 280, (totalSupply == 0) : unproven
+[47] [ASSIGN_CONST] line 291, ((!(_to != msg.sender)) || (balances[msg.sender] == 0)) : unproven
+[48] [ASSIGN_CONST] line 292, ((!(_to != msg.sender)) || (balances[_to] == 0)) : unproven
+[49] [ASSIGN_CONST] line 302, ((!(_from != _to)) || (balances[_to] == 0)) : unproven
+[50] [ASSIGN_CONST] line 303, ((!(_from != _to)) || (balances[_from] == 0)) : unproven
+[51] [ASSIGN_CONST] line 304, ((!(_from != _to)) || (allowed[_from][msg.sender] == 0)) : unproven
+[52] [ASSIGN_CONST] line 329, (balances[msg.sender] == 0) : unproven
+[53] [ASSIGN_CONST] line 376, (numTransfers == 0) : unproven
+[54] [ASSIGN_CONST] line 407, ((!(holder != migrationMaster)) || (totalSupply == 0)) : unproven
+[55] [ASSIGN_CONST] line 410, ((!(holder != migrationMaster)) || (balances[holder] == 0)) : unproven
+[56] [ASSIGN_CONST] line 411, ((!(holder != migrationMaster)) || (balancesRAW[holder] == 0)) : unproven
+[57] [ASSIGN_CONST] line 419, ((!(holder != migrationMaster)) || (totalSupply == 0)) : unproven
+[58] [ASSIGN_CONST] line 421, ((!(holder != migrationMaster)) || (balances[migrationMaster] == 0)) : unproven
+[59] [ASSIGN_CONST] line 428, (CreationRate == 0) : unproven
+[60] [ASSIGN_CONST] line 477, (balances[msg.sender] == 0) : unproven
+[61] [ASSIGN_CONST] line 478, (totalSupply == 0) : unproven
+[62] [ASSIGN_CONST] line 479, (totalMigrated == 0) : unproven
+[63] [ASSIGN_CONST] line 493, (totalSupply == 0) : unproven
+[64] [DEAD] line 49, false : unproven
+[65] [DEAD] line 55, false : unproven
+[66] [DEAD] line 108, false : unproven
+[67] [DEAD] line 109, false : unproven
+[68] [DEAD] line 110, false : unproven
+[69] [DEAD] line 210, false : unproven
+[70] [DEAD] line 213, false : unproven
+[71] [DEAD] line 222, false : unproven
+[72] [DEAD] line 225, false : unproven
+[73] [DEAD] line 246, false : unproven
+[74] [DEAD] line 260, false : unproven
+[75] [DEAD] line 263, false : unproven
+[76] [DEAD] line 276, false : unproven
+[77] [DEAD] line 277, false : unproven
+[78] [DEAD] line 281, false : unproven
+[79] [DEAD] line 293, false : unproven
+[80] [DEAD] line 305, false : unproven
+[81] [DEAD] line 316, false : unproven
+[82] [DEAD] line 328, false : unproven
+[83] [DEAD] line 340, false : unproven
+[84] [DEAD] line 346, false : unproven
+[85] [DEAD] line 351, false : unproven
+[86] [DEAD] line 352, false : unproven
+[87] [DEAD] line 355, false : unproven
+[88] [DEAD] line 356, false : unproven
+[89] [DEAD] line 357, false : unproven
+[90] [DEAD] line 358, false : unproven
+[91] [DEAD] line 368, false : unproven
+[92] [DEAD] line 393, false : unproven
+[93] [DEAD] line 395, false : unproven
+[94] [DEAD] line 413, false : unproven
+[95] [DEAD] line 422, false : unproven
+[96] [DEAD] line 426, false : unproven
+[97] [DEAD] line 433, false : unproven
+[98] [DEAD] line 438, false : unproven
+[99] [DEAD] line 443, false : unproven
+[100] [DEAD] line 448, false : unproven
+[101] [DEAD] line 452, false : unproven
+[102] [DEAD] line 459, false : unproven
+[103] [DEAD] line 464, false : unproven
+[104] [DEAD] line 474, false : unproven
+[105] [DEAD] line 475, false : unproven
+[106] [DEAD] line 481, false : unproven
+[107] [DEAD] line 491, false : unproven
+[108] [DEAD] line 495, false : unproven
+[109] [DEAD] line 496, false : unproven
+
+============ Statistics ============
+# Iter                    : 39
+# Alarm / Query           : 30 / 74
+- integer over/underflow  : 17 / 32
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 4
+- reentrancy-leaking      : 1 / 4
+- reentrancy              : 11 / 22
+- tx.origin               : 0 / 12
+
+Time Elapsed (Real) : 156.70636797
+Time Elapsed (CPU)  : 156.688389

@@ -12,7 +12,7 @@ contract SmartFix {
  * @vulnerable_at_lines: 1152,1496,2467
  */
 
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.24;
 
 
 contract ERC20 {

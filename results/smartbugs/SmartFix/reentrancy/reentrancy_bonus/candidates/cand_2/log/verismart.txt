@@ -1,0 +1,274 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 6
+[INFO] reachable : 3
+[INFO] Generating Paths ... took 0.000489s
+[INFO] # path : 24
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001331s
+Generating VCs ... took 0.007375s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.051955
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/5 ... [IO] line 37, (rewardsForA[recipient] + 100) ... unproven
+2/5 ... [ETH_LEAK] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+3/5 ... [RE_EL] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+4/5 ... [RE] line 27, (Reentrancy_bonus, withdrawReward, [address]) ... unproven
+5/5 ... [RE] line 34, (Reentrancy_bonus, getFirstWithdrawalBonus, [address]) ... unproven
+took 0.633753s
+
+Generating VCs ... took 0.003788s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.708362
+[
+-1 -> (_locked__@3 == true)
+0 -> true
+]
+[
+]
+1/5 ... [IO] line 37, (rewardsForA[recipient] + 100) ... unproven
+2/5 ... [ETH_LEAK] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+3/5 ... [RE_EL] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+4/5 ... [RE] line 27, (Reentrancy_bonus, withdrawReward, [address]) ... proven
+5/5 ... [RE] line 34, (Reentrancy_bonus, getFirstWithdrawalBonus, [address]) ... proven
+took 0.889801s
+
+Generating VCs ... took 0.003587s
+Checking validity of VCs ... took 0.513639s
+
+Generating VCs ... took 0.003598s
+Checking validity of VCs ... took 9.716908s
+
+Generating VCs ... took 0.003777s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 5 Total elapsed : 11.940644
+[
+-1 -> ((_locked__@3 == true) /\ NoOverFlow (ΣrewardsForA__@36))
+0 -> NoOverFlow (ΣrewardsForA__@36)
+]
+[
+]
+1/5 ... [IO] line 37, (rewardsForA[recipient] + 100) ... unproven
+2/5 ... [ETH_LEAK] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+3/5 ... [RE_EL] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+4/5 ... [RE] line 27, (Reentrancy_bonus, withdrawReward, [address]) ... proven
+5/5 ... [RE] line 34, (Reentrancy_bonus, getFirstWithdrawalBonus, [address]) ... proven
+took 1.017256s
+
+Generating VCs ... took 0.003552s
+Checking validity of VCs ... took 10.606973s
+
+Generating VCs ... took 0.003748s
+Checking validity of VCs ... took 0.812226s
+
+Generating VCs ... took 0.003476s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 8 Total elapsed : 24.434115
+[
+-1 -> (((_locked__@3 == true) /\ NoOverFlow (ΣrewardsForA__@36)) /\ NoOverFlow (ΣuserBalances__@28))
+0 -> (NoOverFlow (ΣrewardsForA__@36) /\ NoOverFlow (ΣuserBalances__@28))
+]
+[
+]
+1/5 ... [IO] line 37, (rewardsForA[recipient] + 100) ... unproven
+2/5 ... [ETH_LEAK] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+3/5 ... [RE_EL] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+4/5 ... [RE] line 27, (Reentrancy_bonus, withdrawReward, [address]) ... proven
+5/5 ... [RE] line 34, (Reentrancy_bonus, getFirstWithdrawalBonus, [address]) ... proven
+took 1.02224s
+
+Generating VCs ... took 0.003415s
+Checking validity of VCs ... took 11.846214s
+
+Iter : 10 To explore : 17 Explored : 70 Total elapsed : 37.155675
+Generating VCs ... took 0.003949s
+Checking validity of VCs ... took 0.572437s
+
+Generating VCs ... took 0.003796s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 11 Total elapsed : 37.89704
+[
+-1 -> ((((_locked__@3 == true) /\ (ΣuserBalances__@28 == 0)) /\ NoOverFlow (ΣrewardsForA__@36)) /\ NoOverFlow (ΣuserBalances__@28))
+0 -> (((ΣuserBalances__@28 == 0) /\ NoOverFlow (ΣrewardsForA__@36)) /\ NoOverFlow (ΣuserBalances__@28))
+]
+[
+]
+1/5 ... [IO] line 37, (rewardsForA[recipient] + 100) ... unproven
+2/5 ... [ETH_LEAK] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+3/5 ... [RE_EL] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+4/5 ... [RE] line 27, (Reentrancy_bonus, withdrawReward, [address]) ... proven
+5/5 ... [RE] line 34, (Reentrancy_bonus, getFirstWithdrawalBonus, [address]) ... proven
+took 1.147428s
+
+Generating VCs ... took 0.003903s
+Checking validity of VCs ... took 8.490462s
+
+Generating VCs ... took 0.003742s
+Checking validity of VCs ... took 0.787668s
+
+Generating VCs ... took 0.003667s
+Checking validity of VCs ... took 1.804887s
+
+Generating VCs ... took 0.003832s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 15 Total elapsed : 52.055195
+[
+-1 -> (((((_locked__@3 == true) /\ (ΣrewardsForA__@36 == 0)) /\ (ΣuserBalances__@28 == 0)) /\ NoOverFlow (ΣrewardsForA__@36)) /\ NoOverFlow (ΣuserBalances__@28))
+0 -> ((((ΣrewardsForA__@36 == 0) /\ (ΣuserBalances__@28 == 0)) /\ NoOverFlow (ΣrewardsForA__@36)) /\ NoOverFlow (ΣuserBalances__@28))
+]
+[
+]
+1/5 ... [IO] line 37, (rewardsForA[recipient] + 100) ... proven
+2/5 ... [ETH_LEAK] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+3/5 ... [RE_EL] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); ... unproven
+4/5 ... [RE] line 27, (Reentrancy_bonus, withdrawReward, [address]) ... proven
+5/5 ... [RE] line 34, (Reentrancy_bonus, getFirstWithdrawalBonus, [address]) ... proven
+took 9.474183s
+
+Generating VCs ... took 0.003755s
+Checking validity of VCs ... took 2.39751s
+
+Generating VCs ... took 0.003774s
+Checking validity of VCs ... took 2.338943s
+
+Generating VCs ... took 0.003587s
+Checking validity of VCs ... took 3.019161s
+
+Generating VCs ... took 0.003783s
+Checking validity of VCs ... took 1.817374s
+
+Iter : 20 To explore : 14 Explored : 101 Total elapsed : 69.059763
+Generating VCs ... took 0.00331899999999s
+Checking validity of VCs ... took 1.722128s
+
+Generating VCs ... took 0.00346s
+Checking validity of VCs ... took 1.975466s
+
+Generating VCs ... took 0.00341400000001s
+Checking validity of VCs ... took 2.122154s
+
+Generating VCs ... took 0.00352100000001s
+Checking validity of VCs ... took 1.639876s
+
+Generating VCs ... took 0.00372s
+Checking validity of VCs ... took 0.223132s
+
+Generating VCs ... took 0.00346999999999s
+Checking validity of VCs ... took 1.687908s
+
+Generating VCs ... took 0.003591s
+Checking validity of VCs ... took 0.232694s
+
+Generating VCs ... took 0.00367999999999s
+Checking validity of VCs ... took 0.262675s
+
+Generating VCs ... took 0.003888s
+Checking validity of VCs ... took 1.940268s
+
+Generating VCs ... took 0.003664s
+Checking validity of VCs ... took 0.049896s
+
+Iter : 30 To explore : 13 Explored : 110 Total elapsed : 80.957985
+Generating VCs ... took 0.003731s
+Checking validity of VCs ... took 0.251696s
+
+Generating VCs ... took 0.003517s
+Checking validity of VCs ... took 0.167928s
+
+Generating VCs ... took 0.00403900000001s
+Checking validity of VCs ... took 0.349706s
+
+Generating VCs ... took 0.003653s
+Checking validity of VCs ... took 0.434774s
+
+Generating VCs ... took 0.00395300000001s
+Checking validity of VCs ... took 0.192182s
+
+Generating VCs ... took 0.00374100000001s
+Checking validity of VCs ... took 0.185347s
+
+Generating VCs ... took 0.00394899999999s
+Checking validity of VCs ... took 0.418168s
+
+Generating VCs ... took 0.003782s
+Checking validity of VCs ... took 0.207116s
+
+Generating VCs ... took 0.003753s
+Checking validity of VCs ... took 0.439933s
+
+Generating VCs ... took 0.003714s
+Checking validity of VCs ... took 0.239314s
+
+Iter : 40 To explore : 3 Explored : 110 Total elapsed : 83.885016
+Generating VCs ... took 0.003669s
+Checking validity of VCs ... took 0.284113s
+
+Generating VCs ... took 0.00344700000001s
+Checking validity of VCs ... took 0.23675s
+
+Generating VCs ... took 0.003539s
+Checking validity of VCs ... took 0.05259s
+
+Generating VCs ... took 0.00397799999999s
+Checking validity of VCs ... took 0.177891s
+
+Generating VCs ... took 0.003674s
+Checking validity of VCs ... took 0.201827s
+
+Generating VCs ... took 0.00360499999999s
+Checking validity of VCs ... took 0.198012s
+
+Generating VCs ... took 0.00374599999999s
+Checking validity of VCs ... took 0.222765s
+
+Generating VCs ... took 0.002163s
+Checking validity of VCs ... 
+1/4 ... [NO_EFFECT] line 28, (@pre1 == amountToWithdraw) ... unproven
+2/4 ... [NO_EFFECT] line 37, (@pre2 == rewardsForA[recipient]) ... unproven
+3/4 ... [ASSIGN_CONST] line 37, (rewardsForA[recipient] == 0) ... unproven
+4/4 ... [DEAD] line 39, false ... unproven
+took 1.07366s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 37, (rewardsForA[recipient] + 100) : proven
+[2] [ETH_LEAK] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); : unproven
+[3] [RE_EL] line 30, (success,  ) = recipient.call.value(amountToWithdraw)(""); : unproven
+[4] [RE] line 27, (Reentrancy_bonus, withdrawReward, [address]) : proven
+[5] [RE] line 34, (Reentrancy_bonus, getFirstWithdrawalBonus, [address]) : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 28, (@pre1 == amountToWithdraw) : unproven
+[2] [NO_EFFECT] line 37, (@pre2 == rewardsForA[recipient]) : unproven
+[3] [ASSIGN_CONST] line 37, (rewardsForA[recipient] == 0) : unproven
+[4] [DEAD] line 39, false : unproven
+
+============ Statistics ============
+# Iter                    : 47
+# Alarm / Query           : 2 / 5
+- integer over/underflow  : 0 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 0 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 86.357022047
+Time Elapsed (CPU)  : 86.362995

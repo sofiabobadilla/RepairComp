@@ -82,12 +82,11 @@
     (IO, (SmartBillions/putHash/[]), 754, (lastb + 10)),
     (IO, (SmartBillions/resetBet/[]), 306, (block.number + 3)),
     (IO, (SmartBillions/won/[]), 558, (player.blockNum + 256)),
-    (ETH_LEAK, (SmartBillions/coldStore/[uint256]), 322, msg.sender.transfer(_amount);),
     (ETH_LEAK, (SmartBillions/invest/[address]), 407, msg.sender.transfer(msg.value.sub(investing));),
     (ETH_LEAK, (SmartBillions/pay/[uint256]), 372, msg.sender.transfer(_amount);),
     (ETH_LEAK, (SmartBillions/pay/[uint256]), 382, msg.sender.transfer(maxpay);)
 
-[INFO] # of basic patch components : 90
+[INFO] # of basic patch components : 89
 [INFO] extracted components
 [
 InsertLine (254, assume((block.number >= hashFirst));),
@@ -178,6 +177,85 @@ Replace (551, ((player.blockNum + (10 * hashesSize)) <= block.number), ((player.
 Replace (558, (block.number < (player.blockNum + 256)), (block.number > (player.blockNum + 256))),
 Replace (646, (hashNext < (block.number + 3)), (hashNext > (block.number + 3))),
 Replace (675, ((n + _sadd) > hashesSize), ((n + _sadd) < hashesSize)),
-Replace (737, (block.number <= (lastb + 10)), (block.number > (lastb + 10))),
-Add onlyAnimator to (SmartBillions, coldStore, [uint256]) (line 316)
+Replace (737, (block.number <= (lastb + 10)), (block.number > (lastb + 10)))
 ]
+- Regression found, results/bad_randomness/smart_billions/candidates/cand_89/patch.sol
+/home/opam/.local/lib/python3.8/site-packages/sklearn/metrics/_regression.py:682: UndefinedMetricWarning: R^2 score is not well-defined with less than two samples.
+  warnings.warn(msg, UndefinedMetricWarning)
+- New best candidate, iter 2, 978.145902872s : results/bad_randomness/smart_billions/candidates/cand_1/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 5
+# Alarm (orginal)         : 79
+# Alarm (patch)           : 77
+# Alarm wo leak (patch)   : 74
+# Edit (min,max)          : 1, 1
+# Patch                   : 1
+- First solution          : n/a
+- First solution (iter)   : n/a
+- First solution (time)   : n/a
+# Uncompiled candidate    : 54
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 1., Edit: 1, Iter: 2, Time: 978.145902872, results/bad_randomness/smart_billions/candidates/cand_1/patch.sol
+
+========== Uncompiled ==========
+results/bad_randomness/smart_billions/candidates/cand_61/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_62/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_63/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_64/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_65/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_66/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_67/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_68/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_69/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_150/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_151/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_152/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_153/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_154/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_155/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_156/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_157/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_158/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_236/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_237/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_238/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_239/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_240/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_241/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_242/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_243/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_244/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_322/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_323/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_324/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_325/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_326/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_327/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_328/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_329/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_330/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_407/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_408/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_409/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_410/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_411/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_412/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_413/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_414/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_415/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_491/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_492/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_493/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_494/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_495/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_496/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_497/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_498/patch.sol
+results/bad_randomness/smart_billions/candidates/cand_499/patch.sol
+
+Time Elapsed (Real) : 1950.58866692
+Time Elapsed (CPU)  : 27.018151

@@ -2,7 +2,7 @@
   "fileName": "smartbugs/dataset/unchecked_low_level_calls/0x958a8f594101d2c0485a52319f29b2647f2ebc06.sol",
   "baseName": "0x958a8f594101d2c0485a52319f29b2647f2ebc06.sol",
   "iter": 4,
-  "time": 1.307926,
+  "time": 0.6802410000000001,
   "errMsg": null,
   "invmap": [
     {
@@ -23,7 +23,7 @@
       "line": 55,
       "signatures": [
         {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "execute",
           "argTypes": [ "address", "uint256", "dbytes" ]
         }
@@ -33,25 +33,11 @@
     },
     {
       "no": "2",
-      "kind": "ETH_LEAK",
-      "line": 138,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "sendMessage",
-          "argTypes": [ "string", "string", "string" ]
-        }
-      ],
-      "exp": "owner.transfer(this.balance);",
-      "status": "proven"
-    },
-    {
-      "no": "3",
       "kind": "RE_EL",
       "line": 55,
       "signatures": [
         {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "execute",
           "argTypes": [ "address", "uint256", "dbytes" ]
         }
@@ -60,60 +46,31 @@
       "status": "proven"
     },
     {
-      "no": "4",
-      "kind": "RE_EL",
-      "line": 138,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "sendMessage",
-          "argTypes": [ "string", "string", "string" ]
-        }
-      ],
-      "exp": "owner.transfer(this.balance);",
-      "status": "proven"
-    },
-    {
-      "no": "5",
+      "no": "3",
       "kind": "TX_ORG",
       "line": 21,
       "signatures": [
         {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "changeOwner",
           "argTypes": [ "address" ]
         },
         {
-          "contractName": "Marriage",
-          "methodName": "createMarriage",
-          "argTypes": [ "string", "string", "string", "string" ]
-        },
-        {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "execute",
           "argTypes": [ "address", "uint256", "dbytes" ]
-        },
-        {
-          "contractName": "Marriage",
-          "methodName": "setMajorEvent",
-          "argTypes": [ "string", "string", "string" ]
-        },
-        {
-          "contractName": "Marriage",
-          "methodName": "setStatus",
-          "argTypes": [ "string", "string" ]
         }
       ],
       "exp": "assume((msg.sender == owner));",
       "status": "proven"
     },
     {
-      "no": "6",
+      "no": "4",
       "kind": "TX_ORG",
       "line": 45,
       "signatures": [
         {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "acceptOwnership",
           "argTypes": []
         }
@@ -129,12 +86,12 @@
       "line": 38,
       "signatures": [
         {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "changeOwner",
           "argTypes": [ "address" ]
         }
       ],
-      "exp": "(@pre8 == newOwner)",
+      "exp": "(@pre1 == newOwner)",
       "status": "unproven"
     },
     {
@@ -143,259 +100,42 @@
       "line": 46,
       "signatures": [
         {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "acceptOwnership",
           "argTypes": []
         }
       ],
-      "exp": "(@pre9 == owner)",
+      "exp": "(@pre2 == owner)",
       "status": "unproven"
     },
     {
       "no": "3",
-      "kind": "NO_EFFECT",
-      "line": 115,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "createMarriage",
-          "argTypes": [ "string", "string", "string", "string" ]
-        }
-      ],
-      "exp": "(@pre4 == marriageDate)",
-      "status": "unproven"
-    },
-    {
-      "no": "4",
-      "kind": "NO_EFFECT",
-      "line": 118,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "createMarriage",
-          "argTypes": [ "string", "string", "string", "string" ]
-        }
-      ],
-      "exp": "(@pre3 == struct_init(Event, now, \"Marriage\", vows, url).date)",
-      "status": "unproven"
-    },
-    {
-      "no": "5",
-      "kind": "NO_EFFECT",
-      "line": 132,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "setMajorEvent",
-          "argTypes": [ "string", "string", "string" ]
-        },
-        {
-          "contractName": "Marriage",
-          "methodName": "setStatus",
-          "argTypes": [ "string", "string" ]
-        }
-      ],
-      "exp": "(@pre5 == struct_init(Event, now, name, description, url).date)",
-      "status": "unproven"
-    },
-    {
-      "no": "6",
-      "kind": "NO_EFFECT",
-      "line": 140,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "sendMessage",
-          "argTypes": [ "string", "string", "string" ]
-        }
-      ],
-      "exp": "(@pre6 == struct_init(Message, now, nameFrom, text, url, msg.value).value)",
-      "status": "unproven"
-    },
-    {
-      "no": "7",
-      "kind": "NO_EFFECT",
-      "line": 140,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "sendMessage",
-          "argTypes": [ "string", "string", "string" ]
-        }
-      ],
-      "exp": "(@pre7 == struct_init(Message, now, nameFrom, text, url, msg.value).date)",
-      "status": "unproven"
-    },
-    {
-      "no": "8",
       "kind": "DEAD",
       "line": 21,
       "signatures": [
         {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "changeOwner",
           "argTypes": [ "address" ]
         },
         {
-          "contractName": "Marriage",
-          "methodName": "createMarriage",
-          "argTypes": [ "string", "string", "string", "string" ]
-        },
-        {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "execute",
           "argTypes": [ "address", "uint256", "dbytes" ]
-        },
-        {
-          "contractName": "Marriage",
-          "methodName": "setMajorEvent",
-          "argTypes": [ "string", "string", "string" ]
-        },
-        {
-          "contractName": "Marriage",
-          "methodName": "setStatus",
-          "argTypes": [ "string", "string" ]
         }
       ],
       "exp": "false",
       "status": "unproven"
     },
     {
-      "no": "9",
+      "no": "4",
       "kind": "DEAD",
       "line": 45,
       "signatures": [
         {
-          "contractName": "Marriage",
+          "contractName": "Owned",
           "methodName": "acceptOwnership",
           "argTypes": []
-        }
-      ],
-      "exp": "false",
-      "status": "unproven"
-    },
-    {
-      "no": "10",
-      "kind": "DEAD",
-      "line": 88,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "sendMessage",
-          "argTypes": [ "string", "string", "string" ]
-        },
-        {
-          "contractName": "Marriage",
-          "methodName": "setMajorEvent",
-          "argTypes": [ "string", "string", "string" ]
-        },
-        {
-          "contractName": "Marriage",
-          "methodName": "setStatus",
-          "argTypes": [ "string", "string" ]
-        }
-      ],
-      "exp": "false",
-      "status": "unproven"
-    },
-    {
-      "no": "11",
-      "kind": "DEAD",
-      "line": 112,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "createMarriage",
-          "argTypes": [ "string", "string", "string", "string" ]
-        }
-      ],
-      "exp": "false",
-      "status": "unproven"
-    },
-    {
-      "no": "12",
-      "kind": "DEAD",
-      "line": 119,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "createMarriage",
-          "argTypes": [ "string", "string", "string", "string" ]
-        }
-      ],
-      "exp": "false",
-      "status": "unproven"
-    },
-    {
-      "no": "13",
-      "kind": "DEAD",
-      "line": 126,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "setStatus",
-          "argTypes": [ "string", "string" ]
-        }
-      ],
-      "exp": "false",
-      "status": "unproven"
-    },
-    {
-      "no": "14",
-      "kind": "DEAD",
-      "line": 133,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "setMajorEvent",
-          "argTypes": [ "string", "string", "string" ]
-        },
-        {
-          "contractName": "Marriage",
-          "methodName": "setStatus",
-          "argTypes": [ "string", "string" ]
-        }
-      ],
-      "exp": "false",
-      "status": "unproven"
-    },
-    {
-      "no": "15",
-      "kind": "DEAD",
-      "line": 137,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "sendMessage",
-          "argTypes": [ "string", "string", "string" ]
-        }
-      ],
-      "exp": "false",
-      "status": "unproven"
-    },
-    {
-      "no": "16",
-      "kind": "DEAD",
-      "line": 138,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "sendMessage",
-          "argTypes": [ "string", "string", "string" ]
-        }
-      ],
-      "exp": "false",
-      "status": "unproven"
-    },
-    {
-      "no": "17",
-      "kind": "DEAD",
-      "line": 141,
-      "signatures": [
-        {
-          "contractName": "Marriage",
-          "methodName": "sendMessage",
-          "argTypes": [ "string", "string", "string" ]
         }
       ],
       "exp": "false",

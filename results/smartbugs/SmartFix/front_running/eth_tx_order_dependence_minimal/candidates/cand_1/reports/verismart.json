@@ -1,0 +1,159 @@
+{
+  "fileName": "results/front_running/eth_tx_order_dependence_minimal/candidates/cand_1/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 2,
+  "time": 0.411032,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@3:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "setReward",
+          "argTypes": []
+        }
+      ],
+      "exp": "owner.transfer(reward);",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "claimReward",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.transfer(reward);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "TX_ORG",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "setReward",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "TX_ORG",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "claimReward",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "assume((owner == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "setReward",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == reward)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "DEAD",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "setReward",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "setReward",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "claimReward",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "claimReward",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "EthTxOrderDependenceMinimal",
+          "methodName": "claimReward",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

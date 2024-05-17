@@ -1,0 +1,174 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 7
+[INFO] reachable : 6
+[INFO] Generating Paths ... took 0.000412s
+[INFO] # path : 26
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001384s
+Generating VCs ... took 0.007249s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.048348
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/6 ... [IO] line 28, (balances[msg.sender] + msg.value) ... unproven
+2/6 ... [IO] line 41, (balances[msg.sender] - _am) ... proven
+3/6 ... [ETH_LEAK] line 38, msg.sender.call.value(_am)() ... unproven
+4/6 ... [RE_EL] line 38, msg.sender.call.value(_am)() ... unproven
+5/6 ... [RE] line 22, (PrivateBank, Deposit, []) ... unproven
+6/6 ... [RE] line 33, (PrivateBank, CashOut, [uint256]) ... unproven
+took 0.354694s
+
+Generating VCs ... took 0.003308s
+Checking validity of VCs ... took 5.293531s
+
+Generating VCs ... took 0.00355s
+Checking validity of VCs ... took 20.90502s
+
+Generating VCs ... took 0.003544s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 26.614483
+[
+-1 -> (MinDeposit__@8 == 1000000000000000000)
+0 -> true
+]
+[
+]
+1/6 ... [IO] line 28, (balances[msg.sender] + msg.value) ... unproven
+2/6 ... [IO] line 41, (balances[msg.sender] - _am) ... proven
+3/6 ... [ETH_LEAK] line 38, msg.sender.call.value(_am)() ... unproven
+4/6 ... [RE_EL] line 38, msg.sender.call.value(_am)() ... unproven
+5/6 ... [RE] line 22, (PrivateBank, Deposit, []) ... unproven
+6/6 ... [RE] line 33, (PrivateBank, CashOut, [uint256]) ... unproven
+took 0.340491s
+
+Generating VCs ... took 0.003232s
+Checking validity of VCs ... took 10.208034s
+
+Generating VCs ... took 0.003439s
+Checking validity of VCs ... took 22.398274s
+
+Generating VCs ... took 0.00348s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 7 Total elapsed : 59.577662
+[
+-1 -> (MinDeposit__@8 == 1000000000000000000)
+0 -> (MinDeposit__@8 == 1000000000000000000)
+]
+[
+]
+1/6 ... [IO] line 28, (balances[msg.sender] + msg.value) ... unproven
+2/6 ... [IO] line 41, (balances[msg.sender] - _am) ... proven
+3/6 ... [ETH_LEAK] line 38, msg.sender.call.value(_am)() ... unproven
+4/6 ... [RE_EL] line 38, msg.sender.call.value(_am)() ... unproven
+5/6 ... [RE] line 22, (PrivateBank, Deposit, []) ... unproven
+6/6 ... [RE] line 33, (PrivateBank, CashOut, [uint256]) ... unproven
+took 0.37777s
+
+Generating VCs ... took 0.003274s
+Checking validity of VCs ... took 5.875908s
+
+Generating VCs ... took 0.004487s
+Checking validity of VCs ... took 18.643192s
+
+Iter : 10 To explore : 12 Explored : 65 Total elapsed : 84.485006
+Generating VCs ... took 0.00353100000001s
+Checking validity of VCs ... took 0.580059s
+
+Generating VCs ... took 0.00341200000001s
+Checking validity of VCs ... took 0.618564s
+
+Generating VCs ... took 0.003615s
+Checking validity of VCs ... took 0.632172s
+
+Generating VCs ... took 0.00343100000001s
+Checking validity of VCs ... took 30.123959s
+
+Generating VCs ... took 0.003388s
+Checking validity of VCs ... took 1.999204s
+
+Generating VCs ... took 0.00418999999999s
+Checking validity of VCs ... took 2.124142s
+
+Generating VCs ... took 0.00358199999999s
+Checking validity of VCs ... took 1.986122s
+
+Generating VCs ... took 0.00331799999999s
+Checking validity of VCs ... took 4.007047s
+
+Generating VCs ... took 0.00357100000001s
+Checking validity of VCs ... took 3.02366s
+
+Generating VCs ... took 0.00357099999999s
+Checking validity of VCs ... took 3.174639s
+
+Iter : 20 To explore : 25 Explored : 88 Total elapsed : 132.812439
+Generating VCs ... took 0.00351499999999s
+Checking validity of VCs ... took 5.377184s
+
+Generating VCs ... took 0.00358299999999s
+Checking validity of VCs ... took 5.8631s
+
+Generating VCs ... took 0.00324799999999s
+Checking validity of VCs ... took 7.007791s
+
+Generating VCs ... took 0.00142700000001s
+Checking validity of VCs ... 
+1/10 ... [NO_EFFECT] line 28, (@pre1 == balances[msg.sender]) ... unproven
+2/10 ... [NO_EFFECT] line 41, (@pre2 == balances[msg.sender]) ... unproven
+3/10 ... [NO_EFFECT] line 69, (@pre5 == LastMsg.Sender) ... unproven
+4/10 ... [NO_EFFECT] line 70, (@pre4 == LastMsg.Time) ... unproven
+5/10 ... [NO_EFFECT] line 71, (@pre3 == LastMsg.Val) ... unproven
+6/10 ... [ASSIGN_CONST] line 28, (balances[msg.sender] == 0) ... unproven
+7/10 ... [ASSIGN_CONST] line 41, (balances[msg.sender] == 0) ... unproven
+8/10 ... [DEAD] line 26, false ... unproven
+9/10 ... [DEAD] line 35, false ... unproven
+10/10 ... [DEAD] line 40, false ... unproven
+took 0.4816s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 28, (balances[msg.sender] + msg.value) : unproven
+[2] [IO] line 41, (balances[msg.sender] - _am) : proven
+[3] [ETH_LEAK] line 38, msg.sender.call.value(_am)() : unproven
+[4] [RE_EL] line 38, msg.sender.call.value(_am)() : unproven
+[5] [RE] line 22, (PrivateBank, Deposit, []) : unproven
+[6] [RE] line 33, (PrivateBank, CashOut, [uint256]) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 28, (@pre1 == balances[msg.sender]) : unproven
+[2] [NO_EFFECT] line 41, (@pre2 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 69, (@pre5 == LastMsg.Sender) : unproven
+[4] [NO_EFFECT] line 70, (@pre4 == LastMsg.Time) : unproven
+[5] [NO_EFFECT] line 71, (@pre3 == LastMsg.Val) : unproven
+[6] [ASSIGN_CONST] line 28, (balances[msg.sender] == 0) : unproven
+[7] [ASSIGN_CONST] line 41, (balances[msg.sender] == 0) : unproven
+[8] [DEAD] line 26, false : unproven
+[9] [DEAD] line 35, false : unproven
+[10] [DEAD] line 40, false : unproven
+
+============ Statistics ============
+# Iter                    : 22
+# Alarm / Query           : 5 / 6
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 2 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 151.575948954
+Time Elapsed (CPU)  : 151.561834

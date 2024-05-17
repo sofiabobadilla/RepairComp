@@ -5,17 +5,17 @@
 [CHECKER] Ether-Leaking
 
 [INFO] all funcs : 20
-[INFO] reachable : 11
-[INFO] Generating Paths ... took 7e-05s
-[INFO] # path : 19
+[INFO] reachable : 6
+[INFO] Generating Paths ... took 0.000145s
+[INFO] # path : 14
 
 [INFO] Violate CEI: false
 [INFO] msg.sender = this possible: false
-[INFO] Performing Interval Analysis ... took 0.000262s
-Generating VCs ... took 0.001275s
+[INFO] Performing Interval Analysis ... took 0.000461s
+Generating VCs ... took 0.001793s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 1 Total elapsed : 0.022519
+Iter: 1 Total elapsed : 0.036445
 [
 -1 -> true
 0 -> true
@@ -26,18 +26,18 @@ Iter: 1 Total elapsed : 0.022519
 2/4 ... [RE_EL] line 56, _dst.call.value(_value)(_data); ... unproven
 3/4 ... [TX_ORG] line 22, assume((msg.sender == owner)); ... proven
 4/4 ... [TX_ORG] line 46, assume((msg.sender == newOwner)); ... proven
-took 0.158402s
+took 0.20699s
 
-Generating VCs ... took 0.001265s
-Checking validity of VCs ... took 0.04195s
+Generating VCs ... took 0.000971s
+Checking validity of VCs ... took 0.036395s
 
-Generating VCs ... took 0.00152s
-Checking validity of VCs ... took 0.027513s
+Generating VCs ... took 0.000771s
+Checking validity of VCs ... took 0.022449s
 
-Generating VCs ... took 0.001482s
+Generating VCs ... took 0.000762s
 Checking validity of VCs ... 
 =============== Invariants Found ===============
-Iter: 4 Total elapsed : 0.539648
+Iter: 4 Total elapsed : 0.470921
 [
 -1 -> ((Read(@TU, newOwner__@25) == true) /\ (Read(@TU, owner__@14) == true))
 0 -> ((Read(@TU, newOwner__@25) == true) /\ (Read(@TU, owner__@14) == true))
@@ -48,19 +48,15 @@ Iter: 4 Total elapsed : 0.539648
 2/4 ... [RE_EL] line 56, _dst.call.value(_value)(_data); ... proven
 3/4 ... [TX_ORG] line 22, assume((msg.sender == owner)); ... proven
 4/4 ... [TX_ORG] line 46, assume((msg.sender == newOwner)); ... proven
-took 0.43055s
+took 0.29472s
 
-Generating VCs ... took 0.000604s
+Generating VCs ... took 0.000437s
 Checking validity of VCs ... 
-1/8 ... [NO_EFFECT] line 39, (@pre6 == newOwner) ... unproven
-2/8 ... [NO_EFFECT] line 47, (@pre7 == owner) ... unproven
-3/8 ... [NO_EFFECT] line 88, (@pre3 == struct_init(IndexArray, now, wedaddress, partnernames, weddingdate, displaymultisig).displaymultisig) ... unproven
-4/8 ... [NO_EFFECT] line 88, (@pre4 == struct_init(IndexArray, now, wedaddress, partnernames, weddingdate, displaymultisig).weddingdate) ... unproven
-5/8 ... [NO_EFFECT] line 88, (@pre5 == struct_init(IndexArray, now, wedaddress, partnernames, weddingdate, displaymultisig).indexdate) ... unproven
-6/8 ... [DEAD] line 22, false ... unproven
-7/8 ... [DEAD] line 46, false ... unproven
-8/8 ... [DEAD] line 89, false ... unproven
-took 0.086431s
+1/4 ... [NO_EFFECT] line 39, (@pre1 == newOwner) ... unproven
+2/4 ... [NO_EFFECT] line 47, (@pre2 == owner) ... unproven
+3/4 ... [DEAD] line 22, false ... unproven
+4/4 ... [DEAD] line 46, false ... unproven
+took 0.034332s
 
 
 ===== Vulnerability Report =====
@@ -70,14 +66,10 @@ took 0.086431s
 [4] [TX_ORG] line 46, assume((msg.sender == newOwner)); : proven
 
 ===== Regression Report =====
-[1] [NO_EFFECT] line 39, (@pre6 == newOwner) : unproven
-[2] [NO_EFFECT] line 47, (@pre7 == owner) : unproven
-[3] [NO_EFFECT] line 88, (@pre3 == struct_init(IndexArray, now, wedaddress, partnernames, weddingdate, displaymultisig).displaymultisig) : unproven
-[4] [NO_EFFECT] line 88, (@pre4 == struct_init(IndexArray, now, wedaddress, partnernames, weddingdate, displaymultisig).weddingdate) : unproven
-[5] [NO_EFFECT] line 88, (@pre5 == struct_init(IndexArray, now, wedaddress, partnernames, weddingdate, displaymultisig).indexdate) : unproven
-[6] [DEAD] line 22, false : unproven
-[7] [DEAD] line 46, false : unproven
-[8] [DEAD] line 89, false : unproven
+[1] [NO_EFFECT] line 39, (@pre1 == newOwner) : unproven
+[2] [NO_EFFECT] line 47, (@pre2 == owner) : unproven
+[3] [DEAD] line 22, false : unproven
+[4] [DEAD] line 46, false : unproven
 
 ============ Statistics ============
 # Iter                    : 4
@@ -89,5 +81,5 @@ took 0.086431s
 - reentrancy              : 0 / 0
 - tx.origin               : 0 / 2
 
-Time Elapsed (Real) : 0.802504062653
-Time Elapsed (CPU)  : 0.77615
+Time Elapsed (Real) : 0.674929141998
+Time Elapsed (CPU)  : 0.633373

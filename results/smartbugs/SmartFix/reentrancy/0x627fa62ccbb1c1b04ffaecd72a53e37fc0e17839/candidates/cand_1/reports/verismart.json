@@ -1,0 +1,489 @@
+{
+  "fileName": "results/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839/candidates/cand_1/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 91,
+  "time": 150.725926,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(land(geq(1000000000000000000,MinDeposit__@78:uint256),eq(read(@TU:mapping(address => bool),newOwner__@3:address),cond(true))),eq(read(@TU:mapping(address => bool),owner__@7:address),cond(true)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(eq(read(@TU:mapping(address => bool),newOwner__@3:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@7:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 71,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(Holders[msg.sender] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 72,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(Holders[msg.sender] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 97,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(Holders[_addr] - _wei)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 95,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "_addr.call.value(_wei)()",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE_EL",
+      "line": 95,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "_addr.call.value(_wei)()",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(TokenBank, changeOwner, [address])",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "RE",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "confirmOwner",
+          "argTypes": []
+        }
+      ],
+      "exp": "(TokenBank, confirmOwner, [])",
+      "status": "proven"
+    },
+    {
+      "no": "8",
+      "kind": "RE",
+      "line": 53,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "initTokenBank",
+          "argTypes": []
+        }
+      ],
+      "exp": "(TokenBank, initTokenBank, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "RE",
+      "line": 60,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(TokenBank, @fallback, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "RE",
+      "line": 66,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(TokenBank, Deposit, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "RE",
+      "line": 76,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WitdrawTokenToHolder",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(TokenBank, WitdrawTokenToHolder, [address, address, uint256])",
+      "status": "proven"
+    },
+    {
+      "no": "12",
+      "kind": "RE",
+      "line": 87,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(TokenBank, WithdrawToHolder, [address, uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "TX_ORG",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "confirmOwner",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == newOwner));",
+      "status": "proven"
+    },
+    {
+      "no": "14",
+      "kind": "TX_ORG",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WitdrawTokenToHolder",
+          "argTypes": [ "address", "address", "uint256" ]
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToken",
+          "argTypes": [ "address", "uint256", "address" ]
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((owner == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre8 == newOwner)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "confirmOwner",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre9 == owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 56,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "initTokenBank",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre5 == owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 72,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre6 == Holders[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 97,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre7 == Holders[_addr])",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "ASSIGN_CONST",
+      "line": 72,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(Holders[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "ASSIGN_CONST",
+      "line": 97,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(Holders[_addr] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "confirmOwner",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WitdrawTokenToHolder",
+          "argTypes": [ "address", "address", "uint256" ]
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToken",
+          "argTypes": [ "address", "uint256", "address" ]
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "DEAD",
+      "line": 63,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "DEAD",
+      "line": 69,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "DEAD",
+      "line": 71,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "TokenBank",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "DEAD",
+      "line": 80,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WitdrawTokenToHolder",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "DEAD",
+      "line": 83,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WitdrawTokenToHolder",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "DEAD",
+      "line": 92,
+      "signatures": [
+        {
+          "contractName": "TokenBank",
+          "methodName": "WithdrawToHolder",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}
