@@ -1,4 +1,3 @@
-pragma solidity ^0.4.16;
 
                         contract sGuardPlus {
                                 constructor() internal {
