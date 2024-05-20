@@ -29,12 +29,12 @@ The directory structure of the project is as follows:
 
 
 ## Patches overview
-| Tool        | #outputs | #diff patches | compilable |
-|-------------|----------|---------------|------------|
-| Elysium     |      126 |            106|           -|
-| sGuard      |      103 |             69|         103|
-| sGuardPlus  |       81 |             81|          81|
-| SmartFix    |       86 |             86|          86|
-| Aroc        |       96 |             96|           0|
-| TIPS        |      231 |            231|         223|
-| Smartshield |      134 |            131|           -|
+| Tool        | #outputs | #diff patches | compilable | patches w/o bugs | patxhes w/ new bugs |
+|-------------|----------|---------------|------------|------------------|---------------------|
+| Elysium     |      126 |            106|           -|                  |                     |
+| sGuard      |      103 |             69|         103|                  |                     |
+| sGuardPlus  |       81 |             81|          81|                71|                   10|
+| SmartFix    |       86 |             86|          86|                  |                     |
+| Aroc        |       96 |             96|           0|                 -|                     |
+| TIPS        |      231 |            231|         223|                  |                     |
+| Smartshield |      134 |            131|           -|                  |                     |
