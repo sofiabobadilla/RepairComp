@@ -27,7 +27,6 @@ contract sGuard{
  * @vulnerable_at_lines: 24
  */
 
-pragma solidity ^0.4.0;
 
 contract Reentrancy_cross_function  is sGuard {
 

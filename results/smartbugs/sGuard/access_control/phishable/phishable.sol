@@ -7,7 +7,6 @@ contract sGuard{
  * @vulnerable_at_lines: 20
  */
 
- pragma solidity ^0.4.22;
 
  contract Phishable  is sGuard {
     address public owner;

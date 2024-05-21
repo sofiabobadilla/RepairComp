@@ -27,7 +27,6 @@ contract sGuard{
  * @vulnerable_at_lines: 44
  */
 
-pragma solidity ^0.4.19;
 
 contract ETH_FUND
  is sGuard {

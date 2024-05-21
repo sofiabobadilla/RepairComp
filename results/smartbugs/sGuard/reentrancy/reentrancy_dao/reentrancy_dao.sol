@@ -22,7 +22,6 @@ contract sGuard{
  * @vulnerable_at_lines: 18
  */
 
-pragma solidity ^0.4.19;
 
 contract ReentrancyDAO  is sGuard {
     mapping (address => uint) credit;

@@ -16,7 +16,6 @@ contract sGuard{
  * @vulnerable_at_lines: 23
  */
 
-pragma solidity ^0.4.15;
 
 //Auction susceptible to DoS attack
 contract DosAuction  is sGuard {

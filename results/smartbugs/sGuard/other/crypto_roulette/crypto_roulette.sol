@@ -26,7 +26,6 @@ contract sGuard{
  * @source: https://github.com/thec00n/smart-contract-honeypots/blob/master/CryptoRoulette.sol
  * @vulnerable_at_lines: 40,41,42
  */
-pragma solidity ^0.4.19;
 
 // CryptoRoulette
 //

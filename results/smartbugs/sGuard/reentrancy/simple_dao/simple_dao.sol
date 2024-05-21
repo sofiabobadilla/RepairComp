@@ -27,7 +27,6 @@ contract sGuard{
  * @vulnerable_at_lines: 19
  */
 
-pragma solidity ^0.4.2;
 
 contract SimpleDAO  is sGuard {
   mapping (address => uint) public credit;

@@ -27,7 +27,6 @@ contract sGuard{
  * @vulnerable_at_lines: 54
  */
 
-pragma solidity ^0.4.19;
 
 contract PRIVATE_ETH_CELL
  is sGuard {

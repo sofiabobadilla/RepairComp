@@ -13,7 +13,6 @@ contract sGuard{
  * @vulnerable_at_lines: 91
  */
 
-pragma solidity ^0.4.19;
 /*
  * This is a distributed lottery that chooses random addresses as lucky addresses. If these
  * participate, they get the jackpot: 7 times the price of their bet.

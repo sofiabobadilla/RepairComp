@@ -19,7 +19,6 @@ contract sGuard{
  * @vulnerable_at_lines: 17
  */
 
-pragma solidity ^0.4.24;
  
 contract airDrop is sGuard {
     

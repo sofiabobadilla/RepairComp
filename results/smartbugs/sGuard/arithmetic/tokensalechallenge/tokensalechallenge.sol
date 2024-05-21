@@ -25,7 +25,6 @@ contract sGuard{
  * @vulnerable_at_lines: 23,25,33
  */
 
-pragma solidity ^0.4.21;
 
 contract TokenSaleChallenge  is sGuard {
     mapping(address => uint256) public balanceOf;

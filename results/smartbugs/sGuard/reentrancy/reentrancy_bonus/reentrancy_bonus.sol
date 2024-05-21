@@ -22,7 +22,6 @@ contract sGuard{
  * @vulnerable_at_lines: 28
  */
 
-pragma solidity ^0.4.0;
 
 contract Reentrancy_bonus is sGuard {
 

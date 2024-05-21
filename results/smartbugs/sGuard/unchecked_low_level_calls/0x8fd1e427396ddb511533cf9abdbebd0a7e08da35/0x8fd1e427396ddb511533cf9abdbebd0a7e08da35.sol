@@ -1,25 +1,12 @@
-contract sGuard{
-  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {
-    assert(b <= a);
-    return a - b;
-  }
-  
-  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {
-    uint256 c = a + b;
-    assert(c >= a);
-    return c;
-  }
-}
 /*
  * @source: etherscan.io 
  * @author: -
  * @vulnerable_at_lines: 44,97
  */
 
-pragma solidity ^0.4.18;
 
 contract Ownable
- is sGuard {
+{
     address newOwner;
     address owner = msg.sender;
     
@@ -45,7 +32,7 @@ contract Ownable
     }
 }
 
-contract Token is sGuard,  Ownable
+contract Token is Ownable
 {
     address owner = msg.sender;
     function WithdrawToken(address token, uint256 amount,address to)
@@ -57,7 +44,7 @@ contract Token is sGuard,  Ownable
     }
 }
 
-contract TokenBank is sGuard,  Token
+contract TokenBank is Token
 {
     uint public MinDeposit;
     mapping (address => uint) public Holders;
@@ -81,7 +68,7 @@ contract TokenBank is sGuard,  Token
     {
         if(msg.value>=MinDeposit)
         {
-            Holders[msg.sender] = add_uint256(Holders[msg.sender], msg.value);
+            Holders[msg.sender]+=msg.value;
         }
     }
     
@@ -107,7 +94,7 @@ contract TokenBank is sGuard,  Token
             {
                 // <yes> <report> UNCHECKED_LL_CALLS
                 _addr.call.value(_wei);
-                Holders[_addr] = sub_uint256(Holders[_addr], _wei);
+                Holders[_addr]-=_wei;
             }
         }
     }

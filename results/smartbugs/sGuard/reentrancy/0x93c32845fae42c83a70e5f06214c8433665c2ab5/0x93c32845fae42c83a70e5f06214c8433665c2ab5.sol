@@ -27,7 +27,6 @@ contract sGuard{
  * @vulnerable_at_lines: 29
  */
 
-pragma solidity ^0.4.25;
 
 contract X_WALLET
  is sGuard {

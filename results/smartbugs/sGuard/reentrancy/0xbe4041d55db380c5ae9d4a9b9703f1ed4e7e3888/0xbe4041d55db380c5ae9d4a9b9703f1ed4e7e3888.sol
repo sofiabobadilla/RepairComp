@@ -27,7 +27,6 @@ contract sGuard{
  * @vulnerable_at_lines: 63
  */
 
-pragma solidity ^0.4.19;
 
 contract MONEY_BOX   
  is sGuard {

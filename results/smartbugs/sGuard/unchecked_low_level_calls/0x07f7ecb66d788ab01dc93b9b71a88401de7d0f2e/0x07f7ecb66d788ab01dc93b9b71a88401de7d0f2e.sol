@@ -16,7 +16,6 @@ contract sGuard{
  * @vulnerable_at_lines: 201,213
  */
 
-pragma solidity ^0.4.21;
 
 contract PoCGame
  is sGuard {

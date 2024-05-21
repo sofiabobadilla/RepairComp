@@ -27,7 +27,6 @@ contract sGuard{
  * @vulnerable_at_lines: 38
  */
 
-pragma solidity ^0.4.19;
 
 contract PrivateBank
  is sGuard {

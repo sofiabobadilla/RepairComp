@@ -10,7 +10,6 @@ contract sGuard{
  * @vulnerable_at_lines: 13,27
  */
 
-pragma solidity ^0.4.0;
 contract lottopollo  is sGuard {
   address leader;
   uint    timestamp;

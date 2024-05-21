@@ -27,7 +27,6 @@ contract sGuard{
  * @vulnerable_at_lines: 36
  */
 
- pragma solidity ^0.4.24;
 
  /* User can add pay in and withdraw Ether.
     Unfortunately the developer forgot set the user's balance to 0 when refund() is called.
