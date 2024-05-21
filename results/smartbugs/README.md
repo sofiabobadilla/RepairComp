@@ -20,7 +20,7 @@ The directory structure of the project is as follows:
 |Tool\Return code                    |0 (success)|1 (errors)|timeout (4hr)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
 |------------------------------------|-----------|----------|---------------|-----------------------|-------------------------|-----------------|---|------------------------------------------------------------------|
 |Elysium                             |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
-|sGuard                              |130        |0         |2              |11                     |0                        |0                |0  |                                                                  |
+|sGuard                              |132        |1         |2              |8                      |0                        |0                |0  |                                                                  |
 |sGuardPlus                          |111        |33        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
 |SmartFix                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
@@ -32,7 +32,7 @@ The directory structure of the project is as follows:
 | Tool        | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ new bugs |
 |-------------|----------|---------------|------------|------------------|---------------------|
 | Elysium     |      126 |            101|           -|                  |                     |
-| sGuard      |      103 |             69|         103|                  |                     |
+| sGuard      |      109 |             62|         109|                  |                     |
 | sGuardPlus  |       81 |             81|          81|                71|                   10|
 | SmartFix    |       86 |             86|          86|                  |                     |
 | Aroc        |       96 |             96|           0|                 -|                     |
