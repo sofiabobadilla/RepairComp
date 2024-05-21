@@ -31,7 +31,7 @@ The directory structure of the project is as follows:
 ## Patches overview
 | Tool        | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ new bugs |
 |-------------|----------|---------------|------------|------------------|---------------------|
-| Elysium     |      126 |            101|           -|                  |                     |
+| Elysium     |      126 |            101|           -|                98|                    3|
 | sGuard      |      109 |             62|         109|                  |                     |
 | sGuardPlus  |       81 |             81|          81|                71|                   10|
 | SmartFix    |       86 |             86|          86|                  |                     |
