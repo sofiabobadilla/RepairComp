@@ -37,4 +37,4 @@ The directory structure of the project is as follows:
 | SmartFix    |       86 |             86|          86|                66|               20|                   1|
 | Aroc        |       96 |             96|           0|                 -|                -|                    |
 | TIPS        |      231 |            231|         223|                  |                 |                    |
-| Smartshield |      134 |            131|           -|                  |                 |                    |
+| Smartshield |      134 |            131|           -|               108|               23|                    |
