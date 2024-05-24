@@ -16,25 +16,25 @@ The directory structure of the project is as follows:
 *If the tool generates multiple patches for each contract file, then the patches naming convention is given by the tool itself. Each patch is prefixed by the `contract_file_name` and suffixed by their respective extension (`.sol` if source code, `.bin` if bytecode).
 
 
-## Results from runnning the APR tools
+## Results from runnning the APR tools (bugs)
 |Tool\Return code                    |0 (success)|1 (errors)|timeout (4hr)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
 |------------------------------------|-----------|----------|---------------|-----------------------|-------------------------|-----------------|---|------------------------------------------------------------------|
-|Elysium                             |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
+|Elysium  (binary)                           |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
+|Smartshield   (binary)                       |134        |9         |0              |0                      |0                        |0                |0  |1: code errors                                                    |
 |sGuard                              |132        |1         |2              |8                      |0                        |0                |0  |                                                                  |
 |sGuardPlus                          |111        |33        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
 |SmartFix                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
 |TIPS                                |141        |2         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
-|Smartshield                         |134        |9         |0              |0                      |0                        |0                |0  |1: code errors                                                    |
 
 
-## Patches overview
+## Patches overview in smartbugs-curated (patches)
 | Tool        | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ bugs | paches w/ new bugs |
 |-------------|----------|---------------|------------|------------------|-----------------|--------------------|
-| Elysium     |      126 |            101|           -|                98|                3|                  2+|
+| Elysium (binary)    |      126 |            101|           -|                98|                3|                  2+|
+| Smartshield (binary) |      134 |            131|           -|               108|               23|                    |
 | sGuard      |      109 |             62|         109|                  |                 |                    |
 | sGuardPlus  |       81 |             81|          81|                71|               10|                  10|
 | SmartFix    |       86 |             86|          86|                66|               20|                   1|
 | Aroc        |       96 |             96|           0|                 -|                -|                    |
 | TIPS        |      231 |            231|         223|                  |                 |                    |
-| Smartshield |      134 |            131|           -|               108|               23|                    |
