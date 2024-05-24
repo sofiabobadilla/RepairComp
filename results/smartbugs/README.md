@@ -29,6 +29,16 @@ The directory structure of the project is as follows:
 
 
 ## Patches overview in smartbugs-curated (patches)
+
+```
+find sGuard -name "*.sol" | wc
+find sGuardPlus/ -name "*.sol" | wc
+find Smart -name "*.sol" | wc
+find SmartFix/ -name "*.sol" | wc
+find TIPS/ -name "*.sol" | wc
+ls SmartFix/*/*/*sol | wc 
+```
+
 | Tool        | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ bugs | paches w/ new bugs |
 |-------------|----------|---------------|------------|------------------|-----------------|--------------------|
 | Elysium (binary)    |      126 |            101|           -|                98|                3|                  2+|
