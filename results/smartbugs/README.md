@@ -36,7 +36,10 @@ find sGuardPlus/ -name "*.sol" | wc
 find Smart -name "*.sol" | wc
 find SmartFix/ -name "*.sol" | wc
 find TIPS/ -name "*.sol" | wc
-ls SmartFix/*/*/*sol | wc 
+ls SmartFix/*/*/*sol | wc
+
+find Elysium/ -name "*.bin" | wc
+find SmartShield/ -name "*.bin" | wc
 ```
 
 | Tool        | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ bugs | paches w/ new bugs |
