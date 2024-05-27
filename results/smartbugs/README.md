@@ -25,7 +25,7 @@ The directory structure of the project is as follows:
 |sGuardPlus                          |111        |33        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
 |SmartFix                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
-|TIPS                                |141        |2         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
+|TIPS                                |140        |3         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
 
 
 ## Patches overview in smartbugs-curated (patches)
