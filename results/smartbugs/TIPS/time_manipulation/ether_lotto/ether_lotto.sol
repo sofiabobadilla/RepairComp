@@ -1,4 +1,3 @@
-pragma solidity ^0.4.15;
 contract EtherLotto {
 	uint constant TICKET_AMOUNT = 10;
 	uint constant FEE_AMOUNT = 1;

@@ -1,4 +1,3 @@
-pragma solidity ^0.4.13;
 contract Centra4 {
 	function transfer() public returns(bool ){
 	address contract_address;

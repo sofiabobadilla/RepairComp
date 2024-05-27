@@ -1,4 +1,3 @@
-pragma solidity ^0.4.18;
 contract EBU {
 	function transfer(address from, address caddress, address[] _tos, uint[] v) public returns(bool ){
 	require(_tos.length > 0);

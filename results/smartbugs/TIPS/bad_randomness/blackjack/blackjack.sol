@@ -1,4 +1,3 @@
-pragma solidity ^0.4.9;
 library Deck {
 	function deal(address player, uint8 cardNumber) internal returns(uint8 ){
 	uint b = block.number;

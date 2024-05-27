@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract ETH_VAULT {
 	mapping(address => uint) public balances;
 	uint public MinDeposit = 1 ether;

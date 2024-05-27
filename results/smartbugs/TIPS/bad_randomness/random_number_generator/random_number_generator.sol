@@ -1,4 +1,3 @@
-pragma solidity ^0.4.25;
 contract RandomNumberGenerator {
 	uint256 private salt = block.timestamp;
 	function random(uint max) view private returns(uint256 result){

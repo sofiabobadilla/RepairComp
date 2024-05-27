@@ -1,4 +1,3 @@
-pragma solidity ^0.4.25;
 contract DosGas {
 	address[] creditorAddresses;
 	bool win = false;

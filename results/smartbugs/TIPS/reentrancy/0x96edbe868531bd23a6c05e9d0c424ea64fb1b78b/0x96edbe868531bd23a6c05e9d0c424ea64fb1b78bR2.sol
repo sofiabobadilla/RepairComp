@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract PENNY_BY_PENNY {
 	struct Holder{
 	uint unlockTime;

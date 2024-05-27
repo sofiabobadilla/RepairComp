@@ -1,4 +1,3 @@
-pragma solidity ^0.4.22;
 contract Phishable {
 	address public owner;
 	constructor(address _owner) public {

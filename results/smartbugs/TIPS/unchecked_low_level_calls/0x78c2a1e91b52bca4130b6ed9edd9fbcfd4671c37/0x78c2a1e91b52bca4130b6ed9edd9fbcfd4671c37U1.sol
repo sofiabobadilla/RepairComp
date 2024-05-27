@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract WhaleGiveaway1 {
 	address public Owner = msg.sender;
 	uint public constant minEligibility = 0.999001 ether;

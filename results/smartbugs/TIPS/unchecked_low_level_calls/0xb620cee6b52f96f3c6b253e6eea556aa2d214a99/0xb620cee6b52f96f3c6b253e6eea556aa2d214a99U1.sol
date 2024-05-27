@@ -1,4 +1,3 @@
-pragma solidity ^0.4.23;
 contract DrainMe {
 	address public winner = 0x0;
 	address public owner;

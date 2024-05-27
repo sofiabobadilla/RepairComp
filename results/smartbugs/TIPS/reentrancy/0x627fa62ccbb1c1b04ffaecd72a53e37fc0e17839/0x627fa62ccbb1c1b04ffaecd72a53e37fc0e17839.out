@@ -1,0 +1,92 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:
+../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract Ownable
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:42:27: Warning: "sha3" has been deprecated in favour of "keccak256"
+        token.call(bytes4(sha3("transfer(address,uint256)")),to,amount); 
+                          ^-------------------------------^
+../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:42:9: Warning: Return value of low-level calls not used.
+        token.call(bytes4(sha3("transfer(address,uint256)")),to,amount); 
+        ^-------------------------------------------------------------^
+../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:59:5: Warning: No visibility specified. Defaulting to "public". 
+    function()
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:65:5: Warning: No visibility specified. Defaulting to "public". 
+    function Deposit() 
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+Reentrancy in TokenBank.WithdrawToHolder(address,uint256) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#85-98):
+	External calls:
+	- _addr.call.value(_wei)() (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#93)
+	State variables written after the call(s):
+	- Holders[_addr] -= _wei (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#95)
+	TokenBank.Holders (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#49) can be used in cross function reentrancies:
+	- TokenBank.Deposit() (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#65-72)
+	- TokenBank.Holders (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#49)
+	- TokenBank.WitdrawTokenToHolder(address,address,uint256) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#74-83)
+	- TokenBank.WithdrawToHolder(address,uint256) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#85-98)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+Token.owner (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#37) shadows:
+	- Ownable.owner (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#11)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variable-shadowing
+
+Token.WithdrawToken(address,uint256,address) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#38-43) ignores return value by token.call(bytes4(sha3()(transfer(address,uint256))),to,amount) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#42)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-low-level-calls
+
+Token.WithdrawToken(address,uint256,address).to (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#38) lacks a zero-check on :
+		- token.call(bytes4(sha3()(transfer(address,uint256))),to,amount) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#42)
+Token.WithdrawToken(address,uint256,address).token (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#38) lacks a zero-check on :
+		- token.call(bytes4(sha3()(transfer(address,uint256))),to,amount) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#42)
+Ownable.changeOwner(address).addr (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#13) lacks a zero-check on :
+		- newOwner = addr (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#17)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+Modifier Ownable.onlyOwner() (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#29-32) does not always execute _; or revert
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-modifier
+
+Deprecated standard detected token.call(bytes4(sha3()(transfer(address,uint256))),to,amount) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#42):
+	- Usage of "sha3()" should be replaced with "keccak256()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in Token.WithdrawToken(address,uint256,address) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#38-43):
+	- token.call(bytes4(sha3()(transfer(address,uint256))),to,amount) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#42)
+Low level call in TokenBank.WithdrawToHolder(address,uint256) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#85-98):
+	- _addr.call.value(_wei)() (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#93)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Function Token.WithdrawToken(address,uint256,address) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#38-43) is not in mixedCase
+Function TokenBank.Deposit() (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#65-72) is not in mixedCase
+Function TokenBank.WitdrawTokenToHolder(address,address,uint256) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#74-83) is not in mixedCase
+Parameter TokenBank.WitdrawTokenToHolder(address,address,uint256)._to (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#74) is not in mixedCase
+Parameter TokenBank.WitdrawTokenToHolder(address,address,uint256)._token (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#74) is not in mixedCase
+Parameter TokenBank.WitdrawTokenToHolder(address,address,uint256)._amount (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#74) is not in mixedCase
+Function TokenBank.WithdrawToHolder(address,uint256) (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#85-98) is not in mixedCase
+Parameter TokenBank.WithdrawToHolder(address,uint256)._addr (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#85) is not in mixedCase
+Parameter TokenBank.WithdrawToHolder(address,uint256)._wei (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#85) is not in mixedCase
+Variable TokenBank.MinDeposit (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#48) is not in mixedCase
+Variable TokenBank.Holders (../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#49) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+../smartbugs-curated/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol analyzed (3 contracts with 95 detectors), 22 result(s) found
+
+Error running slither
+0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol
+Getting Solidity AST...
+Running TIPS...
+0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol
+failing to repair the unchecked call defect in charnum:640 in type2
+failing to repair the unchecked call defect in charnum:640 in type2
+0.03336811065673828
+
+

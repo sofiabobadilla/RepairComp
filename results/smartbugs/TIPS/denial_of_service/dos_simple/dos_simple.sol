@@ -1,4 +1,3 @@
-pragma solidity ^0.4.25;
 contract DosOneFunc {
 	address[] listAddresses;
 	function ifillArray() public returns(bool ){

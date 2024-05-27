@@ -1,0 +1,106 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/other/open_address_lottery.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/other' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/other/open_address_lottery.sol:
+../smartbugs-curated/dataset/other/open_address_lottery.sol:40:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function OpenAddressLottery() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/open_address_lottery.sol:25:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract OpenAddressLottery{
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/open_address_lottery.sol:90:9: Warning: Variable is declared as a storage pointer. Use an explicit "storage" keyword to silence this warning.
+        SeedComponents s;
+        ^--------------^
+../smartbugs-curated/dataset/other/open_address_lottery.sol:57:20: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+            if(win>this.balance) //if the balance isnt sufficient...
+                   ^----------^
+../smartbugs-curated/dataset/other/open_address_lottery.sol:58:21: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+                win=this.balance; //...send everything we've got
+                    ^----------^
+../smartbugs-curated/dataset/other/open_address_lottery.sol:68:18: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        n = uint(keccak256(uint(addr), secretSeed)[0]) % 8;
+                 ^-------------------------------^
+../smartbugs-curated/dataset/other/open_address_lottery.sol:72:30: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        secretSeed = uint256(keccak256(
+                             ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/open_address_lottery.sol:90:9: Warning: Uninitialized storage pointer. Did you mean '<type> memory s'?
+        SeedComponents s;
+        ^--------------^
+../smartbugs-curated/dataset/other/open_address_lottery.sol:40:5: Warning: No visibility specified. Defaulting to "public". 
+    function OpenAddressLottery() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/open_address_lottery.sol:45:5: Warning: No visibility specified. Defaulting to "public". 
+    function participate() payable {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/open_address_lottery.sol:66:5: Warning: No visibility specified. Defaulting to "public". 
+    function luckyNumberOfAddress(address addr) constant returns(uint n){
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/open_address_lottery.sol:81:5: Warning: No visibility specified. Defaulting to "public". 
+    function kill() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/open_address_lottery.sol:87:5: Warning: No visibility specified. Defaulting to "public". 
+    function forceReseed() { //reseed initiated by the owner - for testing purposes
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/open_address_lottery.sol:92:32: Warning: "block.blockhash()" has been deprecated in favor of "blockhash()"
+        s.component2 = uint256(block.blockhash(block.number - 1));
+                               ^-------------^
+../smartbugs-curated/dataset/other/open_address_lottery.sol:99:5: Warning: No visibility specified. Defaulting to "public". 
+    function () payable { //if someone sends money without any function call, just assume he wanted to participate
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+OpenAddressLottery.luckyNumberOfAddress(address) (../smartbugs-curated/dataset/other/open_address_lottery.sol#66-69) uses a weak PRNG: "n = uint256(keccak256()(uint256(addr),secretSeed)[0]) % 8 (../smartbugs-curated/dataset/other/open_address_lottery.sol#68)" 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#weak-PRNG
+
+OpenAddressLottery.forceReseed().s (../smartbugs-curated/dataset/other/open_address_lottery.sol#90) is a storage variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-storage-variables
+
+OpenAddressLottery.participate() (../smartbugs-curated/dataset/other/open_address_lottery.sol#45-64) uses a dangerous strict equality:
+	- luckyNumberOfAddress(msg.sender) == LuckyNumber (../smartbugs-curated/dataset/other/open_address_lottery.sol#52)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+
+OpenAddressLottery.participate() (../smartbugs-curated/dataset/other/open_address_lottery.sol#45-64) uses timestamp for comparisons
+	Dangerous comparisons:
+	- luckyNumberOfAddress(msg.sender) == LuckyNumber (../smartbugs-curated/dataset/other/open_address_lottery.sol#52)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+OpenAddressLottery.participate() (../smartbugs-curated/dataset/other/open_address_lottery.sol#45-64) compares to a boolean constant:
+	-require(bool)(winner[msg.sender] == false) (../smartbugs-curated/dataset/other/open_address_lottery.sol#50)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#boolean-equality
+
+Deprecated standard detected s.component2 = uint256(block.blockhash(block.number - 1)) (../smartbugs-curated/dataset/other/open_address_lottery.sol#92):
+	- Usage of "block.blockhash()" should be replaced with "blockhash()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Variable OpenAddressLottery.LuckyNumber (../smartbugs-curated/dataset/other/open_address_lottery.sol#36) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Reentrancy in OpenAddressLottery.participate() (../smartbugs-curated/dataset/other/open_address_lottery.sol#45-64):
+	External calls:
+	- msg.sender.transfer(win) (../smartbugs-curated/dataset/other/open_address_lottery.sol#59)
+	State variables written after the call(s):
+	- reseed(SeedComponents(uint256(block.coinbase),block.difficulty,block.gaslimit,block.timestamp)) (../smartbugs-curated/dataset/other/open_address_lottery.sol#63)
+		- lastReseed = block.number (../smartbugs-curated/dataset/other/open_address_lottery.sol#78)
+	- reseed(SeedComponents(uint256(block.coinbase),block.difficulty,block.gaslimit,block.timestamp)) (../smartbugs-curated/dataset/other/open_address_lottery.sol#63)
+		- secretSeed = uint256(keccak256()(components.component1,components.component2,components.component3,components.component4)) (../smartbugs-curated/dataset/other/open_address_lottery.sol#72-77)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+OpenAddressLottery.LuckyNumber (../smartbugs-curated/dataset/other/open_address_lottery.sol#36) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+../smartbugs-curated/dataset/other/open_address_lottery.sol analyzed (1 contracts with 95 detectors), 10 result(s) found
+
+Error running slither
+open_address_lottery.sol
+Getting Solidity AST...
+Running TIPS...
+open_address_lottery.sol
+0.002982616424560547
+
+

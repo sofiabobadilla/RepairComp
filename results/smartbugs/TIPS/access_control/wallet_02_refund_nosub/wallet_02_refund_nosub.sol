@@ -1,4 +1,3 @@
-pragma solidity ^0.4.24;
 contract Wallet {
 	address creator;
 	mapping(address => uint256) balances;

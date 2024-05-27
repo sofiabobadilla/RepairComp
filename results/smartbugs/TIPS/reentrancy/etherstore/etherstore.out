@@ -1,0 +1,55 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/etherstore.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/etherstore.sol:
+../smartbugs-curated/dataset/reentrancy/etherstore.sol:9:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract EtherStore {
+^ (Relevant source part starts here and spans across multiple lines).
+
+
+Reentrancy in EtherStore.withdrawFunds(uint256) (../smartbugs-curated/dataset/reentrancy/etherstore.sol#19-29):
+	External calls:
+	- require(bool)(msg.sender.call.value(_weiToWithdraw)()) (../smartbugs-curated/dataset/reentrancy/etherstore.sol#26)
+	State variables written after the call(s):
+	- balances[msg.sender] -= _weiToWithdraw (../smartbugs-curated/dataset/reentrancy/etherstore.sol#27)
+	EtherStore.balances (../smartbugs-curated/dataset/reentrancy/etherstore.sol#13) can be used in cross function reentrancies:
+	- EtherStore.balances (../smartbugs-curated/dataset/reentrancy/etherstore.sol#13)
+	- EtherStore.depositFunds() (../smartbugs-curated/dataset/reentrancy/etherstore.sol#15-17)
+	- EtherStore.withdrawFunds(uint256) (../smartbugs-curated/dataset/reentrancy/etherstore.sol#19-29)
+	- lastWithdrawTime[msg.sender] = now (../smartbugs-curated/dataset/reentrancy/etherstore.sol#28)
+	EtherStore.lastWithdrawTime (../smartbugs-curated/dataset/reentrancy/etherstore.sol#12) can be used in cross function reentrancies:
+	- EtherStore.lastWithdrawTime (../smartbugs-curated/dataset/reentrancy/etherstore.sol#12)
+	- EtherStore.withdrawFunds(uint256) (../smartbugs-curated/dataset/reentrancy/etherstore.sol#19-29)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+EtherStore.withdrawFunds(uint256) (../smartbugs-curated/dataset/reentrancy/etherstore.sol#19-29) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(now >= lastWithdrawTime[msg.sender] + 604800) (../smartbugs-curated/dataset/reentrancy/etherstore.sol#24)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in EtherStore.withdrawFunds(uint256) (../smartbugs-curated/dataset/reentrancy/etherstore.sol#19-29):
+	- require(bool)(msg.sender.call.value(_weiToWithdraw)()) (../smartbugs-curated/dataset/reentrancy/etherstore.sol#26)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Parameter EtherStore.withdrawFunds(uint256)._weiToWithdraw (../smartbugs-curated/dataset/reentrancy/etherstore.sol#19) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+EtherStore.withdrawalLimit (../smartbugs-curated/dataset/reentrancy/etherstore.sol#11) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+../smartbugs-curated/dataset/reentrancy/etherstore.sol analyzed (1 contracts with 95 detectors), 6 result(s) found
+
+Error running slither
+etherstore.sol
+Getting Solidity AST...
+Running TIPS...
+etherstore.sol
+0.004172086715698242
+
+

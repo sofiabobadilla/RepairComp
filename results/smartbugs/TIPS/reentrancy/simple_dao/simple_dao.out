@@ -1,0 +1,56 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/simple_dao.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/simple_dao.sol:
+../smartbugs-curated/dataset/reentrancy/simple_dao.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract SimpleDAO {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/simple_dao.sol:11:3: Warning: No visibility specified. Defaulting to "public". 
+  function donate(address to) payable {
+  ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/simple_dao.sol:15:3: Warning: No visibility specified. Defaulting to "public". 
+  function withdraw(uint amount) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/simple_dao.sol:18:7: Warning: Unused local variable.
+      bool res = msg.sender.call.value(amount)();
+      ^------^
+../smartbugs-curated/dataset/reentrancy/simple_dao.sol:23:3: Warning: No visibility specified. Defaulting to "public". 
+  function queryCredit(address to) returns (uint){
+  ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/simple_dao.sol:23:3: Warning: Function state mutability can be restricted to view
+  function queryCredit(address to) returns (uint){
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+
+Reentrancy in SimpleDAO.withdraw(uint256) (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#15-21):
+	External calls:
+	- res = msg.sender.call.value(amount)() (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#18)
+	State variables written after the call(s):
+	- credit[msg.sender] -= amount (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#19)
+	SimpleDAO.credit (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#9) can be used in cross function reentrancies:
+	- SimpleDAO.credit (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#9)
+	- SimpleDAO.donate(address) (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#11-13)
+	- SimpleDAO.queryCredit(address) (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#23-25)
+	- SimpleDAO.withdraw(uint256) (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#15-21)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in SimpleDAO.withdraw(uint256) (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#15-21):
+	- res = msg.sender.call.value(amount)() (../smartbugs-curated/dataset/reentrancy/simple_dao.sol#18)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+../smartbugs-curated/dataset/reentrancy/simple_dao.sol analyzed (1 contracts with 95 detectors), 3 result(s) found
+
+Error running slither
+simple_dao.sol
+Getting Solidity AST...
+Running TIPS...
+simple_dao.sol
+0.004129886627197266
+
+

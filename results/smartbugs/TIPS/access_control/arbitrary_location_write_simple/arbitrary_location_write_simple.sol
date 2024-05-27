@@ -1,4 +1,3 @@
-pragma solidity ^0.4.25;
 contract Wallet {
 	uint[] private bonusCodes;
 	address private owner;

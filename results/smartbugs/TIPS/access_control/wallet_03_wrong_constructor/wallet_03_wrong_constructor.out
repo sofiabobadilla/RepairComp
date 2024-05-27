@@ -1,0 +1,39 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/access_control' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol:
+../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol:12:2: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+ contract Wallet {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol:37:22: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+         to.transfer(this.balance);
+                     ^----------^
+
+
+Wallet.migrateTo(address).to (../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol#35) lacks a zero-check on :
+		- to.transfer(this.balance) (../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol#37)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Reentrancy in Wallet.withdraw(uint256) (../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol#27-31):
+	External calls:
+	- msg.sender.transfer(amount) (../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol#29)
+	State variables written after the call(s):
+	- balances[msg.sender] -= amount (../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol#30)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+../smartbugs-curated/dataset/access_control/wallet_03_wrong_constructor.sol analyzed (1 contracts with 95 detectors), 3 result(s) found
+
+Error running slither
+wallet_03_wrong_constructor.sol
+Getting Solidity AST...
+Running TIPS...
+wallet_03_wrong_constructor.sol
+0.0013096332550048828
+
+

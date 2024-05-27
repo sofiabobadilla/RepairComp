@@ -1,4 +1,3 @@
-pragma solidity ^0.4.23;
 contract keepMyEther {
 	mapping(address => uint256) public balances;
 	function () payable public {

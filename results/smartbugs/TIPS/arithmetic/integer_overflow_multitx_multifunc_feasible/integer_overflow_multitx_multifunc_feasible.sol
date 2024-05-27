@@ -1,4 +1,3 @@
-pragma solidity ^0.4.23;
 contract IntegerOverflowMultiTxMultiFuncFeasible {
 	uint256 private initialized = 0;
 	uint256 public count = 1;

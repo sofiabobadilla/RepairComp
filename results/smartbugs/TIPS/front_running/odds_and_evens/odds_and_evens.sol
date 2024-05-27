@@ -1,4 +1,3 @@
-pragma solidity ^0.4.2;
 contract OddsAndEvens {
 	struct Player{
 	address addr;

@@ -1,4 +1,3 @@
-pragma solidity ^0.4.23;
 contract Delta {
 	address public c = 0xF85A2E95FA30d005F629cBe6c6d2887D979ffF2A;
 	address public owner = 0x788c45dd60ae4dbe5055b5ac02384d5dc84677b0;

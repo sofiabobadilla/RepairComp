@@ -1,4 +1,3 @@
-pragma solidity ^0.4.25;
 contract DosNumber {
 	uint numElements = 0;
 	uint[] array;

@@ -1,4 +1,3 @@
-pragma solidity ^0.4.18;
 contract Lotto {
 	bool public payedOut = false;
 	address public winner;

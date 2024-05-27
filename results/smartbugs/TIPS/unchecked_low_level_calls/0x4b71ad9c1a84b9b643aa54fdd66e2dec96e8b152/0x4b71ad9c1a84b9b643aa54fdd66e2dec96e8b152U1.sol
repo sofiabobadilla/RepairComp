@@ -1,4 +1,3 @@
-pragma solidity ^0.4.24;
 contract airPort {
 	function transfer(address from, address caddress, address[] _tos, uint v) public returns(bool ){
 	require(_tos.length > 0);

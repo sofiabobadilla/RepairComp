@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract WhaleGiveaway1 {
 	address public Owner = msg.sender;
 	function () payable public {

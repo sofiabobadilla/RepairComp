@@ -1,4 +1,3 @@
-pragma solidity ^0.4.18;
 contract Token {
 	mapping(address => uint) balances;
 	uint public totalSupply;

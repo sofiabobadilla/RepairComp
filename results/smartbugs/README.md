@@ -42,12 +42,12 @@ find Elysium/ -name "*.bin" | wc
 find SmartShield/ -name "*.bin" | wc
 ```
 
-| Tool        | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ bugs | paches w/ new bugs |
-|-------------|----------|---------------|------------|------------------|-----------------|--------------------|
-| Elysium (binary)    |      126 |            101|           -|                98|                3|                  2+|
-| Smartshield (binary) |      134 |            131|           -|               108|               23|                    |
-| sGuard      |      109 |             62|         109|                  |                 |                    |
-| sGuardPlus  |       81 |             81|          81|                71|               10|                  10|
-| SmartFix    |       86 |             86|          86|                66|               20|                   1|
-| Aroc        |       96 |             96|           0|                 -|                -|                    |
-| TIPS        |      231 |            231|         223|                  |                 |                    |
+| Tool                  | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ bugs | paches w/ new bugs |
+|-----------------------|----------|---------------|------------|------------------|-----------------|--------------------|
+| Elysium (binary)      |      126 |            101|           -|                98|                3|                  2+|
+| Smartshield (binary)  |      134 |            131|           -|               108|               23|                    |
+| sGuard                |      109 |             62|         109|                  |                 |                    |
+| sGuardPlus            |       81 |             81|          81|                71|               10|                  10|
+| SmartFix              |       86 |             86|          86|                66|               20|                   1|
+| Aroc                  |       96 |             96|           0|                 -|                -|                    |
+| TIPS                  |      231 |            231|         223|               177|               57|                    |

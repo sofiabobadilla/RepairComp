@@ -1,0 +1,182 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/unchecked_low_level_calls' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:49:10: Warning: Use of the "var" keyword is deprecated.
+         var decisionBlockNumber = getDecisionBlockNumber(roundIndex,subpotIndex);
+         ^---------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:55:10: Warning: Use of the "var" keyword is deprecated.
+         var decisionBlockHash = getHashOfBlock(decisionBlockNumber);
+         ^-------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:56:10: Warning: Use of the "var" keyword is deprecated.
+         var winningTicketIndex = decisionBlockHash%rounds[roundIndex].ticketsCount;
+         ^--------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:59:10: Warning: Use of the "var" keyword is deprecated.
+         var ticketIndex = uint256(0);
+         ^-------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:61:14: Warning: Use of the "var" keyword is deprecated.
+         for(var buyerIndex = 0; buyerIndex<rounds[roundIndex].buyers.length; buyerIndex++){
+             ^------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:62:14: Warning: Use of the "var" keyword is deprecated.
+             var buyer = rounds[roundIndex].buyers[buyerIndex];
+             ^-------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:76:10: Warning: Use of the "var" keyword is deprecated.
+         var subpotsCount = rounds[roundIndex].pot/blockReward;
+         ^--------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:90:10: Warning: Use of the "var" keyword is deprecated.
+         var subpotsCount = getSubpotsCount(roundIndex);
+         ^--------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:95:10: Warning: Use of the "var" keyword is deprecated.
+         var decisionBlockNumber = getDecisionBlockNumber(roundIndex,subpotIndex);
+         ^---------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:104:10: Warning: Use of the "var" keyword is deprecated.
+         var winner = calculateWinner(roundIndex,subpotIndex);
+         ^--------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:105:10: Warning: Use of the "var" keyword is deprecated.
+         var subpot = getSubpot(roundIndex);
+         ^--------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:133:10: Warning: Use of the "var" keyword is deprecated.
+         var roundIndex = getRoundIndex();
+         ^------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:134:10: Warning: Use of the "var" keyword is deprecated.
+         var value = msg.value-(msg.value%ticketPrice);
+         ^-------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:144:10: Warning: Use of the "var" keyword is deprecated.
+         var ticketsCount = value/ticketPrice;
+         ^--------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:148:14: Warning: Use of the "var" keyword is deprecated.
+             var buyersLength = rounds[roundIndex].buyers.length++;
+             ^--------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:9:2: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+ contract Lotto {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:61:14: Warning: The type of this variable was inferred as uint8, which can hold values between 0 and 255. This is probably not desired. Use an explicit type to silence this warning.
+         for(var buyerIndex = 0; buyerIndex<rounds[roundIndex].buyers.length; buyerIndex++){
+             ^----------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:108:10: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+         winner.send(subpot);
+         ^-----------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:140:14: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+             msg.sender.send(msg.value-value);
+             ^------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:19:6: Warning: No visibility specified. Defaulting to "public". 
+     function getBlocksPerRound() constant returns(uint){ return blocksPerRound; }
+     ^---------------------------------------------------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:20:6: Warning: No visibility specified. Defaulting to "public". 
+     function getTicketPrice() constant returns(uint){ return ticketPrice; }
+     ^---------------------------------------------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:33:6: Warning: No visibility specified. Defaulting to "public". 
+     function getRoundIndex() constant returns (uint){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:39:6: Warning: No visibility specified. Defaulting to "public". 
+     function getIsCashed(uint roundIndex,uint subpotIndex) constant returns (bool){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:46:6: Warning: No visibility specified. Defaulting to "public". 
+     function calculateWinner(uint roundIndex, uint subpotIndex) constant returns(address){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:71:6: Warning: No visibility specified. Defaulting to "public". 
+     function getDecisionBlockNumber(uint roundIndex,uint subpotIndex) constant returns (uint){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:75:6: Warning: No visibility specified. Defaulting to "public". 
+     function getSubpotsCount(uint roundIndex) constant returns(uint){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:84:6: Warning: No visibility specified. Defaulting to "public". 
+     function getSubpot(uint roundIndex) constant returns(uint){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:88:6: Warning: No visibility specified. Defaulting to "public". 
+     function cash(uint roundIndex, uint subpotIndex){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:114:6: Warning: No visibility specified. Defaulting to "public". 
+     function getHashOfBlock(uint blockIndex) constant returns(uint){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:115:22: Warning: "block.blockhash()" has been deprecated in favor of "blockhash()"
+         return uint(block.blockhash(blockIndex));
+                     ^-------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:118:6: Warning: No visibility specified. Defaulting to "public". 
+     function getBuyers(uint roundIndex,address buyer) constant returns (address[]){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:118:41: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+     function getBuyers(uint roundIndex,address buyer) constant returns (address[]){
+                                        ^-----------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:122:6: Warning: No visibility specified. Defaulting to "public". 
+     function getTicketsCountByBuyer(uint roundIndex,address buyer) constant returns (uint){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:126:6: Warning: No visibility specified. Defaulting to "public". 
+     function getPot(uint roundIndex) constant returns(uint){
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:130:6: Warning: No visibility specified. Defaulting to "public". 
+     function() {
+     ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:134:22: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+         var value = msg.value-(msg.value%ticketPrice);
+                     ^-------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:134:33: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+         var value = msg.value-(msg.value%ticketPrice);
+                                ^-------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:138:19: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+         if(value<msg.value){
+                  ^-------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:140:30: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+             msg.sender.send(msg.value-value);
+                             ^-------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:19:6: Warning: Function state mutability can be restricted to pure
+     function getBlocksPerRound() constant returns(uint){ return blocksPerRound; }
+     ^---------------------------------------------------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:20:6: Warning: Function state mutability can be restricted to pure
+     function getTicketPrice() constant returns(uint){ return ticketPrice; }
+     ^---------------------------------------------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol:71:6: Warning: Function state mutability can be restricted to pure
+     function getDecisionBlockNumber(uint roundIndex,uint subpotIndex) constant returns (uint){
+     ^ (Relevant source part starts here and spans across multiple lines).
+
+
+Lotto.calculateWinner(uint256,uint256) (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#46-69) uses a weak PRNG: "winningTicketIndex = decisionBlockHash % rounds[roundIndex].ticketsCount (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#56)" 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#weak-PRNG
+
+Lotto.cash(uint256,uint256) (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#88-112) ignores return value by winner.send(subpot) (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#108)
+Lotto.fallback() (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#130-159) ignores return value by msg.sender.send(msg.value - value) (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#140)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-send
+
+Deprecated standard detected uint256(block.blockhash(blockIndex)) (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#115):
+	- Usage of "block.blockhash()" should be replaced with "blockhash()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Reentrancy in Lotto.cash(uint256,uint256) (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#88-112):
+	External calls:
+	- winner.send(subpot) (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#108)
+	State variables written after the call(s):
+	- rounds[roundIndex].isCashed[subpotIndex] = true (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#110)
+Reentrancy in Lotto.fallback() (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#130-159):
+	External calls:
+	- msg.sender.send(msg.value - value) (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#140)
+	State variables written after the call(s):
+	- rounds[roundIndex].ticketsCount += ticketsCount (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#145)
+	- buyersLength = rounds[roundIndex].buyers.length ++ (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#148)
+	- rounds[roundIndex].buyers[buyersLength] = msg.sender (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#149)
+	- rounds[roundIndex].ticketsCountByBuyer[msg.sender] += ticketsCount (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#152)
+	- rounds[roundIndex].ticketsCount += ticketsCount (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#153)
+	- rounds[roundIndex].pot += value (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#156)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+Lotto.slitherConstructorConstantVariables() (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#9-161) uses literals with too many digits:
+	- ticketPrice = 100000000000000000 (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#14)
+Lotto.slitherConstructorConstantVariables() (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#9-161) uses literals with too many digits:
+	- blockReward = 5000000000000000000 (../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol#17)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits
+../smartbugs-curated/dataset/unchecked_low_level_calls/etherpot_lotto.sol analyzed (1 contracts with 95 detectors), 9 result(s) found
+
+Error running slither
+etherpot_lotto.sol
+Getting Solidity AST...
+Running TIPS...
+etherpot_lotto.sol
+0.02830195426940918
+
+

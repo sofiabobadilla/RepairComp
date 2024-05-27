@@ -1,4 +1,3 @@
-pragma solidity ^0.4.16;
 library SafeMath {
 	function mul(uint256 a, uint256 b) view internal returns(uint256 ){
 	uint256 c = a * b;

@@ -1,0 +1,52 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/unchecked_low_level_calls' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol:
+../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract RealOldFuckMaker {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol:17:30: Warning: "sha3" has been deprecated in favour of "keccak256"
+            fuck.call(bytes4(sha3("giveBlockReward()")));
+                             ^-----------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol:17:13: Warning: Return value of low-level calls not used.
+            fuck.call(bytes4(sha3("giveBlockReward()")));
+            ^------------------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol:13:5: Warning: No visibility specified. Defaulting to "public". 
+    function makeOldFucks(uint32 number) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+RealOldFuckMaker.makeOldFucks(uint32) (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol#13-19) ignores return value by fuck.call(bytes4(sha3()(giveBlockReward()))) (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol#17)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-low-level-calls
+
+RealOldFuckMaker.makeOldFucks(uint32) (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol#13-19) has external calls inside a loop: fuck.call(bytes4(sha3()(giveBlockReward()))) (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol#17)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+
+Deprecated standard detected fuck.call(bytes4(sha3()(giveBlockReward()))) (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol#17):
+	- Usage of "sha3()" should be replaced with "keccak256()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in RealOldFuckMaker.makeOldFucks(uint32) (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol#13-19):
+	- fuck.call(bytes4(sha3()(giveBlockReward()))) (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol#17)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+RealOldFuckMaker.fuck (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol#9) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+../smartbugs-curated/dataset/unchecked_low_level_calls/0xf2570186500a46986f3139f65afedc2afe4f445d.sol analyzed (1 contracts with 95 detectors), 6 result(s) found
+
+Error running slither
+0xf2570186500a46986f3139f65afedc2afe4f445d.sol
+Getting Solidity AST...
+Running TIPS...
+0xf2570186500a46986f3139f65afedc2afe4f445d.sol
+failing to repair the unchecked call defect in charnum:402 in type2
+0.002627134323120117
+
+

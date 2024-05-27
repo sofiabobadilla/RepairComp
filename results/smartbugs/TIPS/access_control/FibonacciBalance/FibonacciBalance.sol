@@ -1,4 +1,3 @@
-pragma solidity ^0.4.22;
 contract FibonacciBalance {
 	address public fibonacciLibrary;
 	uint public calculatedFibNumber;

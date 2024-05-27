@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract Pie {
 	address public Owner = msg.sender;
 	function () payable public {

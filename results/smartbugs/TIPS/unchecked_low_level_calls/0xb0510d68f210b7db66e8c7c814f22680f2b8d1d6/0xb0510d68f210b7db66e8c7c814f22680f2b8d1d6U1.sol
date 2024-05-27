@@ -1,4 +1,3 @@
-pragma solidity ^0.4.23;
 contract Splitter {
 	address public owner;
 	address[] public puppets;

@@ -1,4 +1,3 @@
-pragma solidity ^0.4.15;
 contract Rubixi {
 	uint private balance = 0;
 	uint private collectedFees = 0;

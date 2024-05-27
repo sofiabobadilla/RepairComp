@@ -1,0 +1,55 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc /smartbugs/reentrancy/reentrancy_bonus.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/smartbugs/reentrancy' running
+Compilation warnings/errors on /smartbugs/reentrancy/reentrancy_bonus.sol:
+/smartbugs/reentrancy/reentrancy_bonus.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract Reentrancy_bonus{
+^ (Relevant source part starts here and spans across multiple lines).
+/smartbugs/reentrancy/reentrancy_bonus.sol:18:9: Warning: Different number of components on the left hand side (2) than on the right hand side (1).
+        (bool success, ) = recipient.call.value(amountToWithdraw)("");
+        ^-----------------------------------------------------------^
+
+
+Reentrancy_bonus.withdrawReward(address) (../../smartbugs/reentrancy/reentrancy_bonus.sol#15-20) sends eth to arbitrary user
+	Dangerous calls:
+	- (success) = recipient.call.value(amountToWithdraw)() (../../smartbugs/reentrancy/reentrancy_bonus.sol#18)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+
+Reentrancy in Reentrancy_bonus.getFirstWithdrawalBonus(address) (../../smartbugs/reentrancy/reentrancy_bonus.sol#22-29):
+	External calls:
+	- withdrawReward(recipient) (../../smartbugs/reentrancy/reentrancy_bonus.sol#27)
+		- (success) = recipient.call.value(amountToWithdraw)() (../../smartbugs/reentrancy/reentrancy_bonus.sol#18)
+	State variables written after the call(s):
+	- claimedBonus[recipient] = true (../../smartbugs/reentrancy/reentrancy_bonus.sol#28)
+	Reentrancy_bonus.claimedBonus (../../smartbugs/reentrancy/reentrancy_bonus.sol#12) can be used in cross function reentrancies:
+	- Reentrancy_bonus.getFirstWithdrawalBonus(address) (../../smartbugs/reentrancy/reentrancy_bonus.sol#22-29)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+Reentrancy_bonus.withdrawReward(address).recipient (../../smartbugs/reentrancy/reentrancy_bonus.sol#15) lacks a zero-check on :
+		- (success) = recipient.call.value(amountToWithdraw)() (../../smartbugs/reentrancy/reentrancy_bonus.sol#18)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+solc-0.4.26 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in Reentrancy_bonus.withdrawReward(address) (../../smartbugs/reentrancy/reentrancy_bonus.sol#15-20):
+	- (success) = recipient.call.value(amountToWithdraw)() (../../smartbugs/reentrancy/reentrancy_bonus.sol#18)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Contract Reentrancy_bonus (../../smartbugs/reentrancy/reentrancy_bonus.sol#8-30) is not in CapWords
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Reentrancy_bonus.userBalances (../../smartbugs/reentrancy/reentrancy_bonus.sol#11) is never used in Reentrancy_bonus (../../smartbugs/reentrancy/reentrancy_bonus.sol#8-30)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-state-variable
+/smartbugs/reentrancy/reentrancy_bonus.sol analyzed (1 contracts with 93 detectors), 7 result(s) found
+
+Error running slither
+reentrancy_bonus.sol
+Getting Solidity AST...
+Running TIPS...
+reentrancy_bonus.sol
+0.004753589630126953

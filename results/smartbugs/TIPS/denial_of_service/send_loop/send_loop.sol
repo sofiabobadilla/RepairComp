@@ -1,4 +1,3 @@
-pragma solidity 0.4.24;
 contract Refunder {
 	address[] private refundAddresses;
 	mapping(address => uint) public refunds;

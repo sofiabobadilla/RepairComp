@@ -1,4 +1,3 @@
-pragma solidity ^0.4.21;
 contract GuessTheRandomNumberChallenge {
 	uint8 answer;
 	constructor() payable public {

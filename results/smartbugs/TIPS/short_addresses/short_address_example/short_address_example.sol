@@ -1,4 +1,3 @@
-pragma solidity ^0.4.11;
 contract MyToken {
 	mapping(address => uint) balances;
 	event Transfer(address indexed _from, address indexed _to, uint256 _value);

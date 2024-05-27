@@ -1,4 +1,3 @@
-pragma solidity ^0.4.24;
 contract Proxy {
 	modifier onlyOwner(){
 	if(msg.sender == Owner){

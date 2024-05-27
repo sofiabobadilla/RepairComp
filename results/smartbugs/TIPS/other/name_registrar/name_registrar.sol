@@ -1,4 +1,3 @@
-pragma solidity ^0.4.15;
 contract NameRegistrar {
 	bool public unlocked = false;
 	struct NameRecord{

@@ -1,4 +1,3 @@
-pragma solidity ^0.4.15;
 contract Reentrance {
 	mapping(address => uint) userBalance;
 	function getBalance(address u) view public returns(uint ){

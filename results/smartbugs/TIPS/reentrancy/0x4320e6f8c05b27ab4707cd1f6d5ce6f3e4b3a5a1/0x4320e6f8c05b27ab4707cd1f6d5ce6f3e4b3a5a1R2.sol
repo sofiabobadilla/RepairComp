@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract ACCURAL_DEPOSIT {
 	mapping(address => uint256) public balances;
 	uint public MinSum = 1 ether;

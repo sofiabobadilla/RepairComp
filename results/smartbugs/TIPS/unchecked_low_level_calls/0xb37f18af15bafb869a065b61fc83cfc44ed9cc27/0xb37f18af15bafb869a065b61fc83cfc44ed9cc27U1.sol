@@ -1,4 +1,3 @@
-pragma solidity ^0.4.24;
 contract SimpleWallet {
 	address public owner = msg.sender;
 	uint public depositsCount;

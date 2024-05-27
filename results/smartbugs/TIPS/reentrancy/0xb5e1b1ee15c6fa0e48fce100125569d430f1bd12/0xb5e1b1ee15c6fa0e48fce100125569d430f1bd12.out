@@ -1,0 +1,71 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol:
+../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol:16:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Private_Bank(address _log)
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract Private_Bank
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol:16:5: Warning: No visibility specified. Defaulting to "public". 
+    function Private_Bank(address _log)
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+Log (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#51-76) contract sets array length with a user-controlled value:
+	- History.push(LastMsg) (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#73)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#array-length-assignment
+
+Reentrancy in Private_Bank.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#32-45):
+	External calls:
+	- msg.sender.call.value(_am)() (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#39)
+	State variables written after the call(s):
+	- balances[msg.sender] -= _am (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#41)
+	Private_Bank.balances (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#10) can be used in cross function reentrancies:
+	- Private_Bank.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#32-45)
+	- Private_Bank.Deposit() (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#21-30)
+	- Private_Bank.balances (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#10)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in Private_Bank.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#32-45):
+	- msg.sender.call.value(_am)() (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#39)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Contract Private_Bank (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#8-49) is not in CapWords
+Function Private_Bank.Deposit() (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#21-30) is not in mixedCase
+Function Private_Bank.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#32-45) is not in mixedCase
+Parameter Private_Bank.CashOut(uint256)._am (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#32) is not in mixedCase
+Variable Private_Bank.MinDeposit (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#12) is not in mixedCase
+Variable Private_Bank.TransferLog (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#14) is not in mixedCase
+Function Log.AddMessage(address,uint256,string) (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#66-74) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._adr (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#66) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._val (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#66) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._data (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#66) is not in mixedCase
+Variable Log.History (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#62) is not in mixedCase
+Variable Log.LastMsg (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#64) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Private_Bank.MinDeposit (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#12) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+
+AddMessage(address,uint256,string) should be declared external:
+	- Log.AddMessage(address,uint256,string) (../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol#66-74)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external
+../smartbugs-curated/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol analyzed (2 contracts with 95 detectors), 18 result(s) found
+
+Error running slither
+0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol
+Getting Solidity AST...
+Running TIPS...
+0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol
+0.008311271667480469
+
+

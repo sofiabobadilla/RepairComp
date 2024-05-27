@@ -1,4 +1,3 @@
-pragma solidity ^0.4.15;
 contract DosAuction {
 	address currentFrontrunner;
 	uint currentBid;

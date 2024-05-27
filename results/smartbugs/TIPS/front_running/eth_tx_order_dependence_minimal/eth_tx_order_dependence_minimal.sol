@@ -1,4 +1,3 @@
-pragma solidity ^0.4.16;
 contract EthTxOrderDependenceMinimal {
 	address public owner;
 	bool public claimed;

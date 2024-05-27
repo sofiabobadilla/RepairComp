@@ -1,4 +1,3 @@
-pragma solidity ^0.4.23;
 contract MultiOwnable {
 	address public root;
 	mapping(address => address) public owners;

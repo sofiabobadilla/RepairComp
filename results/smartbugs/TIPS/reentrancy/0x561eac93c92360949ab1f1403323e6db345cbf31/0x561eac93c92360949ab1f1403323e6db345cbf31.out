@@ -1,0 +1,79 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol:
+../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol:21:24: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+        if(intitalized)throw;
+                       ^---^
+../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol:28:24: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+        if(intitalized)throw;
+                       ^---^
+../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract BANK_SAFE
+^ (Relevant source part starts here and spans across multiple lines).
+
+
+LogFile (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#72-96) contract sets array length with a user-controlled value:
+	- History.push(LastMsg) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#93)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#array-length-assignment
+
+Reentrancy in BANK_SAFE.Collect(uint256) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#46-59):
+	External calls:
+	- msg.sender.call.value(_am)() (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#53)
+	State variables written after the call(s):
+	- balances[msg.sender] -= _am (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#55)
+	BANK_SAFE.balances (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#10) can be used in cross function reentrancies:
+	- BANK_SAFE.Collect(uint256) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#46-59)
+	- BANK_SAFE.Deposit() (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#38-44)
+	- BANK_SAFE.balances (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#10)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+Deprecated standard detected THROW (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#21):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#28):
+	- Usage of "throw" should be replaced with "revert()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in BANK_SAFE.Collect(uint256) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#46-59):
+	- msg.sender.call.value(_am)() (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#53)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Contract BANK_SAFE (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#8-68) is not in CapWords
+Function BANK_SAFE.SetMinSum(uint256) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#18-23) is not in mixedCase
+Parameter BANK_SAFE.SetMinSum(uint256)._val (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#18) is not in mixedCase
+Function BANK_SAFE.SetLogFile(address) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#25-30) is not in mixedCase
+Parameter BANK_SAFE.SetLogFile(address)._log (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#25) is not in mixedCase
+Function BANK_SAFE.Initialized() (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#32-36) is not in mixedCase
+Function BANK_SAFE.Deposit() (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#38-44) is not in mixedCase
+Function BANK_SAFE.Collect(uint256) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#46-59) is not in mixedCase
+Parameter BANK_SAFE.Collect(uint256)._am (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#46) is not in mixedCase
+Variable BANK_SAFE.MinSum (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#12) is not in mixedCase
+Variable BANK_SAFE.Log (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#14) is not in mixedCase
+Function LogFile.AddMessage(address,uint256,string) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#86-94) is not in mixedCase
+Parameter LogFile.AddMessage(address,uint256,string)._adr (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#86) is not in mixedCase
+Parameter LogFile.AddMessage(address,uint256,string)._val (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#86) is not in mixedCase
+Parameter LogFile.AddMessage(address,uint256,string)._data (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#86) is not in mixedCase
+Variable LogFile.History (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#82) is not in mixedCase
+Variable LogFile.LastMsg (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#84) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+AddMessage(address,uint256,string) should be declared external:
+	- LogFile.AddMessage(address,uint256,string) (../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol#86-94)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external
+../smartbugs-curated/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol analyzed (2 contracts with 95 detectors), 24 result(s) found
+
+Error running slither
+0x561eac93c92360949ab1f1403323e6db345cbf31.sol
+Getting Solidity AST...
+Running TIPS...
+0x561eac93c92360949ab1f1403323e6db345cbf31.sol
+0.014472246170043945
+
+

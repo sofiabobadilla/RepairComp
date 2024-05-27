@@ -1,4 +1,3 @@
-pragma solidity ^0.4.24;
 contract FiftyFlip {
 	uint constant DONATING_X = 20;
 	uint constant JACKPOT_FEE = 10;

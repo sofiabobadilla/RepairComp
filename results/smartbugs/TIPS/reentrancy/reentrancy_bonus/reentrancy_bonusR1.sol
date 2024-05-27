@@ -1,4 +1,3 @@
-pragma solidity ^0.4.24;
 contract Reentrancy_bonus {
 	mapping(address => uint) private userBalances;
 	mapping(address => bool) private claimedBonus;

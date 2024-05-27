@@ -1,4 +1,3 @@
-pragma solidity ^0.4.23;
 contract IntegerOverflowSingleTransaction {
 	uint public count = 1;
 	function overflowaddtostate(uint256 input) public {

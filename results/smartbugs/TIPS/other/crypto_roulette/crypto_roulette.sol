@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract CryptoRoulette {
 	uint256 private secretNumber;
 	uint256 public lastPlayed;

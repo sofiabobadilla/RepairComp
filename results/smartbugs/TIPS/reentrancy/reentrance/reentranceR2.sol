@@ -1,4 +1,3 @@
-pragma solidity ^0.4.18;
 contract Reentrance {
 	mapping(address => uint) public balances;
 	function donate(address _to) payable public {

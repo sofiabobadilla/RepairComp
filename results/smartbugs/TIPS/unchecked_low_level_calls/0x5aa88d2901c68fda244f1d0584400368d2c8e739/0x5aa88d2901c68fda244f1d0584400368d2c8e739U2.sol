@@ -1,4 +1,3 @@
-pragma solidity ^0.4.18;
 contract MultiplicatorX3 {
 	address public Owner = msg.sender;
 	function () payable public {

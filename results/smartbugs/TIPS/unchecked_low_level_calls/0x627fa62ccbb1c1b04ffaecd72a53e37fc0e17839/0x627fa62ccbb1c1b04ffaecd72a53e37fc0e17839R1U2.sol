@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract Ownable {
 	address newOwner;
 	address owner = msg.sender;

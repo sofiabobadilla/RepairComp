@@ -1,4 +1,3 @@
-pragma solidity ^0.4.24;
 contract Map {
 	address public owner;
 	uint256[] map;

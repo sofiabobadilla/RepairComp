@@ -1,4 +1,3 @@
-pragma solidity ^0.4.25;
 contract W_WALLET {
 	function Put(uint _unlockTime) payable public {
 	var acc = Acc[msg.sender];

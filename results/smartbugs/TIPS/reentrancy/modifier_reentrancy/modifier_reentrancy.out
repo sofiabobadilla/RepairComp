@@ -1,0 +1,43 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol:
+../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract ModifierEntrancy {
+^ (Relevant source part starts here and spans across multiple lines).
+
+
+Reentrancy in ModifierEntrancy.airDrop() (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#14-16):
+	External calls:
+	- supportsToken() (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#14)
+		- require(bool)(keccak256()(abi.encodePacked(Nu Token)) == Bank(msg.sender).supportsToken()) (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#20)
+	State variables written after the call(s):
+	- tokenBalance[msg.sender] += 20 (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#15)
+	ModifierEntrancy.tokenBalance (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#9) can be used in cross function reentrancies:
+	- ModifierEntrancy.airDrop() (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#14-16)
+	- ModifierEntrancy.hasNoBalance() (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#24-27)
+	- ModifierEntrancy.tokenBalance (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#9)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Contract attack (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#36-48) is not in CapWords
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+ModifierEntrancy.name (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#10) is never used in ModifierEntrancy (../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol#8-28)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-state-variable
+../smartbugs-curated/dataset/reentrancy/modifier_reentrancy.sol analyzed (3 contracts with 95 detectors), 4 result(s) found
+
+Error running slither
+modifier_reentrancy.sol
+Getting Solidity AST...
+Running TIPS...
+modifier_reentrancy.sol
+0.005929231643676758
+
+

@@ -1,0 +1,34 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/unchecked_low_level_calls' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol:
+../smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol:7:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract SendBack {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol:13:3: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+		msg.sender.send(amountToWithdraw);
+		^-------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol:9:5: Warning: No visibility specified. Defaulting to "public". 
+    function withdrawBalance() {  
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+SendBack.withdrawBalance() (../smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol#9-14) ignores return value by msg.sender.send(amountToWithdraw) (../smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol#13)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-send
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+../smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol analyzed (1 contracts with 95 detectors), 2 result(s) found
+
+Error running slither
+mishandled.sol
+Getting Solidity AST...
+Running TIPS...
+mishandled.sol
+0.0020542144775390625
+
+

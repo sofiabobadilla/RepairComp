@@ -1,0 +1,47 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/front_running/FindThisHash.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/front_running' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/front_running/FindThisHash.sol:
+../smartbugs-curated/dataset/front_running/FindThisHash.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract FindThisHash {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/front_running/FindThisHash.sol:16:25: Warning: "sha3" has been deprecated in favour of "keccak256"
+        require(hash == sha3(solution));
+                        ^------------^
+../smartbugs-curated/dataset/front_running/FindThisHash.sol:16:25: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        require(hash == sha3(solution));
+                        ^------------^
+../smartbugs-curated/dataset/front_running/FindThisHash.sol:16:25: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        require(hash == sha3(solution));
+                        ^------------^
+
+
+FindThisHash.solve(string) (../smartbugs-curated/dataset/front_running/FindThisHash.sol#13-18) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(1000000000000000000000) (../smartbugs-curated/dataset/front_running/FindThisHash.sol#17)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+
+Deprecated standard detected require(bool)(hash == sha3()(solution)) (../smartbugs-curated/dataset/front_running/FindThisHash.sol#16):
+	- Usage of "sha3()" should be replaced with "keccak256()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+solve(string) should be declared external:
+	- FindThisHash.solve(string) (../smartbugs-curated/dataset/front_running/FindThisHash.sol#13-18)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external
+../smartbugs-curated/dataset/front_running/FindThisHash.sol analyzed (1 contracts with 95 detectors), 4 result(s) found
+
+Error running slither
+FindThisHash.sol
+Getting Solidity AST...
+Running TIPS...
+FindThisHash.sol
+0.0004730224609375
+
+

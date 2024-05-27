@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract PRIVATE_ETH_CELL {
 	mapping(address => uint256) public balances;
 	uint public MinSum;

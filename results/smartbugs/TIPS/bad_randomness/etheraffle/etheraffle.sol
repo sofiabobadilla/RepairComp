@@ -1,4 +1,3 @@
-pragma solidity ^0.4.16;
 contract Ethraffle_v4b {
 	struct Contestant{
 	address addr;

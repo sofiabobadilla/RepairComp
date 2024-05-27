@@ -1,4 +1,3 @@
-pragma solidity ^0.4.25;
 contract Roulette {
 	uint public pastBlockTime;
 	constructor() payable public {

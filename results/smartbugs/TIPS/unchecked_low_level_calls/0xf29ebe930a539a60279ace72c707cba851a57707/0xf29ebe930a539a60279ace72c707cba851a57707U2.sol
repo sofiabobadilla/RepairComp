@@ -1,4 +1,3 @@
-pragma solidity ^0.4.24;
 contract B {
 	address public owner = msg.sender;
 	function go() payable public {

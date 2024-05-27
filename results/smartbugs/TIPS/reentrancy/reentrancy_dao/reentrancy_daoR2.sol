@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract ReentrancyDAO {
 	mapping(address => uint) credit;
 	uint balance;

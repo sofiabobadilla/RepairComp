@@ -1,4 +1,3 @@
-pragma solidity ^0.4.19;
 contract DEP_BANK {
 	mapping(address => uint256) public balances;
 	uint public MinSum;

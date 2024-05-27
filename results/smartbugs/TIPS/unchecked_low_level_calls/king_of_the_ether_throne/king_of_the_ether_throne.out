@@ -1,0 +1,133 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/unchecked_low_level_calls' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:72:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function KingOfTheEtherThrone() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:25:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract KingOfTheEtherThrone {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:109:13: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+            msg.sender.send(valuePaid);
+            ^------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:117:13: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+            msg.sender.send(excessPaid);
+            ^-------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:131:13: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+            currentMonarch.etherAddress.send(compensation);
+            ^--------------------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:167:9: Warning: Invoking events without "emit" prefix is deprecated.
+        ThroneClaimed(currentMonarch.etherAddress, currentMonarch.name, currentClaimPrice);
+        ^--------------------------------------------------------------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:173:9: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+        wizardAddress.send(amount);
+        ^------------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:72:5: Warning: No visibility specified. Defaulting to "public". 
+    function KingOfTheEtherThrone() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:83:5: Warning: No visibility specified. Defaulting to "public". 
+    function numberOfMonarchs() constant returns (uint n) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:97:5: Warning: No visibility specified. Defaulting to "public". 
+    function() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:102:5: Warning: No visibility specified. Defaulting to "public". 
+    function claimThrone(string name) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:104:26: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+        uint valuePaid = msg.value;
+                         ^-------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:171:5: Warning: No visibility specified. Defaulting to "public". 
+    function sweepCommission(uint amount) onlywizard {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol:177:5: Warning: No visibility specified. Defaulting to "public". 
+    function transferOwnership(address newOwner) onlywizard {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+KingOfTheEtherThrone (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#25-181) contract sets array length with a user-controlled value:
+	- pastMonarchs.push(currentMonarch) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#137)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#array-length-assignment
+
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) performs a multiplication on the result of a division:
+	- currentClaimPrice = 10000000000000000000 * (rawNewClaimPrice / 10000000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#161)
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) performs a multiplication on the result of a division:
+	- currentClaimPrice = 1000000000000000000 * (rawNewClaimPrice / 1000000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#159)
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) performs a multiplication on the result of a division:
+	- currentClaimPrice = 100000000000000000 * (rawNewClaimPrice / 100000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#157)
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) performs a multiplication on the result of a division:
+	- currentClaimPrice = 10000000000000000 * (rawNewClaimPrice / 10000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#155)
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) performs a multiplication on the result of a division:
+	- currentClaimPrice = 1000000000000000 * (rawNewClaimPrice / 1000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#153)
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) performs a multiplication on the result of a division:
+	- currentClaimPrice = 100000000000000 * (rawNewClaimPrice / 100000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#151)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) ignores return value by msg.sender.send(valuePaid) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#109)
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) ignores return value by msg.sender.send(excessPaid) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#117)
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) ignores return value by currentMonarch.etherAddress.send(compensation) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#131)
+KingOfTheEtherThrone.sweepCommission(uint256) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#171-174) ignores return value by wizardAddress.send(amount) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#173)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-send
+
+KingOfTheEtherThrone.transferOwnership(address) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#177-179) should emit an event for: 
+	- wizardAddress = newOwner (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#178) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-access-control
+
+KingOfTheEtherThrone.transferOwnership(address).newOwner (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#177) lacks a zero-check on :
+		- wizardAddress = newOwner (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#178)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+Modifier KingOfTheEtherThrone.onlywizard() (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#44) does not always execute _; or revert
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-modifier
+
+KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168) uses timestamp for comparisons
+	Dangerous comparisons:
+	- currentMonarch.etherAddress != wizardAddress (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#129)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Constant KingOfTheEtherThrone.startingClaimPrice (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#47) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant KingOfTheEtherThrone.claimPriceAdjustNum (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#52) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant KingOfTheEtherThrone.claimPriceAdjustDen (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#53) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant KingOfTheEtherThrone.wizardCommissionFractionNum (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#58) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant KingOfTheEtherThrone.wizardCommissionFractionDen (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#59) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Reentrancy in KingOfTheEtherThrone.claimThrone(string) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#102-168):
+	External calls:
+	- msg.sender.send(excessPaid) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#117)
+	- currentMonarch.etherAddress.send(compensation) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#131)
+	State variables written after the call(s):
+	- currentClaimPrice = rawNewClaimPrice (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#149)
+	- currentClaimPrice = 100000000000000 * (rawNewClaimPrice / 100000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#151)
+	- currentClaimPrice = 1000000000000000 * (rawNewClaimPrice / 1000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#153)
+	- currentClaimPrice = 10000000000000000 * (rawNewClaimPrice / 10000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#155)
+	- currentClaimPrice = 100000000000000000 * (rawNewClaimPrice / 100000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#157)
+	- currentClaimPrice = 1000000000000000000 * (rawNewClaimPrice / 1000000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#159)
+	- currentClaimPrice = 10000000000000000000 * (rawNewClaimPrice / 10000000000000000000) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#161)
+	- currentClaimPrice = rawNewClaimPrice (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#163)
+	- currentMonarch = Monarch(msg.sender,name,valuePaid,block.timestamp) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#138-143)
+	- pastMonarchs.push(currentMonarch) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#137)
+	Event emitted after the call(s):
+	- ThroneClaimed(currentMonarch.etherAddress,currentMonarch.name,currentClaimPrice) (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#167)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+Variable KingOfTheEtherThrone.wizardCommissionFractionDen (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#59) is too similar to KingOfTheEtherThrone.wizardCommissionFractionNum (../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol#58)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#variable-names-too-similar
+../smartbugs-curated/dataset/unchecked_low_level_calls/king_of_the_ether_throne.sol analyzed (1 contracts with 95 detectors), 23 result(s) found
+
+Error running slither
+king_of_the_ether_throne.sol
+Getting Solidity AST...
+Running TIPS...
+king_of_the_ether_throne.sol
+0.03922462463378906
+
+
