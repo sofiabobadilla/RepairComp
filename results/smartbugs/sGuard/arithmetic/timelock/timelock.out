@@ -2,3 +2,14 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/arithmetic/timelock.sol" "results/arithmetic/timelock" "TimeLock"
 
+smartbugs/dataset/arithmetic/timelock.sol
+{ bugFixes:
+   { '2`PfAqBg[}Khrjf"_CV=t]mEY~+?p7T5(`HAN{!.r1':
+      'lockTime[msg.sender] = add_uint256(lockTime[msg.sender], _secondsToIncrease)',
+     '!o5W|3X"`]$W|oVO6DTsH8ePNvkd}T4g{':
+      'balances[msg.sender] = add_uint256(balances[msg.sender], msg.value)',
+     'QiE0LZNa2m!:W': 'add_uint256(now, 1 weeks)',
+     '@G.pde5\\?QSxp~g2~X': 'contract TimeLock  is sGuard ' },
+  source:
+   '/*\n * @source: https://github.com/sigp/solidity-security-blog\n * @author: -\n * @vulnerable_at_lines: 22\n */\n\n//added pragma version\n \n @G.pde5\\?QSxp~g2~X{\n\n     mapping(address => uint) public balances;\n     mapping(address => uint) public lockTime;\n\n     function deposit() public payable {\n         !o5W|3X"`]$W|oVO6DTsH8ePNvkd}T4g{;\n         lockTime[msg.sender] = QiE0LZNa2m!:W;\n     }\n\n     function increaseLockTime(uint _secondsToIncrease) public {\n         // <yes> <report> ARITHMETIC\n         2`PfAqBg[}Khrjf"_CV=t]mEY~+?p7T5(`HAN{!.r1;\n     }\n\n     function withdraw() public {\n         require(balances[msg.sender] > 0);\n         require(now > lockTime[msg.sender]);\n         uint transferValue = balances[msg.sender];\n         balances[msg.sender] = 0;\n         msg.sender.transfer(transferValue);\n     }\n }\n',
+  wrappers: Set { 'add_uint256' } }

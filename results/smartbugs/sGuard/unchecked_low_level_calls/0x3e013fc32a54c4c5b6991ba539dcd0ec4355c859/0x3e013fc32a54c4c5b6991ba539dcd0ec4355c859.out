@@ -2,3 +2,10 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol" "results/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859" "MultiplicatorX4"
 
+smartbugs/dataset/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol
+{ bugFixes:
+   { '`ix"\\Jd%HQim-<-^(SwDOc': 'add_uint256(this.balance, msg.value)',
+     'A-bAIG{,pE._,gBbEVtY+)lS{': 'contract MultiplicatorX4\n is sGuard ' },
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 29\n */\n\n\nA-bAIG{,pE._,gBbEVtY+)lS{{\n    address public Owner = msg.sender;\n   \n    function() public payable{}\n   \n    function withdraw()\n    payable\n    public\n    {\n        require(msg.sender == Owner);\n        Owner.transfer(this.balance);\n    }\n    \n    function Command(address adr,bytes data)\n    payable\n    public\n    {\n        require(msg.sender == Owner);\n        // <yes> <report> UNCHECKED_LL_CALLS\n        adr.call.value(msg.value)(data);\n    }\n    \n    function multiplicate(address adr)\n    public\n    payable\n    {\n        if(msg.value>=this.balance)\n        {        \n            adr.transfer(`ix"\\Jd%HQim-<-^(SwDOc);\n        }\n    }\n}',
+  wrappers: Set { 'add_uint256' } }

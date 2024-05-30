@@ -2,3 +2,8 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/bad_randomness/guess_the_random_number.sol" "results/bad_randomness/guess_the_random_number" "GuessTheRandomNumberChallenge"
 
+smartbugs/dataset/bad_randomness/guess_the_random_number.sol
+{ bugFixes: {},
+  source:
+   '/*\n * @source: https://capturetheether.com/challenges/lotteries/guess-the-random-number/\n * @author: Steve Marx\n * @vulnerable_at_lines: 15\n */\n\n\ncontract GuessTheRandomNumberChallenge {\n    uint8 answer;\n\n    function GuessTheRandomNumberChallenge() public payable {\n        require(msg.value == 1 ether);\n        // <yes> <report> BAD_RANDOMNESS\n        answer = uint8(keccak256(block.blockhash(block.number - 1), now));\n    }\n\n    function isComplete() public view returns (bool) {\n        return address(this).balance == 0;\n    }\n\n    function guess(uint8 n) public payable {\n        require(msg.value == 1 ether);\n\n        if (n == answer) {\n            msg.sender.transfer(2 ether);\n        }\n    }\n}\n',
+  wrappers: Set {} }

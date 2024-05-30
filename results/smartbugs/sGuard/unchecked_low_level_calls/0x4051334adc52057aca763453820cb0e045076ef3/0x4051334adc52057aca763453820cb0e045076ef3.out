@@ -2,3 +2,8 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol" "results/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3" "airdrop"
 
+smartbugs/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol
+{ bugFixes: {},
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 16\n */\n\n \ncontract airdrop{\n    \n    function transfer(address from,address caddress,address[] _tos,uint v)public returns (bool){\n        require(_tos.length > 0);\n        bytes4 id=bytes4(keccak256("transferFrom(address,address,uint256)"));\n        for(uint i=0;i<_tos.length;i++){\n             // <yes> <report> UNCHECKED_LL_CALLS\n            caddress.call(id,from,_tos[i],v);\n        }\n        return true;\n    }\n}',
+  wrappers: Set {} }

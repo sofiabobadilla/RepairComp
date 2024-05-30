@@ -2,3 +2,10 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/unchecked_low_level_calls/0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c.sol" "results/unchecked_low_level_calls/0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c" "EBU"
 
+smartbugs/dataset/unchecked_low_level_calls/0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c.sol
+{ bugFixes:
+   { 'z$5QLip#Z@N-Zx7c8rgB8B04': 'mul_uint256(v[i], 1000000000000000000)',
+     '3YDtRoHMIMh`': 'contract EBU is sGuard ' },
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 19 \n */\n\n\n3YDtRoHMIMh`{\n    address public from = 0x9797055B68C5DadDE6b3c7d5D80C9CFE2eecE6c9;\n    address public caddress = 0x1f844685f7Bf86eFcc0e74D8642c54A257111923;\n    \n    function transfer(address[] _tos,uint[] v)public returns (bool){\n        require(msg.sender == 0x9797055B68C5DadDE6b3c7d5D80C9CFE2eecE6c9);\n        require(_tos.length > 0);\n        bytes4 id=bytes4(keccak256("transferFrom(address,address,uint256)"));\n        for(uint i=0;i<_tos.length;i++){\n            // <yes> <report> UNCHECKED_LL_CALLS\n            caddress.call(id,from,_tos[i],z$5QLip#Z@N-Zx7c8rgB8B04);\n        }\n        return true;\n    }\n}',
+  wrappers: Set { 'mul_uint256' } }

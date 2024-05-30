@@ -2,3 +2,14 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol" "results/reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68" "MY_BANK"
 
+smartbugs/dataset/reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol
+{ bugFixes:
+   { 'y~P.3zQ/[ABs_+{w': 'acc.balance = sub_uint256(acc.balance, _am)',
+     'wh(wQ-rc\\@CeRWj.JPJ8:dx~8l': ' function Collect(uint _am) nonReentrant_ ',
+     '8V0LF9sQPFmje#': 'contract Log \n is sGuard ',
+     'lk#]S&%cC&q3`r/5@L\'WK\\%G': 'acc.balance = add_uint256(acc.balance, msg.value)',
+     '9hi3Ni4H]1%d>95Jn': 'contract MY_BANK\n is sGuard ',
+     '?o1;*6R@l%2r49N]-S<txK[(BFbJOl': ' function Put(uint _unlockTime) nonReentrant_ ' },
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 29\n */\n\n\n9hi3Ni4H]1%d>95Jn{\n    ?o1;*6R@l%2r49N]-S<txK[(BFbJOl\n    public\n    payable\n    {\n        var acc = Acc[msg.sender];\n        lk#]S&%cC&q3`r/5@L\'WK\\%G;\n        acc.unlockTime = _unlockTime>now?_unlockTime:now;\n        LogFile.AddMessage(msg.sender,msg.value,"Put");\n    }\n\n    wh(wQ-rc\\@CeRWj.JPJ8:dx~8l\n    public\n    payable\n    {\n        var acc = Acc[msg.sender];\n        if( acc.balance>=MinSum && acc.balance>=_am && now>acc.unlockTime)\n        {\n            // <yes> <report> REENTRANCY\n            if(msg.sender.call.value(_am)())\n            {\n                y~P.3zQ/[ABs_+{w;\n                LogFile.AddMessage(msg.sender,_am,"Collect");\n            }\n        }\n    }\n\n    function() \n    public \n    payable\n    {\n        Put(0);\n    }\n\n    struct Holder   \n    {\n        uint unlockTime;\n        uint balance;\n    }\n\n    mapping (address => Holder) public Acc;\n\n    Log LogFile;\n\n    uint public MinSum = 1 ether;    \n\n    function MY_BANK(address log) public{\n        LogFile = Log(log);\n    }\n}\n\n\n8V0LF9sQPFmje#{\n    struct Message\n    {\n        address Sender;\n        string  Data;\n        uint Val;\n        uint  Time;\n    }\n\n    Message[] public History;\n\n    Message LastMsg;\n\n    function AddMessage(address _adr,uint _val,string _data)\n    public\n    {\n        LastMsg.Sender = _adr;\n        LastMsg.Time = now;\n        LastMsg.Val = _val;\n        LastMsg.Data = _data;\n        History.push(LastMsg);\n    }\n}',
+  wrappers: Set { 'sub_uint256', 'nonReentrant_', 'add_uint256' } }

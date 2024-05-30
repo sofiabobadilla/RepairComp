@@ -2,3 +2,19 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.sol" "results/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888" "MONEY_BOX"
 
+smartbugs/dataset/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.sol
+{ bugFixes:
+   { 'R[47GY}-6A{,}V*<': 'acc.balance = sub_uint256(acc.balance, _am)',
+     '`KzbQWm59.kHK': 'add_uint256(now, _lockTime)',
+     'KF}7,Ip!7Ps1?OB,_:YB+%<pgiL"B': ' function SetMinSum(uint _val) nonReentrant_ ',
+     '!8CfW}H~er>ok+3DDBFs12': ' function Initialized() nonReentrant_ ',
+     ')W=^sH^JC+}mp|K#rjJ|kZvdeyOF': ' function Put(uint _lockTime) nonReentrant_ ',
+     'CC%S#`l"\'Y3@!DqXE}-\'|O': 'contract MONEY_BOX   \n is sGuard ',
+     '~_FGCgZo$z$=F': 'add_uint256(now, _lockTime)',
+     'g;Y#y|^<6]Xm0k1(!^x&0Y"x32[Plm9Km': ' function SetLogFile(address _log) nonReentrant_ ',
+     '3+znK!"$YM,=E,': 'contract Log \n is sGuard ',
+     'mK0{}V<>jp<4jDSWDW\'?#ii$': 'acc.balance = add_uint256(acc.balance, msg.value)',
+     'fn,kQeFhT\\`kBW=};JitFbMG[]': ' function Collect(uint _am) nonReentrant_ ' },
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 63\n */\n\n\nCC%S#`l"\'Y3@!DqXE}-\'|O{\n    struct Holder   \n    {\n        uint unlockTime;\n        uint balance;\n    }\n    \n    mapping (address => Holder) public Acc;\n    \n    uint public MinSum;\n    \n    Log LogFile;\n    \n    bool intitalized;\n    \n    KF}7,Ip!7Ps1?OB,_:YB+%<pgiL"B\n    public\n    {\n        if(intitalized)throw;\n        MinSum = _val;\n    }\n    \n    g;Y#y|^<6]Xm0k1(!^x&0Y"x32[Plm9Km\n    public\n    {\n        if(intitalized)throw;\n        LogFile = Log(_log);\n    }\n    \n    !8CfW}H~er>ok+3DDBFs12\n    public\n    {\n        intitalized = true;\n    }\n    \n    )W=^sH^JC+}mp|K#rjJ|kZvdeyOF\n    public\n    payable\n    {\n        var acc = Acc[msg.sender];\n        mK0{}V<>jp<4jDSWDW\'?#ii$;\n        if(`KzbQWm59.kHK>acc.unlockTime)acc.unlockTime=~_FGCgZo$z$=F;\n        LogFile.AddMessage(msg.sender,msg.value,"Put");\n    }\n    \n    fn,kQeFhT\\`kBW=};JitFbMG[]\n    public\n    payable\n    {\n        var acc = Acc[msg.sender];\n        if( acc.balance>=MinSum && acc.balance>=_am && now>acc.unlockTime)\n        {\n            // <yes> <report> REENTRANCY\n            if(msg.sender.call.value(_am)())\n            {\n                R[47GY}-6A{,}V*<;\n                LogFile.AddMessage(msg.sender,_am,"Collect");\n            }\n        }\n    }\n    \n    function() \n    public \n    payable\n    {\n        Put(0);\n    }\n    \n}\n\n\n3+znK!"$YM,=E,{\n    struct Message\n    {\n        address Sender;\n        string  Data;\n        uint Val;\n        uint  Time;\n    }\n    \n    Message[] public History;\n    \n    Message LastMsg;\n    \n    function AddMessage(address _adr,uint _val,string _data)\n    public\n    {\n        LastMsg.Sender = _adr;\n        LastMsg.Time = now;\n        LastMsg.Val = _val;\n        LastMsg.Data = _data;\n        History.push(LastMsg);\n    }\n}',
+  wrappers: Set { 'sub_uint256', 'add_uint256', 'nonReentrant_' } }

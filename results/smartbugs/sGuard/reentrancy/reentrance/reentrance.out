@@ -2,3 +2,14 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/reentrancy/reentrance.sol" "results/reentrancy/reentrance" "Reentrance"
 
+smartbugs/dataset/reentrancy/reentrance.sol
+{ bugFixes:
+   { '}mfS!t|1<QuYDj?<X\'b0NlL`&CVAXol':
+      'balances[msg.sender] = sub_uint256(balances[msg.sender], _amount)',
+     '=x^R~Sq]#TYkQ\\sn\\o:&j.+:E{|u': ' function donate(address _to) nonReentrant_ ',
+     'MEl)!8E6z{/k?8*v/EUe': 'contract Reentrance  is sGuard ',
+     'vx\'8I7Y>:^0}@hv.`vrU<?Wu~)': 'balances[_to] = add_uint256(balances[_to], msg.value)',
+     'PYm8Art9w1y5pea.f=cR60`xO\']x;0P': ' function withdraw(uint _amount) nonReentrant_ ' },
+  source:
+   '/*\n * @source: https://ethernaut.zeppelin.solutions/level/0xf70706db003e94cfe4b5e27ffd891d5c81b39488\n * @author: Alejandro Santander\n * @vulnerable_at_lines: 24\n */\n\n\nMEl)!8E6z{/k?8*v/EUe{\n\n  mapping(address => uint) public balances;\n\n  =x^R~Sq]#TYkQ\\sn\\o:&j.+:E{|u public payable {\n    vx\'8I7Y>:^0}@hv.`vrU<?Wu~);\n  }\n\n  function balanceOf(address _who) public view returns (uint balance) {\n    return balances[_who];\n  }\n\n  PYm8Art9w1y5pea.f=cR60`xO\']x;0P public {\n    if(balances[msg.sender] >= _amount) {\n      // <yes> <report> REENTRANCY\n      if(msg.sender.call.value(_amount)()) {\n        _amount;\n      }\n      }mfS!t|1<QuYDj?<X\'b0NlL`&CVAXol;\n    }\n  }\n\n  function() public payable {}\n}\n',
+  wrappers: Set { 'sub_uint256', 'nonReentrant_', 'add_uint256' } }

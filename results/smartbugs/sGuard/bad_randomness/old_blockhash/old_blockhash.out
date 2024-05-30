@@ -2,3 +2,10 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/bad_randomness/old_blockhash.sol" "results/bad_randomness/old_blockhash" "PredictTheBlockHashChallenge"
 
+smartbugs/dataset/bad_randomness/old_blockhash.sol
+{ bugFixes:
+   { 'mLmwpVu&WG`DXPz#': 'add_uint256(block.number, 1)',
+     '7g5`S5OBAHW\'4:iPz_]W<(APGKZoR64Xy<m#1I': 'contract PredictTheBlockHashChallenge  is sGuard ' },
+  source:
+   '/*\n * @source: https://github.com/SmartContractSecurity/SWC-registry/blob/master/test_cases/weak_randomness/old_blockhash.sol\n * @author: -\n * @vulnerable_at_lines: 35\n */\n\n\n//Based on the the Capture the Ether challange at https://capturetheether.com/challenges/lotteries/predict-the-block-hash/\n//Note that while it seems to have a 1/2^256 chance you guess the right hash, actually blockhash returns zero for blocks numbers that are more than 256 blocks ago so you can guess zero and wait.\n7g5`S5OBAHW\'4:iPz_]W<(APGKZoR64Xy<m#1I{\n\n    struct guess{\n      uint block;\n      bytes32 guess;\n    }\n\n    mapping(address => guess) guesses;\n\n    constructor() public payable {\n        require(msg.value == 1 ether);\n    }\n\n    function lockInGuess(bytes32 hash) public payable {\n        require(guesses[msg.sender].block == 0);\n        require(msg.value == 1 ether);\n\n        guesses[msg.sender].guess = hash;\n        guesses[msg.sender].block  = mLmwpVu&WG`DXPz#;\n    }\n\n    function settle() public {\n        require(block.number > guesses[msg.sender].block);\n        // <yes> <report> BAD_RANDOMNESS\n        bytes32 answer = blockhash(guesses[msg.sender].block);\n\n        guesses[msg.sender].block = 0;\n        if (guesses[msg.sender].guess == answer) {\n            msg.sender.transfer(2 ether);\n        }\n    }\n}\n',
+  wrappers: Set { 'add_uint256' } }

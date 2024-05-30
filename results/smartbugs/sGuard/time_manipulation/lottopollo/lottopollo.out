@@ -2,3 +2,10 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/time_manipulation/lottopollo.sol" "results/time_manipulation/lottopollo" "lottopollo"
 
+smartbugs/dataset/time_manipulation/lottopollo.sol
+{ bugFixes:
+   { '}:i%DS"nK%': 'sub_uint256(now, rand)',
+     '>c:*P`g#gPnG~4eK97G\\': 'contract lottopollo  is sGuard ' },
+  source:
+   '/*\n * @source: https://github.com/seresistvanandras/EthBench/blob/master/Benchmark/Simple/timestampdependent.sol\n * @author: -\n * @vulnerable_at_lines: 13,27\n */\n\n>c:*P`g#gPnG~4eK97G\\{\n  address leader;\n  uint    timestamp;\n  function payOut(uint rand) internal {\n    // <yes> <report> TIME MANIPULATION\n    if ( rand> 0 && }:i%DS"nK% > 24 hours ) {\n      msg.sender.send( msg.value );\n\n      if ( this.balance > 0 ) {\n        leader.send( this.balance );\n      }\n    }\n    else if ( msg.value >= 1 ether ) {\n      leader = msg.sender;\n      timestamp = rand;\n    }\n  }\n  function randomGen() constant returns (uint randomNumber) {\n      // <yes> <report> TIME MANIPULATION\n      return block.timestamp;   \n    }\n  function draw(uint seed){\n    uint randomNumber=randomGen(); \n    payOut(randomNumber);\n  }\n}',
+  wrappers: Set { 'sub_uint256' } }

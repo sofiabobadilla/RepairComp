@@ -2,3 +2,14 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/reentrancy/simple_dao.sol" "results/reentrancy/simple_dao" "SimpleDAO"
 
+smartbugs/dataset/reentrancy/simple_dao.sol
+{ bugFixes:
+   { 'Ja3_t2k*L3\\"p@1xlzs9Zh3>Tv':
+      'credit[msg.sender] = sub_uint256(credit[msg.sender], amount)',
+     '!WwIo5m?R^{)<?~bj}my:aFsD4%': ' function donate(address to) nonReentrant_ ',
+     'r<`R"H[:q{\'=1#o@"ch': 'contract SimpleDAO  is sGuard ',
+     'ib|h,r$U@4Q?H90`f^{Yx7?': 'credit[to] = add_uint256(credit[to], msg.value)',
+     '`Vz:{WA>u/q<]@rvip/_L5ui/gXf{V': ' function withdraw(uint amount) nonReentrant_ ' },
+  source:
+   '/*\n * @source: http://blockchain.unica.it/projects/ethereum-survey/attacks.html#simpledao\n * @author: -\n * @vulnerable_at_lines: 19\n */\n\n\nr<`R"H[:q{\'=1#o@"ch{\n  mapping (address => uint) public credit;\n\n  !WwIo5m?R^{)<?~bj}my:aFsD4% payable {\n    ib|h,r$U@4Q?H90`f^{Yx7?;\n  }\n\n  `Vz:{WA>u/q<]@rvip/_L5ui/gXf{V {\n    if (credit[msg.sender]>= amount) {\n      // <yes> <report> REENTRANCY\n      bool res = msg.sender.call.value(amount)();\n      Ja3_t2k*L3\\"p@1xlzs9Zh3>Tv;\n    }\n  }\n\n  function queryCredit(address to) returns (uint){\n    return credit[to];\n  }\n}\n',
+  wrappers: Set { 'sub_uint256', 'nonReentrant_', 'add_uint256' } }

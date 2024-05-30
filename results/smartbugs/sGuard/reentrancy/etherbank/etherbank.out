@@ -2,3 +2,13 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/reentrancy/etherbank.sol" "results/reentrancy/etherbank" "EtherBank"
 
+smartbugs/dataset/reentrancy/etherbank.sol
+{ bugFixes:
+   { 'tZ[]!o.j:Sxj`>RLx;F$SO_^A0!x}i#u(~)r+':
+      'userBalances[msg.sender] = add_uint256(userBalances[msg.sender], msg.value)',
+     '?@_?[8WetkV=75t8|2#~s+^*@Z': ' function withdrawBalance() nonReentrant_ ',
+     'n0Hl\\:.\'eBtV(1#~OvHa$t6': ' function addToBalance() nonReentrant_ ',
+     '%z?xCK#`)Lq8%ds}#|': 'contract EtherBank is sGuard ' },
+  source:
+   '/*\n * @source: https://github.com/seresistvanandras/EthBench/blob/master/Benchmark/Simple/reentrant.sol\n * @author: -\n * @vulnerable_at_lines: 21\n */\n\n%z?xCK#`)Lq8%ds}#|{\n    mapping (address => uint) userBalances;\n    function getBalance(address user) constant returns(uint) {  \n\t\treturn userBalances[user];\n\t}\n\n\tn0Hl\\:.\'eBtV(1#~OvHa$t6 {  \n\t\ttZ[]!o.j:Sxj`>RLx;F$SO_^A0!x}i#u(~)r+;\n\t}\n\n\t?@_?[8WetkV=75t8|2#~s+^*@Z {  \n\t\tuint amountToWithdraw = userBalances[msg.sender];\n        // <yes> <report> REENTRANCY\n\t\tif (!(msg.sender.call.value(amountToWithdraw)())) { throw; }\n\t\tuserBalances[msg.sender] = 0;\n\t}    \n}',
+  wrappers: Set { 'add_uint256', 'nonReentrant_' } }

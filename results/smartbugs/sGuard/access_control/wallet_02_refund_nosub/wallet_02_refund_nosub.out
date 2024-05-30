@@ -2,3 +2,16 @@
 > symEvm@1.0.0 dev /sGuard
 > node src/index.js "smartbugs/dataset/access_control/wallet_02_refund_nosub.sol" "results/access_control/wallet_02_refund_nosub" "Wallet"
 
+smartbugs/dataset/access_control/wallet_02_refund_nosub.sol
+{ bugFixes:
+   { '@_1_:JxdJEHQS_:$<bt}D2}.3{6Y1N':
+      'balances[msg.sender] = sub_uint256(balances[msg.sender], amount)',
+     'fO>t$`?~Q>p0i%:g#fW4:~uPh3^ZGUfJ': 'add_uint256(balances[msg.sender], msg.value)',
+     'Ji723=7zYIl!G:<Oca': ' function deposit() nonReentrant_ ',
+     'w;,ZRzT2zLNeENOpyxTKs;|I^-f$cLY0e':
+      'balances[msg.sender] = add_uint256(balances[msg.sender], msg.value)',
+     'sWfjg?}~{RDNg*90': 'contract Wallet  is sGuard ',
+     'rCPxzxlq]To^vVpQ;|;R7qWj_[={-4Cy;': ' function withdraw(uint256 amount) nonReentrant_ ' },
+  source:
+   '/*\n * @source: https://smartcontractsecurity.github.io/SWC-registry/docs/SWC-105#wallet-02-refund-nosubsol\n * @author: -\n * @vulnerable_at_lines: 36\n */\n\n\n /* User can add pay in and withdraw Ether.\n    Unfortunately the developer forgot set the user\'s balance to 0 when refund() is called.\n    An attacker can pay in a small amount of Ether and call refund() repeatedly to empty the contract.\n */\n\n sWfjg?}~{RDNg*90{\n     address creator;\n\n     mapping(address => uint256) balances;\n\n     constructor() public {\n         creator = msg.sender;\n     }\n\n     Ji723=7zYIl!G:<Oca public payable {\n         assert(fO>t$`?~Q>p0i%:g#fW4:~uPh3^ZGUfJ > balances[msg.sender]);\n         w;,ZRzT2zLNeENOpyxTKs;|I^-f$cLY0e;\n     }\n\n     rCPxzxlq]To^vVpQ;|;R7qWj_[={-4Cy; public {\n         require(amount <= balances[msg.sender]);\n         msg.sender.transfer(amount);\n         @_1_:JxdJEHQS_:$<bt}D2}.3{6Y1N;\n     }\n\n     function refund() public {\n         // <yes> <report> ACCESS_CONTROL\n         msg.sender.transfer(balances[msg.sender]);\n     }\n\n     // In an emergency the owner can migrate  allfunds to a different address.\n\n     function migrateTo(address to) public {\n         require(creator == msg.sender);\n         to.transfer(this.balance);\n     }\n\n }\n',
+  wrappers: Set { 'sub_uint256', 'add_uint256', 'nonReentrant_' } }
