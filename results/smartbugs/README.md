@@ -24,7 +24,7 @@ The directory structure of the project is as follows:
 *If the tool generates multiple patches for each contract file, then the patches naming convention is given by the tool itself. Each patch is prefixed by the `contract_file_name` and suffixed by their respective extension (`.sol` if source code, `.bin` if bytecode).
 
 
-## Results from runnning the APR tools (bugs)
+## Execution of the APR tools
 |Tool\Return code                    |0 (success)|1 (errors)|timeout (4hr)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
 |------------------------------------|-----------|----------|---------------|-----------------------|-------------------------|-----------------|---|------------------------------------------------------------------|
 |Elysium  (binary)                           |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
@@ -34,6 +34,18 @@ The directory structure of the project is as follows:
 |SmartFix                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
 |TIPS                                |140        |3         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
+
+
+## Vulnerabilities detected by the APR tools
+| Tool                  | contract files w/ vuln | total vulnerabilities | 
+|-----------------------|------------------------|-----------------------|
+| **Smartbugs-curated** |                    143 |                   207 |
+| Elysium (binary)      |                    102 |                   217 |
+| Smartshield (binary)  |                     72 |                   121 |
+| sGuard                |                     62 |                   373 |
+| sGuardPlus            |                    112 |                   195 |
+| SmartFix              |                     89 |                   476 |
+| TIPS                  |                     90 |                   100 |
 
 
 ## Patches overview in smartbugs-curated (patches)
