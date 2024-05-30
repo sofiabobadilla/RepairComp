@@ -62,12 +62,11 @@ find Elysium/ -name "*.bin" | wc
 find SmartShield/ -name "*.bin" | wc
 ```
 
-| Tool                  | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ bugs | paches w/ new bugs | fixed og contracts |
-|-----------------------|----------|---------------|------------|------------------|-----------------|--------------------|--------------------|
-| Elysium (binary)      |      126 |            101|           -|                98|                3|                  2+|                  98|
-| Smartshield (binary)  |      134 |            131|           -|               108|               23|                    |                 108|
-| sGuard                |      109 |             62|         109|                  |                 |                    |                    |
-| sGuardPlus            |       81 |             81|          81|                71|               10|                  10|                  71|
-| SmartFix              |       86 |             86|          86|                66|               20|                   1|                  66|
-| Aroc                  |       96 |             96|           0|                 -|                -|                   -|                   -|
-| TIPS                  |      231 |            231|         223|               177|               57|                    |                 132|
+| Tool                  | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ bugs | paches w/ new bugs | og contracts w/o bugs |
+|-----------------------|----------|---------------|------------|------------------|-----------------|--------------------|-----------------------|
+| Elysium (binary)      |      126 |            101|           -|                98|                3|                  2+|                     98|
+| Smartshield (binary)  |      134 |            131|           -|               108|               23|                    |                    108|
+| sGuard                |      109 |             61|         109|                 2|               56|                    |                      2|
+| sGuardPlus            |       81 |             81|          81|                71|               10|                  10|                     71|
+| SmartFix              |       86 |             86|          86|                66|               20|                   1|                     66|
+| TIPS                  |      231 |            231|         223|               177|               57|                    |                    132|
