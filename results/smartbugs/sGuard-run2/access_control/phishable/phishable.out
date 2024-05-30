@@ -1,0 +1,9 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/access_control/phishable/phishable.sol" "report_run/access_control/phishable" "Phishable"
+
+patches/access_control/phishable/phishable.sol
+{ bugFixes: {},
+  source:
+   'contract sGuard{\n  \n}\n/*\n * @source: https://github.com/sigp/solidity-security-blog\n * @author: -\n * @vulnerable_at_lines: 20\n */\n\n\n contract Phishable  is sGuard {\n    address public owner;\n\n    constructor (address _owner) {\n        owner = _owner;\n    }\n\n    function () public payable {} // collect ether\n\n    function withdrawAll(address _recipient) public {\n        // <yes> <report> ACCESS_CONTROL\n        require(msg.sender == owner);\n        _recipient.transfer(this.balance);\n    }\n}\n',
+  wrappers: Set {} }

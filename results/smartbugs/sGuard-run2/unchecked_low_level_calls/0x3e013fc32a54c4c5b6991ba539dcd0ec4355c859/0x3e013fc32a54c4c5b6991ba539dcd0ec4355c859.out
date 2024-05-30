@@ -1,0 +1,12 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol" "report_run/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859" "MultiplicatorX4"
+
+patches/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol
+{ bugFixes:
+   { '|WnMk': 'add_uint256(a, b)',
+     'IKo8QF\\;K:7=lb-': 'contract sGuard is sGuard ',
+     'lxvs:M#+U.2D&l]gveW(u?A/^)6ANI)bk6/y': 'contract MultiplicatorX4\n is sGuard  is sGuard ' },
+  source:
+   'IKo8QF\\;K:7=lb-{\n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = |WnMk;\n    assert(c >= a);\n    return c;\n  }\n}\n/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 29\n */\n\n\nlxvs:M#+U.2D&l]gveW(u?A/^)6ANI)bk6/y{\n    address public Owner = msg.sender;\n   \n    function() public payable{}\n   \n    function withdraw()\n    payable\n    public\n    {\n        require(msg.sender == Owner);\n        Owner.transfer(this.balance);\n    }\n    \n    function Command(address adr,bytes data)\n    payable\n    public\n    {\n        require(msg.sender == Owner);\n        // <yes> <report> UNCHECKED_LL_CALLS\n        adr.call.value(msg.value)(data);\n    }\n    \n    function multiplicate(address adr)\n    public\n    payable\n    {\n        if(msg.value>=this.balance)\n        {        \n            adr.transfer(add_uint256(this.balance, msg.value));\n        }\n    }\n}',
+  wrappers: Set { 'add_uint256' } }

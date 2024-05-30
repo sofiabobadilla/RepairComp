@@ -1,0 +1,14 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/etherbank/etherbank.sol" "report_run/reentrancy/etherbank" "EtherBank"
+
+patches/reentrancy/etherbank/etherbank.sol
+{ bugFixes:
+   { 'Qt:PK': 'add_uint256(a, b)',
+     'P?J8ARrYE@-Baca)M!5,QTh': ' function addToBalance() nonReentrant_ ',
+     ',Wm0)1u3RB@7],2': 'contract sGuard is sGuard ',
+     'bU3U;H"\'[;><0%MC)[7s\\-|"d$': ' function withdrawBalance() nonReentrant_ ',
+     'bFh#AIWKWHK}SqUUK#1<n': 'contract EtherBank is sGuard, ' },
+  source:
+   ',Wm0)1u3RB@7],2{\n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = Qt:PK;\n    assert(c >= a);\n    return c;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n}\n/*\n * @source: https://github.com/seresistvanandras/EthBench/blob/master/Benchmark/Simple/reentrant.sol\n * @author: -\n * @vulnerable_at_lines: 21\n */\n\nbFh#AIWKWHK}SqUUK#1<n sGuard {\n    mapping (address => uint) userBalances;\n    function getBalance(address user) constant returns(uint) {  \n\t\treturn userBalances[user];\n\t}\n\n\t P?J8ARrYE@-Baca)M!5,QTh nonReentrant_  {  \n\t\tuserBalances[msg.sender] = add_uint256(userBalances[msg.sender], msg.value);\n\t}\n\n\t bU3U;H"\'[;><0%MC)[7s\\-|"d$ nonReentrant_  {  \n\t\tuint amountToWithdraw = userBalances[msg.sender];\n        // <yes> <report> REENTRANCY\n\t\tif (!(msg.sender.call.value(amountToWithdraw)())) { throw; }\n\t\tuserBalances[msg.sender] = 0;\n\t}    \n}',
+  wrappers: Set { 'add_uint256', 'nonReentrant_' } }

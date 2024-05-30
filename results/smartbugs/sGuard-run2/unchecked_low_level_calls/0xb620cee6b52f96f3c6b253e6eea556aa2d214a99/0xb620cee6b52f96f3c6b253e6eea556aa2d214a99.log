@@ -1,0 +1,25 @@
+patches/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:1:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.24;"
+contract sGuard{
+^ (Relevant source part starts here and spans across multiple lines).
+patches/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:92:5: Warning: This declaration shadows an existing declaration.
+    uint256 secret = uint256(hash);
+    ^------------^
+patches/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:31:1: The shadowed declaration is here:
+uint256 public secret;
+^-------------------^
+
+patches/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:91:20: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    bytes32 hash = keccak256(blockhash(sub_uint256(block.number, 1)));
+                   ^------------------------------------------------^
+patches/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:91:20: Warning: The provided argument of type bytes32 is not implicitly convertible to expected type bytes memory.
+    bytes32 hash = keccak256(blockhash(sub_uint256(block.number, 1)));
+                   ^------------------------------------------------^
+patches/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:105:2: Warning: Return value of low-level calls not used.
+	firstTarget.call.value(msg.value)();
+	^---------------------------------^
+patches/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:111:2: Warning: Return value of low-level calls not used.
+	secondTarget.call.value(msg.value)();
+	^----------------------------------^
+patches/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:138:2: Warning: Return value of low-level calls not used.
+	owner.call.value(1 wei)();
+	^-----------------------^

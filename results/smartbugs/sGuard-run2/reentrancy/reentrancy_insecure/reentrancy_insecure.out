@@ -1,0 +1,12 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/reentrancy_insecure/reentrancy_insecure.sol" "report_run/reentrancy/reentrancy_insecure" "Reentrancy_insecure"
+
+patches/reentrancy/reentrancy_insecure/reentrancy_insecure.sol
+{ bugFixes:
+   { 'iuJpyB9YU_0FN@;XNP}3KP.A#!': ' function withdrawBalance() nonReentrant_ ',
+     'AJ:=*iG&Cf)a89&': 'contract sGuard is sGuard ',
+     '%`G(w?QGY/@%5IZ6ma]u_r?]wcNHpiN~b:imQ-Ng': 'contract Reentrancy_insecure  is sGuard  is sGuard ' },
+  source:
+   'AJ:=*iG&Cf)a89&{\n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n}\n/*\n * @source: https://consensys.github.io/smart-contract-best-practices/known_attacks/\n * @author: consensys\n * @vulnerable_at_lines: 17\n */\n\n\n%`G(w?QGY/@%5IZ6ma]u_r?]wcNHpiN~b:imQ-Ng{\n\n    // INSECURE\n    mapping (address => uint) private userBalances;\n\n     iuJpyB9YU_0FN@;XNP}3KP.A#! nonReentrant_  public {\n        uint amountToWithdraw = userBalances[msg.sender];\n        // <yes> <report> REENTRANCY\n        (bool success, ) = msg.sender.call.value(amountToWithdraw)(""); // At this point, the caller\'s code is executed, and can call withdrawBalance again\n        require(success);\n        userBalances[msg.sender] = 0;\n    }\n}\n',
+  wrappers: Set { 'nonReentrant_' } }
