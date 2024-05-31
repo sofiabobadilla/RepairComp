@@ -42,7 +42,7 @@ The directory structure of the project is as follows:
 | **Smartbugs-curated** |                    143 |                   207 |
 | Elysium (binary)      |                    102 |                   217 |
 | Smartshield (binary)  |                     72 |                   121 |
-| sGuard                |                     62 |                   373 |
+| sGuard                |                     62 |                   428 |
 | sGuardPlus            |                    112 |                   195 |
 | SmartFix              |                     89 |                   476 |
 | TIPS                  |                     90 |                   100 |
