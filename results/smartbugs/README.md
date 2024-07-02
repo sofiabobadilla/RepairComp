@@ -17,7 +17,7 @@ The directory structure of the project is as follows:
         - `compilation_results_VERSION.csv`: pacthes with their respective compilability with the solidity VERSION. Only available for solidity patches.
         - `valid_patches.csv`: pacthes that are compilable and different from their original contract.
         - `patches_with_bugs.csv`: patches with bugs, vulnerability reports and the original contract vulnerability reports.
-        - `patches_with_bugs.csv`: patches without bugs, vulnerability reports and the original contract vulnerability reports.
+        - `patches_without_bugs.csv`: patches without bugs, vulnerability reports and the original contract vulnerability reports.
 
 - `contracts.csv`: This file contains more details about each contract, including their labels.
 
