@@ -1,0 +1,110 @@
+2024-07-04 18:35:16,906 - root - INFO - 
+Reading file 'integer_overflow_mul.sol' 
+
+2024-07-04 18:35:16,907 - root - INFO - 
+Pragma: 0.4.19 
+
+2024-07-04 18:35:16,907 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_mul.sol 
+
+2024-07-04 18:35:16,907 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_mul_1round.sol  
+
+2024-07-04 18:35:16,914 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:35:16,916 - root - INFO - 
+Running command: solc-select use --always-install 0.4.19 
+
+2024-07-04 18:35:17,087 - root - INFO - 
+Running command: slither shared/arithmetic/integer_overflow_mul.sol --json - 
+
+2024-07-04 18:35:17,774 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [], "description": "solc-0.4.19 is not recommended for deployment\\n", "markdown": "solc-0.4.19 is not recommended for deployment\\n", "first_markdown_element": "", "id": "6c57d3efd769b2c1ca361b3d06ff1f2677845be92f7b50762125a4196d71725a", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [{"type": "pragma", "name": "^0.4.19", "source_mapping": {"start": 299, "length": 24, "filename_relative": "shared/arithmetic/integer_overflow_mul.sol", "filename_absolute": "/home/ethsec/shared/arithmetic/integer_overflow_mul.sol", "filename_short": "shared/arithmetic/integer_overflow_mul.sol", "is_dependency": false, "lines": [10], "starting_column": 1, "ending_column": 25}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".19"]}}], "description": "Pragma version^0.4.19 (shared/arithmetic/integer_overflow_mul.sol#10) allows old versions\\n", "markdown": "Pragma version[^0.4.19](shared/arithmetic/integer_overflow_mul.sol#L10) allows old versions\\n", "first_markdown_element": "shared/arithmetic/integer_overflow_mul.sol#L10", "id": "f30e8735cb831fde4947763d42a2f663751fcf72fdebc168f5df8aa19c6b5345", "check": "solc-version", "impact": "Informational", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:35:20,421 - root - INFO - 
+NEW CODE: The vulnerability in the Solidity code is the potential for integer overflow when multiplying the 'count' variable with the 'input' parameter. To fix this vulnerability, we can add a check to ensure that the result of the multiplication does not exceed the maximum value that the 'count' variable can hold.
+
+Here is the fixed contract with the integer overflow check:
+
+```
+pragma solidity ^0.4.19;
+
+contract IntegerOverflowMul {
+    uint public count = 2;
+
+    function run(uint256 input) public {
+        require(input == 0 || count * input / input == count);
+        count *= input;
+    }
+}
+```
+
+In this fixed contract, we added a require statement before the multiplication operation to check if the result of the multiplication divided by the input is equal to the original count value. This check ensures that the multiplication operation does not cause an integer overflow. 
+
+2024-07-04 18:35:20,422 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_mul_2round.sol  
+
+2024-07-04 18:35:22,671 - root - INFO - 
+NEW CODE: The vulnerability in the Solidity code is the potential for integer overflow when multiplying the 'count' variable with the 'input' parameter. To fix this vulnerability, we can add a check to ensure that the result of the multiplication does not exceed the maximum value that the 'count' variable can hold.
+
+Here is the fixed contract with the integer overflow check:
+
+pragma solidity ^0.4.19;
+
+contract IntegerOverflowMul {
+    uint public count = 2;
+
+    function run(uint256 input) public {
+        require(input == 0 || count * input / input == count);
+        count *= input;
+    }
+} 
+
+2024-07-04 18:35:22,672 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_mul_3round.sol  
+
+2024-07-04 18:35:24,924 - root - INFO - 
+NEW CODE: The vulnerability in the Solidity code is the potential for integer overflow when multiplying the 'count' variable with the 'input' parameter. To fix this vulnerability, we can add a check to ensure that the result of the multiplication does not exceed the maximum value that the 'count' variable can hold.
+
+Here is the fixed contract with the integer overflow check:
+
+pragma solidity ^0.4.19;
+
+contract IntegerOverflowMul {
+    uint public count = 2;
+
+    function run(uint256 input) public {
+        require(input == 0 || count * input / input == count);
+        count *= input;
+    }
+} 
+
+2024-07-04 18:35:24,925 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_mul_4round.sol  
+
+2024-07-04 18:35:27,588 - root - INFO - 
+NEW CODE: The vulnerability in the code is the potential for integer overflow when multiplying the 'count' variable with the 'input' parameter. To fix this vulnerability, we can add a check to ensure that the result of the multiplication does not exceed the maximum value that an unsigned integer can hold.
+
+Here is the fixed contract with the integer overflow check:
+
+```
+pragma solidity ^0.4.19;
+
+contract IntegerOverflowMul {
+    uint public count = 2;
+
+    function run(uint256 input) public {
+        require(input == 0 || count * input / input == count);
+        count *= input;
+    }
+}
+```
+
+In the fixed code, we added a require statement that checks if the result of the multiplication does not cause an overflow. This check ensures that the multiplication operation will not result in an integer overflow. 
+

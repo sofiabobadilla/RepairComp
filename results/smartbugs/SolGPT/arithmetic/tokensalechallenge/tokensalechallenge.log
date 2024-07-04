@@ -1,0 +1,207 @@
+2024-07-04 18:36:17,862 - root - INFO - 
+Reading file 'tokensalechallenge.sol' 
+
+2024-07-04 18:36:17,862 - root - INFO - 
+Pragma: 0.4.21 
+
+2024-07-04 18:36:17,863 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/tokensalechallenge.sol 
+
+2024-07-04 18:36:17,863 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/tokensalechallenge_1round.sol  
+
+2024-07-04 18:36:17,871 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:36:17,873 - root - INFO - 
+Running command: solc-select use --always-install 0.4.21 
+
+2024-07-04 18:36:18,039 - root - INFO - 
+Running command: slither shared/arithmetic/tokensalechallenge.sol --json - 
+
+2024-07-04 18:36:18,762 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [], "description": "solc-0.4.21 is not recommended for deployment\\n", "markdown": "solc-0.4.21 is not recommended for deployment\\n", "first_markdown_element": "", "id": "11c23ced8dbc94c44bd7809b5adfe4054fff8cd744f85723555d37f0b714b15f", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [{"type": "pragma", "name": "^0.4.21", "source_mapping": {"start": 202, "length": 24, "filename_relative": "shared/arithmetic/tokensalechallenge.sol", "filename_absolute": "/home/ethsec/shared/arithmetic/tokensalechallenge.sol", "filename_short": "shared/arithmetic/tokensalechallenge.sol", "is_dependency": false, "lines": [7], "starting_column": 1, "ending_column": 25}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".21"]}}], "description": "Pragma version^0.4.21 (shared/arithmetic/tokensalechallenge.sol#7) allows old versions\\n", "markdown": "Pragma version[^0.4.21](shared/arithmetic/tokensalechallenge.sol#L7) allows old versions\\n", "first_markdown_element": "shared/arithmetic/tokensalechallenge.sol#L7", "id": "fdfab635c98c651cf3a61c9f33c4ea427be3f167ee7dc3192c69a3361e2fbed8", "check": "solc-version", "impact": "Informational", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:36:22,989 - root - INFO - 
+NEW CODE: The vulnerability in the code is that the `buy` function does not update the contract balance after tokens are purchased. This can lead to a situation where the contract balance does not accurately reflect the total funds received from token purchases.
+
+Here is the fixed contract with the vulnerability addressed:
+
+```solidity
+pragma solidity ^0.4.21;
+
+contract TokenSaleChallenge {
+    mapping(address => uint256) public balanceOf;
+    uint256 constant PRICE_PER_TOKEN = 1 ether;
+    uint256 public contractBalance;
+
+    function TokenSaleChallenge(address _player) public payable {
+        require(msg.value == 1 ether);
+        contractBalance = msg.value;
+    }
+
+    function isComplete() public view returns (bool) {
+        return contractBalance < 1 ether;
+    }
+
+    function buy(uint256 numTokens) public payable {
+        require(msg.value == numTokens * PRICE_PER_TOKEN);
+        
+        balanceOf[msg.sender] += numTokens;
+        contractBalance += msg.value;
+    }
+
+    function sell(uint256 numTokens) public {
+        require(balanceOf[msg.sender] >= numTokens);
+
+        balanceOf[msg.sender] -= numTokens;
+        uint256 amount = numTokens * PRICE_PER_TOKEN;
+        require(contractBalance >= amount);
+
+        contractBalance -= amount;
+        msg.sender.transfer(amount);
+    }
+}
+```
+
+In the fixed contract, the `contractBalance` variable is added to keep track of the total funds received by the contract. The `buy` function now updates the `contractBalance` after tokens are purchased. Additionally, the `sell` function now checks if the contract has enough balance to transfer the funds to the seller. 
+
+2024-07-04 18:36:22,989 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/tokensalechallenge_2round.sol  
+
+2024-07-04 18:36:26,964 - root - INFO - 
+NEW CODE: The vulnerability in the code is that the `buy` function does not deduct the correct amount of ether from the sender when purchasing tokens. Here is the fixed contract with the vulnerability addressed:
+
+```solidity
+pragma solidity ^0.4.21;
+
+contract TokenSaleChallenge {
+    mapping(address => uint256) public balanceOf;
+    uint256 constant PRICE_PER_TOKEN = 1 ether;
+
+    function TokenSaleChallenge(address _player) public payable {
+        require(msg.value == 1 ether);
+    }
+
+    function isComplete() public view returns (bool) {
+        return address(this).balance < 1 ether;
+    }
+
+    function buy(uint256 numTokens) public payable {
+        uint256 totalCost = numTokens * PRICE_PER_TOKEN;
+        require(msg.value == totalCost);
+
+        balanceOf[msg.sender] += numTokens;
+    }
+
+    function sell(uint256 numTokens) public {
+        require(balanceOf[msg.sender] >= numTokens);
+
+        balanceOf[msg.sender] -= numTokens;
+
+        uint256 totalEthers = numTokens * PRICE_PER_TOKEN;
+        msg.sender.transfer(totalEthers);
+    }
+}
+```
+
+In the `buy` function, the total cost of the tokens is calculated and compared to the amount of ether sent by the sender. In the `sell` function, the total amount of ether to be transferred back to the sender is calculated correctly based on the number of tokens sold. 
+
+2024-07-04 18:36:26,964 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/tokensalechallenge_3round.sol  
+
+2024-07-04 18:36:31,382 - root - INFO - 
+NEW CODE: There are a couple of vulnerabilities in the provided Solidity code that need to be fixed:
+
+1. The `TokenSaleChallenge` constructor function should not be named the same as the contract itself. This can lead to confusion and potential vulnerabilities. It should be renamed to `constructor`.
+
+2. The `isComplete` function is checking if the contract balance is less than 1 ether, which is incorrect. It should be checking if the contract balance is greater than or equal to 1 ether to determine if the sale is complete.
+
+3. The `buy` function is not deducting the purchased tokens from the sender's balance after the purchase. This can lead to a vulnerability where the sender can buy tokens without actually paying for them. The balance deduction should be added after the purchase.
+
+Here is the fixed contract with the vulnerabilities addressed:
+
+```solidity
+pragma solidity ^0.4.21;
+
+contract TokenSaleChallenge {
+    mapping(address => uint256) public balanceOf;
+    uint256 constant PRICE_PER_TOKEN = 1 ether;
+
+    constructor() public payable {
+        require(msg.value == 1 ether);
+    }
+
+    function isComplete() public view returns (bool) {
+        return address(this).balance >= 1 ether;
+    }
+
+    function buy(uint256 numTokens) public payable {
+        require(msg.value == numTokens * PRICE_PER_TOKEN);
+        
+        balanceOf[msg.sender] += numTokens;
+        msg.sender.transfer(msg.value);
+    }
+
+    function sell(uint256 numTokens) public {
+        require(balanceOf[msg.sender] >= numTokens);
+
+        balanceOf[msg.sender] -= numTokens;
+        msg.sender.transfer(numTokens * PRICE_PER_TOKEN);
+    }
+}
+```
+
+This fixed contract addresses the vulnerabilities and ensures that the token sale functions correctly and securely. 
+
+2024-07-04 18:36:31,383 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/tokensalechallenge_4round.sol  
+
+2024-07-04 18:36:35,889 - root - INFO - 
+NEW CODE: The vulnerability in the code is that the `buy` function does not update the contract's balance after tokens are purchased. This can lead to a situation where the contract's balance does not accurately reflect the total amount of funds received from token purchases.
+
+Here is the fixed contract with the updated `buy` function:
+
+```solidity
+pragma solidity ^0.4.21;
+
+contract TokenSaleChallenge {
+    mapping(address => uint256) public balanceOf;
+    uint256 constant PRICE_PER_TOKEN = 1 ether;
+    uint256 public totalBalance;
+
+    function TokenSaleChallenge(address _player) public payable {
+        require(msg.value == 1 ether);
+        totalBalance = msg.value;
+    }
+
+    function isComplete() public view returns (bool) {
+        return totalBalance < 1 ether;
+    }
+
+    function buy(uint256 numTokens) public payable {
+        require(msg.value == numTokens * PRICE_PER_TOKEN);
+
+        balanceOf[msg.sender] += numTokens;
+        totalBalance += msg.value;
+    }
+
+    function sell(uint256 numTokens) public {
+        require(balanceOf[msg.sender] >= numTokens);
+
+        balanceOf[msg.sender] -= numTokens;
+
+        uint256 amountToTransfer = numTokens * PRICE_PER_TOKEN;
+        totalBalance -= amountToTransfer;
+        msg.sender.transfer(amountToTransfer);
+    }
+}
+```
+
+In the fixed contract, the `totalBalance` variable is added to keep track of the total funds received by the contract. The `buy` function now updates the `totalBalance` variable when tokens are purchased to ensure that the contract's balance is accurately maintained. 
+

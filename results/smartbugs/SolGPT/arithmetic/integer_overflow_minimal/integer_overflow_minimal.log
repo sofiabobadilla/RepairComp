@@ -1,0 +1,118 @@
+2024-07-04 18:36:05,562 - root - INFO - 
+Reading file 'integer_overflow_minimal.sol' 
+
+2024-07-04 18:36:05,563 - root - INFO - 
+Pragma: 0.4.19 
+
+2024-07-04 18:36:05,563 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_minimal.sol 
+
+2024-07-04 18:36:05,563 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_minimal_1round.sol  
+
+2024-07-04 18:36:05,571 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:36:05,573 - root - INFO - 
+Running command: solc-select use --always-install 0.4.19 
+
+2024-07-04 18:36:05,720 - root - INFO - 
+Running command: slither shared/arithmetic/integer_overflow_minimal.sol --json - 
+
+2024-07-04 18:36:06,450 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [{"type": "pragma", "name": "^0.4.19", "source_mapping": {"start": 303, "length": 24, "filename_relative": "shared/arithmetic/integer_overflow_minimal.sol", "filename_absolute": "/home/ethsec/shared/arithmetic/integer_overflow_minimal.sol", "filename_short": "shared/arithmetic/integer_overflow_minimal.sol", "is_dependency": false, "lines": [10], "starting_column": 1, "ending_column": 25}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".19"]}}], "description": "Pragma version^0.4.19 (shared/arithmetic/integer_overflow_minimal.sol#10) allows old versions\\n", "markdown": "Pragma version[^0.4.19](shared/arithmetic/integer_overflow_minimal.sol#L10) allows old versions\\n", "first_markdown_element": "shared/arithmetic/integer_overflow_minimal.sol#L10", "id": "575a5b993f42dd42bcee1bb8958e9e50765cf9e95c79cc4f69e8990a5755771d", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [], "description": "solc-0.4.19 is not recommended for deployment\\n", "markdown": "solc-0.4.19 is not recommended for deployment\\n", "first_markdown_element": "", "id": "6c57d3efd769b2c1ca361b3d06ff1f2677845be92f7b50762125a4196d71725a", "check": "solc-version", "impact": "Informational", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:36:09,164 - root - INFO - 
+NEW CODE: The vulnerability in the Solidity code is the potential for integer underflow in the `run` function. If the `input` value is greater than the current value of `count`, it will result in an underflow and the `count` variable will wrap around to a very large number instead of throwing an error.
+
+To fix this vulnerability, we can add a require statement to check if the subtraction will result in a negative value. Here is the fixed contract:
+
+```solidity
+pragma solidity ^0.4.19;
+
+contract IntegerOverflowMinimal {
+    uint public count = 1;
+
+    function run(uint256 input) public {
+        require(input <= count); // Check for integer underflow
+        count -= input;
+    }
+}
+```
+
+By adding the require statement, we ensure that the `input` value is not greater than the current value of `count` before subtracting it. This prevents integer underflow and adds a safety check to the code. 
+
+2024-07-04 18:36:09,164 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_minimal_2round.sol  
+
+2024-07-04 18:36:11,721 - root - INFO - 
+NEW CODE: The vulnerability in the Solidity code is the potential for integer underflow in the `run` function. If the `input` value is greater than the current value of `count`, it will result in an underflow and potentially lead to unexpected behavior.
+
+Here is the fixed contract with a check to prevent integer underflow:
+
+```solidity
+pragma solidity ^0.4.19;
+
+contract IntegerOverflowMinimal {
+    uint public count = 1;
+
+    function run(uint256 input) public {
+        require(input <= count); // Check if input is less than or equal to count
+        count -= input;
+    }
+}
+```
+
+By adding the `require` statement to check if the `input` value is less than or equal to the current value of `count`, we prevent the possibility of integer underflow. This ensures that the subtraction operation will not result in a negative value for `count`. 
+
+2024-07-04 18:36:11,723 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_minimal_3round.sol  
+
+2024-07-04 18:36:14,076 - root - INFO - 
+NEW CODE: The vulnerability in the Solidity code is the potential for integer underflow in the `run` function. If the `input` value is greater than the current value of `count`, it will result in an underflow and the `count` variable will wrap around to a very large number instead of throwing an error.
+
+To fix this vulnerability, we can add a require statement to check if the subtraction operation will result in a negative value. Here is the fixed contract:
+
+```solidity
+pragma solidity ^0.4.19;
+
+contract IntegerOverflowMinimal {
+    uint public count = 1;
+
+    function run(uint256 input) public {
+        require(input <= count); // Check for underflow
+        count -= input;
+    }
+}
+```
+
+With this require statement, the `run` function will revert if the `input` value is greater than the current value of `count`, preventing integer underflow. 
+
+2024-07-04 18:36:14,077 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_minimal_4round.sol  
+
+2024-07-04 18:36:17,589 - root - INFO - 
+NEW CODE: The vulnerability in the Solidity code is the potential for integer underflow in the `run` function. If the `input` value is greater than the current value of `count`, it will result in an underflow and the `count` variable will wrap around to a very large number instead of becoming negative.
+
+To fix this vulnerability, we can add a require statement to check if the `input` value is less than or equal to the current value of `count` before subtracting it. Here is the fixed contract:
+
+```solidity
+pragma solidity ^0.4.19;
+
+contract IntegerOverflowMinimal {
+    uint public count = 1;
+
+    function run(uint256 input) public {
+        require(input <= count);
+        count -= input;
+    }
+}
+```
+
+With this change, the `run` function will only subtract the `input` value from `count` if it is less than or equal to the current value of `count`, preventing integer underflow. 
+

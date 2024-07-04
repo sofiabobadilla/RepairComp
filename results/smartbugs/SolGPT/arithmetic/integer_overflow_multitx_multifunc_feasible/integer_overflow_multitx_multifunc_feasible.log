@@ -1,0 +1,149 @@
+2024-07-04 18:38:20,099 - root - INFO - 
+Reading file 'integer_overflow_multitx_multifunc_feasible.sol' 
+
+2024-07-04 18:38:20,100 - root - INFO - 
+Pragma: 0.4.23 
+
+2024-07-04 18:38:20,100 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_multitx_multifunc_feasible.sol 
+
+2024-07-04 18:38:20,100 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_multitx_multifunc_feasible_1round.sol  
+
+2024-07-04 18:38:20,106 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:38:20,107 - root - INFO - 
+Running command: solc-select use --always-install 0.4.23 
+
+2024-07-04 18:38:20,281 - root - INFO - 
+Running command: slither shared/arithmetic/integer_overflow_multitx_multifunc_feasible.sol --json - 
+
+2024-07-04 18:38:21,006 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [], "description": "solc-0.4.23 is not recommended for deployment\\n", "markdown": "solc-0.4.23 is not recommended for deployment\\n", "first_markdown_element": "", "id": "382fda39bb161fb6bd84dab76b9e9c2b52aca3c7e5a51e412552f94dbe59a506", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [{"type": "pragma", "name": "^0.4.23", "source_mapping": {"start": 207, "length": 24, "filename_relative": "shared/arithmetic/integer_overflow_multitx_multifunc_feasible.sol", "filename_absolute": "/home/ethsec/shared/arithmetic/integer_overflow_multitx_multifunc_feasible.sol", "filename_short": "shared/arithmetic/integer_overflow_multitx_multifunc_feasible.sol", "is_dependency": false, "lines": [10], "starting_column": 1, "ending_column": 25}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".23"]}}], "description": "Pragma version^0.4.23 (shared/arithmetic/integer_overflow_multitx_multifunc_feasible.sol#10) allows old versions\\n", "markdown": "Pragma version[^0.4.23](shared/arithmetic/integer_overflow_multitx_multifunc_feasible.sol#L10) allows old versions\\n", "first_markdown_element": "shared/arithmetic/integer_overflow_multitx_multifunc_feasible.sol#L10", "id": "c12fecaaeedff879653c0a334caa2cab931719c8eb1d04f5d74da13dd709354e", "check": "solc-version", "impact": "Informational", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:38:24,743 - root - INFO - 
+NEW CODE: There are two vulnerabilities in the provided Solidity code:
+1. The `init` function can be called multiple times, setting `initialized` to 1 each time.
+2. There is a potential integer underflow in the `run` function when `input` is greater than `count`.
+
+Here is the fixed contract with the vulnerabilities addressed:
+
+```solidity
+pragma solidity ^0.4.23;
+
+contract IntegerOverflowMultiTxMultiFuncFeasible {
+    uint256 private initialized = 0;
+    uint256 public count = 1;
+
+    function init() public {
+        require(initialized == 0, "Contract already initialized");
+        initialized = 1;
+    }
+
+    function run(uint256 input) public {
+        require(initialized == 1, "Contract not initialized");
+        require(input <= count, "Input must be less than or equal to count");
+
+        count -= input;
+    }
+}
+```
+
+In the fixed contract:
+- The `init` function now includes a `require` statement to ensure that the contract can only be initialized once.
+- The `run` function includes `require` statements to check if the contract is initialized and if the input is less than or equal to `count` to prevent integer underflow. 
+
+2024-07-04 18:38:24,744 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_multitx_multifunc_feasible_2round.sol  
+
+2024-07-04 18:38:27,609 - root - INFO - 
+NEW CODE: The vulnerability in the code is the potential for integer underflow in the `run` function when `input` is greater than `count`. To fix this vulnerability, we can add a require statement to check if `input` is less than or equal to `count` before subtracting it from `count`.
+
+Here is the fixed contract:
+
+```solidity
+pragma solidity ^0.4.23;
+
+contract IntegerOverflowMultiTxMultiFuncFeasible {
+    uint256 private initialized = 0;
+    uint256 public count = 1;
+
+    function init() public {
+        initialized = 1;
+    }
+
+    function run(uint256 input) public {
+        require(initialized == 1);
+        require(input <= count);
+
+        count -= input;
+    }
+}
+``` 
+
+2024-07-04 18:38:27,609 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_multitx_multifunc_feasible_3round.sol  
+
+2024-07-04 18:38:29,680 - root - INFO - 
+NEW CODE: 1. Add visibility specifier to the `run` function to specify it as a public function.
+2. Add a require statement to check for integer underflow in the `run` function.
+
+Here is the fixed contract:
+
+```solidity
+pragma solidity ^0.4.23;
+
+contract IntegerOverflowMultiTxMultiFuncFeasible {
+    uint256 private initialized = 0;
+    uint256 public count = 1;
+
+    function init() public {
+        initialized = 1;
+    }
+
+    function run(uint256 input) public {
+        require(initialized == 1, "Contract not initialized");
+        require(count >= input, "Integer underflow");
+        
+        count -= input;
+    }
+}
+``` 
+
+2024-07-04 18:38:29,681 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/arithmetic/integer_overflow_multitx_multifunc_feasible_4round.sol  
+
+2024-07-04 18:38:32,317 - root - INFO - 
+NEW CODE: There is a vulnerability in the code where an integer underflow can occur in the `run` function if `input` is greater than `count`. To fix this vulnerability, we need to add a check to ensure that the subtraction operation does not result in an underflow.
+
+Here is the fixed contract:
+
+```solidity
+pragma solidity ^0.4.23;
+
+contract IntegerOverflowMultiTxMultiFuncFeasible {
+    uint256 private initialized = 0;
+    uint256 public count = 1;
+
+    function init() public {
+        initialized = 1;
+    }
+
+    function run(uint256 input) public {
+        if (initialized == 0 || input > count) {
+            return;
+        }
+
+        count -= input;
+    }
+}
+```
+
+In the fixed code, we added a check in the `run` function to ensure that `input` is not greater than `count` before performing the subtraction operation. This prevents the possibility of an integer underflow. 
+

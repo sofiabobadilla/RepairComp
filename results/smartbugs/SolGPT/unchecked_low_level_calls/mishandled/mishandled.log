@@ -1,0 +1,106 @@
+2024-07-04 18:15:56,715 - root - INFO - 
+Reading file 'mishandled.sol' 
+
+2024-07-04 18:15:56,716 - root - INFO - 
+Pragma: 0.4.11 
+
+2024-07-04 18:15:56,716 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/unchecked_low_level_calls/mishandled.sol 
+
+2024-07-04 18:15:56,716 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/unchecked_low_level_calls/mishandled_1round.sol  
+
+2024-07-04 18:15:56,722 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:15:56,725 - root - INFO - 
+Running command: solc-select use --always-install 0.4.11 
+
+2024-07-04 18:15:56,887 - root - INFO - 
+Running command: slither shared/unchecked_low_level_calls/mishandled.sol --json - 
+
+2024-07-04 18:15:57,594 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [{"type": "function", "name": "withdrawBalance", "source_mapping": {"start": 245, "length": 199, "filename_relative": "shared/unchecked_low_level_calls/mishandled.sol", "filename_absolute": "/home/ethsec/shared/unchecked_low_level_calls/mishandled.sol", "filename_short": "shared/unchecked_low_level_calls/mishandled.sol", "is_dependency": false, "lines": [10, 11, 12, 13, 14, 15], "starting_column": 5, "ending_column": 3}, "type_specific_fields": {"parent": {"type": "contract", "name": "SendBack", "source_mapping": {"start": 177, "length": 269, "filename_relative": "shared/unchecked_low_level_calls/mishandled.sol", "filename_absolute": "/home/ethsec/shared/unchecked_low_level_calls/mishandled.sol", "filename_short": "shared/unchecked_low_level_calls/mishandled.sol", "is_dependency": false, "lines": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], "starting_column": 1, "ending_column": 0}}, "signature": "withdrawBalance()"}}, {"type": "node", "name": "msg.sender.send(amountToWithdraw)", "source_mapping": {"start": 407, "length": 33, "filename_relative": "shared/unchecked_low_level_calls/mishandled.sol", "filename_absolute": "/home/ethsec/shared/unchecked_low_level_calls/mishandled.sol", "filename_short": "shared/unchecked_low_level_calls/mishandled.sol", "is_dependency": false, "lines": [14], "starting_column": 3, "ending_column": 36}, "type_specific_fields": {"parent": {"type": "function", "name": "withdrawBalance", "source_mapping": {"start": 245, "length": 199, "filename_relative": "shared/unchecked_low_level_calls/mishandled.sol", "filename_absolute": "/home/ethsec/shared/unchecked_low_level_calls/mishandled.sol", "filename_short": "shared/unchecked_low_level_calls/mishandled.sol", "is_dependency": false, "lines": [10, 11, 12, 13, 14, 15], "starting_column": 5, "ending_column": 3}, "type_specific_fields": {"parent": {"type": "contract", "name": "SendBack", "source_mapping": {"start": 177, "length": 269, "filename_relative": "shared/unchecked_low_level_calls/mishandled.sol", "filename_absolute": "/home/ethsec/shared/unchecked_low_level_calls/mishandled.sol", "filename_short": "shared/unchecked_low_level_calls/mishandled.sol", "is_dependency": false, "lines": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], "starting_column": 1, "ending_column": 0}}, "signature": "withdrawBalance()"}}}}], "description": "SendBack.withdrawBalance() (shared/unchecked_low_level_calls/mishandled.sol#10-15) ignores return value by msg.sender.send(amountToWithdraw) (shared/unchecked_low_level_calls/mishandled.sol#14)\\n", "markdown": "[SendBack.withdrawBalance()](shared/unchecked_low_level_calls/mishandled.sol#L10-L15) ignores return value by [msg.sender.send(amountToWithdraw)](shared/unchecked_low_level_calls/mishandled.sol#L14)\\n", "first_markdown_element": "shared/unchecked_low_level_calls/mishandled.sol#L10-L15", "id": "b3c5f03d9953a51cb523a011f3534530b224121b1c070e18cb1ead983649197f", "check": "unchecked-send", "impact": "Medium", "confidence": "Medium"}, {"elements": [{"type": "pragma", "name": "^0.4.0", "source_mapping": {"start": 153, "length": 23, "filename_relative": "shared/unchecked_low_level_calls/mishandled.sol", "filename_absolute": "/home/ethsec/shared/unchecked_low_level_calls/mishandled.sol", "filename_short": "shared/unchecked_low_level_calls/mishandled.sol", "is_dependency": false, "lines": [7], "starting_column": 1, "ending_column": 24}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".0"]}}], "description": "Pragma version^0.4.0 (shared/unchecked_low_level_calls/mishandled.sol#7) allows old versions\\n", "markdown": "Pragma version[^0.4.0](shared/unchecked_low_level_calls/mishandled.sol#L7) allows old versions\\n", "first_markdown_element": "shared/unchecked_low_level_calls/mishandled.sol#L7", "id": "3783fd9aafd71c132e06cb4ab2260a20a90bb75af790364c485aaab9dc787713", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [], "description": "solc-0.4.11 is not recommended for deployment\\n", "markdown": "solc-0.4.11 is not recommended for deployment\\n", "first_markdown_element": "", "id": "ae83d48790cd633ba7c2546237b2b7b315df466f7ac70ed9b19932c059aba74b", "check": "solc-version", "impact": "Informational", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:15:57,595 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:15:59,301 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.0;
+
+contract SendBack {
+    mapping (address => uint) userBalances;
+
+    function withdrawBalance() {
+        uint amountToWithdraw = userBalances[msg.sender];
+        userBalances[msg.sender] = 0;
+
+        require(msg.sender.send(amountToWithdraw));
+    }
+} 
+
+2024-07-04 18:15:59,301 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/unchecked_low_level_calls/mishandled_2round.sol  
+
+2024-07-04 18:15:59,301 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:16:00,732 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.0;
+
+contract SendBack {
+    mapping (address => uint) userBalances;
+
+    function withdrawBalance() {
+        uint amountToWithdraw = userBalances[msg.sender];
+        userBalances[msg.sender] = 0;
+
+        require(msg.sender.send(amountToWithdraw));
+    }
+} 
+
+2024-07-04 18:16:00,733 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/unchecked_low_level_calls/mishandled_3round.sol  
+
+2024-07-04 18:16:00,733 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:16:02,268 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.0;
+
+contract SendBack {
+    mapping (address => uint) userBalances;
+
+    function withdrawBalance() {
+        uint amountToWithdraw = userBalances[msg.sender];
+        userBalances[msg.sender] = 0;
+
+        require(msg.sender.send(amountToWithdraw));
+    }
+} 
+
+2024-07-04 18:16:02,268 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/unchecked_low_level_calls/mishandled_4round.sol  
+
+2024-07-04 18:16:02,268 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:16:03,907 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.0;
+
+contract SendBack {
+    mapping (address => uint) userBalances;
+
+    function withdrawBalance() {
+        uint amountToWithdraw = userBalances[msg.sender];
+        userBalances[msg.sender] = 0;
+
+        require(msg.sender.send(amountToWithdraw));
+    }
+} 
+

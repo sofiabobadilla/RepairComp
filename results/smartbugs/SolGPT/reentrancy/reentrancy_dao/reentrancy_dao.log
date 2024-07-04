@@ -1,0 +1,156 @@
+2024-07-04 18:50:43,942 - root - INFO - 
+Reading file 'reentrancy_dao.sol' 
+
+2024-07-04 18:50:43,943 - root - INFO - 
+Pragma: 0.4.19 
+
+2024-07-04 18:50:43,944 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/reentrancy/reentrancy_dao.sol 
+
+2024-07-04 18:50:43,944 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/reentrancy/reentrancy_dao_1round.sol  
+
+2024-07-04 18:50:43,952 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:50:43,954 - root - INFO - 
+Running command: solc-select use --always-install 0.4.19 
+
+2024-07-04 18:50:44,119 - root - INFO - 
+Running command: slither shared/reentrancy/reentrancy_dao.sol --json - 
+
+2024-07-04 18:50:44,815 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [{"type": "function", "name": "withdrawAll", "source_mapping": {"start": 245, "length": 324, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "ReentrancyDAO", "source_mapping": {"start": 159, "length": 530, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], "starting_column": 1, "ending_column": 2}}, "signature": "withdrawAll()"}}, {"type": "node", "name": "callResult = msg.sender.call.value(oCredit)()", "source_mapping": {"start": 432, "length": 50, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [18], "starting_column": 13, "ending_column": 63}, "type_specific_fields": {"parent": {"type": "function", "name": "withdrawAll", "source_mapping": {"start": 245, "length": 324, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "ReentrancyDAO", "source_mapping": {"start": 159, "length": 530, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], "starting_column": 1, "ending_column": 2}}, "signature": "withdrawAll()"}}}, "additional_fields": {"underlying_type": "external_calls"}}, {"type": "node", "name": "credit[msg.sender] = 0", "source_mapping": {"start": 530, "length": 22, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [20], "starting_column": 13, "ending_column": 35}, "type_specific_fields": {"parent": {"type": "function", "name": "withdrawAll", "source_mapping": {"start": 245, "length": 324, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "ReentrancyDAO", "source_mapping": {"start": 159, "length": 530, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], "starting_column": 1, "ending_column": 2}}, "signature": "withdrawAll()"}}}, "additional_fields": {"underlying_type": "variables_written", "variable_name": "credit"}}], "description": "Reentrancy in ReentrancyDAO.withdrawAll() (shared/reentrancy/reentrancy_dao.sol#13-22):\\n\\tExternal calls:\\n\\t- callResult = msg.sender.call.value(oCredit)() (shared/reentrancy/reentrancy_dao.sol#18)\\n\\tState variables written after the call(s):\\n\\t- credit[msg.sender] = 0 (shared/reentrancy/reentrancy_dao.sol#20)\\n\\tReentrancyDAO.credit (shared/reentrancy/reentrancy_dao.sol#10) can be used in cross function reentrancies:\\n\\t- ReentrancyDAO.deposit() (shared/reentrancy/reentrancy_dao.sol#24-27)\\n\\t- ReentrancyDAO.withdrawAll() (shared/reentrancy/reentrancy_dao.sol#13-22)\\n", "markdown": "Reentrancy in [ReentrancyDAO.withdrawAll()](shared/reentrancy/reentrancy_dao.sol#L13-L22):\\n\\tExternal calls:\\n\\t- [callResult = msg.sender.call.value(oCredit)()](shared/reentrancy/reentrancy_dao.sol#L18)\\n\\tState variables written after the call(s):\\n\\t- [credit[msg.sender] = 0](shared/reentrancy/reentrancy_dao.sol#L20)\\n\\t[ReentrancyDAO.credit](shared/reentrancy/reentrancy_dao.sol#L10) can be used in cross function reentrancies:\\n\\t- [ReentrancyDAO.deposit()](shared/reentrancy/reentrancy_dao.sol#L24-L27)\\n\\t- [ReentrancyDAO.withdrawAll()](shared/reentrancy/reentrancy_dao.sol#L13-L22)\\n", "first_markdown_element": "shared/reentrancy/reentrancy_dao.sol#L13-L22", "id": "5bc2c9a3e5e73c2eebebbb7540eb133320af2d11bf009a171b6e22f5e76c4320", "check": "reentrancy-eth", "impact": "High", "confidence": "Medium"}, {"elements": [], "description": "solc-0.4.19 is not recommended for deployment\\n", "markdown": "solc-0.4.19 is not recommended for deployment\\n", "first_markdown_element": "", "id": "6c57d3efd769b2c1ca361b3d06ff1f2677845be92f7b50762125a4196d71725a", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [{"type": "pragma", "name": "^0.4.19", "source_mapping": {"start": 133, "length": 24, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [7], "starting_column": 1, "ending_column": 25}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".19"]}}], "description": "Pragma version^0.4.19 (shared/reentrancy/reentrancy_dao.sol#7) allows old versions\\n", "markdown": "Pragma version[^0.4.19](shared/reentrancy/reentrancy_dao.sol#L7) allows old versions\\n", "first_markdown_element": "shared/reentrancy/reentrancy_dao.sol#L7", "id": "8a87ed1200cba70ba5b50f8c38581ece1ea5e42660858ef27890f281b9a42c17", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [{"type": "function", "name": "withdrawAll", "source_mapping": {"start": 245, "length": 324, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "ReentrancyDAO", "source_mapping": {"start": 159, "length": 530, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], "starting_column": 1, "ending_column": 2}}, "signature": "withdrawAll()"}}, {"type": "node", "name": "callResult = msg.sender.call.value(oCredit)()", "source_mapping": {"start": 432, "length": 50, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [18], "starting_column": 13, "ending_column": 63}, "type_specific_fields": {"parent": {"type": "function", "name": "withdrawAll", "source_mapping": {"start": 245, "length": 324, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "ReentrancyDAO", "source_mapping": {"start": 159, "length": 530, "filename_relative": "shared/reentrancy/reentrancy_dao.sol", "filename_absolute": "/home/ethsec/shared/reentrancy/reentrancy_dao.sol", "filename_short": "shared/reentrancy/reentrancy_dao.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], "starting_column": 1, "ending_column": 2}}, "signature": "withdrawAll()"}}}}], "description": "Low level call in ReentrancyDAO.withdrawAll() (shared/reentrancy/reentrancy_dao.sol#13-22):\\n\\t- callResult = msg.sender.call.value(oCredit)() (shared/reentrancy/reentrancy_dao.sol#18)\\n", "markdown": "Low level call in [ReentrancyDAO.withdrawAll()](shared/reentrancy/reentrancy_dao.sol#L13-L22):\\n\\t- [callResult = msg.sender.call.value(oCredit)()](shared/reentrancy/reentrancy_dao.sol#L18)\\n", "first_markdown_element": "shared/reentrancy/reentrancy_dao.sol#L13-L22", "id": "b3114137fe62bf90dd366ce40bceb1daef85c788b39fdbca6f285109fd37d411", "check": "low-level-calls", "impact": "Informational", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:50:44,817 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:50:47,456 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.19;
+
+contract ReentrancyDAO {
+    mapping (address => uint) credit;
+    uint balance;
+
+    function withdrawAll() public {
+        uint oCredit = credit[msg.sender];
+        if (oCredit > 0) {
+            balance -= oCredit;
+            credit[msg.sender] = 0;
+            bool callResult = msg.sender.call.value(oCredit)();
+            require(callResult);
+        }
+    }
+
+    function deposit() public payable {
+        credit[msg.sender] += msg.value;
+        balance += msg.value;
+    }
+} 
+
+2024-07-04 18:50:47,456 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/reentrancy/reentrancy_dao_2round.sol  
+
+2024-07-04 18:50:47,456 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:50:50,934 - root - INFO - 
+NEW CODE: Here is the fixed contract with the vulnerability in the ReentrancyDAO contract addressed:
+
+```solidity
+pragma solidity ^0.4.19;
+
+contract ReentrancyDAO {
+    mapping (address => uint) credit;
+    uint balance;
+
+    function withdrawAll() public {
+        uint oCredit = credit[msg.sender];
+        require(oCredit > 0);
+        
+        credit[msg.sender] = 0; // Update credit before making the external call
+        balance -= oCredit;
+
+        bool callResult = msg.sender.call.value(oCredit)();
+        require(callResult);
+    }
+
+    function deposit() public payable {
+        credit[msg.sender] += msg.value;
+        balance += msg.value;
+    }
+}
+```
+
+In the fixed contract, the credit balance of the sender is updated before making the external call in the `withdrawAll` function. This prevents reentrancy attacks where an external call could manipulate the credit balance after the call. By updating the credit balance first, the contract ensures that the sender's credit is set to zero before any external call is made. 
+
+2024-07-04 18:50:50,934 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/reentrancy/reentrancy_dao_3round.sol  
+
+2024-07-04 18:50:50,934 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:50:54,469 - root - INFO - 
+NEW CODE: Here is the fixed contract with the vulnerability in the ReentrancyDAO contract addressed:
+
+```solidity
+pragma solidity ^0.4.19;
+
+contract ReentrancyDAO {
+    mapping (address => uint) credit;
+    uint balance;
+
+    function withdrawAll() public {
+        uint oCredit = credit[msg.sender];
+        require(oCredit > 0);
+        
+        credit[msg.sender] = 0; // Update credit before making external call
+        balance -= oCredit;
+
+        bool callResult = msg.sender.call.value(oCredit)();
+        require(callResult);
+    }
+
+    function deposit() public payable {
+        credit[msg.sender] += msg.value;
+        balance += msg.value;
+    }
+}
+```
+
+In the fixed contract, the credit balance of the sender is updated before making the external call in the `withdrawAll` function. This prevents reentrancy attacks where an external call can modify the state after the call. Additionally, the `require` statement is added to ensure that the sender has enough credit to withdraw before proceeding. 
+
+2024-07-04 18:50:54,470 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/reentrancy/reentrancy_dao_4round.sol  
+
+2024-07-04 18:50:54,470 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:50:56,359 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.19;
+
+contract ReentrancyDAO {
+    mapping (address => uint) credit;
+    uint balance;
+
+    function withdrawAll() public {
+        uint oCredit = credit[msg.sender];
+        if (oCredit > 0) {
+            balance -= oCredit;
+            credit[msg.sender] = 0;
+            bool callResult = msg.sender.call.value(oCredit)();
+            require(callResult);
+        }
+    }
+
+    function deposit() public payable {
+        credit[msg.sender] += msg.value;
+        balance += msg.value;
+    }
+} 
+

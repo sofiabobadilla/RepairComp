@@ -1,0 +1,33 @@
+pragma solidity ^0.4.21;
+
+contract TokenSaleChallenge {
+    mapping(address => uint256) public balanceOf;
+    uint256 constant PRICE_PER_TOKEN = 1 ether;
+    uint256 public totalBalance;
+
+    function TokenSaleChallenge(address _player) public payable {
+        require(msg.value == 1 ether);
+        totalBalance = msg.value;
+    }
+
+    function isComplete() public view returns (bool) {
+        return totalBalance < 1 ether;
+    }
+
+    function buy(uint256 numTokens) public payable {
+        require(msg.value == numTokens * PRICE_PER_TOKEN);
+
+        balanceOf[msg.sender] += numTokens;
+        totalBalance += msg.value;
+    }
+
+    function sell(uint256 numTokens) public {
+        require(balanceOf[msg.sender] >= numTokens);
+
+        balanceOf[msg.sender] -= numTokens;
+
+        uint256 amountToTransfer = numTokens * PRICE_PER_TOKEN;
+        totalBalance -= amountToTransfer;
+        msg.sender.transfer(amountToTransfer);
+    }
+}

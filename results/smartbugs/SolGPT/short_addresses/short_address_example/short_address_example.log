@@ -1,0 +1,169 @@
+2024-07-04 18:53:48,104 - root - INFO - 
+Reading file 'short_address_example.sol' 
+
+2024-07-04 18:53:48,105 - root - INFO - 
+Pragma: 0.4.11 
+
+2024-07-04 18:53:48,105 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/short_addresses/short_address_example.sol 
+
+2024-07-04 18:53:48,105 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/short_addresses/short_address_example_1round.sol  
+
+2024-07-04 18:53:48,114 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:53:48,116 - root - INFO - 
+Running command: solc-select use --always-install 0.4.11 
+
+2024-07-04 18:53:48,281 - root - INFO - 
+Running command: slither shared/short_addresses/short_address_example.sol --json - 
+
+2024-07-04 18:53:48,974 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [{"type": "pragma", "name": "^0.4.11", "source_mapping": {"start": 130, "length": 24, "filename_relative": "shared/short_addresses/short_address_example.sol", "filename_absolute": "/home/ethsec/shared/short_addresses/short_address_example.sol", "filename_short": "shared/short_addresses/short_address_example.sol", "is_dependency": false, "lines": [7], "starting_column": 2, "ending_column": 26}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".11"]}}], "description": "Pragma version^0.4.11 (shared/short_addresses/short_address_example.sol#7) allows old versions\\n", "markdown": "Pragma version[^0.4.11](shared/short_addresses/short_address_example.sol#L7) allows old versions\\n", "first_markdown_element": "shared/short_addresses/short_address_example.sol#L7", "id": "5ba8c36ee4826b877aef3e74a2a81fe6da234326a6e896959582bce5dfdf9257", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [], "description": "solc-0.4.11 is not recommended for deployment\\n", "markdown": "solc-0.4.11 is not recommended for deployment\\n", "first_markdown_element": "", "id": "ae83d48790cd633ba7c2546237b2b7b315df466f7ac70ed9b19932c059aba74b", "check": "solc-version", "impact": "Informational", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:53:51,880 - root - INFO - 
+NEW CODE: 1. The constructor function should be declared using the "constructor" keyword instead of using the contract name. This is a best practice to make the code more readable and avoid confusion.
+
+2. The use of "tx.origin" in the constructor function is a security vulnerability as it can be manipulated by an attacker. It is recommended to use "msg.sender" instead to ensure the security of the contract.
+
+Here is the fixed contract:
+
+pragma solidity ^0.4.11;
+
+contract MyToken {
+    mapping (address => uint) balances;
+
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+    constructor() {
+        balances[msg.sender] = 10000;
+    }
+
+    function sendCoin(address to, uint amount) public returns(bool sufficient) {
+        if (balances[msg.sender] < amount) return false;
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+        emit Transfer(msg.sender, to, amount);
+        return true;
+    }
+
+    function getBalance(address addr) public view returns(uint) {
+        return balances[addr];
+    }
+} 
+
+2024-07-04 18:53:51,881 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/short_addresses/short_address_example_2round.sol  
+
+2024-07-04 18:53:55,869 - root - INFO - 
+NEW CODE: 1. The constructor function should be declared using the "constructor" keyword instead of using the contract name. This is a common practice in newer versions of Solidity.
+
+2. The "tx.origin" should not be used to initialize the balance of the contract creator. It is recommended to use "msg.sender" instead to prevent potential vulnerabilities.
+
+3. The "sendCoin" function should include a require statement to check if the amount being sent is greater than 0 to prevent sending negative amounts.
+
+Here is the fixed contract:
+
+pragma solidity ^0.4.11;
+
+contract MyToken {
+    mapping (address => uint) balances;
+
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+    constructor() {
+        balances[msg.sender] = 10000;
+    }
+
+    function sendCoin(address to, uint amount) public returns(bool sufficient) {
+        require(amount > 0);
+        if (balances[msg.sender] < amount) return false;
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+        emit Transfer(msg.sender, to, amount);
+        return true;
+    }
+
+    function getBalance(address addr) public view returns(uint) {
+        return balances[addr];
+    }
+} 
+
+2024-07-04 18:53:55,869 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/short_addresses/short_address_example_3round.sol  
+
+2024-07-04 18:54:00,477 - root - INFO - 
+NEW CODE: The vulnerability in the code is that the constructor function `MyToken()` is not marked as `public`, which means it can be called by anyone. This can lead to potential security risks as anyone can initialize the contract and allocate tokens to themselves.
+
+To fix this vulnerability, we need to mark the `MyToken()` function as `public` so that it can only be called by the contract owner. Here is the fixed contract:
+
+```solidity
+pragma solidity ^0.4.11;
+
+contract MyToken {
+    mapping (address => uint) balances;
+
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+    function MyToken() public {
+        balances[msg.sender] = 10000;
+    }
+
+    function sendCoin(address to, uint amount) public returns(bool sufficient) {
+        if (balances[msg.sender] < amount) return false;
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+        Transfer(msg.sender, to, amount);
+        return true;
+    }
+
+    function getBalance(address addr) public view returns(uint) {
+        return balances[addr];
+    }
+}
+```
+
+In the fixed contract, the `MyToken()` function is marked as `public` and the `tx.origin` is replaced with `msg.sender` to ensure that the tokens are allocated to the contract owner. Additionally, the `getBalance()` function is marked as `view` to indicate that it does not modify the state of the contract. 
+
+2024-07-04 18:54:00,478 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/short_addresses/short_address_example_4round.sol  
+
+2024-07-04 18:54:04,778 - root - INFO - 
+NEW CODE: The vulnerability in the code is that the constructor function `MyToken()` is not marked as `public`, which means it can be called by anyone after the contract is deployed. This can lead to potential security risks as anyone can initialize the contract and allocate tokens to themselves.
+
+To fix this vulnerability, we need to mark the `MyToken()` function as `public` so that it can only be called during the contract deployment and not afterwards. Here is the fixed contract:
+
+```solidity
+pragma solidity ^0.4.11;
+
+contract MyToken {
+    mapping (address => uint) balances;
+
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+    function MyToken() public {
+        balances[msg.sender] = 10000;
+    }
+
+    function sendCoin(address to, uint amount) public returns(bool sufficient) {
+        if (balances[msg.sender] < amount) return false;
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+        Transfer(msg.sender, to, amount);
+        return true;
+    }
+
+    function getBalance(address addr) public view returns(uint) {
+        return balances[addr];
+    }
+}
+```
+
+In the fixed contract, the `MyToken()` function is marked as `public` and the `tx.origin` is replaced with `msg.sender` to ensure that the initial token allocation is done to the address deploying the contract. Additionally, the `getBalance()` function is marked as `view` to indicate that it does not modify the state of the contract. 
+
