@@ -46,6 +46,7 @@ The directory structure of the project is as follows:
 | sGuardPlus            |                    112 |                   195 |
 | SmartFix              |                     89 |                   476 |
 | TIPS                  |                     90 |                   100 |
+| SolGPT                |                        |                       |
 
 
 ## Patches overview in smartbugs-curated (patches)
@@ -57,6 +58,7 @@ find Smart -name "*.sol" | wc
 find SmartFix/ -name "*.sol" | wc
 find TIPS/ -name "*.sol" | wc
 ls SmartFix/*/*/*sol | wc
+find SolGPT/ -name "*.sol" | wc
 
 find Elysium/ -name "*.bin" | wc
 find SmartShield/ -name "*.bin" | wc
@@ -70,3 +72,4 @@ find SmartShield/ -name "*.bin" | wc
 | sGuardPlus            |       81 |             81|          81|                71|               10|                  10|                     71|
 | SmartFix              |       86 |             86|          86|                66|               20|                   1|                     66|
 | TIPS                  |      231 |            242|         234|               177|               57|                    |                    132|
+| SolGPT                |      695 |               |            |                  |                 |                    |                       |
