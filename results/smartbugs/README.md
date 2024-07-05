@@ -27,14 +27,14 @@ The directory structure of the project is as follows:
 ## Execution of the APR tools
 |Tool\Return code                    |0 (success)|1 (errors)|timeout (4hr)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
 |------------------------------------|-----------|----------|---------------|-----------------------|-------------------------|-----------------|---|------------------------------------------------------------------|
-|Elysium  (binary)                           |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
-|Smartshield   (binary)                       |134        |9         |0              |0                      |0                        |0                |0  |1: code errors                                                    |
-|sGuard                              |132        |1         |2              |8                      |0                        |0                |0  |                                                                  |
-|sGuardPlus                          |111        |33        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
-|SmartFix                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
+|[Elysium](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/Elysium/return_codes.csv)  (binary)                           |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
+|[Smartshield](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SmartShield/return_codes.csv)   (binary)                       |134        |9         |0              |0                      |0                        |0                |0  |1: code errors                                                    |
+|[sGuard](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/sGuard/return_codes.csv)                              |132        |1         |2              |8                      |0                        |0                |0  |                                                                  |
+|[sGuardPlus](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/sGuardPlus/return_codes.csv)                          |111        |33        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
+|[SmartFix](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SmartFix/return_codes.csv)                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
-|TIPS                                |140        |3         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
-|SolGPT                              |140        |3         |0              |0                      |0                        |0                |0  |1: openai or slither                            |
+|[TIPS](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/TIPS/return_codes.csv)                                |140        |3         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
+|[SolGPT](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SolGPT/patches_per_contract.csv)                              |140        |3         |0              |0                      |0                        |0                |0  |1: openai or slither                            |
 
 ## Vulnerabilities detected by the APR tools
 | Tool                  | contract files w/ vuln | total vulnerabilities | 
@@ -46,7 +46,7 @@ The directory structure of the project is as follows:
 | sGuardPlus            |                    112 |                   195 |
 | SmartFix              |                     89 |                   476 |
 | TIPS                  |                     90 |                   100 |
-| SolGPT                |                    112 |                   318 |
+| [SolGPT](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SolGPT/vulns_Medium.csv)                |                    112 |                   318 |
 
 
 ## Patches overview in smartbugs-curated (patches)
