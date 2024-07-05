@@ -1,0 +1,135 @@
+[
+    {
+        "description": "ClockAuctionBase._bid(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1254-1313) sends eth to arbitrary user\n\tDangerous calls:\n\t- msg.sender.transfer(bidExcess) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1307)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1254-L1313"
+    },
+    {
+        "description": "SaleClockAuction (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1689-1836) contract sets array length with a user-controlled value:\n\t- RarePanda.push(_tokenId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1800)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1689-L1836"
+    },
+    {
+        "description": "SaleClockAuction (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1689-1836) contract sets array length with a user-controlled value:\n\t- CommonPanda.push(_tokenId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1798)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1689-L1836"
+    },
+    {
+        "description": "PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158) uses a weak PRNG: \"uint256(keccak256()(block.blockhash(block.number - 2),now)) % 100 < probability (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1131)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1091-L1158"
+    },
+    {
+        "description": "Reentrancy in PandaAuction.bidOnSiringAuction(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2166-2186):\n\tExternal calls:\n\t- require(bool)(_canBreedWithViaAuction(_matronId,_sireId)) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2177)\n\t\t- geneScience.getSex(_matron.genes) + geneScience.getSex(_sire.genes) != 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#953)\n\t- currentPrice = siringAuction.getCurrentPrice(_sireId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2180)\n\t- siringAuction.bid.value(msg.value - autoBirthFee)(_sireId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2184)\n\t- _breedWith(uint32(_matronId),uint32(_sireId),msg.sender) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2185)\n\t\t- geneScience.getSex(pandas[_matronId].genes) == 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#991)\n\t\t- _kitten.cooldownIndex < 8 && geneScience.getWizzType(_kitten.genes) != 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#858)\n\tExternal calls sending eth:\n\t- siringAuction.bid.value(msg.value - autoBirthFee)(_sireId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2184)\n\tState variables written after the call(s):\n\t- _breedWith(uint32(_matronId),uint32(_sireId),msg.sender) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2185)\n\t\t- matron.siringWithId = uint32(_sireId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1008)\n\tPandaBase.pandas (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#325) can be used in cross function reentrancies:\n\t- PandaBreeding._breedWith(uint256,uint256,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1000-1026)\n\t- PandaBreeding._canBreedWithViaAuction(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#963-970)\n\t- PandaBase._createPanda(uint256,uint256,uint256,uint256[2],address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#416-504)\n\t- PandaBreeding._exchangeMatronSireId(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#990-996)\n\t- PandaBreeding.breedWithAuto(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1033-1081)\n\t- PandaBreeding.canBreedWith(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#978-988)\n\t- PandaBase.getWizzTypeOf(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#384-387)\n\t- PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158)\n\t- PandaBreeding.isPregnant(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#901-908)\n\t- PandaBreeding.isReadyToBreed(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#890-897)\n\t- PandaOwnership.totalSupply() (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#696-698)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L2166-L2186"
+    },
+    {
+        "description": "Reentrancy in PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158):\n\tExternal calls:\n\t- probability = (geneScience.getPureFromGene(matron.genes) + geneScience.getPureFromGene(sire.genes)) / 2 + _factors[0] (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1122)\n\t- kittenId = _createPanda(_matronId,matron.siringWithId,parentGen + 1,childGenes,owner) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1134)\n\t\t- pureDegree = uint16(geneScience.getPureFromGene(_genes)) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#439)\n\t\t- _tp = geneScience.getWizzType(_genes) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#453)\n\t\t- _genes = geneScience.clearWizzType(_genes) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#455)\n\tExternal calls sending eth:\n\t- msg.sender.send(autoBirthFee) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1152)\n\tState variables written after the call(s):\n\t- delete childOwner[_matronId] (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1154)\n\tPandaBreeding.childOwner (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#810) can be used in cross function reentrancies:\n\t- PandaBreeding._breedWith(uint256,uint256,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1000-1026)\n\t- PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1091-L1158"
+    },
+    {
+        "description": "SaleClockAuctionERC20.withdrawERC20Balance(address,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1958-1962) ignores return value by ERC20(_erc20Address).transfer(_to,balances[_erc20Address]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1961)\n",
+        "check": "unchecked-transfer",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1958-L1962"
+    },
+    {
+        "description": "PandaOwnership._memcpy(uint256,uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#747-764) is declared view but contains assembly code\n",
+        "check": "constant-function-asm",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L747-L764"
+    },
+    {
+        "description": "PandaOwnership._toString(bytes32[4],uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#769-782) is declared view but contains assembly code\n",
+        "check": "constant-function-asm",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L769-L782"
+    },
+    {
+        "description": "PandaBreeding._exchangeMatronSireId(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#990-996) uses a dangerous strict equality:\n\t- geneScience.getSex(pandas[_matronId].genes) == 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#991)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L990-L996"
+    },
+    {
+        "description": "SaleClockAuction.bid(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1776-1791) uses a dangerous strict equality:\n\t- isGen0 == 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1786)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1776-L1791"
+    },
+    {
+        "description": "Reentrancy in PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158):\n\tExternal calls:\n\t- probability = (geneScience.getPureFromGene(matron.genes) + geneScience.getPureFromGene(sire.genes)) / 2 + _factors[0] (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1122)\n\t- kittenId = _createPanda(_matronId,matron.siringWithId,parentGen + 1,childGenes,owner) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1134)\n\t\t- pureDegree = uint16(geneScience.getPureFromGene(_genes)) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#439)\n\t\t- _tp = geneScience.getWizzType(_genes) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#453)\n\t\t- _genes = geneScience.clearWizzType(_genes) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#455)\n\tState variables written after the call(s):\n\t- kittenId = _createPanda(_matronId,matron.siringWithId,parentGen + 1,childGenes,owner) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1134)\n\t\t- newKittenId = pandas.push(_panda) - 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#484)\n\tPandaBase.pandas (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#325) can be used in cross function reentrancies:\n\t- PandaBreeding._breedWith(uint256,uint256,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1000-1026)\n\t- PandaBase._createPanda(uint256,uint256,uint256,uint256[2],address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#416-504)\n\t- PandaBreeding._exchangeMatronSireId(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#990-996)\n\t- PandaBreeding.breedWithAuto(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1033-1081)\n\t- PandaBreeding.canBreedWith(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#978-988)\n\t- PandaBase.getWizzTypeOf(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#384-387)\n\t- PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158)\n\t- PandaBreeding.isPregnant(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#901-908)\n\t- PandaBreeding.isReadyToBreed(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#890-897)\n\t- PandaOwnership.totalSupply() (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#696-698)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1091-L1158"
+    },
+    {
+        "description": "Reentrancy in SaleClockAuctionERC20.bidERC20(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1935-1945):\n\tExternal calls:\n\t- price = _bidERC20(_erc20address,msg.sender,_tokenId,_amount) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1942)\n\t\t- require(bool)(ERC20(_erc20Address).transferFrom(_buyerAddress,seller,sellerProceeds)) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2005)\n\t\t- require(bool)(ERC20(_erc20Address).transferFrom(_buyerAddress,address(this),auctioneerCut)) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2007)\n\t- _transfer(msg.sender,_tokenId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1943)\n\t\t- nonFungibleContract.transfer(_receiver,_tokenId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1223)\n\tState variables written after the call(s):\n\t- delete tokenIdToErc20Address[_tokenId] (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1944)\n\tSaleClockAuctionERC20.tokenIdToErc20Address (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1851) can be used in cross function reentrancies:\n\t- SaleClockAuctionERC20._bidERC20(address,address,uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1966-2016)\n\t- SaleClockAuctionERC20.bidERC20(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1935-1945)\n\t- SaleClockAuctionERC20.cancelAuction(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1947-1956)\n\t- SaleClockAuctionERC20.createAuction(uint256,address,uint256,uint256,uint256,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1874-1905)\n\t- SaleClockAuctionERC20.tokenIdToErc20Address (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1851)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1935-L1945"
+    },
+    {
+        "description": "Reentrancy in PandaBase._createPanda(uint256,uint256,uint256,uint256[2],address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#416-504):\n\tExternal calls:\n\t- pureDegree = uint16(geneScience.getPureFromGene(_genes)) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#439)\n\t- _tp = geneScience.getWizzType(_genes) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#453)\n\t- _genes = geneScience.clearWizzType(_genes) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#455)\n\tState variables written after the call(s):\n\t- newKittenId = pandas.push(_panda) - 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#484)\n\tPandaBase.pandas (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#325) can be used in cross function reentrancies:\n\t- PandaBase.getWizzTypeOf(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#384-387)\n\t- wizzPandaCount[_tp] = wizzPandaCount[_tp] + 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#465)\n\tPandaBase.wizzPandaCount (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#366) can be used in cross function reentrancies:\n\t- PandaBase.getWizzPandaCountOf(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#374-376)\n\t- PandaBase.wizzPandaCount (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#366)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L416-L504"
+    },
+    {
+        "description": "Reentrancy in PandaBreeding.breedWithAuto(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1033-1081):\n\tExternal calls:\n\t- require(bool)(_isValidMatingPair(matron,_matronId,sire,_sireId)) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1072-1077)\n\t\t- geneScience.getSex(_matron.genes) + geneScience.getSex(_sire.genes) != 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#953)\n\t- _breedWith(_matronId,_sireId,msg.sender) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1080)\n\t\t- geneScience.getSex(pandas[_matronId].genes) == 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#991)\n\t\t- _kitten.cooldownIndex < 8 && geneScience.getWizzType(_kitten.genes) != 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#858)\n\tState variables written after the call(s):\n\t- _breedWith(_matronId,_sireId,msg.sender) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1080)\n\t\t- matron.siringWithId = uint32(_sireId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1008)\n\tPandaBase.pandas (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#325) can be used in cross function reentrancies:\n\t- PandaBreeding._breedWith(uint256,uint256,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1000-1026)\n\t- PandaBase._createPanda(uint256,uint256,uint256,uint256[2],address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#416-504)\n\t- PandaBreeding._exchangeMatronSireId(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#990-996)\n\t- PandaBreeding.breedWithAuto(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1033-1081)\n\t- PandaBreeding.canBreedWith(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#978-988)\n\t- PandaBase.getWizzTypeOf(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#384-387)\n\t- PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158)\n\t- PandaBreeding.isPregnant(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#901-908)\n\t- PandaBreeding.isReadyToBreed(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#890-897)\n\t- PandaOwnership.totalSupply() (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#696-698)\n\t- _breedWith(_matronId,_sireId,msg.sender) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1080)\n\t\t- delete sireAllowedToAddress[_matronId] (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1016)\n\t\t- delete sireAllowedToAddress[_sireId] (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1017)\n\tPandaBase.sireAllowedToAddress (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#343) can be used in cross function reentrancies:\n\t- PandaBreeding._breedWith(uint256,uint256,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1000-1026)\n\t- PandaBreeding._isSiringPermitted(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#838-845)\n\t- PandaBase._transfer(address,address,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#390-405)\n\t- PandaBreeding.approveSiring(address,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#867-872)\n\t- PandaBase.sireAllowedToAddress (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#343)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1033-L1081"
+    },
+    {
+        "description": "Reentrancy in PandaBreeding._breedWith(uint256,uint256,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1000-1026):\n\tExternal calls:\n\t- (_matronId,_sireId) = _exchangeMatronSireId(_matronId,_sireId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1002)\n\t\t- geneScience.getSex(pandas[_matronId].genes) == 1 (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#991)\n\tState variables written after the call(s):\n\t- matron.siringWithId = uint32(_sireId) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1008)\n\tPandaBase.pandas (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#325) can be used in cross function reentrancies:\n\t- PandaBreeding._breedWith(uint256,uint256,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1000-1026)\n\t- PandaBase._createPanda(uint256,uint256,uint256,uint256[2],address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#416-504)\n\t- PandaBreeding._exchangeMatronSireId(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#990-996)\n\t- PandaBreeding.breedWithAuto(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1033-1081)\n\t- PandaBreeding.canBreedWith(uint256,uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#978-988)\n\t- PandaBase.getWizzTypeOf(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#384-387)\n\t- PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158)\n\t- PandaBreeding.isPregnant(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#901-908)\n\t- PandaBreeding.isReadyToBreed(uint256) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#890-897)\n\t- PandaOwnership.totalSupply() (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#696-698)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1000-L1026"
+    },
+    {
+        "description": "PandaBreeding.giveBirth(uint256,uint256[2],uint256[2]) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1091-1158) ignores return value by msg.sender.send(autoBirthFee) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#1152)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L1091-L1158"
+    },
+    {
+        "description": "PandaCore.withdrawBalance() (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2460-2469) ignores return value by cfoAddress.send(balance - subtractFees) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2467)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L2460-L2469"
+    },
+    {
+        "description": "PandaAuction.withdrawERC20Balance(address,address) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2197-2200) ignores return value by saleAuctionERC20.withdrawERC20Balance(_erc20Address,_to) (shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#2199)\n",
+        "check": "unused-return",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol#L2197-L2200"
+    }
+]

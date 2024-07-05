@@ -1,0 +1,23 @@
+[
+    {
+        "description": "EtherLotto.play() (shared/time_manipulation/ether_lotto.sol#33-57) sends eth to arbitrary user\n\tDangerous calls:\n\t- bank.transfer(FEE_AMOUNT) (shared/time_manipulation/ether_lotto.sol#49)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/time_manipulation/ether_lotto.sol#L33-L57"
+    },
+    {
+        "description": "EtherLotto.play() (shared/time_manipulation/ether_lotto.sol#33-57) uses a weak PRNG: \"random = uint256(sha3()(block.timestamp)) % 2 (shared/time_manipulation/ether_lotto.sol#43)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/time_manipulation/ether_lotto.sol#L33-L57"
+    },
+    {
+        "description": "EtherLotto.play() (shared/time_manipulation/ether_lotto.sol#33-57) uses a dangerous strict equality:\n\t- random == 0 (shared/time_manipulation/ether_lotto.sol#46)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/time_manipulation/ether_lotto.sol#L33-L57"
+    }
+]

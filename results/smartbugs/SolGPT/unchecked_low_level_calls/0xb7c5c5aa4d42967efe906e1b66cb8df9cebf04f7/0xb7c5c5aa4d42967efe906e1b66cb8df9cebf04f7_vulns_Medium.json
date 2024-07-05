@@ -1,0 +1,16 @@
+[
+    {
+        "description": "Reentrancy in keepMyEther.withdraw() (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#23-27):\n\tExternal calls:\n\t- msg.sender.call.value(balances[msg.sender])() (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#25)\n\tState variables written after the call(s):\n\t- balances[msg.sender] = 0 (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#26)\n\tkeepMyEther.balances (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#17) can be used in cross function reentrancies:\n\t- keepMyEther.balances (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#17)\n\t- keepMyEther.fallback() (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#19-21)\n\t- keepMyEther.withdraw() (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#23-27)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#L23-L27"
+    },
+    {
+        "description": "keepMyEther.withdraw() (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#23-27) ignores return value by msg.sender.call.value(balances[msg.sender])() (shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#25)\n",
+        "check": "unchecked-lowlevel",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol#L23-L27"
+    }
+]

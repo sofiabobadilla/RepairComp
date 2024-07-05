@@ -1,0 +1,9 @@
+[
+    {
+        "description": "Reentrancy in ModifierEntrancy.airDrop() (shared/reentrancy/modifier_reentrancy.sol#15-17):\n\tExternal calls:\n\t- supportsToken() (shared/reentrancy/modifier_reentrancy.sol#15)\n\t\t- require(bool)(keccak256()(abi.encodePacked(Nu Token)) == Bank(msg.sender).supportsToken()) (shared/reentrancy/modifier_reentrancy.sol#21)\n\tState variables written after the call(s):\n\t- tokenBalance[msg.sender] += 20 (shared/reentrancy/modifier_reentrancy.sol#16)\n\tModifierEntrancy.tokenBalance (shared/reentrancy/modifier_reentrancy.sol#10) can be used in cross function reentrancies:\n\t- ModifierEntrancy.airDrop() (shared/reentrancy/modifier_reentrancy.sol#15-17)\n\t- ModifierEntrancy.hasNoBalance() (shared/reentrancy/modifier_reentrancy.sol#25-28)\n\t- ModifierEntrancy.tokenBalance (shared/reentrancy/modifier_reentrancy.sol#10)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/modifier_reentrancy.sol#L15-L17"
+    }
+]

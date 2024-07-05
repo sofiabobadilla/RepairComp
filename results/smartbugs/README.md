@@ -46,7 +46,7 @@ The directory structure of the project is as follows:
 | sGuardPlus            |                    112 |                   195 |
 | SmartFix              |                     89 |                   476 |
 | TIPS                  |                     90 |                   100 |
-| SolGPT                |                        |                       |
+| SolGPT                |                    112 |                   318 |
 
 
 ## Patches overview in smartbugs-curated (patches)

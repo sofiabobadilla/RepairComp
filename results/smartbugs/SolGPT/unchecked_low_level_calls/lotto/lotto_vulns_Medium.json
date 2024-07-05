@@ -1,0 +1,37 @@
+[
+    {
+        "description": "Lotto.withdrawLeftOver() (shared/unchecked_low_level_calls/lotto.sol#24-28) sends eth to arbitrary user\n\tDangerous calls:\n\t- msg.sender.send(this.balance) (shared/unchecked_low_level_calls/lotto.sol#27)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/lotto.sol#L24-L28"
+    },
+    {
+        "description": "Lotto.winner (shared/unchecked_low_level_calls/lotto.sol#12) is never initialized. It is used in:\n\t- Lotto.sendToWinner() (shared/unchecked_low_level_calls/lotto.sol#17-22)\n",
+        "check": "uninitialized-state",
+        "impact": "High",
+        "confidence": "High",
+        "first_markdown_element": "shared/unchecked_low_level_calls/lotto.sol#L12"
+    },
+    {
+        "description": "Lotto.winAmount (shared/unchecked_low_level_calls/lotto.sol#13) is never initialized. It is used in:\n\t- Lotto.sendToWinner() (shared/unchecked_low_level_calls/lotto.sol#17-22)\n",
+        "check": "uninitialized-state",
+        "impact": "High",
+        "confidence": "High",
+        "first_markdown_element": "shared/unchecked_low_level_calls/lotto.sol#L13"
+    },
+    {
+        "description": "Lotto.sendToWinner() (shared/unchecked_low_level_calls/lotto.sol#17-22) ignores return value by winner.send(winAmount) (shared/unchecked_low_level_calls/lotto.sol#20)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/lotto.sol#L17-L22"
+    },
+    {
+        "description": "Lotto.withdrawLeftOver() (shared/unchecked_low_level_calls/lotto.sol#24-28) ignores return value by msg.sender.send(this.balance) (shared/unchecked_low_level_calls/lotto.sol#27)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/lotto.sol#L24-L28"
+    }
+]

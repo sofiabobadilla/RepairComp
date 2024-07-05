@@ -1,0 +1,51 @@
+[
+    {
+        "description": "LuckyDoubler (shared/bad_randomness/lucky_doubler.sol#11-191) contract sets array length with a user-controlled value:\n\t- entries.push(Entry(msg.sender,dValue,(dValue * (multiplier) / 100),false)) (shared/bad_randomness/lucky_doubler.sol#87)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lucky_doubler.sol#L11-L191"
+    },
+    {
+        "description": "LuckyDoubler (shared/bad_randomness/lucky_doubler.sol#11-191) contract sets array length with a user-controlled value:\n\t- unpaidEntries.push(entries.length - 1) (shared/bad_randomness/lucky_doubler.sol#89)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lucky_doubler.sol#L11-L191"
+    },
+    {
+        "description": "LuckyDoubler.rand(uint256) (shared/bad_randomness/lucky_doubler.sol#127-133) uses a weak PRNG: \"uint256((uint256(hashVal) / factor)) % max (shared/bad_randomness/lucky_doubler.sol#132)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lucky_doubler.sol#L127-L133"
+    },
+    {
+        "description": "LuckyDoubler.join() (shared/bad_randomness/lucky_doubler.sol#67-122) ignores return value by msg.sender.send(msg.value - 1000000000000000000) (shared/bad_randomness/lucky_doubler.sol#74)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lucky_doubler.sol#L67-L122"
+    },
+    {
+        "description": "LuckyDoubler.init() (shared/bad_randomness/lucky_doubler.sol#57-65) ignores return value by msg.sender.send(msg.value) (shared/bad_randomness/lucky_doubler.sol#60)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lucky_doubler.sol#L57-L65"
+    },
+    {
+        "description": "LuckyDoubler.join() (shared/bad_randomness/lucky_doubler.sol#67-122) ignores return value by owner.send(fees) (shared/bad_randomness/lucky_doubler.sol#119)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lucky_doubler.sol#L67-L122"
+    },
+    {
+        "description": "LuckyDoubler.join() (shared/bad_randomness/lucky_doubler.sol#67-122) ignores return value by theEntry.entryAddress.send(payout) (shared/bad_randomness/lucky_doubler.sol#102)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lucky_doubler.sol#L67-L122"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "description": "BlackJack (shared/bad_randomness/blackjack.sol#45-308) contract sets array length with a user-controlled value:\n\t- games[msg.sender].playerCards.push(Deck.deal(msg.sender,nextCard)) (shared/bad_randomness/blackjack.sol#135)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/blackjack.sol#L45-L308"
+    },
+    {
+        "description": "BlackJack (shared/bad_randomness/blackjack.sol#45-308) contract sets array length with a user-controlled value:\n\t- games[msg.sender].houseCards.push(newCard) (shared/bad_randomness/blackjack.sol#149)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/blackjack.sol#L45-L308"
+    },
+    {
+        "description": "Deck.deal(address,uint8) (shared/bad_randomness/blackjack.sol#15-22) uses a weak PRNG: \"uint8(uint256(keccak256()(block.blockhash(b),player,cardNumber,timestamp)) % 52) (shared/bad_randomness/blackjack.sol#21)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/blackjack.sol#L15-L22"
+    },
+    {
+        "description": "BlackJack.getHouseCard(uint8) (shared/bad_randomness/blackjack.sol#273-278) contains a tautology or contradiction:\n\t- id < 0 || id > games[msg.sender].houseCards.length (shared/bad_randomness/blackjack.sol#274)\n",
+        "check": "tautology",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/blackjack.sol#L273-L278"
+    },
+    {
+        "description": "BlackJack.getPlayerCard(uint8) (shared/bad_randomness/blackjack.sol#266-271) contains a tautology or contradiction:\n\t- id < 0 || id > games[msg.sender].playerCards.length (shared/bad_randomness/blackjack.sol#267)\n",
+        "check": "tautology",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/blackjack.sol#L266-L271"
+    }
+]

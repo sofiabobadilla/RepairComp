@@ -1,0 +1,9 @@
+[
+    {
+        "description": "Reentrancy in EtherBank.withdrawBalance() (shared/reentrancy/etherbank.sol#18-23):\n\tExternal calls:\n\t- ! (msg.sender.call.value(amountToWithdraw)()) (shared/reentrancy/etherbank.sol#21)\n\tState variables written after the call(s):\n\t- userBalances[msg.sender] = 0 (shared/reentrancy/etherbank.sol#22)\n\tEtherBank.userBalances (shared/reentrancy/etherbank.sol#9) can be used in cross function reentrancies:\n\t- EtherBank.addToBalance() (shared/reentrancy/etherbank.sol#14-16)\n\t- EtherBank.getBalance(address) (shared/reentrancy/etherbank.sol#10-12)\n\t- EtherBank.withdrawBalance() (shared/reentrancy/etherbank.sol#18-23)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/etherbank.sol#L18-L23"
+    }
+]

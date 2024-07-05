@@ -1,0 +1,37 @@
+[
+    {
+        "description": "daoPOLSKAtokens.FundsTransfer() (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#431-434) sends eth to arbitrary user\n\tDangerous calls:\n\t- ! owner.send(this.balance) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#433)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#L431-L434"
+    },
+    {
+        "description": "daoPOLSKAtokens.sendTokenAw(address,address,uint256) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#366-376) ignores return value by t.coinContract.transfer(receiver,amount) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#374)\n",
+        "check": "unchecked-transfer",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#L366-L376"
+    },
+    {
+        "description": "Reentrancy in daoPOLSKAtokens.sendTokenAw(address,address,uint256) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#366-376):\n\tExternal calls:\n\t- t.coinContract.transfer(receiver,amount) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#374)\n\tState variables written after the call(s):\n\t- numTransfers ++ (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#375)\n\tdaoPOLSKAtokens.numTransfers (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#186) can be used in cross function reentrancies:\n\t- daoPOLSKAtokens.sendTokenAw(address,address,uint256) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#366-376)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#L366-L376"
+    },
+    {
+        "description": "daoPOLSKAtokens.PartialFundsTransfer(uint256) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#436-440) ignores return value by owner.send(this.balance - SubX) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#439)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#L436-L440"
+    },
+    {
+        "description": "daoPOLSKAtokens.finalize() (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#457-466) ignores return value by owner.send(this.balance) (shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#465)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol#L457-L466"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "description": "FibonacciBalance.withdraw() (shared/access_control/FibonacciBalance.sol#26-33) sends eth to arbitrary user\n\tDangerous calls:\n\t- msg.sender.transfer(calculatedFibNumber * 1000000000000000000) (shared/access_control/FibonacciBalance.sol#32)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/FibonacciBalance.sol#L26-L33"
+    },
+    {
+        "description": "FibonacciBalance.withdraw() (shared/access_control/FibonacciBalance.sol#26-33) uses delegatecall to a input-controlled function id\n\t- require(bool)(fibonacciLibrary.delegatecall(fibSig,withdrawalCounter)) (shared/access_control/FibonacciBalance.sol#31)\n",
+        "check": "controlled-delegatecall",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/FibonacciBalance.sol#L26-L33"
+    },
+    {
+        "description": "FibonacciBalance.fallback() (shared/access_control/FibonacciBalance.sol#36-39) uses delegatecall to a input-controlled function id\n\t- require(bool)(fibonacciLibrary.delegatecall(msg.data)) (shared/access_control/FibonacciBalance.sol#38)\n",
+        "check": "controlled-delegatecall",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/FibonacciBalance.sol#L36-L39"
+    },
+    {
+        "description": "FibonacciBalance.calculatedFibNumber (shared/access_control/FibonacciBalance.sol#14) is never initialized. It is used in:\n\t- FibonacciBalance.withdraw() (shared/access_control/FibonacciBalance.sol#26-33)\n",
+        "check": "uninitialized-state",
+        "impact": "High",
+        "confidence": "High",
+        "first_markdown_element": "shared/access_control/FibonacciBalance.sol#L14"
+    }
+]

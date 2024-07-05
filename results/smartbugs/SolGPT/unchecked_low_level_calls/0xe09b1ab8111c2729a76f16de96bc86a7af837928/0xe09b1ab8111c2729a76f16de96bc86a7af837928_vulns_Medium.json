@@ -1,0 +1,37 @@
+[
+    {
+        "description": "FiftyFlip.sendFunds(address,uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#323-331) sends eth to arbitrary user\n\tDangerous calls:\n\t- success = paidUser.send(amount) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#324)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#L323-L331"
+    },
+    {
+        "description": "FiftyFlip.play(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#162-207) uses a weak PRNG: \"jackpotRes = random % JACKPOT_MODULO (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#175)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#L162-L207"
+    },
+    {
+        "description": "FiftyFlip.play(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#162-207) uses a weak PRNG: \"maskRes = (random % 2) != 0 (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#174)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#L162-L207"
+    },
+    {
+        "description": "Reentrancy in FiftyFlip.wager(bool,uint256,uint256,uint8,bytes32,bytes32) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#128-159):\n\tExternal calls:\n\t- whale.call.value(donate_amount)(bytes4(keccak256()(donate()))) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#150)\n\tState variables written after the call(s):\n\t- bet.amount = amount (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#153)\n\tFiftyFlip.bets (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#66) can be used in cross function reentrancies:\n\t- FiftyFlip.clearProcessedBet(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#349-361)\n\t- FiftyFlip.getBetInfo(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#265-271)\n\t- FiftyFlip.play(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#162-207)\n\t- FiftyFlip.refund(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#228-236)\n\t- FiftyFlip.sendRefund(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#307-320)\n\t- FiftyFlip.wager(bool,uint256,uint256,uint8,bytes32,bytes32) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#128-159)\n\t- bet.blockNumber = block.number (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#154)\n\tFiftyFlip.bets (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#66) can be used in cross function reentrancies:\n\t- FiftyFlip.clearProcessedBet(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#349-361)\n\t- FiftyFlip.getBetInfo(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#265-271)\n\t- FiftyFlip.play(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#162-207)\n\t- FiftyFlip.refund(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#228-236)\n\t- FiftyFlip.sendRefund(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#307-320)\n\t- FiftyFlip.wager(bool,uint256,uint256,uint8,bytes32,bytes32) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#128-159)\n\t- bet.betMask = bMask (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#155)\n\tFiftyFlip.bets (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#66) can be used in cross function reentrancies:\n\t- FiftyFlip.clearProcessedBet(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#349-361)\n\t- FiftyFlip.getBetInfo(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#265-271)\n\t- FiftyFlip.play(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#162-207)\n\t- FiftyFlip.refund(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#228-236)\n\t- FiftyFlip.sendRefund(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#307-320)\n\t- FiftyFlip.wager(bool,uint256,uint256,uint8,bytes32,bytes32) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#128-159)\n\t- bet.player = player (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#156)\n\tFiftyFlip.bets (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#66) can be used in cross function reentrancies:\n\t- FiftyFlip.clearProcessedBet(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#349-361)\n\t- FiftyFlip.getBetInfo(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#265-271)\n\t- FiftyFlip.play(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#162-207)\n\t- FiftyFlip.refund(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#228-236)\n\t- FiftyFlip.sendRefund(uint256) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#307-320)\n\t- FiftyFlip.wager(bool,uint256,uint256,uint8,bytes32,bytes32) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#128-159)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#L128-L159"
+    },
+    {
+        "description": "FiftyFlip.wager(bool,uint256,uint256,uint8,bytes32,bytes32) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#128-159) ignores return value by whale.call.value(donate_amount)(bytes4(keccak256()(donate()))) (shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#150)\n",
+        "check": "unchecked-lowlevel",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol#L128-L159"
+    }
+]

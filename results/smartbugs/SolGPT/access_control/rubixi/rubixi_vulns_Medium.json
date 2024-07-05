@@ -1,0 +1,44 @@
+[
+    {
+        "description": "Rubixi (shared/access_control/rubixi.sol#10-162) contract sets array length with a user-controlled value:\n\t- participants.push(Participant(msg.sender,(msg.value * pyramidMultiplier) / 100)) (shared/access_control/rubixi.sol#61)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/rubixi.sol#L10-L162"
+    },
+    {
+        "description": "Rubixi.collectPercentOfFees(uint256) (shared/access_control/rubixi.sol#99-105) performs a multiplication on the result of a division:\n\t- feesToCollect = collectedFees / 100 * _pcent (shared/access_control/rubixi.sol#102)\n",
+        "check": "divide-before-multiply",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/rubixi.sol#L99-L105"
+    },
+    {
+        "description": "Rubixi.collectAllFees() (shared/access_control/rubixi.sol#82-87) ignores return value by creator.send(collectedFees) (shared/access_control/rubixi.sol#85)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/rubixi.sol#L82-L87"
+    },
+    {
+        "description": "Rubixi.collectPercentOfFees(uint256) (shared/access_control/rubixi.sol#99-105) ignores return value by creator.send(feesToCollect) (shared/access_control/rubixi.sol#103)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/rubixi.sol#L99-L105"
+    },
+    {
+        "description": "Rubixi.collectFeesInEther(uint256) (shared/access_control/rubixi.sol#89-97) ignores return value by creator.send(_amt) (shared/access_control/rubixi.sol#95)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/rubixi.sol#L89-L97"
+    },
+    {
+        "description": "Rubixi.addPayout(uint256) (shared/access_control/rubixi.sol#59-79) ignores return value by participants[payoutOrder].etherAddress.send(payoutToSend) (shared/access_control/rubixi.sol#74)\n",
+        "check": "unchecked-send",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/rubixi.sol#L59-L79"
+    }
+]

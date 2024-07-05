@@ -1,0 +1,16 @@
+[
+    {
+        "description": "LogFile (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#72-96) contract sets array length with a user-controlled value:\n\t- History.push(LastMsg) (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#93)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#L72-L96"
+    },
+    {
+        "description": "Reentrancy in DEP_BANK.Collect(uint256) (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#47-60):\n\tExternal calls:\n\t- msg.sender.call.value(_am)() (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#54)\n\tState variables written after the call(s):\n\t- balances[msg.sender] -= _am (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#56)\n\tDEP_BANK.balances (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#11) can be used in cross function reentrancies:\n\t- DEP_BANK.Collect(uint256) (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#47-60)\n\t- DEP_BANK.Deposit() (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#39-45)\n\t- DEP_BANK.balances (shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#11)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol#L47-L60"
+    }
+]

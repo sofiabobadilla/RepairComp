@@ -1,0 +1,30 @@
+[
+    {
+        "description": "TokenSender (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#39-132) contract sets array length with a user-controlled value:\n\t- transfers.length = transfers.length + data.length (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#73)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#L39-L132"
+    },
+    {
+        "description": "TokenSender.gas() (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#126-130) is declared view but contains assembly code\n",
+        "check": "constant-function-asm",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#L126-L130"
+    },
+    {
+        "description": "Reentrancy in TokenSender.run() (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#87-109):\n\tExternal calls:\n\t- ! token.transfer(addr,transfers[mNext].amount) (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#102)\n\tState variables written after the call(s):\n\t- next = mNext (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#108)\n\tTokenSender.next (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#43) can be used in cross function reentrancies:\n\t- TokenSender.fill(uint256[]) (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#66-83)\n\t- TokenSender.hasTerminated() (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#116-120)\n\t- TokenSender.next (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#43)\n\t- TokenSender.run() (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#87-109)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#L87-L109"
+    },
+    {
+        "description": "Owned.execute(address,uint256,bytes) (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#28-31) ignores return value by _dst.call.value(_value)(_data) (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#30)\n",
+        "check": "unchecked-lowlevel",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol#L28-L31"
+    }
+]

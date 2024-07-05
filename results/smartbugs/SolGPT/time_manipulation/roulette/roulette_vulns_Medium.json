@@ -1,0 +1,23 @@
+[
+    {
+        "description": "Roulette.fallback() (shared/time_manipulation/roulette.sol#15-24) sends eth to arbitrary user\n\tDangerous calls:\n\t- msg.sender.transfer(this.balance) (shared/time_manipulation/roulette.sol#22)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/time_manipulation/roulette.sol#L15-L24"
+    },
+    {
+        "description": "Roulette.fallback() (shared/time_manipulation/roulette.sol#15-24) uses a weak PRNG: \"now % 15 == 0 (shared/time_manipulation/roulette.sol#21)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/time_manipulation/roulette.sol#L15-L24"
+    },
+    {
+        "description": "Roulette.fallback() (shared/time_manipulation/roulette.sol#15-24) uses a dangerous strict equality:\n\t- now % 15 == 0 (shared/time_manipulation/roulette.sol#21)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/time_manipulation/roulette.sol#L15-L24"
+    }
+]
