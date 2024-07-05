@@ -34,7 +34,7 @@ The directory structure of the project is as follows:
 |SmartFix                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
 |Aroc                                |135        |0         |0              |0                      |8                        |0                |0  |                                                                  |
 |TIPS                                |140        |3         |0              |0                      |0                        |0                |0  |1: code errors in parsing json objects                            |
-
+|SolGPT                              |140        |3         |0              |0                      |0                        |0                |0  |1: openai or slither                            |
 
 ## Vulnerabilities detected by the APR tools
 | Tool                  | contract files w/ vuln | total vulnerabilities | 
