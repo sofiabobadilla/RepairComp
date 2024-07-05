@@ -72,4 +72,4 @@ find SmartShield/ -name "*.bin" | wc
 | sGuardPlus            |       81 |             81|          81|                71|               10|                  10|                     71|
 | SmartFix              |       86 |             86|          86|                66|               20|                   1|                     66|
 | TIPS                  |      231 |            242|         234|               177|               57|                    |                    132|
-| SolGPT                |      552 |               |            |                  |                 |                    |                       |
+| SolGPT                |      552 |               |         527|                  |                 |                    |                       |
