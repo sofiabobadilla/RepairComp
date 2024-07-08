@@ -1,0 +1,30 @@
+[
+    {
+        "description": "Reentrancy in WalletLibrary.confirm(bytes32) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#192-205):\n\tExternal calls:\n\t- ! m_txs[_h].to.call.value(m_txs[_h].value)(m_txs[_h].data) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#198)\n\tState variables written after the call(s):\n\t- delete m_txs[_h] (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#202)\n\tWalletLibrary.m_txs (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#282) can be used in cross function reentrancies:\n\t- WalletLibrary.clearPending() (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#260-268)\n\t- WalletLibrary.confirm(bytes32) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#192-205)\n\t- WalletLibrary.execute(address,uint256,bytes) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#165-186)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#L192-L205"
+    },
+    {
+        "description": "WalletLibrary.kill(address) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#161-163) allows anyone to destruct the contract\n",
+        "check": "suicidal",
+        "impact": "High",
+        "confidence": "High",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#L161-L163"
+    },
+    {
+        "description": "WalletLibrary.confirm(bytes32).created (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#194) is a local variable never initialized\n",
+        "check": "uninitialized-local",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#L194"
+    },
+    {
+        "description": "WalletLibrary.execute(address,uint256,bytes).created (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#167) is a local variable never initialized\n",
+        "check": "uninitialized-local",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_1round.sol#L167"
+    }
+]

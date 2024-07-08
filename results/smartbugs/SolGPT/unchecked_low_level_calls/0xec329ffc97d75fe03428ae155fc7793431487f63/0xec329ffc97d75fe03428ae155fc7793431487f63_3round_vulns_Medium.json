@@ -1,0 +1,9 @@
+[
+    {
+        "description": "Reentrancy in TokenSender.run() (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#62-80):\n\tExternal calls:\n\t- (mNext == 0) && (token.balanceOf(this) != totalToDistribute) (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#68)\n\t- require(bool)(token.transfer(addr,transfers[mNext].amount)) (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#74)\n\tState variables written after the call(s):\n\t- next = mNext (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#79)\n\tTokenSender.next (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#32) can be used in cross function reentrancies:\n\t- TokenSender.fill(uint256[]) (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#45-60)\n\t- TokenSender.hasTerminated() (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#82-86)\n\t- TokenSender.next (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#32)\n\t- TokenSender.run() (shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#62-80)\n",
+        "check": "reentrancy-no-eth",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63/0xec329ffc97d75fe03428ae155fc7793431487f63_3round.sol#L62-L80"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "description": "PoCGame.loseWager(uint256) (shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#104-108) sends eth to arbitrary user\n\tDangerous calls:\n\t- require(bool)(whale.call.value(amount)()) (shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#105)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#L104-L108"
+    },
+    {
+        "description": "PoCGame.payout(address) (shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#92-96) sends eth to arbitrary user\n\tDangerous calls:\n\t- winner.transfer(ethToTransfer) (shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#94)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#L92-L96"
+    },
+    {
+        "description": "PoCGame.play() (shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#72-86) uses a weak PRNG: \"winningNumber = uint256(keccak256()(abi.encodePacked(blockhash(uint256)(blockNumber),msg.sender,randomSeed))) % difficulty + 1 (shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#77)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#L72-L86"
+    },
+    {
+        "description": "PoCGame.randomSeed (shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#34) is never initialized. It is used in:\n\t- PoCGame.play() (shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#72-86)\n",
+        "check": "uninitialized-state",
+        "impact": "High",
+        "confidence": "High",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_1round.sol#L34"
+    }
+]

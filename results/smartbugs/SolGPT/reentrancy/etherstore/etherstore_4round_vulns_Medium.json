@@ -1,0 +1,9 @@
+[
+    {
+        "description": "Reentrancy in EtherStore.withdrawFunds(uint256) (shared/reentrancy/etherstore/etherstore_4round.sol#14-25):\n\tExternal calls:\n\t- require(bool)(msg.sender.call.value(_weiToWithdraw)()) (shared/reentrancy/etherstore/etherstore_4round.sol#21)\n\tState variables written after the call(s):\n\t- balances[msg.sender] -= _weiToWithdraw (shared/reentrancy/etherstore/etherstore_4round.sol#22)\n\tEtherStore.balances (shared/reentrancy/etherstore/etherstore_4round.sol#7) can be used in cross function reentrancies:\n\t- EtherStore.balances (shared/reentrancy/etherstore/etherstore_4round.sol#7)\n\t- EtherStore.depositFunds() (shared/reentrancy/etherstore/etherstore_4round.sol#10-12)\n\t- EtherStore.withdrawFunds(uint256) (shared/reentrancy/etherstore/etherstore_4round.sol#14-25)\n\t- lastWithdrawTime[msg.sender] = now (shared/reentrancy/etherstore/etherstore_4round.sol#23)\n\tEtherStore.lastWithdrawTime (shared/reentrancy/etherstore/etherstore_4round.sol#6) can be used in cross function reentrancies:\n\t- EtherStore.lastWithdrawTime (shared/reentrancy/etherstore/etherstore_4round.sol#6)\n\t- EtherStore.withdrawFunds(uint256) (shared/reentrancy/etherstore/etherstore_4round.sol#14-25)\n\t- locked[msg.sender] = false (shared/reentrancy/etherstore/etherstore_4round.sol#24)\n\tEtherStore.locked (shared/reentrancy/etherstore/etherstore_4round.sol#8) can be used in cross function reentrancies:\n\t- EtherStore.withdrawFunds(uint256) (shared/reentrancy/etherstore/etherstore_4round.sol#14-25)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/etherstore/etherstore_4round.sol#L14-L25"
+    }
+]

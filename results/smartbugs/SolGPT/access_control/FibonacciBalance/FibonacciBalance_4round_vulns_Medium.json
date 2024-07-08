@@ -1,0 +1,30 @@
+[
+    {
+        "description": "FibonacciBalance.withdraw() (shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#18-24) sends eth to arbitrary user\n\tDangerous calls:\n\t- msg.sender.transfer(calculatedFibNumber * 1000000000000000000) (shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#23)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#L18-L24"
+    },
+    {
+        "description": "FibonacciBalance.withdraw() (shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#18-24) uses delegatecall to a input-controlled function id\n\t- require(bool)(fibonacciLibrary.delegatecall(fibSig,withdrawalCounter)) (shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#21)\n",
+        "check": "controlled-delegatecall",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#L18-L24"
+    },
+    {
+        "description": "FibonacciBalance.fallback() (shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#26-28) uses delegatecall to a input-controlled function id\n\t- require(bool)(fibonacciLibrary.delegatecall(msg.data)) (shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#27)\n",
+        "check": "controlled-delegatecall",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#L26-L28"
+    },
+    {
+        "description": "FibonacciBalance.calculatedFibNumber (shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#7) is never initialized. It is used in:\n\t- FibonacciBalance.withdraw() (shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#18-24)\n",
+        "check": "uninitialized-state",
+        "impact": "High",
+        "confidence": "High",
+        "first_markdown_element": "shared/access_control/FibonacciBalance/FibonacciBalance_4round.sol#L7"
+    }
+]

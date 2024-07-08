@@ -1,0 +1,30 @@
+[
+    {
+        "description": "CryptoRoulette (shared/other/crypto_roulette/crypto_roulette_2round.sol#3-49) contract sets array length with a user-controlled value:\n\t- gamesPlayed.push(game) (shared/other/crypto_roulette/crypto_roulette_2round.sol#31)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/other/crypto_roulette/crypto_roulette_2round.sol#L3-L49"
+    },
+    {
+        "description": "CryptoRoulette.shuffle() (shared/other/crypto_roulette/crypto_roulette_2round.sol#21-23) uses a weak PRNG: \"secretNumber = uint8(sha3()(now,block.blockhash(block.number - 1),block.coinbase,block.difficulty)) % 20 + 1 (shared/other/crypto_roulette/crypto_roulette_2round.sol#22)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/other/crypto_roulette/crypto_roulette_2round.sol#L21-L23"
+    },
+    {
+        "description": "CryptoRoulette.play(uint256) (shared/other/crypto_roulette/crypto_roulette_2round.sol#25-39) uses a dangerous strict equality:\n\t- number == secretNumber (shared/other/crypto_roulette/crypto_roulette_2round.sol#33)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/other/crypto_roulette/crypto_roulette_2round.sol#L25-L39"
+    },
+    {
+        "description": "CryptoRoulette.play(uint256).game (shared/other/crypto_roulette/crypto_roulette_2round.sol#28) is a local variable never initialized\n",
+        "check": "uninitialized-local",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/other/crypto_roulette/crypto_roulette_2round.sol#L28"
+    }
+]
