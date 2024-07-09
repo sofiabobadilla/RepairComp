@@ -84,12 +84,12 @@ total contracts in the repository: 143
 
 | Tool                  | #generation | compilable | #diff patches | valid patches (Comp&Diff) |
 |-----------------------|----------|---------------|------------|------------------|
-| Elysium (binary)      |      126 |            N/A|         TBA|               TBA|  
-| sGuard                |      109 |            108|         TBA|               TBA| 
-| sGuardPlus            |       81 |             81|         TBA|               TBA| 
-| SmartFix              |       86 |             86|         TBA|               TBA| 
-| Smartshield (binary)  |      134 |            N/A|         TBA|               TBA|  
-| SolGPT                |      139 |            138|         TBA|               TBA| 
-| TIPS                  |      140 |            138|         TBA|               TBA| 
+| Elysium (binary)      |      126 |            N/A|         101|               TBA|  
+| sGuard                |      109 |            108|          62|               TBA| 
+| sGuardPlus            |       81 |             81|          81|               TBA| 
+| SmartFix              |       86 |             86|          86|               TBA| 
+| Smartshield (binary)  |      134 |            N/A|         131|               TBA|  
+| SolGPT                |      139 |            138|         139|               TBA| 
+| TIPS                  |      140 |            138|         140|               TBA| 
 
 
