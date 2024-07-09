@@ -71,5 +71,25 @@ find SmartShield/ -name "*.bin" | wc
 | sGuard                |      109 |             61|         109|                 2|               56|                    |                      2|
 | sGuardPlus            |       81 |             81|          81|                71|               10|                  10|                     71|
 | SmartFix              |       86 |             86|          86|                66|               20|                   1|                     66|
-| TIPS                  |      231 |            242|         234|               177|               57|                    |                    132|
+| TIPS                  |      242 |            242|         234|               177|               57|                    |                    132|
 | SolGPT                |      552 |            552|         527|               251|              276|                    |                     70|
+
+
+
+
+# Per Contract Overview
+This table collects the information per contract in the dataset. For tools that generate multiple patches(SolGPT &TIPS) we count if at least 1 patch fulfills the category.
+total contracts in the repository: 143
+1 duplicate ()
+
+| Tool                  | #generation | compilable | #diff patches | valid patches (Comp&Diff) |
+|-----------------------|----------|---------------|------------|------------------|
+| Elysium (binary)      |      126 |            N/A|         TBA|               TBA|  
+| sGuard                |      109 |            108|         TBA|               TBA| 
+| sGuardPlus            |       81 |             81|         TBA|               TBA| 
+| SmartFix              |       86 |             86|         TBA|               TBA| 
+| Smartshield (binary)  |      134 |            N/A|         TBA|               TBA|  
+| SolGPT                |      139 |            138|         TBA|               TBA| 
+| TIPS                  |      140 |            138|         TBA|               TBA| 
+
+
