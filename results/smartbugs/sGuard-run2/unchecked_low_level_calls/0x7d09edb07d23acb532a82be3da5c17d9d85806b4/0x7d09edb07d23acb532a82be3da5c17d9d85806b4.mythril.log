@@ -1,0 +1,156 @@
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: PoCGame
+Function name: transferAnyERC20Token(address,address,uint256)
+PC address: 2562
+Estimated Gas Usage: 3096 - 38459
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol:297
+
+ERC20Interface(tokenAddress).transfer(tokenOwner, tokens)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: transferAnyERC20Token(address,address,uint256), txdata: 0xd493b9acdededededededededededededeadbeefdeadbeefdeadbeefdeadbeefdeadbeef, value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: PoCGame
+Function name: donate()
+PC address: 3572
+Estimated Gas Usage: 10514 - 66888
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol:209
+
+whale.call.value(amount)(bytes4(keccak256("donate()")))
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x48000002040008000, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: 8e8e8e8e8e8e8e8e8e8e8e8edeadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: , value: 0x0
+Caller: [CREATOR], function: OpenToThePublic(), txdata: 0x4a376c97, value: 0x0
+Caller: [CREATOR], function: donate(), txdata: 0xed88c68e, value: 0x0
+
+==== Unchecked return value from external call. ====
+SWC ID: 104
+Severity: Medium
+Contract: PoCGame
+Function name: donate()
+PC address: 3572
+Estimated Gas Usage: 10514 - 66888
+The return value of a message call is not checked.
+External calls return a boolean value. If the callee halts with an exception, 'false' is returned and execution continues in the caller. The caller should check whether an exception happened and react accordingly to avoid unexpected behavior. For example it is often desirable to wrap external calls in require() so the transaction is reverted if the call fails.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol:209
+
+whale.call.value(amount)(bytes4(keccak256("donate()")))
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2001a2940680000, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: OpenToThePublic(), txdata: 0x4a376c97, value: 0x0
+Caller: [CREATOR], function: donate(), txdata: 0xed88c68e, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PoCGame
+Function name: donate()
+PC address: 3586
+Estimated Gas Usage: 10514 - 66888
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol:210
+
+totalDonated += amount
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1280000012c10003, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: 8e8e8e8e8e8e8e8e8e8e8e8edeadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: , value: 0x0
+Caller: [CREATOR], function: OpenToThePublic(), txdata: 0x4a376c97, value: 0x0
+Caller: [CREATOR], function: donate(), txdata: 0xed88c68e, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PoCGame
+Function name: donate()
+PC address: 3593
+Estimated Gas Usage: 10514 - 66888
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol:210
+
+totalDonated += amount
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1280000012c10003, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: 8e8e8e8e8e8e8e8e8e8e8e8edeadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: , value: 0x0
+Caller: [CREATOR], function: OpenToThePublic(), txdata: 0x4a376c97, value: 0x0
+Caller: [CREATOR], function: donate(), txdata: 0xed88c68e, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PoCGame
+Function name: donate()
+PC address: 3633
+Estimated Gas Usage: 10514 - 66888
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol:211
+
+whale
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1280000012c10003, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: 8e8e8e8e8e8e8e8e8e8e8e8edeadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: , value: 0x0
+Caller: [CREATOR], function: OpenToThePublic(), txdata: 0x4a376c97, value: 0x0
+Caller: [CREATOR], function: donate(), txdata: 0xed88c68e, value: 0x0
+
+

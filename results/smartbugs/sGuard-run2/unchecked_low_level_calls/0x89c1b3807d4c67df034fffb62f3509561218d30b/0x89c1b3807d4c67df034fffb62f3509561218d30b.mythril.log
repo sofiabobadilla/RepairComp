@@ -1,0 +1,176 @@
+==== Integer Arithmetic Bugs ====
+SWC ID: 101
+Severity: High
+Contract: TownCrier
+Function name: upgrade(address)
+PC address: 2035
+Estimated Gas Usage: 26304 - 108916
+The arithmetic operator can underflow.
+It is possible to cause an integer overflow or underflow in the arithmetic operation. 
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:106
+
+-int(newAddr)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: upgrade(address), txdata: 0x0900f01000000000000000000000000001, decoded_data: ('0x0100000000000000000000000000000000000000',), value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: TownCrier
+Function name: request(uint8,address,bytes4,uint256,bytes32[])
+PC address: 5952
+Estimated Gas Usage: 28413 - 147872
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:159
+
+msg.sender.call.value(msg.value)()
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x400000, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: request(uint8,address,bytes4,uint256,bytes32[]), txdata: 0x58487bee, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: TownCrier
+Function name: request(uint8,address,bytes4,uint256,bytes32[])
+PC address: 5979
+Estimated Gas Usage: 28413 - 147872
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:162
+
+externalCallFlag = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x4000, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: request(uint8,address,bytes4,uint256,bytes32[]), txdata: 0x58487bee, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: TownCrier
+Function name: request(uint8,address,bytes4,uint256,bytes32[])
+PC address: 5993
+Estimated Gas Usage: 28413 - 147872
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:162
+
+externalCallFlag = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x4000, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: request(uint8,address,bytes4,uint256,bytes32[]), txdata: 0x58487bee, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: TownCrier
+Function name: request(uint8,address,bytes4,uint256,bytes32[])
+PC address: 7042
+Estimated Gas Usage: 28413 - 147872
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:35
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x4000, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: request(uint8,address,bytes4,uint256,bytes32[]), txdata: 0x58487bee, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: TownCrier
+Function name: request(uint8,address,bytes4,uint256,bytes32[])
+PC address: 7056
+Estimated Gas Usage: 28413 - 147872
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:35
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x4000, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: request(uint8,address,bytes4,uint256,bytes32[]), txdata: 0x58487bee, value: 0x0
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: TownCrier
+Function name: requests(uint256)
+PC address: 7164
+Estimated Gas Usage: 522 - 617
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:82
+
+Request[2**64] public requests
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: requests(uint256), txdata: 0x81d12c5881, decoded_data: (58348357467241364100158816664534141066686828210420440473007923191487475482624,), value: 0x0
+
+

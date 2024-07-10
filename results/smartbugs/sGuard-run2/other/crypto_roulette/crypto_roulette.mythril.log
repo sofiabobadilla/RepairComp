@@ -1,0 +1,179 @@
+==== Dependence on predictable environment variable ====
+SWC ID: 116
+Severity: Low
+Contract: CryptoRoulette
+Function name: constructor
+PC address: 269
+Estimated Gas Usage: 17118 - 78249
+A control flow decision is made based on The block.timestamp environment variable.
+The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+--------------------
+In file: ../results/smartbugs/sGuard/other/crypto_roulette/crypto_roulette.sol:21
+
+assert(c >= a)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: CryptoRoulette
+Function name: gamesPlayed(uint256)
+PC address: 480
+Estimated Gas Usage: 1014 - 1109
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/other/crypto_roulette/crypto_roulette.sol:48
+
+Game[] public gamesPlayed
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: gamesPlayed(uint256), txdata: 0x382cf0a6, value: 0x0
+
+==== Dependence on predictable environment variable ====
+SWC ID: 116
+Severity: Low
+Contract: CryptoRoulette
+Function name: kill()
+PC address: 660
+Estimated Gas Usage: 1937 - 2362
+A control flow decision is made based on The block.timestamp environment variable.
+The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+--------------------
+In file: ../results/smartbugs/sGuard/other/crypto_roulette/crypto_roulette.sol:78
+
+if (msg.sender == ownerAddr && now > add_uint256(lastPlayed, 1 days)) {
+            suicide(msg.sender);
+        }
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: kill(), txdata: 0x41c0e1b5, value: 0x0
+
+==== Transaction Order Dependence ====
+SWC ID: 114
+Severity: Medium
+Contract: CryptoRoulette
+Function name: play(uint256)
+PC address: 1091
+Estimated Gas Usage: 55760 - 272492
+The value of the call is dependent on balance or storage write
+This can lead to race conditions. An attacker may be able to run a transaction after our transaction which can change the value of the call
+--------------------
+In file: ../results/smartbugs/sGuard/other/crypto_roulette/crypto_roulette.sol:70
+
+msg.sender.transfer(this.balance)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x1c10c01420a0001, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: play(uint256), txdata: 0x6898f82b, value: 0x16345785d8a0000
+
+==== Unprotected Ether Withdrawal ====
+SWC ID: 105
+Severity: High
+Contract: CryptoRoulette
+Function name: play(uint256)
+PC address: 1091
+Estimated Gas Usage: 55760 - 272492
+Any sender can withdraw Ether from the contract account.
+Arbitrary senders other than the contract creator can profitably extract Ether from the contract account. Verify the business logic carefully and make sure that appropriate security controls are in place to prevent unexpected loss of funds.
+--------------------
+In file: ../results/smartbugs/sGuard/other/crypto_roulette/crypto_roulette.sol:70
+
+msg.sender.transfer(this.balance)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x403016a0e80404004, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: blockHashAddendsInexpansible(uint256), txdata: 0x00000000, value: 0x0
+Caller: [ATTACKER], function: play(uint256), txdata: 0x6898f82b, value: 0x16345785d8a0000
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: CryptoRoulette
+Function name: kill()
+PC address: 1229
+Estimated Gas Usage: 1895 - 2320
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/other/crypto_roulette/crypto_roulette.sol:78
+
+add_uint256(lastPlayed, 1 days)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: play(uint256), txdata: 0x6898f82b, value: 0x16345785d8a0000
+Caller: [CREATOR], function: kill(), txdata: 0x41c0e1b5, value: 0x0
+
+==== Dependence on predictable environment variable ====
+SWC ID: 116
+Severity: Low
+Contract: CryptoRoulette
+Function name: play(uint256)
+PC address: 1346
+Estimated Gas Usage: 39801 - 196203
+A control flow decision is made based on The block.timestamp environment variable.
+The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+--------------------
+In file: ../results/smartbugs/sGuard/other/crypto_roulette/crypto_roulette.sol:21
+
+assert(c >= a)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: play(uint256), txdata: 0x6898f82b, value: 0x16345785d8a0000
+
+

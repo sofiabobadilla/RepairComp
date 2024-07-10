@@ -1,0 +1,103 @@
+==== Transaction Order Dependence ====
+SWC ID: 114
+Severity: Medium
+Contract: MultiplicatorX3
+Function name: multiplicate(address)
+PC address: 487
+Estimated Gas Usage: 2516 - 36797
+The value of the call is dependent on balance or storage write
+This can lead to race conditions. An attacker may be able to run a transaction after our transaction which can change the value of the call
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x5aa88d2901c68fda244f1d0584400368d2c8e739/0x5aa88d2901c68fda244f1d0584400368d2c8e739.sol:44
+
+adr.transfer(add_uint256(this.balance, msg.value))
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: multiplicate(address), txdata: 0x1ac9f70d, value: 0x0
+
+==== Unprotected Ether Withdrawal ====
+SWC ID: 105
+Severity: High
+Contract: MultiplicatorX3
+Function name: multiplicate(address)
+PC address: 487
+Estimated Gas Usage: 2516 - 36797
+Any sender can withdraw Ether from the contract account.
+Arbitrary senders other than the contract creator can profitably extract Ether from the contract account. Verify the business logic carefully and make sure that appropriate security controls are in place to prevent unexpected loss of funds.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x5aa88d2901c68fda244f1d0584400368d2c8e739/0x5aa88d2901c68fda244f1d0584400368d2c8e739.sol:44
+
+adr.transfer(add_uint256(this.balance, msg.value))
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x10000000000000000, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x2ffffffffffffffff, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: Command(address,bytes), txdata: 0xba21d62a000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef80, value: 0x1
+Caller: [ATTACKER], function: multiplicate(address), txdata: 0x1ac9f70d, value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: MultiplicatorX3
+Function name: Command(address,bytes)
+PC address: 994
+Estimated Gas Usage: 2435 - 40620
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x5aa88d2901c68fda244f1d0584400368d2c8e739/0x5aa88d2901c68fda244f1d0584400368d2c8e739.sol:35
+
+adr.call.value(msg.value)(data)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x20, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: Command(address,bytes), txdata: 0xba21d62a000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef80, value: 0x0
+
+==== Unchecked return value from external call. ====
+SWC ID: 104
+Severity: Medium
+Contract: MultiplicatorX3
+Function name: Command(address,bytes)
+PC address: 994
+Estimated Gas Usage: 2360 - 40357
+The return value of a message call is not checked.
+External calls return a boolean value. If the callee halts with an exception, 'false' is returned and execution continues in the caller. The caller should check whether an exception happened and react accordingly to avoid unexpected behavior. For example it is often desirable to wrap external calls in require() so the transaction is reverted if the call fails.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0x5aa88d2901c68fda244f1d0584400368d2c8e739/0x5aa88d2901c68fda244f1d0584400368d2c8e739.sol:35
+
+adr.call.value(msg.value)(data)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: Command(address,bytes), txdata: 0xba21d62a000000000000000000000000000000000000000000000000000000000000001e, value: 0x0
+Caller: [CREATOR], function: Command(address,bytes), txdata: 0xba21d62a000000000000000000000000000000000000000000000000000000000000001e, value: 0x0
+
+

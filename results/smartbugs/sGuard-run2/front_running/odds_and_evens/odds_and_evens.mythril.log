@@ -1,0 +1,156 @@
+==== Unchecked return value from external call. ====
+SWC ID: 104
+Severity: Medium
+Contract: OddsAndEvens
+Function name: getProfit()
+PC address: 428
+Estimated Gas Usage: 2505 - 37116
+The return value of a message call is not checked.
+External calls return a boolean value. If the callee halts with an exception, 'false' is returned and execution continues in the caller. The caller should check whether an exception happened and react accordingly to avoid unexpected behavior. For example it is often desirable to wrap external calls in require() so the transaction is reverted if the call fails.
+--------------------
+In file: ../results/smartbugs/sGuard/front_running/odds_and_evens/odds_and_evens.sol:73
+
+msg.sender.send(this.balance)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: play(uint256), txdata: 0x6898f82b, value: 0xde0b6b3a7640000
+Caller: [CREATOR], function: getProfit(), txdata: 0x679dffb4, value: 0x0
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: OddsAndEvens
+Function name: players(uint256)
+PC address: 808
+Estimated Gas Usage: 258 - 353
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/front_running/odds_and_evens/odds_and_evens.sol:39
+
+Player[2] public players
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: players(uint256), txdata: 0xf71d96cb40, decoded_data: (28948022309329048855892746252171976963317496166410141009864396001978282409984,), value: 0x0
+
+==== Unchecked return value from external call. ====
+SWC ID: 104
+Severity: Medium
+Contract: OddsAndEvens
+Function name: play(uint256)
+PC address: 1095
+Estimated Gas Usage: 63585 - 302390
+The return value of a message call is not checked.
+External calls return a boolean value. If the callee halts with an exception, 'false' is returned and execution continues in the caller. The caller should check whether an exception happened and react accordingly to avoid unexpected behavior. For example it is often desirable to wrap external calls in require() so the transaction is reverted if the call fails.
+--------------------
+In file: ../results/smartbugs/sGuard/front_running/odds_and_evens/odds_and_evens.sol:61
+
+players[0].addr.send(1800 finney)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2000000000e80001, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x3880000, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: play(uint256), txdata: 0x6898f82b, value: 0xde0b6b3a7640000
+Caller: [CREATOR], function: play(uint256), txdata: 0x6898f82b, value: 0xde0b6b3a7640000
+
+==== Unchecked return value from external call. ====
+SWC ID: 104
+Severity: Medium
+Contract: OddsAndEvens
+Function name: play(uint256)
+PC address: 1217
+Estimated Gas Usage: 63575 - 302380
+The return value of a message call is not checked.
+External calls return a boolean value. If the callee halts with an exception, 'false' is returned and execution continues in the caller. The caller should check whether an exception happened and react accordingly to avoid unexpected behavior. For example it is often desirable to wrap external calls in require() so the transaction is reverted if the call fails.
+--------------------
+In file: ../results/smartbugs/sGuard/front_running/odds_and_evens/odds_and_evens.sol:64
+
+players[1].addr.send(1800 finney)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x4de800b400040008, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: play(uint256), txdata: 0x6898f82b, value: 0xde0b6b3a7640000
+Caller: [SOMEGUY], function: play(uint256), txdata: 0x6898f82b1000211453044a00000830000100161904c3d88741201518432d1058007701a5, decoded_data: (7237233882903324272054594877284755877502700253200273745579675311762570674597,), value: 0xde0b6b3a7640000
+
+==== Unprotected Ether Withdrawal ====
+SWC ID: 105
+Severity: High
+Contract: OddsAndEvens
+Function name: play(uint256)
+PC address: 1217
+Estimated Gas Usage: 63575 - 302380
+Any sender can withdraw Ether from the contract account.
+Arbitrary senders other than the contract creator can profitably extract Ether from the contract account. Verify the business logic carefully and make sure that appropriate security controls are in place to prevent unexpected loss of funds.
+--------------------
+In file: ../results/smartbugs/sGuard/front_running/odds_and_evens/odds_and_evens.sol:64
+
+players[1].addr.send(1800 finney)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x12a4b2b208100000, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x40020000002004040, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: play(uint256), txdata: 0x6898f82b, value: 0xde0b6b3a7640000
+Caller: [ATTACKER], function: play(uint256), txdata: 0x6898f82b8a240324001245c310198481401012380500000004181280904c08115501f1d7, decoded_data: (62482801274627420694160728385181203271169337098492435112984356531177657594327,), value: 0xde0b6b3a7640000
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: OddsAndEvens
+Function name: play(uint256)
+PC address: 1290
+Estimated Gas Usage: 28272 - 111241
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/front_running/odds_and_evens/odds_and_evens.sol:59
+
+add_uint256(players[0].number, players[1].number)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x1092092b3801c0008, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: play(uint256), txdata: 0x6898f82bf9, decoded_data: (112625899297233330704957715887356597872907133522439454866503665695196755001344,), value: 0xde0b6b3a7640000
+Caller: [SOMEGUY], function: play(uint256), txdata: 0x6898f82b11, decoded_data: (7689318425915528602346510723233181380881209919202693705745230188025481265152,), value: 0xde0b6b3a7640000
+
+

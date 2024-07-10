@@ -1,0 +1,126 @@
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: ModifierEntrancy
+Function name: airDrop()
+PC address: 425
+Estimated Gas Usage: 21700 - 119183
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/modifier_reentrancy/modifier_reentrancy.sol:38
+
+Bank(msg.sender).supportsToken()
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: airDrop(), txdata: 0xca5d0880, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: ModifierEntrancy
+Function name: airDrop()
+PC address: 730
+Estimated Gas Usage: 21700 - 119183
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/modifier_reentrancy/modifier_reentrancy.sol:33
+
+tokenBalance[msg.sender]
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: airDrop(), txdata: 0xca5d0880, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: ModifierEntrancy
+Function name: airDrop()
+PC address: 803
+Estimated Gas Usage: 21700 - 119183
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/modifier_reentrancy/modifier_reentrancy.sol:33
+
+tokenBalance[msg.sender] = add_uint256(tokenBalance[msg.sender], 20)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: airDrop(), txdata: 0xca5d0880, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: ModifierEntrancy
+Function name: airDrop()
+PC address: 815
+Estimated Gas Usage: 21700 - 119183
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/modifier_reentrancy/modifier_reentrancy.sol:16
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: airDrop(), txdata: 0xca5d0880, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: ModifierEntrancy
+Function name: airDrop()
+PC address: 829
+Estimated Gas Usage: 21700 - 119183
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/modifier_reentrancy/modifier_reentrancy.sol:16
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: airDrop(), txdata: 0xca5d0880, value: 0x0
+
+

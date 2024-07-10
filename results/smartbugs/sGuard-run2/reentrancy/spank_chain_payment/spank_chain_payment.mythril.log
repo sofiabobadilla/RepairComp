@@ -1,0 +1,222 @@
+==== Dependence on predictable environment variable ====
+SWC ID: 116
+Severity: Low
+Contract: LedgerChannel
+Function name: LCOpenTimeout(bytes32)
+PC address: 3714
+Estimated Gas Usage: 3102 - 4427
+A control flow decision is made based on The block.timestamp environment variable.
+The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/spank_chain_payment/spank_chain_payment.sol:439
+
+require(now > Channels[_lcID].LCopenTimeout)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x180000000021402, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x10000, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010, value: 0x0
+Caller: [ATTACKER], function: LCOpenTimeout(bytes32), txdata: 0x002e1d7e, value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: LedgerChannel
+Function name: createChannel(bytes32,address,uint256,address,uint256[2])
+PC address: 12849
+Estimated Gas Usage: 61876 - 304990
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/spank_chain_payment/spank_chain_payment.sol:423
+
+Channels[_lcID].token.transferFrom(msg.sender, this, _balances[1])
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x20081, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef000000000000000000000000000000000000000000000000000000000000000104, decoded_data: ('0000000000000000000000000000000000000000000000000000000000000000', '0x0101010101010101010101010101010101010101', 0, '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef', [1, 1809251394333065553493296640760748560207343510400633813116524750123642650624]), value: 0x1
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: LedgerChannel
+Function name: createChannel(bytes32,address,uint256,address,uint256[2])
+PC address: 13127
+Estimated Gas Usage: 61876 - 304990
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/spank_chain_payment/spank_chain_payment.sol:424
+
+Channels[_lcID].erc20Balances[0] = _balances[1]
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x401, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x48000000004613804, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef000000000000000000000000000000000000000000000000000000000000000101, decoded_data: ('0000000000000000000000000000000000000000000000000000000000000000', '0x0101010101010101010101010101010101010101', 0, '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef', [1, 452312848583266388373324160190187140051835877600158453279131187530910662656]), value: 0x1
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: LedgerChannel
+Function name: createChannel(bytes32,address,uint256,address,uint256[2])
+PC address: 13164
+Estimated Gas Usage: 61876 - 304990
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/spank_chain_payment/spank_chain_payment.sol:427
+
+Channels[_lcID].sequence = 0
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x401, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x48000000004613804, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef000000000000000000000000000000000000000000000000000000000000000101, decoded_data: ('0000000000000000000000000000000000000000000000000000000000000000', '0x0101010101010101010101010101010101010101', 0, '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef', [1, 452312848583266388373324160190187140051835877600158453279131187530910662656]), value: 0x1
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: LedgerChannel
+Function name: createChannel(bytes32,address,uint256,address,uint256[2])
+PC address: 13199
+Estimated Gas Usage: 61876 - 304990
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/spank_chain_payment/spank_chain_payment.sol:428
+
+Channels[_lcID].confirmTime = _confirmTime
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x401, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x48000000004613804, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef000000000000000000000000000000000000000000000000000000000000000101, decoded_data: ('0000000000000000000000000000000000000000000000000000000000000000', '0x0101010101010101010101010101010101010101', 0, '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef', [1, 452312848583266388373324160190187140051835877600158453279131187530910662656]), value: 0x1
+
+==== Integer Arithmetic Bugs ====
+SWC ID: 101
+Severity: High
+Contract: LedgerChannel
+Function name: createChannel(bytes32,address,uint256,address,uint256[2])
+PC address: 13203
+Estimated Gas Usage: 56652 - 279483
+The arithmetic operator can overflow.
+It is possible to cause an integer overflow or underflow in the arithmetic operation. 
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/spank_chain_payment/spank_chain_payment.sol:431
+
+now + _confirmTime
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101012c208000200000040000010020200000400000040100088004010100200202400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001, decoded_data: ('0000000000000000000000000000000000000000000000000000000000000000', '0x0101010101010101010101010101010101010101', 19959187870639011937639957507350299440574716864997501991163556912484086579776, '0x0000000000000000000000000000000000000000', [0, 452312848583266388373324160190187140051835877600158453279131187530910662656]), value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: LedgerChannel
+Function name: createChannel(bytes32,address,uint256,address,uint256[2])
+PC address: 13236
+Estimated Gas Usage: 61876 - 304990
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/spank_chain_payment/spank_chain_payment.sol:431
+
+Channels[_lcID].LCopenTimeout = now + _confirmTime
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x401, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x48000000004613804, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef000000000000000000000000000000000000000000000000000000000000000101, decoded_data: ('0000000000000000000000000000000000000000000000000000000000000000', '0x0101010101010101010101010101010101010101', 0, '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef', [1, 452312848583266388373324160190187140051835877600158453279131187530910662656]), value: 0x1
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: LedgerChannel
+Function name: createChannel(bytes32,address,uint256,address,uint256[2])
+PC address: 13439
+Estimated Gas Usage: 61876 - 304990
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/spank_chain_payment/spank_chain_payment.sol:434
+
+Channels[_lcID].LCopenTimeout
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x401, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x48000000004613804, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef000000000000000000000000000000000000000000000000000000000000000101, decoded_data: ('0000000000000000000000000000000000000000000000000000000000000000', '0x0101010101010101010101010101010101010101', 0, '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef', [1, 452312848583266388373324160190187140051835877600158453279131187530910662656]), value: 0x1
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Low
+Contract: LedgerChannel
+Function name: createChannel(bytes32,address,uint256,address,uint256[2])
+PC address: 29667
+Estimated Gas Usage: 61876 - 304990
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state. This issue is reported for internal compiler generated code.
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x401, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x48000000004613804, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: createChannel(bytes32,address,uint256,address,uint256[2]), txdata: 0xaeba142c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef000000000000000000000000000000000000000000000000000000000000000101, decoded_data: ('0000000000000000000000000000000000000000000000000000000000000000', '0x0101010101010101010101010101010101010101', 0, '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef', [1, 452312848583266388373324160190187140051835877600158453279131187530910662656]), value: 0x1
+
+

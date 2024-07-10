@@ -1,0 +1,303 @@
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 854
+Estimated Gas Usage: 23155 - 154082
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:74
+
+msg.sender.call.value(_am)()
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 930
+Estimated Gas Usage: 23155 - 154082
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:76
+
+balances[msg.sender]
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 1002
+Estimated Gas Usage: 23155 - 154082
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:76
+
+balances[msg.sender] = sub_uint256(balances[msg.sender], _am)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 1009
+Estimated Gas Usage: 23155 - 154082
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:77
+
+TransferLog
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 1260
+Estimated Gas Usage: 23155 - 154082
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:77
+
+TransferLog.AddMessage(msg.sender,_am,"CashOut")
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: setLog(address), txdata: 0x4797f21b000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: ('0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef',), value: 0x0
+Caller: [ATTACKER], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== Multiple Calls in a Single Transaction ====
+SWC ID: 113
+Severity: Low
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 1260
+Estimated Gas Usage: 23155 - 154082
+Multiple calls are executed in the same transaction.
+This call is executed following another call within the same transaction. It is possible that the call never gets executed if a prior call fails permanently. This might be caused intentionally by a malicious callee. If possible, refactor the code such that each transaction only executes one external call or make sure that all callees can be trusted (i.e. they’re part of your own codebase).
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:77
+
+TransferLog.AddMessage(msg.sender,_am,"CashOut")
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 1260
+Estimated Gas Usage: 23155 - 154082
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:77
+
+TransferLog.AddMessage(msg.sender,_am,"CashOut")
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 1294
+Estimated Gas Usage: 23155 - 154082
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:15
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PrivateDeposit
+Function name: CashOut(uint256)
+PC address: 1308
+Estimated Gas Usage: 23155 - 154082
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:15
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: CashOut(uint256), txdata: 0x9ffa0711, value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: PrivateDeposit
+Function name: Deposit()
+PC address: 1773
+Estimated Gas Usage: 22244 - 118795
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:65
+
+TransferLog.AddMessage(msg.sender,msg.value,"Deposit")
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: setLog(address), txdata: 0x4797f21b000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: ('0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef',), value: 0x0
+Caller: [SOMEGUY], function: Deposit(), txdata: 0xed21248c, value: 0xde0b6b3a7640000
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Low
+Contract: PrivateDeposit
+Function name: Deposit()
+PC address: 1806
+Estimated Gas Usage: 22244 - 118795
+Read of persistent state following external call
+The contract account state is accessed after an external call to a fixed address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:15
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: Deposit(), txdata: 0xed21248c, value: 0xde0b6b3a7640000
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Low
+Contract: PrivateDeposit
+Function name: Deposit()
+PC address: 1820
+Estimated Gas Usage: 22244 - 118795
+Write to persistent state following external call
+The contract account state is accessed after an external call to a fixed address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:15
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: Deposit(), txdata: 0xed21248c, value: 0xde0b6b3a7640000
+
+

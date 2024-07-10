@@ -1,0 +1,126 @@
+==== Dependence on predictable environment variable ====
+SWC ID: 116
+Severity: Low
+Contract: X_WALLET
+Function name: fallback
+PC address: 460
+Estimated Gas Usage: 12822 - 53767
+A control flow decision is made based on The block.timestamp environment variable.
+The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol:39
+
+_unlockTime>now?_unlockTime:now
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x80400002505b5d6e, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: unknown, txdata: 0x, decoded_data: , value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: X_WALLET
+Function name: fallback
+PC address: 733
+Estimated Gas Usage: 26365 - 142726
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol:40
+
+LogFile.AddMessage(msg.sender,msg.value,"Put")
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x202c06c00006de3c1, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: f3f3f3f3f3f3f3f3f3f3f3f3deadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: , value: 0x0
+Caller: [CREATOR], function: blockHashAddendsInexpansible(uint256), txdata: 0x00000000, value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: X_WALLET
+Function name: Put(uint256)
+PC address: 733
+Estimated Gas Usage: 26374 - 142735
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol:40
+
+LogFile.AddMessage(msg.sender,msg.value,"Put")
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: f3f3f3f3f3f3f3f3f3f3f3f3deadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: Put(uint256), txdata: 0x65f3c31a, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: X_WALLET
+Function name: fallback
+PC address: 765
+Estimated Gas Usage: 26254 - 142615
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol:15
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x20140880000000000, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: 000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: , value: 0x0
+Caller: [CREATOR], function: unknown, txdata: 0x, decoded_data: , value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: X_WALLET
+Function name: fallback
+PC address: 779
+Estimated Gas Usage: 26254 - 142615
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol:15
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x20140880000000000, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: 000000000000000000000000deadbeefdeadbeefdeadbeefdeadbeefdeadbeef, decoded_data: , value: 0x0
+Caller: [CREATOR], function: unknown, txdata: 0x, decoded_data: , value: 0x0
+
+
