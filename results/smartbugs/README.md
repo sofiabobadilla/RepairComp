@@ -81,6 +81,9 @@ find SmartShield/ -name "*.bin" | wc
 This table collects the information per contract in the dataset. For tools that generate multiple patches(SolGPT &TIPS) we count if at least 1 patch fulfills the category.
 - Total contracts in the repository: 143
 - 1 duplicate (0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol)
+- Valid Patches are the amount of contracts per tool that have a different patch and compile
+- Detected means. amount of original files per tool labeled with a (or more) vulnerability from the corresponding dataset label.
+- Fixed means that the number of original contracts per tool that have patches where the corresponding vulnerabilities number was reduced
 
 
 | Tool                  | #generation | compilable | #diff patches | valid patches (Comp&Diff) | Detected | Fixed |
