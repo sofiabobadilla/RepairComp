@@ -77,19 +77,20 @@ find SmartShield/ -name "*.bin" | wc
 
 
 
-# Per Contract Overview
+# Per Contract Overview (Updated on 11th July)
 This table collects the information per contract in the dataset. For tools that generate multiple patches(SolGPT &TIPS) we count if at least 1 patch fulfills the category.
-total contracts in the repository: 143
-1 duplicate ()
+- Total contracts in the repository: 143
+- 1 duplicate (0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol)
 
-| Tool                  | #generation | compilable | #diff patches | valid patches (Comp&Diff) |
-|-----------------------|----------|---------------|------------|------------------|
-| Elysium (binary)      |      126 |            N/A|         101|               101|  
-| sGuard                |      109 |            108|          62|                61| 
-| sGuardPlus            |       81 |             81|          81|                81| 
-| SmartFix              |       86 |             86|          86|                86| 
-| Smartshield (binary)  |      134 |            N/A|         131|               131|  
-| SolGPT                |      139 |            138|         139|               138| 
-| TIPS                  |      140 |            138|         140|               138| 
+
+| Tool                  | #generation | compilable | #diff patches | valid patches (Comp&Diff) | Detected | Fixed |
+|-----------------------|----------|---------------|------------|------------------|----------|-------|
+| Elysium (binary)      |      126 |            N/A|         101|               101|        53 |    53 |
+| sGuard                |      109 |            108|          62|                61|        35 |     3 |
+| sGuardPlus            |       81 |             81|          81|                81|        70 |    70 |
+| SmartFix              |       86 |             86|          86|                86|        51 |    50 |
+| Smartshield (binary)  |      134 |            N/A|         131|               131|        60 |    40 |
+| SolGPT                |      139 |            138|         139|               138|        97 |    89 |
+| TIPS                  |      140 |            138|         140|               138|        82 |    81 |
 
 
