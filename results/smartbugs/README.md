@@ -97,3 +97,14 @@ This table collects the information per contract in the dataset. For tools that 
 | TIPS                  |      140 |            138|         140|               138|        82 |    81 |
 
 
+# Mitigated exploits per contract
+Number of exploits: 91
+| Tool                    | #Exploits mitigated |
+|-------------------------|---------------------|
+| Elysium (binary)        | -                   |  
+| Smartshiled (binary)    | -                   |
+| sGuard                  | 31                  |
+| sGuardPlus              | 43                  |
+| SmartFix                | 37                  |
+| SolGPT                  | 74                  |
+| TIPS                    | 46                  |
