@@ -102,7 +102,7 @@ Number of exploits: 91
 | Tool                    | #Exploits mitigated |
 |-------------------------|---------------------|
 | Elysium (binary)        | -                   |  
-| Smartshiled (binary)    | -                   |
+| Smartshiled (binary)    | 63                  |
 | sGuard                  | 31                  |
 | sGuardPlus              | 43                  |
 | SmartFix                | 37                  |
