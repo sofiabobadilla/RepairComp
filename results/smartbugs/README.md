@@ -103,7 +103,7 @@ Number of mitigated exploits directly corresponds to "vulnerability-free" contra
 Number of exploits: 91
 | Tool                    | #Exploits mitigated |
 |-------------------------|---------------------|
-| Elysium (binary)        | -                   |  
+| Elysium (binary)        | 50                  |  
 | Smartshiled (binary)    | 47                  |
 | sGuard                  | 31                  |
 | sGuardPlus              | 43                  |
