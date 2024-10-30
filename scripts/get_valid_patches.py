@@ -22,9 +22,12 @@ def get_valid_patches_bin(diff, returncodes):
         # skip the header
         next(reader)
         for row in reader:
-            elms = row[0].split('/')[2:]
-            source = os.path.join(*elms).replace('.sol', '.bin')
+            elms = row[0].split('/')[-2:]
+            source = os.path.join(elms[0], elms[-1].replace('.sol', '.bin'))
+            print(source)
+            # source = os.path.join(*elms).replace('.sol', '.bin')
             for patch, path in diff_patches:
+                # print(patch)
                 if source == patch:
                     valid.append([path, row[1]])
                     break

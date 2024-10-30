@@ -89,10 +89,10 @@ This table collects the information per contract in the dataset. For tools that 
 | Tool                  | #generation | compilable | #diff patches | valid patches (Comp&Diff) | Detected | Fixed |
 |-----------------------|----------|---------------|------------|------------------|----------|-------|
 | Elysium (binary)      |      126 |            N/A|         101|               101|        53 |    53 |
+| Smartshield (binary)  |      134 |            N/A|         131|               131|        60 |    40 |
 | sGuard                |      109 |            108|          62|                61|        35 |     3 |
 | sGuardPlus            |       81 |             81|          81|                81|        70 |    70 |
 | SmartFix              |       86 |             86|          86|                86|        51 |    50 |
-| Smartshield (binary)  |      134 |            N/A|         131|               131|        60 |    40 |
 | SolGPT                |      139 |            138|         139|               138|        97 |    89 |
 | TIPS                  |      140 |            138|         140|               138|        82 |    81 |
 
@@ -103,10 +103,10 @@ Number of mitigated exploits directly corresponds to "vulnerability-free" contra
 Number of exploits: 91
 | Tool                    | #Exploits mitigated |
 |-------------------------|---------------------|
-| Elysium (binary)        | 50                  |  
-| Smartshiled (binary)    | 47                  |
+| Elysium (binary)        | 42                  | failed 14 sanity checks  
+| Smartshiled (binary)    | 29                  | failed 35 sanity checks
 | sGuard                  | 31                  |
 | sGuardPlus              | 43                  |
 | SmartFix                | 37                  |
-| SolGPT                  | 74                  |
+| SolGPT                  | 70                  | TypeErrors 17
 | TIPS                    | 46                  |
