@@ -104,9 +104,9 @@ Number of exploits: 92
 | Tool                    | #Exploits mitigated | #Failed sanity checks |
 |-------------------------|---------------------|-----------------------|
 | Elysium (binary)        | 32                  | 26                    |  
-| Smartshiled (binary)    | 13                  | 53                    |
+| Smartshiled (binary)    | 12                  | 53                    |
 | sGuard                  | 31                  |  0                    |
 | sGuardPlus              | 44                  |  0                    |
 | SmartFix                | 36                  |  3                    |
-| SolGPT                  | 68                  | 25                    |
+| SolGPT                  | 67                  | 25                    |
 | TIPS                    | 46                  |  5                    |
