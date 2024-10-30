@@ -101,12 +101,12 @@ This table collects the information per contract in the dataset. For tools that 
 Number of mitigated exploits directly corresponds to "vulnerability-free" contract.
 
 Number of exploits: 91
-| Tool                    | #Exploits mitigated |
-|-------------------------|---------------------|
-| Elysium (binary)        | 42                  | failed 14 sanity checks  
-| Smartshiled (binary)    | 29                  | failed 35 sanity checks
-| sGuard                  | 31                  |
-| sGuardPlus              | 43                  |
-| SmartFix                | 37                  |
-| SolGPT                  | 70                  | TypeErrors 17
-| TIPS                    | 46                  |
+| Tool                    | #Exploits mitigated | #Failed sanity checks |
+|-------------------------|---------------------|-----------------------|
+| Elysium (binary)        | 32                  | 26                    |  
+| Smartshiled (binary)    | 13                  | 53                    |
+| sGuard                  | 31                  |  0                    |
+| sGuardPlus              | 44                  |  0                    |
+| SmartFix                | 36                  |  3                    |
+| SolGPT                  | 68                  | 25                    |
+| TIPS                    | 46                  |  5                    |
