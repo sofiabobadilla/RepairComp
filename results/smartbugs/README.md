@@ -100,7 +100,7 @@ This table collects the information per contract in the dataset. For tools that 
 # Mitigated exploits
 Number of mitigated exploits directly corresponds to "vulnerability-free" contract.
 
-Number of exploits: 92
+Number of exploits: 91
 | Tool                    | #Exploits mitigated | #Failed sanity checks |
 |-------------------------|---------------------|-----------------------|
 | Elysium (binary)        | 32                  | 26                    |  
