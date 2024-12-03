@@ -103,10 +103,10 @@ Number of mitigated exploits directly corresponds to "vulnerability-free" contra
 Number of exploits: 91
 | Tool                    | #Exploits mitigated | #Failed sanity checks |
 |-------------------------|---------------------|-----------------------|
-| Elysium (binary)        | 32                  | 26                    |  
-| Smartshiled (binary)    | 12                  | 53                    |
-| sGuard                  | 31                  |  0                    |
-| sGuardPlus              | 44                  |  0                    |
-| SmartFix                | 49                  |  2                    |
-| SolGPT                  | 68                  |  9                    |
-| TIPS                    | 46                  |  3                    |
+| sGuard                  | 31                  | 0                     |
+| sGuardPlus              | 44                  | 0                     |
+| SmartFix                | 49                  | 2                     |
+| SolGPT                  | 68                  | 6                     |
+| TIPS                    | 46                  | 1                     |
+| Elysium (binary)        | 32                  | 26                    |
+| SmartShield (binary)    | 12                  | 53                    |
