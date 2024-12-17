@@ -27,8 +27,8 @@ The directory structure of the project is as follows:
 ## Execution of the APR tools
 |Tool\Return code                    |0 (success)|1 (errors)|timeout (4hr)|134(heap out of memory)|139 (segfault: core dump)|251 (compilation)|253|Notes                                                             |
 |------------------------------------|-----------|----------|---------------|-----------------------|-------------------------|-----------------|---|------------------------------------------------------------------|
-|[Elysium](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/Elysium/return_codes.csv)  (binary)                           |126        |15        |0              |0                      |0                        |1                |1  |1: run_oyente breaks, only mythril is used for these cases in eval|
-|[Smartshield](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SmartShield/return_codes.csv)   (binary)                       |134        |9         |0              |0                      |0                        |0                |0  |1: code errors                                                    |
+|[Elysium](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/Elysium/return_codes.csv)  (binary)                           |121        |20        |1              |0                      |0                        |1                |0  |1: run_oyente breaks, only mythril is used for these cases in eval|
+|[Smartshield](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SmartShield/return_codes.csv)   (binary)                       |135        |6         |2              |0                      |0                        |0                |0  |1: code errors                                                    |
 |[sGuard](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/sGuard/return_codes.csv)                              |132        |1         |2              |8                      |0                        |0                |0  |                                                                  |
 |[sGuardPlus](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/sGuardPlus/return_codes.csv)                          |111        |33        |0              |0                      |0                        |0                |0  |Exceptions in revert2src.js                                       |
 |[SmartFix](https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SmartFix/return_codes.csv)                            |135        |8         |0              |0                      |0                        |0                |0  |                                                                  |
@@ -40,8 +40,8 @@ The directory structure of the project is as follows:
 | Tool                  | contract files w/ vuln | total vulnerabilities | 
 |-----------------------|------------------------|-----------------------|
 | **Smartbugs-curated** |                    143 |                   207 |
-| Elysium (binary)      |                    102 |                   217 |
-| Smartshield (binary)  |                     72 |                   121 |
+| Elysium (binary)      |                     96 |                   208 |
+| Smartshield (binary)  |                     74 |                   126 |
 | sGuard                |                     62 |                   428 |
 | sGuardPlus            |                    112 |                   195 |
 | SmartFix              |                     89 |                   476 |
@@ -66,8 +66,8 @@ find SmartShield/ -name "*.bin" | wc
 
 | Tool                  | #outputs | #diff patches | compilable | patches w/o bugs | patches w/ bugs | paches w/ new bugs (detector+manual check) | og contracts w/o bugs |
 |-----------------------|----------|---------------|------------|------------------|-----------------|--------------------|-----------------------|
-| Elysium (binary)      |      126 |            101|           -|                98|                3|                  2+|                     98|
-| Smartshield (binary)  |      134 |            131|           -|               108|               23|                    |                    108|
+| Elysium (binary)      |      121 |            95 |           -|                  |                 |                    |                     26|
+| Smartshield (binary)  |      135 |            135|           -|                  |                 |                    |                     68|
 | sGuard                |      109 |             62|         108|                 2|               56|                    |                      2|
 | sGuardPlus            |       81 |             81|          81|                71|               10|                  10|                     71|
 | SmartFix              |       86 |             86|          86|                66|               20|                   1|                     66|
@@ -77,7 +77,7 @@ find SmartShield/ -name "*.bin" | wc
 
 
 
-# Per Contract Overview (Updated on 11th July)
+# Per Contract Overview (Updated on 17th December)
 This table collects the information per contract in the dataset. For tools that generate multiple patches(SolGPT &TIPS) we count if at least 1 patch fulfills the category.
 - Total contracts in the repository: 143
 - 1 duplicate (0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol)
@@ -87,14 +87,14 @@ This table collects the information per contract in the dataset. For tools that 
 
 
 | Tool                  | #generation | compilable | #diff patches | valid patches (Comp&Diff) | Detected | Fixed |
-|-----------------------|----------|---------------|------------|------------------|----------|-------|
-| Elysium (binary)      |      126 |            N/A|         101|               101|        53 |    53 |
-| Smartshield (binary)  |      134 |            N/A|         131|               131|        60 |    40 |
-| sGuard                |      109 |            108|          62|                61|        35 |     3 |
-| sGuardPlus            |       81 |             81|          81|                81|        70 |    70 |
-| SmartFix              |       86 |             86|          86|                86|        51 |    50 |
-| SolGPT                |      139 |            138|         139|               138|        97 |    89 |
-| TIPS                  |      140 |            138|         140|               138|        82 |    81 |
+|-----------------------|-------------|------------|---------------|---------------------------|----------|-------|
+| Elysium (binary)      |         121 |         N/A|             95|                         95|       52 |    52 |
+| Smartshield (binary)  |         135 |         N/A|            135|                        135|       59 |    59 |
+| sGuard                |         109 |         108|             62|                         61|       35 |     3 |
+| sGuardPlus            |          81 |          81|             81|                         81|       70 |    70 |
+| SmartFix              |          86 |          86|             86|                         86|       51 |    50 |
+| SolGPT                |         139 |         138|            139|                        138|       97 |    89 |
+| TIPS                  |         140 |         138|            140|                        138|       82 |    81 |
 
 
 # Mitigated exploits
