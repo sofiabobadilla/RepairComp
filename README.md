@@ -16,4 +16,4 @@ Datasets:
 - [Smartbugs-curated](https://github.com/ASSERT-KTH/smartbugs-curated)
 
 Custom tool and dataset:
-- [solidity-hack-labs](https://github.com/ASSERT-KTH/solidity-hack-labs)
+- [sb-heists](https://github.com/ASSERT-KTH/sb-heists)
