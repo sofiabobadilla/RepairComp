@@ -1,17 +1,17 @@
 --- https://github.com/smartbugs/smartbugs-curated/tree/main/dataset/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol
 +++ https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SolGPT/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106/0x4e73b32ed6c35f570686b89848e5f39f20ecc106_3round.sol
-@@ -1,23 +1,32 @@
-+/*
+@@ -1,32 +1,23 @@
+-/*
 
-+ * @source: etherscan.io
+- * @source: etherscan.io
 
-+ * @author: -
+- * @author: -
 
-+ * @vulnerable_at_lines: 54
+- * @vulnerable_at_lines: 54
 
-+ */
+- */
 
-+
+-
 
  pragma solidity ^0.4.19;
 
@@ -21,27 +21,27 @@
 
      mapping(address => uint256) public balances;
 
-+
+-
 
      uint public MinSum;
 
-+
+-
 
      LogFile Log;
 
--    bool initialized;
+-
 
-+
+-    bool intitalized;
 
-+    bool intitalized;
++    bool initialized;
 
  
 
      function SetMinSum(uint _val) public {
 
--        require(!initialized);
+-        require(!intitalized);
 
-+        require(!intitalized);
++        require(!initialized);
 
          MinSum = _val;
 
@@ -51,9 +51,9 @@
 
      function SetLogFile(address _log) public {
 
--        require(!initialized);
+-        require(!intitalized);
 
-+        require(!intitalized);
++        require(!initialized);
 
          Log = LogFile(_log);
 
@@ -63,9 +63,9 @@
 
      function Initialized() public {
 
--        initialized = true;
+-        intitalized = true;
 
-+        intitalized = true;
++        initialized = true;
 
      }
 
@@ -73,42 +73,42 @@
 
      function Deposit() public payable {
 
-@@ -25,13 +34,14 @@
+@@ -34,14 +25,13 @@
          Log.AddMessage(msg.sender, msg.value, "Put");
 
      }
 
  
 
--    function Collect(uint _am) public {
+-    function Collect(uint _am) public payable {
 
--        require(balances[msg.sender] >= MinSum && balances[msg.sender] >= _am);
+-        if (balances[msg.sender] >= MinSum && balances[msg.sender] >= _am) {
 
--
+-            // <yes> <report> REENTRANCY
 
--        balances[msg.sender] -= _am;
+-            if (msg.sender.call.value(_am)()) {
 
--        Log.AddMessage(msg.sender, _am, "Collect");
+-                balances[msg.sender] -= _am;
 
--
+-                Log.AddMessage(msg.sender, _am, "Collect");
 
--        require(msg.sender.call.value(_am)());
+-            }
 
-+    function Collect(uint _am) public payable {
+-        }
 
-+        if (balances[msg.sender] >= MinSum && balances[msg.sender] >= _am) {
++    function Collect(uint _am) public {
 
-+            // <yes> <report> REENTRANCY
++        require(balances[msg.sender] >= MinSum && balances[msg.sender] >= _am);
 
-+            if (msg.sender.call.value(_am)()) {
++
 
-+                balances[msg.sender] -= _am;
++        balances[msg.sender] -= _am;
 
-+                Log.AddMessage(msg.sender, _am, "Collect");
++        Log.AddMessage(msg.sender, _am, "Collect");
 
-+            }
++
 
-+        }
++        require(msg.sender.call.value(_am)());
 
      }
 
@@ -116,40 +116,40 @@
 
      function() public payable {
 
-@@ -49,12 +59,13 @@
+@@ -59,13 +49,12 @@
  
 
      Message[] public History;
 
  
 
-+    Message LastMsg;
+-    Message LastMsg;
 
-+
+-
 
      function AddMessage(address _adr, uint _val, string _data) public {
 
--        Message memory newMessage;
+-        LastMsg.Sender = _adr;
 
--        newMessage.Sender = _adr;
+-        LastMsg.Time = now;
 
--        newMessage.Time = now;
+-        LastMsg.Val = _val;
 
--        newMessage.Val = _val;
+-        LastMsg.Data = _data;
 
--        newMessage.Data = _data;
+-        History.push(LastMsg);
 
--        History.push(newMessage);
++        Message memory newMessage;
 
-+        LastMsg.Sender = _adr;
++        newMessage.Sender = _adr;
 
-+        LastMsg.Time = now;
++        newMessage.Time = now;
 
-+        LastMsg.Val = _val;
++        newMessage.Val = _val;
 
-+        LastMsg.Data = _data;
++        newMessage.Data = _data;
 
-+        History.push(LastMsg);
++        History.push(newMessage);
 
      }
 

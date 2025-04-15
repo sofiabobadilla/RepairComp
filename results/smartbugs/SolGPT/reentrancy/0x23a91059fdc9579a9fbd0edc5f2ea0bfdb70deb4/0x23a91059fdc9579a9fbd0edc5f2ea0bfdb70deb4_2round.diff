@@ -1,17 +1,17 @@
 --- https://github.com/smartbugs/smartbugs-curated/tree/main/dataset/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol
 +++ https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SolGPT/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4_2round.sol
-@@ -1,3 +1,9 @@
-+/*
+@@ -1,9 +1,3 @@
+-/*
 
-+ * @source: etherscan.io
+- * @source: etherscan.io
 
-+ * @author: -
+- * @author: -
 
-+ * @vulnerable_at_lines: 38
+- * @vulnerable_at_lines: 38
 
-+ */
+- */
 
-+
+-
 
  pragma solidity ^0.4.19;
 
@@ -19,28 +19,28 @@
 
  contract PrivateBank {
 
-@@ -12,20 +18,20 @@
+@@ -18,20 +12,20 @@
      }
 
  
 
      function Deposit() public payable {
 
--        require(msg.value >= MinDeposit);
+-        if (msg.value >= MinDeposit) {
 
--
+-            balances[msg.sender] += msg.value;
 
--        balances[msg.sender] += msg.value;
+-            TransferLog.AddMessage(msg.sender, msg.value, "Deposit");
 
--        TransferLog.AddMessage(msg.sender, msg.value, "Deposit");
+-        }
 
-+        if (msg.value >= MinDeposit) {
++        require(msg.value >= MinDeposit);
 
-+            balances[msg.sender] += msg.value;
++
 
-+            TransferLog.AddMessage(msg.sender, msg.value, "Deposit");
++        balances[msg.sender] += msg.value;
 
-+        }
++        TransferLog.AddMessage(msg.sender, msg.value, "Deposit");
 
      }
 
@@ -48,33 +48,33 @@
 
      function CashOut(uint _am) {
 
--        require(_am <= balances[msg.sender]);
+-        if (_am <= balances[msg.sender]) {
 
--
+-            // <yes> <report> REENTRANCY
 
--        uint amountToWithdraw = _am;
+-            if (msg.sender.call.value(_am)()) {
 
--        balances[msg.sender] -= amountToWithdraw;
+-                balances[msg.sender] -= _am;
 
--        TransferLog.AddMessage(msg.sender, amountToWithdraw, "CashOut");
+-                TransferLog.AddMessage(msg.sender, _am, "CashOut");
 
--
+-            }
 
--        msg.sender.transfer(amountToWithdraw);
+-        }
 
-+        if (_am <= balances[msg.sender]) {
++        require(_am <= balances[msg.sender]);
 
-+            // <yes> <report> REENTRANCY
++
 
-+            if (msg.sender.call.value(_am)()) {
++        uint amountToWithdraw = _am;
 
-+                balances[msg.sender] -= _am;
++        balances[msg.sender] -= amountToWithdraw;
 
-+                TransferLog.AddMessage(msg.sender, _am, "CashOut");
++        TransferLog.AddMessage(msg.sender, amountToWithdraw, "CashOut");
 
-+            }
++
 
-+        }
++        msg.sender.transfer(amountToWithdraw);
 
      }
 
@@ -82,40 +82,40 @@
 
      function() public payable {}
 
-@@ -41,12 +47,13 @@
+@@ -47,13 +41,12 @@
  
 
      Message[] public History;
 
  
 
-+    Message LastMsg;
+-    Message LastMsg;
 
-+
+-
 
      function AddMessage(address _adr, uint _val, string _data) public {
 
--        Message memory newMessage;
+-        LastMsg.Sender = _adr;
 
--        newMessage.Sender = _adr;
+-        LastMsg.Time = now;
 
--        newMessage.Time = now;
+-        LastMsg.Val = _val;
 
--        newMessage.Val = _val;
+-        LastMsg.Data = _data;
 
--        newMessage.Data = _data;
+-        History.push(LastMsg);
 
--        History.push(newMessage);
++        Message memory newMessage;
 
-+        LastMsg.Sender = _adr;
++        newMessage.Sender = _adr;
 
-+        LastMsg.Time = now;
++        newMessage.Time = now;
 
-+        LastMsg.Val = _val;
++        newMessage.Val = _val;
 
-+        LastMsg.Data = _data;
++        newMessage.Data = _data;
 
-+        History.push(LastMsg);
++        History.push(newMessage);
 
      }
 

@@ -1,17 +1,17 @@
 --- https://github.com/smartbugs/smartbugs-curated/tree/main/dataset/reentrancy/reentrancy_simple.sol
 +++ https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SolGPT/reentrancy/reentrancy_simple/reentrancy_simple_3round.sol
-@@ -1,8 +1,13 @@
-+/*
+@@ -1,13 +1,8 @@
+-/*
 
-+ * @source: https://github.com/trailofbits/not-so-smart-contracts/blob/master/reentrancy/Reentrancy.sol
+- * @source: https://github.com/trailofbits/not-so-smart-contracts/blob/master/reentrancy/Reentrancy.sol
 
-+ * @author: -
+- * @author: -
 
-+ * @vulnerable_at_lines: 24
+- * @vulnerable_at_lines: 24
 
-+ */
+- */
 
-+
+-
 
  pragma solidity ^0.4.15;
 
@@ -21,7 +21,7 @@
 
      mapping(address => uint) userBalance;
 
--    mapping(address => bool) locked;
++    mapping(address => bool) locked;
 
  
 
@@ -29,46 +29,46 @@
 
          return userBalance[u];
 
-@@ -13,16 +18,12 @@
+@@ -18,12 +13,16 @@
      }
 
  
 
      function withdrawBalance() {
 
--        require(!locked[msg.sender]);
+-        // send userBalance[msg.sender] ethers to msg.sender
 
--        locked[msg.sender] = true;
+-        // if mgs.sender is a contract, it will call its fallback function
 
--
+-        // <yes> <report> REENTRANCY
 
--        uint balance = userBalance[msg.sender];
+-        if (!(msg.sender.call.value(userBalance[msg.sender])())) {
 
-+        // send userBalance[msg.sender] ethers to msg.sender
+-            throw;
 
-+        // if mgs.sender is a contract, it will call its fallback function
++        require(!locked[msg.sender]);
 
-+        // <yes> <report> REENTRANCY
++        locked[msg.sender] = true;
 
-+        if (!(msg.sender.call.value(userBalance[msg.sender])())) {
++
 
-+            throw;
++        uint balance = userBalance[msg.sender];
 
-+        }
++        userBalance[msg.sender] = 0;
 
-         userBalance[msg.sender] = 0;
++
 
--
++        if (!msg.sender.call.value(balance)()) {
 
--        if (!msg.sender.call.value(balance)()) {
++            revert();
 
--            revert();
+         }
 
--        }
+-        userBalance[msg.sender] = 0;
 
--
++
 
--        locked[msg.sender] = false;
++        locked[msg.sender] = false;
 
      }
 

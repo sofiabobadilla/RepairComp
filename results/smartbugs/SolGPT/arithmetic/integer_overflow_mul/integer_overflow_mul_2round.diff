@@ -1,23 +1,23 @@
 --- https://github.com/smartbugs/smartbugs-curated/tree/main/dataset/arithmetic/integer_overflow_mul.sol
 +++ https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SolGPT/arithmetic/integer_overflow_mul/integer_overflow_mul_2round.sol
-@@ -1,10 +1,19 @@
-+/*
+@@ -1,19 +1,10 @@
+-/*
 
-+ * @source: https://github.com/SmartContractSecurity/SWC-registry/blob/master/test_cases/integer_overflow_and_underflow/integer_overflow_mul.sol
+- * @source: https://github.com/SmartContractSecurity/SWC-registry/blob/master/test_cases/integer_overflow_and_underflow/integer_overflow_mul.sol
 
-+ * @author: -
+- * @author: -
 
-+ * @vulnerable_at_lines: 17
+- * @vulnerable_at_lines: 17
 
-+ */
+- */
 
-+
+-
 
-+//Single transaction overflow
+-//Single transaction overflow
 
-+//Post-transaction effect: overflow escapes to publicly-readable storage
+-//Post-transaction effect: overflow escapes to publicly-readable storage
 
-+
+-
 
  pragma solidity ^0.4.19;
 
@@ -31,9 +31,9 @@
 
      function run(uint256 input) public {
 
--        require(input == 0 || (count * input) / input == count);
+-        // <yes> <report> ARITHMETIC
 
-+        // <yes> <report> ARITHMETIC
++        require(input == 0 || (count * input) / input == count);
 
          count *= input;
 

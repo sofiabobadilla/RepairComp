@@ -1,71 +1,71 @@
 --- https://github.com/smartbugs/smartbugs-curated/tree/main/dataset/reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol
 +++ https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/TIPS/reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1R1.sol
-@@ -1,41 +1,54 @@
-+/*
+@@ -1,54 +1,41 @@
+-/*
 
-+ * @source: etherscan.io
+- * @source: etherscan.io
 
-+ * @author: -
+- * @author: -
 
-+ * @vulnerable_at_lines: 55
+- * @vulnerable_at_lines: 55
 
-+ */
+- */
 
-+
+-
 
-+pragma solidity ^0.4.19;
+-pragma solidity ^0.4.19;
 
-+
+-
 
  contract ACCURAL_DEPOSIT {
 
      mapping(address => uint256) public balances;
 
-+
+-
 
      uint public MinSum = 1 ether;
 
-+
+-
 
      LogFile Log = LogFile(0x0486cF65A2F2F3A392CBEa398AFB7F5f0B72FF46);
 
-+
+-
 
      bool intitalized;
 
-+
+-
 
      function SetMinSum(uint _val) public {
 
--        if (intitalized) {
+-        if (intitalized) revert();
 
--            revert();
++        if (intitalized) {
 
--        }
++            revert();
 
-+        if (intitalized) revert();
++        }
 
          MinSum = _val;
 
      }
 
-+
+-
 
      function SetLogFile(address _log) public {
 
--        if (intitalized) {
+-        if (intitalized) revert();
 
--            revert();
++        if (intitalized) {
 
--        }
++            revert();
 
-+        if (intitalized) revert();
++        }
 
          Log = LogFile(_log);
 
      }
 
-+
+-
 
      function Initialized() public {
 
@@ -73,7 +73,7 @@
 
      }
 
-+
+-
 
      function Deposit() public payable {
 
@@ -83,25 +83,25 @@
 
      }
 
-+
+-
 
      function Collect(uint _am) public payable {
 
          if (balances[msg.sender] >= MinSum && balances[msg.sender] >= _am) {
 
--            if (msg.sender.send(_am)) {
+-            // <yes> <report> REENTRANCY
 
-+            // <yes> <report> REENTRANCY
+-            if (msg.sender.call.value(_am)()) {
 
-+            if (msg.sender.call.value(_am)()) {
++            if (msg.sender.send(_am)) {
 
                  balances[msg.sender] -= _am;
 
                  Log.AddMessage(msg.sender, _am, "Collect");
 
--            } else {
++            } else {
 
--                throw;
++                throw;
 
              }
 
@@ -109,7 +109,7 @@
 
      }
 
-+
+-
 
      function() public payable {
 
@@ -119,7 +119,7 @@
 
  }
 
-+
+-
 
  contract LogFile {
 
@@ -127,22 +127,22 @@
 
          address Sender;
 
-@@ -43,8 +56,11 @@
+@@ -56,11 +43,8 @@
          uint Val;
 
          uint Time;
 
      }
 
-+
+-
 
      Message[] public History;
 
-+
+-
 
      Message LastMsg;
 
-+
+-
 
      function AddMessage(address _adr, uint _val, string _data) public {
 

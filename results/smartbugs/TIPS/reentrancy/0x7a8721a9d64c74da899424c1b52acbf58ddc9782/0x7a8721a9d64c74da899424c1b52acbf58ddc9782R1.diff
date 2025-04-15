@@ -1,37 +1,37 @@
 --- https://github.com/smartbugs/smartbugs-curated/tree/main/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol
 +++ https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/TIPS/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782R1.sol
-@@ -1,37 +1,53 @@
-+/*
+@@ -1,53 +1,37 @@
+-/*
 
-+ * @source: etherscan.io
+- * @source: etherscan.io
 
-+ * @author: -
+- * @author: -
 
-+ * @vulnerable_at_lines: 52
+- * @vulnerable_at_lines: 52
 
-+ */
+- */
 
-+
+-
 
-+pragma solidity ^0.4.19;
+-pragma solidity ^0.4.19;
 
-+
+-
 
  contract PrivateDeposit {
 
      mapping(address => uint) public balances;
 
-+
+-
 
      uint public MinDeposit = 1 ether;
 
      address public owner;
 
-+
+-
 
      Log TransferLog;
 
-+
+-
 
      modifier onlyOwner() {
 
@@ -41,11 +41,11 @@
 
      }
 
--    constructor() public {
+-
 
-+
+-    function PrivateDeposit() {
 
-+    function PrivateDeposit() {
++    constructor() public {
 
          owner = msg.sender;
 
@@ -53,17 +53,17 @@
 
      }
 
--    function setLog(address _lib) public onlyOwner {
+-
 
-+
+-    function setLog(address _lib) onlyOwner {
 
-+    function setLog(address _lib) onlyOwner {
++    function setLog(address _lib) public onlyOwner {
 
          TransferLog = Log(_lib);
 
      }
 
-+
+-
 
      function Deposit() public payable {
 
@@ -77,27 +77,27 @@
 
      }
 
--    function CashOut(uint _am) public {
+-
 
-+
+-    function CashOut(uint _am) {
 
-+    function CashOut(uint _am) {
++    function CashOut(uint _am) public {
 
          if (_am <= balances[msg.sender]) {
 
--            if (msg.sender.send(_am)) {
+-            // <yes> <report> REENTRANCY
 
-+            // <yes> <report> REENTRANCY
+-            if (msg.sender.call.value(_am)()) {
 
-+            if (msg.sender.call.value(_am)()) {
++            if (msg.sender.send(_am)) {
 
                  balances[msg.sender] -= _am;
 
                  TransferLog.AddMessage(msg.sender, _am, "CashOut");
 
--            } else {
++            } else {
 
--                throw;
++                throw;
 
              }
 
@@ -105,13 +105,13 @@
 
      }
 
-+
+-
 
      function() public payable {}
 
  }
 
-+
+-
 
  contract Log {
 
@@ -119,22 +119,22 @@
 
          address Sender;
 
-@@ -39,8 +55,11 @@
+@@ -55,11 +39,8 @@
          uint Val;
 
          uint Time;
 
      }
 
-+
+-
 
      Message[] public History;
 
-+
+-
 
      Message LastMsg;
 
-+
+-
 
      function AddMessage(address _adr, uint _val, string _data) public {
 

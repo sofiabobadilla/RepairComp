@@ -1,17 +1,17 @@
 --- https://github.com/smartbugs/smartbugs-curated/tree/main/dataset/unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c.sol
 +++ https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/SolGPT/unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c_4round.sol
-@@ -1,23 +1,27 @@
-+/*
+@@ -1,27 +1,23 @@
+-/*
 
-+ * @source: etherscan.io
+- * @source: etherscan.io
 
-+ * @author: -
+- * @author: -
 
-+ * @vulnerable_at_lines: 14
+- * @vulnerable_at_lines: 14
 
-+ */
+- */
 
-+
+-
 
  pragma solidity ^0.4.24;
 
@@ -21,21 +21,21 @@
 
      modifier onlyOwner() {
 
--        require(msg.sender == Owner);
+-        if (msg.sender == Owner) _;
 
--        _;
++        require(msg.sender == Owner);
 
-+        if (msg.sender == Owner) _;
++        _;
 
      }
 
--
+-    address Owner = msg.sender;
 
--    address public Owner = msg.sender;
++
 
--
++    address public Owner = msg.sender;
 
-+    address Owner = msg.sender;
++
 
      function transferOwner(address _owner) public onlyOwner {
 
@@ -43,15 +43,15 @@
 
      }
 
--
++
 
      function proxy(address target, bytes data) public payable {
 
--        require(target.call.value(msg.value)(data));
+-        // <yes> <report> UNCHECKED_LL_CALLS
 
-+        // <yes> <report> UNCHECKED_LL_CALLS
+-        target.call.value(msg.value)(data);
 
-+        target.call.value(msg.value)(data);
++        require(target.call.value(msg.value)(data));
 
      }
 
@@ -61,7 +61,7 @@
 
  contract VaultProxy is Proxy {
 
-+    address public Owner;
+-    address public Owner;
 
      mapping(address => uint256) public Deposits;
 
@@ -69,22 +69,22 @@
 
      function() public payable {}
 
-@@ -36,7 +40,8 @@
+@@ -40,8 +36,7 @@
      }
 
  
 
      function withdraw(uint256 amount) public onlyOwner {
 
--        require(amount > 0 && Deposits[msg.sender] >= amount);
+-        if (amount > 0 && Deposits[msg.sender] >= amount) {
 
--        msg.sender.transfer(amount);
+-            msg.sender.transfer(amount);
 
-+        if (amount > 0 && Deposits[msg.sender] >= amount) {
+-        }
 
-+            msg.sender.transfer(amount);
++        require(amount > 0 && Deposits[msg.sender] >= amount);
 
-+        }
++        msg.sender.transfer(amount);
 
      }
 
