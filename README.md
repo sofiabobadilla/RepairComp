@@ -3,9 +3,18 @@
 ## Overview
 A comprehensive comparison of Automated Program Repair (APR) tools for Solidity smart contracts.
 
-This repository accompanies our research paper:
-> **Do Automated Fixes Truly Mitigate Smart Contract Exploits?**  
-> Available on [arXiv:2501.04600](https://arxiv.org/abs/2501.04600)
+This repository accompanies our research paper [Do Automated Fixes Truly Mitigate Smart Contract Exploits?](https://arxiv.org/pdf/2501.04600), [arXiv:2501.04600](https://arxiv.org/abs/2501.04600)
+
+```bibtex
+@techreport{2501.04600,
+ title = {Do Automated Fixes Truly Mitigate Smart Contract Exploits?},
+ year = {2025},
+ author = {Sofia Bobadilla and Monica Jin and Martin Monperrus},
+ url = {http://arxiv.org/pdf/2501.04600},
+ number = {2501.04600},
+ institution = {arXiv},
+}
+```
 
 ## Evaluated APR Tools
 
