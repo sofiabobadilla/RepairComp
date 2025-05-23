@@ -16,9 +16,10 @@ This repository accompanies our research paper [Do Automated Fixes Truly Mitigat
 }
 ```
 
+The sister repository is [sb-heists](https://github.com/ASSERT-KTH/sb-heists), our exploit benchmark and patch evaluator for smartbugs-curated.
+
 ## Evaluated APR Tools
 
-### Reproduced Tools
 - [SmartShield](https://github.com/ASSERT-KTH/SmartShield)
 - [sGuard](https://github.com/ASSERT-KTH/sGuard)
 - [Elysium](https://github.com/ASSERT-KTH/Elysium)
@@ -27,14 +28,14 @@ This repository accompanies our research paper [Do Automated Fixes Truly Mitigat
 - [SGuard+](https://github.com/ASSERT-KTH/sGuardPlus)
 - [SolGPT](https://github.com/ASSERT-KTH/solgpt)
 
-### Other tools
+**Note**: These repos are our own forks, some of them have been modified from their original source code to add missing dependencies and fix minor errors.
+
+Discarded tools, see <https://github.com/ASSERT-KTH/RepairComp/blob/main/results/technical-report-reproducibility.md>:
+
 - [ContractTinker](https://github.com/ASSERT-KTH/ContractTinker)
 - [Aroc](https://github.com/ASSERT-KTH/TSE-Aroc)
 
-> **Note**: These tools have been modified from their original source code to ensure compatibility and add missing dependencies.
 
-## Datasets
+## Dataset
 
-### Benchmark Collections
-- [Smartbugs-curated](https://github.com/ASSERT-KTH/smartbugs-curated) - Curated vulnerability dataset
-- [sb-heists](https://github.com/ASSERT-KTH/sb-heists) - Custom exploit dataset and patch evaluator.
+[Smartbugs-curated](https://github.com/ASSERT-KTH/smartbugs-curated) - Curated vulnerability dataset
