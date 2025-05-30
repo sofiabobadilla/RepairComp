@@ -1,0 +1,35 @@
+name: Test Marimo Export
+
+on:
+  push:
+    branches: [ repo-web-page ]  # Only runs on your branch
+  pull_request:
+    branches: [ repo-web-page ]
+
+jobs:
+  test-export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install dependencies from requirements.txt
+        run: |
+          pip install -r requirements.txt
+          
+      - name: Test marimo export
+        run: |
+          marimo export html dashboard.py -o test-index.html
+          echo "Export completed successfully"
+          ls -la test-index.html
+          echo "File size: $(wc -c < test-index.html) bytes"
+          
+      - name: Upload test artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: marimo-test-export
+          path: test-index.html
