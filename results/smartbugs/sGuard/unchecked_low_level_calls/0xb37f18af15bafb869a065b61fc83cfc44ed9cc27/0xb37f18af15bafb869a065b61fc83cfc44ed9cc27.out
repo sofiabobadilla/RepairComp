@@ -1,0 +1,9 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/unchecked_low_level_calls/0xb37f18af15bafb869a065b61fc83cfc44ed9cc27.sol" "results/unchecked_low_level_calls/0xb37f18af15bafb869a065b61fc83cfc44ed9cc27" "SimpleWallet"
+
+smartbugs/dataset/unchecked_low_level_calls/0xb37f18af15bafb869a065b61fc83cfc44ed9cc27.sol
+{ bugFixes: {},
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 33\n */\n\n\n\ncontract SimpleWallet {\n    address public owner = msg.sender;\n    uint public depositsCount;\n    \n    modifier onlyOwner {\n        require(msg.sender == owner);\n        _;\n    }\n    \n    function() public payable {\n        depositsCount++;\n    }\n    \n    function withdrawAll() public onlyOwner {\n        withdraw(address(this).balance);\n    }\n    \n    function withdraw(uint _value) public onlyOwner {\n        msg.sender.transfer(_value);\n    }\n    \n    function sendMoney(address _target, uint _value) public onlyOwner {\n        // <yes> <report> UNCHECKED_LL_CALLS\n        _target.call.value(_value)();\n    }\n}',
+  wrappers: Set {} }

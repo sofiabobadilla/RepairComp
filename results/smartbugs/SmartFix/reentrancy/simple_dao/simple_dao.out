@@ -1,0 +1,51 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 4
+[INFO] reachable : 4
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (SimpleDAO/donate/[address]), 13, (credit[to] + msg.value)),
+    (IO, (SimpleDAO/withdraw/[uint256]), 20, (credit[msg.sender] - amount)),
+    (ETH_LEAK, (SimpleDAO/withdraw/[uint256]), 19, res = msg.sender.call.value(amount)();),
+    (RE_EL, (SimpleDAO/withdraw/[uint256]), 19, res = msg.sender.call.value(amount)();)
+
+[INFO] # of basic patch components : 5
+[INFO] extracted components
+[
+InsertLine (13, assume(((credit[to] + msg.value) >= credit[to]));),
+InsertLine (20, assume((credit[msg.sender] >= amount));),
+Replace (17, (credit[msg.sender] >= amount), (credit[msg.sender] < amount)),
+AtomLst [
+Move ([20] -> 19)
+InsertLine (20, assume(res);)
+],
+AtomLst [
+Add @nonReentrant to (SimpleDAO, donate, [address]) (line 12)
+Add @nonReentrant to (SimpleDAO, withdraw, [uint256]) (line 16)
+]
+]
+- New best candidate, iter 1, 166.094825029s : results/reentrancy/simple_dao/candidates/cand_4/patch.sol
+- New best candidate, iter 6, 605.618124008s : results/reentrancy/simple_dao/candidates/cand_6/patch.sol
+- Solution found, iter 6, 605.618124008s : results/reentrancy/simple_dao/candidates/cand_6/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 7
+# Alarm (orginal)         : 4
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : results/reentrancy/simple_dao/candidates/cand_6/patch.sol
+- First solution (iter)   : 6
+- First solution (time)   : 605.618124008
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 6, Time: 605.618124008, results/reentrancy/simple_dao/candidates/cand_6/patch.sol
+
+Time Elapsed (Real) : 605.66933012
+Time Elapsed (CPU)  : 6.827578

@@ -1,0 +1,82 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 3
+[INFO] reachable : 3
+[INFO] Generating Paths ... took 0.000107s
+[INFO] # path : 8
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000355s
+Generating VCs ... took 0.001649s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.042614
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/5 ... [IO] line 20, (balances[msg.sender] + msg.value) ... unproven
+2/5 ... [ETH_LEAK] line 25, msg.sender.call.value(balances[msg.sender])(); ... unproven
+3/5 ... [RE_EL] line 25, msg.sender.call.value(balances[msg.sender])(); ... unproven
+4/5 ... [RE] line 19, (keepMyEther, @fallback, []) ... unproven
+5/5 ... [RE] line 23, (keepMyEther, withdraw, []) ... unproven
+took 0.260207s
+
+Generating VCs ... took 0.000374s
+Checking validity of VCs ... took 6.760172s
+
+Generating VCs ... took 0.000378s
+Checking validity of VCs ... took 0.300021s
+
+Generating VCs ... took 0.000373s
+Checking validity of VCs ... took 0.231376s
+
+Generating VCs ... took 0.000372s
+Checking validity of VCs ... took 2.299683s
+
+Generating VCs ... took 0.000392s
+Checking validity of VCs ... took 1.530629s
+
+Generating VCs ... took 0.000387s
+Checking validity of VCs ... took 2.254733s
+
+Generating VCs ... took 0.000377s
+Checking validity of VCs ... took 4.880228s
+
+Generating VCs ... took 0.000235s
+Checking validity of VCs ... 
+1/2 ... [NO_EFFECT] line 20, (@pre1 == balances[msg.sender]) ... unproven
+2/2 ... [ASSIGN_CONST] line 20, (balances[msg.sender] == 0) ... unproven
+took 0.054686s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 20, (balances[msg.sender] + msg.value) : unproven
+[2] [ETH_LEAK] line 25, msg.sender.call.value(balances[msg.sender])(); : unproven
+[3] [RE_EL] line 25, msg.sender.call.value(balances[msg.sender])(); : unproven
+[4] [RE] line 19, (keepMyEther, @fallback, []) : unproven
+[5] [RE] line 23, (keepMyEther, withdraw, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 20, (@pre1 == balances[msg.sender]) : unproven
+[2] [ASSIGN_CONST] line 20, (balances[msg.sender] == 0) : unproven
+
+============ Statistics ============
+# Iter                    : 9
+# Alarm / Query           : 5 / 5
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 2 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 18.6281378269
+Time Elapsed (CPU)  : 18.61504

@@ -1,0 +1,42 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 9
+[INFO] reachable : 5
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: true
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (ModifierEntrancy/airDrop/[]), 16, (tokenBalance[msg.sender] + 20)),
+    (RE, (ModifierEntrancy/airDrop/[]), 15, (ModifierEntrancy, airDrop, []))
+
+[INFO] # of basic patch components : 2
+[INFO] extracted components
+[
+InsertLine (16, assume(((tokenBalance[msg.sender] + 20) >= tokenBalance[msg.sender]));),
+AtomLst [
+Add @nonReentrant to (ModifierEntrancy, airDrop, []) (line 15)
+]
+]
+- New best candidate, iter 1, 14.4169111252s : results/reentrancy/modifier_reentrancy/candidates/cand_1/patch.sol
+- New best candidate, iter 3, 19.4683940411s : results/reentrancy/modifier_reentrancy/candidates/cand_3/patch.sol
+- Solution found, iter 3, 19.4683940411s : results/reentrancy/modifier_reentrancy/candidates/cand_3/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 4
+# Alarm (orginal)         : 2
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : results/reentrancy/modifier_reentrancy/candidates/cand_3/patch.sol
+- First solution (iter)   : 3
+- First solution (time)   : 19.4683940411
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2.03, Edit: 2, Iter: 3, Time: 19.4683940411, results/reentrancy/modifier_reentrancy/candidates/cand_3/patch.sol
+
+Time Elapsed (Real) : 19.4725799561
+Time Elapsed (CPU)  : 6.097706

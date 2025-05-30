@@ -1,0 +1,213 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 26
+[INFO] reachable : 22
+[INFO] Generating Paths ... took 0.00092s
+[INFO] # path : 78
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.00254s
+Generating VCs ... took 0.012438s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.084539
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/16 ... [IO] line 87, (block.number - 1) ... proven
+2/16 ... [IO] line 119, (seed[0] * seed[1]) ... proven
+3/16 ... [IO] line 120, (seed[0] * seed[1]) ... proven
+4/16 ... [ETH_LEAK] line 81, msg.sender.transfer(amount); ... proven
+5/16 ... [ETH_LEAK] line 101, firstTarget.call.value(msg.value)(); ... unproven
+6/16 ... [ETH_LEAK] line 107, secondTarget.call.value(msg.value)(); ... unproven
+7/16 ... [ETH_LEAK] line 135, owner.call.value(1)(); ... unproven
+8/16 ... [ETH_LEAK] line 139, winner.transfer(address(this).balance); ... unproven
+9/16 ... [RE_EL] line 81, msg.sender.transfer(amount); ... proven
+10/16 ... [RE_EL] line 101, firstTarget.call.value(msg.value)(); ... unproven
+11/16 ... [RE_EL] line 107, secondTarget.call.value(msg.value)(); ... unproven
+12/16 ... [RE_EL] line 135, owner.call.value(1)(); ... unproven
+13/16 ... [RE_EL] line 139, winner.transfer(address(this).balance); ... unproven
+14/16 ... [TX_ORG] line 39, assume((msg.sender == owner)); ... proven
+15/16 ... [TX_ORG] line 44, assume((msg.sender == winner)); ... proven
+16/16 ... [TX_ORG] line 79, assume((msg.sender != owner)); ... proven
+took 1.756788s
+
+Generating VCs ... took 0.011375s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 1.889764
+[
+-1 -> (Read(@TU, firstTarget__@9) == true)
+0 -> (Read(@TU, firstTarget__@9) == true)
+]
+[
+]
+1/16 ... [IO] line 87, (block.number - 1) ... proven
+2/16 ... [IO] line 119, (seed[0] * seed[1]) ... proven
+3/16 ... [IO] line 120, (seed[0] * seed[1]) ... proven
+4/16 ... [ETH_LEAK] line 81, msg.sender.transfer(amount); ... proven
+5/16 ... [ETH_LEAK] line 101, firstTarget.call.value(msg.value)(); ... proven
+6/16 ... [ETH_LEAK] line 107, secondTarget.call.value(msg.value)(); ... unproven
+7/16 ... [ETH_LEAK] line 135, owner.call.value(1)(); ... unproven
+8/16 ... [ETH_LEAK] line 139, winner.transfer(address(this).balance); ... unproven
+9/16 ... [RE_EL] line 81, msg.sender.transfer(amount); ... proven
+10/16 ... [RE_EL] line 101, firstTarget.call.value(msg.value)(); ... proven
+11/16 ... [RE_EL] line 107, secondTarget.call.value(msg.value)(); ... unproven
+12/16 ... [RE_EL] line 135, owner.call.value(1)(); ... unproven
+13/16 ... [RE_EL] line 139, winner.transfer(address(this).balance); ... unproven
+14/16 ... [TX_ORG] line 39, assume((msg.sender == owner)); ... proven
+15/16 ... [TX_ORG] line 44, assume((msg.sender == winner)); ... proven
+16/16 ... [TX_ORG] line 79, assume((msg.sender != owner)); ... proven
+took 1.045344s
+
+Generating VCs ... took 0.012018s
+Checking validity of VCs ... took 0.947354s
+
+Generating VCs ... took 0.012883s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 4.721542
+[
+-1 -> ((Read(@TU, firstTarget__@9) == true) /\ (Read(@TU, secondTarget__@12) == true))
+0 -> ((Read(@TU, firstTarget__@9) == true) /\ (Read(@TU, secondTarget__@12) == true))
+]
+[
+]
+1/16 ... [IO] line 87, (block.number - 1) ... proven
+2/16 ... [IO] line 119, (seed[0] * seed[1]) ... proven
+3/16 ... [IO] line 120, (seed[0] * seed[1]) ... proven
+4/16 ... [ETH_LEAK] line 81, msg.sender.transfer(amount); ... proven
+5/16 ... [ETH_LEAK] line 101, firstTarget.call.value(msg.value)(); ... proven
+6/16 ... [ETH_LEAK] line 107, secondTarget.call.value(msg.value)(); ... proven
+7/16 ... [ETH_LEAK] line 135, owner.call.value(1)(); ... unproven
+8/16 ... [ETH_LEAK] line 139, winner.transfer(address(this).balance); ... unproven
+9/16 ... [RE_EL] line 81, msg.sender.transfer(amount); ... proven
+10/16 ... [RE_EL] line 101, firstTarget.call.value(msg.value)(); ... proven
+11/16 ... [RE_EL] line 107, secondTarget.call.value(msg.value)(); ... proven
+12/16 ... [RE_EL] line 135, owner.call.value(1)(); ... unproven
+13/16 ... [RE_EL] line 139, winner.transfer(address(this).balance); ... unproven
+14/16 ... [TX_ORG] line 39, assume((msg.sender == owner)); ... proven
+15/16 ... [TX_ORG] line 44, assume((msg.sender == winner)); ... proven
+16/16 ... [TX_ORG] line 79, assume((msg.sender != owner)); ... proven
+took 1.345152s
+
+Generating VCs ... took 0.01171s
+Checking validity of VCs ... took 0.976195s
+
+Generating VCs ... took 0.012666s
+Checking validity of VCs ... took 0.882528s
+
+Generating VCs ... took 0.014054s
+Checking validity of VCs ... took 1.106976s
+
+Generating VCs ... took 0.014053s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 8 Total elapsed : 9.17259
+[
+-1 -> ((((Read(@TU, firstTarget__@9) == true) /\ (Read(@TU, owner__@6) == true)) /\ (Read(@TU, secondTarget__@12) == true)) /\ (Read(@TU, winner__@4) == true))
+0 -> ((((Read(@TU, firstTarget__@9) == true) /\ (Read(@TU, owner__@6) == true)) /\ (Read(@TU, secondTarget__@12) == true)) /\ (Read(@TU, winner__@4) == true))
+]
+[
+]
+1/16 ... [IO] line 87, (block.number - 1) ... proven
+2/16 ... [IO] line 119, (seed[0] * seed[1]) ... proven
+3/16 ... [IO] line 120, (seed[0] * seed[1]) ... proven
+4/16 ... [ETH_LEAK] line 81, msg.sender.transfer(amount); ... proven
+5/16 ... [ETH_LEAK] line 101, firstTarget.call.value(msg.value)(); ... proven
+6/16 ... [ETH_LEAK] line 107, secondTarget.call.value(msg.value)(); ... proven
+7/16 ... [ETH_LEAK] line 135, owner.call.value(1)(); ... proven
+8/16 ... [ETH_LEAK] line 139, winner.transfer(address(this).balance); ... proven
+9/16 ... [RE_EL] line 81, msg.sender.transfer(amount); ... proven
+10/16 ... [RE_EL] line 101, firstTarget.call.value(msg.value)(); ... proven
+11/16 ... [RE_EL] line 107, secondTarget.call.value(msg.value)(); ... proven
+12/16 ... [RE_EL] line 135, owner.call.value(1)(); ... proven
+13/16 ... [RE_EL] line 139, winner.transfer(address(this).balance); ... proven
+14/16 ... [TX_ORG] line 39, assume((msg.sender == owner)); ... proven
+15/16 ... [TX_ORG] line 44, assume((msg.sender == winner)); ... proven
+16/16 ... [TX_ORG] line 79, assume((msg.sender != owner)); ... proven
+took 1.118526s
+
+Generating VCs ... took 0.004927s
+Checking validity of VCs ... 
+1/19 ... [NO_EFFECT] line 33, (@pre1 == owner) ... unproven
+2/19 ... [NO_EFFECT] line 60, (@pre2 == secret) ... unproven
+3/19 ... [NO_EFFECT] line 88, (@pre4 == secret) ... unproven
+4/19 ... [NO_EFFECT] line 90, (@pre3 == winner) ... unproven
+5/19 ... [NO_EFFECT] line 111, (@pre5 == seed[_index]) ... unproven
+6/19 ... [NO_EFFECT] line 115, (@pre6 == seed.length) ... unproven
+7/19 ... [DEAD] line 39, false ... unproven
+8/19 ... [DEAD] line 44, false ... unproven
+9/19 ... [DEAD] line 72, false ... unproven
+10/19 ... [DEAD] line 78, false ... unproven
+11/19 ... [DEAD] line 79, false ... unproven
+12/19 ... [DEAD] line 81, false ... unproven
+13/19 ... [DEAD] line 86, false ... unproven
+14/19 ... [DEAD] line 99, false ... unproven
+15/19 ... [DEAD] line 105, false ... unproven
+16/19 ... [DEAD] line 119, false ... unproven
+17/19 ... [DEAD] line 127, false ... unproven
+18/19 ... [DEAD] line 128, false ... unproven
+19/19 ... [DEAD] line 139, false ... unproven
+took 0.690396s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 87, (block.number - 1) : proven
+[2] [IO] line 119, (seed[0] * seed[1]) : proven
+[3] [IO] line 120, (seed[0] * seed[1]) : proven
+[4] [ETH_LEAK] line 81, msg.sender.transfer(amount); : proven
+[5] [ETH_LEAK] line 101, firstTarget.call.value(msg.value)(); : proven
+[6] [ETH_LEAK] line 107, secondTarget.call.value(msg.value)(); : proven
+[7] [ETH_LEAK] line 135, owner.call.value(1)(); : proven
+[8] [ETH_LEAK] line 139, winner.transfer(address(this).balance); : proven
+[9] [RE_EL] line 81, msg.sender.transfer(amount); : proven
+[10] [RE_EL] line 101, firstTarget.call.value(msg.value)(); : proven
+[11] [RE_EL] line 107, secondTarget.call.value(msg.value)(); : proven
+[12] [RE_EL] line 135, owner.call.value(1)(); : proven
+[13] [RE_EL] line 139, winner.transfer(address(this).balance); : proven
+[14] [TX_ORG] line 39, assume((msg.sender == owner)); : proven
+[15] [TX_ORG] line 44, assume((msg.sender == winner)); : proven
+[16] [TX_ORG] line 79, assume((msg.sender != owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 33, (@pre1 == owner) : unproven
+[2] [NO_EFFECT] line 60, (@pre2 == secret) : unproven
+[3] [NO_EFFECT] line 88, (@pre4 == secret) : unproven
+[4] [NO_EFFECT] line 90, (@pre3 == winner) : unproven
+[5] [NO_EFFECT] line 111, (@pre5 == seed[_index]) : unproven
+[6] [NO_EFFECT] line 115, (@pre6 == seed.length) : unproven
+[7] [DEAD] line 39, false : unproven
+[8] [DEAD] line 44, false : unproven
+[9] [DEAD] line 72, false : unproven
+[10] [DEAD] line 78, false : unproven
+[11] [DEAD] line 79, false : unproven
+[12] [DEAD] line 81, false : unproven
+[13] [DEAD] line 86, false : unproven
+[14] [DEAD] line 99, false : unproven
+[15] [DEAD] line 105, false : unproven
+[16] [DEAD] line 119, false : unproven
+[17] [DEAD] line 127, false : unproven
+[18] [DEAD] line 128, false : unproven
+[19] [DEAD] line 139, false : unproven
+
+============ Statistics ============
+# Iter                    : 8
+# Alarm / Query           : 0 / 16
+- integer over/underflow  : 0 / 3
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 5
+- reentrancy-leaking      : 0 / 5
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 3
+
+Time Elapsed (Real) : 10.0982329845
+Time Elapsed (CPU)  : 10.072064

@@ -1,0 +1,105 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 9
+[INFO] reachable : 5
+[INFO] Generating Paths ... took 0.004626s
+[INFO] # path : 9
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: true
+[INFO] Performing Interval Analysis ... took 0.000176s
+Generating VCs ... took 0.000985s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.031775
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/2 ... [IO] line 16, (tokenBalance[msg.sender] + 20) ... unproven
+2/2 ... [RE] line 15, (ModifierEntrancy, airDrop, []) ... unproven
+took 0.055194s
+
+Generating VCs ... took 0.000401s
+Checking validity of VCs ... took 0.408326s
+
+Generating VCs ... took 0.00035s
+Checking validity of VCs ... took 0.126783s
+
+Generating VCs ... took 0.000349s
+Checking validity of VCs ... took 0.025164s
+
+Generating VCs ... took 0.000435s
+Checking validity of VCs ... took 0.023496s
+
+Generating VCs ... took 0.000352s
+Checking validity of VCs ... took 0.306037s
+
+Generating VCs ... took 0.000441s
+Checking validity of VCs ... took 0.432263s
+
+Generating VCs ... took 0.000386s
+Checking validity of VCs ... took 0.074042s
+
+Generating VCs ... took 0.000348s
+Checking validity of VCs ... took 0.423661s
+
+Iter : 10 To explore : 6 Explored : 15 Total elapsed : 1.913214
+Generating VCs ... took 0.000349s
+Checking validity of VCs ... took 0.808123s
+
+Generating VCs ... took 0.000355s
+Checking validity of VCs ... took 1.315153s
+
+Generating VCs ... took 0.000349999999999s
+Checking validity of VCs ... took 0.679625s
+
+Generating VCs ... took 0.000413000000001s
+Checking validity of VCs ... took 0.079426s
+
+Generating VCs ... took 0.000348000000001s
+Checking validity of VCs ... took 0.145367s
+
+Generating VCs ... took 0.000596s
+Checking validity of VCs ... took 0.145721s
+
+Generating VCs ... took 0.000351000000001s
+Checking validity of VCs ... took 0.215255s
+
+Generating VCs ... took 0.000142s
+Checking validity of VCs ... 
+1/4 ... [NO_EFFECT] line 16, (@pre1 == tokenBalance[msg.sender]) ... unproven
+2/4 ... [ASSIGN_CONST] line 16, (tokenBalance[msg.sender] == 0) ... unproven
+3/4 ... [DEAD] line 21, false ... unproven
+4/4 ... [DEAD] line 26, false ... unproven
+took 0.029118s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 16, (tokenBalance[msg.sender] + 20) : unproven
+[2] [RE] line 15, (ModifierEntrancy, airDrop, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 16, (@pre1 == tokenBalance[msg.sender]) : unproven
+[2] [ASSIGN_CONST] line 16, (tokenBalance[msg.sender] == 0) : unproven
+[3] [DEAD] line 21, false : unproven
+[4] [DEAD] line 26, false : unproven
+
+============ Statistics ============
+# Iter                    : 17
+# Alarm / Query           : 2 / 2
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 1 / 1
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 5.36188101768
+Time Elapsed (CPU)  : 5.335963

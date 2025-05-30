@@ -1,0 +1,652 @@
+{
+  "success": true,
+  "error": null,
+  "results": {
+    "detectors": [
+      {
+        "elements": [
+          {
+            "type": "function",
+            "name": "withdrawFunds",
+            "source_mapping": {
+              "start": 247,
+              "length": 331,
+              "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+              "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+              "is_dependency": false,
+              "lines": [
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+              ],
+              "starting_column": 2,
+              "ending_column": 3
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "EtherStore",
+                "source_mapping": {
+                  "start": 0,
+                  "length": 582,
+                  "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 0
+                }
+              },
+              "signature": "withdrawFunds(uint256)"
+            }
+          },
+          {
+            "type": "node",
+            "name": "require(bool)(now >= lastWithdrawTime[msg.sender] + 604800)",
+            "source_mapping": {
+              "start": 399,
+              "length": 54,
+              "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+              "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+              "is_dependency": false,
+              "lines": [
+                11
+              ],
+              "starting_column": 2,
+              "ending_column": 56
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawFunds",
+                "source_mapping": {
+                  "start": 247,
+                  "length": 331,
+                  "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "EtherStore",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawFunds(uint256)"
+                }
+              }
+            }
+          }
+        ],
+        "description": "EtherStore.withdrawFunds(uint256) (reentrancy/etherstore/etherstoreR1.sol#8-15) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- require(bool)(now >= lastWithdrawTime[msg.sender] + 604800) (reentrancy/etherstore/etherstoreR1.sol#11)\n",
+        "markdown": "[EtherStore.withdrawFunds(uint256)](reentrancy/etherstore/etherstoreR1.sol#L8-L15) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- [require(bool)(now >= lastWithdrawTime[msg.sender] + 604800)](reentrancy/etherstore/etherstoreR1.sol#L11)\n",
+        "first_markdown_element": "reentrancy/etherstore/etherstoreR1.sol#L8-L15",
+        "id": "671d63d00e4e5d3678ab5e25f35529aa3cf6789e819f60f93423ba19cd03bf5e",
+        "check": "timestamp",
+        "impact": "Low",
+        "confidence": "Medium"
+      },
+      {
+        "elements": [],
+        "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.\n",
+        "markdown": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.\n",
+        "first_markdown_element": "",
+        "id": "c7d638b1e771d6abd47c965e1dc1d602dca6481f45f5718f0f579b9cf306ec28",
+        "check": "solc-version",
+        "impact": "Informational",
+        "confidence": "High"
+      },
+      {
+        "elements": [
+          {
+            "type": "variable",
+            "name": "_weiToWithdraw",
+            "source_mapping": {
+              "start": 270,
+              "length": 22,
+              "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+              "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+              "is_dependency": false,
+              "lines": [
+                8
+              ],
+              "starting_column": 25,
+              "ending_column": 47
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawFunds",
+                "source_mapping": {
+                  "start": 247,
+                  "length": 331,
+                  "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "EtherStore",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawFunds(uint256)"
+                }
+              }
+            },
+            "additional_fields": {
+              "target": "parameter",
+              "convention": "mixedCase"
+            }
+          }
+        ],
+        "description": "Parameter EtherStore.withdrawFunds(uint256)._weiToWithdraw (reentrancy/etherstore/etherstoreR1.sol#8) is not in mixedCase\n",
+        "markdown": "Parameter [EtherStore.withdrawFunds(uint256)._weiToWithdraw](reentrancy/etherstore/etherstoreR1.sol#L8) is not in mixedCase\n",
+        "first_markdown_element": "reentrancy/etherstore/etherstoreR1.sol#L8",
+        "id": "c06bf6a774dd5bdf4384a132979c1d9255a2cdf61336e243d90ff7ee228bfc4e",
+        "check": "naming-convention",
+        "impact": "Informational",
+        "confidence": "High"
+      },
+      {
+        "elements": [
+          {
+            "type": "function",
+            "name": "withdrawFunds",
+            "source_mapping": {
+              "start": 247,
+              "length": 331,
+              "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+              "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+              "is_dependency": false,
+              "lines": [
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+              ],
+              "starting_column": 2,
+              "ending_column": 3
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "EtherStore",
+                "source_mapping": {
+                  "start": 0,
+                  "length": 582,
+                  "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 0
+                }
+              },
+              "signature": "withdrawFunds(uint256)"
+            }
+          },
+          {
+            "type": "node",
+            "name": "require(bool)(msg.sender.send(_weiToWithdraw))",
+            "source_mapping": {
+              "start": 456,
+              "length": 40,
+              "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+              "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+              "is_dependency": false,
+              "lines": [
+                12
+              ],
+              "starting_column": 2,
+              "ending_column": 42
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawFunds",
+                "source_mapping": {
+                  "start": 247,
+                  "length": 331,
+                  "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "EtherStore",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawFunds(uint256)"
+                }
+              }
+            },
+            "additional_fields": {
+              "underlying_type": "external_calls"
+            }
+          },
+          {
+            "type": "node",
+            "name": "balances[msg.sender] -= _weiToWithdraw",
+            "source_mapping": {
+              "start": 499,
+              "length": 38,
+              "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+              "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+              "is_dependency": false,
+              "lines": [
+                13
+              ],
+              "starting_column": 2,
+              "ending_column": 40
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawFunds",
+                "source_mapping": {
+                  "start": 247,
+                  "length": 331,
+                  "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "EtherStore",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawFunds(uint256)"
+                }
+              }
+            },
+            "additional_fields": {
+              "underlying_type": "variables_written",
+              "variable_name": "balances"
+            }
+          },
+          {
+            "type": "node",
+            "name": "lastWithdrawTime[msg.sender] = now",
+            "source_mapping": {
+              "start": 540,
+              "length": 34,
+              "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+              "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+              "is_dependency": false,
+              "lines": [
+                14
+              ],
+              "starting_column": 2,
+              "ending_column": 36
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawFunds",
+                "source_mapping": {
+                  "start": 247,
+                  "length": 331,
+                  "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "EtherStore",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                      "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawFunds(uint256)"
+                }
+              }
+            },
+            "additional_fields": {
+              "underlying_type": "variables_written",
+              "variable_name": "lastWithdrawTime"
+            }
+          }
+        ],
+        "description": "Reentrancy in EtherStore.withdrawFunds(uint256) (reentrancy/etherstore/etherstoreR1.sol#8-15):\n\tExternal calls:\n\t- require(bool)(msg.sender.send(_weiToWithdraw)) (reentrancy/etherstore/etherstoreR1.sol#12)\n\tState variables written after the call(s):\n\t- balances[msg.sender] -= _weiToWithdraw (reentrancy/etherstore/etherstoreR1.sol#13)\n\t- lastWithdrawTime[msg.sender] = now (reentrancy/etherstore/etherstoreR1.sol#14)\n",
+        "markdown": "Reentrancy in [EtherStore.withdrawFunds(uint256)](reentrancy/etherstore/etherstoreR1.sol#L8-L15):\n\tExternal calls:\n\t- [require(bool)(msg.sender.send(_weiToWithdraw))](reentrancy/etherstore/etherstoreR1.sol#L12)\n\tState variables written after the call(s):\n\t- [balances[msg.sender] -= _weiToWithdraw](reentrancy/etherstore/etherstoreR1.sol#L13)\n\t- [lastWithdrawTime[msg.sender] = now](reentrancy/etherstore/etherstoreR1.sol#L14)\n",
+        "first_markdown_element": "reentrancy/etherstore/etherstoreR1.sol#L8-L15",
+        "id": "24f6f6843b986f67679f1836543d5b42ad139559004e5bb392dc2d64ff18e9ae",
+        "check": "reentrancy-unlimited-gas",
+        "impact": "Informational",
+        "confidence": "Medium"
+      },
+      {
+        "elements": [
+          {
+            "type": "variable",
+            "name": "withdrawalLimit",
+            "source_mapping": {
+              "start": 23,
+              "length": 40,
+              "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+              "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+              "is_dependency": false,
+              "lines": [
+                2
+              ],
+              "starting_column": 2,
+              "ending_column": 42
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "EtherStore",
+                "source_mapping": {
+                  "start": 0,
+                  "length": 582,
+                  "filename_relative": "reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/etherstore/etherstoreR1.sol",
+                  "filename_short": "reentrancy/etherstore/etherstoreR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 0
+                }
+              }
+            }
+          }
+        ],
+        "description": "EtherStore.withdrawalLimit (reentrancy/etherstore/etherstoreR1.sol#2) should be constant \n",
+        "markdown": "[EtherStore.withdrawalLimit](reentrancy/etherstore/etherstoreR1.sol#L2) should be constant \n",
+        "first_markdown_element": "reentrancy/etherstore/etherstoreR1.sol#L2",
+        "id": "d57da0174a10c1a3c40cfde29b604935aa8efee4bf468eaca4deb268500af01f",
+        "check": "constable-states",
+        "impact": "Optimization",
+        "confidence": "High"
+      }
+    ]
+  }
+}

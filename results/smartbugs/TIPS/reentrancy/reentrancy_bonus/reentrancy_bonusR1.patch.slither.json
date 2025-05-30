@@ -1,0 +1,955 @@
+{
+  "success": true,
+  "error": null,
+  "results": {
+    "detectors": [
+      {
+        "elements": [
+          {
+            "type": "function",
+            "name": "withdrawReward",
+            "source_mapping": {
+              "start": 172,
+              "length": 211,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+              ],
+              "starting_column": 2,
+              "ending_column": 3
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "Reentrancy_bonus",
+                "source_mapping": {
+                  "start": 0,
+                  "length": 582,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 0
+                }
+              },
+              "signature": "withdrawReward(address)"
+            }
+          },
+          {
+            "type": "node",
+            "name": "success = recipient.call.value(amountToWithdraw)()",
+            "source_mapping": {
+              "start": 303,
+              "length": 57,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                8
+              ],
+              "starting_column": 2,
+              "ending_column": 59
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawReward",
+                "source_mapping": {
+                  "start": 172,
+                  "length": 211,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "Reentrancy_bonus",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawReward(address)"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Reentrancy_bonus.withdrawReward(address) (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#5-10) sends eth to arbitrary user\n\tDangerous calls:\n\t- success = recipient.call.value(amountToWithdraw)() (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#8)\n",
+        "markdown": "[Reentrancy_bonus.withdrawReward(address)](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L5-L10) sends eth to arbitrary user\n\tDangerous calls:\n\t- [success = recipient.call.value(amountToWithdraw)()](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L8)\n",
+        "first_markdown_element": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L5-L10",
+        "id": "0d3ff0cca75319135e20de249539843d73bc77f94b6e81cb9a9baeaf3df25c22",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium"
+      },
+      {
+        "elements": [
+          {
+            "type": "function",
+            "name": "getFirstWithdrawalBonus",
+            "source_mapping": {
+              "start": 385,
+              "length": 193,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ],
+              "starting_column": 2,
+              "ending_column": 3
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "Reentrancy_bonus",
+                "source_mapping": {
+                  "start": 0,
+                  "length": 582,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 0
+                }
+              },
+              "signature": "getFirstWithdrawalBonus(address)"
+            }
+          },
+          {
+            "type": "node",
+            "name": "withdrawReward(recipient)",
+            "source_mapping": {
+              "start": 516,
+              "length": 25,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                14
+              ],
+              "starting_column": 2,
+              "ending_column": 27
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "getFirstWithdrawalBonus",
+                "source_mapping": {
+                  "start": 385,
+                  "length": 193,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "Reentrancy_bonus",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "getFirstWithdrawalBonus(address)"
+                }
+              }
+            },
+            "additional_fields": {
+              "underlying_type": "external_calls"
+            }
+          },
+          {
+            "type": "node",
+            "name": "success = recipient.call.value(amountToWithdraw)()",
+            "source_mapping": {
+              "start": 303,
+              "length": 57,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                8
+              ],
+              "starting_column": 2,
+              "ending_column": 59
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawReward",
+                "source_mapping": {
+                  "start": 172,
+                  "length": 211,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "Reentrancy_bonus",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawReward(address)"
+                }
+              }
+            },
+            "additional_fields": {
+              "underlying_type": "external_calls_sending_eth"
+            }
+          },
+          {
+            "type": "node",
+            "name": "claimedBonus[recipient] = true",
+            "source_mapping": {
+              "start": 544,
+              "length": 30,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                15
+              ],
+              "starting_column": 2,
+              "ending_column": 32
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "getFirstWithdrawalBonus",
+                "source_mapping": {
+                  "start": 385,
+                  "length": 193,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "Reentrancy_bonus",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "getFirstWithdrawalBonus(address)"
+                }
+              }
+            },
+            "additional_fields": {
+              "underlying_type": "variables_written",
+              "variable_name": "claimedBonus"
+            }
+          }
+        ],
+        "description": "Reentrancy in Reentrancy_bonus.getFirstWithdrawalBonus(address) (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#11-16):\n\tExternal calls:\n\t- withdrawReward(recipient) (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#14)\n\t\t- success = recipient.call.value(amountToWithdraw)() (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#8)\n\tState variables written after the call(s):\n\t- claimedBonus[recipient] = true (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#15)\n\tReentrancy_bonus.claimedBonus (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#3) can be used in cross function reentrancies:\n\t- Reentrancy_bonus.getFirstWithdrawalBonus(address) (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#11-16)\n",
+        "markdown": "Reentrancy in [Reentrancy_bonus.getFirstWithdrawalBonus(address)](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L11-L16):\n\tExternal calls:\n\t- [withdrawReward(recipient)](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L14)\n\t\t- [success = recipient.call.value(amountToWithdraw)()](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L8)\n\tState variables written after the call(s):\n\t- [claimedBonus[recipient] = true](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L15)\n\t[Reentrancy_bonus.claimedBonus](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L3) can be used in cross function reentrancies:\n\t- [Reentrancy_bonus.getFirstWithdrawalBonus(address)](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L11-L16)\n",
+        "first_markdown_element": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L11-L16",
+        "id": "bae99b6899eb3a49977f77f891a391e9c015f2835abc6a6cddc35158eb9b08c8",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium"
+      },
+      {
+        "elements": [
+          {
+            "type": "variable",
+            "name": "recipient",
+            "source_mapping": {
+              "start": 196,
+              "length": 17,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                5
+              ],
+              "starting_column": 26,
+              "ending_column": 43
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawReward",
+                "source_mapping": {
+                  "start": 172,
+                  "length": 211,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "Reentrancy_bonus",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawReward(address)"
+                }
+              }
+            }
+          },
+          {
+            "type": "node",
+            "name": "success = recipient.call.value(amountToWithdraw)()",
+            "source_mapping": {
+              "start": 303,
+              "length": 57,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                8
+              ],
+              "starting_column": 2,
+              "ending_column": 59
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawReward",
+                "source_mapping": {
+                  "start": 172,
+                  "length": 211,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "Reentrancy_bonus",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawReward(address)"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Reentrancy_bonus.withdrawReward(address).recipient (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#5) lacks a zero-check on :\n\t\t- success = recipient.call.value(amountToWithdraw)() (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#8)\n",
+        "markdown": "[Reentrancy_bonus.withdrawReward(address).recipient](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L5) lacks a zero-check on :\n\t\t- [success = recipient.call.value(amountToWithdraw)()](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L8)\n",
+        "first_markdown_element": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L5",
+        "id": "c77cc76cd4960dd4a6541789b13e31466fb3c1556798e231f62bb5cb79de1cdc",
+        "check": "missing-zero-check",
+        "impact": "Low",
+        "confidence": "Medium"
+      },
+      {
+        "elements": [],
+        "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.\n",
+        "markdown": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.\n",
+        "first_markdown_element": "",
+        "id": "c7d638b1e771d6abd47c965e1dc1d602dca6481f45f5718f0f579b9cf306ec28",
+        "check": "solc-version",
+        "impact": "Informational",
+        "confidence": "High"
+      },
+      {
+        "elements": [
+          {
+            "type": "function",
+            "name": "withdrawReward",
+            "source_mapping": {
+              "start": 172,
+              "length": 211,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+              ],
+              "starting_column": 2,
+              "ending_column": 3
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "Reentrancy_bonus",
+                "source_mapping": {
+                  "start": 0,
+                  "length": 582,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 0
+                }
+              },
+              "signature": "withdrawReward(address)"
+            }
+          },
+          {
+            "type": "node",
+            "name": "success = recipient.call.value(amountToWithdraw)()",
+            "source_mapping": {
+              "start": 303,
+              "length": 57,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                8
+              ],
+              "starting_column": 2,
+              "ending_column": 59
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "function",
+                "name": "withdrawReward",
+                "source_mapping": {
+                  "start": 172,
+                  "length": 211,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "starting_column": 2,
+                  "ending_column": 3
+                },
+                "type_specific_fields": {
+                  "parent": {
+                    "type": "contract",
+                    "name": "Reentrancy_bonus",
+                    "source_mapping": {
+                      "start": 0,
+                      "length": 582,
+                      "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                      "is_dependency": false,
+                      "lines": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19
+                      ],
+                      "starting_column": 1,
+                      "ending_column": 0
+                    }
+                  },
+                  "signature": "withdrawReward(address)"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Low level call in Reentrancy_bonus.withdrawReward(address) (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#5-10):\n\t- success = recipient.call.value(amountToWithdraw)() (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#8)\n",
+        "markdown": "Low level call in [Reentrancy_bonus.withdrawReward(address)](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L5-L10):\n\t- [success = recipient.call.value(amountToWithdraw)()](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L8)\n",
+        "first_markdown_element": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L5-L10",
+        "id": "3ff6f585fe21227fbf8628f28870b514389e22d094d062272afc44c6a9777af8",
+        "check": "low-level-calls",
+        "impact": "Informational",
+        "confidence": "High"
+      },
+      {
+        "elements": [
+          {
+            "type": "contract",
+            "name": "Reentrancy_bonus",
+            "source_mapping": {
+              "start": 0,
+              "length": 582,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19
+              ],
+              "starting_column": 1,
+              "ending_column": 0
+            },
+            "additional_fields": {
+              "target": "contract",
+              "convention": "CapWords"
+            }
+          }
+        ],
+        "description": "Contract Reentrancy_bonus (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#1-19) is not in CapWords\n",
+        "markdown": "Contract [Reentrancy_bonus](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L1-L19) is not in CapWords\n",
+        "first_markdown_element": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L1-L19",
+        "id": "aaf8f3e29b64cac57fd92b0d627f4d94b51464a318cd12d345bfa329f282d5ad",
+        "check": "naming-convention",
+        "impact": "Informational",
+        "confidence": "High"
+      },
+      {
+        "elements": [
+          {
+            "type": "variable",
+            "name": "userBalances",
+            "source_mapping": {
+              "start": 29,
+              "length": 45,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                2
+              ],
+              "starting_column": 2,
+              "ending_column": 47
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "Reentrancy_bonus",
+                "source_mapping": {
+                  "start": 0,
+                  "length": 582,
+                  "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 0
+                }
+              }
+            }
+          },
+          {
+            "type": "contract",
+            "name": "Reentrancy_bonus",
+            "source_mapping": {
+              "start": 0,
+              "length": 582,
+              "filename_relative": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_absolute": "/home/mokita/sc_study/RepairComp/results/smartbugs/TIPS/reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "filename_short": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol",
+              "is_dependency": false,
+              "lines": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19
+              ],
+              "starting_column": 1,
+              "ending_column": 0
+            }
+          }
+        ],
+        "description": "Reentrancy_bonus.userBalances (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#2) is never used in Reentrancy_bonus (reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#1-19)\n",
+        "markdown": "[Reentrancy_bonus.userBalances](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L2) is never used in [Reentrancy_bonus](reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L1-L19)\n",
+        "first_markdown_element": "reentrancy/reentrancy_bonus/reentrancy_bonusR1.sol#L2",
+        "id": "164dd66be30bd3d15e432e5aeca57013d69a99f86990c024cfe7a32dd59299fd",
+        "check": "unused-state",
+        "impact": "Informational",
+        "confidence": "High"
+      }
+    ]
+  }
+}

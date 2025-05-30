@@ -1,0 +1,12 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220.sol" "results/unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220" "airDrop"
+
+smartbugs/dataset/unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220.sol
+{ bugFixes:
+   { 'AD}TICi*@xN)Vn5': 'pow_uint256(10, _decimals)',
+     '*(a+xo[nfb>XU;(z)W;': 'mul_uint256(v, AD}TICi*@xN)Vn5)',
+     'z!>`F)[ViOUZ5@Wo': 'contract airDrop is sGuard ' },
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 17\n */\n\n \nz!>`F)[ViOUZ5@Wo{\n    \n    function transfer(address from,address caddress,address[] _tos,uint v, uint _decimals)public returns (bool){\n        require(_tos.length > 0);\n        bytes4 id=bytes4(keccak256("transferFrom(address,address,uint256)"));\n        uint _value = *(a+xo[nfb>XU;(z)W;;\n        for(uint i=0;i<_tos.length;i++){\n            // <yes> <report> UNCHECKED_LL_CALLS\n            caddress.call(id,from,_tos[i],_value);\n        }\n        return true;\n    }\n}',
+  wrappers: Set { 'pow_uint256', 'mul_uint256' } }

@@ -1,0 +1,359 @@
+==== Dependence on predictable environment variable ====
+SWC ID: 116
+Severity: Low
+Contract: PENNY_BY_PENNY
+Function name: fallback
+PC address: 642
+Estimated Gas Usage: 13730 - 54675
+A control flow decision is made based on The block.timestamp environment variable.
+The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:73
+
+if(add_uint256(now, _lockTime)>acc.unlockTime)acc.unlockTime=add_uint256(now, _lockTime)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x20801400340400016, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x10880000202101040, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: unknown, txdata: 0x, decoded_data: , value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Low
+Contract: PENNY_BY_PENNY
+Function name: fallback
+PC address: 950
+Estimated Gas Usage: 27250 - 143611
+Read of persistent state following external call
+The contract account state is accessed after an external call to a fixed address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:21
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: unknown, txdata: 0x, decoded_data: , value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Low
+Contract: PENNY_BY_PENNY
+Function name: fallback
+PC address: 964
+Estimated Gas Usage: 27250 - 143611
+Write to persistent state following external call
+The contract account state is accessed after an external call to a fixed address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:21
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: unknown, txdata: 0x, decoded_data: , value: 0x0
+
+==== Dependence on predictable environment variable ====
+SWC ID: 116
+Severity: Low
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1308
+Estimated Gas Usage: 10307 - 31252
+A control flow decision is made based on The block.timestamp environment variable.
+The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:82
+
+if( acc.balance>=MinSum && acc.balance>=_am && now>acc.unlockTime)
+        {
+            // <yes> <report> REENTRANCY
+            if(msg.sender.call.value(_am)())
+            {
+                acc.balance = sub_uint256(acc.balance, _am);
+                Log.AddMessage(msg.sender,_am,"Collect");
+            }
+        }
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1348
+Estimated Gas Usage: 25394 - 155941
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:85
+
+msg.sender.call.value(_am)()
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x1, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1365
+Estimated Gas Usage: 25394 - 155941
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:87
+
+acc.balance
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2000001, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1378
+Estimated Gas Usage: 25394 - 155941
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:87
+
+acc.balance = sub_uint256(acc.balance, _am)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2000001, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1385
+Estimated Gas Usage: 25394 - 155941
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:88
+
+Log
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2000001, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== Multiple Calls in a Single Transaction ====
+SWC ID: 113
+Severity: Low
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1636
+Estimated Gas Usage: 25394 - 155941
+Multiple calls are executed in the same transaction.
+This call is executed following another call within the same transaction. It is possible that the call never gets executed if a prior call fails permanently. This might be caused intentionally by a malicious callee. If possible, refactor the code such that each transaction only executes one external call or make sure that all callees can be trusted (i.e. they’re part of your own codebase).
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:88
+
+Log.AddMessage(msg.sender,_am,"Collect")
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x4, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1636
+Estimated Gas Usage: 25394 - 155941
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:88
+
+Log.AddMessage(msg.sender,_am,"Collect")
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2000001, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1670
+Estimated Gas Usage: 25394 - 155941
+Read of persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:21
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2000001, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== State access after external call ====
+SWC ID: 107
+Severity: Medium
+Contract: PENNY_BY_PENNY
+Function name: Collect(uint256)
+PC address: 1684
+Estimated Gas Usage: 25394 - 155941
+Write to persistent state following external call
+The contract account state is accessed after an external call to a user defined address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:21
+
+locked_ = false
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x2000001, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: Collect(uint256), txdata: 0x3fe43822, value: 0x0
+
+==== Dependence on predictable environment variable ====
+SWC ID: 116
+Severity: Low
+Contract: PENNY_BY_PENNY
+Function name: fallback
+PC address: 1972
+Estimated Gas Usage: 13681 - 54626
+A control flow decision is made based on The block.timestamp environment variable.
+The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:9
+
+assert(c >= a)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x44100000000000002, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: unknown, txdata: 0x, decoded_data: , value: 0x0
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: PENNY_BY_PENNY
+Function name: Put(uint256)
+PC address: 1973
+Estimated Gas Usage: 13877 - 54822
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:73
+
+add_uint256(now, _lockTime)
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x3000000000000000, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: Put(uint256), txdata: 0x65f3c31a33, decoded_data: (23067955277746585807039532169699544142643629757608081117235690564076443795456,), value: 0x0
+
+

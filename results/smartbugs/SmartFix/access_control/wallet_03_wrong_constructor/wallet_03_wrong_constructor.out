@@ -1,0 +1,40 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 5
+[INFO] reachable : 5
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (ETH_LEAK, (Wallet/migrateTo/[address]), 38, to.transfer(this.balance);)
+
+[INFO] # of basic patch components : 3
+[INFO] extracted components
+[
+InsertLine (20, assume((creator == msg.sender));),
+InsertLine (37, assume((creator == msg.sender));),
+Change (Wallet, initWallet, []) to constructor
+]
+- Regression found, results/access_control/wallet_03_wrong_constructor/candidates/cand_1/patch.sol
+- New best candidate, iter 3, 110.392152071s : results/access_control/wallet_03_wrong_constructor/candidates/cand_3/patch.sol
+- Solution found, iter 3, 110.392152071s : results/access_control/wallet_03_wrong_constructor/candidates/cand_3/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 4
+# Alarm (orginal)         : 1
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 1, 1
+# Patch                   : 1
+- First solution          : results/access_control/wallet_03_wrong_constructor/candidates/cand_3/patch.sol
+- First solution (iter)   : 3
+- First solution (time)   : 110.392152071
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 1.3, Edit: 1, Iter: 3, Time: 110.392152071, results/access_control/wallet_03_wrong_constructor/candidates/cand_3/patch.sol
+
+Time Elapsed (Real) : 110.396808147
+Time Elapsed (CPU)  : 5.190058

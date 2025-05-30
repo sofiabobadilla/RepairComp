@@ -1,0 +1,9 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/unchecked_low_level_calls/mishandled.sol" "results/unchecked_low_level_calls/mishandled" "SendBack"
+
+smartbugs/dataset/unchecked_low_level_calls/mishandled.sol
+{ bugFixes: {},
+  source:
+   '/*\n * @source: https://github.com/seresistvanandras/EthBench/blob/master/Benchmark/Simple/mishandled.sol \n * @author: -\n * @vulnerable_at_lines: 14\n */\n\ncontract SendBack {\n    mapping (address => uint) userBalances;\n    function withdrawBalance() {  \n\t\tuint amountToWithdraw = userBalances[msg.sender];\n\t\tuserBalances[msg.sender] = 0;\n        // <yes> <report> UNCHECKED_LL_CALLS\n\t\tmsg.sender.send(amountToWithdraw);\n\t}\n}',
+  wrappers: Set {} }

@@ -1,0 +1,155 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 3
+[INFO] reachable : 3
+[INFO] Generating Paths ... took 0.000159s
+[INFO] # path : 13
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000565s
+Generating VCs ... took 0.002654s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.033907
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/7 ... [IO] line 16, (balance - oCredit) ... unproven
+2/7 ... [IO] line 26, (credit[msg.sender] + msg.value) ... unproven
+3/7 ... [IO] line 27, (balance + msg.value) ... unproven
+4/7 ... [ETH_LEAK] line 19, callResult = msg.sender.call.value(oCredit)(); ... unproven
+5/7 ... [RE_EL] line 19, callResult = msg.sender.call.value(oCredit)(); ... unproven
+6/7 ... [RE] line 13, (ReentrancyDAO, withdrawAll, []) ... unproven
+7/7 ... [RE] line 25, (ReentrancyDAO, deposit, []) ... unproven
+took 0.480976s
+
+Generating VCs ... took 0.001482s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 20.963021
+[
+-1 -> @Invest_sum >= Σ_u credit__@5
+0 -> @Invest_sum >= Σ_u credit__@5
+]
+[
+]
+1/7 ... [IO] line 16, (balance - oCredit) ... unproven
+2/7 ... [IO] line 26, (credit[msg.sender] + msg.value) ... unproven
+3/7 ... [IO] line 27, (balance + msg.value) ... unproven
+4/7 ... [ETH_LEAK] line 19, callResult = msg.sender.call.value(oCredit)(); ... proven
+5/7 ... [RE_EL] line 19, callResult = msg.sender.call.value(oCredit)(); ... proven
+6/7 ... [RE] line 13, (ReentrancyDAO, withdrawAll, []) ... unproven
+7/7 ... [RE] line 25, (ReentrancyDAO, deposit, []) ... unproven
+took 24.754276s
+
+Generating VCs ... took 0.001277s
+Checking validity of VCs ... took 18.383652s
+
+Generating VCs ... took 0.001849s
+Checking validity of VCs ... took 4.309944s
+
+Generating VCs ... took 0.00132199999999s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 5 Total elapsed : 75.719846
+[
+-1 -> ((Σcredit__@5 == balance__@7) /\ @Invest_sum >= Σ_u credit__@5)
+0 -> ((Σcredit__@5 == balance__@7) /\ @Invest_sum >= Σ_u credit__@5)
+]
+[
+]
+1/7 ... [IO] line 16, (balance - oCredit) ... unproven
+2/7 ... [IO] line 26, (credit[msg.sender] + msg.value) ... unproven
+3/7 ... [IO] line 27, (balance + msg.value) ... unproven
+4/7 ... [ETH_LEAK] line 19, callResult = msg.sender.call.value(oCredit)(); ... proven
+5/7 ... [RE_EL] line 19, callResult = msg.sender.call.value(oCredit)(); ... proven
+6/7 ... [RE] line 13, (ReentrancyDAO, withdrawAll, []) ... unproven
+7/7 ... [RE] line 25, (ReentrancyDAO, deposit, []) ... unproven
+took 28.552354s
+
+Generating VCs ... took 0.00130999999999s
+Checking validity of VCs ... took 20.679526s
+
+Generating VCs ... took 0.00140999999999s
+Checking validity of VCs ... took 4.793675s
+
+Generating VCs ... took 0.00129800000001s
+Checking validity of VCs ... took 2.83187s
+
+Generating VCs ... took 0.001267s
+Checking validity of VCs ... took 0.759071s
+
+Iter : 10 To explore : 6 Explored : 26 Total elapsed : 105.600934
+Generating VCs ... took 0.001344s
+Checking validity of VCs ... took 4.124451s
+
+Generating VCs ... took 0.00142099999999s
+Checking validity of VCs ... took 1.570981s
+
+Generating VCs ... took 0.001277s
+Checking validity of VCs ... took 4.560607s
+
+Generating VCs ... took 0.00144300000001s
+Checking validity of VCs ... took 1.138829s
+
+Generating VCs ... took 0.001397s
+Checking validity of VCs ... took 3.917631s
+
+Generating VCs ... took 0.002746s
+Checking validity of VCs ... took 1.135449s
+
+Generating VCs ... took 0.001364s
+Checking validity of VCs ... took 4.081453s
+
+Generating VCs ... took 0.000709000000001s
+Checking validity of VCs ... 
+1/8 ... [NO_EFFECT] line 14, (@pre2 == oCredit) ... unproven
+2/8 ... [NO_EFFECT] line 16, (@pre1 == balance) ... unproven
+3/8 ... [NO_EFFECT] line 26, (@pre4 == credit[msg.sender]) ... unproven
+4/8 ... [NO_EFFECT] line 27, (@pre3 == balance) ... unproven
+5/8 ... [ASSIGN_CONST] line 16, (balance == 0) ... unproven
+6/8 ... [ASSIGN_CONST] line 26, (credit[msg.sender] == 0) ... unproven
+7/8 ... [ASSIGN_CONST] line 27, (balance == 0) ... unproven
+8/8 ... [DEAD] line 15, false ... unproven
+took 0.602607s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 16, (balance - oCredit) : unproven
+[2] [IO] line 26, (credit[msg.sender] + msg.value) : unproven
+[3] [IO] line 27, (balance + msg.value) : unproven
+[4] [ETH_LEAK] line 19, callResult = msg.sender.call.value(oCredit)(); : proven
+[5] [RE_EL] line 19, callResult = msg.sender.call.value(oCredit)(); : proven
+[6] [RE] line 13, (ReentrancyDAO, withdrawAll, []) : unproven
+[7] [RE] line 25, (ReentrancyDAO, deposit, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 14, (@pre2 == oCredit) : unproven
+[2] [NO_EFFECT] line 16, (@pre1 == balance) : unproven
+[3] [NO_EFFECT] line 26, (@pre4 == credit[msg.sender]) : unproven
+[4] [NO_EFFECT] line 27, (@pre3 == balance) : unproven
+[5] [ASSIGN_CONST] line 16, (balance == 0) : unproven
+[6] [ASSIGN_CONST] line 26, (credit[msg.sender] == 0) : unproven
+[7] [ASSIGN_CONST] line 27, (balance == 0) : unproven
+[8] [DEAD] line 15, false : unproven
+
+============ Statistics ============
+# Iter                    : 17
+# Alarm / Query           : 5 / 7
+- integer over/underflow  : 3 / 3
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 1
+- reentrancy              : 2 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 126.760356903
+Time Elapsed (CPU)  : 126.750379

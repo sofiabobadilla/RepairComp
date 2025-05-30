@@ -1,0 +1,119 @@
+2024-07-04 18:32:59,971 - root - INFO - 
+Reading file 'random_number_generator.sol' 
+
+2024-07-04 18:32:59,972 - root - INFO - 
+Pragma: 0.4.25 
+
+2024-07-04 18:32:59,972 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/bad_randomness/random_number_generator.sol 
+
+2024-07-04 18:32:59,972 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/bad_randomness/random_number_generator_1round.sol  
+
+2024-07-04 18:32:59,981 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:32:59,984 - root - INFO - 
+Running command: solc-select use --always-install 0.4.25 
+
+2024-07-04 18:33:00,152 - root - INFO - 
+Running command: slither shared/bad_randomness/random_number_generator.sol --json - 
+
+2024-07-04 18:33:00,969 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [{"type": "function", "name": "random", "source_mapping": {"start": 416, "length": 480, "filename_relative": "shared/bad_randomness/random_number_generator.sol", "filename_absolute": "/home/ethsec/shared/bad_randomness/random_number_generator.sol", "filename_short": "shared/bad_randomness/random_number_generator.sol", "is_dependency": false, "lines": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25], "starting_column": 3, "ending_column": 4}, "type_specific_fields": {"parent": {"type": "contract", "name": "RandomNumberGenerator", "source_mapping": {"start": 302, "length": 596, "filename_relative": "shared/bad_randomness/random_number_generator.sol", "filename_absolute": "/home/ethsec/shared/bad_randomness/random_number_generator.sol", "filename_short": "shared/bad_randomness/random_number_generator.sol", "is_dependency": false, "lines": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26], "starting_column": 1, "ending_column": 2}}, "signature": "random(uint256)"}}, {"type": "node", "name": "uint256((h / x)) % max + 1", "source_mapping": {"start": 858, "length": 33, "filename_relative": "shared/bad_randomness/random_number_generator.sol", "filename_absolute": "/home/ethsec/shared/bad_randomness/random_number_generator.sol", "filename_short": "shared/bad_randomness/random_number_generator.sol", "is_dependency": false, "lines": [24], "starting_column": 5, "ending_column": 38}, "type_specific_fields": {"parent": {"type": "function", "name": "random", "source_mapping": {"start": 416, "length": 480, "filename_relative": "shared/bad_randomness/random_number_generator.sol", "filename_absolute": "/home/ethsec/shared/bad_randomness/random_number_generator.sol", "filename_short": "shared/bad_randomness/random_number_generator.sol", "is_dependency": false, "lines": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25], "starting_column": 3, "ending_column": 4}, "type_specific_fields": {"parent": {"type": "contract", "name": "RandomNumberGenerator", "source_mapping": {"start": 302, "length": 596, "filename_relative": "shared/bad_randomness/random_number_generator.sol", "filename_absolute": "/home/ethsec/shared/bad_randomness/random_number_generator.sol", "filename_short": "shared/bad_randomness/random_number_generator.sol", "is_dependency": false, "lines": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26], "starting_column": 1, "ending_column": 2}}, "signature": "random(uint256)"}}}}], "description": "RandomNumberGenerator.random(uint256) (shared/bad_randomness/random_number_generator.sol#14-25) uses a weak PRNG: \\"uint256((h / x)) % max + 1 (shared/bad_randomness/random_number_generator.sol#24)\\" \\n", "markdown": "[RandomNumberGenerator.random(uint256)](shared/bad_randomness/random_number_generator.sol#L14-L25) uses a weak PRNG: \\"[uint256((h / x)) % max + 1](shared/bad_randomness/random_number_generator.sol#L24)\\" \\n", "first_markdown_element": "shared/bad_randomness/random_number_generator.sol#L14-L25", "id": "d8e05a1f69f9a486a331ad66a53b0fbefb2dab55dde8e13628c4a3685eea151f", "check": "weak-prng", "impact": "High", "confidence": "Medium"}, {"elements": [{"type": "function", "name": "random", "source_mapping": {"start": 416, "length": 480, "filename_relative": "shared/bad_randomness/random_number_generator.sol", "filename_absolute": "/home/ethsec/shared/bad_randomness/random_number_generator.sol", "filename_short": "shared/bad_randomness/random_number_generator.sol", "is_dependency": false, "lines": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25], "starting_column": 3, "ending_column": 4}, "type_specific_fields": {"parent": {"type": "contract", "name": "RandomNumberGenerator", "source_mapping": {"start": 302, "length": 596, "filename_relative": "shared/bad_randomness/random_number_generator.sol", "filename_absolute": "/home/ethsec/shared/bad_randomness/random_number_generator.sol", "filename_short": "shared/bad_randomness/random_number_generator.sol", "is_dependency": false, "lines": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26], "starting_column": 1, "ending_column": 2}}, "signature": "random(uint256)"}}], "description": "RandomNumberGenerator.random(uint256) (shared/bad_randomness/random_number_generator.sol#14-25) is never used and should be removed\\n", "markdown": "[RandomNumberGenerator.random(uint256)](shared/bad_randomness/random_number_generator.sol#L14-L25) is never used and should be removed\\n", "first_markdown_element": "shared/bad_randomness/random_number_generator.sol#L14-L25", "id": "5b6fe05c86e57f6b7fa5de38c6475e0dafa8a0609263da8f2fc5482c05c20c71", "check": "dead-code", "impact": "Informational", "confidence": "Medium"}, {"elements": [], "description": "solc-0.4.25 is not recommended for deployment\\n", "markdown": "solc-0.4.25 is not recommended for deployment\\n", "first_markdown_element": "", "id": "4d64003d70a62b1c6963f871e841b6cbd633d07d95554e1a50e0f25d9b71ebb3", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [{"type": "pragma", "name": "^0.4.25", "source_mapping": {"start": 192, "length": 24, "filename_relative": "shared/bad_randomness/random_number_generator.sol", "filename_absolute": "/home/ethsec/shared/bad_randomness/random_number_generator.sol", "filename_short": "shared/bad_randomness/random_number_generator.sol", "is_dependency": false, "lines": [7], "starting_column": 1, "ending_column": 25}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".25"]}}], "description": "Pragma version^0.4.25 (shared/bad_randomness/random_number_generator.sol#7) allows old versions\\n", "markdown": "Pragma version[^0.4.25](shared/bad_randomness/random_number_generator.sol#L7) allows old versions\\n", "first_markdown_element": "shared/bad_randomness/random_number_generator.sol#L7", "id": "f14bd7185801eecb378bcf6dbbdacdd41a6636d30dccc26022b3e059dc04ef2f", "check": "solc-version", "impact": "Informational", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:33:00,970 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:33:03,203 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.25;
+
+contract RandomNumberGenerator {
+
+    uint256 private salt = block.timestamp;
+
+    function random(uint max) view private returns (uint256 result) {
+        uint256 x = salt * 100 / max;
+        uint256 y = salt * block.number / (salt % 5);
+        uint256 seed = block.number / 3 + (salt % 300) + y;
+        bytes32 h = block.blockhash(seed);
+        return uint256(h) % max + 1;
+    }
+} 
+
+2024-07-04 18:33:03,203 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/bad_randomness/random_number_generator_2round.sol  
+
+2024-07-04 18:33:03,203 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:33:05,044 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.25;
+
+contract RandomNumberGenerator {
+
+    uint256 private salt = block.timestamp;
+
+    function random(uint max) view private returns (uint256 result) {
+        uint256 x = salt * 100 / max;
+        uint256 y = salt * block.number / (salt % 5);
+        uint256 seed = block.number / 3 + (salt % 300) + y;
+        bytes32 h = block.blockhash(seed);
+        return uint256(keccak256(abi.encodePacked(h, x))) % max + 1;
+    }
+} 
+
+2024-07-04 18:33:05,045 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/bad_randomness/random_number_generator_3round.sol  
+
+2024-07-04 18:33:05,045 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:33:06,683 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.25;
+
+contract RandomNumberGenerator {
+
+    uint256 private salt = block.timestamp;
+
+    function random(uint max) view private returns (uint256 result) {
+
+        uint256 x = salt * 100 / max;
+
+        uint256 y = salt * block.number / (salt % 5);
+
+        uint256 seed = block.number / 3 + (salt % 300) + y;
+
+        bytes32 h = block.blockhash(seed);
+
+        return uint256(h) % max + 1;
+    }
+} 
+
+2024-07-04 18:33:06,683 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/bad_randomness/random_number_generator_4round.sol  
+
+2024-07-04 18:33:06,683 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:33:08,627 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.25;
+
+contract RandomNumberGenerator {
+
+    uint256 private salt = block.timestamp;
+
+    function random(uint max) view private returns (uint256 result) {
+        uint256 x = salt * 100 / max;
+        uint256 y = salt * block.number / (salt % 5);
+        uint256 seed = block.number / 3 + (salt % 300) + y;
+        bytes32 h = block.blockhash(seed);
+        return uint256(keccak256(abi.encodePacked(h, x))) % max + 1;
+    }
+} 
+

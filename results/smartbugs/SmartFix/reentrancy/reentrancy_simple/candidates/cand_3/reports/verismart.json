@@ -1,0 +1,115 @@
+{
+  "fileName": "results/reentrancy/reentrancy_simple/candidates/cand_3/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 17,
+  "time": 14.776712,
+  "errMsg": null,
+  "invmap": [
+    { "key": "-1", "formula": "eq(_locked__@3:bool,cond(true))" },
+    { "key": "0", "formula": "true" }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Reentrance",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(userBalance[msg.sender] + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 35,
+      "signatures": [
+        {
+          "contractName": "Reentrance",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.call.value(userBalance[msg.sender])()",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "RE_EL",
+      "line": 35,
+      "signatures": [
+        {
+          "contractName": "Reentrance",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.call.value(userBalance[msg.sender])()",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "RE",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "Reentrance",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(Reentrance, addToBalance, [])",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "Reentrance",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(Reentrance, withdrawBalance, [])",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Reentrance",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == userBalance[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "ASSIGN_CONST",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Reentrance",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(userBalance[msg.sender] == 0)",
+      "status": "unproven"
+    }
+  ]
+}

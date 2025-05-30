@@ -1,0 +1,40 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 20
+[INFO] reachable : 10
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (TokenBank/Deposit/[]), 72, (Holders[msg.sender] + msg.value)),
+    (IO, (TokenBank/WithdrawToHolder/[address_uint256]), 96, (Holders[_addr] - _wei))
+
+[INFO] # of basic patch components : 2
+[INFO] extracted components
+[
+InsertLine (72, assume(((Holders[msg.sender] + msg.value) >= Holders[msg.sender]));),
+InsertLine (96, assume((Holders[_addr] >= _wei));)
+]
+- New best candidate, iter 1, 317.736398935s : results/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839/candidates/cand_2/patch.sol
+- New best candidate, iter 3, 652.9135921s : results/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839/candidates/cand_3/patch.sol
+- Solution found, iter 3, 652.9135921s : results/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839/candidates/cand_3/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 4
+# Alarm (orginal)         : 2
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : results/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839/candidates/cand_3/patch.sol
+- First solution (iter)   : 3
+- First solution (time)   : 652.9135921
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 3, Time: 652.9135921, results/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839/candidates/cand_3/patch.sol
+
+Time Elapsed (Real) : 652.918022156
+Time Elapsed (CPU)  : 5.749322

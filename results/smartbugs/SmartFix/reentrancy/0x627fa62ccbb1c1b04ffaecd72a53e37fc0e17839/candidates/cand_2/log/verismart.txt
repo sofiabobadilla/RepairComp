@@ -1,0 +1,196 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 20
+[INFO] reachable : 10
+[INFO] Generating Paths ... took 0.000316s
+[INFO] # path : 33
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000843s
+Generating VCs ... took 0.004777s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.049394
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/13 ... [IO] line 71, (Holders[msg.sender] + msg.value) ... unproven
+2/13 ... [IO] line 97, (Holders[_addr] - _wei) ... proven
+3/13 ... [ETH_LEAK] line 94, _addr.call.value(_wei)() ... unproven
+4/13 ... [RE_EL] line 94, _addr.call.value(_wei)() ... unproven
+5/13 ... [RE] line 14, (TokenBank, changeOwner, [address]) ... unproven
+6/13 ... [RE] line 21, (TokenBank, confirmOwner, []) ... unproven
+7/13 ... [RE] line 53, (TokenBank, initTokenBank, []) ... unproven
+8/13 ... [RE] line 60, (TokenBank, @fallback, []) ... unproven
+9/13 ... [RE] line 66, (TokenBank, Deposit, []) ... unproven
+10/13 ... [RE] line 75, (TokenBank, WitdrawTokenToHolder, [address, address, uint256]) ... unproven
+11/13 ... [RE] line 86, (TokenBank, WithdrawToHolder, [address, uint256]) ... unproven
+12/13 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
+13/13 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
+took 0.424152s
+
+Generating VCs ... took 0.002909s
+Checking validity of VCs ... took 0.034038s
+
+Generating VCs ... took 0.002991s
+Checking validity of VCs ... took 0.026211s
+
+Generating VCs ... took 0.002962s
+Checking validity of VCs ... took 0.026032s
+
+Generating VCs ... took 0.002934s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 5 Total elapsed : 0.964344
+[
+-1 -> ((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true))
+0 -> ((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true))
+]
+[
+]
+1/13 ... [IO] line 71, (Holders[msg.sender] + msg.value) ... unproven
+2/13 ... [IO] line 97, (Holders[_addr] - _wei) ... proven
+3/13 ... [ETH_LEAK] line 94, _addr.call.value(_wei)() ... proven
+4/13 ... [RE_EL] line 94, _addr.call.value(_wei)() ... proven
+5/13 ... [RE] line 14, (TokenBank, changeOwner, [address]) ... proven
+6/13 ... [RE] line 21, (TokenBank, confirmOwner, []) ... proven
+7/13 ... [RE] line 53, (TokenBank, initTokenBank, []) ... unproven
+8/13 ... [RE] line 60, (TokenBank, @fallback, []) ... unproven
+9/13 ... [RE] line 66, (TokenBank, Deposit, []) ... unproven
+10/13 ... [RE] line 75, (TokenBank, WitdrawTokenToHolder, [address, address, uint256]) ... proven
+11/13 ... [RE] line 86, (TokenBank, WithdrawToHolder, [address, uint256]) ... unproven
+12/13 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
+13/13 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
+took 0.944203s
+
+Generating VCs ... took 0.003129s
+Checking validity of VCs ... took 0.416114s
+
+Generating VCs ... took 0.003001s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 7 Total elapsed : 13.659651
+[
+-1 -> (((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true)) /\ @Invest_sum >= Σ_u Holders__@82)
+0 -> (((Read(@TU, newOwner__@3) == true) /\ (Read(@TU, owner__@7) == true)) /\ @Invest_sum >= Σ_u Holders__@82)
+]
+[
+]
+1/13 ... [IO] line 71, (Holders[msg.sender] + msg.value) ... unproven
+2/13 ... [IO] line 97, (Holders[_addr] - _wei) ... proven
+3/13 ... [ETH_LEAK] line 94, _addr.call.value(_wei)() ... proven
+4/13 ... [RE_EL] line 94, _addr.call.value(_wei)() ... proven
+5/13 ... [RE] line 14, (TokenBank, changeOwner, [address]) ... proven
+6/13 ... [RE] line 21, (TokenBank, confirmOwner, []) ... proven
+7/13 ... [RE] line 53, (TokenBank, initTokenBank, []) ... unproven
+8/13 ... [RE] line 60, (TokenBank, @fallback, []) ... unproven
+9/13 ... [RE] line 66, (TokenBank, Deposit, []) ... unproven
+10/13 ... [RE] line 75, (TokenBank, WitdrawTokenToHolder, [address, address, uint256]) ... proven
+11/13 ... [RE] line 86, (TokenBank, WithdrawToHolder, [address, uint256]) ... unproven
+12/13 ... [TX_ORG] line 24, assume((msg.sender == newOwner)); ... proven
+13/13 ... [TX_ORG] line 32, assume((owner == msg.sender)); ... proven
+took 12.362767s
+
+Generating VCs ... took 0.003007s
+Checking validity of VCs ... took 10.328655s
+
+Generating VCs ... took 0.003s
+Checking validity of VCs ... took 47.200655s
+
+Iter : 10 To explore : 21 Explored : 76 Total elapsed : 71.846571
+Generating VCs ... took 0.003086s
+Checking validity of VCs ... took 43.527009s
+
+Generating VCs ... took 0.00309499999999s
+Checking validity of VCs ... took 11.385959s
+
+Generating VCs ... took 0.00303599999999s
+Checking validity of VCs ... took 1.731332s
+
+Generating VCs ... took 0.00304499999999s
+Checking validity of VCs ... took 11.820852s
+
+Generating VCs ... took 0.00305s
+Checking validity of VCs ... took 3.400722s
+
+Generating VCs ... took 0.00334799999999s
+Checking validity of VCs ... took 1.975689s
+
+Generating VCs ... took 0.003208s
+Checking validity of VCs ... took 2.181176s
+
+Generating VCs ... took 0.00295600000001s
+Checking validity of VCs ... took 12.112621s
+
+Generating VCs ... took 0.00143299999999s
+Checking validity of VCs ... 
+1/15 ... [NO_EFFECT] line 18, (@pre8 == newOwner) ... unproven
+2/15 ... [NO_EFFECT] line 26, (@pre9 == owner) ... unproven
+3/15 ... [NO_EFFECT] line 56, (@pre5 == owner) ... unproven
+4/15 ... [NO_EFFECT] line 71, (@pre6 == Holders[msg.sender]) ... unproven
+5/15 ... [NO_EFFECT] line 97, (@pre7 == Holders[_addr]) ... unproven
+6/15 ... [ASSIGN_CONST] line 71, (Holders[msg.sender] == 0) ... unproven
+7/15 ... [ASSIGN_CONST] line 97, (Holders[_addr] == 0) ... unproven
+8/15 ... [DEAD] line 24, false ... unproven
+9/15 ... [DEAD] line 32, false ... unproven
+10/15 ... [DEAD] line 63, false ... unproven
+11/15 ... [DEAD] line 69, false ... unproven
+12/15 ... [DEAD] line 79, false ... unproven
+13/15 ... [DEAD] line 82, false ... unproven
+14/15 ... [DEAD] line 91, false ... unproven
+15/15 ... [DEAD] line 96, false ... unproven
+took 0.873129s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 71, (Holders[msg.sender] + msg.value) : unproven
+[2] [IO] line 97, (Holders[_addr] - _wei) : proven
+[3] [ETH_LEAK] line 94, _addr.call.value(_wei)() : proven
+[4] [RE_EL] line 94, _addr.call.value(_wei)() : proven
+[5] [RE] line 14, (TokenBank, changeOwner, [address]) : proven
+[6] [RE] line 21, (TokenBank, confirmOwner, []) : proven
+[7] [RE] line 53, (TokenBank, initTokenBank, []) : unproven
+[8] [RE] line 60, (TokenBank, @fallback, []) : unproven
+[9] [RE] line 66, (TokenBank, Deposit, []) : unproven
+[10] [RE] line 75, (TokenBank, WitdrawTokenToHolder, [address, address, uint256]) : proven
+[11] [RE] line 86, (TokenBank, WithdrawToHolder, [address, uint256]) : unproven
+[12] [TX_ORG] line 24, assume((msg.sender == newOwner)); : proven
+[13] [TX_ORG] line 32, assume((owner == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 18, (@pre8 == newOwner) : unproven
+[2] [NO_EFFECT] line 26, (@pre9 == owner) : unproven
+[3] [NO_EFFECT] line 56, (@pre5 == owner) : unproven
+[4] [NO_EFFECT] line 71, (@pre6 == Holders[msg.sender]) : unproven
+[5] [NO_EFFECT] line 97, (@pre7 == Holders[_addr]) : unproven
+[6] [ASSIGN_CONST] line 71, (Holders[msg.sender] == 0) : unproven
+[7] [ASSIGN_CONST] line 97, (Holders[_addr] == 0) : unproven
+[8] [DEAD] line 24, false : unproven
+[9] [DEAD] line 32, false : unproven
+[10] [DEAD] line 63, false : unproven
+[11] [DEAD] line 69, false : unproven
+[12] [DEAD] line 79, false : unproven
+[13] [DEAD] line 82, false : unproven
+[14] [DEAD] line 91, false : unproven
+[15] [DEAD] line 96, false : unproven
+
+============ Statistics ============
+# Iter                    : 17
+# Alarm / Query           : 5 / 13
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 1
+- reentrancy              : 4 / 7
+- tx.origin               : 0 / 2
+
+Time Elapsed (Real) : 160.917444944
+Time Elapsed (CPU)  : 160.906681

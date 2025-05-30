@@ -1,0 +1,14 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/reentrancy/reentrancy_dao.sol" "results/reentrancy/reentrancy_dao" "ReentrancyDAO"
+
+smartbugs/dataset/reentrancy/reentrancy_dao.sol
+{ bugFixes:
+   { '63a-t1`c@1:&mlbW?|ta\\1fR@gAP:NV':
+      'credit[msg.sender] = add_uint256(credit[msg.sender], msg.value)',
+     ':to*A_g!<38t4"}GWAN&n_': ' function withdrawAll() nonReentrant_ ',
+     '"A80>XXn610K1`A>,Y': ' function deposit() nonReentrant_ ',
+     'aO-HDEx8$#JMImPTWJ;[L~?': 'contract ReentrancyDAO  is sGuard ' },
+  source:
+   '/*\n * @source: https://github.com/ConsenSys/evm-analyzer-benchmark-suite\n * @author: Suhabe Bugrara\n * @vulnerable_at_lines: 18\n */\n\n\naO-HDEx8$#JMImPTWJ;[L~?{\n    mapping (address => uint) credit;\n    uint balance;\n\n    :to*A_g!<38t4"}GWAN&n_ public {\n        uint oCredit = credit[msg.sender];\n        if (oCredit > 0) {\n            balance -= oCredit;\n            // <yes> <report> REENTRANCY\n            bool callResult = msg.sender.call.value(oCredit)();\n            require (callResult);\n            credit[msg.sender] = 0;\n        }\n    }\n\n    "A80>XXn610K1`A>,Y public payable {\n        63a-t1`c@1:&mlbW?|ta\\1fR@gAP:NV;\n        balance += msg.value;\n    }\n}\n',
+  wrappers: Set { 'add_uint256', 'nonReentrant_' } }

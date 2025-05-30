@@ -1,0 +1,30 @@
+[
+    {
+        "description": "Reentrancy in WalletLibrary.confirm(bytes32) (shared/access_control/parity_wallet_bug_2.sol#279-293):\n\tExternal calls:\n\t- ! m_txs[_h].to.call.value(m_txs[_h].value)(m_txs[_h].data) (shared/access_control/parity_wallet_bug_2.sol#285)\n\tState variables written after the call(s):\n\t- delete m_txs[_h] (shared/access_control/parity_wallet_bug_2.sol#290)\n\tWalletLibrary.m_txs (shared/access_control/parity_wallet_bug_2.sol#405) can be used in cross function reentrancies:\n\t- WalletLibrary.clearPending() (shared/access_control/parity_wallet_bug_2.sol#369-380)\n\t- WalletLibrary.confirm(bytes32) (shared/access_control/parity_wallet_bug_2.sol#279-293)\n\t- WalletLibrary.execute(address,uint256,bytes) (shared/access_control/parity_wallet_bug_2.sol#241-266)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2.sol#L279-L293"
+    },
+    {
+        "description": "WalletLibrary.kill(address) (shared/access_control/parity_wallet_bug_2.sol#233-235) allows anyone to destruct the contract\n",
+        "check": "suicidal",
+        "impact": "High",
+        "confidence": "High",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2.sol#L233-L235"
+    },
+    {
+        "description": "WalletLibrary.confirm(bytes32).created (shared/access_control/parity_wallet_bug_2.sol#281) is a local variable never initialized\n",
+        "check": "uninitialized-local",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2.sol#L281"
+    },
+    {
+        "description": "WalletLibrary.execute(address,uint256,bytes).created (shared/access_control/parity_wallet_bug_2.sol#245) is a local variable never initialized\n",
+        "check": "uninitialized-local",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2.sol#L245"
+    }
+]

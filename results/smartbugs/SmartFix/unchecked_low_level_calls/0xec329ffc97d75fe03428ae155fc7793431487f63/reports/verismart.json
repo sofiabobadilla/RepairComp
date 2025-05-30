@@ -1,0 +1,103 @@
+{
+  "fileName": "smartbugs/dataset/unchecked_low_level_calls/0xec329ffc97d75fe03428ae155fc7793431487f63.sol",
+  "baseName": "0xec329ffc97d75fe03428ae155fc7793431487f63.sol",
+  "iter": 2,
+  "time": 0.359902,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@12:address),cond(true))"
+    },
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@12:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "execute",
+          "argTypes": [ "address", "uint256", "dbytes" ]
+        }
+      ],
+      "exp": "_dst.call.value(_value)(_data);",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "RE_EL",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "execute",
+          "argTypes": [ "address", "uint256", "dbytes" ]
+        }
+      ],
+      "exp": "_dst.call.value(_value)(_data);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "TX_ORG",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Owned",
+          "methodName": "execute",
+          "argTypes": [ "address", "uint256", "dbytes" ]
+        }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre1 == owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "DEAD",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Owned",
+          "methodName": "execute",
+          "argTypes": [ "address", "uint256", "dbytes" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

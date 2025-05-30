@@ -1,0 +1,144 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 12
+[INFO] reachable : 5
+[INFO] Generating Paths ... took 0.000135s
+[INFO] # path : 10
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: true
+[INFO] Performing Interval Analysis ... took 0.000198s
+Generating VCs ... took 0.001614s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.03195
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/2 ... [IO] line 27, (tokenBalance[msg.sender] + 20) ... unproven
+2/2 ... [RE] line 26, (ModifierEntrancy, airDrop, []) ... unproven
+took 0.054003s
+
+Generating VCs ... took 0.00052s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.093513
+[
+-1 -> (_locked__@3 == true)
+0 -> true
+]
+[
+]
+1/2 ... [IO] line 27, (tokenBalance[msg.sender] + 20) ... unproven
+2/2 ... [RE] line 26, (ModifierEntrancy, airDrop, []) ... proven
+took 0.087925s
+
+Generating VCs ... took 0.000556s
+Checking validity of VCs ... took 0.263234s
+
+Generating VCs ... took 0.00077s
+Checking validity of VCs ... took 0.146167s
+
+Generating VCs ... took 0.000514s
+Checking validity of VCs ... took 0.040086s
+
+Generating VCs ... took 0.000535s
+Checking validity of VCs ... took 0.04175s
+
+Generating VCs ... took 0.000517s
+Checking validity of VCs ... took 0.182783s
+
+Generating VCs ... took 0.000574s
+Checking validity of VCs ... took 0.054348s
+
+Generating VCs ... took 0.000526s
+Checking validity of VCs ... took 0.160345s
+
+Iter : 10 To explore : 7 Explored : 21 Total elapsed : 1.069353
+Generating VCs ... took 0.00051s
+Checking validity of VCs ... took 0.302342s
+
+Generating VCs ... took 0.000518s
+Checking validity of VCs ... took 0.601657s
+
+Generating VCs ... took 0.000521s
+Checking validity of VCs ... took 0.369324s
+
+Generating VCs ... took 0.000782s
+Checking validity of VCs ... took 0.708242s
+
+Generating VCs ... took 0.00051s
+Checking validity of VCs ... took 0.010526s
+
+Generating VCs ... took 0.000543s
+Checking validity of VCs ... took 0.0156s
+
+Generating VCs ... took 0.000551s
+Checking validity of VCs ... took 0.016974s
+
+Generating VCs ... took 0.000505s
+Checking validity of VCs ... took 0.015923s
+
+Generating VCs ... took 0.000507s
+Checking validity of VCs ... took 0.017941s
+
+Generating VCs ... took 0.000514s
+Checking validity of VCs ... took 0.015306s
+
+Iter : 20 To explore : 6 Explored : 30 Total elapsed : 3.150783
+Generating VCs ... took 0.000527s
+Checking validity of VCs ... took 0.016955s
+
+Generating VCs ... took 0.000506s
+Checking validity of VCs ... took 0.016274s
+
+Generating VCs ... took 0.000881s
+Checking validity of VCs ... took 0.058465s
+
+Generating VCs ... took 0.000565s
+Checking validity of VCs ... took 0.094423s
+
+Generating VCs ... took 0.000517s
+Checking validity of VCs ... took 0.091968s
+
+Generating VCs ... took 0.000518s
+Checking validity of VCs ... took 0.13317s
+
+Generating VCs ... took 0.000184s
+Checking validity of VCs ... 
+1/4 ... [NO_EFFECT] line 27, (@pre1 == tokenBalance[msg.sender]) ... unproven
+2/4 ... [ASSIGN_CONST] line 27, (tokenBalance[msg.sender] == 0) ... unproven
+3/4 ... [DEAD] line 32, false ... unproven
+4/4 ... [DEAD] line 37, false ... unproven
+took 0.075467s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 27, (tokenBalance[msg.sender] + 20) : unproven
+[2] [RE] line 26, (ModifierEntrancy, airDrop, []) : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 27, (@pre1 == tokenBalance[msg.sender]) : unproven
+[2] [ASSIGN_CONST] line 27, (tokenBalance[msg.sender] == 0) : unproven
+[3] [DEAD] line 32, false : unproven
+[4] [DEAD] line 37, false : unproven
+
+============ Statistics ============
+# Iter                    : 26
+# Alarm / Query           : 1 / 2
+- integer over/underflow  : 1 / 1
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 1
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 3.6667201519
+Time Elapsed (CPU)  : 3.64225

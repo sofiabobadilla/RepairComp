@@ -1,0 +1,62 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 2
+[INFO] reachable : 2
+[INFO] Generating Paths ... took 5.6e-05s
+[INFO] # path : 5
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 9.4e-05s
+Generating VCs ... took 0.000224s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.021073
+[
+0 -> true
+]
+[
+]
+1/1 ... [ETH_LEAK] line 14, msg.sender.send(amountToWithdraw); ... unproven
+took 0.073874s
+
+Generating VCs ... took 0.000126s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 6.507115
+[
+0 -> @Invest_sum >= Σ_u userBalances__@5
+]
+[
+]
+1/1 ... [ETH_LEAK] line 14, msg.sender.send(amountToWithdraw); ... proven
+took 6.651566s
+
+Generating VCs ... took 8.39999999993e-05s
+Checking validity of VCs ... 
+1/1 ... [NO_EFFECT] line 11, (@pre1 == amountToWithdraw) ... unproven
+took 0.026281s
+
+
+===== Vulnerability Report =====
+[1] [ETH_LEAK] line 14, msg.sender.send(amountToWithdraw); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 11, (@pre1 == amountToWithdraw) : unproven
+
+============ Statistics ============
+# Iter                    : 2
+# Alarm / Query           : 0 / 1
+- integer over/underflow  : 0 / 0
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 6.78541898727
+Time Elapsed (CPU)  : 6.772636

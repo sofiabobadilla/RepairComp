@@ -1,0 +1,15 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/access_control/wallet_04_confused_sign/wallet_04_confused_sign.sol" "report_run/access_control/wallet_04_confused_sign" "Wallet"
+
+patches/access_control/wallet_04_confused_sign/wallet_04_confused_sign.sol
+{ bugFixes:
+   { '%9,>N': 'add_uint256(a, b)',
+     '~rKs53NRx^t-M,DB~g': ' function deposit() nonReentrant_ ',
+     'HMrMWyY?7VG$H@6v3Bb_cNK39O!': 'contract Wallet  is sGuard  is sGuard ',
+     '?pyaQ': 'sub_uint256(a, b)',
+     'z?`%r\\{Loq=~0da': 'contract sGuard is sGuard ',
+     ')?-0g}pP3OsxyD@~De>oN9v#[\\T"(o].O': ' function withdraw(uint256 amount) nonReentrant_ ' },
+  source:
+   'z?`%r\\{Loq=~0da{\n  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    assert(b <= a);\n    return ?pyaQ;\n  }\n  \n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = %9,>N;\n    assert(c >= a);\n    return c;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n}\n/*\n * @source: https://smartcontractsecurity.github.io/SWC-registry/docs/SWC-105#wallet-04-confused-signsol\n * @author: -\n * @vulnerable_at_lines: 30\n */\n\n\n /* User can add pay in and withdraw Ether.\n    Unfortunatelty, the developer was drunk and used the wrong comparison operator in "withdraw()"\n    Anybody can withdraw arbitrary amounts of Ether :()\n */\n\n HMrMWyY?7VG$H@6v3Bb_cNK39O!{\n     address creator;\n\n     mapping(address => uint256) balances;\n\n     constructor() public {\n         creator = msg.sender;\n     }\n\n      ~rKs53NRx^t-M,DB~g nonReentrant_  public payable {\n         assert(add_uint256(balances[msg.sender], msg.value) > balances[msg.sender]);\n         balances[msg.sender] = add_uint256(balances[msg.sender], msg.value);\n     }\n\n      )?-0g}pP3OsxyD@~De>oN9v#[\\T"(o].O nonReentrant_  public {\n         // <yes> <report> ACCESS_CONTROL\n         require(amount >= balances[msg.sender]);\n         msg.sender.transfer(amount);\n         balances[msg.sender] = sub_uint256(balances[msg.sender], amount);\n     }\n\n     // In an emergency the owner can migrate  allfunds to a different address.\n\n     function migrateTo(address to) public {\n         require(creator == msg.sender);\n         to.transfer(this.balance);\n     }\n\n }\n',
+  wrappers: Set { 'add_uint256', 'nonReentrant_', 'sub_uint256' } }

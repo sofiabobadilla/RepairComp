@@ -1,0 +1,65 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 10
+[INFO] reachable : 9
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (PrivateDeposit/CashOut/[uint256]), 54, (balances[msg.sender] - _am)),
+    (IO, (PrivateDeposit/Deposit/[]), 42, (balances[msg.sender] + msg.value)),
+    (ETH_LEAK, (PrivateDeposit/CashOut/[uint256]), 52, msg.sender.call.value(_am)()),
+    (RE_EL, (PrivateDeposit/CashOut/[uint256]), 52, msg.sender.call.value(_am)()),
+    (TX_ORG, (PrivateDeposit/onlyOwner/[]), 19, assume((tx.origin == owner));)
+
+[INFO] # of basic patch components : 8
+[INFO] extracted components
+[
+InsertLine (42, assume(((balances[msg.sender] + msg.value) >= balances[msg.sender]));),
+InsertLine (54, assume((balances[msg.sender] >= _am));),
+Replace (19, (tx.origin == owner), (tx.origin != owner)),
+Replace (19, tx.origin, msg.sender),
+Replace (49, (_am <= balances[msg.sender]), (_am > balances[msg.sender])),
+AtomLst [
+Move ([54] -> 52)
+ElseRevert (line 56)
+],
+AtomLst [
+Add @nonReentrant to (PrivateDeposit, Deposit, []) (line 36)
+Add @nonReentrant to (PrivateDeposit, CashOut, [uint256]) (line 47)
+Add @nonReentrant to (PrivateDeposit, @fallback, []) (line 60)
+],
+AtomLst [
+Add @nonReentrant to (PrivateDeposit, setLog, [address]) (line 31)
+Add @nonReentrant to (PrivateDeposit, Deposit, []) (line 36)
+Add @nonReentrant to (PrivateDeposit, CashOut, [uint256]) (line 47)
+Add @nonReentrant to (PrivateDeposit, @fallback, []) (line 60)
+]
+]
+Iter : 1, # of Workset Elements : 8, Total elapsed : 90.842689991
+- New best candidate, iter 1, 257.850964069s : results/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/candidates/cand_6/patch.sol
+/home/opam/.local/lib/python3.8/site-packages/sklearn/metrics/_regression.py:682: UndefinedMetricWarning: R^2 score is not well-defined with less than two samples.
+  warnings.warn(msg, UndefinedMetricWarning)
+- New best candidate, iter 9, 1082.618994s : results/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/candidates/cand_9/patch.sol
+- New best candidate, iter 10, 1239.29042006s : results/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/candidates/cand_33/patch.sol
+- Solution found, iter 10, 1239.29042006s : results/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/candidates/cand_33/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 20
+# Alarm (orginal)         : 5
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 3, 3
+# Patch                   : 1
+- First solution          : results/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/candidates/cand_33/patch.sol
+- First solution (iter)   : 10
+- First solution (time)   : 1239.29042006
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 3., Edit: 3, Iter: 10, Time: 1239.29042006, results/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/candidates/cand_33/patch.sol
+
+Time Elapsed (Real) : 1434.06521511
+Time Elapsed (CPU)  : 7.286504

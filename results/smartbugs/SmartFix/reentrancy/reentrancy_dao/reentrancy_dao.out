@@ -1,0 +1,51 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 3
+[INFO] reachable : 3
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (ReentrancyDAO/deposit/[]), 25, (credit[msg.sender] + msg.value)),
+    (IO, (ReentrancyDAO/deposit/[]), 26, (balance + msg.value)),
+    (IO, (ReentrancyDAO/withdrawAll/[]), 16, (balance - oCredit)),
+    (ETH_LEAK, (ReentrancyDAO/withdrawAll/[]), 18, callResult = msg.sender.call.value(oCredit)();),
+    (RE_EL, (ReentrancyDAO/withdrawAll/[]), 18, callResult = msg.sender.call.value(oCredit)();)
+
+[INFO] # of basic patch components : 5
+[INFO] extracted components
+[
+InsertLine (16, assume((balance >= oCredit));),
+InsertLine (25, assume(((credit[msg.sender] + msg.value) >= credit[msg.sender]));),
+InsertLine (26, assume(((balance + msg.value) >= balance));),
+AtomLst [
+Move ([20] -> 18)
+],
+AtomLst [
+Add @nonReentrant to (ReentrancyDAO, withdrawAll, []) (line 13)
+Add @nonReentrant to (ReentrancyDAO, deposit, []) (line 24)
+]
+]
+- New best candidate, iter 1, 240.95392704s : results/reentrancy/reentrancy_dao/candidates/cand_4/patch.sol
+- New best candidate, iter 6, 816.666601896s : results/reentrancy/reentrancy_dao/candidates/cand_8/patch.sol
+- Solution found, iter 6, 816.666601896s : results/reentrancy/reentrancy_dao/candidates/cand_8/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 7
+# Alarm (orginal)         : 5
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : results/reentrancy/reentrancy_dao/candidates/cand_8/patch.sol
+- First solution (iter)   : 6
+- First solution (time)   : 816.666601896
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 6, Time: 816.666601896, results/reentrancy/reentrancy_dao/candidates/cand_8/patch.sol
+
+Time Elapsed (Real) : 816.756988049
+Time Elapsed (CPU)  : 4.873226

@@ -1,0 +1,571 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol:
+../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol:12:2: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+ contract Token {
+ ^ (Relevant source part starts here and spans across multiple lines).
+
+
+LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545) sends eth to arbitrary user
+	Dangerous calls:
+	- Channels[_lcID].partyAddresses[0].transfer(_balances[0]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#533)
+	- Channels[_lcID].partyAddresses[1].transfer(_balances[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#534)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+
+ECTools.toEthereumSignedMessage(string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#138-143) calls abi.encodePacked() with multiple dynamic arguments:
+	- keccak256()(abi.encodePacked(prefix,uintToString(len),_msg)) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#142)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#abi-encodePacked-collision
+
+Reentrancy in LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#429)
+	External calls sending eth:
+	- Channels[_lcID].partyAddresses[0].transfer(Channels[_lcID].ethBalances[0]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#425)
+	State variables written after the call(s):
+	- delete Channels[_lcID] (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#435)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+Reentrancy in LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816):
+	External calls:
+	- require(bool,string)(channel.token.transfer(channel.partyAddresses[0],tokenbalanceA),byzantineCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#802-805)
+	- require(bool,string)(channel.token.transfer(channel.partyAddresses[1],tokenbalanceI),byzantineCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#806-809)
+	External calls sending eth:
+	- channel.partyAddresses[0].transfer(ethbalanceA) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#797)
+	- channel.partyAddresses[1].transfer(ethbalanceI) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#798)
+	State variables written after the call(s):
+	- channel.isOpen = false (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#812)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+ECTools.recoverSigner(bytes32,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#61-87) is declared view but contains assembly code
+ECTools.uintToBytes32(uint256) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#131-134) is declared view but contains assembly code
+LedgerChannel._isContained(bytes32,bytes,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#818-833) is declared view but contains assembly code
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#constant-functions-using-assembly-code
+
+LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436) uses a dangerous strict equality:
+	- require(bool)(msg.sender == Channels[_lcID].partyAddresses[0] && Channels[_lcID].isOpen == false) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#420)
+LedgerChannel._isContained(bytes32,bytes,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#818-833) uses a dangerous strict equality:
+	- cursor == _root (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#832)
+LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545) uses a dangerous strict equality:
+	- require(bool)(Channels[_lcID].isOpen == true) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#505)
+LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545) uses a dangerous strict equality:
+	- require(bool)(totalEthDeposit == _balances[0] + _balances[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#508)
+LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545) uses a dangerous strict equality:
+	- require(bool)(totalTokenDeposit == _balances[2] + _balances[3]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#509)
+LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491) uses a dangerous strict equality:
+	- require(bool,string)(Channels[_lcID].isOpen == true,Tried adding funds to a closed channel) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#465)
+LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656) uses a dangerous strict equality:
+	- require(bool)(_isContained(_initState,_proof,Channels[_lcID].VCrootHash) == true) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#642)
+LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459) uses a dangerous strict equality:
+	- require(bool)(Channels[_lcID].isOpen == false) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#440)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+
+Reentrancy in LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),CreateChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#405)
+	State variables written after the call(s):
+	- Channels[_lcID].erc20Balances[0] = _balances[1] (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#406)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+	- Channels[_lcID].sequence = 0 (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#409)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+	- Channels[_lcID].confirmTime = _confirmTime (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#410)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+	- Channels[_lcID].LCopenTimeout = now + _confirmTime (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#413)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+	- Channels[_lcID].initialDeposit = _balances (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#414)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+Reentrancy in LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#472)
+	State variables written after the call(s):
+	- Channels[_lcID].erc20Balances[2] += _balance (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#473)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+	- Channels[_lcID].ethBalances[3] += msg.value (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#486)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+Reentrancy in LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#472)
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#482)
+	State variables written after the call(s):
+	- Channels[_lcID].erc20Balances[3] += _balance (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#483)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+Reentrancy in LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),joinChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#448)
+	State variables written after the call(s):
+	- Channels[_lcID].erc20Balances[1] = _balances[1] (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#449)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+	- Channels[_lcID].initialDeposit[0] += _balances[0] (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#452)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+	- Channels[_lcID].initialDeposit[1] += _balances[1] (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#453)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+	- Channels[_lcID].isOpen = true (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#455)
+	LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) can be used in cross function reentrancies:
+	- LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377)
+	- LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436)
+	- LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816)
+	- LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751)
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+	- LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491)
+	- LedgerChannel.getChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#836-865)
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+
+ECTools.substring(string,uint256,uint256) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#166-177) contains a tautology or contradiction:
+	- require(bool)(_startIndex >= 0) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#169)
+LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417) contains a tautology or contradiction:
+	- require(bool,string)(_balances[0] >= 0 && _balances[1] >= 0,Balances cannot be negative) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#391)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#tautology-or-contradiction
+
+Reentrancy in LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816):
+	External calls:
+	- require(bool,string)(channel.token.transfer(channel.partyAddresses[0],tokenbalanceA),byzantineCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#802-805)
+	- require(bool,string)(channel.token.transfer(channel.partyAddresses[1],tokenbalanceI),byzantineCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#806-809)
+	External calls sending eth:
+	- channel.partyAddresses[0].transfer(ethbalanceA) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#797)
+	- channel.partyAddresses[1].transfer(ethbalanceI) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#798)
+	State variables written after the call(s):
+	- numChannels -- (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#813)
+Reentrancy in LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],_balances[2]),happyCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#538)
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[1],_balances[3]),happyCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#539)
+	External calls sending eth:
+	- Channels[_lcID].partyAddresses[0].transfer(_balances[0]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#533)
+	- Channels[_lcID].partyAddresses[1].transfer(_balances[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#534)
+	State variables written after the call(s):
+	- numChannels -- (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#542)
+Reentrancy in LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),joinChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#448)
+	State variables written after the call(s):
+	- numChannels ++ (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#456)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+
+Reentrancy in LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#429)
+	External calls sending eth:
+	- Channels[_lcID].partyAddresses[0].transfer(Channels[_lcID].ethBalances[0]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#425)
+	Event emitted after the call(s):
+	- DidLCClose(_lcID,0,Channels[_lcID].ethBalances[0],Channels[_lcID].erc20Balances[0],0,0) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#432)
+Reentrancy in LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816):
+	External calls:
+	- require(bool,string)(channel.token.transfer(channel.partyAddresses[0],tokenbalanceA),byzantineCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#802-805)
+	- require(bool,string)(channel.token.transfer(channel.partyAddresses[1],tokenbalanceI),byzantineCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#806-809)
+	External calls sending eth:
+	- channel.partyAddresses[0].transfer(ethbalanceA) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#797)
+	- channel.partyAddresses[1].transfer(ethbalanceI) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#798)
+	Event emitted after the call(s):
+	- DidLCClose(_lcID,channel.sequence,ethbalanceA,ethbalanceI,tokenbalanceA,tokenbalanceI) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#815)
+Reentrancy in LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],_balances[2]),happyCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#538)
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[1],_balances[3]),happyCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#539)
+	External calls sending eth:
+	- Channels[_lcID].partyAddresses[0].transfer(_balances[0]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#533)
+	- Channels[_lcID].partyAddresses[1].transfer(_balances[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#534)
+	Event emitted after the call(s):
+	- DidLCClose(_lcID,_sequence,_balances[0],_balances[1],_balances[2],_balances[3]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#544)
+Reentrancy in LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),CreateChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#405)
+	Event emitted after the call(s):
+	- DidLCOpen(_lcID,msg.sender,_partyI,_balances[0],_token,_balances[1],Channels[_lcID].LCopenTimeout) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#416)
+Reentrancy in LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#472)
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#482)
+	Event emitted after the call(s):
+	- DidLCDeposit(_lcID,recipient,_balance,isToken) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#490)
+Reentrancy in LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459):
+	External calls:
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),joinChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#448)
+	Event emitted after the call(s):
+	- DidLCJoin(_lcID,_balances[0],_balances[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#458)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+
+LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(Channels[_lcID].partyAddresses[0] == address(0),Channel has already been created.) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#389)
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),CreateChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#405)
+LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(msg.sender == Channels[_lcID].partyAddresses[0] && Channels[_lcID].isOpen == false) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#420)
+	- require(bool)(now > Channels[_lcID].LCopenTimeout) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#421)
+	- Channels[_lcID].initialDeposit[0] != 0 (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#423)
+	- Channels[_lcID].initialDeposit[1] != 0 (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#427)
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#429)
+LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(Channels[_lcID].isOpen == false) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#440)
+	- require(bool)(msg.sender == Channels[_lcID].partyAddresses[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#441)
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),joinChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#448)
+LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(Channels[_lcID].isOpen == true,Tried adding funds to a closed channel) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#465)
+	- require(bool)(recipient == Channels[_lcID].partyAddresses[0] || recipient == Channels[_lcID].partyAddresses[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#466)
+	- Channels[_lcID].partyAddresses[0] == recipient (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#470)
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#472)
+	- Channels[_lcID].partyAddresses[1] == recipient (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#480)
+	- require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#482)
+LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(Channels[_lcID].isOpen == true) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#505)
+	- require(bool)(totalEthDeposit == _balances[0] + _balances[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#508)
+	- require(bool)(totalTokenDeposit == _balances[2] + _balances[3]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#509)
+	- require(bool)(Channels[_lcID].partyAddresses[0] == ECTools.recoverSigner(_state,_sigA)) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#527)
+	- require(bool)(Channels[_lcID].partyAddresses[1] == ECTools.recoverSigner(_state,_sigI)) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#528)
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],_balances[2]),happyCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#538)
+	- require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[1],_balances[3]),happyCloseChannel: token transfer failure) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#539)
+LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(channel.isOpen) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#559)
+	- require(bool)(channel.sequence < updateParams[0]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#560)
+	- require(bool)(channel.ethBalances[0] + channel.ethBalances[1] >= updateParams[2] + updateParams[3]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#561)
+	- require(bool)(channel.erc20Balances[0] + channel.erc20Balances[1] >= updateParams[4] + updateParams[5]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#562)
+	- require(bool)(channel.updateLCtimeout > now) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#565)
+	- require(bool)(channel.partyAddresses[0] == ECTools.recoverSigner(_state,_sigA)) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#584)
+	- require(bool)(channel.partyAddresses[1] == ECTools.recoverSigner(_state,_sigI)) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#585)
+LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(Channels[_lcID].isOpen,LC is closed.) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#626)
+	- require(bool,string)(Channels[_lcID].updateLCtimeout < now,LC timeout not over.) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#630)
+	- require(bool)(_isContained(_initState,_proof,Channels[_lcID].VCrootHash) == true) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#642)
+LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(Channels[_lcID].isOpen,LC is closed.) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#672)
+	- require(bool)(Channels[_lcID].updateLCtimeout < now) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#688)
+LedgerChannel.closeVirtualChannel(bytes32,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724-751) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(Channels[_lcID].isOpen,LC is closed.) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#726)
+	- require(bool,string)(virtualChannels[_vcID].updateVCtimeout < now,Update vc timeout has not elapsed.) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#728)
+	- virtualChannels[_vcID].partyA == Channels[_lcID].partyAddresses[0] (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#736)
+	- virtualChannels[_vcID].partyB == Channels[_lcID].partyAddresses[0] (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#742)
+LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(channel.updateLCtimeout < now,LC timeout over.) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#762)
+LedgerChannel._isContained(bytes32,bytes,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#818-833) uses timestamp for comparisons
+	Dangerous comparisons:
+	- cursor == _root (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#832)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+ECTools.recoverSigner(bytes32,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#61-87) uses assembly
+	- INLINE ASM (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#75-80)
+ECTools.uintToBytes32(uint256) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#131-134) uses assembly
+	- INLINE ASM (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#133-134)
+LedgerChannel._isContained(bytes32,bytes,bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#818-833) uses assembly
+	- INLINE ASM (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#823-825)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage
+
+LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436) compares to a boolean constant:
+	-require(bool)(msg.sender == Channels[_lcID].partyAddresses[0] && Channels[_lcID].isOpen == false) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#420)
+LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459) compares to a boolean constant:
+	-require(bool)(Channels[_lcID].isOpen == false) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#440)
+LedgerChannel.deposit(bytes32,address,uint256,bool) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464-491) compares to a boolean constant:
+	-require(bool,string)(Channels[_lcID].isOpen == true,Tried adding funds to a closed channel) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#465)
+LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545) compares to a boolean constant:
+	-require(bool)(Channels[_lcID].isOpen == true) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#505)
+LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611) compares to a boolean constant:
+	-channel.isUpdateLCSettling == true (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#564)
+LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656) compares to a boolean constant:
+	-require(bool)(_isContained(_initState,_proof,Channels[_lcID].VCrootHash) == true) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#642)
+LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816) compares to a boolean constant:
+	-require(bool)(channel.isUpdateLCSettling == true) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#760)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#boolean-equality
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in HumanStandardToken.approveAndCall(address,uint256,bytes) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#251-260):
+	- require(bool)(_spender.call(bytes4(bytes32(keccak256()(receiveApproval(address,uint256,address,bytes)))),msg.sender,_value,this,_extraData)) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#258)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Parameter ECTools.recoverSigner(bytes32,string)._hashedMsg (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#61) is not in mixedCase
+Parameter ECTools.recoverSigner(bytes32,string)._sig (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#61) is not in mixedCase
+Parameter ECTools.isSignedBy(bytes32,string,address)._hashedMsg (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#90) is not in mixedCase
+Parameter ECTools.isSignedBy(bytes32,string,address)._sig (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#90) is not in mixedCase
+Parameter ECTools.isSignedBy(bytes32,string,address)._addr (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#90) is not in mixedCase
+Parameter ECTools.hexstrToBytes(string)._hexstr (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#97) is not in mixedCase
+Parameter ECTools.parseInt16Char(string)._char (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#115) is not in mixedCase
+Parameter ECTools.toEthereumSignedMessage(string)._msg (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#138) is not in mixedCase
+Parameter ECTools.uintToString(uint256)._uint (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#146) is not in mixedCase
+Parameter ECTools.substring(string,uint256,uint256)._str (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#166) is not in mixedCase
+Parameter ECTools.substring(string,uint256,uint256)._startIndex (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#166) is not in mixedCase
+Parameter ECTools.substring(string,uint256,uint256)._endIndex (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#166) is not in mixedCase
+Parameter StandardToken.transfer(address,uint256)._to (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#181) is not in mixedCase
+Parameter StandardToken.transfer(address,uint256)._value (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#181) is not in mixedCase
+Parameter StandardToken.transferFrom(address,address,uint256)._from (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#193) is not in mixedCase
+Parameter StandardToken.transferFrom(address,address,uint256)._to (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#193) is not in mixedCase
+Parameter StandardToken.transferFrom(address,address,uint256)._value (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#193) is not in mixedCase
+Parameter StandardToken.balanceOf(address)._owner (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#204) is not in mixedCase
+Parameter StandardToken.approve(address,uint256)._spender (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#208) is not in mixedCase
+Parameter StandardToken.approve(address,uint256)._value (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#208) is not in mixedCase
+Parameter StandardToken.allowance(address,address)._owner (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#214) is not in mixedCase
+Parameter StandardToken.allowance(address,address)._spender (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#214) is not in mixedCase
+Parameter HumanStandardToken.approveAndCall(address,uint256,bytes)._spender (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#251) is not in mixedCase
+Parameter HumanStandardToken.approveAndCall(address,uint256,bytes)._value (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#251) is not in mixedCase
+Parameter HumanStandardToken.approveAndCall(address,uint256,bytes)._extraData (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#251) is not in mixedCase
+Parameter LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2])._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#380) is not in mixedCase
+Parameter LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2])._partyI (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#381) is not in mixedCase
+Parameter LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2])._confirmTime (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#382) is not in mixedCase
+Parameter LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2])._token (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#383) is not in mixedCase
+Parameter LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2])._balances (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#384) is not in mixedCase
+Function LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436) is not in mixedCase
+Parameter LedgerChannel.LCOpenTimeout(bytes32)._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419) is not in mixedCase
+Parameter LedgerChannel.joinChannel(bytes32,uint256[2])._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438) is not in mixedCase
+Parameter LedgerChannel.joinChannel(bytes32,uint256[2])._balances (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438) is not in mixedCase
+Parameter LedgerChannel.deposit(bytes32,address,uint256,bool)._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464) is not in mixedCase
+Parameter LedgerChannel.deposit(bytes32,address,uint256,bool)._balance (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#464) is not in mixedCase
+Parameter LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string)._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#495) is not in mixedCase
+Parameter LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string)._sequence (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#496) is not in mixedCase
+Parameter LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string)._balances (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#497) is not in mixedCase
+Parameter LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string)._sigA (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#498) is not in mixedCase
+Parameter LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string)._sigI (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#499) is not in mixedCase
+Parameter LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string)._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#550) is not in mixedCase
+Parameter LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string)._VCroot (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#552) is not in mixedCase
+Parameter LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string)._sigA (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#553) is not in mixedCase
+Parameter LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string)._sigI (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#554) is not in mixedCase
+Parameter LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string)._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#615) is not in mixedCase
+Parameter LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string)._vcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#616) is not in mixedCase
+Parameter LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string)._proof (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#617) is not in mixedCase
+Parameter LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string)._partyA (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#618) is not in mixedCase
+Parameter LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string)._partyB (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#619) is not in mixedCase
+Parameter LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string)._bond (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#620) is not in mixedCase
+Parameter LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string)._balances (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#621) is not in mixedCase
+Parameter LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string)._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#662) is not in mixedCase
+Parameter LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string)._vcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#663) is not in mixedCase
+Parameter LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string)._partyA (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#665) is not in mixedCase
+Parameter LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string)._partyB (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#666) is not in mixedCase
+Parameter LedgerChannel.closeVirtualChannel(bytes32,bytes32)._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724) is not in mixedCase
+Parameter LedgerChannel.closeVirtualChannel(bytes32,bytes32)._vcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#724) is not in mixedCase
+Parameter LedgerChannel.byzantineCloseChannel(bytes32)._lcID (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755) is not in mixedCase
+Variable LedgerChannel.Channels (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#377) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Reentrancy in LedgerChannel.LCOpenTimeout(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#419-436):
+	External calls:
+	- Channels[_lcID].partyAddresses[0].transfer(Channels[_lcID].ethBalances[0]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#425)
+	State variables written after the call(s):
+	- delete Channels[_lcID] (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#435)
+	Event emitted after the call(s):
+	- DidLCClose(_lcID,0,Channels[_lcID].ethBalances[0],Channels[_lcID].erc20Balances[0],0,0) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#432)
+Reentrancy in LedgerChannel.byzantineCloseChannel(bytes32) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#755-816):
+	External calls:
+	- channel.partyAddresses[0].transfer(ethbalanceA) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#797)
+	- channel.partyAddresses[1].transfer(ethbalanceI) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#798)
+	State variables written after the call(s):
+	- channel.isOpen = false (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#812)
+	- numChannels -- (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#813)
+	Event emitted after the call(s):
+	- DidLCClose(_lcID,channel.sequence,ethbalanceA,ethbalanceI,tokenbalanceA,tokenbalanceI) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#815)
+Reentrancy in LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545):
+	External calls:
+	- Channels[_lcID].partyAddresses[0].transfer(_balances[0]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#533)
+	- Channels[_lcID].partyAddresses[1].transfer(_balances[1]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#534)
+	State variables written after the call(s):
+	- numChannels -- (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#542)
+	Event emitted after the call(s):
+	- DidLCClose(_lcID,_sequence,_balances[0],_balances[1],_balances[2],_balances[3]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#544)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+Variable LedgerChannel.byzantineCloseChannel(bytes32).ethbalanceA (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#786) is too similar to LedgerChannel.byzantineCloseChannel(bytes32).ethbalanceI (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#787)
+Variable LedgerChannel.byzantineCloseChannel(bytes32).tokenbalanceA (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#788) is too similar to LedgerChannel.byzantineCloseChannel(bytes32).tokenbalanceI (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#789)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#variable-names-too-similar
+
+HumanStandardToken.version (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#235) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+
+isSignedBy(bytes32,string,address) should be declared external:
+	- ECTools.isSignedBy(bytes32,string,address) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#90-94)
+toEthereumSignedMessage(string) should be declared external:
+	- ECTools.toEthereumSignedMessage(string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#138-143)
+approveAndCall(address,uint256,bytes) should be declared external:
+	- HumanStandardToken.approveAndCall(address,uint256,bytes) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#251-260)
+createChannel(bytes32,address,uint256,address,uint256[2]) should be declared external:
+	- LedgerChannel.createChannel(bytes32,address,uint256,address,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#379-417)
+joinChannel(bytes32,uint256[2]) should be declared external:
+	- LedgerChannel.joinChannel(bytes32,uint256[2]) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#438-459)
+consensusCloseChannel(bytes32,uint256,uint256[4],string,string) should be declared external:
+	- LedgerChannel.consensusCloseChannel(bytes32,uint256,uint256[4],string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#494-545)
+updateLCstate(bytes32,uint256[6],bytes32,string,string) should be declared external:
+	- LedgerChannel.updateLCstate(bytes32,uint256[6],bytes32,string,string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#549-611)
+initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) should be declared external:
+	- LedgerChannel.initVCstate(bytes32,bytes32,bytes,address,address,uint256[2],uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#614-656)
+settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) should be declared external:
+	- LedgerChannel.settleVC(bytes32,bytes32,uint256,address,address,uint256[4],string) (../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol#661-722)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external
+../smartbugs-curated/dataset/reentrancy/spank_chain_payment.sol analyzed (5 contracts with 95 detectors), 128 result(s) found
+
+Error running slither
+spank_chain_payment.sol
+Getting Solidity AST...
+Running TIPS...
+spank_chain_payment.sol
+0.20184803009033203
+
+

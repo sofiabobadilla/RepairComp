@@ -1,0 +1,239 @@
+{
+  "fileName": "results/access_control/wallet_02_refund_nosub/candidates/cand_2/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 3,
+  "time": 8.769517,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "land(eq(read(@TU:mapping(address => bool),creator__@3:address),cond(true)),usum(@Invest_sum:uint256,balances__@7:mapping(address => uint256)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 24,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "deposit", "argTypes": [] }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 25,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "deposit", "argTypes": [] }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] - amount)",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.transfer(amount);",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "ETH_LEAK",
+      "line": 38,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "refund", "argTypes": [] }
+      ],
+      "exp": "msg.sender.transfer(tmp__1);",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "ETH_LEAK",
+      "line": 45,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "migrateTo",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "to.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "TX_ORG",
+      "line": 44,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "migrateTo",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((creator == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 25,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "deposit", "argTypes": [] }
+      ],
+      "exp": "(@pre1 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 36,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "refund", "argTypes": [] }
+      ],
+      "exp": "(@pre3 == tmp__1)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ASSIGN_CONST",
+      "line": 25,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "deposit", "argTypes": [] }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ASSIGN_CONST",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 24,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "deposit", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "withdraw",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 38,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "refund", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "DEAD",
+      "line": 44,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "migrateTo",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "DEAD",
+      "line": 45,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "migrateTo",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

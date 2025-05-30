@@ -1,0 +1,14 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/front_running/eth_tx_order_dependence_minimal/eth_tx_order_dependence_minimal.sol" "report_run/front_running/eth_tx_order_dependence_minimal" "EthTxOrderDependenceMinimal"
+
+patches/front_running/eth_tx_order_dependence_minimal/eth_tx_order_dependence_minimal.sol
+{ bugFixes:
+   { 'S826ztdv*W&hf.D8"..u': ' function setReward() nonReentrant_ ',
+     'r8PE>Uv"ujO}hS8``<Sy]7WOw9J-99sie6f9ceT/_9%\'^f[t':
+      'contract EthTxOrderDependenceMinimal  is sGuard  is sGuard ',
+     'k5dECC:Z$#%7$3m^gt3O:EE^Ac-wn;y_vB.X2q\'&': ' function claimReward(uint256 submission) nonReentrant_ ',
+     '(Nj9n<\'h.t*;\\f@': 'contract sGuard is sGuard ' },
+  source:
+   '(Nj9n<\'h.t*;\\f@{\n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n}\n/*\n * @source: https://github.com/ConsenSys/evm-analyzer-benchmark-suite\n * @author: Suhabe Bugrara\n * @vulnerable_at_lines: 23,31\n */\n\n\nr8PE>Uv"ujO}hS8``<Sy]7WOw9J-99sie6f9ceT/_9%\'^f[t{\n    address public owner;\n    bool public claimed;\n    uint public reward;\n\n    function EthTxOrderDependenceMinimal() public {\n        owner = msg.sender;\n    }\n\n     S826ztdv*W&hf.D8"..u nonReentrant_  public payable {\n        require (!claimed);\n\n        require(msg.sender == owner);\n        // <yes> <report> FRONT_RUNNING\n        owner.transfer(reward);\n        reward = msg.value;\n    }\n\n     k5dECC:Z$#%7$3m^gt3O:EE^Ac-wn;y_vB.X2q\'& nonReentrant_  {\n        require (!claimed);\n        require(submission < 10);\n        // <yes> <report> FRONT_RUNNING\n        msg.sender.transfer(reward);\n        claimed = true;\n    }\n}\n',
+  wrappers: Set { 'nonReentrant_' } }

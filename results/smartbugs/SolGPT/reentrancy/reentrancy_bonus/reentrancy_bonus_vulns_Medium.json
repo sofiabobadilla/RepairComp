@@ -1,0 +1,16 @@
+[
+    {
+        "description": "Reentrancy_bonus.withdrawReward(address) (shared/reentrancy/reentrancy_bonus.sol#16-21) sends eth to arbitrary user\n\tDangerous calls:\n\t- (success) = recipient.call.value(amountToWithdraw)() (shared/reentrancy/reentrancy_bonus.sol#19)\n",
+        "check": "arbitrary-send-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/reentrancy_bonus.sol#L16-L21"
+    },
+    {
+        "description": "Reentrancy in Reentrancy_bonus.getFirstWithdrawalBonus(address) (shared/reentrancy/reentrancy_bonus.sol#23-30):\n\tExternal calls:\n\t- withdrawReward(recipient) (shared/reentrancy/reentrancy_bonus.sol#28)\n\t\t- (success) = recipient.call.value(amountToWithdraw)() (shared/reentrancy/reentrancy_bonus.sol#19)\n\tState variables written after the call(s):\n\t- claimedBonus[recipient] = true (shared/reentrancy/reentrancy_bonus.sol#29)\n\tReentrancy_bonus.claimedBonus (shared/reentrancy/reentrancy_bonus.sol#13) can be used in cross function reentrancies:\n\t- Reentrancy_bonus.getFirstWithdrawalBonus(address) (shared/reentrancy/reentrancy_bonus.sol#23-30)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/reentrancy_bonus.sol#L23-L30"
+    }
+]

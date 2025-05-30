@@ -1,0 +1,60 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/unchecked_low_level_calls' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol:
+../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol:8:2: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+ contract Lotto {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol:19:10: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+         winner.send(winAmount);
+         ^--------------------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol:26:26: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+         msg.sender.send(this.balance);
+                         ^----------^
+../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol:26:10: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+         msg.sender.send(this.balance);
+         ^---------------------------^
+
+
+Lotto.withdrawLeftOver() (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#23-27) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.send(this.balance) (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#26)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+
+Lotto.winner (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#11) is never initialized. It is used in:
+	- Lotto.sendToWinner() (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#16-21)
+Lotto.winAmount (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#12) is never initialized. It is used in:
+	- Lotto.sendToWinner() (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#16-21)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-state-variables
+
+Lotto.sendToWinner() (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#16-21) ignores return value by winner.send(winAmount) (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#19)
+Lotto.withdrawLeftOver() (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#23-27) ignores return value by msg.sender.send(this.balance) (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#26)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-send
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Reentrancy in Lotto.sendToWinner() (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#16-21):
+	External calls:
+	- winner.send(winAmount) (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#19)
+	State variables written after the call(s):
+	- payedOut = true (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#20)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+Lotto.winAmount (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#12) should be constant 
+Lotto.winner (../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol#11) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+../smartbugs-curated/dataset/unchecked_low_level_calls/lotto.sol analyzed (1 contracts with 95 detectors), 9 result(s) found
+
+Error running slither
+lotto.sol
+Getting Solidity AST...
+Running TIPS...
+lotto.sol
+0.00401616096496582
+
+

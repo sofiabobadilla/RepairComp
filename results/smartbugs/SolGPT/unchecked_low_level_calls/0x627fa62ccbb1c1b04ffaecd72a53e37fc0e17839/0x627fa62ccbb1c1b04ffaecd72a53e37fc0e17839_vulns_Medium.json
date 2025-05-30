@@ -1,0 +1,23 @@
+[
+    {
+        "description": "Reentrancy in TokenBank.WithdrawToHolder(address,uint256) (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#87-99):\n\tExternal calls:\n\t- _addr.call.value(_wei)() (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#94)\n\tState variables written after the call(s):\n\t- Holders[_addr] -= _wei (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#96)\n\tTokenBank.Holders (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#51) can be used in cross function reentrancies:\n\t- TokenBank.Deposit() (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#67-74)\n\t- TokenBank.Holders (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#51)\n\t- TokenBank.WitdrawTokenToHolder(address,address,uint256) (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#76-85)\n\t- TokenBank.WithdrawToHolder(address,uint256) (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#87-99)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#L87-L99"
+    },
+    {
+        "description": "Token.owner (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#38) shadows:\n\t- Ownable.owner (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#12)\n",
+        "check": "shadowing-state",
+        "impact": "High",
+        "confidence": "High",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#L38"
+    },
+    {
+        "description": "Token.WithdrawToken(address,uint256,address) (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#39-45) ignores return value by token.call(bytes4(sha3()(transfer(address,uint256))),to,amount) (shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#44)\n",
+        "check": "unchecked-lowlevel",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol#L39-L45"
+    }
+]

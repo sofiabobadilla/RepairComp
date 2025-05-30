@@ -1,0 +1,53 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/unchecked_low_level_calls' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol:
+../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract airdrop{
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol:15:13: Warning: Return value of low-level calls not used.
+            caddress.call(id,from,_tos[i],v);
+            ^------------------------------^
+
+
+airdrop.transfer(address,address,address[],uint256) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#10-18) ignores return value by caddress.call(id,from,_tos[i],v) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-low-level-calls
+
+airdrop.transfer(address,address,address[],uint256).caddress (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#10) lacks a zero-check on :
+		- caddress.call(id,from,_tos[i],v) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#15)
+airdrop.transfer(address,address,address[],uint256).from (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#10) lacks a zero-check on :
+		- caddress.call(id,from,_tos[i],v) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+airdrop.transfer(address,address,address[],uint256) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#10-18) has external calls inside a loop: caddress.call(id,from,_tos[i],v) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in airdrop.transfer(address,address,address[],uint256) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#10-18):
+	- caddress.call(id,from,_tos[i],v) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Contract airdrop (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#8-20) is not in CapWords
+Parameter airdrop.transfer(address,address,address[],uint256)._tos (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#10) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+transfer(address,address,address[],uint256) should be declared external:
+	- airdrop.transfer(address,address,address[],uint256) (../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol#10-18)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external
+../smartbugs-curated/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol analyzed (1 contracts with 95 detectors), 9 result(s) found
+
+Error running slither
+0x4051334adc52057aca763453820cb0e045076ef3.sol
+Getting Solidity AST...
+Running TIPS...
+0x4051334adc52057aca763453820cb0e045076ef3.sol
+failing to repair the unchecked call defect in charnum:413 in type2
+0.0035059452056884766
+
+

@@ -1,0 +1,44 @@
+[
+    {
+        "description": "BlackJack (shared/bad_randomness/blackjack/blackjack_2round.sol#30-157) contract sets array length with a user-controlled value:\n\t- games[msg.sender].playerCards.push(Deck.deal(msg.sender,nextCard)) (shared/bad_randomness/blackjack/blackjack_2round.sol#92)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/blackjack/blackjack_2round.sol#L30-L157"
+    },
+    {
+        "description": "BlackJack (shared/bad_randomness/blackjack/blackjack_2round.sol#30-157) contract sets array length with a user-controlled value:\n\t- games[msg.sender].houseCards.push(newCard) (shared/bad_randomness/blackjack/blackjack_2round.sol#104)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/blackjack/blackjack_2round.sol#L30-L157"
+    },
+    {
+        "description": "Deck.deal(address,uint8) (shared/bad_randomness/blackjack/blackjack_2round.sol#4-8) uses a weak PRNG: \"uint8(uint256(keccak256()(abi.encodePacked(block.blockhash(b),player,cardNumber,timestamp))) % 52) (shared/bad_randomness/blackjack/blackjack_2round.sol#7)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/blackjack/blackjack_2round.sol#L4-L8"
+    },
+    {
+        "description": "Contract locking ether found:\n\tContract BlackJack (shared/bad_randomness/blackjack/blackjack_2round.sol#30-157) has payable functions:\n\t - BlackJack.fallback() (shared/bad_randomness/blackjack/blackjack_2round.sol#62)\n\t - BlackJack.deal() (shared/bad_randomness/blackjack/blackjack_2round.sol#64-88)\n\tBut does not have a function to withdraw the ether\n",
+        "check": "locked-ether",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/blackjack/blackjack_2round.sol#L30-L157"
+    },
+    {
+        "description": "BlackJack.getPlayerCard(uint8) (shared/bad_randomness/blackjack/blackjack_2round.sol#121-124) contains a tautology or contradiction:\n\t- require(bool)(id >= 0 && id < games[msg.sender].playerCards.length) (shared/bad_randomness/blackjack/blackjack_2round.sol#122)\n",
+        "check": "tautology",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/blackjack/blackjack_2round.sol#L121-L124"
+    },
+    {
+        "description": "BlackJack.getHouseCard(uint8) (shared/bad_randomness/blackjack/blackjack_2round.sol#126-129) contains a tautology or contradiction:\n\t- require(bool)(id >= 0 && id < games[msg.sender].houseCards.length) (shared/bad_randomness/blackjack/blackjack_2round.sol#127)\n",
+        "check": "tautology",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/blackjack/blackjack_2round.sol#L126-L129"
+    }
+]

@@ -1,0 +1,106 @@
+2024-07-04 18:54:53,610 - root - INFO - 
+Reading file 'FindThisHash.sol' 
+
+2024-07-04 18:54:53,611 - root - INFO - 
+Pragma: 0.4.22 
+
+2024-07-04 18:54:53,611 - root - INFO - 
+Processing /home/mokita/sc_study/smartbugs-curated/dataset/front_running/FindThisHash.sol 
+
+2024-07-04 18:54:53,611 - root - INFO - 
+try 1/4: /home/mokita/sc_study/smartbugs-curated/dataset/front_running/FindThisHash_1round.sol  
+
+2024-07-04 18:54:53,618 - root - INFO - 
+
+        Docker container name: slither
+        Docker image name: trailofbits/eth-security-toolbox
+        Docker shared folder: /home/mokita/sc_study/smartbugs-curated/dataset:/home/ethsec/shared
+        Docker command: None
+         
+
+2024-07-04 18:54:53,621 - root - INFO - 
+Running command: solc-select use --always-install 0.4.22 
+
+2024-07-04 18:54:54,608 - root - INFO - 
+Running command: slither shared/front_running/FindThisHash.sol --json - 
+
+2024-07-04 18:54:55,282 - root - INFO - 
+b'{"success": true, "error": null, "results": {"detectors": [{"elements": [{"type": "function", "name": "solve", "source_mapping": {"start": 323, "length": 242, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [14, 15, 16, 17, 18, 19], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "FindThisHash", "source_mapping": {"start": 135, "length": 432, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "starting_column": 1, "ending_column": 2}}, "signature": "solve(string)"}}, {"type": "node", "name": "msg.sender.transfer(1000000000000000000000)", "source_mapping": {"start": 527, "length": 31, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [18], "starting_column": 9, "ending_column": 40}, "type_specific_fields": {"parent": {"type": "function", "name": "solve", "source_mapping": {"start": 323, "length": 242, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [14, 15, 16, 17, 18, 19], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "FindThisHash", "source_mapping": {"start": 135, "length": 432, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "starting_column": 1, "ending_column": 2}}, "signature": "solve(string)"}}}}], "description": "FindThisHash.solve(string) (shared/front_running/FindThisHash.sol#14-19) sends eth to arbitrary user\\n\\tDangerous calls:\\n\\t- msg.sender.transfer(1000000000000000000000) (shared/front_running/FindThisHash.sol#18)\\n", "markdown": "[FindThisHash.solve(string)](shared/front_running/FindThisHash.sol#L14-L19) sends eth to arbitrary user\\n\\tDangerous calls:\\n\\t- [msg.sender.transfer(1000000000000000000000)](shared/front_running/FindThisHash.sol#L18)\\n", "first_markdown_element": "shared/front_running/FindThisHash.sol#L14-L19", "id": "6821906a40bd244d0d6c42f35ce9fdd51030f412791ba49994b95a0b0aecd0c7", "check": "arbitrary-send-eth", "impact": "High", "confidence": "Medium"}, {"elements": [{"type": "node", "name": "require(bool)(hash == sha3()(solution))", "source_mapping": {"start": 486, "length": 31, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [17], "starting_column": 9, "ending_column": 40}, "type_specific_fields": {"parent": {"type": "function", "name": "solve", "source_mapping": {"start": 323, "length": 242, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [14, 15, 16, 17, 18, 19], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "FindThisHash", "source_mapping": {"start": 135, "length": 432, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "starting_column": 1, "ending_column": 2}}, "signature": "solve(string)"}}}}], "description": "Deprecated standard detected require(bool)(hash == sha3()(solution)) (shared/front_running/FindThisHash.sol#17):\\n\\t- Usage of \\"sha3()\\" should be replaced with \\"keccak256()\\"\\n", "markdown": "Deprecated standard detected [require(bool)(hash == sha3()(solution))](shared/front_running/FindThisHash.sol#L17):\\n\\t- Usage of \\"sha3()\\" should be replaced with \\"keccak256()\\"\\n", "first_markdown_element": "shared/front_running/FindThisHash.sol#L17", "id": "8ad7f3932aebb4fabe1cfefb0121262dfb891811b8541ccdb52736d549c0f0a9", "check": "deprecated-standards", "impact": "Informational", "confidence": "High"}, {"elements": [], "description": "solc-0.4.22 is known to contain severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)", "markdown": "solc-0.4.22 is known to contain severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)", "first_markdown_element": "", "id": "113041d02ad8d8c1f0a9137c4392269953828a030c22dc283813c1c6df7f407e", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [{"type": "pragma", "name": "^0.4.22", "source_mapping": {"start": 109, "length": 24, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [7], "starting_column": 1, "ending_column": 25}, "type_specific_fields": {"directive": ["solidity", "^", "0.4", ".22"]}}], "description": "Pragma version^0.4.22 (shared/front_running/FindThisHash.sol#7) is known to contain severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)\\n", "markdown": "Pragma version[^0.4.22](shared/front_running/FindThisHash.sol#L7) is known to contain severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)\\n", "first_markdown_element": "shared/front_running/FindThisHash.sol#L7", "id": "551a14d64764df09185a1cfb52757ba3e9df20cfe2d33476b33482c5fd04251a", "check": "solc-version", "impact": "Informational", "confidence": "High"}, {"elements": [{"type": "function", "name": "solve", "source_mapping": {"start": 323, "length": 242, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [14, 15, 16, 17, 18, 19], "starting_column": 5, "ending_column": 6}, "type_specific_fields": {"parent": {"type": "contract", "name": "FindThisHash", "source_mapping": {"start": 135, "length": 432, "filename_relative": "shared/front_running/FindThisHash.sol", "filename_absolute": "/home/ethsec/shared/front_running/FindThisHash.sol", "filename_short": "shared/front_running/FindThisHash.sol", "is_dependency": false, "lines": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "starting_column": 1, "ending_column": 2}}, "signature": "solve(string)"}}], "description": "solve(string) should be declared external:\\n\\t- FindThisHash.solve(string) (shared/front_running/FindThisHash.sol#14-19)\\n", "markdown": "solve(string) should be declared external:\\n\\t- [FindThisHash.solve(string)](shared/front_running/FindThisHash.sol#L14-L19)\\n", "first_markdown_element": "shared/front_running/FindThisHash.sol#L14-L19", "id": "c0d60d95316ea96a538d52d3ca19f13be357f80403e017591ab3edbf6e65310e", "check": "external-function", "impact": "Optimization", "confidence": "High"}]}}\n' 
+
+2024-07-04 18:54:55,283 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:54:56,779 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.22;
+
+contract FindThisHash {
+    bytes32 constant public hash = 0xb5b5b97fafd9855eec9b41f74dfb6c38f5951141f9a3ecd7f44d5479b630ee0a;
+
+    constructor() public payable {} 
+
+    function solve(string solution) public {
+        require(hash == keccak256(solution));
+        msg.sender.transfer(1000 ether);
+    }
+} 
+
+2024-07-04 18:54:56,780 - root - INFO - 
+try 2/4: /home/mokita/sc_study/smartbugs-curated/dataset/front_running/FindThisHash_2round.sol  
+
+2024-07-04 18:54:56,780 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:54:58,333 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.22;
+
+contract FindThisHash {
+    bytes32 constant public hash = 0xb5b5b97fafd9855eec9b41f74dfb6c38f5951141f9a3ecd7f44d5479b630ee0a;
+
+    constructor() public payable {} 
+
+    function solve(string solution) public {
+        require(hash == keccak256(solution));
+        msg.sender.transfer(1000 ether);
+    }
+} 
+
+2024-07-04 18:54:58,334 - root - INFO - 
+try 3/4: /home/mokita/sc_study/smartbugs-curated/dataset/front_running/FindThisHash_3round.sol  
+
+2024-07-04 18:54:58,334 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:54:59,869 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.22;
+
+contract FindThisHash {
+    bytes32 constant public hash = 0xb5b5b97fafd9855eec9b41f74dfb6c38f5951141f9a3ecd7f44d5479b630ee0a;
+
+    constructor() public payable {} 
+
+    function solve(string solution) public {
+        require(hash == keccak256(solution));
+        msg.sender.transfer(1000 ether);
+    }
+} 
+
+2024-07-04 18:54:59,869 - root - INFO - 
+try 4/4: /home/mokita/sc_study/smartbugs-curated/dataset/front_running/FindThisHash_4round.sol  
+
+2024-07-04 18:54:59,869 - root - INFO - 
+Found 1 vulnerabilities of severity Medium 
+
+2024-07-04 18:55:01,609 - root - INFO - 
+NEW CODE: pragma solidity ^0.4.22;
+
+contract FindThisHash {
+    bytes32 constant public hash = 0xb5b5b97fafd9855eec9b41f74dfb6c38f5951141f9a3ecd7f44d5479b630ee0a;
+
+    constructor() public payable {} 
+
+    function solve(string solution) public {
+        require(hash == keccak256(solution));
+        msg.sender.transfer(1000 ether);
+    }
+} 
+

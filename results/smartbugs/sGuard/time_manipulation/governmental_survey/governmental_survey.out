@@ -1,0 +1,19 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/time_manipulation/governmental_survey.sol" "results/time_manipulation/governmental_survey" "Governmental"
+
+smartbugs/dataset/time_manipulation/governmental_survey.sol
+{ bugFixes:
+   { ',OG:{j(;=AbLkoBWS:H=': 'sub_uint256(this.balance, 1 ether)',
+     '!<q_IYXa-*Y': 'div_uint256(msg.value, 2)',
+     'pZ[(tU*NlkYx6m5IH': ' function invest() nonReentrant_ ',
+     'B-D`QJWo%1w]L;#ac?': 'contract Attacker  is sGuard ',
+     '|=G_/,GN86Py,,$,l.4!:iY`z{a!uYDQ<Y': 'add_uint256(lastInvestmentTimestamp, ONE_MINUTE)',
+     '`cr;<FuaW': 'div_uint256(jackpot, 2)',
+     ';A}W\'|7B(rHL$w4cbHZdy/': 'contract Governmental  is sGuard ',
+     'LH_g)S&_(S\'*,cuA2WJ1mT': 'jackpot = add_uint256(jackpot, !<q_IYXa-*Y)',
+     '#cTo/&3f6JxIr#R)<0!\\3UL3fb': ' function resetInvestment() nonReentrant_ ' },
+  source:
+   '/*\n * @source: http://blockchain.unica.it/projects/ethereum-survey/attacks.html#governmental\n * @author: -\n * @vulnerable_at_lines: 27\n */\n\n//added pragma version\n\n;A}W\'|7B(rHL$w4cbHZdy/{\n  address public owner;\n  address public lastInvestor;\n  uint public jackpot = 1 ether;\n  uint public lastInvestmentTimestamp;\n  uint public ONE_MINUTE = 1 minutes;\n\n  function Governmental() {\n    owner = msg.sender;\n    if (msg.value<1 ether) throw;\n  }\n\n  pZ[(tU*NlkYx6m5IH {\n    if (msg.value<`cr;<FuaW) throw;\n    lastInvestor = msg.sender;\n    LH_g)S&_(S\'*,cuA2WJ1mT;\n    // <yes> <report> TIME_MANIPULATION\n    lastInvestmentTimestamp = block.timestamp;\n  }\n\n  #cTo/&3f6JxIr#R)<0!\\3UL3fb {\n    if (block.timestamp < |=G_/,GN86Py,,$,l.4!:iY`z{a!uYDQ<Y)\n      throw;\n\n    lastInvestor.send(jackpot);\n    owner.send(,OG:{j(;=AbLkoBWS:H=);\n\n    lastInvestor = 0;\n    jackpot = 1 ether;\n    lastInvestmentTimestamp = 0;\n  }\n}\n\nB-D`QJWo%1w]L;#ac?{\n\n  function attack(address target, uint count) {\n    if (0<=count && count<1023) {\n      this.attack.gas(msg.gas-2000)(target, count+1);\n    }\n    else {\n      Governmental(target).resetInvestment();\n    }\n  }\n}\n',
+  wrappers:
+   Set { 'sub_uint256', 'div_uint256', 'nonReentrant_', 'add_uint256' } }

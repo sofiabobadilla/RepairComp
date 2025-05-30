@@ -1,0 +1,108 @@
+{
+  "fileName": "smartbugs/dataset/unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol",
+  "baseName": "0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol",
+  "iter": 1,
+  "time": 0.09166500000000001,
+  "errMsg": null,
+  "invmap": [ { "key": "0", "formula": "true" } ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "TX_ORG",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "Token",
+          "methodName": "confirmOwner",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == newOwner));",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "TX_ORG",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "Token",
+          "methodName": "WithdrawToken",
+          "argTypes": [ "address", "uint256", "address" ]
+        },
+        {
+          "contractName": "Token",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((owner == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 18,
+      "signatures": [
+        {
+          "contractName": "Token",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre3 == newOwner)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "Token",
+          "methodName": "confirmOwner",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre4 == owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 24,
+      "signatures": [
+        {
+          "contractName": "Token",
+          "methodName": "confirmOwner",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "Token",
+          "methodName": "WithdrawToken",
+          "argTypes": [ "address", "uint256", "address" ]
+        },
+        {
+          "contractName": "Token",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

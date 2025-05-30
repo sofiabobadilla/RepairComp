@@ -1,0 +1,148 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/bad_randomness' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:32:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function LuckyDoubler() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:141:41: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+        if (multi < 110 || multi > 150) throw;
+                                        ^---^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:148:13: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+            throw;
+            ^---^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:10:2: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+ contract LuckyDoubler {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:94:9: Warning: Variable is declared as a storage pointer. Use an explicit "storage" keyword to silence this warning.
+        Entry theEntry = entries[unpaidEntries[index]];
+        ^------------^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:59:14: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+             msg.sender.send(msg.value);
+             ^------------------------^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:73:10: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+        	msg.sender.send(msg.value - 1 ether);
+        	^----------------------------------^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:101:13: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+            theEntry.entryAddress.send(payout);
+            ^--------------------------------^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:115:21: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        uint fees = this.balance - balance;
+                    ^----------^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:118:17: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+                owner.send(fees);
+                ^--------------^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:32:5: Warning: No visibility specified. Defaulting to "public". 
+    function LuckyDoubler() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:52:5: Warning: No visibility specified. Defaulting to "public". 
+    function() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:129:35: Warning: "block.blockhash()" has been deprecated in favor of "blockhash()"
+        uint256 hashVal = uint256(block.blockhash(lastBlockNumber));
+                                  ^-------------^
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:136:5: Warning: No visibility specified. Defaulting to "public". 
+    function changeOwner(address newOwner) onlyowner {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:140:5: Warning: No visibility specified. Defaulting to "public". 
+    function changeMultiplier(uint multi) onlyowner {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:146:5: Warning: No visibility specified. Defaulting to "public". 
+    function changeFee(uint newFee) onlyowner {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:154:5: Warning: No visibility specified. Defaulting to "public". 
+    function multiplierFactor() constant returns (uint factor, string info) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:159:5: Warning: No visibility specified. Defaulting to "public". 
+    function currentFee() constant returns (uint feePercentage, string info) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:164:5: Warning: No visibility specified. Defaulting to "public". 
+    function totalEntries() constant returns (uint count, string info) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:169:5: Warning: No visibility specified. Defaulting to "public". 
+    function userStats(address user) constant returns (uint deposits, uint payouts, string info)
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol:179:5: Warning: No visibility specified. Defaulting to "public". 
+    function entryDetails(uint index) constant returns (address user, uint payout, bool paid, string info)
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+LuckyDoubler (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#10-190) contract sets array length with a user-controlled value:
+	- unpaidEntries.push(entries.length - 1) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#88)
+LuckyDoubler (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#10-190) contract sets array length with a user-controlled value:
+	- entries.push(Entry(msg.sender,dValue,(dValue * (multiplier) / 100),false)) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#86)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#array-length-assignment
+
+LuckyDoubler.rand(uint256) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#126-132) uses a weak PRNG: "uint256((uint256(hashVal) / factor)) % max (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#131)" 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#weak-PRNG
+
+LuckyDoubler.init() (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#56-64) ignores return value by msg.sender.send(msg.value) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#59)
+LuckyDoubler.join() (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#66-121) ignores return value by msg.sender.send(msg.value - 1000000000000000000) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#73)
+LuckyDoubler.join() (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#66-121) ignores return value by theEntry.entryAddress.send(payout) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#101)
+LuckyDoubler.join() (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#66-121) ignores return value by owner.send(fees) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#118)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-send
+
+LuckyDoubler.changeOwner(address) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#136-138) should emit an event for: 
+	- owner = newOwner (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#137) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-access-control
+
+LuckyDoubler.changeMultiplier(uint256) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#140-144) should emit an event for: 
+	- multiplier = multi (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#143) 
+LuckyDoubler.changeFee(uint256) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#146-150) should emit an event for: 
+	- fee = newFee (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#149) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-arithmetic
+
+LuckyDoubler.changeOwner(address).newOwner (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#136) lacks a zero-check on :
+		- owner = newOwner (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#137)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+
+Modifier LuckyDoubler.onlyowner() (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#36) does not always execute _; or revert
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-modifier
+
+Deprecated standard detected hashVal = uint256(block.blockhash(lastBlockNumber)) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#129):
+	- Usage of "block.blockhash()" should be replaced with "blockhash()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#141):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#148):
+	- Usage of "throw" should be replaced with "revert()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Reentrancy in LuckyDoubler.join() (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#66-121):
+	External calls:
+	- msg.sender.send(msg.value - 1000000000000000000) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#73)
+	State variables written after the call(s):
+	- balance += (dValue * (100 - fee)) / 100 (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#91)
+	- entries.push(Entry(msg.sender,dValue,(dValue * (multiplier) / 100),false)) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#86)
+	- unpaidEntries.push(entries.length - 1) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#88)
+	- users[msg.sender].id = msg.sender (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#80)
+	- users[msg.sender].deposits = 0 (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#81)
+	- users[msg.sender].payoutsReceived = 0 (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#82)
+	- users[msg.sender].deposits ++ (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#87)
+Reentrancy in LuckyDoubler.join() (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#66-121):
+	External calls:
+	- msg.sender.send(msg.value - 1000000000000000000) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#73)
+	- theEntry.entryAddress.send(payout) (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#101)
+	State variables written after the call(s):
+	- balance -= payout (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#105)
+	- theEntry.paid = true (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#102)
+	- unpaidEntries[index] = unpaidEntries[unpaidEntries.length - 1] (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#108)
+	- unpaidEntries.length -- (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#110)
+	- users[theEntry.entryAddress].payoutsReceived ++ (../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol#103)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+../smartbugs-curated/dataset/bad_randomness/lucky_doubler.sol analyzed (1 contracts with 95 detectors), 18 result(s) found
+
+Error running slither
+lucky_doubler.sol
+Getting Solidity AST...
+Running TIPS...
+lucky_doubler.sol
+0.030837535858154297
+
+

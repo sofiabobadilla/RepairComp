@@ -1,0 +1,86 @@
+{
+  "fileName": "smartbugs/dataset/unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.sol",
+  "baseName": "0xbaa3de6504690efb064420d89e871c27065cdd52.sol",
+  "iter": 1,
+  "time": 1.633266,
+  "errMsg": null,
+  "invmap": [
+    { "key": "-1", "formula": "true" }, { "key": "0", "formula": "true" }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "Proxy",
+          "methodName": "proxy",
+          "argTypes": [ "address", "dbytes" ]
+        }
+      ],
+      "exp": "target.call.value(msg.value)(data);",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "RE_EL",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "Proxy",
+          "methodName": "proxy",
+          "argTypes": [ "address", "dbytes" ]
+        }
+      ],
+      "exp": "target.call.value(msg.value)(data);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "TX_ORG",
+      "line": 10,
+      "signatures": [
+        {
+          "contractName": "Proxy",
+          "methodName": "transferOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((msg.sender == Owner));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 11,
+      "signatures": [
+        {
+          "contractName": "Proxy",
+          "methodName": "transferOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre1 == Owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "DEAD",
+      "line": 10,
+      "signatures": [
+        {
+          "contractName": "Proxy",
+          "methodName": "transferOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

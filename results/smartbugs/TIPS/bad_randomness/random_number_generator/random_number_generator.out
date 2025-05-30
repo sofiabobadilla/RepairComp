@@ -1,0 +1,31 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/bad_randomness/random_number_generator.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/bad_randomness' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/bad_randomness/random_number_generator.sol:
+../smartbugs-curated/dataset/bad_randomness/random_number_generator.sol:9:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract RandomNumberGenerator {
+^ (Relevant source part starts here and spans across multiple lines).
+
+
+RandomNumberGenerator.random(uint256) (../smartbugs-curated/dataset/bad_randomness/random_number_generator.sol#13-24) uses a weak PRNG: "uint256((h / x)) % max + 1 (../smartbugs-curated/dataset/bad_randomness/random_number_generator.sol#23)" 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#weak-PRNG
+
+RandomNumberGenerator.random(uint256) (../smartbugs-curated/dataset/bad_randomness/random_number_generator.sol#13-24) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+../smartbugs-curated/dataset/bad_randomness/random_number_generator.sol analyzed (1 contracts with 95 detectors), 3 result(s) found
+
+Error running slither
+random_number_generator.sol
+Getting Solidity AST...
+Running TIPS...
+random_number_generator.sol
+0.0014438629150390625
+
+

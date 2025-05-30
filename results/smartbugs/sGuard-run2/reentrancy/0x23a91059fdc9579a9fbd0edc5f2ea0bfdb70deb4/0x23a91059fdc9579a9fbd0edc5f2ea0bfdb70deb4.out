@@ -1,0 +1,16 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol" "report_run/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4" "PrivateBank"
+
+patches/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol
+{ bugFixes:
+   { '":=1d': 'add_uint256(a, b)',
+     't@}sYa9B]U"}g}*3I%X~YnG>!<': ' function CashOut(uint _am) nonReentrant_ ',
+     'RQT/QY<g0SnxZOsTW)bUnioEP': 'contract Log \n is sGuard  is sGuard ',
+     '<+ZI}&e3,cz9lx=': 'contract sGuard is sGuard ',
+     't.A16': 'sub_uint256(a, b)',
+     'kUjg3p:?oh!5fHL_EM{Y,Qegdc{qv6wE': 'contract PrivateBank\n is sGuard  is sGuard ',
+     'LA$He!g$SlfV5(J116': ' function Deposit() nonReentrant_ ' },
+  source:
+   '<+ZI}&e3,cz9lx={\n  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    assert(b <= a);\n    return t.A16;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n  \n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = ":=1d;\n    assert(c >= a);\n    return c;\n  }\n}\n/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 38\n */\n\n\nkUjg3p:?oh!5fHL_EM{Y,Qegdc{qv6wE{\n    mapping (address => uint) public balances;\n    \n    uint public MinDeposit = 1 ether;\n    \n    Log TransferLog;\n    \n    function PrivateBank(address _log)\n    {\n        TransferLog = Log(_log);\n    }\n    \n     LA$He!g$SlfV5(J116 nonReentrant_ \n    public\n    payable\n    {\n        if(msg.value >= MinDeposit)\n        {\n            balances[msg.sender] = add_uint256(balances[msg.sender], msg.value);\n            TransferLog.AddMessage(msg.sender,msg.value,"Deposit");\n        }\n    }\n    \n     t@}sYa9B]U"}g}*3I%X~YnG>!< nonReentrant_ \n    {\n        if(_am<=balances[msg.sender])\n        {            \n            // <yes> <report> REENTRANCY\n            if(msg.sender.call.value(_am)())\n            {\n                balances[msg.sender] = sub_uint256(balances[msg.sender], _am);\n                TransferLog.AddMessage(msg.sender,_am,"CashOut");\n            }\n        }\n    }\n    \n    function() public payable{}    \n    \n}\n\nRQT/QY<g0SnxZOsTW)bUnioEP{\n   \n    struct Message\n    {\n        address Sender;\n        string  Data;\n        uint Val;\n        uint  Time;\n    }\n    \n    Message[] public History;\n    \n    Message LastMsg;\n    \n    function AddMessage(address _adr,uint _val,string _data)\n    public\n    {\n        LastMsg.Sender = _adr;\n        LastMsg.Time = now;\n        LastMsg.Val = _val;\n        LastMsg.Data = _data;\n        History.push(LastMsg);\n    }\n}',
+  wrappers: Set { 'add_uint256', 'nonReentrant_', 'sub_uint256' } }

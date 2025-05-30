@@ -1,0 +1,365 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 68
+[INFO] reachable : 26
+[INFO] Generating Paths ... took 0.516382s
+[INFO] # path : 3400
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.602302s
+Generating VCs ... took 26.782595s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 55.382213
+[
+-1 -> true
+0 -> true
+108 -> true
+669 -> true
+673 -> true
+686 -> true
+774 -> true
+(-1,108) -> true
+(-1,669) -> true
+(-1,673) -> true
+(-1,686) -> true
+(-1,774) -> true
+]
+[
+439 -> (true, true)
+]
+1/43 ... [IO] line 125, (_owners.length + 1) ... proven
+2/43 ... [IO] line 126, (_owners.length + 1) ... proven
+3/43 ... [IO] line 129, (i + 1) ... proven
+4/43 ... [IO] line 131, (2 + i) ... proven
+5/43 ... [IO] line 132, (2 + i) ... proven
+6/43 ... [IO] line 133, (2 + i) ... proven
+7/43 ... [IO] line 146, (pending.yetNeeded + 1) ... proven
+8/43 ... [IO] line 147, (pending.yetNeeded + 1) ... proven
+9/43 ... [IO] line 149, (pending.ownersDone - ownerIndexBit) ... proven
+10/43 ... [IO] line 175, (m_numOwners + 1) ... proven
+11/43 ... [IO] line 185, (m_numOwners - 1) ... proven
+12/43 ... [IO] line 203, (ownerIndex + 1) ... proven
+13/43 ... [IO] line 204, (ownerIndex + 1) ... proven
+14/43 ... [IO] line 327, (m_pendingIndex.length + 1) ... proven
+15/43 ... [IO] line 345, (pending.yetNeeded - 1) ... proven
+16/43 ... [IO] line 355, (free + 1) ... proven
+17/43 ... [IO] line 356, (m_numOwners - 1) ... proven
+18/43 ... [IO] line 376, (m_spentToday + _value) ... proven
+19/43 ... [IO] line 377, (m_spentToday + _value) ... proven
+20/43 ... [IO] line 378, (m_spentToday + _value) ... proven
+21/43 ... [IO] line 390, (i + 1) ... proven
+22/43 ... [KA] line 251, suicide(_to); ... unproven
+23/43 ... [ETH_LEAK] line 251, suicide(_to); ... unproven
+24/43 ... [ETH_LEAK] line 266, _to.call.value(_value)(_data) ... unproven
+25/43 ... [ETH_LEAK] line 302, m_txs[_h].to.call.value(m_txs[_h].value)(m_txs[_h].data) ... unproven
+26/43 ... [RE_EL] line 266, _to.call.value(_value)(_data) ... unproven
+27/43 ... [RE_EL] line 302, m_txs[_h].to.call.value(m_txs[_h].value)(m_txs[_h].data) ... unproven
+28/43 ... [RE] line 116, (WalletLibrary, @fallback, []) ... unproven
+29/43 ... [RE] line 124, (WalletLibrary, initMultiowned, [address[], uint256]) ... unproven
+30/43 ... [RE] line 139, (WalletLibrary, revoke, [bytes32]) ... unproven
+31/43 ... [RE] line 155, (WalletLibrary, changeOwner, [address, address]) ... unproven
+32/43 ... [RE] line 167, (WalletLibrary, addOwner, [address]) ... unproven
+33/43 ... [RE] line 181, (WalletLibrary, removeOwner, [address]) ... unproven
+34/43 ... [RE] line 194, (WalletLibrary, changeRequirement, [uint256]) ... unproven
+35/43 ... [RE] line 224, (WalletLibrary, initDaylimit, [uint256]) ... unproven
+36/43 ... [RE] line 229, (WalletLibrary, setDailyLimit, [uint256]) ... unproven
+37/43 ... [RE] line 233, (WalletLibrary, resetSpentToday, []) ... unproven
+38/43 ... [RE] line 243, (WalletLibrary, initWallet, [address[], uint256, uint256]) ... unproven
+39/43 ... [RE] line 250, (WalletLibrary, kill, [address]) ... unproven
+40/43 ... [RE] line 258, (WalletLibrary, execute, [address, uint256, dbytes]) ... unproven
+41/43 ... [RE] line 296, (WalletLibrary, confirm, [bytes32]) ... unproven
+42/43 ... [RE] line 314, (WalletLibrary, confirmAndCheck, [bytes32]) ... unproven
+43/43 ... [RE] line 351, (WalletLibrary, reorganizeOwners, []) ... unproven
+took 71.712639s
+
+Generating VCs ... took 25.805144s
+Checking validity of VCs ... took 13.671575s
+
+Generating VCs ... took 4.218004s
+Checking validity of VCs ... 
+1/109 ... [NO_EFFECT] line 126, (@pre6 == m_numOwners) ... unproven
+2/109 ... [NO_EFFECT] line 127, (@pre5 == m_owners[1]) ... unproven
+3/109 ... [NO_EFFECT] line 129, (@pre2 == i) ... unproven
+4/109 ... [NO_EFFECT] line 132, (@pre4 == m_owners[(2 + i)]) ... unproven
+5/109 ... [NO_EFFECT] line 133, (@pre3 == m_ownerIndex[uint256(_owners[i])]) ... unproven
+6/109 ... [NO_EFFECT] line 135, (@pre1 == m_required) ... unproven
+7/109 ... [NO_EFFECT] line 140, (@pre10 == ownerIndex) ... unproven
+8/109 ... [NO_EFFECT] line 143, (@pre9 == ownerIndexBit) ... unproven
+9/109 ... [NO_EFFECT] line 147, (@pre8 == pending.yetNeeded) ... unproven
+10/109 ... [NO_EFFECT] line 149, (@pre7 == pending.ownersDone) ... unproven
+11/109 ... [NO_EFFECT] line 157, (@pre13 == ownerIndex) ... unproven
+12/109 ... [NO_EFFECT] line 161, (@pre12 == m_owners[ownerIndex]) ... unproven
+13/109 ... [NO_EFFECT] line 163, (@pre11 == m_ownerIndex[uint256(_to)]) ... unproven
+14/109 ... [NO_EFFECT] line 175, (@pre16 == m_numOwners) ... unproven
+15/109 ... [NO_EFFECT] line 176, (@pre15 == m_owners[m_numOwners]) ... unproven
+16/109 ... [NO_EFFECT] line 177, (@pre14 == m_ownerIndex[uint256(_owner)]) ... unproven
+17/109 ... [NO_EFFECT] line 182, (@pre17 == ownerIndex) ... unproven
+18/109 ... [NO_EFFECT] line 196, (@pre18 == m_required) ... unproven
+19/109 ... [NO_EFFECT] line 213, (@pre20 == ownerIndex) ... unproven
+20/109 ... [NO_EFFECT] line 219, (@pre19 == ownerIndexBit) ... unproven
+21/109 ... [NO_EFFECT] line 225, (@pre21 == m_dailyLimit) ... unproven
+22/109 ... [NO_EFFECT] line 230, (@pre22 == m_dailyLimit) ... unproven
+23/109 ... [NO_EFFECT] line 275, (@pre24 == m_txs[o_hash].to) ... unproven
+24/109 ... [NO_EFFECT] line 276, (@pre23 == m_txs[o_hash].value) ... unproven
+25/109 ... [NO_EFFECT] line 316, (@pre32 == ownerIndex) ... unproven
+26/109 ... [NO_EFFECT] line 324, (@pre31 == pending.yetNeeded) ... unproven
+27/109 ... [NO_EFFECT] line 327, (@pre28 == pending.index) ... unproven
+28/109 ... [NO_EFFECT] line 327, (@pre29 == m_pendingIndex.length) ... unproven
+29/109 ... [NO_EFFECT] line 327, (@pre30 == Tmp18) ... unproven
+30/109 ... [NO_EFFECT] line 331, (@pre27 == ownerIndexBit) ... unproven
+31/109 ... [NO_EFFECT] line 345, (@pre26 == pending.yetNeeded) ... unproven
+32/109 ... [NO_EFFECT] line 346, (@pre25 == pending.ownersDone) ... unproven
+33/109 ... [NO_EFFECT] line 355, (@pre36 == free) ... unproven
+34/109 ... [NO_EFFECT] line 356, (@pre35 == m_numOwners) ... unproven
+35/109 ... [NO_EFFECT] line 359, (@pre34 == m_owners[free]) ... unproven
+36/109 ... [NO_EFFECT] line 360, (@pre33 == m_ownerIndex[m_owners[free]]) ... unproven
+37/109 ... [NO_EFFECT] line 378, (@pre37 == m_spentToday) ... unproven
+38/109 ... [NO_EFFECT] line 388, (@pre39 == length) ... unproven
+39/109 ... [NO_EFFECT] line 390, (@pre38 == i) ... unproven
+40/109 ... [ASSIGN_CONST] line 126, (m_numOwners == 0) ... unproven
+41/109 ... [ASSIGN_CONST] line 129, (i == 0) ... unproven
+42/109 ... [ASSIGN_CONST] line 133, (m_ownerIndex[uint256(_owners[i])] == 0) ... unproven
+43/109 ... [ASSIGN_CONST] line 147, (pending.yetNeeded == 0) ... unproven
+44/109 ... [ASSIGN_CONST] line 149, (pending.ownersDone == 0) ... unproven
+45/109 ... [ASSIGN_CONST] line 175, (m_numOwners == 0) ... unproven
+46/109 ... [ASSIGN_CONST] line 327, (m_pendingIndex.length == 0) ... unproven
+47/109 ... [ASSIGN_CONST] line 345, (pending.yetNeeded == 0) ... unproven
+48/109 ... [ASSIGN_CONST] line 355, (free == 0) ... unproven
+49/109 ... [ASSIGN_CONST] line 356, (m_numOwners == 0) ... unproven
+50/109 ... [ASSIGN_CONST] line 378, (m_spentToday == 0) ... unproven
+51/109 ... [ASSIGN_CONST] line 390, (i == 0) ... unproven
+52/109 ... [DEAD] line 102, false ... unproven
+53/109 ... [DEAD] line 109, false ... unproven
+54/109 ... [DEAD] line 118, false ... unproven
+55/109 ... [DEAD] line 119, false ... unproven
+56/109 ... [DEAD] line 125, false ... unproven
+57/109 ... [DEAD] line 131, false ... unproven
+58/109 ... [DEAD] line 142, false ... unproven
+59/109 ... [DEAD] line 145, false ... unproven
+60/109 ... [DEAD] line 146, false ... unproven
+61/109 ... [DEAD] line 148, false ... unproven
+62/109 ... [DEAD] line 150, false ... unproven
+63/109 ... [DEAD] line 156, false ... unproven
+64/109 ... [DEAD] line 158, false ... unproven
+65/109 ... [DEAD] line 160, false ... unproven
+66/109 ... [DEAD] line 164, false ... unproven
+67/109 ... [DEAD] line 168, false ... unproven
+68/109 ... [DEAD] line 170, false ... unproven
+69/109 ... [DEAD] line 171, false ... unproven
+70/109 ... [DEAD] line 172, false ... unproven
+71/109 ... [DEAD] line 173, false ... unproven
+72/109 ... [DEAD] line 178, false ... unproven
+73/109 ... [DEAD] line 183, false ... unproven
+74/109 ... [DEAD] line 184, false ... unproven
+75/109 ... [DEAD] line 185, false ... unproven
+76/109 ... [DEAD] line 189, false ... unproven
+77/109 ... [DEAD] line 190, false ... unproven
+78/109 ... [DEAD] line 191, false ... unproven
+79/109 ... [DEAD] line 195, false ... unproven
+80/109 ... [DEAD] line 197, false ... unproven
+81/109 ... [DEAD] line 198, false ... unproven
+82/109 ... [DEAD] line 203, false ... unproven
+83/109 ... [DEAD] line 216, false ... unproven
+84/109 ... [DEAD] line 226, false ... unproven
+85/109 ... [DEAD] line 238, false ... unproven
+86/109 ... [DEAD] line 244, false ... unproven
+87/109 ... [DEAD] line 245, false ... unproven
+88/109 ... [DEAD] line 260, false ... unproven
+89/109 ... [DEAD] line 263, false ... unproven
+90/109 ... [DEAD] line 264, false ... unproven
+91/109 ... [DEAD] line 269, false ... unproven
+92/109 ... [DEAD] line 274, false ... unproven
+93/109 ... [DEAD] line 279, false ... unproven
+94/109 ... [DEAD] line 280, false ... unproven
+95/109 ... [DEAD] line 297, false ... unproven
+96/109 ... [DEAD] line 299, false ... unproven
+97/109 ... [DEAD] line 300, false ... unproven
+98/109 ... [DEAD] line 306, false ... unproven
+99/109 ... [DEAD] line 318, false ... unproven
+100/109 ... [DEAD] line 322, false ... unproven
+101/109 ... [DEAD] line 333, false ... unproven
+102/109 ... [DEAD] line 334, false ... unproven
+103/109 ... [DEAD] line 336, false ... unproven
+104/109 ... [DEAD] line 357, false ... unproven
+105/109 ... [DEAD] line 370, false ... unproven
+106/109 ... [DEAD] line 372, false ... unproven
+107/109 ... [DEAD] line 376, false ... unproven
+108/109 ... [DEAD] line 377, false ... unproven
+109/109 ... [DEAD] line 393, false ... unproven
+took 38.85652s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 125, (_owners.length + 1) : proven
+[2] [IO] line 126, (_owners.length + 1) : proven
+[3] [IO] line 129, (i + 1) : proven
+[4] [IO] line 131, (2 + i) : proven
+[5] [IO] line 132, (2 + i) : proven
+[6] [IO] line 133, (2 + i) : proven
+[7] [IO] line 146, (pending.yetNeeded + 1) : proven
+[8] [IO] line 147, (pending.yetNeeded + 1) : proven
+[9] [IO] line 149, (pending.ownersDone - ownerIndexBit) : proven
+[10] [IO] line 175, (m_numOwners + 1) : proven
+[11] [IO] line 185, (m_numOwners - 1) : proven
+[12] [IO] line 203, (ownerIndex + 1) : proven
+[13] [IO] line 204, (ownerIndex + 1) : proven
+[14] [IO] line 327, (m_pendingIndex.length + 1) : proven
+[15] [IO] line 345, (pending.yetNeeded - 1) : proven
+[16] [IO] line 355, (free + 1) : proven
+[17] [IO] line 356, (m_numOwners - 1) : proven
+[18] [IO] line 376, (m_spentToday + _value) : proven
+[19] [IO] line 377, (m_spentToday + _value) : proven
+[20] [IO] line 378, (m_spentToday + _value) : proven
+[21] [IO] line 390, (i + 1) : proven
+[22] [KA] line 251, suicide(_to); : unproven
+[23] [ETH_LEAK] line 251, suicide(_to); : unproven
+[24] [ETH_LEAK] line 266, _to.call.value(_value)(_data) : unproven
+[25] [ETH_LEAK] line 302, m_txs[_h].to.call.value(m_txs[_h].value)(m_txs[_h].data) : unproven
+[26] [RE_EL] line 266, _to.call.value(_value)(_data) : unproven
+[27] [RE_EL] line 302, m_txs[_h].to.call.value(m_txs[_h].value)(m_txs[_h].data) : unproven
+[28] [RE] line 116, (WalletLibrary, @fallback, []) : unproven
+[29] [RE] line 124, (WalletLibrary, initMultiowned, [address[], uint256]) : unproven
+[30] [RE] line 139, (WalletLibrary, revoke, [bytes32]) : unproven
+[31] [RE] line 155, (WalletLibrary, changeOwner, [address, address]) : unproven
+[32] [RE] line 167, (WalletLibrary, addOwner, [address]) : unproven
+[33] [RE] line 181, (WalletLibrary, removeOwner, [address]) : unproven
+[34] [RE] line 194, (WalletLibrary, changeRequirement, [uint256]) : unproven
+[35] [RE] line 224, (WalletLibrary, initDaylimit, [uint256]) : unproven
+[36] [RE] line 229, (WalletLibrary, setDailyLimit, [uint256]) : unproven
+[37] [RE] line 233, (WalletLibrary, resetSpentToday, []) : unproven
+[38] [RE] line 243, (WalletLibrary, initWallet, [address[], uint256, uint256]) : unproven
+[39] [RE] line 250, (WalletLibrary, kill, [address]) : unproven
+[40] [RE] line 258, (WalletLibrary, execute, [address, uint256, dbytes]) : unproven
+[41] [RE] line 296, (WalletLibrary, confirm, [bytes32]) : unproven
+[42] [RE] line 314, (WalletLibrary, confirmAndCheck, [bytes32]) : unproven
+[43] [RE] line 351, (WalletLibrary, reorganizeOwners, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 126, (@pre6 == m_numOwners) : unproven
+[2] [NO_EFFECT] line 127, (@pre5 == m_owners[1]) : unproven
+[3] [NO_EFFECT] line 129, (@pre2 == i) : unproven
+[4] [NO_EFFECT] line 132, (@pre4 == m_owners[(2 + i)]) : unproven
+[5] [NO_EFFECT] line 133, (@pre3 == m_ownerIndex[uint256(_owners[i])]) : unproven
+[6] [NO_EFFECT] line 135, (@pre1 == m_required) : unproven
+[7] [NO_EFFECT] line 140, (@pre10 == ownerIndex) : unproven
+[8] [NO_EFFECT] line 143, (@pre9 == ownerIndexBit) : unproven
+[9] [NO_EFFECT] line 147, (@pre8 == pending.yetNeeded) : unproven
+[10] [NO_EFFECT] line 149, (@pre7 == pending.ownersDone) : unproven
+[11] [NO_EFFECT] line 157, (@pre13 == ownerIndex) : unproven
+[12] [NO_EFFECT] line 161, (@pre12 == m_owners[ownerIndex]) : unproven
+[13] [NO_EFFECT] line 163, (@pre11 == m_ownerIndex[uint256(_to)]) : unproven
+[14] [NO_EFFECT] line 175, (@pre16 == m_numOwners) : unproven
+[15] [NO_EFFECT] line 176, (@pre15 == m_owners[m_numOwners]) : unproven
+[16] [NO_EFFECT] line 177, (@pre14 == m_ownerIndex[uint256(_owner)]) : unproven
+[17] [NO_EFFECT] line 182, (@pre17 == ownerIndex) : unproven
+[18] [NO_EFFECT] line 196, (@pre18 == m_required) : unproven
+[19] [NO_EFFECT] line 213, (@pre20 == ownerIndex) : unproven
+[20] [NO_EFFECT] line 219, (@pre19 == ownerIndexBit) : unproven
+[21] [NO_EFFECT] line 225, (@pre21 == m_dailyLimit) : unproven
+[22] [NO_EFFECT] line 230, (@pre22 == m_dailyLimit) : unproven
+[23] [NO_EFFECT] line 275, (@pre24 == m_txs[o_hash].to) : unproven
+[24] [NO_EFFECT] line 276, (@pre23 == m_txs[o_hash].value) : unproven
+[25] [NO_EFFECT] line 316, (@pre32 == ownerIndex) : unproven
+[26] [NO_EFFECT] line 324, (@pre31 == pending.yetNeeded) : unproven
+[27] [NO_EFFECT] line 327, (@pre28 == pending.index) : unproven
+[28] [NO_EFFECT] line 327, (@pre29 == m_pendingIndex.length) : unproven
+[29] [NO_EFFECT] line 327, (@pre30 == Tmp18) : unproven
+[30] [NO_EFFECT] line 331, (@pre27 == ownerIndexBit) : unproven
+[31] [NO_EFFECT] line 345, (@pre26 == pending.yetNeeded) : unproven
+[32] [NO_EFFECT] line 346, (@pre25 == pending.ownersDone) : unproven
+[33] [NO_EFFECT] line 355, (@pre36 == free) : unproven
+[34] [NO_EFFECT] line 356, (@pre35 == m_numOwners) : unproven
+[35] [NO_EFFECT] line 359, (@pre34 == m_owners[free]) : unproven
+[36] [NO_EFFECT] line 360, (@pre33 == m_ownerIndex[m_owners[free]]) : unproven
+[37] [NO_EFFECT] line 378, (@pre37 == m_spentToday) : unproven
+[38] [NO_EFFECT] line 388, (@pre39 == length) : unproven
+[39] [NO_EFFECT] line 390, (@pre38 == i) : unproven
+[40] [ASSIGN_CONST] line 126, (m_numOwners == 0) : unproven
+[41] [ASSIGN_CONST] line 129, (i == 0) : unproven
+[42] [ASSIGN_CONST] line 133, (m_ownerIndex[uint256(_owners[i])] == 0) : unproven
+[43] [ASSIGN_CONST] line 147, (pending.yetNeeded == 0) : unproven
+[44] [ASSIGN_CONST] line 149, (pending.ownersDone == 0) : unproven
+[45] [ASSIGN_CONST] line 175, (m_numOwners == 0) : unproven
+[46] [ASSIGN_CONST] line 327, (m_pendingIndex.length == 0) : unproven
+[47] [ASSIGN_CONST] line 345, (pending.yetNeeded == 0) : unproven
+[48] [ASSIGN_CONST] line 355, (free == 0) : unproven
+[49] [ASSIGN_CONST] line 356, (m_numOwners == 0) : unproven
+[50] [ASSIGN_CONST] line 378, (m_spentToday == 0) : unproven
+[51] [ASSIGN_CONST] line 390, (i == 0) : unproven
+[52] [DEAD] line 102, false : unproven
+[53] [DEAD] line 109, false : unproven
+[54] [DEAD] line 118, false : unproven
+[55] [DEAD] line 119, false : unproven
+[56] [DEAD] line 125, false : unproven
+[57] [DEAD] line 131, false : unproven
+[58] [DEAD] line 142, false : unproven
+[59] [DEAD] line 145, false : unproven
+[60] [DEAD] line 146, false : unproven
+[61] [DEAD] line 148, false : unproven
+[62] [DEAD] line 150, false : unproven
+[63] [DEAD] line 156, false : unproven
+[64] [DEAD] line 158, false : unproven
+[65] [DEAD] line 160, false : unproven
+[66] [DEAD] line 164, false : unproven
+[67] [DEAD] line 168, false : unproven
+[68] [DEAD] line 170, false : unproven
+[69] [DEAD] line 171, false : unproven
+[70] [DEAD] line 172, false : unproven
+[71] [DEAD] line 173, false : unproven
+[72] [DEAD] line 178, false : unproven
+[73] [DEAD] line 183, false : unproven
+[74] [DEAD] line 184, false : unproven
+[75] [DEAD] line 185, false : unproven
+[76] [DEAD] line 189, false : unproven
+[77] [DEAD] line 190, false : unproven
+[78] [DEAD] line 191, false : unproven
+[79] [DEAD] line 195, false : unproven
+[80] [DEAD] line 197, false : unproven
+[81] [DEAD] line 198, false : unproven
+[82] [DEAD] line 203, false : unproven
+[83] [DEAD] line 216, false : unproven
+[84] [DEAD] line 226, false : unproven
+[85] [DEAD] line 238, false : unproven
+[86] [DEAD] line 244, false : unproven
+[87] [DEAD] line 245, false : unproven
+[88] [DEAD] line 260, false : unproven
+[89] [DEAD] line 263, false : unproven
+[90] [DEAD] line 264, false : unproven
+[91] [DEAD] line 269, false : unproven
+[92] [DEAD] line 274, false : unproven
+[93] [DEAD] line 279, false : unproven
+[94] [DEAD] line 280, false : unproven
+[95] [DEAD] line 297, false : unproven
+[96] [DEAD] line 299, false : unproven
+[97] [DEAD] line 300, false : unproven
+[98] [DEAD] line 306, false : unproven
+[99] [DEAD] line 318, false : unproven
+[100] [DEAD] line 322, false : unproven
+[101] [DEAD] line 333, false : unproven
+[102] [DEAD] line 334, false : unproven
+[103] [DEAD] line 336, false : unproven
+[104] [DEAD] line 357, false : unproven
+[105] [DEAD] line 370, false : unproven
+[106] [DEAD] line 372, false : unproven
+[107] [DEAD] line 376, false : unproven
+[108] [DEAD] line 377, false : unproven
+[109] [DEAD] line 393, false : unproven
+
+============ Statistics ============
+# Iter                    : 2
+# Alarm / Query           : 22 / 43
+- integer over/underflow  : 0 / 21
+- kill-anyone             : 1 / 1
+- ether-leaking           : 3 / 3
+- reentrancy-leaking      : 2 / 2
+- reentrancy              : 16 / 16
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 225.781186104
+Time Elapsed (CPU)  : 225.785883

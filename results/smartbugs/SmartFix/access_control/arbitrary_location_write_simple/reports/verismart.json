@@ -1,0 +1,143 @@
+{
+  "fileName": "smartbugs/dataset/access_control/arbitrary_location_write_simple.sol",
+  "baseName": "arbitrary_location_write_simple.sol",
+  "iter": 3,
+  "time": 0.142631,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@6:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "PopBonusCode",
+          "argTypes": []
+        }
+      ],
+      "exp": "(bonusCodes.length - 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "KA",
+      "line": 38,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "Destroy", "argTypes": [] }
+      ],
+      "exp": "selfdestruct(msg.sender);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 38,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "Destroy", "argTypes": [] }
+      ],
+      "exp": "selfdestruct(msg.sender);",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "TX_ORG",
+      "line": 37,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "Destroy", "argTypes": [] }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "PopBonusCode",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == bonusCodes.length)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "UpdateBonusCodeAt",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == bonusCodes[idx])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "PopBonusCode",
+          "argTypes": []
+        }
+      ],
+      "exp": "(bonusCodes.length == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "PopBonusCode",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "Wallet",
+          "methodName": "UpdateBonusCodeAt",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 37,
+      "signatures": [
+        { "contractName": "Wallet", "methodName": "Destroy", "argTypes": [] }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

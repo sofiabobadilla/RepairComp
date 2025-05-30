@@ -1,0 +1,113 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 8
+[INFO] reachable : 8
+[INFO] Generating Paths ... took 0.00019s
+[INFO] # path : 16
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.004739s
+Generating VCs ... took 0.00052s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.030127
+[
+0 -> true
+]
+[
+]
+1/10 ... [IO] line 18, (count + input) ... proven
+2/10 ... [IO] line 19, (count + input) ... proven
+3/10 ... [IO] line 25, (count * input) ... proven
+4/10 ... [IO] line 26, (count * input) ... unproven
+5/10 ... [IO] line 33, (count - input) ... proven
+6/10 ... [IO] line 39, (count + input) ... proven
+7/10 ... [IO] line 40, (count + input) ... proven
+8/10 ... [IO] line 46, (count * input) ... proven
+9/10 ... [IO] line 47, (count * input) ... unproven
+10/10 ... [IO] line 54, (count - input) ... proven
+took 0.042773s
+
+Generating VCs ... took 0.000192s
+Checking validity of VCs ... took 0.044378s
+
+Generating VCs ... took 0.000191s
+Checking validity of VCs ... took 0.007299s
+
+Generating VCs ... took 0.000208s
+Checking validity of VCs ... took 0.039645s
+
+Generating VCs ... took 0.000204s
+Checking validity of VCs ... took 0.143596s
+
+Generating VCs ... took 0.000176s
+Checking validity of VCs ... took 0.141037s
+
+Generating VCs ... took 9.1e-05s
+Checking validity of VCs ... 
+1/16 ... [NO_EFFECT] line 19, (@pre1 == count) ... unproven
+2/16 ... [NO_EFFECT] line 26, (@pre2 == count) ... unproven
+3/16 ... [NO_EFFECT] line 33, (@pre3 == count) ... unproven
+4/16 ... [NO_EFFECT] line 40, (@pre4 == res) ... unproven
+5/16 ... [NO_EFFECT] line 47, (@pre5 == res) ... unproven
+6/16 ... [NO_EFFECT] line 54, (@pre6 == res) ... unproven
+7/16 ... [ASSIGN_CONST] line 19, (count == 0) ... unproven
+8/16 ... [ASSIGN_CONST] line 33, (count == 0) ... unproven
+9/16 ... [ASSIGN_CONST] line 40, (res == 0) ... unproven
+10/16 ... [ASSIGN_CONST] line 54, (res == 0) ... unproven
+11/16 ... [DEAD] line 18, false ... unproven
+12/16 ... [DEAD] line 25, false ... unproven
+13/16 ... [DEAD] line 32, false ... unproven
+14/16 ... [DEAD] line 39, false ... unproven
+15/16 ... [DEAD] line 46, false ... unproven
+16/16 ... [DEAD] line 53, false ... unproven
+took 0.479792s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 18, (count + input) : proven
+[2] [IO] line 19, (count + input) : proven
+[3] [IO] line 25, (count * input) : proven
+[4] [IO] line 26, (count * input) : unproven
+[5] [IO] line 33, (count - input) : proven
+[6] [IO] line 39, (count + input) : proven
+[7] [IO] line 40, (count + input) : proven
+[8] [IO] line 46, (count * input) : proven
+[9] [IO] line 47, (count * input) : unproven
+[10] [IO] line 54, (count - input) : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 19, (@pre1 == count) : unproven
+[2] [NO_EFFECT] line 26, (@pre2 == count) : unproven
+[3] [NO_EFFECT] line 33, (@pre3 == count) : unproven
+[4] [NO_EFFECT] line 40, (@pre4 == res) : unproven
+[5] [NO_EFFECT] line 47, (@pre5 == res) : unproven
+[6] [NO_EFFECT] line 54, (@pre6 == res) : unproven
+[7] [ASSIGN_CONST] line 19, (count == 0) : unproven
+[8] [ASSIGN_CONST] line 33, (count == 0) : unproven
+[9] [ASSIGN_CONST] line 40, (res == 0) : unproven
+[10] [ASSIGN_CONST] line 54, (res == 0) : unproven
+[11] [DEAD] line 18, false : unproven
+[12] [DEAD] line 25, false : unproven
+[13] [DEAD] line 32, false : unproven
+[14] [DEAD] line 39, false : unproven
+[15] [DEAD] line 46, false : unproven
+[16] [DEAD] line 53, false : unproven
+
+============ Statistics ============
+# Iter                    : 7
+# Alarm / Query           : 2 / 10
+- integer over/underflow  : 2 / 10
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 0.957365989685
+Time Elapsed (CPU)  : 0.930205

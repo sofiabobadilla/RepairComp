@@ -1,0 +1,41 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 4
+[INFO] reachable : 4
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (OddsAndEvens/andTheWinnerIs/[]), 36, (players[0].number + players[1].number)),
+    (IO, (OddsAndEvens/play/[uint256]), 29, (tot + 1)),
+    (ETH_LEAK, (OddsAndEvens/andTheWinnerIs/[]), 38, res = players[0].addr.send(1800000000000000000);),
+    (ETH_LEAK, (OddsAndEvens/andTheWinnerIs/[]), 41, res = players[1].addr.send(1800000000000000000);)
+
+[INFO] # of basic patch components : 2
+[INFO] extracted components
+[
+InsertLine (29, assume(((tot + 1) >= tot));),
+InsertLine (36, assume(((players[0].number + players[1].number) >= players[0].number));)
+]
+- New best candidate, iter 1, 31.8419208527s : results/front_running/odds_and_evens/candidates/cand_2/patch.sol
+- New best candidate, iter 3, 36.4636998177s : results/front_running/odds_and_evens/candidates/cand_3/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 4
+# Alarm (orginal)         : 4
+# Alarm (patch)           : 2
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : n/a
+- First solution (iter)   : n/a
+- First solution (time)   : n/a
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 3, Time: 36.4636998177, results/front_running/odds_and_evens/candidates/cand_3/patch.sol
+
+Time Elapsed (Real) : 36.4681828022
+Time Elapsed (CPU)  : 5.16735

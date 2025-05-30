@@ -1,0 +1,205 @@
+{
+  "fileName": "smartbugs/dataset/bad_randomness/lottery.sol",
+  "baseName": "lottery.sol",
+  "iter": 3,
+  "time": 0.380261,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),organizer__@18:address),cond(true))"
+    },
+    {
+      "key": "48",
+      "formula": "eq(read(@TU:mapping(address => bool),organizer__@18:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "getBets",
+          "argTypes": []
+        }
+      ],
+      "exp": "(i + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "KA",
+      "line": 66,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "destroy",
+          "argTypes": []
+        }
+      ],
+      "exp": "suicide(organizer);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 46,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "makeBet",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.send(msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 66,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "destroy",
+          "argTypes": []
+        }
+      ],
+      "exp": "suicide(organizer);",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "TX_ORG",
+      "line": 55,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "getBets",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender != organizer));",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "TX_ORG",
+      "line": 64,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "destroy",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender != organizer));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 42,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "makeBet",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == struct_init(Bet, msg.value, block.number, won).blockNumber)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 42,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "makeBet",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == struct_init(Bet, msg.value, block.number, won).betAmount)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "getBets",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre3 == i)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ASSIGN_CONST",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "getBets",
+          "argTypes": []
+        }
+      ],
+      "exp": "(i == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 55,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "getBets",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 58,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "getBets",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 64,
+      "signatures": [
+        {
+          "contractName": "Lottery",
+          "methodName": "destroy",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

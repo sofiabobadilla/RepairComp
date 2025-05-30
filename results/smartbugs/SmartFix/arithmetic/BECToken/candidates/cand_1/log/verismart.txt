@@ -1,0 +1,158 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 91
+[INFO] reachable : 13
+[INFO] Generating Paths ... took 0.000378s
+[INFO] # path : 51
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001519s
+Generating VCs ... took 0.007956s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.080431
+[
+0 -> true
+379 -> true
+]
+[
+318 -> (true, true)
+]
+1/9 ... [IO] line 29, (a - b) ... proven
+2/9 ... [IO] line 33, (a + b) ... proven
+3/9 ... [IO] line 264, (uint256(cnt) * _value) ... proven
+4/9 ... [IO] line 265, (uint256(cnt) * _value) ... proven
+5/9 ... [IO] line 270, (i + 1) ... proven
+6/9 ... [TX_ORG] line 66, assume((_to != address(0))); ... proven
+7/9 ... [TX_ORG] line 117, assume((_to != address(0))); ... proven
+8/9 ... [TX_ORG] line 180, assume((msg.sender == owner)); ... proven
+9/9 ... [TX_ORG] line 190, assume((newOwner != address(0))); ... proven
+took 0.086426s
+
+Generating VCs ... took 0.001752s
+Checking validity of VCs ... 
+1/46 ... [NO_EFFECT] line 33, (@pre3 == c) ... unproven
+2/46 ... [NO_EFFECT] line 70, (@pre13 == balances[msg.sender]) ... unproven
+3/46 ... [NO_EFFECT] line 71, (@pre12 == balances[_to]) ... unproven
+4/46 ... [NO_EFFECT] line 82, (@pre24 == balance) ... unproven
+5/46 ... [NO_EFFECT] line 121, (@pre9 == balances[_from]) ... unproven
+6/46 ... [NO_EFFECT] line 122, (@pre8 == balances[_to]) ... unproven
+7/46 ... [NO_EFFECT] line 123, (@pre7 == allowed[_from][msg.sender]) ... unproven
+8/46 ... [NO_EFFECT] line 139, (@pre10 == allowed[msg.sender][_spender]) ... unproven
+9/46 ... [NO_EFFECT] line 151, (@pre23 == remaining) ... unproven
+10/46 ... [NO_EFFECT] line 192, (@pre22 == owner) ... unproven
+11/46 ... [NO_EFFECT] line 262, (@pre21 == cnt) ... unproven
+12/46 ... [NO_EFFECT] line 265, (@pre20 == amount) ... unproven
+13/46 ... [NO_EFFECT] line 269, (@pre19 == balances[msg.sender]) ... unproven
+14/46 ... [NO_EFFECT] line 270, (@pre17 == i) ... unproven
+15/46 ... [NO_EFFECT] line 271, (@pre18 == balances[_receivers[i]]) ... unproven
+16/46 ... [ASSIGN_CONST] line 33, (c == 0) ... unproven
+17/46 ... [ASSIGN_CONST] line 270, (i == 0) ... unproven
+18/46 ... [DEAD] line 28, false ... unproven
+19/46 ... [DEAD] line 34, false ... unproven
+20/46 ... [DEAD] line 66, false ... unproven
+21/46 ... [DEAD] line 67, false ... unproven
+22/46 ... [DEAD] line 70, false ... unproven
+23/46 ... [DEAD] line 71, false ... unproven
+24/46 ... [DEAD] line 72, false ... unproven
+25/46 ... [DEAD] line 117, false ... unproven
+26/46 ... [DEAD] line 118, false ... unproven
+27/46 ... [DEAD] line 119, false ... unproven
+28/46 ... [DEAD] line 121, false ... unproven
+29/46 ... [DEAD] line 122, false ... unproven
+30/46 ... [DEAD] line 123, false ... unproven
+31/46 ... [DEAD] line 124, false ... unproven
+32/46 ... [DEAD] line 140, false ... unproven
+33/46 ... [DEAD] line 180, false ... unproven
+34/46 ... [DEAD] line 190, false ... unproven
+35/46 ... [DEAD] line 191, false ... unproven
+36/46 ... [DEAD] line 229, false ... unproven
+37/46 ... [DEAD] line 237, false ... unproven
+38/46 ... [DEAD] line 250, false ... unproven
+39/46 ... [DEAD] line 254, false ... unproven
+40/46 ... [DEAD] line 258, false ... unproven
+41/46 ... [DEAD] line 264, false ... unproven
+42/46 ... [DEAD] line 266, false ... unproven
+43/46 ... [DEAD] line 267, false ... unproven
+44/46 ... [DEAD] line 269, false ... unproven
+45/46 ... [DEAD] line 271, false ... unproven
+46/46 ... [DEAD] line 272, false ... unproven
+took 2.20096s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 29, (a - b) : proven
+[2] [IO] line 33, (a + b) : proven
+[3] [IO] line 264, (uint256(cnt) * _value) : proven
+[4] [IO] line 265, (uint256(cnt) * _value) : proven
+[5] [IO] line 270, (i + 1) : proven
+[6] [TX_ORG] line 66, assume((_to != address(0))); : proven
+[7] [TX_ORG] line 117, assume((_to != address(0))); : proven
+[8] [TX_ORG] line 180, assume((msg.sender == owner)); : proven
+[9] [TX_ORG] line 190, assume((newOwner != address(0))); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 33, (@pre3 == c) : unproven
+[2] [NO_EFFECT] line 70, (@pre13 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 71, (@pre12 == balances[_to]) : unproven
+[4] [NO_EFFECT] line 82, (@pre24 == balance) : unproven
+[5] [NO_EFFECT] line 121, (@pre9 == balances[_from]) : unproven
+[6] [NO_EFFECT] line 122, (@pre8 == balances[_to]) : unproven
+[7] [NO_EFFECT] line 123, (@pre7 == allowed[_from][msg.sender]) : unproven
+[8] [NO_EFFECT] line 139, (@pre10 == allowed[msg.sender][_spender]) : unproven
+[9] [NO_EFFECT] line 151, (@pre23 == remaining) : unproven
+[10] [NO_EFFECT] line 192, (@pre22 == owner) : unproven
+[11] [NO_EFFECT] line 262, (@pre21 == cnt) : unproven
+[12] [NO_EFFECT] line 265, (@pre20 == amount) : unproven
+[13] [NO_EFFECT] line 269, (@pre19 == balances[msg.sender]) : unproven
+[14] [NO_EFFECT] line 270, (@pre17 == i) : unproven
+[15] [NO_EFFECT] line 271, (@pre18 == balances[_receivers[i]]) : unproven
+[16] [ASSIGN_CONST] line 33, (c == 0) : unproven
+[17] [ASSIGN_CONST] line 270, (i == 0) : unproven
+[18] [DEAD] line 28, false : unproven
+[19] [DEAD] line 34, false : unproven
+[20] [DEAD] line 66, false : unproven
+[21] [DEAD] line 67, false : unproven
+[22] [DEAD] line 70, false : unproven
+[23] [DEAD] line 71, false : unproven
+[24] [DEAD] line 72, false : unproven
+[25] [DEAD] line 117, false : unproven
+[26] [DEAD] line 118, false : unproven
+[27] [DEAD] line 119, false : unproven
+[28] [DEAD] line 121, false : unproven
+[29] [DEAD] line 122, false : unproven
+[30] [DEAD] line 123, false : unproven
+[31] [DEAD] line 124, false : unproven
+[32] [DEAD] line 140, false : unproven
+[33] [DEAD] line 180, false : unproven
+[34] [DEAD] line 190, false : unproven
+[35] [DEAD] line 191, false : unproven
+[36] [DEAD] line 229, false : unproven
+[37] [DEAD] line 237, false : unproven
+[38] [DEAD] line 250, false : unproven
+[39] [DEAD] line 254, false : unproven
+[40] [DEAD] line 258, false : unproven
+[41] [DEAD] line 264, false : unproven
+[42] [DEAD] line 266, false : unproven
+[43] [DEAD] line 267, false : unproven
+[44] [DEAD] line 269, false : unproven
+[45] [DEAD] line 271, false : unproven
+[46] [DEAD] line 272, false : unproven
+
+============ Statistics ============
+# Iter                    : 1
+# Alarm / Query           : 0 / 9
+- integer over/underflow  : 0 / 5
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 4
+
+Time Elapsed (Real) : 2.44003582001
+Time Elapsed (CPU)  : 2.366577

@@ -1,0 +1,19 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol" "report_run/reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f" "PERSONAL_BANK"
+
+patches/reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol
+{ bugFixes:
+   { '$8Un@': 'add_uint256(a, b)',
+     '}aeM$9j%6504Ms{w!Wv%\\/-#Zy.V5': ' function SetMinSum(uint _val) nonReentrant_ ',
+     '.Xuf-DQZ0ZHaRxi!\'e': ' function Deposit() nonReentrant_ ',
+     '3J55N*CE:hhH:G7x|WPwT~': ' function Initialized() nonReentrant_ ',
+     'LlCLC@[&ojlphS?X6,0UT2SUZh9UK2a}#m': 'contract PERSONAL_BANK\n is sGuard  is sGuard ',
+     Ex8gS: 'sub_uint256(a, b)',
+     'FV;\\N/Z-v:`q9m.5lFLmO<G+oSj{\'3O7V': ' function SetLogFile(address _log) nonReentrant_ ',
+     '5Il[P&UQ)eI97?i': 'contract sGuard is sGuard ',
+     'rgl"+c\'e`aKV@5yIE>ul{Kc#P%': ' function Collect(uint _am) nonReentrant_ ',
+     'ur.\'+f0NW5}0)+PphSs9:9EDs*:F': 'contract LogFile\n is sGuard  is sGuard ' },
+  source:
+   '5Il[P&UQ)eI97?i{\n  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    assert(b <= a);\n    return Ex8gS;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n  \n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = $8Un@;\n    assert(c >= a);\n    return c;\n  }\n}\n/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 54\n */\n\n\nLlCLC@[&ojlphS?X6,0UT2SUZh9UK2a}#m{\n    mapping (address=>uint256) public balances;   \n   \n    uint public MinSum = 1 ether;\n    \n    LogFile Log = LogFile(0x0486cF65A2F2F3A392CBEa398AFB7F5f0B72FF46);\n    \n    bool intitalized;\n    \n     }aeM$9j%6504Ms{w!Wv%\\/-#Zy.V5 nonReentrant_ \n    public\n    {\n        if(intitalized)revert();\n        MinSum = _val;\n    }\n    \n     FV;\\N/Z-v:`q9m.5lFLmO<G+oSj{\'3O7V nonReentrant_ \n    public\n    {\n        if(intitalized)revert();\n        Log = LogFile(_log);\n    }\n    \n     3J55N*CE:hhH:G7x|WPwT~ nonReentrant_ \n    public\n    {\n        intitalized = true;\n    }\n    \n     .Xuf-DQZ0ZHaRxi!\'e nonReentrant_ \n    public\n    payable\n    {\n        balances[msg.sender] = add_uint256(balances[msg.sender], msg.value);\n        Log.AddMessage(msg.sender,msg.value,"Put");\n    }\n    \n     rgl"+c\'e`aKV@5yIE>ul{Kc#P% nonReentrant_ \n    public\n    payable\n    {\n        if(balances[msg.sender]>=MinSum && balances[msg.sender]>=_am)\n        {\n            // <yes> <report> REENTRANCY\n            if(msg.sender.call.value(_am)())\n            {\n                balances[msg.sender] = sub_uint256(balances[msg.sender], _am);\n                Log.AddMessage(msg.sender,_am,"Collect");\n            }\n        }\n    }\n    \n    function() \n    public \n    payable\n    {\n        Deposit();\n    }\n    \n}\n\n\n\nur.\'+f0NW5}0)+PphSs9:9EDs*:F{\n    struct Message\n    {\n        address Sender;\n        string  Data;\n        uint Val;\n        uint  Time;\n    }\n    \n    Message[] public History;\n    \n    Message LastMsg;\n    \n    function AddMessage(address _adr,uint _val,string _data)\n    public\n    {\n        LastMsg.Sender = _adr;\n        LastMsg.Time = now;\n        LastMsg.Val = _val;\n        LastMsg.Data = _data;\n        History.push(LastMsg);\n    }\n}',
+  wrappers: Set { 'add_uint256', 'nonReentrant_', 'sub_uint256' } }

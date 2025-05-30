@@ -1,0 +1,40 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 4
+[INFO] reachable : 4
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (EtherLotto/play/[]), 39, (pot + msg.value)),
+    (ETH_LEAK, (EtherLotto/play/[]), 52, msg.sender.transfer((pot - FEE_AMOUNT));)
+
+[INFO] # of basic patch components : 2
+[INFO] extracted components
+[
+InsertLine (36, assume((bank == msg.sender));),
+InsertLine (39, assume(((pot + msg.value) >= pot));)
+]
+- New best candidate, iter 1, 310.358617067s : results/time_manipulation/ether_lotto/candidates/cand_2/patch.sol
+- Regression found, results/time_manipulation/ether_lotto/candidates/cand_1/patch.sol
+- Regression found, results/time_manipulation/ether_lotto/candidates/cand_3/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 4
+# Alarm (orginal)         : 2
+# Alarm (patch)           : 1
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 1, 1
+# Patch                   : 1
+- First solution          : n/a
+- First solution (iter)   : n/a
+- First solution (time)   : n/a
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 1., Edit: 1, Iter: 1, Time: 310.358617067, results/time_manipulation/ether_lotto/candidates/cand_2/patch.sol
+
+Time Elapsed (Real) : 472.533679008
+Time Elapsed (CPU)  : 4.759883

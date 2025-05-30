@@ -1,0 +1,60 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 2
+[INFO] reachable : 2
+[INFO] Generating Paths ... took 0.000219s
+[INFO] # path : 12
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000258s
+Generating VCs ... took 0.00409s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.026293
+[
+0 -> true
+]
+[
+]
+1/2 ... [ETH_LEAK] line 24, currentFrontrunner.send(currentBid) ... proven
+2/2 ... [TX_ORG] line 16, assume((currentFrontrunner == msg.sender)); ... proven
+took 0.253536s
+
+Generating VCs ... took 0.000266s
+Checking validity of VCs ... 
+1/5 ... [NO_EFFECT] line 27, (@pre2 == currentFrontrunner) ... proven
+2/5 ... [NO_EFFECT] line 28, (@pre1 == currentBid) ... unproven
+3/5 ... [DEAD] line 16, false ... unproven
+4/5 ... [DEAD] line 17, false ... unproven
+5/5 ... [DEAD] line 21, false ... unproven
+took 0.176153s
+
+
+===== Vulnerability Report =====
+[1] [ETH_LEAK] line 24, currentFrontrunner.send(currentBid) : proven
+[2] [TX_ORG] line 16, assume((currentFrontrunner == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 27, (@pre2 == currentFrontrunner) : proven
+[2] [NO_EFFECT] line 28, (@pre1 == currentBid) : unproven
+[3] [DEAD] line 16, false : unproven
+[4] [DEAD] line 17, false : unproven
+[5] [DEAD] line 21, false : unproven
+
+============ Statistics ============
+# Iter                    : 1
+# Alarm / Query           : 0 / 2
+- integer over/underflow  : 0 / 0
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 0.470051050186
+Time Elapsed (CPU)  : 0.455048

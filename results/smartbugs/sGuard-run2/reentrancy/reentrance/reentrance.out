@@ -1,0 +1,15 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/reentrance/reentrance.sol" "report_run/reentrancy/reentrance" "Reentrance"
+
+patches/reentrancy/reentrance/reentrance.sol
+{ bugFixes:
+   { '^77%U': 'add_uint256(a, b)',
+     'zwj}C5B_u)6^%X+})m20o:,={Pf[': ' function donate(address _to) nonReentrant_ ',
+     'c4Bfw(TyY%h5ELz1(1wI6O)4T#M=:q^': 'contract Reentrance  is sGuard  is sGuard ',
+     '^#\'j(': 'sub_uint256(a, b)',
+     'fYjSZTYo/J8|ix.': 'contract sGuard is sGuard ',
+     'zPXujKGE$TUXhtvP*by_,p7]*&IQDEq': ' function withdraw(uint _amount) nonReentrant_ ' },
+  source:
+   'fYjSZTYo/J8|ix.{\n  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    assert(b <= a);\n    return ^#\'j(;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n  \n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = ^77%U;\n    assert(c >= a);\n    return c;\n  }\n}\n/*\n * @source: https://ethernaut.zeppelin.solutions/level/0xf70706db003e94cfe4b5e27ffd891d5c81b39488\n * @author: Alejandro Santander\n * @vulnerable_at_lines: 24\n */\n\n\nc4Bfw(TyY%h5ELz1(1wI6O)4T#M=:q^{\n\n  mapping(address => uint) public balances;\n\n   zwj}C5B_u)6^%X+})m20o:,={Pf[ nonReentrant_  public payable {\n    balances[_to] = add_uint256(balances[_to], msg.value);\n  }\n\n  function balanceOf(address _who) public view returns (uint balance) {\n    return balances[_who];\n  }\n\n   zPXujKGE$TUXhtvP*by_,p7]*&IQDEq nonReentrant_  public {\n    if(balances[msg.sender] >= _amount) {\n      // <yes> <report> REENTRANCY\n      if(msg.sender.call.value(_amount)()) {\n        _amount;\n      }\n      balances[msg.sender] = sub_uint256(balances[msg.sender], _amount);\n    }\n  }\n\n  function() public payable {}\n}\n',
+  wrappers: Set { 'add_uint256', 'nonReentrant_', 'sub_uint256' } }

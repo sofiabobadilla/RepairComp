@@ -1,0 +1,54 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 4
+[INFO] reachable : 4
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (EtherStore/depositFunds/[]), 17, (balances[msg.sender] + msg.value)),
+    (IO, (EtherStore/withdrawFunds/[uint256]), 25, (lastWithdrawTime[msg.sender] + 604800)),
+    (IO, (EtherStore/withdrawFunds/[uint256]), 28, (balances[msg.sender] - _weiToWithdraw)),
+    (ETH_LEAK, (EtherStore/withdrawFunds/[uint256]), 27, msg.sender.call.value(_weiToWithdraw)()),
+    (RE_EL, (EtherStore/withdrawFunds/[uint256]), 27, msg.sender.call.value(_weiToWithdraw)())
+
+[INFO] # of basic patch components : 7
+[INFO] extracted components
+[
+InsertLine (17, assume(((balances[msg.sender] + msg.value) >= balances[msg.sender]));),
+InsertLine (25, assume(((lastWithdrawTime[msg.sender] + 604800) >= lastWithdrawTime[msg.sender]));),
+InsertLine (28, assume((balances[msg.sender] >= _weiToWithdraw));),
+Replace (23, (_weiToWithdraw <= withdrawalLimit), (_weiToWithdraw > withdrawalLimit)),
+Replace (25, (now >= (lastWithdrawTime[msg.sender] + 604800)), (now <= (lastWithdrawTime[msg.sender] + 604800))),
+AtomLst [
+Move ([28, 29] -> 27)
+],
+AtomLst [
+Add @nonReentrant to (EtherStore, depositFunds, []) (line 16)
+Add @nonReentrant to (EtherStore, withdrawFunds, [uint256]) (line 20)
+]
+]
+- New best candidate, iter 1, 305.742187977s : results/reentrancy/etherstore/candidates/cand_6/patch.sol
+- New best candidate, iter 8, 1385.33865094s : results/reentrancy/etherstore/candidates/cand_8/patch.sol
+- New best candidate, iter 9, 1539.79287791s : results/reentrancy/etherstore/candidates/cand_26/patch.sol
+- Solution found, iter 9, 1539.79287791s : results/reentrancy/etherstore/candidates/cand_26/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 19
+# Alarm (orginal)         : 5
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 3, 3
+# Patch                   : 1
+- First solution          : results/reentrancy/etherstore/candidates/cand_26/patch.sol
+- First solution (iter)   : 9
+- First solution (time)   : 1539.79287791
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 3., Edit: 3, Iter: 9, Time: 1539.79287791, results/reentrancy/etherstore/candidates/cand_26/patch.sol
+
+Time Elapsed (Real) : 2038.51853895
+Time Elapsed (CPU)  : 5.72075

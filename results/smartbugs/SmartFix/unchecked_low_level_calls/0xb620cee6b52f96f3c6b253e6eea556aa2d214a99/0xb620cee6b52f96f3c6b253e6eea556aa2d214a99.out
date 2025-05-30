@@ -1,0 +1,83 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 26
+[INFO] reachable : 22
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (DrainMe/guessSeed/[uint256]), 118, (seed[0] * seed[1])),
+    (IO, (DrainMe/unlockSecret/[]), 86, (block.number - 1)),
+    (ETH_LEAK, (DrainMe/claimPrize/[]), 137, winner.transfer(address(this).balance);),
+    (ETH_LEAK, (DrainMe/winPrize/[]), 133, owner.call.value(1)();),
+    (RE_EL, (DrainMe/claimPrize/[]), 137, winner.transfer(address(this).balance);),
+    (RE_EL, (DrainMe/winPrize/[]), 133, owner.call.value(1)();)
+
+[INFO] # of basic patch components : 11
+[INFO] extracted components
+[
+InsertLine (86, assume((block.number >= 1));),
+InsertLine (118, assume(((seed[0] == 0) || (((seed[0] * seed[1]) / seed[0]) == seed[1])));),
+Change (DrainMe, manipulateSecret, []) to constructor,
+Add onlyOwner to (DrainMe, DranMe, []) (line 32),
+Add onlyWinner to (DrainMe, DranMe, []) (line 32),
+Add onlyOwner to (DrainMe, claimPrize, []) (line 136),
+Add onlyOwner to (DrainMe, manipulateSecret, []) (line 77),
+Add onlyWinner to (DrainMe, manipulateSecret, []) (line 77),
+Add onlyWinner to (DrainMe, winPrize, []) (line 131),
+AtomLst [
+Add @nonReentrant to (DrainMe, DranMe, []) (line 32)
+Add @nonReentrant to (DrainMe, setSecret, [uint256]) (line 59)
+Add @nonReentrant to (DrainMe, becomePlayer, []) (line 71)
+Add @nonReentrant to (DrainMe, manipulateSecret, []) (line 77)
+Add @nonReentrant to (DrainMe, callFirstTarget, []) (line 97)
+Add @nonReentrant to (DrainMe, callSecondTarget, []) (line 103)
+Add @nonReentrant to (DrainMe, setSeed, [uint256, uint256]) (line 109)
+Add @nonReentrant to (DrainMe, addSeed, [uint256]) (line 113)
+Add @nonReentrant to (DrainMe, guessSeed, [uint256]) (line 117)
+Add @nonReentrant to (DrainMe, checkSecret, []) (line 124)
+Add @nonReentrant to (DrainMe, winPrize, []) (line 131)
+Add @nonReentrant to (DrainMe, claimPrize, []) (line 136)
+Add @nonReentrant to (DrainMe, @fallback, []) (line 142)
+],
+AtomLst [
+Add @nonReentrant to (DrainMe, winPrize, []) (line 131)
+Add @nonReentrant to (DrainMe, DranMe, []) (line 32)
+Add @nonReentrant to (DrainMe, becomePlayer, []) (line 71)
+Add @nonReentrant to (DrainMe, callFirstTarget, []) (line 97)
+Add @nonReentrant to (DrainMe, callSecondTarget, []) (line 103)
+Add @nonReentrant to (DrainMe, setSeed, [uint256, uint256]) (line 109)
+Add @nonReentrant to (DrainMe, addSeed, [uint256]) (line 113)
+Add @nonReentrant to (DrainMe, guessSeed, [uint256]) (line 117)
+Add @nonReentrant to (DrainMe, checkSecret, []) (line 124)
+Add @nonReentrant to (DrainMe, @fallback, []) (line 142)
+]
+]
+- New best candidate, iter 2, 456.29958415s : results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_1/patch.sol
+- Regression found, results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_8/patch.sol
+- Regression found, results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_4/patch.sol
+- Regression found, results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_3/patch.sol
+- New best candidate, iter 12, 1975.23141098s : results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_20/patch.sol
+- New best candidate, iter 13, 2128.83109212s : results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_62/patch.sol
+- New best candidate, iter 23, 3505.43622518s : results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_76/patch.sol
+- Solution found, iter 23, 3505.43622518s : results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_76/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 33
+# Alarm (orginal)         : 6
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 4, 4
+# Patch                   : 1
+- First solution          : results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_76/patch.sol
+- First solution (iter)   : 23
+- First solution (time)   : 3505.43622518
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 4., Edit: 4, Iter: 23, Time: 3505.43622518, results/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/candidates/cand_76/patch.sol
+
+Time Elapsed (Real) : 4269.05920911
+Time Elapsed (CPU)  : 7.92504

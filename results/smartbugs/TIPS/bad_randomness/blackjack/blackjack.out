@@ -1,0 +1,212 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/bad_randomness/blackjack.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/bad_randomness' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/bad_randomness/blackjack.sol:
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:69:4: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+			throw; // game doesn't exist or already finished
+			^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:90:2: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+	function BlackJack() {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:101:4: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+			throw; // game is already going on
+			^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:105:4: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+			throw; // incorrect bet
+			^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:143:8: Warning: Use of the "var" keyword is deprecated.
+		var (houseScore, houseScoreBig) = calculateScore(games[msg.sender].houseCards);
+		     ^--------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:143:20: Warning: Use of the "var" keyword is deprecated.
+		var (houseScore, houseScoreBig) = calculateScore(games[msg.sender].houseCards);
+		                 ^-----------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:160:8: Warning: Use of the "var" keyword is deprecated.
+		var (houseScore, houseScoreBig) = calculateScore(game.houseCards);
+		     ^--------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:160:20: Warning: Use of the "var" keyword is deprecated.
+		var (houseScore, houseScoreBig) = calculateScore(game.houseCards);
+		                 ^-----------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:162:8: Warning: Use of the "var" keyword is deprecated.
+		var (playerScore, playerScoreBig) = calculateScore(game.playerCards);
+		     ^---------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:162:21: Warning: Use of the "var" keyword is deprecated.
+		var (playerScore, playerScoreBig) = calculateScore(game.playerCards);
+		                  ^------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:169:37: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+				if (!msg.sender.send(game.bet)) throw; // return bet to the player
+				                                ^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:182:48: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+					if (!msg.sender.send((game.bet * 5) / 2)) throw; // send prize to the player
+					                                          ^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:185:42: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+					if (!msg.sender.send(game.bet * 2)) throw; // send prize to the player
+					                                    ^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:222:43: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+						if (!msg.sender.send(game.bet * 2)) throw; // send prize to the player
+						                                    ^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:235:38: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+					if (!msg.sender.send(game.bet)) throw; // return bet to the player
+					                                ^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:239:42: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+					if (!msg.sender.send(game.bet * 2)) throw; // send prize to the player
+					                                    ^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:267:4: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+			throw;
+			^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:274:4: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+			throw;
+			^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:289:4: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+			throw; // game doesn't exist
+			^---^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:9:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+library Deck {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:292:3: Warning: Variable is declared as a storage pointer. Use an explicit "storage" keyword to silence this warning.
+		Game game = games[msg.sender];
+		^-------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:20:24: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+		return uint8(uint256(keccak256(block.blockhash(b), player, cardNumber, timestamp)) % 52);
+		                     ^----------------------------------------------------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:113:3: Warning: Invoking events without "emit" prefix is deprecated.
+		Deal(true, playerCards[0]);
+		^------------------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:115:3: Warning: Invoking events without "emit" prefix is deprecated.
+		Deal(false, houseCards[0]);
+		^------------------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:117:3: Warning: Invoking events without "emit" prefix is deprecated.
+		Deal(true, playerCards[1]);
+		^------------------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:136:3: Warning: Invoking events without "emit" prefix is deprecated.
+		Deal(true, games[msg.sender].playerCards[games[msg.sender].playerCards.length - 1]);
+		^---------------------------------------------------------------------------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:151:4: Warning: Invoking events without "emit" prefix is deprecated.
+			Deal(false, newCard);
+			^------------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:164:3: Warning: Invoking events without "emit" prefix is deprecated.
+		GameStatus(houseScore, houseScoreBig, playerScore, playerScoreBig);
+		^----------------------------------------------------------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:193:6: Warning: Invoking events without "emit" prefix is deprecated.
+					Log(1);
+					^----^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:20:34: Warning: "block.blockhash()" has been deprecated in favor of "blockhash()"
+		return uint8(uint256(keccak256(block.blockhash(b), player, cardNumber, timestamp)) % 52);
+		                               ^-------------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:90:2: Warning: No visibility specified. Defaulting to "public". 
+	function BlackJack() {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:94:2: Warning: No visibility specified. Defaulting to "public". 
+	function () payable {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:143:8: Warning: Unused local variable.
+		var (houseScore, houseScoreBig) = calculateScore(games[msg.sender].houseCards);
+		     ^--------^
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:14:2: Warning: Function state mutability can be restricted to view
+	function deal(address player, uint8 cardNumber) internal returns (uint8) {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:23:2: Warning: Function state mutability can be restricted to pure
+	function valueOf(uint8 card, bool isBigAce) internal constant returns (uint8) {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:34:2: Warning: Function state mutability can be restricted to pure
+	function isAce(uint8 card) internal constant returns (bool) {
+ ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol:38:2: Warning: Function state mutability can be restricted to pure
+	function isTen(uint8 card) internal constant returns (bool) {
+ ^ (Relevant source part starts here and spans across multiple lines).
+
+
+BlackJack (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#44-307) contract sets array length with a user-controlled value:
+	- games[msg.sender].houseCards.push(newCard) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#148)
+BlackJack (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#44-307) contract sets array length with a user-controlled value:
+	- games[msg.sender].playerCards.push(Deck.deal(msg.sender,nextCard)) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#134)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#array-length-assignment
+
+Deck.deal(address,uint8) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#14-21) uses a weak PRNG: "uint8(uint256(keccak256()(block.blockhash(b),player,cardNumber,timestamp)) % 52) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#20)" 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#weak-PRNG
+
+BlackJack.getPlayerCard(uint8) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#265-270) contains a tautology or contradiction:
+	- id < 0 || id > games[msg.sender].playerCards.length (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#266)
+BlackJack.getHouseCard(uint8) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#272-277) contains a tautology or contradiction:
+	- id < 0 || id > games[msg.sender].houseCards.length (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#273)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#tautology-or-contradiction
+
+Deprecated standard detected uint8(uint256(keccak256()(block.blockhash(b),player,cardNumber,timestamp)) % 52) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#20):
+	- Usage of "block.blockhash()" should be replaced with "blockhash()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#101):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#105):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#169):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#182):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#185):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#222):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#235):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#239):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#267):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#274):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#289):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#69):
+	- Usage of "throw" should be replaced with "revert()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Variable BlackJack.BLACKJACK (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#50) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Reentrancy in BlackJack.checkGameResult(BlackJack.Game,bool) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#158-246):
+	External calls:
+	- ! msg.sender.send(game.bet) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#169)
+	State variables written after the call(s):
+	- games[msg.sender].state = GameState.Tie (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#170)
+Reentrancy in BlackJack.checkGameResult(BlackJack.Game,bool) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#158-246):
+	External calls:
+	- ! msg.sender.send((game.bet * 5) / 2) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#182)
+	- ! msg.sender.send(game.bet * 2) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#185)
+	State variables written after the call(s):
+	- games[msg.sender].state = GameState.Player (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#187)
+Reentrancy in BlackJack.checkGameResult(BlackJack.Game,bool) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#158-246):
+	External calls:
+	- ! msg.sender.send(game.bet * 2) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#222)
+	State variables written after the call(s):
+	- games[msg.sender].state = GameState.Player (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#223)
+Reentrancy in BlackJack.checkGameResult(BlackJack.Game,bool) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#158-246):
+	External calls:
+	- ! msg.sender.send(game.bet) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#235)
+	State variables written after the call(s):
+	- games[msg.sender].state = GameState.Tie (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#236)
+Reentrancy in BlackJack.checkGameResult(BlackJack.Game,bool) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#158-246):
+	External calls:
+	- ! msg.sender.send(game.bet * 2) (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#239)
+	State variables written after the call(s):
+	- games[msg.sender].state = GameState.Player (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#240)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+BlackJack.BLACKJACK (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#50) should be constant 
+BlackJack.maxBet (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#48) should be constant 
+BlackJack.minBet (../smartbugs-curated/dataset/bad_randomness/blackjack.sol#47) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+../smartbugs-curated/dataset/bad_randomness/blackjack.sol analyzed (2 contracts with 95 detectors), 28 result(s) found
+
+Error running slither
+blackjack.sol
+Getting Solidity AST...
+Running TIPS...
+blackjack.sol
+0.012957334518432617
+
+

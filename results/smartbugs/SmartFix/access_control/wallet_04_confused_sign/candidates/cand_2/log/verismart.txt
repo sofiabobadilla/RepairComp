@@ -1,0 +1,110 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.000184s
+[INFO] # path : 13
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000304s
+Generating VCs ... took 0.000976s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.032613
+[
+0 -> true
+]
+[
+]
+1/6 ... [IO] line 24, (balances[msg.sender] + msg.value) ... proven
+2/6 ... [IO] line 25, (balances[msg.sender] + msg.value) ... proven
+3/6 ... [IO] line 32, (balances[msg.sender] - amount) ... proven
+4/6 ... [ETH_LEAK] line 31, msg.sender.transfer(amount); ... unproven
+5/6 ... [ETH_LEAK] line 39, to.transfer(this.balance); ... unproven
+6/6 ... [TX_ORG] line 38, assume((creator == msg.sender)); ... proven
+took 0.104869s
+
+Generating VCs ... took 0.000278s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.137076
+[
+0 -> (Read(@TU, creator__@3) == true)
+]
+[
+]
+1/6 ... [IO] line 24, (balances[msg.sender] + msg.value) ... proven
+2/6 ... [IO] line 25, (balances[msg.sender] + msg.value) ... proven
+3/6 ... [IO] line 32, (balances[msg.sender] - amount) ... proven
+4/6 ... [ETH_LEAK] line 31, msg.sender.transfer(amount); ... unproven
+5/6 ... [ETH_LEAK] line 39, to.transfer(this.balance); ... proven
+6/6 ... [TX_ORG] line 38, assume((creator == msg.sender)); ... proven
+took 0.072426s
+
+Generating VCs ... took 0.000282s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 3 Total elapsed : 0.261489
+[
+0 -> ((Read(@TU, creator__@3) == true) /\ @Invest_sum >= Σ_u balances__@7)
+]
+[
+]
+1/6 ... [IO] line 24, (balances[msg.sender] + msg.value) ... proven
+2/6 ... [IO] line 25, (balances[msg.sender] + msg.value) ... proven
+3/6 ... [IO] line 32, (balances[msg.sender] - amount) ... proven
+4/6 ... [ETH_LEAK] line 31, msg.sender.transfer(amount); ... proven
+5/6 ... [ETH_LEAK] line 39, to.transfer(this.balance); ... proven
+6/6 ... [TX_ORG] line 38, assume((creator == msg.sender)); ... proven
+took 0.307015s
+
+Generating VCs ... took 0.000157s
+Checking validity of VCs ... 
+1/9 ... [NO_EFFECT] line 25, (@pre1 == balances[msg.sender]) ... unproven
+2/9 ... [NO_EFFECT] line 32, (@pre2 == balances[msg.sender]) ... unproven
+3/9 ... [ASSIGN_CONST] line 25, (balances[msg.sender] == 0) ... unproven
+4/9 ... [ASSIGN_CONST] line 32, (balances[msg.sender] == 0) ... unproven
+5/9 ... [DEAD] line 24, false ... unproven
+6/9 ... [DEAD] line 30, false ... unproven
+7/9 ... [DEAD] line 31, false ... unproven
+8/9 ... [DEAD] line 38, false ... unproven
+9/9 ... [DEAD] line 39, false ... unproven
+took 1.118401s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 24, (balances[msg.sender] + msg.value) : proven
+[2] [IO] line 25, (balances[msg.sender] + msg.value) : proven
+[3] [IO] line 32, (balances[msg.sender] - amount) : proven
+[4] [ETH_LEAK] line 31, msg.sender.transfer(amount); : proven
+[5] [ETH_LEAK] line 39, to.transfer(this.balance); : proven
+[6] [TX_ORG] line 38, assume((creator == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 25, (@pre1 == balances[msg.sender]) : unproven
+[2] [NO_EFFECT] line 32, (@pre2 == balances[msg.sender]) : unproven
+[3] [ASSIGN_CONST] line 25, (balances[msg.sender] == 0) : unproven
+[4] [ASSIGN_CONST] line 32, (balances[msg.sender] == 0) : unproven
+[5] [DEAD] line 24, false : unproven
+[6] [DEAD] line 30, false : unproven
+[7] [DEAD] line 31, false : unproven
+[8] [DEAD] line 38, false : unproven
+[9] [DEAD] line 39, false : unproven
+
+============ Statistics ============
+# Iter                    : 3
+# Alarm / Query           : 0 / 6
+- integer over/underflow  : 0 / 3
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 2
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 1.65669488907
+Time Elapsed (CPU)  : 1.635284

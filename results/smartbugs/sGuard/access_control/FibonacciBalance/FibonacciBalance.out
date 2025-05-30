@@ -1,0 +1,13 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/access_control/FibonacciBalance.sol" "results/access_control/FibonacciBalance" "FibonacciBalance"
+
+smartbugs/dataset/access_control/FibonacciBalance.sol
+{ bugFixes:
+   { 'wWK+)#SLP=HK(EcIY5ZA==Kq(g6,E': 'mul_uint256(calculatedFibNumber, 1 ether)',
+     '@ON6A^=\\J\'v7;R0kY.u5~2': 'contract FibonacciLib  is sGuard ',
+     'pY,eVJ,0:wM~4A7M&2Z>UT': 'withdrawalCounter = add_uint256(withdrawalCounter, 1)',
+     'imJ)@QS3}|*h##v+L4ZAJV2Y/=': 'contract FibonacciBalance  is sGuard ' },
+  source:
+   '/*\n * @source: https://github.com/sigp/solidity-security-blog\n * @author: Suhabe Bugrara\n * @vulnerable_at_lines: 31,38\n */\n\n//added pragma version\n\nimJ)@QS3}|*h##v+L4ZAJV2Y/={\n\n    address public fibonacciLibrary;\n    // the current fibonacci number to withdraw\n    uint public calculatedFibNumber;\n    // the starting fibonacci sequence number\n    uint public start = 3;\n    uint public withdrawalCounter;\n    // the fibonancci function selector\n    bytes4 constant fibSig = bytes4(sha3("setFibonacci(uint256)"));\n\n    // constructor - loads the contract with ether\n    constructor(address _fibonacciLibrary) public payable {\n        fibonacciLibrary = _fibonacciLibrary;\n    }\n\n    function withdraw() {\n        pY,eVJ,0:wM~4A7M&2Z>UT;\n        // calculate the fibonacci number for the current withdrawal user\n        // this sets calculatedFibNumber\n        // <yes> <report> ACCESS_CONTROL\n        require(fibonacciLibrary.delegatecall(fibSig, withdrawalCounter));\n        msg.sender.transfer(wWK+)#SLP=HK(EcIY5ZA==Kq(g6,E);\n    }\n\n    // allow users to call fibonacci library functions\n    function() public {\n        // <yes> <report> ACCESS_CONTROL\n        require(fibonacciLibrary.delegatecall(msg.data));\n    }\n}\n\n// library contract - calculates fibonacci-like numbers;\n@ON6A^=\\J\'v7;R0kY.u5~2{\n    // initializing the standard fibonacci sequence;\n    uint public start;\n    uint public calculatedFibNumber;\n\n    // modify the zeroth number in the sequence\n    function setStart(uint _start) public {\n        start = _start;\n    }\n\n    function setFibonacci(uint n) public {\n        calculatedFibNumber = fibonacci(n);\n    }\n\n    function fibonacci(uint n) internal returns (uint) {\n        if (n == 0) return start;\n        else if (n == 1) return start + 1;\n        else return fibonacci(n - 1) + fibonacci(n - 2);\n    }\n}\n',
+  wrappers: Set { 'mul_uint256', 'add_uint256' } }

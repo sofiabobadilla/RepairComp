@@ -1,0 +1,98 @@
+{
+  "fileName": "smartbugs/dataset/access_control/multiowned_vulnerable.sol",
+  "baseName": "multiowned_vulnerable.sol",
+  "iter": 1,
+  "time": 0.149212,
+  "errMsg": null,
+  "invmap": [ { "key": "0", "formula": "true" } ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "TX_ORG",
+      "line": 48,
+      "signatures": [
+        {
+          "contractName": "MultiOwnable",
+          "methodName": "deleteOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((msg.sender == root));",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "TX_ORG",
+      "line": 48,
+      "signatures": [
+        {
+          "contractName": "MultiOwnable",
+          "methodName": "deleteOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((owners[_owner] == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "MultiOwnable",
+          "methodName": "newOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre1 == owners[_owner])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "DEAD",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "MultiOwnable",
+          "methodName": "deleteOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 39,
+      "signatures": [
+        {
+          "contractName": "MultiOwnable",
+          "methodName": "newOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 48,
+      "signatures": [
+        {
+          "contractName": "MultiOwnable",
+          "methodName": "deleteOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

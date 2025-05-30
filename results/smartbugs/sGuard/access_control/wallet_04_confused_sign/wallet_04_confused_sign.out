@@ -1,0 +1,17 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/access_control/wallet_04_confused_sign.sol" "results/access_control/wallet_04_confused_sign" "Wallet"
+
+smartbugs/dataset/access_control/wallet_04_confused_sign.sol
+{ bugFixes:
+   { '{~X0/YEYb@a"$m4tLyI_8Iw(}C[I!9':
+      'balances[msg.sender] = sub_uint256(balances[msg.sender], amount)',
+     'sqcm@L((C?P:s~p.M\'5q9@QgnlR%q8-E': 'add_uint256(balances[msg.sender], msg.value)',
+     'NkvAS~hdL_8H*q/9N0': ' function deposit() nonReentrant_ ',
+     '>>~LMk~/9}\'j#TJ"s@<r/K#1&Vu5(>BMB':
+      'balances[msg.sender] = add_uint256(balances[msg.sender], msg.value)',
+     '<"d^&;TwL$3\':6`&': 'contract Wallet  is sGuard ',
+     'E=6iI.Sye/jQz\\>glM^2bPoF8@E?D</vD': ' function withdraw(uint256 amount) nonReentrant_ ' },
+  source:
+   '/*\n * @source: https://smartcontractsecurity.github.io/SWC-registry/docs/SWC-105#wallet-04-confused-signsol\n * @author: -\n * @vulnerable_at_lines: 30\n */\n\n\n /* User can add pay in and withdraw Ether.\n    Unfortunatelty, the developer was drunk and used the wrong comparison operator in "withdraw()"\n    Anybody can withdraw arbitrary amounts of Ether :()\n */\n\n <"d^&;TwL$3\':6`&{\n     address creator;\n\n     mapping(address => uint256) balances;\n\n     constructor() public {\n         creator = msg.sender;\n     }\n\n     NkvAS~hdL_8H*q/9N0 public payable {\n         assert(sqcm@L((C?P:s~p.M\'5q9@QgnlR%q8-E > balances[msg.sender]);\n         >>~LMk~/9}\'j#TJ"s@<r/K#1&Vu5(>BMB;\n     }\n\n     E=6iI.Sye/jQz\\>glM^2bPoF8@E?D</vD public {\n         // <yes> <report> ACCESS_CONTROL\n         require(amount >= balances[msg.sender]);\n         msg.sender.transfer(amount);\n         {~X0/YEYb@a"$m4tLyI_8Iw(}C[I!9;\n     }\n\n     // In an emergency the owner can migrate  allfunds to a different address.\n\n     function migrateTo(address to) public {\n         require(creator == msg.sender);\n         to.transfer(this.balance);\n     }\n\n }\n',
+  wrappers: Set { 'sub_uint256', 'add_uint256', 'nonReentrant_' } }

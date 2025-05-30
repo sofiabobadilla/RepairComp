@@ -1,0 +1,40 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 3
+[INFO] reachable : 3
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (GuessTheRandomNumberChallenge/GuessTheRandomNumberChallenge/[]), 15, (block.number - 1)),
+    (ETH_LEAK, (GuessTheRandomNumberChallenge/guess/[uint8]), 26, msg.sender.transfer(2000000000000000000);)
+
+[INFO] # of basic patch components : 2
+[INFO] extracted components
+[
+InsertLine (15, assume((block.number >= 1));),
+InsertLine (23, assume((smartfix_owner == msg.sender));)
+]
+- New best candidate, iter 1, 4.61999201775s : results/bad_randomness/guess_the_random_number/candidates/cand_2/patch.sol
+- New best candidate, iter 3, 7.91170907021s : results/bad_randomness/guess_the_random_number/candidates/cand_3/patch.sol
+- Solution found, iter 3, 7.91170907021s : results/bad_randomness/guess_the_random_number/candidates/cand_3/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 4
+# Alarm (orginal)         : 2
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : results/bad_randomness/guess_the_random_number/candidates/cand_3/patch.sol
+- First solution (iter)   : 3
+- First solution (time)   : 7.91170907021
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 3, Time: 7.91170907021, results/bad_randomness/guess_the_random_number/candidates/cand_3/patch.sol
+
+Time Elapsed (Real) : 7.91612100601
+Time Elapsed (CPU)  : 5.823608

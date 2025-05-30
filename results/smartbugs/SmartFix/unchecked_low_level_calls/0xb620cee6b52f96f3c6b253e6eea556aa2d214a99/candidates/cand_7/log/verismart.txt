@@ -1,0 +1,493 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 26
+[INFO] reachable : 22
+[INFO] Generating Paths ... took 0.00101s
+[INFO] # path : 74
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.00293s
+Generating VCs ... took 0.011242s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.079826
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/15 ... [IO] line 86, (block.number - 1) ... unproven
+2/15 ... [IO] line 118, (seed[0] * seed[1]) ... unproven
+3/15 ... [ETH_LEAK] line 81, msg.sender.transfer(amount); ... proven
+4/15 ... [ETH_LEAK] line 100, firstTarget.call.value(msg.value)(); ... unproven
+5/15 ... [ETH_LEAK] line 106, secondTarget.call.value(msg.value)(); ... unproven
+6/15 ... [ETH_LEAK] line 133, owner.call.value(1)(); ... unproven
+7/15 ... [ETH_LEAK] line 137, winner.transfer(address(this).balance); ... unproven
+8/15 ... [RE_EL] line 81, msg.sender.transfer(amount); ... proven
+9/15 ... [RE_EL] line 100, firstTarget.call.value(msg.value)(); ... unproven
+10/15 ... [RE_EL] line 106, secondTarget.call.value(msg.value)(); ... unproven
+11/15 ... [RE_EL] line 133, owner.call.value(1)(); ... unproven
+12/15 ... [RE_EL] line 137, winner.transfer(address(this).balance); ... unproven
+13/15 ... [TX_ORG] line 39, assume((msg.sender == owner)); ... proven
+14/15 ... [TX_ORG] line 44, assume((msg.sender == winner)); ... proven
+15/15 ... [TX_ORG] line 79, assume((msg.sender != owner)); ... proven
+took 1.68486s
+
+Generating VCs ... took 0.010767s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 1.818561
+[
+-1 -> (Read(@TU, firstTarget__@9) == true)
+0 -> (Read(@TU, firstTarget__@9) == true)
+]
+[
+]
+1/15 ... [IO] line 86, (block.number - 1) ... unproven
+2/15 ... [IO] line 118, (seed[0] * seed[1]) ... unproven
+3/15 ... [ETH_LEAK] line 81, msg.sender.transfer(amount); ... proven
+4/15 ... [ETH_LEAK] line 100, firstTarget.call.value(msg.value)(); ... proven
+5/15 ... [ETH_LEAK] line 106, secondTarget.call.value(msg.value)(); ... unproven
+6/15 ... [ETH_LEAK] line 133, owner.call.value(1)(); ... unproven
+7/15 ... [ETH_LEAK] line 137, winner.transfer(address(this).balance); ... unproven
+8/15 ... [RE_EL] line 81, msg.sender.transfer(amount); ... proven
+9/15 ... [RE_EL] line 100, firstTarget.call.value(msg.value)(); ... proven
+10/15 ... [RE_EL] line 106, secondTarget.call.value(msg.value)(); ... unproven
+11/15 ... [RE_EL] line 133, owner.call.value(1)(); ... unproven
+12/15 ... [RE_EL] line 137, winner.transfer(address(this).balance); ... unproven
+13/15 ... [TX_ORG] line 39, assume((msg.sender == owner)); ... proven
+14/15 ... [TX_ORG] line 44, assume((msg.sender == winner)); ... proven
+15/15 ... [TX_ORG] line 79, assume((msg.sender != owner)); ... proven
+took 1.264976s
+
+Generating VCs ... took 0.010723s
+Checking validity of VCs ... took 0.898858s
+
+Generating VCs ... took 0.011003s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 4.801556
+[
+-1 -> ((Read(@TU, firstTarget__@9) == true) /\ (Read(@TU, secondTarget__@12) == true))
+0 -> ((Read(@TU, firstTarget__@9) == true) /\ (Read(@TU, secondTarget__@12) == true))
+]
+[
+]
+1/15 ... [IO] line 86, (block.number - 1) ... unproven
+2/15 ... [IO] line 118, (seed[0] * seed[1]) ... unproven
+3/15 ... [ETH_LEAK] line 81, msg.sender.transfer(amount); ... proven
+4/15 ... [ETH_LEAK] line 100, firstTarget.call.value(msg.value)(); ... proven
+5/15 ... [ETH_LEAK] line 106, secondTarget.call.value(msg.value)(); ... proven
+6/15 ... [ETH_LEAK] line 133, owner.call.value(1)(); ... unproven
+7/15 ... [ETH_LEAK] line 137, winner.transfer(address(this).balance); ... unproven
+8/15 ... [RE_EL] line 81, msg.sender.transfer(amount); ... proven
+9/15 ... [RE_EL] line 100, firstTarget.call.value(msg.value)(); ... proven
+10/15 ... [RE_EL] line 106, secondTarget.call.value(msg.value)(); ... proven
+11/15 ... [RE_EL] line 133, owner.call.value(1)(); ... unproven
+12/15 ... [RE_EL] line 137, winner.transfer(address(this).balance); ... unproven
+13/15 ... [TX_ORG] line 39, assume((msg.sender == owner)); ... proven
+14/15 ... [TX_ORG] line 44, assume((msg.sender == winner)); ... proven
+15/15 ... [TX_ORG] line 79, assume((msg.sender != owner)); ... proven
+took 1.406267s
+
+Generating VCs ... took 0.010798s
+Checking validity of VCs ... took 0.996674s
+
+Generating VCs ... took 0.012061s
+Checking validity of VCs ... took 0.874635s
+
+Generating VCs ... took 0.010747s
+Checking validity of VCs ... took 1.051782s
+
+Generating VCs ... took 0.010425s
+Checking validity of VCs ... took 0.868894s
+
+Generating VCs ... took 0.010562s
+Checking validity of VCs ... took 1.26021s
+
+Iter : 10 To explore : 158 Explored : 283 Total elapsed : 10.533483
+Generating VCs ... took 0.011185s
+Checking validity of VCs ... took 1.112324s
+
+Generating VCs ... took 0.013716s
+Checking validity of VCs ... took 1.161766s
+
+Generating VCs ... took 0.010604s
+Checking validity of VCs ... took 1.188022s
+
+Generating VCs ... took 0.010743s
+Checking validity of VCs ... took 1.867944s
+
+Generating VCs ... took 0.010414s
+Checking validity of VCs ... took 1.032846s
+
+Generating VCs ... took 0.010873s
+Checking validity of VCs ... took 1.11796s
+
+Generating VCs ... took 0.010464s
+Checking validity of VCs ... took 1.119329s
+
+Generating VCs ... took 0.010573s
+Checking validity of VCs ... took 1.027074s
+
+Generating VCs ... took 0.010689s
+Checking validity of VCs ... took 1.133201s
+
+Generating VCs ... took 0.011027s
+Checking validity of VCs ... took 1.068498s
+
+Iter : 20 To explore : 235 Explored : 370 Total elapsed : 22.519744
+Generating VCs ... took 0.011084s
+Checking validity of VCs ... took 0.993589s
+
+Generating VCs ... took 0.012397s
+Checking validity of VCs ... took 1.288154s
+
+Generating VCs ... took 0.010687s
+Checking validity of VCs ... took 1.000564s
+
+Generating VCs ... took 0.010499s
+Checking validity of VCs ... took 1.170481s
+
+Generating VCs ... took 0.011174s
+Checking validity of VCs ... took 1.268037s
+
+Generating VCs ... took 0.010563s
+Checking validity of VCs ... took 1.154921s
+
+Generating VCs ... took 0.011014s
+Checking validity of VCs ... took 1.191093s
+
+Generating VCs ... took 0.010479s
+Checking validity of VCs ... took 1.222422s
+
+Generating VCs ... took 0.012374s
+Checking validity of VCs ... took 1.307394s
+
+Generating VCs ... took 0.011009s
+Checking validity of VCs ... took 1.088725s
+
+Iter : 30 To explore : 271 Explored : 416 Total elapsed : 34.385601
+Generating VCs ... took 0.013694s
+Checking validity of VCs ... took 1.050012s
+
+Generating VCs ... took 0.010633s
+Checking validity of VCs ... took 0.976398s
+
+Generating VCs ... took 0.011389s
+Checking validity of VCs ... took 1.048166s
+
+Generating VCs ... took 0.013602s
+Checking validity of VCs ... took 1.185009s
+
+Generating VCs ... took 0.012693s
+Checking validity of VCs ... took 1.748255s
+
+Generating VCs ... took 0.010977s
+Checking validity of VCs ... took 1.713625s
+
+Generating VCs ... took 0.013092s
+Checking validity of VCs ... took 1.861929s
+
+Generating VCs ... took 0.01137s
+Checking validity of VCs ... took 1.837272s
+
+Generating VCs ... took 0.014422s
+Checking validity of VCs ... took 1.125184s
+
+Generating VCs ... took 0.010569s
+Checking validity of VCs ... took 1.031546s
+
+Iter : 40 To explore : 307 Explored : 462 Total elapsed : 48.145261
+Generating VCs ... took 0.010537s
+Checking validity of VCs ... took 1.020078s
+
+Generating VCs ... took 0.010402s
+Checking validity of VCs ... took 1.70156s
+
+Generating VCs ... took 0.010775s
+Checking validity of VCs ... took 1.753828s
+
+Generating VCs ... took 0.014075s
+Checking validity of VCs ... took 1.763658s
+
+Generating VCs ... took 0.010565s
+Checking validity of VCs ... took 1.779761s
+
+Generating VCs ... took 0.012309s
+Checking validity of VCs ... took 1.131776s
+
+Generating VCs ... took 0.013002s
+Checking validity of VCs ... took 1.228283s
+
+Generating VCs ... took 0.010959s
+Checking validity of VCs ... took 1.152248s
+
+Generating VCs ... took 0.011508s
+Checking validity of VCs ... took 1.926048s
+
+Generating VCs ... took 0.010595s
+Checking validity of VCs ... took 1.807157s
+
+Iter : 50 To explore : 352 Explored : 517 Total elapsed : 63.590511
+Generating VCs ... took 0.010523s
+Checking validity of VCs ... took 1.758054s
+
+Generating VCs ... took 0.012553s
+Checking validity of VCs ... took 1.7189s
+
+Generating VCs ... took 0.010909s
+Checking validity of VCs ... took 1.810147s
+
+Generating VCs ... took 0.01128s
+Checking validity of VCs ... took 1.814551s
+
+Generating VCs ... took 0.011019s
+Checking validity of VCs ... took 1.819166s
+
+Generating VCs ... took 0.011085s
+Checking validity of VCs ... took 1.808655s
+
+Generating VCs ... took 0.010793s
+Checking validity of VCs ... took 1.970805s
+
+Generating VCs ... took 0.01136s
+Checking validity of VCs ... took 1.953891s
+
+Generating VCs ... took 0.013854s
+Checking validity of VCs ... took 1.853258s
+
+Generating VCs ... took 0.010952s
+Checking validity of VCs ... took 1.932073s
+
+Iter : 60 To explore : 361 Explored : 536 Total elapsed : 82.22779
+Generating VCs ... took 0.010612s
+Checking validity of VCs ... took 2.02476s
+
+Generating VCs ... took 0.011079s
+Checking validity of VCs ... took 1.93869s
+
+Generating VCs ... took 0.011406s
+Checking validity of VCs ... took 1.947139s
+
+Generating VCs ... took 0.010458s
+Checking validity of VCs ... took 2.01953s
+
+Generating VCs ... took 0.014468s
+Checking validity of VCs ... took 1.803684s
+
+Generating VCs ... took 0.011322s
+Checking validity of VCs ... took 1.89466s
+
+Generating VCs ... took 0.010901s
+Checking validity of VCs ... took 1.831569s
+
+Generating VCs ... took 0.010801s
+Checking validity of VCs ... took 1.782087s
+
+Generating VCs ... took 0.012718s
+Checking validity of VCs ... took 1.85346s
+
+Generating VCs ... took 0.01151s
+Checking validity of VCs ... took 1.848481s
+
+Iter : 70 To explore : 386 Explored : 571 Total elapsed : 101.378751
+Generating VCs ... took 0.011007s
+Checking validity of VCs ... took 1.82284s
+
+Generating VCs ... took 0.011218s
+Checking validity of VCs ... took 1.877434s
+
+Generating VCs ... took 0.010684s
+Checking validity of VCs ... took 1.055555s
+
+Generating VCs ... took 0.011017s
+Checking validity of VCs ... took 1.128029s
+
+Generating VCs ... took 0.014377s
+Checking validity of VCs ... took 1.059723s
+
+Generating VCs ... took 0.012419s
+Checking validity of VCs ... took 1.126676s
+
+Generating VCs ... took 0.010611s
+Checking validity of VCs ... took 1.145901s
+
+Generating VCs ... took 0.010942s
+Checking validity of VCs ... took 1.081566s
+
+Generating VCs ... took 0.011826s
+Checking validity of VCs ... took 1.232186s
+
+Generating VCs ... took 0.011379s
+Checking validity of VCs ... took 1.15216s
+
+Iter : 80 To explore : 447 Explored : 642 Total elapsed : 114.229845
+Generating VCs ... took 0.011021s
+Checking validity of VCs ... took 1.067116s
+
+Generating VCs ... took 0.010455s
+Checking validity of VCs ... took 1.224536s
+
+Generating VCs ... took 0.010478s
+Checking validity of VCs ... took 1.217044s
+
+Generating VCs ... took 0.010768s
+Checking validity of VCs ... took 1.077859s
+
+Generating VCs ... took 0.012942s
+Checking validity of VCs ... took 1.093896s
+
+Generating VCs ... took 0.012749s
+Checking validity of VCs ... took 1.330574s
+
+Generating VCs ... took 0.010653s
+Checking validity of VCs ... took 1.168125s
+
+Generating VCs ... took 0.010861s
+Checking validity of VCs ... took 1.14955s
+
+Generating VCs ... took 0.010832s
+Checking validity of VCs ... took 1.094901s
+
+Generating VCs ... took 0.011163s
+Checking validity of VCs ... took 1.157232s
+
+Iter : 90 To explore : 566 Explored : 771 Total elapsed : 125.979234
+Generating VCs ... took 0.010811s
+Checking validity of VCs ... took 1.008025s
+
+Generating VCs ... took 0.011185s
+Checking validity of VCs ... took 1.435972s
+
+Generating VCs ... took 0.010794s
+Checking validity of VCs ... took 1.160953s
+
+Generating VCs ... took 0.010522s
+Checking validity of VCs ... took 1.060409s
+
+Generating VCs ... took 0.011102s
+Checking validity of VCs ... took 1.316111s
+
+Generating VCs ... took 0.010841s
+Checking validity of VCs ... took 1.332977s
+
+Generating VCs ... took 0.010935s
+Checking validity of VCs ... took 1.348926s
+
+Generating VCs ... took 0.011451s
+Checking validity of VCs ... took 1.401521s
+
+Generating VCs ... took 0.010778s
+Checking validity of VCs ... took 1.158042s
+
+Generating VCs ... took 0.010698s
+Checking validity of VCs ... took 1.361457s
+
+Iter : 100 To explore : 683 Explored : 898 Total elapsed : 138.745512
+Generating VCs ... took 0.0114s
+Checking validity of VCs ... took 1.373069s
+
+Generating VCs ... took 0.010781s
+Checking validity of VCs ... took 1.373081s
+
+Generating VCs ... took 0.011861s
+Checking validity of VCs ... took 1.223309s
+
+Generating VCs ... took 0.011521s
+Checking validity of VCs ... took 1.134619s
+
+Generating VCs ... took 0.010656s
+Checking validity of VCs ... took 1.010866s
+
+Generating VCs ... took 0.011264s
+Checking validity of VCs ... took 1.10098s
+
+Generating VCs ... took 0.011654s
+Checking validity of VCs ... took 1.101767s
+
+Generating VCs ... took 0.011691s
+Checking validity of VCs ... took 1.10978s
+
+Generating VCs ... took 0.010699s
+Checking validity of VCs ... took 1.135803s
+
+Generating VCs ... took 0.010849s
+Checking validity of VCs ... took 1.856381s
+
+Generating VCs ... took 0.00665800000002s
+Checking validity of VCs ... 
+1/17 ... [NO_EFFECT] line 33, (@pre1 == owner) ... unproven
+2/17 ... [NO_EFFECT] line 60, (@pre2 == secret) ... unproven
+3/17 ... [NO_EFFECT] line 87, (@pre4 == secret) ... unproven
+4/17 ... [NO_EFFECT] line 89, (@pre3 == winner) ... unproven
+5/17 ... [NO_EFFECT] line 110, (@pre5 == seed[_index]) ... unproven
+6/17 ... [NO_EFFECT] line 114, (@pre6 == seed.length) ... unproven
+7/17 ... [DEAD] line 39, false ... unproven
+8/17 ... [DEAD] line 44, false ... unproven
+9/17 ... [DEAD] line 72, false ... unproven
+10/17 ... [DEAD] line 78, false ... unproven
+11/17 ... [DEAD] line 79, false ... unproven
+12/17 ... [DEAD] line 81, false ... unproven
+13/17 ... [DEAD] line 98, false ... unproven
+14/17 ... [DEAD] line 104, false ... unproven
+15/17 ... [DEAD] line 125, false ... unproven
+16/17 ... [DEAD] line 126, false ... unproven
+17/17 ... [DEAD] line 137, false ... unproven
+took 0.60171s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 86, (block.number - 1) : unproven
+[2] [IO] line 118, (seed[0] * seed[1]) : unproven
+[3] [ETH_LEAK] line 81, msg.sender.transfer(amount); : proven
+[4] [ETH_LEAK] line 100, firstTarget.call.value(msg.value)(); : proven
+[5] [ETH_LEAK] line 106, secondTarget.call.value(msg.value)(); : proven
+[6] [ETH_LEAK] line 133, owner.call.value(1)(); : unproven
+[7] [ETH_LEAK] line 137, winner.transfer(address(this).balance); : unproven
+[8] [RE_EL] line 81, msg.sender.transfer(amount); : proven
+[9] [RE_EL] line 100, firstTarget.call.value(msg.value)(); : proven
+[10] [RE_EL] line 106, secondTarget.call.value(msg.value)(); : proven
+[11] [RE_EL] line 133, owner.call.value(1)(); : unproven
+[12] [RE_EL] line 137, winner.transfer(address(this).balance); : unproven
+[13] [TX_ORG] line 39, assume((msg.sender == owner)); : proven
+[14] [TX_ORG] line 44, assume((msg.sender == winner)); : proven
+[15] [TX_ORG] line 79, assume((msg.sender != owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 33, (@pre1 == owner) : unproven
+[2] [NO_EFFECT] line 60, (@pre2 == secret) : unproven
+[3] [NO_EFFECT] line 87, (@pre4 == secret) : unproven
+[4] [NO_EFFECT] line 89, (@pre3 == winner) : unproven
+[5] [NO_EFFECT] line 110, (@pre5 == seed[_index]) : unproven
+[6] [NO_EFFECT] line 114, (@pre6 == seed.length) : unproven
+[7] [DEAD] line 39, false : unproven
+[8] [DEAD] line 44, false : unproven
+[9] [DEAD] line 72, false : unproven
+[10] [DEAD] line 78, false : unproven
+[11] [DEAD] line 79, false : unproven
+[12] [DEAD] line 81, false : unproven
+[13] [DEAD] line 98, false : unproven
+[14] [DEAD] line 104, false : unproven
+[15] [DEAD] line 125, false : unproven
+[16] [DEAD] line 126, false : unproven
+[17] [DEAD] line 137, false : unproven
+
+============ Statistics ============
+# Iter                    : 109
+# Alarm / Query           : 6 / 15
+- integer over/underflow  : 2 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 2 / 5
+- reentrancy-leaking      : 2 / 5
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 3
+
+Time Elapsed (Real) : 151.69707799
+Time Elapsed (CPU)  : 151.960597

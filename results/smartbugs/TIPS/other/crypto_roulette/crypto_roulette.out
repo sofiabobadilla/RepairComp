@@ -1,0 +1,90 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/other/crypto_roulette.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/other' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/other/crypto_roulette.sol:
+../smartbugs-curated/dataset/other/crypto_roulette.sol:26:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function CryptoRoulette() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/crypto_roulette.sol:13:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract CryptoRoulette {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/other/crypto_roulette.sol:39:9: Warning: Variable is declared as a storage pointer. Use an explicit "storage" keyword to silence this warning.
+        Game game; //Uninitialized storage pointer
+        ^-------^
+../smartbugs-curated/dataset/other/crypto_roulette.sol:33:30: Warning: "sha3" has been deprecated in favour of "keccak256"
+        secretNumber = uint8(sha3(now, block.blockhash(block.number-1))) % 20 + 1;
+                             ^----------------------------------------^
+../smartbugs-curated/dataset/other/crypto_roulette.sol:33:30: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        secretNumber = uint8(sha3(now, block.blockhash(block.number-1))) % 20 + 1;
+                             ^----------------------------------------^
+../smartbugs-curated/dataset/other/crypto_roulette.sol:39:9: Warning: Uninitialized storage pointer. Did you mean '<type> memory game'?
+        Game game; //Uninitialized storage pointer
+        ^-------^
+../smartbugs-curated/dataset/other/crypto_roulette.sol:46:33: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+            msg.sender.transfer(this.balance);
+                                ^----------^
+../smartbugs-curated/dataset/other/crypto_roulette.sol:55:13: Warning: "suicide" has been deprecated in favour of "selfdestruct"
+            suicide(msg.sender);
+            ^-----------------^
+../smartbugs-curated/dataset/other/crypto_roulette.sol:33:40: Warning: "block.blockhash()" has been deprecated in favor of "blockhash()"
+        secretNumber = uint8(sha3(now, block.blockhash(block.number-1))) % 20 + 1;
+                                       ^-------------^
+
+
+CryptoRoulette (../smartbugs-curated/dataset/other/crypto_roulette.sol#13-60) contract sets array length with a user-controlled value:
+	- gamesPlayed.push(game) (../smartbugs-curated/dataset/other/crypto_roulette.sol#42)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#array-length-assignment
+
+CryptoRoulette.shuffle() (../smartbugs-curated/dataset/other/crypto_roulette.sol#31-34) uses a weak PRNG: "secretNumber = uint8(sha3()(now,block.blockhash(block.number - 1))) % 20 + 1 (../smartbugs-curated/dataset/other/crypto_roulette.sol#33)" 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#weak-PRNG
+
+CryptoRoulette.play(uint256).game (../smartbugs-curated/dataset/other/crypto_roulette.sol#39) is a storage variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-storage-variables
+
+CryptoRoulette.play(uint256) (../smartbugs-curated/dataset/other/crypto_roulette.sol#36-51) uses a dangerous strict equality:
+	- number == secretNumber (../smartbugs-curated/dataset/other/crypto_roulette.sol#44)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+
+CryptoRoulette.play(uint256) (../smartbugs-curated/dataset/other/crypto_roulette.sol#36-51) uses timestamp for comparisons
+	Dangerous comparisons:
+	- number == secretNumber (../smartbugs-curated/dataset/other/crypto_roulette.sol#44)
+CryptoRoulette.kill() (../smartbugs-curated/dataset/other/crypto_roulette.sol#53-57) uses timestamp for comparisons
+	Dangerous comparisons:
+	- msg.sender == ownerAddr && now > lastPlayed + 86400 (../smartbugs-curated/dataset/other/crypto_roulette.sol#54)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+Deprecated standard detected secretNumber = uint8(sha3()(now,block.blockhash(block.number - 1))) % 20 + 1 (../smartbugs-curated/dataset/other/crypto_roulette.sol#33):
+	- Usage of "block.blockhash()" should be replaced with "blockhash()"
+	- Usage of "sha3()" should be replaced with "keccak256()"
+Deprecated standard detected suicide(address)(msg.sender) (../smartbugs-curated/dataset/other/crypto_roulette.sol#55):
+	- Usage of "suicide()" should be replaced with "selfdestruct()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Reentrancy in CryptoRoulette.play(uint256) (../smartbugs-curated/dataset/other/crypto_roulette.sol#36-51):
+	External calls:
+	- msg.sender.transfer(this.balance) (../smartbugs-curated/dataset/other/crypto_roulette.sol#46)
+	State variables written after the call(s):
+	- lastPlayed = now (../smartbugs-curated/dataset/other/crypto_roulette.sol#50)
+	- shuffle() (../smartbugs-curated/dataset/other/crypto_roulette.sol#49)
+		- secretNumber = uint8(sha3()(now,block.blockhash(block.number - 1))) % 20 + 1 (../smartbugs-curated/dataset/other/crypto_roulette.sol#33)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+CryptoRoulette.betPrice (../smartbugs-curated/dataset/other/crypto_roulette.sol#17) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+../smartbugs-curated/dataset/other/crypto_roulette.sol analyzed (1 contracts with 95 detectors), 11 result(s) found
+
+Error running slither
+crypto_roulette.sol
+Getting Solidity AST...
+Running TIPS...
+crypto_roulette.sol
+0.002395153045654297
+
+

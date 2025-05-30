@@ -1,0 +1,35 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/unchecked_low_level_calls' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol:
+../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol:9:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract B {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol:15:9: Warning: Return value of low-level calls not used.
+        target.call.value(msg.value)();
+        ^----------------------------^
+
+
+B.go() (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol#12-17) ignores return value by target.call.value(msg.value)() (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-low-level-calls
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in B.go() (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol#12-17):
+	- target.call.value(msg.value)() (../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+../smartbugs-curated/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol analyzed (1 contracts with 95 detectors), 3 result(s) found
+
+Error running slither
+0xf29ebe930a539a60279ace72c707cba851a57707.sol
+Getting Solidity AST...
+Running TIPS...
+0xf29ebe930a539a60279ace72c707cba851a57707.sol
+0.002710580825805664
+
+

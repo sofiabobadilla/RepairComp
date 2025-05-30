@@ -1,0 +1,45 @@
+ ______     __         __  __     ______     __     __  __     __    __    
+/\  ___\   /\ \       /\ \_\ \   /\  ___\   /\ \   /\ \/\ \   /\ "-./  \   
+\ \  __\   \ \ \____  \ \____ \  \ \___  \  \ \ \  \ \ \_\ \  \ \ \-./\ \  
+ \ \_____\  \ \_____\  \/\_____\  \/\_____\  \ \_\  \ \_____\  \ \_\ \ \_\ 
+  \/_____/   \/_____/   \/_____/   \/_____/   \/_/   \/_____/   \/_/  \/_/ 
+                                                                           
+Compiling source code...
+Error: Solidity compilation failed!
+/home/mokita/sc_study/smartbugs-curated/dataset/access_control/parity_wallet_bug_1.sol:19:1: : Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.12
+contract WalletEvents {
+^
+Spanning multiple lines.
+
+/home/mokita/sc_study/smartbugs-curated/dataset/access_control/parity_wallet_bug_1.sol:263:3: : Variable is shadowed in inline assembly by an instruction of the same name
+  function create(uint _value, bytes _code) internal returns (address o_addr) {
+  ^
+Spanning multiple lines.
+
+/home/mokita/sc_study/smartbugs-curated/dataset/access_control/parity_wallet_bug_1.sol:266:13: : Identifier not found.
+      jumpi(invalidJumpLabel, iszero(extcodesize(o_addr)))
+            ^--------------^
+
+/home/mokita/sc_study/smartbugs-curated/dataset/access_control/parity_wallet_bug_1.sol:266:7: : Jump instructions are low-level EVM features that can lead to incorrect stack access. Because of that they are discouraged. Please consider using "switch" or "for" statements instead.
+      jumpi(invalidJumpLabel, iszero(extcodesize(o_addr)))
+      ^---^
+
+/home/mokita/sc_study/smartbugs-curated/dataset/access_control/parity_wallet_bug_1.sol:376:37: : This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'.
+  address constant _walletLibrary = 0xcafecafecafecafecafecafecafecafecafecafe;
+                                    ^----------------------------------------^
+
+/home/mokita/sc_study/smartbugs-curated/dataset/access_control/parity_wallet_bug_1.sol:416:14: : Unbalanced stack at the end of a block: 1 surplus item(s).
+    assembly {
+             ^
+Spanning multiple lines.
+
+/home/mokita/sc_study/smartbugs-curated/dataset/access_control/parity_wallet_bug_1.sol:436:7: : Return value of low-level calls not used.
+      _walletLibrary.delegatecall(msg.data); //it should have whitelisted specific methods that the user is allowed to call
+      ^-----------------------------------^
+
+/home/mokita/sc_study/smartbugs-curated/dataset/access_control/parity_wallet_bug_1.sol:455:37: : This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'.
+  address constant _walletLibrary = 0xcafecafecafecafecafecafecafecafecafecafe;
+                                    ^----------------------------------------^
+
+Error: The compilation did not produce any output!
+Please check the source code!

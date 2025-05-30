@@ -1,0 +1,57 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 7
+[INFO] reachable : 6
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (W_WALLET/Collect/[uint256]), 31, (acc.balance - _am)),
+    (IO, (W_WALLET/Put/[uint256]), 16, (acc.balance + msg.value)),
+    (ETH_LEAK, (W_WALLET/Collect/[uint256]), 29, msg.sender.call.value(_am)()),
+    (RE_EL, (W_WALLET/Collect/[uint256]), 29, msg.sender.call.value(_am)())
+
+[INFO] # of basic patch components : 6
+[INFO] extracted components
+[
+InsertLine (16, assume(((acc.balance + msg.value) >= acc.balance));),
+InsertLine (31, assume((acc.balance >= _am));),
+Replace (26, (acc.balance >= _am), (acc.balance < _am)),
+AtomLst [
+Move ([31] -> 29)
+ElseRevert (line 33)
+],
+AtomLst [
+Add @nonReentrant to (W_WALLET, Put, [uint256]) (line 11)
+Add @nonReentrant to (W_WALLET, Collect, [uint256]) (line 21)
+],
+AtomLst [
+Add @nonReentrant to (W_WALLET, Put, [uint256]) (line 11)
+Add @nonReentrant to (W_WALLET, Collect, [uint256]) (line 21)
+Add @nonReentrant to (W_WALLET, @fallback, []) (line 37)
+]
+]
+- New best candidate, iter 1, 230.67845583s : results/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3/candidates/cand_4/patch.sol
+- Regression found, results/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3/candidates/cand_6/patch.sol
+- New best candidate, iter 7, 901.148469925s : results/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3/candidates/cand_7/patch.sol
+- Solution found, iter 7, 901.148469925s : results/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3/candidates/cand_7/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 8
+# Alarm (orginal)         : 4
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : results/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3/candidates/cand_7/patch.sol
+- First solution (iter)   : 7
+- First solution (time)   : 901.148469925
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 7, Time: 901.148469925, results/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3/candidates/cand_7/patch.sol
+
+Time Elapsed (Real) : 901.211066961
+Time Elapsed (CPU)  : 6.21194

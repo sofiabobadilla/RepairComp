@@ -1,0 +1,187 @@
+{
+  "fileName": "smartbugs/dataset/arithmetic/tokensalechallenge.sol",
+  "baseName": "tokensalechallenge.sol",
+  "iter": 47,
+  "time": 91.782197,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(PRICE_PER_TOKEN__@8:uint256,1000000000000000000)"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "buy",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(numTokens * PRICE_PER_TOKEN)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "buy",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balanceOf[msg.sender] + numTokens)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "sell",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balanceOf[msg.sender] - numTokens)",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "sell",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(numTokens * PRICE_PER_TOKEN)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ETH_LEAK",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "sell",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.transfer((numTokens * PRICE_PER_TOKEN));",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "buy",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == balanceOf[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "sell",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == balanceOf[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 25,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "buy",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balanceOf[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ASSIGN_CONST",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "sell",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balanceOf[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "buy",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "sell",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "TokenSaleChallenge",
+          "methodName": "sell",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 3
+[INFO] reachable : 3
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (IntegerOverflowMul/run/[uint256]), 17, (count * input))
+
+[INFO] # of basic patch components : 1
+[INFO] extracted components
+[
+InsertLine (17, assume(((count == 0) || (((count * input) / count) == input)));)
+]
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 2
+# Alarm (orginal)         : 1
+# Alarm (patch)           : n/a
+# Alarm wo leak (patch)   : n/a
+# Edit (min,max)          : n/a
+# Patch                   : 0
+- First solution          : n/a
+- First solution (iter)   : n/a
+- First solution (time)   : n/a
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+No patch generated
+
+Time Elapsed (Real) : 1.55494999886
+Time Elapsed (CPU)  : 5.364

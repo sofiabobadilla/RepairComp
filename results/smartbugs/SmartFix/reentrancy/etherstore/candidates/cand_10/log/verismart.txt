@@ -1,0 +1,124 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.000261s
+[INFO] # path : 16
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.004753s
+Generating VCs ... took 0.004574s
+Generating VCs ... took 0.002526s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 10.567683
+[
+-1 -> ((withdrawalLimit__@4 == 1000000000000000000) /\ @Invest_sum >= Σ_u balances__@12)
+0 -> ((withdrawalLimit__@4 == 1000000000000000000) /\ @Invest_sum >= Σ_u balances__@12)
+]
+[
+]
+1/7 ... [IO] line 17, (balances[msg.sender] + msg.value) ... unproven
+2/7 ... [IO] line 25, (lastWithdrawTime[msg.sender] + 604800) ... unproven
+3/7 ... [IO] line 27, (balances[msg.sender] - _weiToWithdraw) ... proven
+4/7 ... [ETH_LEAK] line 29, msg.sender.call.value(_weiToWithdraw)() ... proven
+5/7 ... [RE_EL] line 29, msg.sender.call.value(_weiToWithdraw)() ... proven
+6/7 ... [RE] line 16, (EtherStore, depositFunds, []) ... unproven
+7/7 ... [RE] line 20, (EtherStore, withdrawFunds, [uint256]) ... unproven
+took 10.31903s
+
+Generating VCs ... took 0.002243s
+Checking validity of VCs ... took 7.401361s
+
+Generating VCs ... took 0.002289s
+Checking validity of VCs ... took 7.298894s
+
+Generating VCs ... took 0.00228s
+Checking validity of VCs ... took 49.382109s
+
+Generating VCs ... took 0.00208500000001s
+Checking validity of VCs ... took 6.721232s
+
+Generating VCs ... took 0.00214000000001s
+Checking validity of VCs ... took 6.055553s
+
+Generating VCs ... took 0.00216500000001s
+Checking validity of VCs ... took 1.129005s
+
+Generating VCs ... took 0.00225399999999s
+Checking validity of VCs ... took 5.40851s
+
+Generating VCs ... took 0.00222100000001s
+Checking validity of VCs ... took 1.482607s
+
+Iter : 10 To explore : 63 Explored : 72 Total elapsed : 99.944408
+Generating VCs ... took 0.00218100000001s
+Checking validity of VCs ... took 1.399929s
+
+Generating VCs ... took 0.002171s
+Checking validity of VCs ... took 6.538161s
+
+Generating VCs ... took 0.00228000000001s
+Checking validity of VCs ... took 1.286147s
+
+Generating VCs ... took 0.002207s
+Checking validity of VCs ... took 7.501245s
+
+Generating VCs ... took 0.002077s
+Checking validity of VCs ... took 26.152199s
+
+Generating VCs ... took 0.002196s
+Checking validity of VCs ... took 6.693688s
+
+Generating VCs ... took 0.00226699999999s
+Checking validity of VCs ... took 3.892076s
+
+Generating VCs ... took 0.001114s
+Checking validity of VCs ... 
+1/8 ... [NO_EFFECT] line 17, (@pre1 == balances[msg.sender]) ... unproven
+2/8 ... [NO_EFFECT] line 27, (@pre3 == balances[msg.sender]) ... unproven
+3/8 ... [NO_EFFECT] line 28, (@pre2 == lastWithdrawTime[msg.sender]) ... unproven
+4/8 ... [ASSIGN_CONST] line 17, (balances[msg.sender] == 0) ... unproven
+5/8 ... [ASSIGN_CONST] line 27, (balances[msg.sender] == 0) ... unproven
+6/8 ... [DEAD] line 21, false ... unproven
+7/8 ... [DEAD] line 23, false ... unproven
+8/8 ... [DEAD] line 25, false ... unproven
+took 1.274183s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 17, (balances[msg.sender] + msg.value) : unproven
+[2] [IO] line 25, (lastWithdrawTime[msg.sender] + 604800) : unproven
+[3] [IO] line 27, (balances[msg.sender] - _weiToWithdraw) : proven
+[4] [ETH_LEAK] line 29, msg.sender.call.value(_weiToWithdraw)() : proven
+[5] [RE_EL] line 29, msg.sender.call.value(_weiToWithdraw)() : proven
+[6] [RE] line 16, (EtherStore, depositFunds, []) : unproven
+[7] [RE] line 20, (EtherStore, withdrawFunds, [uint256]) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 17, (@pre1 == balances[msg.sender]) : unproven
+[2] [NO_EFFECT] line 27, (@pre3 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 28, (@pre2 == lastWithdrawTime[msg.sender]) : unproven
+[4] [ASSIGN_CONST] line 17, (balances[msg.sender] == 0) : unproven
+[5] [ASSIGN_CONST] line 27, (balances[msg.sender] == 0) : unproven
+[6] [DEAD] line 21, false : unproven
+[7] [DEAD] line 23, false : unproven
+[8] [DEAD] line 25, false : unproven
+
+============ Statistics ============
+# Iter                    : 16
+# Alarm / Query           : 4 / 7
+- integer over/underflow  : 2 / 3
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 1
+- reentrancy              : 2 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 154.750614882
+Time Elapsed (CPU)  : 154.738334

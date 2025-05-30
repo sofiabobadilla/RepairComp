@@ -1,0 +1,153 @@
+--- https://github.com/smartbugs/smartbugs-curated/tree/main/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol
++++ https://github.com/ASSERT-KTH/RepairComp/blob/main/results/smartbugs/sGuard/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol
+@@ -1,13 +1,35 @@
++contract sGuard{
+
++  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {
+
++    assert(b <= a);
+
++    return a - b;
+
++  }
+
++  
+
++  bool internal locked_;
+
++  constructor() internal {
+
++    locked_ = false;
+
++  }
+
++  modifier nonReentrant_() {
+
++    require(!locked_);
+
++    locked_ = true;
+
++    _;
+
++    locked_ = false;
+
++  }
+
++  
+
++  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {
+
++    uint256 c = a + b;
+
++    assert(c >= a);
+
++    return c;
+
++  }
+
++}
+
+ /*
+
+  * @source: etherscan.io 
+
+  * @author: -
+
+  * @vulnerable_at_lines: 40
+
+  */
+
+ 
+
+-pragma solidity ^0.4.19;
+
+ 
+
+ contract Private_Bank
+
+-{
+
++ is sGuard {
+
+     mapping (address => uint) public balances;
+
+     
+
+     uint public MinDeposit = 1 ether;
+
+@@ -19,18 +41,18 @@
+         TransferLog = Log(_log);
+
+     }
+
+     
+
+-    function Deposit()
+
++     function Deposit() nonReentrant_ 
+
+     public
+
+     payable
+
+     {
+
+         if(msg.value > MinDeposit)
+
+         {
+
+-            balances[msg.sender]+=msg.value;
+
++            balances[msg.sender] = add_uint256(balances[msg.sender], msg.value);
+
+             TransferLog.AddMessage(msg.sender,msg.value,"Deposit");
+
+         }
+
+     }
+
+     
+
+-    function CashOut(uint _am)
+
++     function CashOut(uint _am) nonReentrant_ 
+
+     public
+
+     payable
+
+     {
+
+@@ -39,7 +61,7 @@
+             // <yes> <report> REENTRANCY
+
+             if(msg.sender.call.value(_am)())
+
+             {
+
+-                balances[msg.sender]-=_am;
+
++                balances[msg.sender] = sub_uint256(balances[msg.sender], _am);
+
+                 TransferLog.AddMessage(msg.sender,_am,"CashOut");
+
+             }
+
+         }
+
+@@ -50,7 +72,7 @@
+ }
+
+ 
+
+ contract Log 
+
+-{
+
++ is sGuard {
+
+    
+
+     struct Message
+
+     {

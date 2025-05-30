@@ -1,0 +1,17 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol" "report_run/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782" "PrivateDeposit"
+
+patches/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol
+{ bugFixes:
+   { 'FED3)': 'add_uint256(a, b)',
+     'Y{9<ks1Me4U+j_*RC[G+ia5=Fr=+T': ' function setLog(address _lib) nonReentrant_ ',
+     'k{aQMn?~oE-*TE5{Rf': ' function Deposit() nonReentrant_ ',
+     'QbM2.N,"*k[K*-z-MmE(`E?Q"tj$z|x2?5+': 'contract PrivateDeposit\n is sGuard  is sGuard ',
+     '3(Wv7': 'sub_uint256(a, b)',
+     ')hiuT:$,{Z`C!GN(Q*$RY4_(/': 'contract Log \n is sGuard  is sGuard ',
+     '*bE+7?hpRiJ.e}r35E8K,3(m]P': ' function CashOut(uint _am) nonReentrant_ ',
+     'j73f)D5qF.isV4a': 'contract sGuard is sGuard ' },
+  source:
+   'j73f)D5qF.isV4a{\n  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    assert(b <= a);\n    return 3(Wv7;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n  \n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = FED3);\n    assert(c >= a);\n    return c;\n  }\n}\n/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 52\n */\n\n\nQbM2.N,"*k[K*-z-MmE(`E?Q"tj$z|x2?5+{\n    mapping (address => uint) public balances;\n        \n    uint public MinDeposit = 1 ether;\n    address public owner;\n    \n    Log TransferLog;\n    \n    modifier onlyOwner() {\n        require(msg.sender == owner);\n        _;\n    }    \n    \n    function PrivateDeposit()\n    {\n        owner = msg.sender;\n        TransferLog = new Log();\n    }\n    \n    \n    \n    Y{9<ks1Me4U+j_*RC[G+ia5=Fr=+T onlyOwner\n    {\n        TransferLog = Log(_lib);\n    }    \n    \n     k{aQMn?~oE-*TE5{Rf nonReentrant_ \n    public\n    payable\n    {\n        if(msg.value >= MinDeposit)\n        {\n            balances[msg.sender] = add_uint256(balances[msg.sender], msg.value);\n            TransferLog.AddMessage(msg.sender,msg.value,"Deposit");\n        }\n    }\n    \n     *bE+7?hpRiJ.e}r35E8K,3(m]P nonReentrant_ \n    {\n        if(_am<=balances[msg.sender])\n        {            \n            // <yes> <report> REENTRANCY\n            if(msg.sender.call.value(_am)())\n            {\n                balances[msg.sender] = sub_uint256(balances[msg.sender], _am);\n                TransferLog.AddMessage(msg.sender,_am,"CashOut");\n            }\n        }\n    }\n    \n    function() public payable{}    \n    \n}\n\n)hiuT:$,{Z`C!GN(Q*$RY4_(/{\n   \n    struct Message\n    {\n        address Sender;\n        string  Data;\n        uint Val;\n        uint  Time;\n    }\n    \n    Message[] public History;\n    \n    Message LastMsg;\n    \n    function AddMessage(address _adr,uint _val,string _data)\n    public\n    {\n        LastMsg.Sender = _adr;\n        LastMsg.Time = now;\n        LastMsg.Val = _val;\n        LastMsg.Data = _data;\n        History.push(LastMsg);\n    }\n}',
+  wrappers: Set { 'add_uint256', 'nonReentrant_', 'sub_uint256' } }

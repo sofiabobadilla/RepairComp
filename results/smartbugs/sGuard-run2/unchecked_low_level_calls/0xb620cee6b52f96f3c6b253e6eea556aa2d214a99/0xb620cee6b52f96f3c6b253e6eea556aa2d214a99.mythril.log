@@ -1,0 +1,182 @@
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: DrainMe
+Function name: setSeed(uint256,uint256)
+PC address: 1815
+Estimated Gas Usage: 2012 - 2627
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:114
+
+function setSeed (uint256 _index, uint256 _value) public payable onlyPlayers {
+	seed[_index] = _value;
+}
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: becomePlayer(), txdata: 0x56075a98, value: 0x470de4df820000
+Caller: [SOMEGUY], function: setSeed(uint256,uint256), txdata: 0x1d7915ad01, value: 0x0
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: DrainMe
+Function name: balance(uint256)
+PC address: 2152
+Estimated Gas Usage: 1146 - 1241
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:33
+
+uint256[] public balance
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: balance(uint256), txdata: 0x47bb89f0, value: 0x0
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: DrainMe
+Function name: seed(uint256)
+PC address: 2952
+Estimated Gas Usage: 1256 - 1351
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:32
+
+uint256[] public seed = [951828771,158769871220]
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: seed(uint256), txdata: 0x9556483701, decoded_data: (452312848583266388373324160190187140051835877600158453279131187530910662656,), value: 0x0
+
+==== External Call To User-Supplied Address ====
+SWC ID: 107
+Severity: Low
+Contract: DrainMe
+Function name: winPrize()
+PC address: 3178
+Estimated Gas Usage: 2868 - 37809
+A call to a user-supplied address is executed.
+An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:138
+
+owner.call.value(1 wei)()
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x1080000001ec6fe00, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: DranMe(), txdata: 0x2a8de0ca, value: 0x0
+Caller: [ATTACKER], function: winPrize(), txdata: 0xb11cc099, value: 0x0
+
+==== Unchecked return value from external call. ====
+SWC ID: 104
+Severity: Medium
+Contract: DrainMe
+Function name: winPrize()
+PC address: 3178
+Estimated Gas Usage: 2868 - 37809
+The return value of a message call is not checked.
+External calls return a boolean value. If the callee halts with an exception, 'false' is returned and execution continues in the caller. The caller should check whether an exception happened and react accordingly to avoid unexpected behavior. For example it is often desirable to wrap external calls in require() so the transaction is reverted if the call fails.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:138
+
+owner.call.value(1 wei)()
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x11200102, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [SOMEGUY], function: DranMe(), txdata: 0x2a8de0ca, value: 0x0
+Caller: [SOMEGUY], function: winPrize(), txdata: 0xb11cc099, value: 0x0
+
+==== Unprotected Ether Withdrawal ====
+SWC ID: 105
+Severity: High
+Contract: DrainMe
+Function name: winPrize()
+PC address: 3178
+Estimated Gas Usage: 2868 - 37809
+Any sender can withdraw Ether from the contract account.
+Arbitrary senders other than the contract creator can profitably extract Ether from the contract account. Verify the business logic carefully and make sure that appropriate security controls are in place to prevent unexpected loss of funds.
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:138
+
+owner.call.value(1 wei)()
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [ATTACKER], function: DranMe(), txdata: 0x2a8de0ca, value: 0x0
+Caller: [ATTACKER], function: winPrize(), txdata: 0xb11cc099, value: 0x0
+
+==== Exception State ====
+SWC ID: 110
+Severity: Medium
+Contract: DrainMe
+Function name: players(uint256)
+PC address: 3606
+Estimated Gas Usage: 1498 - 1593
+An assertion violation was triggered.
+It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).
+--------------------
+In file: ../results/smartbugs/sGuard/unchecked_low_level_calls/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99/0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol:27
+
+address[] public players
+
+--------------------
+Initial State:
+
+Account: [CREATOR], balance: 0x0, nonce:0, storage:{}
+Account: [ATTACKER], balance: 0x0, nonce:0, storage:{}
+
+Transaction Sequence:
+
+Caller: [CREATOR], calldata: , decoded_data: , value: 0x0
+Caller: [CREATOR], function: players(uint256), txdata: 0xf71d96cb, value: 0x0
+
+

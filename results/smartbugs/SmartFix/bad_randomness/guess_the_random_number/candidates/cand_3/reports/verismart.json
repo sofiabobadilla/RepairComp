@@ -1,0 +1,117 @@
+{
+  "fileName": "results/bad_randomness/guess_the_random_number/candidates/cand_3/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 2,
+  "time": 0.314052,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),smartfix_owner__@4:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "GuessTheRandomNumberChallenge",
+          "methodName": "GuessTheRandomNumberChallenge",
+          "argTypes": []
+        }
+      ],
+      "exp": "(block.number - 1)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "GuessTheRandomNumberChallenge",
+          "methodName": "guess",
+          "argTypes": [ "uint8" ]
+        }
+      ],
+      "exp": "msg.sender.transfer(2000000000000000000);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "TX_ORG",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "GuessTheRandomNumberChallenge",
+          "methodName": "guess",
+          "argTypes": [ "uint8" ]
+        }
+      ],
+      "exp": "assume((smartfix_owner == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "DEAD",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "GuessTheRandomNumberChallenge",
+          "methodName": "guess",
+          "argTypes": [ "uint8" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "DEAD",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "GuessTheRandomNumberChallenge",
+          "methodName": "guess",
+          "argTypes": [ "uint8" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "GuessTheRandomNumberChallenge",
+          "methodName": "guess",
+          "argTypes": [ "uint8" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "GuessTheRandomNumberChallenge",
+          "methodName": "guess",
+          "argTypes": [ "uint8" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

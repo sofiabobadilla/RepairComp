@@ -1,0 +1,9 @@
+[
+    {
+        "description": "Reentrancy in SimpleDAO.withdraw(uint256) (shared/reentrancy/simple_dao.sol#16-22):\n\tExternal calls:\n\t- res = msg.sender.call.value(amount)() (shared/reentrancy/simple_dao.sol#19)\n\tState variables written after the call(s):\n\t- credit[msg.sender] -= amount (shared/reentrancy/simple_dao.sol#20)\n\tSimpleDAO.credit (shared/reentrancy/simple_dao.sol#10) can be used in cross function reentrancies:\n\t- SimpleDAO.credit (shared/reentrancy/simple_dao.sol#10)\n\t- SimpleDAO.donate(address) (shared/reentrancy/simple_dao.sol#12-14)\n\t- SimpleDAO.queryCredit(address) (shared/reentrancy/simple_dao.sol#24-26)\n\t- SimpleDAO.withdraw(uint256) (shared/reentrancy/simple_dao.sol#16-22)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/simple_dao.sol#L16-L22"
+    }
+]

@@ -1,0 +1,15 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/reentrancy/reentrancy_cross_function.sol" "results/reentrancy/reentrancy_cross_function" "Reentrancy_cross_function"
+
+smartbugs/dataset/reentrancy/reentrancy_cross_function.sol
+{ bugFixes:
+   { ',<Q]5./w5O^(M&u#1=>nCnK#Lp&GM#E6cz':
+      'userBalances[msg.sender] = sub_uint256(userBalances[msg.sender], amount)',
+     ':HV$2933NOIK<sR$}|AvE)3Jl}T-SY~AB8P6Gl=th(': ' function transfer(address to, uint amount) nonReentrant_ ',
+     '!I]HbE\\aPR%Gt~YRS`5Cs0!ao:FtE(#ul-=': 'contract Reentrancy_cross_function  is sGuard ',
+     '\\^|06oR\'!3Hk!6Jb>bfa2OXz8H': 'userBalances[to] = add_uint256(userBalances[to], amount)',
+     '9W+[@:!_!6|"Jr.be.:in6&I^3': ' function withdrawBalance() nonReentrant_ ' },
+  source:
+   '/*\n * @source: https://consensys.github.io/smart-contract-best-practices/known_attacks/\n * @author: consensys\n * @vulnerable_at_lines: 24\n */\n\n\n!I]HbE\\aPR%Gt~YRS`5Cs0!ao:FtE(#ul-={\n\n    // INSECURE\n    mapping (address => uint) private userBalances;\n\n    :HV$2933NOIK<sR$}|AvE)3Jl}T-SY~AB8P6Gl=th( {\n        if (userBalances[msg.sender] >= amount) {\n            \\^|06oR\'!3Hk!6Jb>bfa2OXz8H;\n            ,<Q]5./w5O^(M&u#1=>nCnK#Lp&GM#E6cz;\n        }\n    }\n\n    9W+[@:!_!6|"Jr.be.:in6&I^3 public {\n        uint amountToWithdraw = userBalances[msg.sender];\n        // <yes> <report> REENTRANCY\n        (bool success, ) = msg.sender.call.value(amountToWithdraw)(""); // At this point, the caller\'s code is executed, and can call transfer()\n        require(success);\n        userBalances[msg.sender] = 0;\n    }\n}\n',
+  wrappers: Set { 'sub_uint256', 'nonReentrant_', 'add_uint256' } }

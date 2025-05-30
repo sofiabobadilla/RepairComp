@@ -1,0 +1,161 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 10
+[INFO] reachable : 9
+[INFO] Generating Paths ... took 0.000234s
+[INFO] # path : 28
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001365s
+Generating VCs ... took 0.007356s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.052615
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/10 ... [IO] line 43, (balances[msg.sender] + msg.value) ... unproven
+2/10 ... [IO] line 54, (balances[msg.sender] - _am) ... proven
+3/10 ... [ETH_LEAK] line 55, msg.sender.call.value(_am)() ... unproven
+4/10 ... [RE_EL] line 55, msg.sender.call.value(_am)() ... unproven
+5/10 ... [RE] line 19, (PERSONAL_BANK, SetMinSum, [uint256]) ... unproven
+6/10 ... [RE] line 26, (PERSONAL_BANK, SetLogFile, [address]) ... unproven
+7/10 ... [RE] line 33, (PERSONAL_BANK, Initialized, []) ... unproven
+8/10 ... [RE] line 39, (PERSONAL_BANK, Deposit, []) ... unproven
+9/10 ... [RE] line 47, (PERSONAL_BANK, Collect, [uint256]) ... unproven
+10/10 ... [RE] line 63, (PERSONAL_BANK, @fallback, []) ... unproven
+took 0.446581s
+
+Generating VCs ... took 0.004354s
+Checking validity of VCs ... took 0.098409s
+
+Generating VCs ... took 0.004294s
+Checking validity of VCs ... took 0.093374s
+
+Generating VCs ... took 0.004899s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 4 Total elapsed : 10.841505
+[
+-1 -> @Invest_sum >= Σ_u balances__@5
+0 -> @Invest_sum >= Σ_u balances__@5
+]
+[
+]
+1/10 ... [IO] line 43, (balances[msg.sender] + msg.value) ... unproven
+2/10 ... [IO] line 54, (balances[msg.sender] - _am) ... proven
+3/10 ... [ETH_LEAK] line 55, msg.sender.call.value(_am)() ... proven
+4/10 ... [RE_EL] line 55, msg.sender.call.value(_am)() ... proven
+5/10 ... [RE] line 19, (PERSONAL_BANK, SetMinSum, [uint256]) ... unproven
+6/10 ... [RE] line 26, (PERSONAL_BANK, SetLogFile, [address]) ... unproven
+7/10 ... [RE] line 33, (PERSONAL_BANK, Initialized, []) ... unproven
+8/10 ... [RE] line 39, (PERSONAL_BANK, Deposit, []) ... unproven
+9/10 ... [RE] line 47, (PERSONAL_BANK, Collect, [uint256]) ... unproven
+10/10 ... [RE] line 63, (PERSONAL_BANK, @fallback, []) ... unproven
+took 16.655246s
+
+Generating VCs ... took 0.004337s
+Checking validity of VCs ... took 6.172889s
+
+Generating VCs ... took 0.005234s
+Checking validity of VCs ... took 6.927028s
+
+Generating VCs ... took 0.004212s
+Checking validity of VCs ... took 48.960018s
+
+Generating VCs ... took 0.004154s
+Checking validity of VCs ... took 23.815805s
+
+Generating VCs ... took 0.00413800000001s
+Checking validity of VCs ... took 7.626725s
+
+Iter : 10 To explore : 63 Explored : 109 Total elapsed : 110.902141
+Generating VCs ... took 0.00424599999999s
+Checking validity of VCs ... took 2.231035s
+
+Generating VCs ... took 0.004366s
+Checking validity of VCs ... took 2.334724s
+
+Generating VCs ... took 0.004294s
+Checking validity of VCs ... took 1.901213s
+
+Generating VCs ... took 0.00412s
+Checking validity of VCs ... took 5.876871s
+
+Generating VCs ... took 0.004178s
+Checking validity of VCs ... took 6.306973s
+
+Generating VCs ... took 0.00411299999999s
+Checking validity of VCs ... took 6.899612s
+
+Generating VCs ... took 0.004302s
+Checking validity of VCs ... took 2.082106s
+
+Generating VCs ... took 0.00426999999999s
+Checking validity of VCs ... took 2.284521s
+
+Generating VCs ... took 0.00420399999999s
+Checking validity of VCs ... took 2.06769s
+
+Generating VCs ... took 0.00409199999999s
+Checking validity of VCs ... took 8.097733s
+
+Generating VCs ... took 0.002532s
+Checking validity of VCs ... 
+1/10 ... [NO_EFFECT] line 23, (@pre1 == MinSum) ... unproven
+2/10 ... [NO_EFFECT] line 43, (@pre2 == balances[msg.sender]) ... unproven
+3/10 ... [NO_EFFECT] line 54, (@pre3 == balances[msg.sender]) ... unproven
+4/10 ... [NO_EFFECT] line 91, (@pre6 == LastMsg.Sender) ... unproven
+5/10 ... [NO_EFFECT] line 92, (@pre5 == LastMsg.Time) ... unproven
+6/10 ... [NO_EFFECT] line 93, (@pre4 == LastMsg.Val) ... unproven
+7/10 ... [ASSIGN_CONST] line 43, (balances[msg.sender] == 0) ... unproven
+8/10 ... [ASSIGN_CONST] line 54, (balances[msg.sender] == 0) ... unproven
+9/10 ... [DEAD] line 51, false ... unproven
+10/10 ... [DEAD] line 67, false ... unproven
+took 0.840398s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 43, (balances[msg.sender] + msg.value) : unproven
+[2] [IO] line 54, (balances[msg.sender] - _am) : proven
+[3] [ETH_LEAK] line 55, msg.sender.call.value(_am)() : proven
+[4] [RE_EL] line 55, msg.sender.call.value(_am)() : proven
+[5] [RE] line 19, (PERSONAL_BANK, SetMinSum, [uint256]) : unproven
+[6] [RE] line 26, (PERSONAL_BANK, SetLogFile, [address]) : unproven
+[7] [RE] line 33, (PERSONAL_BANK, Initialized, []) : unproven
+[8] [RE] line 39, (PERSONAL_BANK, Deposit, []) : unproven
+[9] [RE] line 47, (PERSONAL_BANK, Collect, [uint256]) : unproven
+[10] [RE] line 63, (PERSONAL_BANK, @fallback, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 23, (@pre1 == MinSum) : unproven
+[2] [NO_EFFECT] line 43, (@pre2 == balances[msg.sender]) : unproven
+[3] [NO_EFFECT] line 54, (@pre3 == balances[msg.sender]) : unproven
+[4] [NO_EFFECT] line 91, (@pre6 == LastMsg.Sender) : unproven
+[5] [NO_EFFECT] line 92, (@pre5 == LastMsg.Time) : unproven
+[6] [NO_EFFECT] line 93, (@pre4 == LastMsg.Val) : unproven
+[7] [ASSIGN_CONST] line 43, (balances[msg.sender] == 0) : unproven
+[8] [ASSIGN_CONST] line 54, (balances[msg.sender] == 0) : unproven
+[9] [DEAD] line 51, false : unproven
+[10] [DEAD] line 67, false : unproven
+
+============ Statistics ============
+# Iter                    : 19
+# Alarm / Query           : 7 / 10
+- integer over/underflow  : 1 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 1
+- reentrancy              : 6 / 6
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 151.913077116
+Time Elapsed (CPU)  : 151.899976

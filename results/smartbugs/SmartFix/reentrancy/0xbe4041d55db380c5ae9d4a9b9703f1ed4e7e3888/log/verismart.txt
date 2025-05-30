@@ -1,0 +1,185 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 10
+[INFO] reachable : 9
+[INFO] Generating Paths ... took 0.00037s
+[INFO] # path : 33
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001516s
+Generating VCs ... took 0.009813s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.070775
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/11 ... [IO] line 50, (acc.balance + msg.value) ... unproven
+2/11 ... [IO] line 51, (now + _lockTime) ... unproven
+3/11 ... [IO] line 65, (acc.balance - _am) ... unproven
+4/11 ... [ETH_LEAK] line 63, msg.sender.call.value(_am)() ... unproven
+5/11 ... [RE_EL] line 63, msg.sender.call.value(_am)() ... unproven
+6/11 ... [RE] line 25, (MONEY_BOX, SetMinSum, [uint256]) ... unproven
+7/11 ... [RE] line 32, (MONEY_BOX, SetLogFile, [address]) ... unproven
+8/11 ... [RE] line 39, (MONEY_BOX, Initialized, []) ... unproven
+9/11 ... [RE] line 45, (MONEY_BOX, Put, [uint256]) ... unproven
+10/11 ... [RE] line 55, (MONEY_BOX, Collect, [uint256]) ... unproven
+11/11 ... [RE] line 71, (MONEY_BOX, @fallback, []) ... unproven
+took 0.8754s
+
+Generating VCs ... took 0.006143s
+Checking validity of VCs ... took 0.264086s
+
+Generating VCs ... took 0.006145s
+Checking validity of VCs ... took 4.39049s
+
+Generating VCs ... took 0.00614s
+Checking validity of VCs ... took 4.808681s
+
+Generating VCs ... took 0.00602s
+Checking validity of VCs ... took 3.467137s
+
+Generating VCs ... took 0.005808s
+Checking validity of VCs ... took 6.77451s
+
+Generating VCs ... took 0.005996s
+Checking validity of VCs ... took 4.214551s
+
+Generating VCs ... took 0.005912s
+Checking validity of VCs ... took 4.729432s
+
+Generating VCs ... took 0.006618s
+Checking validity of VCs ... took 0.262767s
+
+Iter : 10 To explore : 32 Explored : 41 Total elapsed : 29.903321
+Generating VCs ... took 0.006104s
+Checking validity of VCs ... took 10.892377s
+
+Generating VCs ... took 0.00662s
+Checking validity of VCs ... took 10.550406s
+
+Generating VCs ... took 0.005921s
+Checking validity of VCs ... took 4.509146s
+
+Generating VCs ... took 0.00591s
+Checking validity of VCs ... took 6.896208s
+
+Generating VCs ... took 0.006007s
+Checking validity of VCs ... took 0.269079s
+
+Generating VCs ... took 0.005841s
+Checking validity of VCs ... took 0.437701s
+
+Generating VCs ... took 0.005868s
+Checking validity of VCs ... took 10.610206s
+
+Generating VCs ... took 0.006603s
+Checking validity of VCs ... took 4.786515s
+
+Generating VCs ... took 0.005948s
+Checking validity of VCs ... took 14.7321s
+
+Generating VCs ... took 0.00597700000002s
+Checking validity of VCs ... took 4.239466s
+
+Iter : 20 To explore : 45 Explored : 64 Total elapsed : 97.904812
+Generating VCs ... took 0.00669099999999s
+Checking validity of VCs ... took 13.774459s
+
+Generating VCs ... took 0.00602600000001s
+Checking validity of VCs ... took 9.727799s
+
+Generating VCs ... took 0.00585700000001s
+Checking validity of VCs ... took 4.8312s
+
+Generating VCs ... took 0.005838s
+Checking validity of VCs ... took 5.404327s
+
+Generating VCs ... took 0.006889s
+Checking validity of VCs ... took 5.775565s
+
+Generating VCs ... took 0.00654800000001s
+Checking validity of VCs ... took 4.232198s
+
+Generating VCs ... took 0.005944s
+Checking validity of VCs ... took 6.017029s
+
+Generating VCs ... took 0.00586200000001s
+Checking validity of VCs ... took 13.183121s
+
+Generating VCs ... took 0.00584700000002s
+Checking validity of VCs ... took 4.048775s
+
+Generating VCs ... took 0.00593900000001s
+Checking validity of VCs ... took 8.06266s
+
+Iter : 30 To explore : 50 Explored : 79 Total elapsed : 173.041658
+Generating VCs ... took 0.00628799999998s
+Checking validity of VCs ... took 16.640059s
+
+Generating VCs ... took 0.00340299999999s
+Checking validity of VCs ... 
+1/13 ... [NO_EFFECT] line 29, (@pre1 == MinSum) ... unproven
+2/13 ... [NO_EFFECT] line 50, (@pre3 == acc.balance) ... unproven
+3/13 ... [NO_EFFECT] line 51, (@pre2 == acc.unlockTime) ... unproven
+4/13 ... [NO_EFFECT] line 65, (@pre4 == acc.balance) ... unproven
+5/13 ... [NO_EFFECT] line 98, (@pre7 == LastMsg.Sender) ... unproven
+6/13 ... [NO_EFFECT] line 99, (@pre6 == LastMsg.Time) ... unproven
+7/13 ... [NO_EFFECT] line 100, (@pre5 == LastMsg.Val) ... unproven
+8/13 ... [ASSIGN_CONST] line 50, (acc.balance == 0) ... unproven
+9/13 ... [ASSIGN_CONST] line 51, (acc.unlockTime == 0) ... unproven
+10/13 ... [ASSIGN_CONST] line 65, (acc.balance == 0) ... unproven
+11/13 ... [DEAD] line 51, false ... unproven
+12/13 ... [DEAD] line 60, false ... unproven
+13/13 ... [DEAD] line 75, false ... unproven
+took 0.316449s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 50, (acc.balance + msg.value) : unproven
+[2] [IO] line 51, (now + _lockTime) : unproven
+[3] [IO] line 65, (acc.balance - _am) : unproven
+[4] [ETH_LEAK] line 63, msg.sender.call.value(_am)() : unproven
+[5] [RE_EL] line 63, msg.sender.call.value(_am)() : unproven
+[6] [RE] line 25, (MONEY_BOX, SetMinSum, [uint256]) : unproven
+[7] [RE] line 32, (MONEY_BOX, SetLogFile, [address]) : unproven
+[8] [RE] line 39, (MONEY_BOX, Initialized, []) : unproven
+[9] [RE] line 45, (MONEY_BOX, Put, [uint256]) : unproven
+[10] [RE] line 55, (MONEY_BOX, Collect, [uint256]) : unproven
+[11] [RE] line 71, (MONEY_BOX, @fallback, []) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 29, (@pre1 == MinSum) : unproven
+[2] [NO_EFFECT] line 50, (@pre3 == acc.balance) : unproven
+[3] [NO_EFFECT] line 51, (@pre2 == acc.unlockTime) : unproven
+[4] [NO_EFFECT] line 65, (@pre4 == acc.balance) : unproven
+[5] [NO_EFFECT] line 98, (@pre7 == LastMsg.Sender) : unproven
+[6] [NO_EFFECT] line 99, (@pre6 == LastMsg.Time) : unproven
+[7] [NO_EFFECT] line 100, (@pre5 == LastMsg.Val) : unproven
+[8] [ASSIGN_CONST] line 50, (acc.balance == 0) : unproven
+[9] [ASSIGN_CONST] line 51, (acc.unlockTime == 0) : unproven
+[10] [ASSIGN_CONST] line 65, (acc.balance == 0) : unproven
+[11] [DEAD] line 51, false : unproven
+[12] [DEAD] line 60, false : unproven
+[13] [DEAD] line 75, false : unproven
+
+============ Statistics ============
+# Iter                    : 30
+# Alarm / Query           : 11 / 11
+- integer over/underflow  : 3 / 3
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 6 / 6
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 190.017801046
+Time Elapsed (CPU)  : 190.010199

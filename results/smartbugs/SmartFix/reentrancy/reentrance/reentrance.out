@@ -1,0 +1,52 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 5
+[INFO] reachable : 5
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (Reentrance/donate/[address]), 14, (balances[_to] + msg.value)),
+    (IO, (Reentrance/withdraw/[uint256]), 27, (balances[msg.sender] - _amount)),
+    (ETH_LEAK, (Reentrance/withdraw/[uint256]), 24, msg.sender.call.value(_amount)()),
+    (RE_EL, (Reentrance/withdraw/[uint256]), 24, msg.sender.call.value(_amount)())
+
+[INFO] # of basic patch components : 5
+[INFO] extracted components
+[
+InsertLine (14, assume(((balances[_to] + msg.value) >= balances[_to]));),
+InsertLine (27, assume((balances[msg.sender] >= _amount));),
+Replace (22, (balances[msg.sender] >= _amount), (balances[msg.sender] < _amount)),
+AtomLst [
+Move ([27] -> 24)
+ElseRevert (line 26)
+],
+AtomLst [
+Add @nonReentrant to (Reentrance, donate, [address]) (line 13)
+Add @nonReentrant to (Reentrance, withdraw, [uint256]) (line 21)
+Add @nonReentrant to (Reentrance, @fallback, []) (line 31)
+]
+]
+- New best candidate, iter 1, 181.518010139s : results/reentrancy/reentrance/candidates/cand_4/patch.sol
+- New best candidate, iter 6, 649.558092117s : results/reentrancy/reentrance/candidates/cand_6/patch.sol
+- Solution found, iter 6, 649.558092117s : results/reentrancy/reentrance/candidates/cand_6/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 7
+# Alarm (orginal)         : 4
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : results/reentrancy/reentrance/candidates/cand_6/patch.sol
+- First solution (iter)   : 6
+- First solution (time)   : 649.558092117
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 6, Time: 649.558092117, results/reentrancy/reentrance/candidates/cand_6/patch.sol
+
+Time Elapsed (Real) : 649.604674101
+Time Elapsed (CPU)  : 5.548009

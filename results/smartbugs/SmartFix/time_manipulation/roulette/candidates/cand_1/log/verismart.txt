@@ -1,0 +1,75 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 6
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.000182s
+[INFO] # path : 11
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000244s
+Generating VCs ... took 0.00091s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.029362
+[
+0 -> true
+]
+[
+]
+1/2 ... [ETH_LEAK] line 27, msg.sender.transfer(this.balance); ... unproven
+2/2 ... [TX_ORG] line 20, assume((smartfix_owner == msg.sender)); ... proven
+took 0.327292s
+
+Generating VCs ... took 0.000342s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.352686
+[
+0 -> (Read(@TU, smartfix_owner__@4) == true)
+]
+[
+]
+1/2 ... [ETH_LEAK] line 27, msg.sender.transfer(this.balance); ... proven
+2/2 ... [TX_ORG] line 20, assume((smartfix_owner == msg.sender)); ... proven
+took 0.015887s
+
+Generating VCs ... took 0.000137s
+Checking validity of VCs ... 
+1/6 ... [NO_EFFECT] line 25, (@pre1 == pastBlockTime) ... unproven
+2/6 ... [DEAD] line 20, false ... unproven
+3/6 ... [DEAD] line 21, false ... unproven
+4/6 ... [DEAD] line 23, false ... unproven
+5/6 ... [DEAD] line 26, false ... unproven
+6/6 ... [DEAD] line 27, false ... unproven
+took 0.492814s
+
+
+===== Vulnerability Report =====
+[1] [ETH_LEAK] line 27, msg.sender.transfer(this.balance); : proven
+[2] [TX_ORG] line 20, assume((smartfix_owner == msg.sender)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 25, (@pre1 == pastBlockTime) : unproven
+[2] [DEAD] line 20, false : unproven
+[3] [DEAD] line 21, false : unproven
+[4] [DEAD] line 23, false : unproven
+[5] [DEAD] line 26, false : unproven
+[6] [DEAD] line 27, false : unproven
+
+============ Statistics ============
+# Iter                    : 2
+# Alarm / Query           : 0 / 2
+- integer over/underflow  : 0 / 0
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 1
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 0.879549980164
+Time Elapsed (CPU)  : 0.860962

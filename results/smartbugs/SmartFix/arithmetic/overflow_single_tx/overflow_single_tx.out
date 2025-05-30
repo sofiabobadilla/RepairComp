@@ -1,0 +1,49 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 8
+[INFO] reachable : 8
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (IntegerOverflowSingleTransaction/overflowaddtostate/[uint256]), 18, (count + input)),
+    (IO, (IntegerOverflowSingleTransaction/overflowlocalonly/[uint256]), 36, (count + input)),
+    (IO, (IntegerOverflowSingleTransaction/overflowmulocalonly/[uint256]), 42, (count * input)),
+    (IO, (IntegerOverflowSingleTransaction/overflowmultostate/[uint256]), 24, (count * input)),
+    (IO, (IntegerOverflowSingleTransaction/underflowlocalonly/[uint256]), 48, (count - input)),
+    (IO, (IntegerOverflowSingleTransaction/underflowtostate/[uint256]), 30, (count - input))
+
+[INFO] # of basic patch components : 6
+[INFO] extracted components
+[
+InsertLine (18, assume(((count + input) >= count));),
+InsertLine (24, assume(((count == 0) || (((count * input) / count) == input)));),
+InsertLine (30, assume((count >= input));),
+InsertLine (36, assume(((count + input) >= count));),
+InsertLine (42, assume(((count == 0) || (((count * input) / count) == input)));),
+InsertLine (48, assume((count >= input));)
+]
+- New best candidate, iter 1, 1.0895960331s : results/arithmetic/overflow_single_tx/candidates/cand_6/patch.sol
+- New best candidate, iter 7, 6.0796380043s : results/arithmetic/overflow_single_tx/candidates/cand_14/patch.sol
+- New best candidate, iter 8, 7.29597997665s : results/arithmetic/overflow_single_tx/candidates/cand_23/patch.sol
+- New best candidate, iter 9, 8.29206204414s : results/arithmetic/overflow_single_tx/candidates/cand_28/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 64
+# Alarm (orginal)         : 6
+# Alarm (patch)           : 2
+# Alarm wo leak (patch)   : 2
+# Edit (min,max)          : 4, 4
+# Patch                   : 1
+- First solution          : n/a
+- First solution (iter)   : n/a
+- First solution (time)   : n/a
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 4., Edit: 4, Iter: 9, Time: 8.29206204414, results/arithmetic/overflow_single_tx/candidates/cand_28/patch.sol
+
+Time Elapsed (Real) : 49.9594838619
+Time Elapsed (CPU)  : 7.047276

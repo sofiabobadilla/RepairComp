@@ -1,0 +1,105 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.0005s
+[INFO] # path : 20
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.001197s
+Generating VCs ... took 0.002447s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.042653
+[
+0 -> true
+]
+[
+]
+1/8 ... [IO] line 29, (tot + 1) ... proven
+2/8 ... [IO] line 30, (tot + 1) ... proven
+3/8 ... [IO] line 37, (players[0].number + players[1].number) ... proven
+4/8 ... [IO] line 38, (players[0].number + players[1].number) ... proven
+5/8 ... [ETH_LEAK] line 40, res = players[0].addr.send(1800000000000000000); ... unproven
+6/8 ... [ETH_LEAK] line 43, res = players[1].addr.send(1800000000000000000); ... unproven
+7/8 ... [ETH_LEAK] line 52, res = msg.sender.send(this.balance); ... unproven
+8/8 ... [TX_ORG] line 51, assume((msg.sender != owner)); ... proven
+took 0.444256s
+
+Generating VCs ... took 0.001209s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.486876
+[
+0 -> (Read(@TU, owner__@14) == true)
+]
+[
+]
+1/8 ... [IO] line 29, (tot + 1) ... proven
+2/8 ... [IO] line 30, (tot + 1) ... proven
+3/8 ... [IO] line 37, (players[0].number + players[1].number) ... proven
+4/8 ... [IO] line 38, (players[0].number + players[1].number) ... proven
+5/8 ... [ETH_LEAK] line 40, res = players[0].addr.send(1800000000000000000); ... unproven
+6/8 ... [ETH_LEAK] line 43, res = players[1].addr.send(1800000000000000000); ... unproven
+7/8 ... [ETH_LEAK] line 52, res = msg.sender.send(this.balance); ... proven
+8/8 ... [TX_ORG] line 51, assume((msg.sender != owner)); ... proven
+took 0.279022s
+
+Generating VCs ... took 0.000632s
+Checking validity of VCs ... 
+1/12 ... [NO_EFFECT] line 28, (@pre2 == players[tot].number) ... unproven
+2/12 ... [NO_EFFECT] line 28, (@pre3 == players[tot].addr) ... unproven
+3/12 ... [NO_EFFECT] line 30, (@pre1 == tot) ... unproven
+4/12 ... [NO_EFFECT] line 38, (@pre4 == n) ... unproven
+5/12 ... [ASSIGN_CONST] line 30, (tot == 0) ... unproven
+6/12 ... [ASSIGN_CONST] line 38, ((!(players[0].addr != players[1].addr)) || (n == 0)) ... unproven
+7/12 ... [DEAD] line 26, false ... unproven
+8/12 ... [DEAD] line 29, false ... unproven
+9/12 ... [DEAD] line 32, false ... unproven
+10/12 ... [DEAD] line 37, false ... unproven
+11/12 ... [DEAD] line 39, false ... unproven
+12/12 ... [DEAD] line 51, false ... unproven
+took 1.07453s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 29, (tot + 1) : proven
+[2] [IO] line 30, (tot + 1) : proven
+[3] [IO] line 37, (players[0].number + players[1].number) : proven
+[4] [IO] line 38, (players[0].number + players[1].number) : proven
+[5] [ETH_LEAK] line 40, res = players[0].addr.send(1800000000000000000); : unproven
+[6] [ETH_LEAK] line 43, res = players[1].addr.send(1800000000000000000); : unproven
+[7] [ETH_LEAK] line 52, res = msg.sender.send(this.balance); : proven
+[8] [TX_ORG] line 51, assume((msg.sender != owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 28, (@pre2 == players[tot].number) : unproven
+[2] [NO_EFFECT] line 28, (@pre3 == players[tot].addr) : unproven
+[3] [NO_EFFECT] line 30, (@pre1 == tot) : unproven
+[4] [NO_EFFECT] line 38, (@pre4 == n) : unproven
+[5] [ASSIGN_CONST] line 30, (tot == 0) : unproven
+[6] [ASSIGN_CONST] line 38, ((!(players[0].addr != players[1].addr)) || (n == 0)) : unproven
+[7] [DEAD] line 26, false : unproven
+[8] [DEAD] line 29, false : unproven
+[9] [DEAD] line 32, false : unproven
+[10] [DEAD] line 37, false : unproven
+[11] [DEAD] line 39, false : unproven
+[12] [DEAD] line 51, false : unproven
+
+============ Statistics ============
+# Iter                    : 3
+# Alarm / Query           : 2 / 8
+- integer over/underflow  : 0 / 4
+- kill-anyone             : 0 / 0
+- ether-leaking           : 2 / 3
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 1.86881804466
+Time Elapsed (CPU)  : 1.839689

@@ -1,0 +1,309 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 7
+[INFO] reachable : 6
+[INFO] Generating Paths ... took 0.002289s
+[INFO] # path : 50
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.003805s
+Generating VCs ... took 0.027419s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.108232
+[
+0 -> true
+]
+[
+151 -> (true, true)
+]
+1/13 ... [IO] line 56, (msg.value * 7) ... proven
+2/13 ... [IO] line 57, (msg.value * 7) ... proven
+3/13 ... [IO] line 65, (block.number - lastReseed) ... proven
+4/13 ... [IO] line 95, (block.number - 1) ... unproven
+5/13 ... [IO] line 96, (block.difficulty * uint256(block.coinbase)) ... unproven
+6/13 ... [IO] line 97, (tx.gasprice * 7) ... proven
+7/13 ... [IO] line 98, (tx.gasprice * 7) ... proven
+8/13 ... [KA] line 87, selfdestruct(msg.sender); ... unproven
+9/13 ... [ETH_LEAK] line 61, msg.sender.transfer(win); ... unproven
+10/13 ... [ETH_LEAK] line 87, selfdestruct(msg.sender); ... unproven
+11/13 ... [TX_ORG] line 85, assume((msg.sender == owner)); ... proven
+12/13 ... [TX_ORG] line 91, assume((msg.sender == owner)); ... proven
+13/13 ... [TX_ORG] line 104, assume((msg.sender != owner)); ... proven
+took 1.266782s
+
+Generating VCs ... took 0.027142s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 1.424427
+[
+0 -> (Read(@TU, owner__@12) == true)
+]
+[
+151 -> ((Read(@TU, owner__@12) == true), (Read(@TU, owner__@12) == true))
+]
+1/13 ... [IO] line 56, (msg.value * 7) ... proven
+2/13 ... [IO] line 57, (msg.value * 7) ... proven
+3/13 ... [IO] line 65, (block.number - lastReseed) ... proven
+4/13 ... [IO] line 95, (block.number - 1) ... unproven
+5/13 ... [IO] line 96, (block.difficulty * uint256(block.coinbase)) ... unproven
+6/13 ... [IO] line 97, (tx.gasprice * 7) ... proven
+7/13 ... [IO] line 98, (tx.gasprice * 7) ... proven
+8/13 ... [KA] line 87, selfdestruct(msg.sender); ... proven
+9/13 ... [ETH_LEAK] line 61, msg.sender.transfer(win); ... unproven
+10/13 ... [ETH_LEAK] line 87, selfdestruct(msg.sender); ... proven
+11/13 ... [TX_ORG] line 85, assume((msg.sender == owner)); ... proven
+12/13 ... [TX_ORG] line 91, assume((msg.sender == owner)); ... proven
+13/13 ... [TX_ORG] line 104, assume((msg.sender != owner)); ... proven
+took 0.950013s
+
+Generating VCs ... took 0.028494s
+Checking validity of VCs ... took 4.501901s
+
+Generating VCs ... took 0.028503s
+Checking validity of VCs ... took 0.019515s
+
+Generating VCs ... took 0.026784s
+Checking validity of VCs ... took 3.710627s
+
+Generating VCs ... took 0.027641s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 6 Total elapsed : 11.229711
+[
+0 -> ((LuckyNumber__@19 == 7) /\ (Read(@TU, owner__@12) == true))
+]
+[
+151 -> (((LuckyNumber__@19 == 7) /\ (Read(@TU, owner__@12) == true)), ((LuckyNumber__@19 == 7) /\ (Read(@TU, owner__@12) == true)))
+]
+1/13 ... [IO] line 56, (msg.value * 7) ... proven
+2/13 ... [IO] line 57, (msg.value * 7) ... proven
+3/13 ... [IO] line 65, (block.number - lastReseed) ... proven
+4/13 ... [IO] line 95, (block.number - 1) ... unproven
+5/13 ... [IO] line 96, (block.difficulty * uint256(block.coinbase)) ... unproven
+6/13 ... [IO] line 97, (tx.gasprice * 7) ... proven
+7/13 ... [IO] line 98, (tx.gasprice * 7) ... proven
+8/13 ... [KA] line 87, selfdestruct(msg.sender); ... proven
+9/13 ... [ETH_LEAK] line 61, msg.sender.transfer(win); ... unproven
+10/13 ... [ETH_LEAK] line 87, selfdestruct(msg.sender); ... proven
+11/13 ... [TX_ORG] line 85, assume((msg.sender == owner)); ... proven
+12/13 ... [TX_ORG] line 91, assume((msg.sender == owner)); ... proven
+13/13 ... [TX_ORG] line 104, assume((msg.sender != owner)); ... proven
+took 1.365392s
+
+Generating VCs ... took 0.02699s
+Checking validity of VCs ... took 3.545864s
+
+Generating VCs ... took 0.027207s
+Checking validity of VCs ... took 7.083443s
+
+Generating VCs ... took 0.026279s
+Checking validity of VCs ... took 0.505646s
+
+Iter : 10 To explore : 108 Explored : 319 Total elapsed : 23.38498
+Generating VCs ... took 0.026714s
+Checking validity of VCs ... took 0.4986s
+
+Generating VCs ... took 0.027168s
+Checking validity of VCs ... took 0.511652s
+
+Generating VCs ... took 0.027144s
+Checking validity of VCs ... took 0.503206s
+
+Generating VCs ... took 0.026782s
+Checking validity of VCs ... took 4.592317s
+
+Generating VCs ... took 0.026193s
+Checking validity of VCs ... took 4.430551s
+
+Generating VCs ... took 0.02776s
+Checking validity of VCs ... took 4.121003s
+
+Generating VCs ... took 0.02722s
+Checking validity of VCs ... took 3.577825s
+
+Generating VCs ... took 0.02649s
+Checking validity of VCs ... took 4.046881s
+
+Generating VCs ... took 0.026805s
+Checking validity of VCs ... took 4.088058s
+
+Generating VCs ... took 0.027041s
+Checking validity of VCs ... took 3.923984s
+
+Iter : 20 To explore : 294 Explored : 515 Total elapsed : 54.040791
+Generating VCs ... took 0.026775s
+Checking validity of VCs ... took 3.23794s
+
+Generating VCs ... took 0.026506s
+Checking validity of VCs ... took 4.134268s
+
+Generating VCs ... took 0.026948s
+Checking validity of VCs ... took 3.646005s
+
+Generating VCs ... took 0.026075s
+Checking validity of VCs ... took 4.052712s
+
+Generating VCs ... took 0.027052s
+Checking validity of VCs ... took 3.991831s
+
+Generating VCs ... took 0.026629s
+Checking validity of VCs ... took 3.446354s
+
+Generating VCs ... took 0.027531s
+Checking validity of VCs ... took 3.730199s
+
+Generating VCs ... took 0.026407s
+Checking validity of VCs ... took 3.562565s
+
+Generating VCs ... took 0.031261s
+Checking validity of VCs ... took 5.111729s
+
+Generating VCs ... took 0.026763s
+Checking validity of VCs ... took 3.576406s
+
+Iter : 30 To explore : 468 Explored : 699 Total elapsed : 92.919157
+Generating VCs ... took 0.029284s
+Checking validity of VCs ... took 5.7874s
+
+Generating VCs ... took 0.026938s
+Checking validity of VCs ... took 5.37584s
+
+Generating VCs ... took 0.026857s
+Checking validity of VCs ... took 3.643011s
+
+Generating VCs ... took 0.028327s
+Checking validity of VCs ... took 3.051361s
+
+Generating VCs ... took 0.026968s
+Checking validity of VCs ... took 5.113908s
+
+Generating VCs ... took 0.02706s
+Checking validity of VCs ... took 0.763891s
+
+Generating VCs ... took 0.026366s
+Checking validity of VCs ... took 4.180159s
+
+Generating VCs ... took 0.030223s
+Checking validity of VCs ... took 0.772267s
+
+Generating VCs ... took 0.027249s
+Checking validity of VCs ... took 6.765273s
+
+Generating VCs ... took 0.031056s
+Checking validity of VCs ... took 0.74091s
+
+Iter : 40 To explore : 610 Explored : 851 Total elapsed : 129.501363
+Generating VCs ... took 0.026951s
+Checking validity of VCs ... took 0.746121s
+
+Generating VCs ... took 0.027331s
+Checking validity of VCs ... took 3.348459s
+
+Generating VCs ... took 0.02769s
+Checking validity of VCs ... took 4.91451s
+
+Generating VCs ... took 0.026911s
+Checking validity of VCs ... took 4.514677s
+
+Generating VCs ... took 0.029406s
+Checking validity of VCs ... took 4.693268s
+
+Generating VCs ... took 0.028837s
+Checking validity of VCs ... took 3.791478s
+
+Generating VCs ... took 0.00791100000001s
+Checking validity of VCs ... 
+1/28 ... [NO_EFFECT] line 57, (@pre6 == win) ... unproven
+2/28 ... [NO_EFFECT] line 60, (@pre5 == win) ... unproven
+3/28 ... [NO_EFFECT] line 66, (@pre1 == struct_init(SeedComponents, uint256(block.coinbase), block.difficulty, block.gaslimit, block.timestamp).component4) ... unproven
+4/28 ... [NO_EFFECT] line 66, (@pre2 == struct_init(SeedComponents, uint256(block.coinbase), block.difficulty, block.gaslimit, block.timestamp).component3) ... unproven
+5/28 ... [NO_EFFECT] line 66, (@pre3 == struct_init(SeedComponents, uint256(block.coinbase), block.difficulty, block.gaslimit, block.timestamp).component2) ... unproven
+6/28 ... [NO_EFFECT] line 66, (@pre4 == struct_init(SeedComponents, uint256(block.coinbase), block.difficulty, block.gaslimit, block.timestamp).component1) ... unproven
+7/28 ... [NO_EFFECT] line 71, (@pre7 == n) ... unproven
+8/28 ... [NO_EFFECT] line 75, (@pre9 == secretSeed) ... unproven
+9/28 ... [NO_EFFECT] line 81, (@pre8 == lastReseed) ... unproven
+10/28 ... [NO_EFFECT] line 94, (@pre13 == s.component1) ... unproven
+11/28 ... [NO_EFFECT] line 95, (@pre12 == s.component2) ... unproven
+12/28 ... [NO_EFFECT] line 96, (@pre11 == s.component3) ... unproven
+13/28 ... [NO_EFFECT] line 98, (@pre10 == s.component4) ... unproven
+14/28 ... [DEAD] line 47, false ... unproven
+15/28 ... [DEAD] line 51, false ... unproven
+16/28 ... [DEAD] line 53, false ... unproven
+17/28 ... [DEAD] line 56, false ... unproven
+18/28 ... [DEAD] line 59, false ... unproven
+19/28 ... [DEAD] line 61, false ... unproven
+20/28 ... [DEAD] line 64, false ... unproven
+21/28 ... [DEAD] line 65, false ... unproven
+22/28 ... [DEAD] line 66, false ... unproven
+23/28 ... [DEAD] line 85, false ... unproven
+24/28 ... [DEAD] line 91, false ... unproven
+25/28 ... [DEAD] line 97, false ... unproven
+26/28 ... [DEAD] line 100, false ... unproven
+27/28 ... [DEAD] line 104, false ... unproven
+28/28 ... [DEAD] line 105, false ... unproven
+took 2.528256s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 56, (msg.value * 7) : proven
+[2] [IO] line 57, (msg.value * 7) : proven
+[3] [IO] line 65, (block.number - lastReseed) : proven
+[4] [IO] line 95, (block.number - 1) : unproven
+[5] [IO] line 96, (block.difficulty * uint256(block.coinbase)) : unproven
+[6] [IO] line 97, (tx.gasprice * 7) : proven
+[7] [IO] line 98, (tx.gasprice * 7) : proven
+[8] [KA] line 87, selfdestruct(msg.sender); : proven
+[9] [ETH_LEAK] line 61, msg.sender.transfer(win); : unproven
+[10] [ETH_LEAK] line 87, selfdestruct(msg.sender); : proven
+[11] [TX_ORG] line 85, assume((msg.sender == owner)); : proven
+[12] [TX_ORG] line 91, assume((msg.sender == owner)); : proven
+[13] [TX_ORG] line 104, assume((msg.sender != owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 57, (@pre6 == win) : unproven
+[2] [NO_EFFECT] line 60, (@pre5 == win) : unproven
+[3] [NO_EFFECT] line 66, (@pre1 == struct_init(SeedComponents, uint256(block.coinbase), block.difficulty, block.gaslimit, block.timestamp).component4) : unproven
+[4] [NO_EFFECT] line 66, (@pre2 == struct_init(SeedComponents, uint256(block.coinbase), block.difficulty, block.gaslimit, block.timestamp).component3) : unproven
+[5] [NO_EFFECT] line 66, (@pre3 == struct_init(SeedComponents, uint256(block.coinbase), block.difficulty, block.gaslimit, block.timestamp).component2) : unproven
+[6] [NO_EFFECT] line 66, (@pre4 == struct_init(SeedComponents, uint256(block.coinbase), block.difficulty, block.gaslimit, block.timestamp).component1) : unproven
+[7] [NO_EFFECT] line 71, (@pre7 == n) : unproven
+[8] [NO_EFFECT] line 75, (@pre9 == secretSeed) : unproven
+[9] [NO_EFFECT] line 81, (@pre8 == lastReseed) : unproven
+[10] [NO_EFFECT] line 94, (@pre13 == s.component1) : unproven
+[11] [NO_EFFECT] line 95, (@pre12 == s.component2) : unproven
+[12] [NO_EFFECT] line 96, (@pre11 == s.component3) : unproven
+[13] [NO_EFFECT] line 98, (@pre10 == s.component4) : unproven
+[14] [DEAD] line 47, false : unproven
+[15] [DEAD] line 51, false : unproven
+[16] [DEAD] line 53, false : unproven
+[17] [DEAD] line 56, false : unproven
+[18] [DEAD] line 59, false : unproven
+[19] [DEAD] line 61, false : unproven
+[20] [DEAD] line 64, false : unproven
+[21] [DEAD] line 65, false : unproven
+[22] [DEAD] line 66, false : unproven
+[23] [DEAD] line 85, false : unproven
+[24] [DEAD] line 91, false : unproven
+[25] [DEAD] line 97, false : unproven
+[26] [DEAD] line 100, false : unproven
+[27] [DEAD] line 104, false : unproven
+[28] [DEAD] line 105, false : unproven
+
+============ Statistics ============
+# Iter                    : 45
+# Alarm / Query           : 3 / 13
+- integer over/underflow  : 2 / 7
+- kill-anyone             : 0 / 1
+- ether-leaking           : 1 / 2
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 3
+
+Time Elapsed (Real) : 154.286199808
+Time Elapsed (CPU)  : 154.281336

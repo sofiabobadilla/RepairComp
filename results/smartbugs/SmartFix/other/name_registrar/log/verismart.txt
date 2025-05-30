@@ -1,0 +1,50 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 2
+[INFO] reachable : 2
+[INFO] Generating Paths ... took 3.1e-05s
+[INFO] # path : 3
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 7.8e-05s
+Generating VCs ... took 0.000186s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.01754
+[
+0 -> true
+]
+[
+]
+took 0.000188s
+
+Generating VCs ... took 0.000101s
+Checking validity of VCs ... 
+1/2 ... [NO_EFFECT] line 25, (@pre2 == newRecord.mappedAddress) ... unproven
+2/2 ... [NO_EFFECT] line 27, (@pre1 == resolve[_name]) ... unproven
+took 0.037543s
+
+
+===== Vulnerability Report =====
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 25, (@pre2 == newRecord.mappedAddress) : unproven
+[2] [NO_EFFECT] line 27, (@pre1 == resolve[_name]) : unproven
+
+============ Statistics ============
+# Iter                    : 1
+# Alarm / Query           : 0 / 0
+- integer over/underflow  : 0 / 0
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 0.0745179653168
+Time Elapsed (CPU)  : 0.055269

@@ -1,0 +1,67 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 10
+[INFO] reachable : 9
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (MONEY_BOX/Collect/[uint256]), 65, (acc.balance - _am)),
+    (IO, (MONEY_BOX/Put/[uint256]), 50, (acc.balance + msg.value)),
+    (IO, (MONEY_BOX/Put/[uint256]), 51, (now + _lockTime)),
+    (ETH_LEAK, (MONEY_BOX/Collect/[uint256]), 63, msg.sender.call.value(_am)()),
+    (RE_EL, (MONEY_BOX/Collect/[uint256]), 63, msg.sender.call.value(_am)())
+
+[INFO] # of basic patch components : 8
+[INFO] extracted components
+[
+InsertLine (50, assume(((acc.balance + msg.value) >= acc.balance));),
+InsertLine (51, assume(((now + _lockTime) >= now));),
+InsertLine (65, assume((acc.balance >= _am));),
+Replace (51, ((now + _lockTime) > acc.unlockTime), ((now + _lockTime) < acc.unlockTime)),
+Replace (60, (acc.balance >= _am), (acc.balance < _am)),
+AtomLst [
+Move ([65] -> 63)
+ElseRevert (line 67)
+],
+AtomLst [
+Add @nonReentrant to (MONEY_BOX, SetMinSum, [uint256]) (line 25)
+Add @nonReentrant to (MONEY_BOX, SetLogFile, [address]) (line 32)
+Add @nonReentrant to (MONEY_BOX, Initialized, []) (line 39)
+Add @nonReentrant to (MONEY_BOX, Put, [uint256]) (line 45)
+Add @nonReentrant to (MONEY_BOX, Collect, [uint256]) (line 55)
+],
+AtomLst [
+Add @nonReentrant to (MONEY_BOX, SetMinSum, [uint256]) (line 25)
+Add @nonReentrant to (MONEY_BOX, SetLogFile, [address]) (line 32)
+Add @nonReentrant to (MONEY_BOX, Initialized, []) (line 39)
+Add @nonReentrant to (MONEY_BOX, Put, [uint256]) (line 45)
+Add @nonReentrant to (MONEY_BOX, Collect, [uint256]) (line 55)
+Add @nonReentrant to (MONEY_BOX, @fallback, []) (line 71)
+]
+]
+- New best candidate, iter 1, 374.321654081s : results/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888/candidates/cand_6/patch.sol
+/home/opam/.local/lib/python3.8/site-packages/sklearn/metrics/_regression.py:682: UndefinedMetricWarning: R^2 score is not well-defined with less than two samples.
+  warnings.warn(msg, UndefinedMetricWarning)
+- Regression found, results/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888/candidates/cand_8/patch.sol
+- New best candidate, iter 9, 1864.05594301s : results/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888/candidates/cand_9/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 9
+# Alarm (orginal)         : 5
+# Alarm (patch)           : 1
+# Alarm wo leak (patch)   : 1
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : n/a
+- First solution (iter)   : n/a
+- First solution (time)   : n/a
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 9, Time: 1864.05594301, results/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888/candidates/cand_9/patch.sol
+
+Time Elapsed (Real) : 1864.26576209
+Time Elapsed (CPU)  : 6.592186

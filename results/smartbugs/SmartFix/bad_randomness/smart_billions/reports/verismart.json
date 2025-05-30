@@ -1,0 +1,5794 @@
+{
+  "fileName": "smartbugs/dataset/bad_randomness/smart_billions.sol",
+  "baseName": "smart_billions.sol",
+  "iter": 1,
+  "time": 216.690457,
+  "errMsg": null,
+  "invmap": [
+    { "key": "0", "formula": "true" },
+    { "key": "789", "formula": "true" },
+    { "key": "1212", "formula": "true" },
+    { "key": "1330", "formula": "true" }
+  ],
+  "specmap": [
+    { "key": "599", "pre": "true", "post": "true" },
+    { "key": "1057", "pre": "true", "post": "true" },
+    { "key": "1080", "pre": "true", "post": "true" },
+    { "key": "1084", "pre": "true", "post": "true" },
+    { "key": "1089", "pre": "true", "post": "true" },
+    { "key": "1093", "pre": "true", "post": "true" },
+    { "key": "1179", "pre": "true", "post": "true" },
+    { "key": "1237", "pre": "true", "post": "true" },
+    { "key": "1333", "pre": "true", "post": "true" },
+    { "key": "2011", "pre": "true", "post": "true" }
+  ],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 12,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(a - b)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(a + b)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(size + 4)",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 51,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(2 * 32)",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "IO",
+      "line": 84,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(3 * 32)",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "IO",
+      "line": 254,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "dividendsBlocks",
+          "argTypes": []
+        }
+      ],
+      "exp": "(10 * hashesSize)",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "IO",
+      "line": 254,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "dividendsBlocks",
+          "argTypes": []
+        }
+      ],
+      "exp": "(block.number - hashFirst)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "IO",
+      "line": 258,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "dividendsBlocks",
+          "argTypes": []
+        }
+      ],
+      "exp": "((10 * hashesSize) - ((block.number - hashFirst) % (10 * hashesSize)))",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "IO",
+      "line": 258,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "dividendsBlocks",
+          "argTypes": []
+        }
+      ],
+      "exp": "(10 * hashesSize)",
+      "status": "proven"
+    },
+    {
+      "no": "10",
+      "kind": "IO",
+      "line": 258,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "dividendsBlocks",
+          "argTypes": []
+        }
+      ],
+      "exp": "(block.number - hashFirst)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "IO",
+      "line": 306,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "resetBet",
+          "argTypes": []
+        }
+      ],
+      "exp": "(block.number + 3)",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "IO",
+      "line": 318,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "((((investBalance * 9) / 10) + walletBalance) + _amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "IO",
+      "line": 318,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(((investBalance * 9) / 10) + walletBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "IO",
+      "line": 318,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(investBalance * 9)",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "IO",
+      "line": 320,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(((4 * 60) * 24) * 7)",
+      "status": "proven"
+    },
+    {
+      "no": "16",
+      "kind": "IO",
+      "line": 320,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "((4 * 60) * 24)",
+      "status": "proven"
+    },
+    {
+      "no": "17",
+      "kind": "IO",
+      "line": 320,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(4 * 60)",
+      "status": "proven"
+    },
+    {
+      "no": "18",
+      "kind": "IO",
+      "line": 320,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(coldStoreLast + (((4 * 60) * 24) * 7))",
+      "status": "unproven"
+    },
+    {
+      "no": "19",
+      "kind": "IO",
+      "line": 339,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(hashesSize * 5)",
+      "status": "proven"
+    },
+    {
+      "no": "20",
+      "kind": "IO",
+      "line": 339,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(investStart + (hashesSize * 5))",
+      "status": "unproven"
+    },
+    {
+      "no": "21",
+      "kind": "IO",
+      "line": 344,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(10 * hashesSize)",
+      "status": "proven"
+    },
+    {
+      "no": "22",
+      "kind": "IO",
+      "line": 344,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(block.number - hashFirst)",
+      "status": "unproven"
+    },
+    {
+      "no": "23",
+      "kind": "IO",
+      "line": 345,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(dividends.length - 2)",
+      "status": "unproven"
+    },
+    {
+      "no": "24",
+      "kind": "IO",
+      "line": 348,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(dividends.length - 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "25",
+      "kind": "IO",
+      "line": 349,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(dividendPeriod + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "26",
+      "kind": "IO",
+      "line": 364,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payWallet",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(walletBalance - balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "27",
+      "kind": "IO",
+      "line": 378,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(_amount - maxpay)",
+      "status": "proven"
+    },
+    {
+      "no": "28",
+      "kind": "IO",
+      "line": 379,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(walletBalance + keepbalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "29",
+      "kind": "IO",
+      "line": 380,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(wallets[msg.sender].balance + uint208(keepbalance))",
+      "status": "unproven"
+    },
+    {
+      "no": "30",
+      "kind": "IO",
+      "line": 381,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(((4 * 60) * 24) * 30)",
+      "status": "proven"
+    },
+    {
+      "no": "31",
+      "kind": "IO",
+      "line": 381,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "((4 * 60) * 24)",
+      "status": "proven"
+    },
+    {
+      "no": "32",
+      "kind": "IO",
+      "line": 381,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(4 * 60)",
+      "status": "proven"
+    },
+    {
+      "no": "33",
+      "kind": "IO",
+      "line": 381,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(block.number + (((4 * 60) * 24) * 30))",
+      "status": "unproven"
+    },
+    {
+      "no": "34",
+      "kind": "IO",
+      "line": 401,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(hashesSize * 5)",
+      "status": "proven"
+    },
+    {
+      "no": "35",
+      "kind": "IO",
+      "line": 401,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investStart + (hashesSize * 5))",
+      "status": "unproven"
+    },
+    {
+      "no": "36",
+      "kind": "IO",
+      "line": 403,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investBalanceMax - investBalance)",
+      "status": "proven"
+    },
+    {
+      "no": "37",
+      "kind": "IO",
+      "line": 404,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investBalanceMax - investBalance)",
+      "status": "proven"
+    },
+    {
+      "no": "38",
+      "kind": "IO",
+      "line": 410,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investBalance + investing)",
+      "status": "proven"
+    },
+    {
+      "no": "39",
+      "kind": "IO",
+      "line": 413,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(walletBalance + (investing / 10))",
+      "status": "unproven"
+    },
+    {
+      "no": "40",
+      "kind": "IO",
+      "line": 414,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(wallets[owner].balance + uint208((investing / 10)))",
+      "status": "unproven"
+    },
+    {
+      "no": "41",
+      "kind": "IO",
+      "line": 416,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(((investing * 5) / 100) * 2)",
+      "status": "unproven"
+    },
+    {
+      "no": "42",
+      "kind": "IO",
+      "line": 416,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investing * 5)",
+      "status": "unproven"
+    },
+    {
+      "no": "43",
+      "kind": "IO",
+      "line": 416,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(walletBalance + (((investing * 5) / 100) * 2))",
+      "status": "unproven"
+    },
+    {
+      "no": "44",
+      "kind": "IO",
+      "line": 417,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investing * 5)",
+      "status": "unproven"
+    },
+    {
+      "no": "45",
+      "kind": "IO",
+      "line": 417,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(wallets[owner].balance + uint208(((investing * 5) / 100)))",
+      "status": "unproven"
+    },
+    {
+      "no": "46",
+      "kind": "IO",
+      "line": 418,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investing * 5)",
+      "status": "unproven"
+    },
+    {
+      "no": "47",
+      "kind": "IO",
+      "line": 418,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(wallets[_partner].balance + uint208(((investing * 5) / 100)))",
+      "status": "unproven"
+    },
+    {
+      "no": "48",
+      "kind": "IO",
+      "line": 421,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investing * 16)",
+      "status": "unproven"
+    },
+    {
+      "no": "49",
+      "kind": "IO",
+      "line": 422,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(investing * 10)",
+      "status": "unproven"
+    },
+    {
+      "no": "50",
+      "kind": "IO",
+      "line": 423,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] + senderBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "51",
+      "kind": "IO",
+      "line": 424,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(balances[owner] + ownerBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "52",
+      "kind": "IO",
+      "line": 425,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(balances[animator] + animatorBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "53",
+      "kind": "IO",
+      "line": 426,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((senderBalance + ownerBalance) + animatorBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "54",
+      "kind": "IO",
+      "line": 426,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(senderBalance + ownerBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "55",
+      "kind": "IO",
+      "line": 426,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(totalSupply + ((senderBalance + ownerBalance) + animatorBalance))",
+      "status": "unproven"
+    },
+    {
+      "no": "56",
+      "kind": "IO",
+      "line": 439,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] * (10 ** 15))",
+      "status": "unproven"
+    },
+    {
+      "no": "57",
+      "kind": "IO",
+      "line": 442,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(investBalance - initialInvestment)",
+      "status": "unproven"
+    },
+    {
+      "no": "58",
+      "kind": "IO",
+      "line": 443,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(initialInvestment * 9)",
+      "status": "unproven"
+    },
+    {
+      "no": "59",
+      "kind": "IO",
+      "line": 443,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(wallets[msg.sender].balance + uint208(((initialInvestment * 9) / 10)))",
+      "status": "unproven"
+    },
+    {
+      "no": "60",
+      "kind": "IO",
+      "line": 468,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(balances[_who] * 4294967295)",
+      "status": "unproven"
+    },
+    {
+      "no": "61",
+      "kind": "IO",
+      "line": 470,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(last + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "62",
+      "kind": "IO",
+      "line": 471,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(balance + (share * dividends[last]))",
+      "status": "unproven"
+    },
+    {
+      "no": "63",
+      "kind": "IO",
+      "line": 471,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(share * dividends[last])",
+      "status": "unproven"
+    },
+    {
+      "no": "64",
+      "kind": "IO",
+      "line": 474,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(walletBalance + balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "65",
+      "kind": "IO",
+      "line": 475,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(wallets[_who].balance + uint208(balance))",
+      "status": "unproven"
+    },
+    {
+      "no": "66",
+      "kind": "IO",
+      "line": 486,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "((((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0)) + (((hit & 15728640) == 0) ? 1 : 0))",
+      "status": "proven"
+    },
+    {
+      "no": "67",
+      "kind": "IO",
+      "line": 486,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0)) + (((hit & 983040) == 0) ? 1 : 0))",
+      "status": "proven"
+    },
+    {
+      "no": "68",
+      "kind": "IO",
+      "line": 486,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "((((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0)) + (((hit & 61440) == 0) ? 1 : 0))",
+      "status": "proven"
+    },
+    {
+      "no": "69",
+      "kind": "IO",
+      "line": 486,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0)) + (((hit & 3840) == 0) ? 1 : 0))",
+      "status": "proven"
+    },
+    {
+      "no": "70",
+      "kind": "IO",
+      "line": 486,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "((((hit & 15) == 0) ? 1 : 0) + (((hit & 240) == 0) ? 1 : 0))",
+      "status": "proven"
+    },
+    {
+      "no": "71",
+      "kind": "IO",
+      "line": 493,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(uint256(_player.value) * 7000000)",
+      "status": "unproven"
+    },
+    {
+      "no": "72",
+      "kind": "IO",
+      "line": 496,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(uint256(_player.value) * 20000)",
+      "status": "unproven"
+    },
+    {
+      "no": "73",
+      "kind": "IO",
+      "line": 499,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(uint256(_player.value) * 500)",
+      "status": "unproven"
+    },
+    {
+      "no": "74",
+      "kind": "IO",
+      "line": 502,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(uint256(_player.value) * 25)",
+      "status": "unproven"
+    },
+    {
+      "no": "75",
+      "kind": "IO",
+      "line": 505,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(uint256(_player.value) * 3)",
+      "status": "unproven"
+    },
+    {
+      "no": "76",
+      "kind": "IO",
+      "line": 518,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(10 * hashesSize)",
+      "status": "proven"
+    },
+    {
+      "no": "77",
+      "kind": "IO",
+      "line": 518,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(player.blockNum + (10 * hashesSize))",
+      "status": "proven"
+    },
+    {
+      "no": "78",
+      "kind": "IO",
+      "line": 521,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(player.blockNum + 256)",
+      "status": "unproven"
+    },
+    {
+      "no": "79",
+      "kind": "IO",
+      "line": 551,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(10 * hashesSize)",
+      "status": "proven"
+    },
+    {
+      "no": "80",
+      "kind": "IO",
+      "line": 551,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(player.blockNum + (10 * hashesSize))",
+      "status": "proven"
+    },
+    {
+      "no": "81",
+      "kind": "IO",
+      "line": 558,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(player.blockNum + 256)",
+      "status": "unproven"
+    },
+    {
+      "no": "82",
+      "kind": "IO",
+      "line": 639,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(dividends[dividendPeriod] + (msg.value / 20))",
+      "status": "unproven"
+    },
+    {
+      "no": "83",
+      "kind": "IO",
+      "line": 643,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(walletBalance + fee)",
+      "status": "unproven"
+    },
+    {
+      "no": "84",
+      "kind": "IO",
+      "line": 644,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(wallets[_partner].balance + uint208(fee))",
+      "status": "unproven"
+    },
+    {
+      "no": "85",
+      "kind": "IO",
+      "line": 646,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(block.number + 3)",
+      "status": "unproven"
+    },
+    {
+      "no": "86",
+      "kind": "IO",
+      "line": 647,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(block.number + 3)",
+      "status": "unproven"
+    },
+    {
+      "no": "87",
+      "kind": "IO",
+      "line": 652,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(hashNext + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "88",
+      "kind": "IO",
+      "line": 656,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(hashBetSum + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "89",
+      "kind": "IO",
+      "line": 675,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(n + _sadd)",
+      "status": "unproven"
+    },
+    {
+      "no": "90",
+      "kind": "IO",
+      "line": 679,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(hashes.length + _sadd)",
+      "status": "unproven"
+    },
+    {
+      "no": "91",
+      "kind": "IO",
+      "line": 681,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(n + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "92",
+      "kind": "IO",
+      "line": 685,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(block.number - (block.number % 10))",
+      "status": "unproven"
+    },
+    {
+      "no": "93",
+      "kind": "IO",
+      "line": 702,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "94",
+      "kind": "IO",
+      "line": 704,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 2)",
+      "status": "unproven"
+    },
+    {
+      "no": "95",
+      "kind": "IO",
+      "line": 706,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 3)",
+      "status": "unproven"
+    },
+    {
+      "no": "96",
+      "kind": "IO",
+      "line": 708,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 4)",
+      "status": "unproven"
+    },
+    {
+      "no": "97",
+      "kind": "IO",
+      "line": 710,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 5)",
+      "status": "unproven"
+    },
+    {
+      "no": "98",
+      "kind": "IO",
+      "line": 712,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 6)",
+      "status": "unproven"
+    },
+    {
+      "no": "99",
+      "kind": "IO",
+      "line": 714,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 7)",
+      "status": "unproven"
+    },
+    {
+      "no": "100",
+      "kind": "IO",
+      "line": 716,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 8)",
+      "status": "unproven"
+    },
+    {
+      "no": "101",
+      "kind": "IO",
+      "line": 718,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_lastb + 9)",
+      "status": "unproven"
+    },
+    {
+      "no": "102",
+      "kind": "IO",
+      "line": 723,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_block - hashFirst)",
+      "status": "unproven"
+    },
+    {
+      "no": "103",
+      "kind": "IO",
+      "line": 728,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(_block - hashFirst)",
+      "status": "unproven"
+    },
+    {
+      "no": "104",
+      "kind": "IO",
+      "line": 729,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(24 * slotp)",
+      "status": "unproven"
+    },
+    {
+      "no": "105",
+      "kind": "IO",
+      "line": 737,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(lastb + 10)",
+      "status": "unproven"
+    },
+    {
+      "no": "106",
+      "kind": "IO",
+      "line": 745,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(block.number - 256)",
+      "status": "proven"
+    },
+    {
+      "no": "107",
+      "kind": "IO",
+      "line": 749,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(num + (num % 10))",
+      "status": "unproven"
+    },
+    {
+      "no": "108",
+      "kind": "IO",
+      "line": 752,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(lastb - hashFirst)",
+      "status": "unproven"
+    },
+    {
+      "no": "109",
+      "kind": "IO",
+      "line": 754,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(lastb + 10)",
+      "status": "unproven"
+    },
+    {
+      "no": "110",
+      "kind": "IO",
+      "line": 764,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(n + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "111",
+      "kind": "ETH_LEAK",
+      "line": 322,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.transfer(_amount);",
+      "status": "unproven"
+    },
+    {
+      "no": "112",
+      "kind": "ETH_LEAK",
+      "line": 372,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.transfer(_amount);",
+      "status": "unproven"
+    },
+    {
+      "no": "113",
+      "kind": "ETH_LEAK",
+      "line": 382,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.transfer(maxpay);",
+      "status": "unproven"
+    },
+    {
+      "no": "114",
+      "kind": "ETH_LEAK",
+      "line": 407,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "msg.sender.transfer(msg.value.sub(investing));",
+      "status": "unproven"
+    },
+    {
+      "no": "115",
+      "kind": "TX_ORG",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "assume((_to == address(this)));",
+      "status": "proven"
+    },
+    {
+      "no": "116",
+      "kind": "TX_ORG",
+      "line": 172,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "resetBet",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "setBetMax",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "setInvestStart",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    },
+    {
+      "no": "117",
+      "kind": "TX_ORG",
+      "line": 177,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeAnimator",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((msg.sender == animator));",
+      "status": "proven"
+    },
+    {
+      "no": "118",
+      "kind": "TX_ORG",
+      "line": 268,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((_who != address(0)));",
+      "status": "proven"
+    },
+    {
+      "no": "119",
+      "kind": "TX_ORG",
+      "line": 279,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeAnimator",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((_who != address(0)));",
+      "status": "proven"
+    },
+    {
+      "no": "120",
+      "kind": "TX_ORG",
+      "line": 412,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((_partner == address(0)));",
+      "status": "proven"
+    },
+    {
+      "no": "121",
+      "kind": "TX_ORG",
+      "line": 412,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((_partner == owner));",
+      "status": "proven"
+    },
+    {
+      "no": "122",
+      "kind": "TX_ORG",
+      "line": 641,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "assume((_partner != address(0)));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == c)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 53,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre103 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 56,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre102 == balances[owner])",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 61,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre101 == balances[_to])",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 71,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "balanceOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre104 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 85,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre98 == _allowance)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "NO_EFFECT",
+      "line": 88,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre97 == balances[_to])",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "NO_EFFECT",
+      "line": 89,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre96 == balances[_from])",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "NO_EFFECT",
+      "line": 101,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "approve",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre99 == allowed[msg.sender][_spender])",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "NO_EFFECT",
+      "line": 111,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "allowance",
+          "argTypes": [ "address", "address" ]
+        }
+      ],
+      "exp": "(@pre100 == remaining)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "NO_EFFECT",
+      "line": 254,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "dividendsBlocks",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre15 == period)",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "NO_EFFECT",
+      "line": 271,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre16 == owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "NO_EFFECT",
+      "line": 282,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeAnimator",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre17 == animator)",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "NO_EFFECT",
+      "line": 291,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "setInvestStart",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre18 == investStart)",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "NO_EFFECT",
+      "line": 299,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "setBetMax",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre19 == hashBetMax)",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "NO_EFFECT",
+      "line": 306,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "resetBet",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre20 == hashNext)",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "NO_EFFECT",
+      "line": 323,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre21 == coldStoreLast)",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "NO_EFFECT",
+      "line": 344,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre23 == period)",
+      "status": "unproven"
+    },
+    {
+      "no": "19",
+      "kind": "NO_EFFECT",
+      "line": 349,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre22 == dividendPeriod)",
+      "status": "unproven"
+    },
+    {
+      "no": "20",
+      "kind": "NO_EFFECT",
+      "line": 362,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payWallet",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre25 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "21",
+      "kind": "NO_EFFECT",
+      "line": 364,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payWallet",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre24 == walletBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "22",
+      "kind": "NO_EFFECT",
+      "line": 370,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre30 == maxpay)",
+      "status": "unproven"
+    },
+    {
+      "no": "23",
+      "kind": "NO_EFFECT",
+      "line": 378,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre29 == keepbalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "24",
+      "kind": "NO_EFFECT",
+      "line": 379,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre28 == walletBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "25",
+      "kind": "NO_EFFECT",
+      "line": 380,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre27 == wallets[msg.sender].balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "26",
+      "kind": "NO_EFFECT",
+      "line": 381,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre26 == wallets[msg.sender].nextWithdrawBlock)",
+      "status": "unproven"
+    },
+    {
+      "no": "27",
+      "kind": "NO_EFFECT",
+      "line": 402,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre47 == investing)",
+      "status": "unproven"
+    },
+    {
+      "no": "28",
+      "kind": "NO_EFFECT",
+      "line": 404,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre46 == investing)",
+      "status": "unproven"
+    },
+    {
+      "no": "29",
+      "kind": "NO_EFFECT",
+      "line": 405,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre45 == investBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "30",
+      "kind": "NO_EFFECT",
+      "line": 410,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre44 == investBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "31",
+      "kind": "NO_EFFECT",
+      "line": 413,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre43 == walletBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "32",
+      "kind": "NO_EFFECT",
+      "line": 414,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre42 == wallets[owner].balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "33",
+      "kind": "NO_EFFECT",
+      "line": 416,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre41 == walletBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "34",
+      "kind": "NO_EFFECT",
+      "line": 417,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre40 == wallets[owner].balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "35",
+      "kind": "NO_EFFECT",
+      "line": 418,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre39 == wallets[_partner].balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "36",
+      "kind": "NO_EFFECT",
+      "line": 419,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre38 == wallets[msg.sender].lastDividendPeriod)",
+      "status": "unproven"
+    },
+    {
+      "no": "37",
+      "kind": "NO_EFFECT",
+      "line": 420,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre37 == senderBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "38",
+      "kind": "NO_EFFECT",
+      "line": 421,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre36 == ownerBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "39",
+      "kind": "NO_EFFECT",
+      "line": 422,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre35 == animatorBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "40",
+      "kind": "NO_EFFECT",
+      "line": 423,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre34 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "41",
+      "kind": "NO_EFFECT",
+      "line": 424,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre33 == balances[owner])",
+      "status": "unproven"
+    },
+    {
+      "no": "42",
+      "kind": "NO_EFFECT",
+      "line": 425,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre32 == balances[animator])",
+      "status": "unproven"
+    },
+    {
+      "no": "43",
+      "kind": "NO_EFFECT",
+      "line": 426,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre31 == totalSupply)",
+      "status": "unproven"
+    },
+    {
+      "no": "44",
+      "kind": "NO_EFFECT",
+      "line": 439,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre50 == initialInvestment)",
+      "status": "unproven"
+    },
+    {
+      "no": "45",
+      "kind": "NO_EFFECT",
+      "line": 442,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre49 == investBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "46",
+      "kind": "NO_EFFECT",
+      "line": 443,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre48 == wallets[msg.sender].balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "47",
+      "kind": "NO_EFFECT",
+      "line": 460,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre59 == last)",
+      "status": "unproven"
+    },
+    {
+      "no": "48",
+      "kind": "NO_EFFECT",
+      "line": 462,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre58 == wallets[_who].lastDividendPeriod)",
+      "status": "unproven"
+    },
+    {
+      "no": "49",
+      "kind": "NO_EFFECT",
+      "line": 468,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre57 == share)",
+      "status": "unproven"
+    },
+    {
+      "no": "50",
+      "kind": "NO_EFFECT",
+      "line": 470,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre55 == last)",
+      "status": "unproven"
+    },
+    {
+      "no": "51",
+      "kind": "NO_EFFECT",
+      "line": 471,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre56 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "52",
+      "kind": "NO_EFFECT",
+      "line": 473,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre54 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "53",
+      "kind": "NO_EFFECT",
+      "line": 474,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre53 == walletBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "54",
+      "kind": "NO_EFFECT",
+      "line": 475,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre52 == wallets[_who].balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "55",
+      "kind": "NO_EFFECT",
+      "line": 476,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre51 == wallets[_who].lastDividendPeriod)",
+      "status": "unproven"
+    },
+    {
+      "no": "56",
+      "kind": "NO_EFFECT",
+      "line": 483,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(@pre62 == bethash)",
+      "status": "unproven"
+    },
+    {
+      "no": "57",
+      "kind": "NO_EFFECT",
+      "line": 484,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(@pre61 == hit)",
+      "status": "unproven"
+    },
+    {
+      "no": "58",
+      "kind": "NO_EFFECT",
+      "line": 485,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(@pre60 == matches)",
+      "status": "unproven"
+    },
+    {
+      "no": "59",
+      "kind": "NO_EFFECT",
+      "line": 560,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre65 == hash)",
+      "status": "unproven"
+    },
+    {
+      "no": "60",
+      "kind": "NO_EFFECT",
+      "line": 567,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre64 == prize)",
+      "status": "unproven"
+    },
+    {
+      "no": "61",
+      "kind": "NO_EFFECT",
+      "line": 583,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre63 == maxWin)",
+      "status": "unproven"
+    },
+    {
+      "no": "62",
+      "kind": "NO_EFFECT",
+      "line": 635,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre78 == bethash)",
+      "status": "unproven"
+    },
+    {
+      "no": "63",
+      "kind": "NO_EFFECT",
+      "line": 639,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre77 == dividends[dividendPeriod])",
+      "status": "unproven"
+    },
+    {
+      "no": "64",
+      "kind": "NO_EFFECT",
+      "line": 642,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre76 == fee)",
+      "status": "unproven"
+    },
+    {
+      "no": "65",
+      "kind": "NO_EFFECT",
+      "line": 643,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre75 == walletBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "66",
+      "kind": "NO_EFFECT",
+      "line": 644,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre74 == wallets[_partner].balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "67",
+      "kind": "NO_EFFECT",
+      "line": 647,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre73 == hashNext)",
+      "status": "unproven"
+    },
+    {
+      "no": "68",
+      "kind": "NO_EFFECT",
+      "line": 648,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre72 == hashBetSum)",
+      "status": "unproven"
+    },
+    {
+      "no": "69",
+      "kind": "NO_EFFECT",
+      "line": 652,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre71 == hashNext)",
+      "status": "unproven"
+    },
+    {
+      "no": "70",
+      "kind": "NO_EFFECT",
+      "line": 653,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre70 == hashBetSum)",
+      "status": "unproven"
+    },
+    {
+      "no": "71",
+      "kind": "NO_EFFECT",
+      "line": 656,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre69 == hashBetSum)",
+      "status": "unproven"
+    },
+    {
+      "no": "72",
+      "kind": "NO_EFFECT",
+      "line": 659,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre66 == bets[msg.sender].blockNum)",
+      "status": "unproven"
+    },
+    {
+      "no": "73",
+      "kind": "NO_EFFECT",
+      "line": 659,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre67 == bets[msg.sender].betHash)",
+      "status": "unproven"
+    },
+    {
+      "no": "74",
+      "kind": "NO_EFFECT",
+      "line": 659,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(@pre68 == bets[msg.sender].value)",
+      "status": "unproven"
+    },
+    {
+      "no": "75",
+      "kind": "NO_EFFECT",
+      "line": 674,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre84 == n)",
+      "status": "unproven"
+    },
+    {
+      "no": "76",
+      "kind": "NO_EFFECT",
+      "line": 676,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre83 == hashes.length)",
+      "status": "unproven"
+    },
+    {
+      "no": "77",
+      "kind": "NO_EFFECT",
+      "line": 679,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre82 == hashes.length)",
+      "status": "unproven"
+    },
+    {
+      "no": "78",
+      "kind": "NO_EFFECT",
+      "line": 681,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre81 == n)",
+      "status": "unproven"
+    },
+    {
+      "no": "79",
+      "kind": "NO_EFFECT",
+      "line": 685,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre80 == hashFirst)",
+      "status": "unproven"
+    },
+    {
+      "no": "80",
+      "kind": "NO_EFFECT",
+      "line": 686,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre79 == hashLast)",
+      "status": "unproven"
+    },
+    {
+      "no": "81",
+      "kind": "NO_EFFECT",
+      "line": 723,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre87 == delta)",
+      "status": "unproven"
+    },
+    {
+      "no": "82",
+      "kind": "NO_EFFECT",
+      "line": 724,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre86 == hash)",
+      "status": "unproven"
+    },
+    {
+      "no": "83",
+      "kind": "NO_EFFECT",
+      "line": 728,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre85 == slotp)",
+      "status": "unproven"
+    },
+    {
+      "no": "84",
+      "kind": "NO_EFFECT",
+      "line": 736,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre94 == lastb)",
+      "status": "unproven"
+    },
+    {
+      "no": "85",
+      "kind": "NO_EFFECT",
+      "line": 745,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre93 == blockn256)",
+      "status": "unproven"
+    },
+    {
+      "no": "86",
+      "kind": "NO_EFFECT",
+      "line": 748,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre92 == num)",
+      "status": "unproven"
+    },
+    {
+      "no": "87",
+      "kind": "NO_EFFECT",
+      "line": 749,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre91 == num)",
+      "status": "unproven"
+    },
+    {
+      "no": "88",
+      "kind": "NO_EFFECT",
+      "line": 750,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre90 == lastb)",
+      "status": "unproven"
+    },
+    {
+      "no": "89",
+      "kind": "NO_EFFECT",
+      "line": 752,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre89 == delta)",
+      "status": "unproven"
+    },
+    {
+      "no": "90",
+      "kind": "NO_EFFECT",
+      "line": 754,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre88 == hashLast)",
+      "status": "unproven"
+    },
+    {
+      "no": "91",
+      "kind": "NO_EFFECT",
+      "line": 764,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre95 == n)",
+      "status": "unproven"
+    },
+    {
+      "no": "92",
+      "kind": "ASSIGN_CONST",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(c == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "93",
+      "kind": "ASSIGN_CONST",
+      "line": 306,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "resetBet",
+          "argTypes": []
+        }
+      ],
+      "exp": "(hashNext == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "94",
+      "kind": "ASSIGN_CONST",
+      "line": 349,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(dividendPeriod == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "95",
+      "kind": "ASSIGN_CONST",
+      "line": 364,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payWallet",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "(walletBalance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "96",
+      "kind": "ASSIGN_CONST",
+      "line": 378,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(keepbalance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "97",
+      "kind": "ASSIGN_CONST",
+      "line": 379,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(walletBalance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "98",
+      "kind": "ASSIGN_CONST",
+      "line": 380,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(wallets[msg.sender].balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "99",
+      "kind": "ASSIGN_CONST",
+      "line": 404,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (investing == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "100",
+      "kind": "ASSIGN_CONST",
+      "line": 410,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (investBalance == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "101",
+      "kind": "ASSIGN_CONST",
+      "line": 413,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (walletBalance == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "102",
+      "kind": "ASSIGN_CONST",
+      "line": 414,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[owner].balance == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "103",
+      "kind": "ASSIGN_CONST",
+      "line": 416,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (walletBalance == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "104",
+      "kind": "ASSIGN_CONST",
+      "line": 417,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[owner].balance == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "105",
+      "kind": "ASSIGN_CONST",
+      "line": 418,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (wallets[_partner].balance == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "106",
+      "kind": "ASSIGN_CONST",
+      "line": 423,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[msg.sender] == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "107",
+      "kind": "ASSIGN_CONST",
+      "line": 424,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[owner] == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "108",
+      "kind": "ASSIGN_CONST",
+      "line": 425,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (balances[animator] == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "109",
+      "kind": "ASSIGN_CONST",
+      "line": 426,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "((!(((animator != msg.sender) && (animator != owner)) && (msg.sender != owner))) || (totalSupply == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "110",
+      "kind": "ASSIGN_CONST",
+      "line": 442,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(investBalance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "111",
+      "kind": "ASSIGN_CONST",
+      "line": 443,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "(wallets[msg.sender].balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "112",
+      "kind": "ASSIGN_CONST",
+      "line": 470,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(last == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "113",
+      "kind": "ASSIGN_CONST",
+      "line": 471,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "114",
+      "kind": "ASSIGN_CONST",
+      "line": 474,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(walletBalance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "115",
+      "kind": "ASSIGN_CONST",
+      "line": 475,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(wallets[_who].balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "116",
+      "kind": "ASSIGN_CONST",
+      "line": 485,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "(matches == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "117",
+      "kind": "ASSIGN_CONST",
+      "line": 639,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(dividends[dividendPeriod] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "118",
+      "kind": "ASSIGN_CONST",
+      "line": 643,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(walletBalance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "119",
+      "kind": "ASSIGN_CONST",
+      "line": 644,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(wallets[_partner].balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "120",
+      "kind": "ASSIGN_CONST",
+      "line": 647,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(hashNext == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "121",
+      "kind": "ASSIGN_CONST",
+      "line": 652,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(hashNext == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "122",
+      "kind": "ASSIGN_CONST",
+      "line": 656,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "(hashBetSum == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "123",
+      "kind": "ASSIGN_CONST",
+      "line": 679,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(hashes.length == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "124",
+      "kind": "ASSIGN_CONST",
+      "line": 681,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(n == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "125",
+      "kind": "ASSIGN_CONST",
+      "line": 685,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(hashFirst == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "126",
+      "kind": "ASSIGN_CONST",
+      "line": 745,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(blockn256 == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "127",
+      "kind": "ASSIGN_CONST",
+      "line": 749,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(num == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "128",
+      "kind": "ASSIGN_CONST",
+      "line": 754,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "(hashLast == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "129",
+      "kind": "ASSIGN_CONST",
+      "line": 764,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(n == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "130",
+      "kind": "DEAD",
+      "line": 11,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "131",
+      "kind": "DEAD",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "132",
+      "kind": "DEAD",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "133",
+      "kind": "DEAD",
+      "line": 52,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "134",
+      "kind": "DEAD",
+      "line": 53,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "135",
+      "kind": "DEAD",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "136",
+      "kind": "DEAD",
+      "line": 55,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "137",
+      "kind": "DEAD",
+      "line": 56,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "138",
+      "kind": "DEAD",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "139",
+      "kind": "DEAD",
+      "line": 60,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "140",
+      "kind": "DEAD",
+      "line": 61,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "141",
+      "kind": "DEAD",
+      "line": 62,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "142",
+      "kind": "DEAD",
+      "line": 86,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "143",
+      "kind": "DEAD",
+      "line": 87,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "144",
+      "kind": "DEAD",
+      "line": 88,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "145",
+      "kind": "DEAD",
+      "line": 89,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "146",
+      "kind": "DEAD",
+      "line": 90,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "147",
+      "kind": "DEAD",
+      "line": 91,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "148",
+      "kind": "DEAD",
+      "line": 102,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "approve",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "149",
+      "kind": "DEAD",
+      "line": 172,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "resetBet",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "setBetMax",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "setInvestStart",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "150",
+      "kind": "DEAD",
+      "line": 177,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeAnimator",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "151",
+      "kind": "DEAD",
+      "line": 251,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "dividendsBlocks",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "152",
+      "kind": "DEAD",
+      "line": 255,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "dividendsBlocks",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "153",
+      "kind": "DEAD",
+      "line": 268,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "154",
+      "kind": "DEAD",
+      "line": 269,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "155",
+      "kind": "DEAD",
+      "line": 270,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "156",
+      "kind": "DEAD",
+      "line": 279,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeAnimator",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "157",
+      "kind": "DEAD",
+      "line": 280,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeAnimator",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "158",
+      "kind": "DEAD",
+      "line": 281,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "changeAnimator",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "159",
+      "kind": "DEAD",
+      "line": 290,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "setInvestStart",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "160",
+      "kind": "DEAD",
+      "line": 317,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "161",
+      "kind": "DEAD",
+      "line": 318,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "162",
+      "kind": "DEAD",
+      "line": 319,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "163",
+      "kind": "DEAD",
+      "line": 320,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "164",
+      "kind": "DEAD",
+      "line": 322,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "165",
+      "kind": "DEAD",
+      "line": 330,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "166",
+      "kind": "DEAD",
+      "line": 339,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "167",
+      "kind": "DEAD",
+      "line": 343,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "168",
+      "kind": "DEAD",
+      "line": 345,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "169",
+      "kind": "DEAD",
+      "line": 348,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "coldStore",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "hotStore",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "houseKeeping",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "170",
+      "kind": "DEAD",
+      "line": 361,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payWallet",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "171",
+      "kind": "DEAD",
+      "line": 365,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payWallet",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "172",
+      "kind": "DEAD",
+      "line": 371,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "173",
+      "kind": "DEAD",
+      "line": 372,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "174",
+      "kind": "DEAD",
+      "line": 373,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "175",
+      "kind": "DEAD",
+      "line": 374,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "176",
+      "kind": "DEAD",
+      "line": 382,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "pay",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "177",
+      "kind": "DEAD",
+      "line": 392,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "investDirect",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "178",
+      "kind": "DEAD",
+      "line": 401,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "179",
+      "kind": "DEAD",
+      "line": 403,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "180",
+      "kind": "DEAD",
+      "line": 407,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "181",
+      "kind": "DEAD",
+      "line": 412,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "182",
+      "kind": "DEAD",
+      "line": 427,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "183",
+      "kind": "DEAD",
+      "line": 428,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "184",
+      "kind": "DEAD",
+      "line": 429,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "185",
+      "kind": "DEAD",
+      "line": 430,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "invest",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "186",
+      "kind": "DEAD",
+      "line": 437,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "187",
+      "kind": "DEAD",
+      "line": 438,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "188",
+      "kind": "DEAD",
+      "line": 440,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "189",
+      "kind": "DEAD",
+      "line": 444,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "disinvest",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "190",
+      "kind": "DEAD",
+      "line": 451,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "191",
+      "kind": "DEAD",
+      "line": 452,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "192",
+      "kind": "DEAD",
+      "line": 453,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "payDividends",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "193",
+      "kind": "DEAD",
+      "line": 461,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "194",
+      "kind": "DEAD",
+      "line": 465,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "195",
+      "kind": "DEAD",
+      "line": 477,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "commitDividend",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "196",
+      "kind": "DEAD",
+      "line": 486,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "197",
+      "kind": "DEAD",
+      "line": 487,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "198",
+      "kind": "DEAD",
+      "line": 488,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "199",
+      "kind": "DEAD",
+      "line": 489,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "200",
+      "kind": "DEAD",
+      "line": 490,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "201",
+      "kind": "DEAD",
+      "line": 491,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "202",
+      "kind": "DEAD",
+      "line": 492,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "203",
+      "kind": "DEAD",
+      "line": 495,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "204",
+      "kind": "DEAD",
+      "line": 498,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "205",
+      "kind": "DEAD",
+      "line": 501,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "206",
+      "kind": "DEAD",
+      "line": 504,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betPrize",
+          "argTypes": [ "struct SmartBillions.Bet", "uint24" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "207",
+      "kind": "DEAD",
+      "line": 515,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "208",
+      "kind": "DEAD",
+      "line": 521,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "209",
+      "kind": "DEAD",
+      "line": 523,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "210",
+      "kind": "DEAD",
+      "line": 525,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "211",
+      "kind": "DEAD",
+      "line": 526,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "212",
+      "kind": "DEAD",
+      "line": 531,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "213",
+      "kind": "DEAD",
+      "line": 542,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "214",
+      "kind": "DEAD",
+      "line": 546,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "215",
+      "kind": "DEAD",
+      "line": 547,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "216",
+      "kind": "DEAD",
+      "line": 550,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "217",
+      "kind": "DEAD",
+      "line": 551,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "218",
+      "kind": "DEAD",
+      "line": 552,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "219",
+      "kind": "DEAD",
+      "line": 558,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "220",
+      "kind": "DEAD",
+      "line": 561,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "221",
+      "kind": "DEAD",
+      "line": 564,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "222",
+      "kind": "DEAD",
+      "line": 565,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "223",
+      "kind": "DEAD",
+      "line": 566,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "224",
+      "kind": "DEAD",
+      "line": 570,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "225",
+      "kind": "DEAD",
+      "line": 574,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "226",
+      "kind": "DEAD",
+      "line": 580,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "227",
+      "kind": "DEAD",
+      "line": 581,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "228",
+      "kind": "DEAD",
+      "line": 582,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "229",
+      "kind": "DEAD",
+      "line": 584,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "230",
+      "kind": "DEAD",
+      "line": 586,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "231",
+      "kind": "DEAD",
+      "line": 589,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "232",
+      "kind": "DEAD",
+      "line": 599,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "233",
+      "kind": "DEAD",
+      "line": 600,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "234",
+      "kind": "DEAD",
+      "line": 601,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "235",
+      "kind": "DEAD",
+      "line": 604,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "236",
+      "kind": "DEAD",
+      "line": 609,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "237",
+      "kind": "DEAD",
+      "line": 610,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "238",
+      "kind": "DEAD",
+      "line": 611,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "239",
+      "kind": "DEAD",
+      "line": 618,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "240",
+      "kind": "DEAD",
+      "line": 626,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playRandom",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "241",
+      "kind": "DEAD",
+      "line": 634,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "242",
+      "kind": "DEAD",
+      "line": 636,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "243",
+      "kind": "DEAD",
+      "line": 637,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "244",
+      "kind": "DEAD",
+      "line": 638,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "245",
+      "kind": "DEAD",
+      "line": 641,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "246",
+      "kind": "DEAD",
+      "line": 646,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "247",
+      "kind": "DEAD",
+      "line": 651,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "248",
+      "kind": "DEAD",
+      "line": 660,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "249",
+      "kind": "DEAD",
+      "line": 662,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "playSystem",
+          "argTypes": [ "uint256", "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "250",
+      "kind": "DEAD",
+      "line": 673,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "251",
+      "kind": "DEAD",
+      "line": 675,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "252",
+      "kind": "DEAD",
+      "line": 684,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "253",
+      "kind": "DEAD",
+      "line": 695,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "addHashes128",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "254",
+      "kind": "DEAD",
+      "line": 725,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "betOf",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "SmartBillions",
+          "methodName": "won",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "255",
+      "kind": "DEAD",
+      "line": 737,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "256",
+      "kind": "DEAD",
+      "line": 741,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "257",
+      "kind": "DEAD",
+      "line": 747,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "258",
+      "kind": "DEAD",
+      "line": 753,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHash",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "259",
+      "kind": "DEAD",
+      "line": 765,
+      "signatures": [
+        {
+          "contractName": "SmartBillions",
+          "methodName": "putHashes",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

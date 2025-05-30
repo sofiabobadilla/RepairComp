@@ -1,0 +1,866 @@
+{
+  "fileName": "results/arithmetic/BECToken/candidates/cand_1/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 1,
+  "time": 2.366577,
+  "errMsg": null,
+  "invmap": [
+    { "key": "0", "formula": "true" }, { "key": "379", "formula": "true" }
+  ],
+  "specmap": [ { "key": "318", "pre": "true", "post": "true" } ],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(a - b)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(a + b)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 264,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(uint256(cnt) * _value)",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 265,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(uint256(cnt) * _value)",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "IO",
+      "line": 270,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(i + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "TX_ORG",
+      "line": 66,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "assume((_to != address(0)));",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "TX_ORG",
+      "line": 117,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "assume((_to != address(0)));",
+      "status": "proven"
+    },
+    {
+      "no": "8",
+      "kind": "TX_ORG",
+      "line": 180,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "pause",
+          "argTypes": []
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "transferOwnership",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "unpause",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    },
+    {
+      "no": "9",
+      "kind": "TX_ORG",
+      "line": 190,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transferOwnership",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "assume((newOwner != address(0)));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == c)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 70,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre13 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 71,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre12 == balances[_to])",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 82,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "balanceOf",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre24 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 121,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre9 == balances[_from])",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 122,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre8 == balances[_to])",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "NO_EFFECT",
+      "line": 123,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre7 == allowed[_from][msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "NO_EFFECT",
+      "line": 139,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "approve",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "(@pre10 == allowed[msg.sender][_spender])",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "NO_EFFECT",
+      "line": 151,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "allowance",
+          "argTypes": [ "address", "address" ]
+        }
+      ],
+      "exp": "(@pre23 == remaining)",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "NO_EFFECT",
+      "line": 192,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transferOwnership",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre22 == owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "NO_EFFECT",
+      "line": 262,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(@pre21 == cnt)",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "NO_EFFECT",
+      "line": 265,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(@pre20 == amount)",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "NO_EFFECT",
+      "line": 269,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(@pre19 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "NO_EFFECT",
+      "line": 270,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(@pre17 == i)",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "NO_EFFECT",
+      "line": 271,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(@pre18 == balances[_receivers[i]])",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "ASSIGN_CONST",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "(c == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "ASSIGN_CONST",
+      "line": 270,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "(i == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "DEAD",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "19",
+      "kind": "DEAD",
+      "line": 34,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        },
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "20",
+      "kind": "DEAD",
+      "line": 66,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "21",
+      "kind": "DEAD",
+      "line": 67,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "22",
+      "kind": "DEAD",
+      "line": 70,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "23",
+      "kind": "DEAD",
+      "line": 71,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "24",
+      "kind": "DEAD",
+      "line": 72,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "25",
+      "kind": "DEAD",
+      "line": 117,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "26",
+      "kind": "DEAD",
+      "line": 118,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "27",
+      "kind": "DEAD",
+      "line": 119,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "28",
+      "kind": "DEAD",
+      "line": 121,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "29",
+      "kind": "DEAD",
+      "line": 122,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "30",
+      "kind": "DEAD",
+      "line": 123,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "31",
+      "kind": "DEAD",
+      "line": 124,
+      "signatures": [
+        {
+          "contractName": "StandardToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "32",
+      "kind": "DEAD",
+      "line": 140,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "approve",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "33",
+      "kind": "DEAD",
+      "line": 180,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "pause",
+          "argTypes": []
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "transferOwnership",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "PausableToken",
+          "methodName": "unpause",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "34",
+      "kind": "DEAD",
+      "line": 190,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transferOwnership",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "35",
+      "kind": "DEAD",
+      "line": 191,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transferOwnership",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "36",
+      "kind": "DEAD",
+      "line": 229,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "pause",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "37",
+      "kind": "DEAD",
+      "line": 237,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "unpause",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "38",
+      "kind": "DEAD",
+      "line": 250,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transfer",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "39",
+      "kind": "DEAD",
+      "line": 254,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "transferFrom",
+          "argTypes": [ "address", "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "40",
+      "kind": "DEAD",
+      "line": 258,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "approve",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "41",
+      "kind": "DEAD",
+      "line": 264,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "42",
+      "kind": "DEAD",
+      "line": 266,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "43",
+      "kind": "DEAD",
+      "line": 267,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "44",
+      "kind": "DEAD",
+      "line": 269,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "45",
+      "kind": "DEAD",
+      "line": 271,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "46",
+      "kind": "DEAD",
+      "line": 272,
+      "signatures": [
+        {
+          "contractName": "PausableToken",
+          "methodName": "batchTransfer",
+          "argTypes": [ "address[]", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

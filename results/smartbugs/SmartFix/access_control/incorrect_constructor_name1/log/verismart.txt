@@ -1,0 +1,59 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 5
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 6.5e-05s
+[INFO] # path : 8
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000131s
+Generating VCs ... took 0.000265s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.021681
+[
+0 -> true
+]
+[
+]
+1/2 ... [ETH_LEAK] line 32, owner.transfer(this.balance); ... unproven
+2/2 ... [TX_ORG] line 13, assume((msg.sender == owner)); ... proven
+took 0.070276s
+
+Generating VCs ... took 0.000114s
+Checking validity of VCs ... took 0.010766s
+
+Generating VCs ... took 7.1e-05s
+Checking validity of VCs ... 
+1/3 ... [NO_EFFECT] line 23, (@pre1 == owner) ... unproven
+2/3 ... [DEAD] line 13, false ... unproven
+3/3 ... [DEAD] line 32, false ... unproven
+took 0.061331s
+
+
+===== Vulnerability Report =====
+[1] [ETH_LEAK] line 32, owner.transfer(this.balance); : unproven
+[2] [TX_ORG] line 13, assume((msg.sender == owner)); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 23, (@pre1 == owner) : unproven
+[2] [DEAD] line 13, false : unproven
+[3] [DEAD] line 32, false : unproven
+
+============ Statistics ============
+# Iter                    : 3
+# Alarm / Query           : 1 / 2
+- integer over/underflow  : 0 / 0
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 1
+
+Time Elapsed (Real) : 0.178524017334
+Time Elapsed (CPU)  : 0.164017

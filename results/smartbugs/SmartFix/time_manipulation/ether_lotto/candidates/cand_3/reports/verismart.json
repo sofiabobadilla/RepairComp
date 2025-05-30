@@ -1,0 +1,229 @@
+{
+  "fileName": "results/time_manipulation/ether_lotto/candidates/cand_3/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 2,
+  "time": 8.507149999999999,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),bank__@9:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "(pot + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "(pot + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "(pot - FEE_AMOUNT)",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 51,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "bank.transfer(FEE_AMOUNT);",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "ETH_LEAK",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.transfer((pot - FEE_AMOUNT));",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "TX_ORG",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((bank == msg.sender));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == pot)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 45,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == random)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "((!(bank != msg.sender)) || (pot == 0))",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 37,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 48,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 51,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "EtherLotto",
+          "methodName": "play",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

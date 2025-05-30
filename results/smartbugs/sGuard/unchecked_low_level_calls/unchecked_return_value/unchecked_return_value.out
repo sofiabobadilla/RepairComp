@@ -1,0 +1,9 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/unchecked_low_level_calls/unchecked_return_value.sol" "results/unchecked_low_level_calls/unchecked_return_value" "ReturnValue"
+
+smartbugs/dataset/unchecked_low_level_calls/unchecked_return_value.sol
+{ bugFixes: {},
+  source:
+   '/*\n * @source: https://smartcontractsecurity.github.io/SWC-registry/docs/SWC-104#unchecked-return-valuesol\n * @author: -\n * @vulnerable_at_lines: 17\n */\n\n\ncontract ReturnValue {\n\n  function callchecked(address callee) public {\n    require(callee.call());\n  }\n\n  function callnotchecked(address callee) public {\n     // <yes> <report> UNCHECKED_LL_CALLS\n    callee.call();\n  }\n}\n',
+  wrappers: Set {} }

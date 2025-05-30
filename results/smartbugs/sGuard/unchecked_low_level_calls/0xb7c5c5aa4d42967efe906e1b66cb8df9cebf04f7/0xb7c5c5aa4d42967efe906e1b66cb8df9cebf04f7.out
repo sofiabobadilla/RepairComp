@@ -1,0 +1,13 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol" "results/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7" "keepMyEther"
+
+smartbugs/dataset/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol
+{ bugFixes:
+   { 'ynzc5*6{I65N@<bRJ7*8>QR+j~~NTHQqO':
+      'balances[msg.sender] = add_uint256(balances[msg.sender], msg.value)',
+     '`kaeo"DhNJ&{TfTBM!c7x': 'contract keepMyEther  is sGuard ',
+     'imQ}+Tp`C~L0(?q~r-1': ' function withdraw() nonReentrant_ ' },
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 25\n */\n\n\n/*\n!!! THIS CONTRACT IS EXPLOITABLE AND FOR EDUCATIONAL PURPOSES ONLY !!!\n\nThis smart contract allows a user to (insecurely) store funds\nin this smart contract and withdraw them at any later point in time\n*/\n\n`kaeo"DhNJ&{TfTBM!c7x{\n    mapping(address => uint256) public balances;\n    \n    function () payable public {\n        ynzc5*6{I65N@<bRJ7*8>QR+j~~NTHQqO;\n    }\n    \n    imQ}+Tp`C~L0(?q~r-1 public {\n        // <yes> <report> UNCHECKED_LL_CALLS\n        msg.sender.call.value(balances[msg.sender])();\n        balances[msg.sender] = 0;\n    }\n}',
+  wrappers: Set { 'add_uint256', 'nonReentrant_' } }

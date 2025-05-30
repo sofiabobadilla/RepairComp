@@ -1,0 +1,17 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol" "results/reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344" "ETH_VAULT"
+
+smartbugs/dataset/reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol
+{ bugFixes:
+   { '/.aUu(@E\\J"$;q`iMSqP&D|n!':
+      'balances[msg.sender] = sub_uint256(balances[msg.sender], _am)',
+     '0=uJc-&X2Duwr*@PUjzh|SrCTL': ' function CashOut(uint _am) nonReentrant_ ',
+     '3?3KTPzLpe`}0G': 'contract Log \n is sGuard ',
+     'R2s)ns?;thV@NrpJc5aYtcD<&g.R]vI':
+      'balances[msg.sender] = add_uint256(balances[msg.sender], msg.value)',
+     'j{u<7(OwC<n>QK-qm\\o': 'contract ETH_VAULT\n is sGuard ',
+     'aXO.S68/<wHw2E8u(a': ' function Deposit() nonReentrant_ ' },
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 41\n */\n \n\nj{u<7(OwC<n>QK-qm\\o{\n    mapping (address => uint) public balances;\n    \n    Log TransferLog;\n    \n    uint public MinDeposit = 1 ether;\n    \n    function ETH_VAULT(address _log)\n    public \n    {\n        TransferLog = Log(_log);\n    }\n    \n    aXO.S68/<wHw2E8u(a\n    public\n    payable\n    {\n        if(msg.value > MinDeposit)\n        {\n            R2s)ns?;thV@NrpJc5aYtcD<&g.R]vI;\n            TransferLog.AddMessage(msg.sender,msg.value,"Deposit");\n        }\n    }\n    \n    0=uJc-&X2Duwr*@PUjzh|SrCTL\n    public\n    payable\n    {\n        if(_am<=balances[msg.sender])\n        {\n            // <yes> <report> REENTRANCY\n            if(msg.sender.call.value(_am)())\n            {\n                /.aUu(@E\\J"$;q`iMSqP&D|n!;\n                TransferLog.AddMessage(msg.sender,_am,"CashOut");\n            }\n        }\n    }\n    \n    function() public payable{}    \n    \n}\n\n3?3KTPzLpe`}0G{\n   \n    struct Message\n    {\n        address Sender;\n        string  Data;\n        uint Val;\n        uint  Time;\n    }\n    \n    Message[] public History;\n    \n    Message LastMsg;\n    \n    function AddMessage(address _adr,uint _val,string _data)\n    public\n    {\n        LastMsg.Sender = _adr;\n        LastMsg.Time = now;\n        LastMsg.Val = _val;\n        LastMsg.Data = _data;\n        History.push(LastMsg);\n    }\n}',
+  wrappers: Set { 'sub_uint256', 'nonReentrant_', 'add_uint256' } }

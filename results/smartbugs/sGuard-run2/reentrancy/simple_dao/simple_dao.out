@@ -1,0 +1,15 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/simple_dao/simple_dao.sol" "report_run/reentrancy/simple_dao" "SimpleDAO"
+
+patches/reentrancy/simple_dao/simple_dao.sol
+{ bugFixes:
+   { 'z>B\'0': 'add_uint256(a, b)',
+     '(CN-?,DV4TFRCo=<y0akA`gZMEk': ' function donate(address to) nonReentrant_ ',
+     'QRIjnEmA\'Ie\'io96{*7ot|Aq~C,D(1': 'contract SimpleDAO  is sGuard  is sGuard ',
+     'K/;w"': 'sub_uint256(a, b)',
+     '?TNG5!obd:,Tn8i': 'contract sGuard is sGuard ',
+     'cxe"2Zm4p:0:"^)=-:YgRRiAp"fb{r': ' function withdraw(uint amount) nonReentrant_ ' },
+  source:
+   '?TNG5!obd:,Tn8i{\n  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    assert(b <= a);\n    return K/;w";\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n  \n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = z>B\'0;\n    assert(c >= a);\n    return c;\n  }\n}\n/*\n * @source: http://blockchain.unica.it/projects/ethereum-survey/attacks.html#simpledao\n * @author: -\n * @vulnerable_at_lines: 19\n */\n\n\nQRIjnEmA\'Ie\'io96{*7ot|Aq~C,D(1{\n  mapping (address => uint) public credit;\n\n   (CN-?,DV4TFRCo=<y0akA`gZMEk nonReentrant_  payable {\n    credit[to] = add_uint256(credit[to], msg.value);\n  }\n\n   cxe"2Zm4p:0:"^)=-:YgRRiAp"fb{r nonReentrant_  {\n    if (credit[msg.sender]>= amount) {\n      // <yes> <report> REENTRANCY\n      bool res = msg.sender.call.value(amount)();\n      credit[msg.sender] = sub_uint256(credit[msg.sender], amount);\n    }\n  }\n\n  function queryCredit(address to) returns (uint){\n    return credit[to];\n  }\n}\n',
+  wrappers: Set { 'add_uint256', 'nonReentrant_', 'sub_uint256' } }

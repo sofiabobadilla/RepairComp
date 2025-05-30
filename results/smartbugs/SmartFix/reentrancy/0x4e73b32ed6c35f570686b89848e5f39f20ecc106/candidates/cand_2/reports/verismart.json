@@ -1,0 +1,325 @@
+{
+  "fileName": "results/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106/candidates/cand_2/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 17,
+  "time": 158.12234099999998,
+  "errMsg": null,
+  "invmap": [
+    { "key": "-1", "formula": "true" }, { "key": "0", "formula": "true" }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] - _am)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "RE_EL",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "msg.sender.call.value(_am)()",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "SetMinSum",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(PRIVATE_ETH_CELL, SetMinSum, [uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "SetLogFile",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(PRIVATE_ETH_CELL, SetLogFile, [address])",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "RE",
+      "line": 33,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Initialized",
+          "argTypes": []
+        }
+      ],
+      "exp": "(PRIVATE_ETH_CELL, Initialized, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "RE",
+      "line": 39,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(PRIVATE_ETH_CELL, Deposit, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "RE",
+      "line": 47,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(PRIVATE_ETH_CELL, Collect, [uint256])",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "RE",
+      "line": 63,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(PRIVATE_ETH_CELL, @fallback, [])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "SetMinSum",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == MinSum)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 91,
+      "signatures": [
+        {
+          "contractName": "LogFile",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre6 == LastMsg.Sender)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 92,
+      "signatures": [
+        {
+          "contractName": "LogFile",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre5 == LastMsg.Time)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 93,
+      "signatures": [
+        {
+          "contractName": "LogFile",
+          "methodName": "AddMessage",
+          "argTypes": [ "address", "uint256", "string" ]
+        }
+      ],
+      "exp": "(@pre4 == LastMsg.Val)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "ASSIGN_CONST",
+      "line": 43,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "@fallback",
+          "argTypes": []
+        },
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "ASSIGN_CONST",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 51,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "DEAD",
+      "line": 56,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "Collect",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "DEAD",
+      "line": 67,
+      "signatures": [
+        {
+          "contractName": "PRIVATE_ETH_CELL",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

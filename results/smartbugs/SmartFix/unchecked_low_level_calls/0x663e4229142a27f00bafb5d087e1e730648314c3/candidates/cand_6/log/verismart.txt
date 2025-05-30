@@ -1,0 +1,955 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 600
+[INFO] reachable : 150
+[INFO] Generating Paths ... took 0.248413s
+[INFO] # path : 2015
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: true
+[INFO] Performing Interval Analysis ... took 0.619432s
+Generating VCs ... took 31.657646s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 59.024456
+[
+-1 -> true
+0 -> true
+3495 -> true
+7949 -> true
+(-1,3495) -> true
+(-1,7949) -> true
+]
+[
+]
+1/109 ... [IO] line 3, (a + b) ... proven
+2/109 ... [IO] line 4, (a + b) ... proven
+3/109 ... [IO] line 400, (ownershipTokenCount[_to] + 1) ... unproven
+4/109 ... [IO] line 405, (ownershipTokenCount[_from] - 1) ... unproven
+5/109 ... [IO] line 455, ((cooldownIndex / 10) + 1) ... unproven
+6/109 ... [IO] line 457, (cooldownIndex - 1) ... unproven
+7/109 ... [IO] line 473, (wizzPandaCount[_tp] + 1) ... proven
+8/109 ... [IO] line 478, (gen0CreatedCount + 1) ... proven
+9/109 ... [IO] line 492, (pandas.push(_panda) - 1) ... proven
+10/109 ... [IO] line 705, (pandas.length - 1) ... unproven
+11/109 ... [IO] line 744, (resultIndex + 1) ... proven
+12/109 ... [IO] line 860, ((cooldowns[_kitten.cooldownIndex] / secondsPerBlock) + block.number) ... unproven
+13/109 ... [IO] line 867, (_kitten.cooldownIndex + 1) ... proven
+14/109 ... [IO] line 961, (geneScience.getSex(_matron.genes) + geneScience.getSex(_sire.genes)) ... unproven
+15/109 ... [IO] line 1028, (pregnantPandas + 1) ... unproven
+16/109 ... [IO] line 1130, (((geneScience.getPureFromGene(matron.genes) + geneScience.getPureFromGene(sire.genes)) / 2) + _factors[0]) ... unproven
+17/109 ... [IO] line 1130, (geneScience.getPureFromGene(matron.genes) + geneScience.getPureFromGene(sire.genes)) ... unproven
+18/109 ... [IO] line 1131, ((parentGen + 1) * _factors[1]) ... unproven
+19/109 ... [IO] line 1131, (parentGen + 1) ... unproven
+20/109 ... [IO] line 1132, ((parentGen + 1) * _factors[1]) ... unproven
+21/109 ... [IO] line 1132, (parentGen + 1) ... unproven
+22/109 ... [IO] line 1132, (probability - ((parentGen + 1) * _factors[1])) ... proven
+23/109 ... [IO] line 1139, (block.number - 2) ... unproven
+24/109 ... [IO] line 1142, (parentGen + 1) ... unproven
+25/109 ... [IO] line 1156, (pregnantPandas - 1) ... unproven
+26/109 ... [IO] line 1293, (price - auctioneerCut) ... unproven
+27/109 ... [IO] line 1310, (_bidAmount - price) ... proven
+28/109 ... [IO] line 1352, (now - _auction.startedAt) ... proven
+29/109 ... [IO] line 1389, (int256(_endingPrice) - int256(_startingPrice)) ... unproven
+30/109 ... [IO] line 1394, (totalPriceChange * int256(_secondsPassed)) ... unproven
+31/109 ... [IO] line 1398, (int256(_startingPrice) + currentPriceChange) ... unproven
+32/109 ... [IO] line 1412, (_price * ownerCut) ... unproven
+33/109 ... [IO] line 1797, (gen0SaleCount + 1) ... unproven
+34/109 ... [IO] line 1838, (i + 1) ... proven
+35/109 ... [IO] line 1839, (sum + lastGen0SalePrices[i]) ... unproven
+36/109 ... [IO] line 2189, (currentPrice + autoBirthFee) ... unproven
+37/109 ... [IO] line 2308, (avePrice + (avePrice / 2)) ... unproven
+38/109 ... [IO] line 2471, ((pregnantPandas + 1) * autoBirthFee) ... unproven
+39/109 ... [IO] line 2471, (pregnantPandas + 1) ... unproven
+40/109 ... [IO] line 2475, (balance - subtractFees) ... proven
+41/109 ... [ETH_LEAK] line 1160, msg.sender.send(autoBirthFee); ... unproven
+42/109 ... [ETH_LEAK] line 1303, seller.transfer(sellerProceeds); ... unproven
+43/109 ... [ETH_LEAK] line 1315, msg.sender.transfer(bidExcess); ... unproven
+44/109 ... [ETH_LEAK] line 1504, res = nftAddress.send(this.balance); ... unproven
+45/109 ... [ETH_LEAK] line 2475, cfoAddress.send((balance - subtractFees)); ... unproven
+46/109 ... [RE_EL] line 1160, msg.sender.send(autoBirthFee); ... unproven
+47/109 ... [RE_EL] line 1303, seller.transfer(sellerProceeds); ... unproven
+48/109 ... [RE_EL] line 1315, msg.sender.transfer(bidExcess); ... unproven
+49/109 ... [RE_EL] line 1504, res = nftAddress.send(this.balance); ... unproven
+50/109 ... [RE_EL] line 2475, cfoAddress.send((balance - subtractFees)); ... unproven
+51/109 ... [RE] line 176, (PandaCore, setCEO, [address]) ... unproven
+52/109 ... [RE] line 184, (PandaCore, setCFO, [address]) ... unproven
+53/109 ... [RE] line 192, (PandaCore, setCOO, [address]) ... unproven
+54/109 ... [RE] line 214, (PandaCore, pause, []) ... unproven
+55/109 ... [RE] line 386, (PandaCore, setTotalWizzPandaOf, [uint256, uint256]) ... unproven
+56/109 ... [RE] line 424, (PandaCore, _createPanda, [uint256, uint256, uint256, uint256[2], address]) ... unproven
+57/109 ... [RE] line 515, (PandaCore, setSecondsPerBlock, [uint256]) ... unproven
+58/109 ... [RE] line 624, (PandaCore, transfer, [address, uint256]) ... unproven
+59/109 ... [RE] line 656, (PandaCore, approve, [address, uint256]) ... unproven
+60/109 ... [RE] line 680, (PandaCore, transferFrom, [address, address, uint256]) ... unproven
+61/109 ... [RE] line 823, (PandaCore, setGeneScienceAddress, [address]) ... unproven
+62/109 ... [RE] line 875, (PandaCore, approveSiring, [address, uint256]) ... unproven
+63/109 ... [RE] line 885, (PandaCore, setAutoBirthFee, [uint256]) ... unproven
+64/109 ... [RE] line 1008, (PandaCore, _breedWith, [uint256, uint256, address]) ... unproven
+65/109 ... [RE] line 1099, (PandaCore, giveBirth, [uint256, uint256[2], uint256[2]]) ... unproven
+66/109 ... [RE] line 2040, (PandaCore, setSaleAuctionAddress, [address]) ... unproven
+67/109 ... [RE] line 2050, (PandaCore, setSaleAuctionERC20Address, [address]) ... unproven
+68/109 ... [RE] line 2062, (PandaCore, setSiringAuctionAddress, [address]) ... unproven
+69/109 ... [RE] line 2074, (PandaCore, createSaleAuction, [uint256, uint256, uint256, uint256]) ... unproven
+70/109 ... [RE] line 2105, (PandaCore, createSaleAuctionERC20, [uint256, address, uint256, uint256, uint256]) ... unproven
+71/109 ... [RE] line 2144, (PandaCore, createSiringAuction, [uint256, uint256, uint256, uint256]) ... unproven
+72/109 ... [RE] line 2285, (PandaCore, createGen0Auction, [uint256]) ... unproven
+73/109 ... [RE] line 2387, (PandaCore, init, []) ... unproven
+74/109 ... [RE] line 2403, (PandaCore, setNewAddress, [address]) ... unproven
+75/109 ... [RE] line 2457, (PandaCore, unpause, []) ... unproven
+76/109 ... [RE] line 2468, (PandaCore, withdrawBalance, []) ... unproven
+77/109 ... [TX_ORG] line 149, assume((msg.sender == ceoAddress)); ... proven
+78/109 ... [TX_ORG] line 155, assume((msg.sender == cfoAddress)); ... proven
+79/109 ... [TX_ORG] line 161, assume((msg.sender == cooAddress)); ... proven
+80/109 ... [TX_ORG] line 167, assume((msg.sender == cooAddress)); ... proven
+81/109 ... [TX_ORG] line 168, assume((msg.sender == ceoAddress)); ... proven
+82/109 ... [TX_ORG] line 169, assume((msg.sender == cfoAddress)); ... proven
+83/109 ... [TX_ORG] line 177, assume((_newCEO != address(0))); ... proven
+84/109 ... [TX_ORG] line 185, assume((_newCFO != address(0))); ... proven
+85/109 ... [TX_ORG] line 193, assume((_newCOO != address(0))); ... proven
+86/109 ... [TX_ORG] line 404, assume((_from != address(0))); ... proven
+87/109 ... [TX_ORG] line 632, assume((_to != address(0))); ... proven
+88/109 ... [TX_ORG] line 636, assume((_to != address(this))); ... proven
+89/109 ... [TX_ORG] line 640, assume((_to != address(saleAuction))); ... proven
+90/109 ... [TX_ORG] line 641, assume((_to != address(siringAuction))); ... proven
+91/109 ... [TX_ORG] line 689, assume((_to != address(0))); ... proven
+92/109 ... [TX_ORG] line 693, assume((_to != address(this))); ... proven
+93/109 ... [TX_ORG] line 717, assume((owner != address(0))); ... proven
+94/109 ... [TX_ORG] line 742, assume((pandaIndexToOwner[catId] == _owner)); ... proven
+95/109 ... [TX_ORG] line 1499, assume((msg.sender == owner)); ... proven
+96/109 ... [TX_ORG] line 1500, assume((msg.sender == nftAddress)); ... proven
+97/109 ... [TX_ORG] line 1660, assume((msg.sender == address(nonFungibleContract))); ... proven
+98/109 ... [TX_ORG] line 1681, assume((msg.sender == address(nonFungibleContract))); ... proven
+99/109 ... [TX_ORG] line 1741, assume((msg.sender == address(nonFungibleContract))); ... proven
+100/109 ... [TX_ORG] line 1769, assume((msg.sender == address(nonFungibleContract))); ... proven
+101/109 ... [TX_ORG] line 1804, assume((msg.sender == address(nonFungibleContract))); ... proven
+102/109 ... [TX_ORG] line 1870, assume((msg.sender == address(nonFungibleContract))); ... proven
+103/109 ... [TX_ORG] line 1872, assume((_erc20address != address(0))); ... proven
+104/109 ... [TX_ORG] line 1898, assume((msg.sender == address(nonFungibleContract))); ... proven
+105/109 ... [TX_ORG] line 1968, assume((msg.sender == address(nonFungibleContract))); ... proven
+106/109 ... [TX_ORG] line 2238, assume((pandaOwner == address(0))); ... proven
+107/109 ... [TX_ORG] line 2415, assume((msg.sender == address(saleAuction))); ... proven
+108/109 ... [TX_ORG] line 2416, assume((msg.sender == address(siringAuction))); ... proven
+109/109 ... [TX_ORG] line 2461, assume((newContractAddress == address(0))); ... proven
+took 73.119401s
+
+Generating VCs ... took 7.694015s
+Checking validity of VCs ... 
+1/343 ... [NO_EFFECT] line 4, (@pre363 == c) ... unproven
+2/343 ... [NO_EFFECT] line 179, (@pre360 == ceoAddress) ... unproven
+3/343 ... [NO_EFFECT] line 187, (@pre361 == cfoAddress) ... unproven
+4/343 ... [NO_EFFECT] line 195, (@pre362 == cooAddress) ... unproven
+5/343 ... [NO_EFFECT] line 389, (@pre342 == wizzPandaQuota[_tp]) ... unproven
+6/343 ... [NO_EFFECT] line 400, (@pre233 == ownershipTokenCount[_to]) ... unproven
+7/343 ... [NO_EFFECT] line 400, (@pre284 == ownershipTokenCount[_to]) ... unproven
+8/343 ... [NO_EFFECT] line 400, (@pre345 == ownershipTokenCount[_to]) ... unproven
+9/343 ... [NO_EFFECT] line 400, (@pre42 == ownershipTokenCount[_to]) ... unproven
+10/343 ... [NO_EFFECT] line 400, (@pre89 == ownershipTokenCount[_to]) ... unproven
+11/343 ... [NO_EFFECT] line 402, (@pre232 == pandaIndexToOwner[_tokenId]) ... unproven
+12/343 ... [NO_EFFECT] line 402, (@pre283 == pandaIndexToOwner[_tokenId]) ... unproven
+13/343 ... [NO_EFFECT] line 402, (@pre344 == pandaIndexToOwner[_tokenId]) ... unproven
+14/343 ... [NO_EFFECT] line 402, (@pre41 == pandaIndexToOwner[_tokenId]) ... unproven
+15/343 ... [NO_EFFECT] line 402, (@pre88 == pandaIndexToOwner[_tokenId]) ... unproven
+16/343 ... [NO_EFFECT] line 405, (@pre231 == ownershipTokenCount[_from]) ... unproven
+17/343 ... [NO_EFFECT] line 405, (@pre282 == ownershipTokenCount[_from]) ... unproven
+18/343 ... [NO_EFFECT] line 405, (@pre343 == ownershipTokenCount[_from]) ... unproven
+19/343 ... [NO_EFFECT] line 405, (@pre40 == ownershipTokenCount[_from]) ... unproven
+20/343 ... [NO_EFFECT] line 405, (@pre87 == ownershipTokenCount[_from]) ... unproven
+21/343 ... [NO_EFFECT] line 447, (@pre358 == pureDegree) ... unproven
+22/343 ... [NO_EFFECT] line 451, (@pre357 == cooldownIndex) ... unproven
+23/343 ... [NO_EFFECT] line 453, (@pre356 == cooldownIndex) ... unproven
+24/343 ... [NO_EFFECT] line 455, (@pre355 == cooldownIndex) ... unproven
+25/343 ... [NO_EFFECT] line 457, (@pre354 == cooldownIndex) ... unproven
+26/343 ... [NO_EFFECT] line 473, (@pre353 == wizzPandaCount[_tp]) ... unproven
+27/343 ... [NO_EFFECT] line 478, (@pre352 == gen0CreatedCount) ... unproven
+28/343 ... [NO_EFFECT] line 482, (@pre347 == _panda.generation) ... unproven
+29/343 ... [NO_EFFECT] line 482, (@pre348 == _panda.cooldownIndex) ... unproven
+30/343 ... [NO_EFFECT] line 482, (@pre349 == _panda.sireId) ... unproven
+31/343 ... [NO_EFFECT] line 482, (@pre350 == _panda.matronId) ... unproven
+32/343 ... [NO_EFFECT] line 482, (@pre351 == _panda.birthTime) ... unproven
+33/343 ... [NO_EFFECT] line 492, (@pre346 == newKittenId) ... unproven
+34/343 ... [NO_EFFECT] line 517, (@pre359 == secondsPerBlock) ... unproven
+35/343 ... [NO_EFFECT] line 608, (@pre333 == pandaIndexToApproved[_tokenId]) ... unproven
+36/343 ... [NO_EFFECT] line 615, (@pre334 == count) ... unproven
+37/343 ... [NO_EFFECT] line 715, (@pre223 == owner) ... unproven
+38/343 ... [NO_EFFECT] line 715, (@pre274 == owner) ... unproven
+39/343 ... [NO_EFFECT] line 715, (@pre32 == owner) ... unproven
+40/343 ... [NO_EFFECT] line 715, (@pre335 == owner) ... unproven
+41/343 ... [NO_EFFECT] line 715, (@pre79 == owner) ... unproven
+42/343 ... [NO_EFFECT] line 743, (@pre337 == result[resultIndex]) ... unproven
+43/343 ... [NO_EFFECT] line 744, (@pre336 == resultIndex) ... unproven
+44/343 ... [NO_EFFECT] line 847, (@pre318 == matronOwner) ... unproven
+45/343 ... [NO_EFFECT] line 848, (@pre317 == sireOwner) ... unproven
+46/343 ... [NO_EFFECT] line 860, (@pre320 == _kitten.cooldownEndBlock) ... unproven
+47/343 ... [NO_EFFECT] line 867, (@pre319 == _kitten.cooldownIndex) ... unproven
+48/343 ... [NO_EFFECT] line 879, (@pre321 == sireAllowedToAddress[_sireId]) ... unproven
+49/343 ... [NO_EFFECT] line 886, (@pre322 == autoBirthFee) ... unproven
+50/343 ... [NO_EFFECT] line 1016, (@pre325 == matron.siringWithId) ... unproven
+51/343 ... [NO_EFFECT] line 1028, (@pre324 == pregnantPandas) ... unproven
+52/343 ... [NO_EFFECT] line 1030, (@pre323 == childOwner[_matronId]) ... unproven
+53/343 ... [NO_EFFECT] line 1114, (@pre332 == sireId) ... unproven
+54/343 ... [NO_EFFECT] line 1118, (@pre331 == parentGen) ... unproven
+55/343 ... [NO_EFFECT] line 1120, (@pre330 == parentGen) ... unproven
+56/343 ... [NO_EFFECT] line 1130, (@pre329 == probability) ... unproven
+57/343 ... [NO_EFFECT] line 1132, (@pre328 == probability) ... unproven
+58/343 ... [NO_EFFECT] line 1141, (@pre327 == owner) ... unproven
+59/343 ... [NO_EFFECT] line 1156, (@pre326 == pregnantPandas) ... unproven
+60/343 ... [NO_EFFECT] line 1281, (@pre125 == seller) ... unproven
+61/343 ... [NO_EFFECT] line 1281, (@pre141 == seller) ... unproven
+62/343 ... [NO_EFFECT] line 1281, (@pre172 == seller) ... unproven
+63/343 ... [NO_EFFECT] line 1293, (@pre124 == sellerProceeds) ... unproven
+64/343 ... [NO_EFFECT] line 1293, (@pre140 == sellerProceeds) ... unproven
+65/343 ... [NO_EFFECT] line 1293, (@pre171 == sellerProceeds) ... unproven
+66/343 ... [NO_EFFECT] line 1310, (@pre123 == bidExcess) ... unproven
+67/343 ... [NO_EFFECT] line 1310, (@pre139 == bidExcess) ... unproven
+68/343 ... [NO_EFFECT] line 1310, (@pre170 == bidExcess) ... unproven
+69/343 ... [NO_EFFECT] line 1352, (@pre126 == secondsPassed) ... unproven
+70/343 ... [NO_EFFECT] line 1352, (@pre142 == secondsPassed) ... unproven
+71/343 ... [NO_EFFECT] line 1352, (@pre173 == secondsPassed) ... unproven
+72/343 ... [NO_EFFECT] line 1352, (@pre200 == secondsPassed) ... unproven
+73/343 ... [NO_EFFECT] line 1389, (@pre129 == totalPriceChange) ... unproven
+74/343 ... [NO_EFFECT] line 1389, (@pre145 == totalPriceChange) ... unproven
+75/343 ... [NO_EFFECT] line 1389, (@pre176 == totalPriceChange) ... unproven
+76/343 ... [NO_EFFECT] line 1389, (@pre203 == totalPriceChange) ... unproven
+77/343 ... [NO_EFFECT] line 1394, (@pre128 == currentPriceChange) ... unproven
+78/343 ... [NO_EFFECT] line 1394, (@pre144 == currentPriceChange) ... unproven
+79/343 ... [NO_EFFECT] line 1394, (@pre175 == currentPriceChange) ... unproven
+80/343 ... [NO_EFFECT] line 1394, (@pre202 == currentPriceChange) ... unproven
+81/343 ... [NO_EFFECT] line 1398, (@pre127 == currentPrice) ... unproven
+82/343 ... [NO_EFFECT] line 1398, (@pre143 == currentPrice) ... unproven
+83/343 ... [NO_EFFECT] line 1398, (@pre174 == currentPrice) ... unproven
+84/343 ... [NO_EFFECT] line 1398, (@pre201 == currentPrice) ... unproven
+85/343 ... [NO_EFFECT] line 1496, (@pre116 == nftAddress) ... unproven
+86/343 ... [NO_EFFECT] line 1496, (@pre137 == nftAddress) ... unproven
+87/343 ... [NO_EFFECT] line 1496, (@pre168 == nftAddress) ... unproven
+88/343 ... [NO_EFFECT] line 1496, (@pre191 == nftAddress) ... unproven
+89/343 ... [NO_EFFECT] line 1532, (@pre117 == auction.startedAt) ... unproven
+90/343 ... [NO_EFFECT] line 1532, (@pre118 == auction.duration) ... unproven
+91/343 ... [NO_EFFECT] line 1532, (@pre119 == auction.endingPrice) ... unproven
+92/343 ... [NO_EFFECT] line 1532, (@pre120 == auction.startingPrice) ... unproven
+93/343 ... [NO_EFFECT] line 1532, (@pre121 == auction.seller) ... unproven
+94/343 ... [NO_EFFECT] line 1532, (@pre192 == auction.startedAt) ... unproven
+95/343 ... [NO_EFFECT] line 1532, (@pre193 == auction.duration) ... unproven
+96/343 ... [NO_EFFECT] line 1532, (@pre194 == auction.endingPrice) ... unproven
+97/343 ... [NO_EFFECT] line 1532, (@pre195 == auction.startingPrice) ... unproven
+98/343 ... [NO_EFFECT] line 1532, (@pre196 == auction.seller) ... unproven
+99/343 ... [NO_EFFECT] line 1662, (@pre131 == auction.startedAt) ... unproven
+100/343 ... [NO_EFFECT] line 1662, (@pre132 == auction.duration) ... unproven
+101/343 ... [NO_EFFECT] line 1662, (@pre133 == auction.endingPrice) ... unproven
+102/343 ... [NO_EFFECT] line 1662, (@pre134 == auction.startingPrice) ... unproven
+103/343 ... [NO_EFFECT] line 1662, (@pre135 == auction.seller) ... unproven
+104/343 ... [NO_EFFECT] line 1682, (@pre136 == seller) ... unproven
+105/343 ... [NO_EFFECT] line 1743, (@pre147 == auction.startedAt) ... unproven
+106/343 ... [NO_EFFECT] line 1743, (@pre148 == auction.duration) ... unproven
+107/343 ... [NO_EFFECT] line 1743, (@pre149 == auction.endingPrice) ... unproven
+108/343 ... [NO_EFFECT] line 1743, (@pre150 == auction.startingPrice) ... unproven
+109/343 ... [NO_EFFECT] line 1743, (@pre151 == auction.seller) ... unproven
+110/343 ... [NO_EFFECT] line 1771, (@pre152 == auction.startedAt) ... unproven
+111/343 ... [NO_EFFECT] line 1771, (@pre153 == auction.duration) ... unproven
+112/343 ... [NO_EFFECT] line 1771, (@pre154 == auction.endingPrice) ... unproven
+113/343 ... [NO_EFFECT] line 1771, (@pre155 == auction.startingPrice) ... unproven
+114/343 ... [NO_EFFECT] line 1771, (@pre156 == auction.seller) ... unproven
+115/343 ... [NO_EFFECT] line 1789, (@pre159 == isGen0) ... unproven
+116/343 ... [NO_EFFECT] line 1796, (@pre158 == lastGen0SalePrices[(gen0SaleCount % 5)]) ... unproven
+117/343 ... [NO_EFFECT] line 1797, (@pre157 == gen0SaleCount) ... unproven
+118/343 ... [NO_EFFECT] line 1838, (@pre166 == i) ... unproven
+119/343 ... [NO_EFFECT] line 1839, (@pre167 == sum) ... unproven
+120/343 ... [NO_EFFECT] line 1874, (@pre178 == erc20ContractsSwitcher[_erc20address]) ... unproven
+121/343 ... [NO_EFFECT] line 1903, (@pre180 == auction.startedAt) ... unproven
+122/343 ... [NO_EFFECT] line 1903, (@pre181 == auction.duration) ... unproven
+123/343 ... [NO_EFFECT] line 1903, (@pre182 == auction.endingPrice) ... unproven
+124/343 ... [NO_EFFECT] line 1903, (@pre183 == auction.startingPrice) ... unproven
+125/343 ... [NO_EFFECT] line 1903, (@pre184 == auction.seller) ... unproven
+126/343 ... [NO_EFFECT] line 1912, (@pre179 == tokenIdToErc20Address[_tokenId]) ... unproven
+127/343 ... [NO_EFFECT] line 2237, (@pre314 == pandaOwner) ... unproven
+128/343 ... [NO_EFFECT] line 2239, (@pre313 == pandaOwner) ... unproven
+129/343 ... [NO_EFFECT] line 2308, (@pre316 == nextPrice) ... unproven
+130/343 ... [NO_EFFECT] line 2312, (@pre315 == nextPrice) ... unproven
+131/343 ... [NO_EFFECT] line 2405, (@pre303 == newContractAddress) ... unproven
+132/343 ... [NO_EFFECT] line 2442, (@pre310 == cooldownIndex) ... unproven
+133/343 ... [NO_EFFECT] line 2443, (@pre309 == nextActionAt) ... unproven
+134/343 ... [NO_EFFECT] line 2444, (@pre308 == siringWithId) ... unproven
+135/343 ... [NO_EFFECT] line 2445, (@pre307 == birthTime) ... unproven
+136/343 ... [NO_EFFECT] line 2446, (@pre306 == matronId) ... unproven
+137/343 ... [NO_EFFECT] line 2447, (@pre305 == sireId) ... unproven
+138/343 ... [NO_EFFECT] line 2448, (@pre304 == generation) ... unproven
+139/343 ... [NO_EFFECT] line 2469, (@pre312 == balance) ... unproven
+140/343 ... [NO_EFFECT] line 2471, (@pre311 == subtractFees) ... unproven
+141/343 ... [ASSIGN_CONST] line 4, (c == 0) ... unproven
+142/343 ... [ASSIGN_CONST] line 400, ((!(_from != _to)) || (ownershipTokenCount[_to] == 0)) ... unproven
+143/343 ... [ASSIGN_CONST] line 405, ((!(_from != _to)) || (ownershipTokenCount[_from] == 0)) ... unproven
+144/343 ... [ASSIGN_CONST] line 455, (cooldownIndex == 0) ... unproven
+145/343 ... [ASSIGN_CONST] line 457, (cooldownIndex == 0) ... unproven
+146/343 ... [ASSIGN_CONST] line 473, (wizzPandaCount[_tp] == 0) ... unproven
+147/343 ... [ASSIGN_CONST] line 478, (gen0CreatedCount == 0) ... unproven
+148/343 ... [ASSIGN_CONST] line 492, (newKittenId == 0) ... unproven
+149/343 ... [ASSIGN_CONST] line 744, (resultIndex == 0) ... unproven
+150/343 ... [ASSIGN_CONST] line 867, (_kitten.cooldownIndex == 0) ... unproven
+151/343 ... [ASSIGN_CONST] line 1028, (pregnantPandas == 0) ... unproven
+152/343 ... [ASSIGN_CONST] line 1130, (probability == 0) ... unproven
+153/343 ... [ASSIGN_CONST] line 1132, (probability == 0) ... unproven
+154/343 ... [ASSIGN_CONST] line 1156, (pregnantPandas == 0) ... unproven
+155/343 ... [ASSIGN_CONST] line 1293, ((!(msg.sender != seller)) || (sellerProceeds == 0)) ... unproven
+156/343 ... [ASSIGN_CONST] line 1310, ((!(msg.sender != seller)) || (bidExcess == 0)) ... unproven
+157/343 ... [ASSIGN_CONST] line 1352, (secondsPassed == 0) ... unproven
+158/343 ... [ASSIGN_CONST] line 1389, (totalPriceChange == 0) ... unproven
+159/343 ... [ASSIGN_CONST] line 1398, (currentPrice == 0) ... unproven
+160/343 ... [ASSIGN_CONST] line 1797, (gen0SaleCount == 0) ... unproven
+161/343 ... [ASSIGN_CONST] line 1838, (i == 0) ... unproven
+162/343 ... [ASSIGN_CONST] line 1839, (sum == 0) ... unproven
+163/343 ... [ASSIGN_CONST] line 2308, (nextPrice == 0) ... unproven
+164/343 ... [DEAD] line 3, false ... unproven
+165/343 ... [DEAD] line 149, false ... unproven
+166/343 ... [DEAD] line 155, false ... unproven
+167/343 ... [DEAD] line 161, false ... unproven
+168/343 ... [DEAD] line 167, false ... unproven
+169/343 ... [DEAD] line 177, false ... unproven
+170/343 ... [DEAD] line 185, false ... unproven
+171/343 ... [DEAD] line 193, false ... unproven
+172/343 ... [DEAD] line 387, false ... unproven
+173/343 ... [DEAD] line 388, false ... unproven
+174/343 ... [DEAD] line 404, false ... unproven
+175/343 ... [DEAD] line 412, false ... unproven
+176/343 ... [DEAD] line 438, false ... unproven
+177/343 ... [DEAD] line 439, false ... unproven
+178/343 ... [DEAD] line 440, false ... unproven
+179/343 ... [DEAD] line 446, false ... unproven
+180/343 ... [DEAD] line 448, false ... unproven
+181/343 ... [DEAD] line 452, false ... unproven
+182/343 ... [DEAD] line 458, false ... unproven
+183/343 ... [DEAD] line 462, false ... unproven
+184/343 ... [DEAD] line 467, false ... unproven
+185/343 ... [DEAD] line 472, false ... unproven
+186/343 ... [DEAD] line 476, false ... unproven
+187/343 ... [DEAD] line 477, false ... unproven
+188/343 ... [DEAD] line 496, false ... unproven
+189/343 ... [DEAD] line 499, false ... unproven
+190/343 ... [DEAD] line 509, false ... unproven
+191/343 ... [DEAD] line 516, false ... unproven
+192/343 ... [DEAD] line 632, false ... unproven
+193/343 ... [DEAD] line 636, false ... unproven
+194/343 ... [DEAD] line 640, false ... unproven
+195/343 ... [DEAD] line 641, false ... unproven
+196/343 ... [DEAD] line 644, false ... unproven
+197/343 ... [DEAD] line 647, false ... unproven
+198/343 ... [DEAD] line 664, false ... unproven
+199/343 ... [DEAD] line 667, false ... unproven
+200/343 ... [DEAD] line 670, false ... unproven
+201/343 ... [DEAD] line 689, false ... unproven
+202/343 ... [DEAD] line 693, false ... unproven
+203/343 ... [DEAD] line 695, false ... unproven
+204/343 ... [DEAD] line 696, false ... unproven
+205/343 ... [DEAD] line 699, false ... unproven
+206/343 ... [DEAD] line 717, false ... unproven
+207/343 ... [DEAD] line 727, false ... unproven
+208/343 ... [DEAD] line 734, false ... unproven
+209/343 ... [DEAD] line 741, false ... unproven
+210/343 ... [DEAD] line 742, false ... unproven
+211/343 ... [DEAD] line 866, false ... unproven
+212/343 ... [DEAD] line 878, false ... unproven
+213/343 ... [DEAD] line 902, false ... unproven
+214/343 ... [DEAD] line 904, false ... unproven
+215/343 ... [DEAD] line 913, false ... unproven
+216/343 ... [DEAD] line 934, false ... unproven
+217/343 ... [DEAD] line 939, false ... unproven
+218/343 ... [DEAD] line 942, false ... unproven
+219/343 ... [DEAD] line 948, false ... unproven
+220/343 ... [DEAD] line 953, false ... unproven
+221/343 ... [DEAD] line 956, false ... unproven
+222/343 ... [DEAD] line 961, false ... unproven
+223/343 ... [DEAD] line 977, false ... unproven
+224/343 ... [DEAD] line 990, false ... unproven
+225/343 ... [DEAD] line 991, false ... unproven
+226/343 ... [DEAD] line 994, false ... unproven
+227/343 ... [DEAD] line 995, false ... unproven
+228/343 ... [DEAD] line 1010, false ... unproven
+229/343 ... [DEAD] line 1019, false ... unproven
+230/343 ... [DEAD] line 1020, false ... unproven
+231/343 ... [DEAD] line 1033, false ... unproven
+232/343 ... [DEAD] line 1046, false ... unproven
+233/343 ... [DEAD] line 1049, false ... unproven
+234/343 ... [DEAD] line 1065, false ... unproven
+235/343 ... [DEAD] line 1071, false ... unproven
+236/343 ... [DEAD] line 1077, false ... unproven
+237/343 ... [DEAD] line 1080, false ... unproven
+238/343 ... [DEAD] line 1088, false ... unproven
+239/343 ... [DEAD] line 1108, false ... unproven
+240/343 ... [DEAD] line 1111, false ... unproven
+241/343 ... [DEAD] line 1119, false ... unproven
+242/343 ... [DEAD] line 1131, false ... unproven
+243/343 ... [DEAD] line 1136, false ... unproven
+244/343 ... [DEAD] line 1139, false ... unproven
+245/343 ... [DEAD] line 1142, false ... unproven
+246/343 ... [DEAD] line 1144, false ... unproven
+247/343 ... [DEAD] line 1241, false ... unproven
+248/343 ... [DEAD] line 1245, false ... unproven
+249/343 ... [DEAD] line 1273, false ... unproven
+250/343 ... [DEAD] line 1276, false ... unproven
+251/343 ... [DEAD] line 1277, false ... unproven
+252/343 ... [DEAD] line 1285, false ... unproven
+253/343 ... [DEAD] line 1288, false ... unproven
+254/343 ... [DEAD] line 1292, false ... unproven
+255/343 ... [DEAD] line 1303, false ... unproven
+256/343 ... [DEAD] line 1315, false ... unproven
+257/343 ... [DEAD] line 1318, false ... unproven
+258/343 ... [DEAD] line 1351, false ... unproven
+259/343 ... [DEAD] line 1355, false ... unproven
+260/343 ... [DEAD] line 1499, false ... unproven
+261/343 ... [DEAD] line 1526, false ... unproven
+262/343 ... [DEAD] line 1527, false ... unproven
+263/343 ... [DEAD] line 1528, false ... unproven
+264/343 ... [DEAD] line 1530, false ... unproven
+265/343 ... [DEAD] line 1531, false ... unproven
+266/343 ... [DEAD] line 1540, false ... unproven
+267/343 ... [DEAD] line 1552, false ... unproven
+268/343 ... [DEAD] line 1553, false ... unproven
+269/343 ... [DEAD] line 1617, false ... unproven
+270/343 ... [DEAD] line 1618, false ... unproven
+271/343 ... [DEAD] line 1656, false ... unproven
+272/343 ... [DEAD] line 1657, false ... unproven
+273/343 ... [DEAD] line 1658, false ... unproven
+274/343 ... [DEAD] line 1660, false ... unproven
+275/343 ... [DEAD] line 1661, false ... unproven
+276/343 ... [DEAD] line 1670, false ... unproven
+277/343 ... [DEAD] line 1681, false ... unproven
+278/343 ... [DEAD] line 1684, false ... unproven
+279/343 ... [DEAD] line 1687, false ... unproven
+280/343 ... [DEAD] line 1737, false ... unproven
+281/343 ... [DEAD] line 1738, false ... unproven
+282/343 ... [DEAD] line 1739, false ... unproven
+283/343 ... [DEAD] line 1741, false ... unproven
+284/343 ... [DEAD] line 1742, false ... unproven
+285/343 ... [DEAD] line 1751, false ... unproven
+286/343 ... [DEAD] line 1765, false ... unproven
+287/343 ... [DEAD] line 1766, false ... unproven
+288/343 ... [DEAD] line 1767, false ... unproven
+289/343 ... [DEAD] line 1769, false ... unproven
+290/343 ... [DEAD] line 1770, false ... unproven
+291/343 ... [DEAD] line 1779, false ... unproven
+292/343 ... [DEAD] line 1790, false ... unproven
+293/343 ... [DEAD] line 1791, false ... unproven
+294/343 ... [DEAD] line 1794, false ... unproven
+295/343 ... [DEAD] line 1804, false ... unproven
+296/343 ... [DEAD] line 1805, false ... unproven
+297/343 ... [DEAD] line 1870, false ... unproven
+298/343 ... [DEAD] line 1872, false ... unproven
+299/343 ... [DEAD] line 1894, false ... unproven
+300/343 ... [DEAD] line 1895, false ... unproven
+301/343 ... [DEAD] line 1896, false ... unproven
+302/343 ... [DEAD] line 1898, false ... unproven
+303/343 ... [DEAD] line 1900, false ... unproven
+304/343 ... [DEAD] line 1902, false ... unproven
+305/343 ... [DEAD] line 1911, false ... unproven
+306/343 ... [DEAD] line 1922, false ... unproven
+307/343 ... [DEAD] line 1926, false ... unproven
+308/343 ... [DEAD] line 1967, false ... unproven
+309/343 ... [DEAD] line 1968, false ... unproven
+310/343 ... [DEAD] line 2086, false ... unproven
+311/343 ... [DEAD] line 2090, false ... unproven
+312/343 ... [DEAD] line 2091, false ... unproven
+313/343 ... [DEAD] line 2118, false ... unproven
+314/343 ... [DEAD] line 2122, false ... unproven
+315/343 ... [DEAD] line 2123, false ... unproven
+316/343 ... [DEAD] line 2156, false ... unproven
+317/343 ... [DEAD] line 2157, false ... unproven
+318/343 ... [DEAD] line 2158, false ... unproven
+319/343 ... [DEAD] line 2183, false ... unproven
+320/343 ... [DEAD] line 2184, false ... unproven
+321/343 ... [DEAD] line 2185, false ... unproven
+322/343 ... [DEAD] line 2189, false ... unproven
+323/343 ... [DEAD] line 2193, false ... unproven
+324/343 ... [DEAD] line 2206, false ... unproven
+325/343 ... [DEAD] line 2238, false ... unproven
+326/343 ... [DEAD] line 2242, false ... unproven
+327/343 ... [DEAD] line 2254, false ... unproven
+328/343 ... [DEAD] line 2255, false ... unproven
+329/343 ... [DEAD] line 2286, false ... unproven
+330/343 ... [DEAD] line 2289, false ... unproven
+331/343 ... [DEAD] line 2293, false ... unproven
+332/343 ... [DEAD] line 2306, false ... unproven
+333/343 ... [DEAD] line 2311, false ... unproven
+334/343 ... [DEAD] line 2389, false ... unproven
+335/343 ... [DEAD] line 2394, false ... unproven
+336/343 ... [DEAD] line 2406, false ... unproven
+337/343 ... [DEAD] line 2415, false ... unproven
+338/343 ... [DEAD] line 2458, false ... unproven
+339/343 ... [DEAD] line 2459, false ... unproven
+340/343 ... [DEAD] line 2460, false ... unproven
+341/343 ... [DEAD] line 2461, false ... unproven
+342/343 ... [DEAD] line 2464, false ... unproven
+343/343 ... [DEAD] line 2473, false ... unproven
+took 14.722579s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 3, (a + b) : proven
+[2] [IO] line 4, (a + b) : proven
+[3] [IO] line 400, (ownershipTokenCount[_to] + 1) : unproven
+[4] [IO] line 405, (ownershipTokenCount[_from] - 1) : unproven
+[5] [IO] line 455, ((cooldownIndex / 10) + 1) : unproven
+[6] [IO] line 457, (cooldownIndex - 1) : unproven
+[7] [IO] line 473, (wizzPandaCount[_tp] + 1) : proven
+[8] [IO] line 478, (gen0CreatedCount + 1) : proven
+[9] [IO] line 492, (pandas.push(_panda) - 1) : proven
+[10] [IO] line 705, (pandas.length - 1) : unproven
+[11] [IO] line 744, (resultIndex + 1) : proven
+[12] [IO] line 860, ((cooldowns[_kitten.cooldownIndex] / secondsPerBlock) + block.number) : unproven
+[13] [IO] line 867, (_kitten.cooldownIndex + 1) : proven
+[14] [IO] line 961, (geneScience.getSex(_matron.genes) + geneScience.getSex(_sire.genes)) : unproven
+[15] [IO] line 1028, (pregnantPandas + 1) : unproven
+[16] [IO] line 1130, (((geneScience.getPureFromGene(matron.genes) + geneScience.getPureFromGene(sire.genes)) / 2) + _factors[0]) : unproven
+[17] [IO] line 1130, (geneScience.getPureFromGene(matron.genes) + geneScience.getPureFromGene(sire.genes)) : unproven
+[18] [IO] line 1131, ((parentGen + 1) * _factors[1]) : unproven
+[19] [IO] line 1131, (parentGen + 1) : unproven
+[20] [IO] line 1132, ((parentGen + 1) * _factors[1]) : unproven
+[21] [IO] line 1132, (parentGen + 1) : unproven
+[22] [IO] line 1132, (probability - ((parentGen + 1) * _factors[1])) : proven
+[23] [IO] line 1139, (block.number - 2) : unproven
+[24] [IO] line 1142, (parentGen + 1) : unproven
+[25] [IO] line 1156, (pregnantPandas - 1) : unproven
+[26] [IO] line 1293, (price - auctioneerCut) : unproven
+[27] [IO] line 1310, (_bidAmount - price) : proven
+[28] [IO] line 1352, (now - _auction.startedAt) : proven
+[29] [IO] line 1389, (int256(_endingPrice) - int256(_startingPrice)) : unproven
+[30] [IO] line 1394, (totalPriceChange * int256(_secondsPassed)) : unproven
+[31] [IO] line 1398, (int256(_startingPrice) + currentPriceChange) : unproven
+[32] [IO] line 1412, (_price * ownerCut) : unproven
+[33] [IO] line 1797, (gen0SaleCount + 1) : unproven
+[34] [IO] line 1838, (i + 1) : proven
+[35] [IO] line 1839, (sum + lastGen0SalePrices[i]) : unproven
+[36] [IO] line 2189, (currentPrice + autoBirthFee) : unproven
+[37] [IO] line 2308, (avePrice + (avePrice / 2)) : unproven
+[38] [IO] line 2471, ((pregnantPandas + 1) * autoBirthFee) : unproven
+[39] [IO] line 2471, (pregnantPandas + 1) : unproven
+[40] [IO] line 2475, (balance - subtractFees) : proven
+[41] [ETH_LEAK] line 1160, msg.sender.send(autoBirthFee); : unproven
+[42] [ETH_LEAK] line 1303, seller.transfer(sellerProceeds); : unproven
+[43] [ETH_LEAK] line 1315, msg.sender.transfer(bidExcess); : unproven
+[44] [ETH_LEAK] line 1504, res = nftAddress.send(this.balance); : unproven
+[45] [ETH_LEAK] line 2475, cfoAddress.send((balance - subtractFees)); : unproven
+[46] [RE_EL] line 1160, msg.sender.send(autoBirthFee); : unproven
+[47] [RE_EL] line 1303, seller.transfer(sellerProceeds); : unproven
+[48] [RE_EL] line 1315, msg.sender.transfer(bidExcess); : unproven
+[49] [RE_EL] line 1504, res = nftAddress.send(this.balance); : unproven
+[50] [RE_EL] line 2475, cfoAddress.send((balance - subtractFees)); : unproven
+[51] [RE] line 176, (PandaCore, setCEO, [address]) : unproven
+[52] [RE] line 184, (PandaCore, setCFO, [address]) : unproven
+[53] [RE] line 192, (PandaCore, setCOO, [address]) : unproven
+[54] [RE] line 214, (PandaCore, pause, []) : unproven
+[55] [RE] line 386, (PandaCore, setTotalWizzPandaOf, [uint256, uint256]) : unproven
+[56] [RE] line 424, (PandaCore, _createPanda, [uint256, uint256, uint256, uint256[2], address]) : unproven
+[57] [RE] line 515, (PandaCore, setSecondsPerBlock, [uint256]) : unproven
+[58] [RE] line 624, (PandaCore, transfer, [address, uint256]) : unproven
+[59] [RE] line 656, (PandaCore, approve, [address, uint256]) : unproven
+[60] [RE] line 680, (PandaCore, transferFrom, [address, address, uint256]) : unproven
+[61] [RE] line 823, (PandaCore, setGeneScienceAddress, [address]) : unproven
+[62] [RE] line 875, (PandaCore, approveSiring, [address, uint256]) : unproven
+[63] [RE] line 885, (PandaCore, setAutoBirthFee, [uint256]) : unproven
+[64] [RE] line 1008, (PandaCore, _breedWith, [uint256, uint256, address]) : unproven
+[65] [RE] line 1099, (PandaCore, giveBirth, [uint256, uint256[2], uint256[2]]) : unproven
+[66] [RE] line 2040, (PandaCore, setSaleAuctionAddress, [address]) : unproven
+[67] [RE] line 2050, (PandaCore, setSaleAuctionERC20Address, [address]) : unproven
+[68] [RE] line 2062, (PandaCore, setSiringAuctionAddress, [address]) : unproven
+[69] [RE] line 2074, (PandaCore, createSaleAuction, [uint256, uint256, uint256, uint256]) : unproven
+[70] [RE] line 2105, (PandaCore, createSaleAuctionERC20, [uint256, address, uint256, uint256, uint256]) : unproven
+[71] [RE] line 2144, (PandaCore, createSiringAuction, [uint256, uint256, uint256, uint256]) : unproven
+[72] [RE] line 2285, (PandaCore, createGen0Auction, [uint256]) : unproven
+[73] [RE] line 2387, (PandaCore, init, []) : unproven
+[74] [RE] line 2403, (PandaCore, setNewAddress, [address]) : unproven
+[75] [RE] line 2457, (PandaCore, unpause, []) : unproven
+[76] [RE] line 2468, (PandaCore, withdrawBalance, []) : unproven
+[77] [TX_ORG] line 149, assume((msg.sender == ceoAddress)); : proven
+[78] [TX_ORG] line 155, assume((msg.sender == cfoAddress)); : proven
+[79] [TX_ORG] line 161, assume((msg.sender == cooAddress)); : proven
+[80] [TX_ORG] line 167, assume((msg.sender == cooAddress)); : proven
+[81] [TX_ORG] line 168, assume((msg.sender == ceoAddress)); : proven
+[82] [TX_ORG] line 169, assume((msg.sender == cfoAddress)); : proven
+[83] [TX_ORG] line 177, assume((_newCEO != address(0))); : proven
+[84] [TX_ORG] line 185, assume((_newCFO != address(0))); : proven
+[85] [TX_ORG] line 193, assume((_newCOO != address(0))); : proven
+[86] [TX_ORG] line 404, assume((_from != address(0))); : proven
+[87] [TX_ORG] line 632, assume((_to != address(0))); : proven
+[88] [TX_ORG] line 636, assume((_to != address(this))); : proven
+[89] [TX_ORG] line 640, assume((_to != address(saleAuction))); : proven
+[90] [TX_ORG] line 641, assume((_to != address(siringAuction))); : proven
+[91] [TX_ORG] line 689, assume((_to != address(0))); : proven
+[92] [TX_ORG] line 693, assume((_to != address(this))); : proven
+[93] [TX_ORG] line 717, assume((owner != address(0))); : proven
+[94] [TX_ORG] line 742, assume((pandaIndexToOwner[catId] == _owner)); : proven
+[95] [TX_ORG] line 1499, assume((msg.sender == owner)); : proven
+[96] [TX_ORG] line 1500, assume((msg.sender == nftAddress)); : proven
+[97] [TX_ORG] line 1660, assume((msg.sender == address(nonFungibleContract))); : proven
+[98] [TX_ORG] line 1681, assume((msg.sender == address(nonFungibleContract))); : proven
+[99] [TX_ORG] line 1741, assume((msg.sender == address(nonFungibleContract))); : proven
+[100] [TX_ORG] line 1769, assume((msg.sender == address(nonFungibleContract))); : proven
+[101] [TX_ORG] line 1804, assume((msg.sender == address(nonFungibleContract))); : proven
+[102] [TX_ORG] line 1870, assume((msg.sender == address(nonFungibleContract))); : proven
+[103] [TX_ORG] line 1872, assume((_erc20address != address(0))); : proven
+[104] [TX_ORG] line 1898, assume((msg.sender == address(nonFungibleContract))); : proven
+[105] [TX_ORG] line 1968, assume((msg.sender == address(nonFungibleContract))); : proven
+[106] [TX_ORG] line 2238, assume((pandaOwner == address(0))); : proven
+[107] [TX_ORG] line 2415, assume((msg.sender == address(saleAuction))); : proven
+[108] [TX_ORG] line 2416, assume((msg.sender == address(siringAuction))); : proven
+[109] [TX_ORG] line 2461, assume((newContractAddress == address(0))); : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 4, (@pre363 == c) : unproven
+[2] [NO_EFFECT] line 179, (@pre360 == ceoAddress) : unproven
+[3] [NO_EFFECT] line 187, (@pre361 == cfoAddress) : unproven
+[4] [NO_EFFECT] line 195, (@pre362 == cooAddress) : unproven
+[5] [NO_EFFECT] line 389, (@pre342 == wizzPandaQuota[_tp]) : unproven
+[6] [NO_EFFECT] line 400, (@pre233 == ownershipTokenCount[_to]) : unproven
+[7] [NO_EFFECT] line 400, (@pre284 == ownershipTokenCount[_to]) : unproven
+[8] [NO_EFFECT] line 400, (@pre345 == ownershipTokenCount[_to]) : unproven
+[9] [NO_EFFECT] line 400, (@pre42 == ownershipTokenCount[_to]) : unproven
+[10] [NO_EFFECT] line 400, (@pre89 == ownershipTokenCount[_to]) : unproven
+[11] [NO_EFFECT] line 402, (@pre232 == pandaIndexToOwner[_tokenId]) : unproven
+[12] [NO_EFFECT] line 402, (@pre283 == pandaIndexToOwner[_tokenId]) : unproven
+[13] [NO_EFFECT] line 402, (@pre344 == pandaIndexToOwner[_tokenId]) : unproven
+[14] [NO_EFFECT] line 402, (@pre41 == pandaIndexToOwner[_tokenId]) : unproven
+[15] [NO_EFFECT] line 402, (@pre88 == pandaIndexToOwner[_tokenId]) : unproven
+[16] [NO_EFFECT] line 405, (@pre231 == ownershipTokenCount[_from]) : unproven
+[17] [NO_EFFECT] line 405, (@pre282 == ownershipTokenCount[_from]) : unproven
+[18] [NO_EFFECT] line 405, (@pre343 == ownershipTokenCount[_from]) : unproven
+[19] [NO_EFFECT] line 405, (@pre40 == ownershipTokenCount[_from]) : unproven
+[20] [NO_EFFECT] line 405, (@pre87 == ownershipTokenCount[_from]) : unproven
+[21] [NO_EFFECT] line 447, (@pre358 == pureDegree) : unproven
+[22] [NO_EFFECT] line 451, (@pre357 == cooldownIndex) : unproven
+[23] [NO_EFFECT] line 453, (@pre356 == cooldownIndex) : unproven
+[24] [NO_EFFECT] line 455, (@pre355 == cooldownIndex) : unproven
+[25] [NO_EFFECT] line 457, (@pre354 == cooldownIndex) : unproven
+[26] [NO_EFFECT] line 473, (@pre353 == wizzPandaCount[_tp]) : unproven
+[27] [NO_EFFECT] line 478, (@pre352 == gen0CreatedCount) : unproven
+[28] [NO_EFFECT] line 482, (@pre347 == _panda.generation) : unproven
+[29] [NO_EFFECT] line 482, (@pre348 == _panda.cooldownIndex) : unproven
+[30] [NO_EFFECT] line 482, (@pre349 == _panda.sireId) : unproven
+[31] [NO_EFFECT] line 482, (@pre350 == _panda.matronId) : unproven
+[32] [NO_EFFECT] line 482, (@pre351 == _panda.birthTime) : unproven
+[33] [NO_EFFECT] line 492, (@pre346 == newKittenId) : unproven
+[34] [NO_EFFECT] line 517, (@pre359 == secondsPerBlock) : unproven
+[35] [NO_EFFECT] line 608, (@pre333 == pandaIndexToApproved[_tokenId]) : unproven
+[36] [NO_EFFECT] line 615, (@pre334 == count) : unproven
+[37] [NO_EFFECT] line 715, (@pre223 == owner) : unproven
+[38] [NO_EFFECT] line 715, (@pre274 == owner) : unproven
+[39] [NO_EFFECT] line 715, (@pre32 == owner) : unproven
+[40] [NO_EFFECT] line 715, (@pre335 == owner) : unproven
+[41] [NO_EFFECT] line 715, (@pre79 == owner) : unproven
+[42] [NO_EFFECT] line 743, (@pre337 == result[resultIndex]) : unproven
+[43] [NO_EFFECT] line 744, (@pre336 == resultIndex) : unproven
+[44] [NO_EFFECT] line 847, (@pre318 == matronOwner) : unproven
+[45] [NO_EFFECT] line 848, (@pre317 == sireOwner) : unproven
+[46] [NO_EFFECT] line 860, (@pre320 == _kitten.cooldownEndBlock) : unproven
+[47] [NO_EFFECT] line 867, (@pre319 == _kitten.cooldownIndex) : unproven
+[48] [NO_EFFECT] line 879, (@pre321 == sireAllowedToAddress[_sireId]) : unproven
+[49] [NO_EFFECT] line 886, (@pre322 == autoBirthFee) : unproven
+[50] [NO_EFFECT] line 1016, (@pre325 == matron.siringWithId) : unproven
+[51] [NO_EFFECT] line 1028, (@pre324 == pregnantPandas) : unproven
+[52] [NO_EFFECT] line 1030, (@pre323 == childOwner[_matronId]) : unproven
+[53] [NO_EFFECT] line 1114, (@pre332 == sireId) : unproven
+[54] [NO_EFFECT] line 1118, (@pre331 == parentGen) : unproven
+[55] [NO_EFFECT] line 1120, (@pre330 == parentGen) : unproven
+[56] [NO_EFFECT] line 1130, (@pre329 == probability) : unproven
+[57] [NO_EFFECT] line 1132, (@pre328 == probability) : unproven
+[58] [NO_EFFECT] line 1141, (@pre327 == owner) : unproven
+[59] [NO_EFFECT] line 1156, (@pre326 == pregnantPandas) : unproven
+[60] [NO_EFFECT] line 1281, (@pre125 == seller) : unproven
+[61] [NO_EFFECT] line 1281, (@pre141 == seller) : unproven
+[62] [NO_EFFECT] line 1281, (@pre172 == seller) : unproven
+[63] [NO_EFFECT] line 1293, (@pre124 == sellerProceeds) : unproven
+[64] [NO_EFFECT] line 1293, (@pre140 == sellerProceeds) : unproven
+[65] [NO_EFFECT] line 1293, (@pre171 == sellerProceeds) : unproven
+[66] [NO_EFFECT] line 1310, (@pre123 == bidExcess) : unproven
+[67] [NO_EFFECT] line 1310, (@pre139 == bidExcess) : unproven
+[68] [NO_EFFECT] line 1310, (@pre170 == bidExcess) : unproven
+[69] [NO_EFFECT] line 1352, (@pre126 == secondsPassed) : unproven
+[70] [NO_EFFECT] line 1352, (@pre142 == secondsPassed) : unproven
+[71] [NO_EFFECT] line 1352, (@pre173 == secondsPassed) : unproven
+[72] [NO_EFFECT] line 1352, (@pre200 == secondsPassed) : unproven
+[73] [NO_EFFECT] line 1389, (@pre129 == totalPriceChange) : unproven
+[74] [NO_EFFECT] line 1389, (@pre145 == totalPriceChange) : unproven
+[75] [NO_EFFECT] line 1389, (@pre176 == totalPriceChange) : unproven
+[76] [NO_EFFECT] line 1389, (@pre203 == totalPriceChange) : unproven
+[77] [NO_EFFECT] line 1394, (@pre128 == currentPriceChange) : unproven
+[78] [NO_EFFECT] line 1394, (@pre144 == currentPriceChange) : unproven
+[79] [NO_EFFECT] line 1394, (@pre175 == currentPriceChange) : unproven
+[80] [NO_EFFECT] line 1394, (@pre202 == currentPriceChange) : unproven
+[81] [NO_EFFECT] line 1398, (@pre127 == currentPrice) : unproven
+[82] [NO_EFFECT] line 1398, (@pre143 == currentPrice) : unproven
+[83] [NO_EFFECT] line 1398, (@pre174 == currentPrice) : unproven
+[84] [NO_EFFECT] line 1398, (@pre201 == currentPrice) : unproven
+[85] [NO_EFFECT] line 1496, (@pre116 == nftAddress) : unproven
+[86] [NO_EFFECT] line 1496, (@pre137 == nftAddress) : unproven
+[87] [NO_EFFECT] line 1496, (@pre168 == nftAddress) : unproven
+[88] [NO_EFFECT] line 1496, (@pre191 == nftAddress) : unproven
+[89] [NO_EFFECT] line 1532, (@pre117 == auction.startedAt) : unproven
+[90] [NO_EFFECT] line 1532, (@pre118 == auction.duration) : unproven
+[91] [NO_EFFECT] line 1532, (@pre119 == auction.endingPrice) : unproven
+[92] [NO_EFFECT] line 1532, (@pre120 == auction.startingPrice) : unproven
+[93] [NO_EFFECT] line 1532, (@pre121 == auction.seller) : unproven
+[94] [NO_EFFECT] line 1532, (@pre192 == auction.startedAt) : unproven
+[95] [NO_EFFECT] line 1532, (@pre193 == auction.duration) : unproven
+[96] [NO_EFFECT] line 1532, (@pre194 == auction.endingPrice) : unproven
+[97] [NO_EFFECT] line 1532, (@pre195 == auction.startingPrice) : unproven
+[98] [NO_EFFECT] line 1532, (@pre196 == auction.seller) : unproven
+[99] [NO_EFFECT] line 1662, (@pre131 == auction.startedAt) : unproven
+[100] [NO_EFFECT] line 1662, (@pre132 == auction.duration) : unproven
+[101] [NO_EFFECT] line 1662, (@pre133 == auction.endingPrice) : unproven
+[102] [NO_EFFECT] line 1662, (@pre134 == auction.startingPrice) : unproven
+[103] [NO_EFFECT] line 1662, (@pre135 == auction.seller) : unproven
+[104] [NO_EFFECT] line 1682, (@pre136 == seller) : unproven
+[105] [NO_EFFECT] line 1743, (@pre147 == auction.startedAt) : unproven
+[106] [NO_EFFECT] line 1743, (@pre148 == auction.duration) : unproven
+[107] [NO_EFFECT] line 1743, (@pre149 == auction.endingPrice) : unproven
+[108] [NO_EFFECT] line 1743, (@pre150 == auction.startingPrice) : unproven
+[109] [NO_EFFECT] line 1743, (@pre151 == auction.seller) : unproven
+[110] [NO_EFFECT] line 1771, (@pre152 == auction.startedAt) : unproven
+[111] [NO_EFFECT] line 1771, (@pre153 == auction.duration) : unproven
+[112] [NO_EFFECT] line 1771, (@pre154 == auction.endingPrice) : unproven
+[113] [NO_EFFECT] line 1771, (@pre155 == auction.startingPrice) : unproven
+[114] [NO_EFFECT] line 1771, (@pre156 == auction.seller) : unproven
+[115] [NO_EFFECT] line 1789, (@pre159 == isGen0) : unproven
+[116] [NO_EFFECT] line 1796, (@pre158 == lastGen0SalePrices[(gen0SaleCount % 5)]) : unproven
+[117] [NO_EFFECT] line 1797, (@pre157 == gen0SaleCount) : unproven
+[118] [NO_EFFECT] line 1838, (@pre166 == i) : unproven
+[119] [NO_EFFECT] line 1839, (@pre167 == sum) : unproven
+[120] [NO_EFFECT] line 1874, (@pre178 == erc20ContractsSwitcher[_erc20address]) : unproven
+[121] [NO_EFFECT] line 1903, (@pre180 == auction.startedAt) : unproven
+[122] [NO_EFFECT] line 1903, (@pre181 == auction.duration) : unproven
+[123] [NO_EFFECT] line 1903, (@pre182 == auction.endingPrice) : unproven
+[124] [NO_EFFECT] line 1903, (@pre183 == auction.startingPrice) : unproven
+[125] [NO_EFFECT] line 1903, (@pre184 == auction.seller) : unproven
+[126] [NO_EFFECT] line 1912, (@pre179 == tokenIdToErc20Address[_tokenId]) : unproven
+[127] [NO_EFFECT] line 2237, (@pre314 == pandaOwner) : unproven
+[128] [NO_EFFECT] line 2239, (@pre313 == pandaOwner) : unproven
+[129] [NO_EFFECT] line 2308, (@pre316 == nextPrice) : unproven
+[130] [NO_EFFECT] line 2312, (@pre315 == nextPrice) : unproven
+[131] [NO_EFFECT] line 2405, (@pre303 == newContractAddress) : unproven
+[132] [NO_EFFECT] line 2442, (@pre310 == cooldownIndex) : unproven
+[133] [NO_EFFECT] line 2443, (@pre309 == nextActionAt) : unproven
+[134] [NO_EFFECT] line 2444, (@pre308 == siringWithId) : unproven
+[135] [NO_EFFECT] line 2445, (@pre307 == birthTime) : unproven
+[136] [NO_EFFECT] line 2446, (@pre306 == matronId) : unproven
+[137] [NO_EFFECT] line 2447, (@pre305 == sireId) : unproven
+[138] [NO_EFFECT] line 2448, (@pre304 == generation) : unproven
+[139] [NO_EFFECT] line 2469, (@pre312 == balance) : unproven
+[140] [NO_EFFECT] line 2471, (@pre311 == subtractFees) : unproven
+[141] [ASSIGN_CONST] line 4, (c == 0) : unproven
+[142] [ASSIGN_CONST] line 400, ((!(_from != _to)) || (ownershipTokenCount[_to] == 0)) : unproven
+[143] [ASSIGN_CONST] line 405, ((!(_from != _to)) || (ownershipTokenCount[_from] == 0)) : unproven
+[144] [ASSIGN_CONST] line 455, (cooldownIndex == 0) : unproven
+[145] [ASSIGN_CONST] line 457, (cooldownIndex == 0) : unproven
+[146] [ASSIGN_CONST] line 473, (wizzPandaCount[_tp] == 0) : unproven
+[147] [ASSIGN_CONST] line 478, (gen0CreatedCount == 0) : unproven
+[148] [ASSIGN_CONST] line 492, (newKittenId == 0) : unproven
+[149] [ASSIGN_CONST] line 744, (resultIndex == 0) : unproven
+[150] [ASSIGN_CONST] line 867, (_kitten.cooldownIndex == 0) : unproven
+[151] [ASSIGN_CONST] line 1028, (pregnantPandas == 0) : unproven
+[152] [ASSIGN_CONST] line 1130, (probability == 0) : unproven
+[153] [ASSIGN_CONST] line 1132, (probability == 0) : unproven
+[154] [ASSIGN_CONST] line 1156, (pregnantPandas == 0) : unproven
+[155] [ASSIGN_CONST] line 1293, ((!(msg.sender != seller)) || (sellerProceeds == 0)) : unproven
+[156] [ASSIGN_CONST] line 1310, ((!(msg.sender != seller)) || (bidExcess == 0)) : unproven
+[157] [ASSIGN_CONST] line 1352, (secondsPassed == 0) : unproven
+[158] [ASSIGN_CONST] line 1389, (totalPriceChange == 0) : unproven
+[159] [ASSIGN_CONST] line 1398, (currentPrice == 0) : unproven
+[160] [ASSIGN_CONST] line 1797, (gen0SaleCount == 0) : unproven
+[161] [ASSIGN_CONST] line 1838, (i == 0) : unproven
+[162] [ASSIGN_CONST] line 1839, (sum == 0) : unproven
+[163] [ASSIGN_CONST] line 2308, (nextPrice == 0) : unproven
+[164] [DEAD] line 3, false : unproven
+[165] [DEAD] line 149, false : unproven
+[166] [DEAD] line 155, false : unproven
+[167] [DEAD] line 161, false : unproven
+[168] [DEAD] line 167, false : unproven
+[169] [DEAD] line 177, false : unproven
+[170] [DEAD] line 185, false : unproven
+[171] [DEAD] line 193, false : unproven
+[172] [DEAD] line 387, false : unproven
+[173] [DEAD] line 388, false : unproven
+[174] [DEAD] line 404, false : unproven
+[175] [DEAD] line 412, false : unproven
+[176] [DEAD] line 438, false : unproven
+[177] [DEAD] line 439, false : unproven
+[178] [DEAD] line 440, false : unproven
+[179] [DEAD] line 446, false : unproven
+[180] [DEAD] line 448, false : unproven
+[181] [DEAD] line 452, false : unproven
+[182] [DEAD] line 458, false : unproven
+[183] [DEAD] line 462, false : unproven
+[184] [DEAD] line 467, false : unproven
+[185] [DEAD] line 472, false : unproven
+[186] [DEAD] line 476, false : unproven
+[187] [DEAD] line 477, false : unproven
+[188] [DEAD] line 496, false : unproven
+[189] [DEAD] line 499, false : unproven
+[190] [DEAD] line 509, false : unproven
+[191] [DEAD] line 516, false : unproven
+[192] [DEAD] line 632, false : unproven
+[193] [DEAD] line 636, false : unproven
+[194] [DEAD] line 640, false : unproven
+[195] [DEAD] line 641, false : unproven
+[196] [DEAD] line 644, false : unproven
+[197] [DEAD] line 647, false : unproven
+[198] [DEAD] line 664, false : unproven
+[199] [DEAD] line 667, false : unproven
+[200] [DEAD] line 670, false : unproven
+[201] [DEAD] line 689, false : unproven
+[202] [DEAD] line 693, false : unproven
+[203] [DEAD] line 695, false : unproven
+[204] [DEAD] line 696, false : unproven
+[205] [DEAD] line 699, false : unproven
+[206] [DEAD] line 717, false : unproven
+[207] [DEAD] line 727, false : unproven
+[208] [DEAD] line 734, false : unproven
+[209] [DEAD] line 741, false : unproven
+[210] [DEAD] line 742, false : unproven
+[211] [DEAD] line 866, false : unproven
+[212] [DEAD] line 878, false : unproven
+[213] [DEAD] line 902, false : unproven
+[214] [DEAD] line 904, false : unproven
+[215] [DEAD] line 913, false : unproven
+[216] [DEAD] line 934, false : unproven
+[217] [DEAD] line 939, false : unproven
+[218] [DEAD] line 942, false : unproven
+[219] [DEAD] line 948, false : unproven
+[220] [DEAD] line 953, false : unproven
+[221] [DEAD] line 956, false : unproven
+[222] [DEAD] line 961, false : unproven
+[223] [DEAD] line 977, false : unproven
+[224] [DEAD] line 990, false : unproven
+[225] [DEAD] line 991, false : unproven
+[226] [DEAD] line 994, false : unproven
+[227] [DEAD] line 995, false : unproven
+[228] [DEAD] line 1010, false : unproven
+[229] [DEAD] line 1019, false : unproven
+[230] [DEAD] line 1020, false : unproven
+[231] [DEAD] line 1033, false : unproven
+[232] [DEAD] line 1046, false : unproven
+[233] [DEAD] line 1049, false : unproven
+[234] [DEAD] line 1065, false : unproven
+[235] [DEAD] line 1071, false : unproven
+[236] [DEAD] line 1077, false : unproven
+[237] [DEAD] line 1080, false : unproven
+[238] [DEAD] line 1088, false : unproven
+[239] [DEAD] line 1108, false : unproven
+[240] [DEAD] line 1111, false : unproven
+[241] [DEAD] line 1119, false : unproven
+[242] [DEAD] line 1131, false : unproven
+[243] [DEAD] line 1136, false : unproven
+[244] [DEAD] line 1139, false : unproven
+[245] [DEAD] line 1142, false : unproven
+[246] [DEAD] line 1144, false : unproven
+[247] [DEAD] line 1241, false : unproven
+[248] [DEAD] line 1245, false : unproven
+[249] [DEAD] line 1273, false : unproven
+[250] [DEAD] line 1276, false : unproven
+[251] [DEAD] line 1277, false : unproven
+[252] [DEAD] line 1285, false : unproven
+[253] [DEAD] line 1288, false : unproven
+[254] [DEAD] line 1292, false : unproven
+[255] [DEAD] line 1303, false : unproven
+[256] [DEAD] line 1315, false : unproven
+[257] [DEAD] line 1318, false : unproven
+[258] [DEAD] line 1351, false : unproven
+[259] [DEAD] line 1355, false : unproven
+[260] [DEAD] line 1499, false : unproven
+[261] [DEAD] line 1526, false : unproven
+[262] [DEAD] line 1527, false : unproven
+[263] [DEAD] line 1528, false : unproven
+[264] [DEAD] line 1530, false : unproven
+[265] [DEAD] line 1531, false : unproven
+[266] [DEAD] line 1540, false : unproven
+[267] [DEAD] line 1552, false : unproven
+[268] [DEAD] line 1553, false : unproven
+[269] [DEAD] line 1617, false : unproven
+[270] [DEAD] line 1618, false : unproven
+[271] [DEAD] line 1656, false : unproven
+[272] [DEAD] line 1657, false : unproven
+[273] [DEAD] line 1658, false : unproven
+[274] [DEAD] line 1660, false : unproven
+[275] [DEAD] line 1661, false : unproven
+[276] [DEAD] line 1670, false : unproven
+[277] [DEAD] line 1681, false : unproven
+[278] [DEAD] line 1684, false : unproven
+[279] [DEAD] line 1687, false : unproven
+[280] [DEAD] line 1737, false : unproven
+[281] [DEAD] line 1738, false : unproven
+[282] [DEAD] line 1739, false : unproven
+[283] [DEAD] line 1741, false : unproven
+[284] [DEAD] line 1742, false : unproven
+[285] [DEAD] line 1751, false : unproven
+[286] [DEAD] line 1765, false : unproven
+[287] [DEAD] line 1766, false : unproven
+[288] [DEAD] line 1767, false : unproven
+[289] [DEAD] line 1769, false : unproven
+[290] [DEAD] line 1770, false : unproven
+[291] [DEAD] line 1779, false : unproven
+[292] [DEAD] line 1790, false : unproven
+[293] [DEAD] line 1791, false : unproven
+[294] [DEAD] line 1794, false : unproven
+[295] [DEAD] line 1804, false : unproven
+[296] [DEAD] line 1805, false : unproven
+[297] [DEAD] line 1870, false : unproven
+[298] [DEAD] line 1872, false : unproven
+[299] [DEAD] line 1894, false : unproven
+[300] [DEAD] line 1895, false : unproven
+[301] [DEAD] line 1896, false : unproven
+[302] [DEAD] line 1898, false : unproven
+[303] [DEAD] line 1900, false : unproven
+[304] [DEAD] line 1902, false : unproven
+[305] [DEAD] line 1911, false : unproven
+[306] [DEAD] line 1922, false : unproven
+[307] [DEAD] line 1926, false : unproven
+[308] [DEAD] line 1967, false : unproven
+[309] [DEAD] line 1968, false : unproven
+[310] [DEAD] line 2086, false : unproven
+[311] [DEAD] line 2090, false : unproven
+[312] [DEAD] line 2091, false : unproven
+[313] [DEAD] line 2118, false : unproven
+[314] [DEAD] line 2122, false : unproven
+[315] [DEAD] line 2123, false : unproven
+[316] [DEAD] line 2156, false : unproven
+[317] [DEAD] line 2157, false : unproven
+[318] [DEAD] line 2158, false : unproven
+[319] [DEAD] line 2183, false : unproven
+[320] [DEAD] line 2184, false : unproven
+[321] [DEAD] line 2185, false : unproven
+[322] [DEAD] line 2189, false : unproven
+[323] [DEAD] line 2193, false : unproven
+[324] [DEAD] line 2206, false : unproven
+[325] [DEAD] line 2238, false : unproven
+[326] [DEAD] line 2242, false : unproven
+[327] [DEAD] line 2254, false : unproven
+[328] [DEAD] line 2255, false : unproven
+[329] [DEAD] line 2286, false : unproven
+[330] [DEAD] line 2289, false : unproven
+[331] [DEAD] line 2293, false : unproven
+[332] [DEAD] line 2306, false : unproven
+[333] [DEAD] line 2311, false : unproven
+[334] [DEAD] line 2389, false : unproven
+[335] [DEAD] line 2394, false : unproven
+[336] [DEAD] line 2406, false : unproven
+[337] [DEAD] line 2415, false : unproven
+[338] [DEAD] line 2458, false : unproven
+[339] [DEAD] line 2459, false : unproven
+[340] [DEAD] line 2460, false : unproven
+[341] [DEAD] line 2461, false : unproven
+[342] [DEAD] line 2464, false : unproven
+[343] [DEAD] line 2473, false : unproven
+
+============ Statistics ============
+# Iter                    : 1
+# Alarm / Query           : 64 / 109
+- integer over/underflow  : 28 / 40
+- kill-anyone             : 0 / 0
+- ether-leaking           : 5 / 5
+- reentrancy-leaking      : 5 / 5
+- reentrancy              : 26 / 26
+- tx.origin               : 0 / 33
+
+Time Elapsed (Real) : 265.392138958
+Time Elapsed (CPU)  : 264.943592

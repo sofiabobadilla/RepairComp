@@ -1,0 +1,520 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 21
+[INFO] reachable : 18
+[INFO] Generating Paths ... took 0.00316s
+[INFO] # path : 118
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.012698s
+Generating VCs ... took 0.060429s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.232374
+[
+0 -> true
+47 -> true
+]
+[
+]
+1/23 ... [IO] line 3, (a + b) ... proven
+2/23 ... [IO] line 4, (a + b) ... proven
+3/23 ... [IO] line 72, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+4/23 ... [IO] line 73, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+5/23 ... [IO] line 82, (roundIndex + 1) ... proven
+6/23 ... [IO] line 83, ((roundIndex + 1) * blocksPerRound) ... proven
+7/23 ... [IO] line 83, (roundIndex + 1) ... proven
+8/23 ... [IO] line 84, (((roundIndex + 1) * blocksPerRound) + subpotIndex) ... unproven
+9/23 ... [IO] line 84, ((roundIndex + 1) * blocksPerRound) ... proven
+10/23 ... [IO] line 84, (roundIndex + 1) ... proven
+11/23 ... [IO] line 91, (subpotsCount + 1) ... unproven
+12/23 ... [IO] line 147, (msg.value - (msg.value % ticketPrice)) ... proven
+13/23 ... [IO] line 153, (msg.value - value) ... proven
+14/23 ... [IO] line 158, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+15/23 ... [IO] line 159, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+16/23 ... [IO] line 162, (rounds[roundIndex].buyers.length + 1) ... proven
+17/23 ... [IO] line 166, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+18/23 ... [IO] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+19/23 ... [IO] line 168, (rounds[roundIndex].ticketsCount + ticketsCount) ... unproven
+20/23 ... [IO] line 171, (rounds[roundIndex].pot + value) ... proven
+21/23 ... [IO] line 172, (rounds[roundIndex].pot + value) ... proven
+22/23 ... [ETH_LEAK] line 120, winner.send(subpot); ... unproven
+23/23 ... [ETH_LEAK] line 153, msg.sender.send((msg.value - value)); ... unproven
+took 24.751054s
+
+Generating VCs ... took 0.059517s
+Checking validity of VCs ... took 0.067683s
+
+Generating VCs ... took 0.063357s
+Checking validity of VCs ... took 0.034152s
+
+Generating VCs ... took 0.061493s
+Checking validity of VCs ... took 0.057625s
+
+Generating VCs ... took 0.060331s
+Checking validity of VCs ... took 0.046656s
+
+Generating VCs ... took 0.061169s
+Checking validity of VCs ... took 0.068018s
+
+Generating VCs ... took 0.06015s
+Checking validity of VCs ... took 0.057264s
+
+Generating VCs ... took 0.061295s
+Checking validity of VCs ... took 0.04718s
+
+Generating VCs ... took 0.059411s
+Checking validity of VCs ... took 0.071679s
+
+Iter : 10 To explore : 254 Explored : 263 Total elapsed : 25.948887
+Generating VCs ... took 0.059108s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 10 Total elapsed : 26.050816
+[
+0 -> (blocksPerRound__@33 == 6800)
+47 -> (blocksPerRound__@33 == 6800)
+]
+[
+]
+1/23 ... [IO] line 3, (a + b) ... proven
+2/23 ... [IO] line 4, (a + b) ... proven
+3/23 ... [IO] line 72, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+4/23 ... [IO] line 73, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+5/23 ... [IO] line 82, (roundIndex + 1) ... proven
+6/23 ... [IO] line 83, ((roundIndex + 1) * blocksPerRound) ... proven
+7/23 ... [IO] line 83, (roundIndex + 1) ... proven
+8/23 ... [IO] line 84, (((roundIndex + 1) * blocksPerRound) + subpotIndex) ... unproven
+9/23 ... [IO] line 84, ((roundIndex + 1) * blocksPerRound) ... proven
+10/23 ... [IO] line 84, (roundIndex + 1) ... proven
+11/23 ... [IO] line 91, (subpotsCount + 1) ... unproven
+12/23 ... [IO] line 147, (msg.value - (msg.value % ticketPrice)) ... proven
+13/23 ... [IO] line 153, (msg.value - value) ... proven
+14/23 ... [IO] line 158, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+15/23 ... [IO] line 159, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+16/23 ... [IO] line 162, (rounds[roundIndex].buyers.length + 1) ... proven
+17/23 ... [IO] line 166, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+18/23 ... [IO] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+19/23 ... [IO] line 168, (rounds[roundIndex].ticketsCount + ticketsCount) ... unproven
+20/23 ... [IO] line 171, (rounds[roundIndex].pot + value) ... proven
+21/23 ... [IO] line 172, (rounds[roundIndex].pot + value) ... proven
+22/23 ... [ETH_LEAK] line 120, winner.send(subpot); ... unproven
+23/23 ... [ETH_LEAK] line 153, msg.sender.send((msg.value - value)); ... unproven
+took 6.715546s
+
+Generating VCs ... took 0.060003s
+Checking validity of VCs ... took 1.557898s
+
+Generating VCs ... took 0.064818s
+Checking validity of VCs ... took 1.580935s
+
+Generating VCs ... took 0.058773s
+Checking validity of VCs ... took 1.518105s
+
+Generating VCs ... took 0.059973s
+Checking validity of VCs ... took 1.567613s
+
+Generating VCs ... took 0.063825s
+Checking validity of VCs ... took 1.529319s
+
+Generating VCs ... took 0.060401s
+Checking validity of VCs ... took 1.518106s
+
+Generating VCs ... took 0.058967s
+Checking validity of VCs ... took 1.518523s
+
+Generating VCs ... took 0.059096s
+Checking validity of VCs ... took 1.536916s
+
+Generating VCs ... took 0.060645s
+Checking validity of VCs ... took 1.607188s
+
+Iter : 20 To explore : 155 Explored : 422 Total elapsed : 47.297985
+Generating VCs ... took 0.059849s
+Checking validity of VCs ... took 1.620844s
+
+Generating VCs ... took 0.059797s
+Checking validity of VCs ... took 1.5803s
+
+Generating VCs ... took 0.059411s
+Checking validity of VCs ... took 1.521928s
+
+Generating VCs ... took 0.058018s
+Checking validity of VCs ... took 1.644282s
+
+Generating VCs ... took 0.059119s
+Checking validity of VCs ... took 1.52301s
+
+Generating VCs ... took 0.059492s
+Checking validity of VCs ... took 1.590673s
+
+Generating VCs ... took 0.059998s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 26 Total elapsed : 58.712941
+[
+0 -> ((blockReward__@39 == 5000000000000000000) /\ (blocksPerRound__@33 == 6800))
+47 -> ((blockReward__@39 == 5000000000000000000) /\ (blocksPerRound__@33 == 6800))
+]
+[
+]
+1/23 ... [IO] line 3, (a + b) ... proven
+2/23 ... [IO] line 4, (a + b) ... proven
+3/23 ... [IO] line 72, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+4/23 ... [IO] line 73, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+5/23 ... [IO] line 82, (roundIndex + 1) ... proven
+6/23 ... [IO] line 83, ((roundIndex + 1) * blocksPerRound) ... proven
+7/23 ... [IO] line 83, (roundIndex + 1) ... proven
+8/23 ... [IO] line 84, (((roundIndex + 1) * blocksPerRound) + subpotIndex) ... unproven
+9/23 ... [IO] line 84, ((roundIndex + 1) * blocksPerRound) ... proven
+10/23 ... [IO] line 84, (roundIndex + 1) ... proven
+11/23 ... [IO] line 91, (subpotsCount + 1) ... unproven
+12/23 ... [IO] line 147, (msg.value - (msg.value % ticketPrice)) ... proven
+13/23 ... [IO] line 153, (msg.value - value) ... proven
+14/23 ... [IO] line 158, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+15/23 ... [IO] line 159, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+16/23 ... [IO] line 162, (rounds[roundIndex].buyers.length + 1) ... proven
+17/23 ... [IO] line 166, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+18/23 ... [IO] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+19/23 ... [IO] line 168, (rounds[roundIndex].ticketsCount + ticketsCount) ... unproven
+20/23 ... [IO] line 171, (rounds[roundIndex].pot + value) ... proven
+21/23 ... [IO] line 172, (rounds[roundIndex].pot + value) ... proven
+22/23 ... [ETH_LEAK] line 120, winner.send(subpot); ... unproven
+23/23 ... [ETH_LEAK] line 153, msg.sender.send((msg.value - value)); ... unproven
+took 7.38509s
+
+Generating VCs ... took 0.066013s
+Checking validity of VCs ... took 1.792589s
+
+Generating VCs ... took 0.064934s
+Checking validity of VCs ... took 1.753874s
+
+Generating VCs ... took 0.06862s
+Checking validity of VCs ... took 1.752067s
+
+Iter : 30 To explore : 82 Explored : 622 Total elapsed : 70.186632
+Generating VCs ... took 0.059393s
+Checking validity of VCs ... took 1.760829s
+
+Generating VCs ... took 0.060817s
+Checking validity of VCs ... took 1.731517s
+
+Generating VCs ... took 0.064476s
+Checking validity of VCs ... took 1.756896s
+
+Generating VCs ... took 0.058618s
+Checking validity of VCs ... took 1.774028s
+
+Generating VCs ... took 0.059808s
+Checking validity of VCs ... took 1.723576s
+
+Generating VCs ... took 0.059657s
+Checking validity of VCs ... took 1.728028s
+
+Generating VCs ... took 0.063565s
+Checking validity of VCs ... took 1.68188s
+
+Generating VCs ... took 0.080325s
+Checking validity of VCs ... took 1.797562s
+
+Generating VCs ... took 0.068413s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 38 Total elapsed : 86.469054
+[
+0 -> (((blockReward__@39 == 5000000000000000000) /\ (blocksPerRound__@33 == 6800)) /\ (ticketPrice__@36 == 100000000000000000))
+47 -> (((blockReward__@39 == 5000000000000000000) /\ (blocksPerRound__@33 == 6800)) /\ (ticketPrice__@36 == 100000000000000000))
+]
+[
+]
+1/23 ... [IO] line 3, (a + b) ... proven
+2/23 ... [IO] line 4, (a + b) ... proven
+3/23 ... [IO] line 72, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+4/23 ... [IO] line 73, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+5/23 ... [IO] line 82, (roundIndex + 1) ... proven
+6/23 ... [IO] line 83, ((roundIndex + 1) * blocksPerRound) ... proven
+7/23 ... [IO] line 83, (roundIndex + 1) ... proven
+8/23 ... [IO] line 84, (((roundIndex + 1) * blocksPerRound) + subpotIndex) ... unproven
+9/23 ... [IO] line 84, ((roundIndex + 1) * blocksPerRound) ... proven
+10/23 ... [IO] line 84, (roundIndex + 1) ... proven
+11/23 ... [IO] line 91, (subpotsCount + 1) ... unproven
+12/23 ... [IO] line 147, (msg.value - (msg.value % ticketPrice)) ... proven
+13/23 ... [IO] line 153, (msg.value - value) ... proven
+14/23 ... [IO] line 158, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+15/23 ... [IO] line 159, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+16/23 ... [IO] line 162, (rounds[roundIndex].buyers.length + 1) ... proven
+17/23 ... [IO] line 166, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+18/23 ... [IO] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+19/23 ... [IO] line 168, (rounds[roundIndex].ticketsCount + ticketsCount) ... unproven
+20/23 ... [IO] line 171, (rounds[roundIndex].pot + value) ... proven
+21/23 ... [IO] line 172, (rounds[roundIndex].pot + value) ... proven
+22/23 ... [ETH_LEAK] line 120, winner.send(subpot); ... unproven
+23/23 ... [ETH_LEAK] line 153, msg.sender.send((msg.value - value)); ... unproven
+took 11.179075s
+
+Generating VCs ... took 0.058684s
+Checking validity of VCs ... took 1.963938s
+
+Iter : 40 To explore : 5 Explored : 632 Total elapsed : 98.005009
+Generating VCs ... took 0.059511s
+Checking validity of VCs ... took 1.967259s
+
+Generating VCs ... took 0.05934s
+Checking validity of VCs ... took 1.933416s
+
+Generating VCs ... took 0.066555s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 42 Total elapsed : 104.043391
+[
+0 -> ((((blockReward__@39 >= ticketPrice__@36) /\ (blockReward__@39 == 5000000000000000000)) /\ (blocksPerRound__@33 == 6800)) /\ (ticketPrice__@36 == 100000000000000000))
+47 -> ((((blockReward__@39 >= ticketPrice__@36) /\ (blockReward__@39 == 5000000000000000000)) /\ (blocksPerRound__@33 == 6800)) /\ (ticketPrice__@36 == 100000000000000000))
+]
+[
+]
+1/23 ... [IO] line 3, (a + b) ... proven
+2/23 ... [IO] line 4, (a + b) ... proven
+3/23 ... [IO] line 72, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+4/23 ... [IO] line 73, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+5/23 ... [IO] line 82, (roundIndex + 1) ... proven
+6/23 ... [IO] line 83, ((roundIndex + 1) * blocksPerRound) ... proven
+7/23 ... [IO] line 83, (roundIndex + 1) ... proven
+8/23 ... [IO] line 84, (((roundIndex + 1) * blocksPerRound) + subpotIndex) ... unproven
+9/23 ... [IO] line 84, ((roundIndex + 1) * blocksPerRound) ... proven
+10/23 ... [IO] line 84, (roundIndex + 1) ... proven
+11/23 ... [IO] line 91, (subpotsCount + 1) ... unproven
+12/23 ... [IO] line 147, (msg.value - (msg.value % ticketPrice)) ... proven
+13/23 ... [IO] line 153, (msg.value - value) ... proven
+14/23 ... [IO] line 158, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+15/23 ... [IO] line 159, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+16/23 ... [IO] line 162, (rounds[roundIndex].buyers.length + 1) ... proven
+17/23 ... [IO] line 166, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+18/23 ... [IO] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+19/23 ... [IO] line 168, (rounds[roundIndex].ticketsCount + ticketsCount) ... unproven
+20/23 ... [IO] line 171, (rounds[roundIndex].pot + value) ... proven
+21/23 ... [IO] line 172, (rounds[roundIndex].pot + value) ... proven
+22/23 ... [ETH_LEAK] line 120, winner.send(subpot); ... unproven
+23/23 ... [ETH_LEAK] line 153, msg.sender.send((msg.value - value)); ... unproven
+took 12.963818s
+
+Generating VCs ... took 0.067946s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 43 Total elapsed : 117.286812
+[
+0 -> (((((blockReward__@39 >= blocksPerRound__@33) /\ (blockReward__@39 >= ticketPrice__@36)) /\ (blockReward__@39 == 5000000000000000000)) /\ (blocksPerRound__@33 == 6800)) /\ (ticketPrice__@36 == 100000000000000000))
+47 -> (((((blockReward__@39 >= blocksPerRound__@33) /\ (blockReward__@39 >= ticketPrice__@36)) /\ (blockReward__@39 == 5000000000000000000)) /\ (blocksPerRound__@33 == 6800)) /\ (ticketPrice__@36 == 100000000000000000))
+]
+[
+]
+1/23 ... [IO] line 3, (a + b) ... proven
+2/23 ... [IO] line 4, (a + b) ... proven
+3/23 ... [IO] line 72, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+4/23 ... [IO] line 73, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+5/23 ... [IO] line 82, (roundIndex + 1) ... proven
+6/23 ... [IO] line 83, ((roundIndex + 1) * blocksPerRound) ... proven
+7/23 ... [IO] line 83, (roundIndex + 1) ... proven
+8/23 ... [IO] line 84, (((roundIndex + 1) * blocksPerRound) + subpotIndex) ... unproven
+9/23 ... [IO] line 84, ((roundIndex + 1) * blocksPerRound) ... proven
+10/23 ... [IO] line 84, (roundIndex + 1) ... proven
+11/23 ... [IO] line 91, (subpotsCount + 1) ... unproven
+12/23 ... [IO] line 147, (msg.value - (msg.value % ticketPrice)) ... proven
+13/23 ... [IO] line 153, (msg.value - value) ... proven
+14/23 ... [IO] line 158, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+15/23 ... [IO] line 159, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+16/23 ... [IO] line 162, (rounds[roundIndex].buyers.length + 1) ... proven
+17/23 ... [IO] line 166, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+18/23 ... [IO] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+19/23 ... [IO] line 168, (rounds[roundIndex].ticketsCount + ticketsCount) ... unproven
+20/23 ... [IO] line 171, (rounds[roundIndex].pot + value) ... proven
+21/23 ... [IO] line 172, (rounds[roundIndex].pot + value) ... proven
+22/23 ... [ETH_LEAK] line 120, winner.send(subpot); ... unproven
+23/23 ... [ETH_LEAK] line 153, msg.sender.send((msg.value - value)); ... unproven
+took 8.454297s
+
+Generating VCs ... took 0.062408s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 44 Total elapsed : 126.101253
+[
+0 -> ((((((blockReward__@39 >= blocksPerRound__@33) /\ (blockReward__@39 >= ticketPrice__@36)) /\ (ticketPrice__@36 >= blocksPerRound__@33)) /\ (blockReward__@39 == 5000000000000000000)) /\ (blocksPerRound__@33 == 6800)) /\ (ticketPrice__@36 == 100000000000000000))
+47 -> ((((((blockReward__@39 >= blocksPerRound__@33) /\ (blockReward__@39 >= ticketPrice__@36)) /\ (ticketPrice__@36 >= blocksPerRound__@33)) /\ (blockReward__@39 == 5000000000000000000)) /\ (blocksPerRound__@33 == 6800)) /\ (ticketPrice__@36 == 100000000000000000))
+]
+[
+]
+1/23 ... [IO] line 3, (a + b) ... proven
+2/23 ... [IO] line 4, (a + b) ... proven
+3/23 ... [IO] line 72, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+4/23 ... [IO] line 73, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) ... proven
+5/23 ... [IO] line 82, (roundIndex + 1) ... proven
+6/23 ... [IO] line 83, ((roundIndex + 1) * blocksPerRound) ... proven
+7/23 ... [IO] line 83, (roundIndex + 1) ... proven
+8/23 ... [IO] line 84, (((roundIndex + 1) * blocksPerRound) + subpotIndex) ... unproven
+9/23 ... [IO] line 84, ((roundIndex + 1) * blocksPerRound) ... proven
+10/23 ... [IO] line 84, (roundIndex + 1) ... proven
+11/23 ... [IO] line 91, (subpotsCount + 1) ... unproven
+12/23 ... [IO] line 147, (msg.value - (msg.value % ticketPrice)) ... proven
+13/23 ... [IO] line 153, (msg.value - value) ... proven
+14/23 ... [IO] line 158, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+15/23 ... [IO] line 159, (rounds[roundIndex].ticketsCount + ticketsCount) ... proven
+16/23 ... [IO] line 162, (rounds[roundIndex].buyers.length + 1) ... proven
+17/23 ... [IO] line 166, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+18/23 ... [IO] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) ... proven
+19/23 ... [IO] line 168, (rounds[roundIndex].ticketsCount + ticketsCount) ... unproven
+20/23 ... [IO] line 171, (rounds[roundIndex].pot + value) ... proven
+21/23 ... [IO] line 172, (rounds[roundIndex].pot + value) ... proven
+22/23 ... [ETH_LEAK] line 120, winner.send(subpot); ... unproven
+23/23 ... [ETH_LEAK] line 153, msg.sender.send((msg.value - value)); ... unproven
+took 7.985292s
+
+Generating VCs ... took 0.023074s
+Checking validity of VCs ... 
+1/51 ... [NO_EFFECT] line 4, (@pre18 == c) ... unproven
+2/51 ... [NO_EFFECT] line 65, (@pre5 == winningTicketIndex) ... unproven
+3/51 ... [NO_EFFECT] line 68, (@pre4 == ticketIndex) ... unproven
+4/51 ... [NO_EFFECT] line 71, (@pre3 == buyer) ... unproven
+5/51 ... [NO_EFFECT] line 73, (@pre2 == ticketIndex) ... unproven
+6/51 ... [NO_EFFECT] line 88, (@pre7 == subpotsCount) ... unproven
+7/51 ... [NO_EFFECT] line 91, (@pre6 == subpotsCount) ... unproven
+8/51 ... [NO_EFFECT] line 147, (@pre17 == value) ... unproven
+9/51 ... [NO_EFFECT] line 157, (@pre16 == ticketsCount) ... unproven
+10/51 ... [NO_EFFECT] line 159, (@pre15 == rounds[roundIndex].ticketsCount) ... unproven
+11/51 ... [NO_EFFECT] line 162, (@pre12 == buyersLength) ... unproven
+12/51 ... [NO_EFFECT] line 162, (@pre13 == rounds[roundIndex].buyers.length) ... unproven
+13/51 ... [NO_EFFECT] line 162, (@pre14 == Tmp3) ... unproven
+14/51 ... [NO_EFFECT] line 163, (@pre11 == rounds[roundIndex].buyers[buyersLength]) ... unproven
+15/51 ... [NO_EFFECT] line 167, (@pre10 == rounds[roundIndex].ticketsCountByBuyer[msg.sender]) ... unproven
+16/51 ... [NO_EFFECT] line 168, (@pre9 == rounds[roundIndex].ticketsCount) ... unproven
+17/51 ... [NO_EFFECT] line 172, (@pre8 == rounds[roundIndex].pot) ... unproven
+18/51 ... [ASSIGN_CONST] line 4, (c == 0) ... unproven
+19/51 ... [ASSIGN_CONST] line 73, (ticketIndex == 0) ... unproven
+20/51 ... [ASSIGN_CONST] line 91, (subpotsCount == 0) ... unproven
+21/51 ... [ASSIGN_CONST] line 147, (value == 0) ... unproven
+22/51 ... [ASSIGN_CONST] line 159, (rounds[roundIndex].ticketsCount == 0) ... unproven
+23/51 ... [ASSIGN_CONST] line 162, (rounds[roundIndex].buyers.length == 0) ... unproven
+24/51 ... [ASSIGN_CONST] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] == 0) ... unproven
+25/51 ... [ASSIGN_CONST] line 168, (rounds[roundIndex].ticketsCount == 0) ... unproven
+26/51 ... [ASSIGN_CONST] line 172, (rounds[roundIndex].pot == 0) ... unproven
+27/51 ... [DEAD] line 3, false ... unproven
+28/51 ... [DEAD] line 58, false ... unproven
+29/51 ... [DEAD] line 60, false ... unproven
+30/51 ... [DEAD] line 64, false ... unproven
+31/51 ... [DEAD] line 70, false ... unproven
+32/51 ... [DEAD] line 72, false ... unproven
+33/51 ... [DEAD] line 75, false ... unproven
+34/51 ... [DEAD] line 82, false ... unproven
+35/51 ... [DEAD] line 83, false ... unproven
+36/51 ... [DEAD] line 90, false ... unproven
+37/51 ... [DEAD] line 97, false ... unproven
+38/51 ... [DEAD] line 102, false ... unproven
+39/51 ... [DEAD] line 104, false ... unproven
+40/51 ... [DEAD] line 107, false ... unproven
+41/51 ... [DEAD] line 109, false ... unproven
+42/51 ... [DEAD] line 116, false ... unproven
+43/51 ... [DEAD] line 117, false ... unproven
+44/51 ... [DEAD] line 145, false ... unproven
+45/51 ... [DEAD] line 146, false ... unproven
+46/51 ... [DEAD] line 149, false ... unproven
+47/51 ... [DEAD] line 151, false ... unproven
+48/51 ... [DEAD] line 158, false ... unproven
+49/51 ... [DEAD] line 161, false ... unproven
+50/51 ... [DEAD] line 166, false ... unproven
+51/51 ... [DEAD] line 171, false ... unproven
+took 35.264828s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 3, (a + b) : proven
+[2] [IO] line 4, (a + b) : proven
+[3] [IO] line 72, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) : proven
+[4] [IO] line 73, (ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer]) : proven
+[5] [IO] line 82, (roundIndex + 1) : proven
+[6] [IO] line 83, ((roundIndex + 1) * blocksPerRound) : proven
+[7] [IO] line 83, (roundIndex + 1) : proven
+[8] [IO] line 84, (((roundIndex + 1) * blocksPerRound) + subpotIndex) : unproven
+[9] [IO] line 84, ((roundIndex + 1) * blocksPerRound) : proven
+[10] [IO] line 84, (roundIndex + 1) : proven
+[11] [IO] line 91, (subpotsCount + 1) : unproven
+[12] [IO] line 147, (msg.value - (msg.value % ticketPrice)) : proven
+[13] [IO] line 153, (msg.value - value) : proven
+[14] [IO] line 158, (rounds[roundIndex].ticketsCount + ticketsCount) : proven
+[15] [IO] line 159, (rounds[roundIndex].ticketsCount + ticketsCount) : proven
+[16] [IO] line 162, (rounds[roundIndex].buyers.length + 1) : proven
+[17] [IO] line 166, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) : proven
+[18] [IO] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount) : proven
+[19] [IO] line 168, (rounds[roundIndex].ticketsCount + ticketsCount) : unproven
+[20] [IO] line 171, (rounds[roundIndex].pot + value) : proven
+[21] [IO] line 172, (rounds[roundIndex].pot + value) : proven
+[22] [ETH_LEAK] line 120, winner.send(subpot); : unproven
+[23] [ETH_LEAK] line 153, msg.sender.send((msg.value - value)); : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 4, (@pre18 == c) : unproven
+[2] [NO_EFFECT] line 65, (@pre5 == winningTicketIndex) : unproven
+[3] [NO_EFFECT] line 68, (@pre4 == ticketIndex) : unproven
+[4] [NO_EFFECT] line 71, (@pre3 == buyer) : unproven
+[5] [NO_EFFECT] line 73, (@pre2 == ticketIndex) : unproven
+[6] [NO_EFFECT] line 88, (@pre7 == subpotsCount) : unproven
+[7] [NO_EFFECT] line 91, (@pre6 == subpotsCount) : unproven
+[8] [NO_EFFECT] line 147, (@pre17 == value) : unproven
+[9] [NO_EFFECT] line 157, (@pre16 == ticketsCount) : unproven
+[10] [NO_EFFECT] line 159, (@pre15 == rounds[roundIndex].ticketsCount) : unproven
+[11] [NO_EFFECT] line 162, (@pre12 == buyersLength) : unproven
+[12] [NO_EFFECT] line 162, (@pre13 == rounds[roundIndex].buyers.length) : unproven
+[13] [NO_EFFECT] line 162, (@pre14 == Tmp3) : unproven
+[14] [NO_EFFECT] line 163, (@pre11 == rounds[roundIndex].buyers[buyersLength]) : unproven
+[15] [NO_EFFECT] line 167, (@pre10 == rounds[roundIndex].ticketsCountByBuyer[msg.sender]) : unproven
+[16] [NO_EFFECT] line 168, (@pre9 == rounds[roundIndex].ticketsCount) : unproven
+[17] [NO_EFFECT] line 172, (@pre8 == rounds[roundIndex].pot) : unproven
+[18] [ASSIGN_CONST] line 4, (c == 0) : unproven
+[19] [ASSIGN_CONST] line 73, (ticketIndex == 0) : unproven
+[20] [ASSIGN_CONST] line 91, (subpotsCount == 0) : unproven
+[21] [ASSIGN_CONST] line 147, (value == 0) : unproven
+[22] [ASSIGN_CONST] line 159, (rounds[roundIndex].ticketsCount == 0) : unproven
+[23] [ASSIGN_CONST] line 162, (rounds[roundIndex].buyers.length == 0) : unproven
+[24] [ASSIGN_CONST] line 167, (rounds[roundIndex].ticketsCountByBuyer[msg.sender] == 0) : unproven
+[25] [ASSIGN_CONST] line 168, (rounds[roundIndex].ticketsCount == 0) : unproven
+[26] [ASSIGN_CONST] line 172, (rounds[roundIndex].pot == 0) : unproven
+[27] [DEAD] line 3, false : unproven
+[28] [DEAD] line 58, false : unproven
+[29] [DEAD] line 60, false : unproven
+[30] [DEAD] line 64, false : unproven
+[31] [DEAD] line 70, false : unproven
+[32] [DEAD] line 72, false : unproven
+[33] [DEAD] line 75, false : unproven
+[34] [DEAD] line 82, false : unproven
+[35] [DEAD] line 83, false : unproven
+[36] [DEAD] line 90, false : unproven
+[37] [DEAD] line 97, false : unproven
+[38] [DEAD] line 102, false : unproven
+[39] [DEAD] line 104, false : unproven
+[40] [DEAD] line 107, false : unproven
+[41] [DEAD] line 109, false : unproven
+[42] [DEAD] line 116, false : unproven
+[43] [DEAD] line 117, false : unproven
+[44] [DEAD] line 145, false : unproven
+[45] [DEAD] line 146, false : unproven
+[46] [DEAD] line 149, false : unproven
+[47] [DEAD] line 151, false : unproven
+[48] [DEAD] line 158, false : unproven
+[49] [DEAD] line 161, false : unproven
+[50] [DEAD] line 166, false : unproven
+[51] [DEAD] line 171, false : unproven
+
+============ Statistics ============
+# Iter                    : 45
+# Alarm / Query           : 5 / 23
+- integer over/underflow  : 3 / 21
+- kill-anyone             : 0 / 0
+- ether-leaking           : 2 / 2
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 0
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 167.082914829
+Time Elapsed (CPU)  : 167.126984

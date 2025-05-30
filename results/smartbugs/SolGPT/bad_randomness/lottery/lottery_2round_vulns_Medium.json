@@ -1,0 +1,23 @@
+[
+    {
+        "description": "Lottery (shared/bad_randomness/lottery/lottery_2round.sol#3-49) contract sets array length with a user-controlled value:\n\t- bets.push(Bet(msg.value,block.number,won)) (shared/bad_randomness/lottery/lottery_2round.sol#26)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lottery/lottery_2round.sol#L3-L49"
+    },
+    {
+        "description": "Lottery.makeBet() (shared/bad_randomness/lottery/lottery_2round.sol#23-33) uses a weak PRNG: \"won = (uint256(keccak256()(block.blockhash(block.number - 1),now)) % 2) == 0 (shared/bad_randomness/lottery/lottery_2round.sol#24)\" \n",
+        "check": "weak-prng",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/lottery/lottery_2round.sol#L23-L33"
+    },
+    {
+        "description": "Lottery.makeBet() (shared/bad_randomness/lottery/lottery_2round.sol#23-33) uses a dangerous strict equality:\n\t- won = (uint256(keccak256()(block.blockhash(block.number - 1),now)) % 2) == 0 (shared/bad_randomness/lottery/lottery_2round.sol#24)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/lottery/lottery_2round.sol#L23-L33"
+    }
+]

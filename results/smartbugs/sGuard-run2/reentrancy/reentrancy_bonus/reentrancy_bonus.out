@@ -1,0 +1,15 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/reentrancy_bonus/reentrancy_bonus.sol" "report_run/reentrancy/reentrancy_bonus" "Reentrancy_bonus"
+
+patches/reentrancy/reentrancy_bonus/reentrancy_bonus.sol
+{ bugFixes:
+   { '|d,dp': 'add_uint256(a, b)',
+     '^+kMwlV3upR{(gu:&doi#@MD)R.!J(XA7JE7^U5D.K': ' function withdrawReward(address recipient) nonReentrant_ ',
+     'm*6[Z}3u*/hbTD|': 'contract sGuard is sGuard ',
+     '7*tN>M@5)Cv[X]bUj+,u4;2V5DF9t\'daae;]tMIofq3%`!1HPzE':
+      ' function getFirstWithdrawalBonus(address recipient) nonReentrant_ ',
+     ',Z0lo_{C[HY9\\!Yoj?kG,dDHk|Y#': 'contract Reentrancy_bonus is sGuard, ' },
+  source:
+   'm*6[Z}3u*/hbTD|{\n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = |d,dp;\n    assert(c >= a);\n    return c;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n}\n/*\n * @source: https://consensys.github.io/smart-contract-best-practices/known_attacks/\n * @author: consensys\n * @vulnerable_at_lines: 28\n */\n\n\n,Z0lo_{C[HY9\\!Yoj?kG,dDHk|Y# sGuard {\n\n    // INSECURE\n    mapping (address => uint) private userBalances;\n    mapping (address => bool) private claimedBonus;\n    mapping (address => uint) private rewardsForA;\n\n     ^+kMwlV3upR{(gu:&doi#@MD)R.!J(XA7JE7^U5D.K nonReentrant_  public {\n        uint amountToWithdraw = rewardsForA[recipient];\n        rewardsForA[recipient] = 0;\n        (bool success, ) = recipient.call.value(amountToWithdraw)("");\n        require(success);\n    }\n\n     7*tN>M@5)Cv[X]bUj+,u4;2V5DF9t\'daae;]tMIofq3%`!1HPzE nonReentrant_  public {\n        require(!claimedBonus[recipient]); // Each recipient should only be able to claim the bonus once\n\n        rewardsForA[recipient] = add_uint256(rewardsForA[recipient], 100);\n        // <yes> <report> REENTRANCY\n        withdrawReward(recipient); // At this point, the caller will be able to execute getFirstWithdrawalBonus again.\n        claimedBonus[recipient] = true;\n    }\n}\n',
+  wrappers: Set { 'add_uint256', 'nonReentrant_' } }

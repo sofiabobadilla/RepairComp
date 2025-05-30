@@ -1,0 +1,77 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:
+../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:22:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function PrivateDeposit()
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract PrivateDeposit
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:22:5: Warning: No visibility specified. Defaulting to "public". 
+    function PrivateDeposit()
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:30:5: Warning: No visibility specified. Defaulting to "public". 
+    function setLog(address _lib) onlyOwner
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:46:5: Warning: No visibility specified. Defaulting to "public". 
+    function CashOut(uint _am)
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+Log (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#63-88) contract sets array length with a user-controlled value:
+	- History.push(LastMsg) (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#85)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#array-length-assignment
+
+Reentrancy in PrivateDeposit.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#46-57):
+	External calls:
+	- msg.sender.call.value(_am)() (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#51)
+	State variables written after the call(s):
+	- balances[msg.sender] -= _am (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#53)
+	PrivateDeposit.balances (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#10) can be used in cross function reentrancies:
+	- PrivateDeposit.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#46-57)
+	- PrivateDeposit.Deposit() (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#35-44)
+	- PrivateDeposit.balances (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#10)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in PrivateDeposit.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#46-57):
+	- msg.sender.call.value(_am)() (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#51)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Parameter PrivateDeposit.setLog(address)._lib (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#30) is not in mixedCase
+Function PrivateDeposit.Deposit() (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#35-44) is not in mixedCase
+Function PrivateDeposit.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#46-57) is not in mixedCase
+Parameter PrivateDeposit.CashOut(uint256)._am (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#46) is not in mixedCase
+Variable PrivateDeposit.MinDeposit (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#12) is not in mixedCase
+Variable PrivateDeposit.TransferLog (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#15) is not in mixedCase
+Function Log.AddMessage(address,uint256,string) (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#78-86) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._adr (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#78) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._val (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#78) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._data (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#78) is not in mixedCase
+Variable Log.History (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#74) is not in mixedCase
+Variable Log.LastMsg (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#76) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+PrivateDeposit.MinDeposit (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#12) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+
+AddMessage(address,uint256,string) should be declared external:
+	- Log.AddMessage(address,uint256,string) (../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol#78-86)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external
+../smartbugs-curated/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol analyzed (2 contracts with 95 detectors), 18 result(s) found
+
+Error running slither
+0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol
+Getting Solidity AST...
+Running TIPS...
+0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol
+0.010419845581054688
+
+

@@ -1,0 +1,64 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 29
+[INFO] reachable : 15
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (PoCGame/donateToWhale/[uint256]), 202, (totalDonated + amount)),
+    (IO, (PoCGame/loseWager/[uint256]), 214, (totalDonated + amount)),
+    (IO, (PoCGame/play/[]), 153, ((uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty) + 1)),
+    (ETH_LEAK, (PoCGame/payout/[address]), 190, winner.transfer(ethToTransfer);),
+    (RE_EL, (PoCGame/payout/[address]), 190, winner.transfer(ethToTransfer);)
+
+[INFO] # of basic patch components : 6
+[INFO] extracted components
+[
+InsertLine (153, assume((((uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty) + 1) >= (uint256(keccak256(abi.encodePacked(blockhash(blockNumber), msg.sender))) % difficulty)));),
+InsertLine (202, assume(((totalDonated + amount) >= totalDonated));),
+InsertLine (214, assume(((totalDonated + amount) >= totalDonated));),
+AtomLst [
+Move ([202] -> 201)
+Move ([214] -> 213)
+],
+AtomLst [
+Add @nonReentrant to (PoCGame, transferAnyERC20Token, [address, address, uint256]) (line 284)
+Add @nonReentrant to (PoCGame, @fallback, []) (line 115)
+Add @nonReentrant to (PoCGame, wager, []) (line 120)
+Add @nonReentrant to (PoCGame, play, []) (line 141)
+Add @nonReentrant to (PoCGame, donate, []) (line 174)
+],
+AtomLst [
+Add @nonReentrant to (PoCGame, transferAnyERC20Token, [address, address, uint256]) (line 284)
+Add @nonReentrant to (PoCGame, OpenToThePublic, []) (line 83)
+Add @nonReentrant to (PoCGame, AdjustBetAmounts, [uint256]) (line 93)
+Add @nonReentrant to (PoCGame, AdjustDifficulty, [uint256]) (line 105)
+Add @nonReentrant to (PoCGame, @fallback, []) (line 115)
+Add @nonReentrant to (PoCGame, wager, []) (line 120)
+Add @nonReentrant to (PoCGame, play, []) (line 141)
+Add @nonReentrant to (PoCGame, donate, []) (line 174)
+]
+]
+- New best candidate, iter 3, 614.335906982s : results/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e/candidates/cand_3/patch.sol
+- New best candidate, iter 7, 1232.27239299s : results/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e/candidates/cand_12/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 26
+# Alarm (orginal)         : 5
+# Alarm (patch)           : 3
+# Alarm wo leak (patch)   : 2
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : n/a
+- First solution (iter)   : n/a
+- First solution (time)   : n/a
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 7, Time: 1232.27239299, results/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e/candidates/cand_12/patch.sol
+
+Time Elapsed (Real) : 4047.90770292
+Time Elapsed (CPU)  : 6.14219

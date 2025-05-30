@@ -1,0 +1,90 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 4
+[INFO] reachable : 4
+[INFO] Generating Paths ... took 0.000151s
+[INFO] # path : 10
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[INFO] Performing Interval Analysis ... took 0.000302s
+Generating VCs ... took 0.001419s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.031845
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/6 ... [IO] line 13, (credit[to] + msg.value) ... unproven
+2/6 ... [IO] line 20, (credit[msg.sender] - amount) ... unproven
+3/6 ... [ETH_LEAK] line 19, res = msg.sender.call.value(amount)(); ... unproven
+4/6 ... [RE_EL] line 19, res = msg.sender.call.value(amount)(); ... unproven
+5/6 ... [RE] line 12, (SimpleDAO, donate, [address]) ... unproven
+6/6 ... [RE] line 16, (SimpleDAO, withdraw, [uint256]) ... unproven
+took 0.333053s
+
+Generating VCs ... took 0.00061s
+Checking validity of VCs ... took 5.824239s
+
+Generating VCs ... took 0.000519999999999s
+Checking validity of VCs ... took 3.217908s
+
+Generating VCs ... took 0.000539999999999s
+Checking validity of VCs ... took 0.532069s
+
+Generating VCs ... took 0.000622999999999s
+Checking validity of VCs ... took 4.195548s
+
+Generating VCs ... took 0.000626s
+Checking validity of VCs ... took 2.095701s
+
+Generating VCs ... took 0.000571999999998s
+Checking validity of VCs ... took 4.291193s
+
+Generating VCs ... took 0.000592000000001s
+Checking validity of VCs ... took 7.260114s
+
+Generating VCs ... took 0.000318s
+Checking validity of VCs ... 
+1/5 ... [NO_EFFECT] line 13, (@pre1 == credit[to]) ... unproven
+2/5 ... [NO_EFFECT] line 20, (@pre2 == credit[msg.sender]) ... unproven
+3/5 ... [ASSIGN_CONST] line 13, (credit[to] == 0) ... unproven
+4/5 ... [ASSIGN_CONST] line 20, (credit[msg.sender] == 0) ... unproven
+5/5 ... [DEAD] line 17, false ... unproven
+took 0.285855s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 13, (credit[to] + msg.value) : unproven
+[2] [IO] line 20, (credit[msg.sender] - amount) : unproven
+[3] [ETH_LEAK] line 19, res = msg.sender.call.value(amount)(); : unproven
+[4] [RE_EL] line 19, res = msg.sender.call.value(amount)(); : unproven
+[5] [RE] line 12, (SimpleDAO, donate, [address]) : unproven
+[6] [RE] line 16, (SimpleDAO, withdraw, [uint256]) : unproven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 13, (@pre1 == credit[to]) : unproven
+[2] [NO_EFFECT] line 20, (@pre2 == credit[msg.sender]) : unproven
+[3] [ASSIGN_CONST] line 13, (credit[to] == 0) : unproven
+[4] [ASSIGN_CONST] line 20, (credit[msg.sender] == 0) : unproven
+[5] [DEAD] line 17, false : unproven
+
+============ Statistics ============
+# Iter                    : 9
+# Alarm / Query           : 6 / 6
+- integer over/underflow  : 2 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 1 / 1
+- reentrancy-leaking      : 1 / 1
+- reentrancy              : 2 / 2
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 28.0954179764
+Time Elapsed (CPU)  : 28.078694

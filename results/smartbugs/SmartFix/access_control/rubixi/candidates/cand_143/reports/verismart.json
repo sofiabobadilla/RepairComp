@@ -1,0 +1,1091 @@
+{
+  "fileName": "results/access_control/rubixi/candidates/cand_143/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 158,
+  "time": 153.069509,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "land(geq(150,feePercent__@10:uint256),eq(read(@TU:mapping(address => bool),creator__@18:address),cond(true)))"
+    },
+    {
+      "key": "77",
+      "formula": "land(geq(150,feePercent__@10:uint256),eq(read(@TU:mapping(address => bool),creator__@18:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 47,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(collectedFees + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 48,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(collectedFees + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 62,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(msg.value * pyramidMultiplier)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 69,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(100 - _fee)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "IO",
+      "line": 69,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balance + ((msg.value * (100 - _fee)) / 100))",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "IO",
+      "line": 69,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(msg.value * (100 - _fee))",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "IO",
+      "line": 70,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(collectedFees + ((msg.value * _fee) / 100))",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "IO",
+      "line": 70,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(msg.value * _fee)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "IO",
+      "line": 77,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balance - participants[payoutOrder].payout)",
+      "status": "proven"
+    },
+    {
+      "no": "10",
+      "kind": "IO",
+      "line": 78,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(payoutOrder + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "11",
+      "kind": "IO",
+      "line": 91,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(_amt * 1000000000000000000)",
+      "status": "proven"
+    },
+    {
+      "no": "12",
+      "kind": "IO",
+      "line": 92,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(_amt * 1000000000000000000)",
+      "status": "proven"
+    },
+    {
+      "no": "13",
+      "kind": "IO",
+      "line": 98,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(collectedFees - _amt)",
+      "status": "proven"
+    },
+    {
+      "no": "14",
+      "kind": "IO",
+      "line": 104,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "((collectedFees / 100) * _pcent)",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "IO",
+      "line": 107,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(collectedFees - feesToCollect)",
+      "status": "proven"
+    },
+    {
+      "no": "16",
+      "kind": "IO",
+      "line": 156,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "numberOfParticipantsWaitingForPayout",
+          "argTypes": []
+        }
+      ],
+      "exp": "(participants.length - payoutOrder)",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "ETH_LEAK",
+      "line": 75,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "participants[payoutOrder].etherAddress.send(payoutToSend);",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "ETH_LEAK",
+      "line": 86,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectAllFees",
+          "argTypes": []
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "creator.send(collectedFees);",
+      "status": "proven"
+    },
+    {
+      "no": "19",
+      "kind": "ETH_LEAK",
+      "line": 97,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "creator.send(_amt);",
+      "status": "proven"
+    },
+    {
+      "no": "20",
+      "kind": "ETH_LEAK",
+      "line": 105,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "creator.send(feesToCollect);",
+      "status": "proven"
+    },
+    {
+      "no": "21",
+      "kind": "TX_ORG",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeFeePercentage",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeMultiplier",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectAllFees",
+          "argTypes": []
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "assume((msg.sender == creator));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 48,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre3 == collectedFees)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 52,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == _fee)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == _fee)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 62,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre10 == struct_init(Participant, msg.sender, ((msg.value * pyramidMultiplier) / 100)).etherAddress)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 62,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre9 == struct_init(Participant, msg.sender, ((msg.value * pyramidMultiplier) / 100)).payout)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 69,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre8 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "NO_EFFECT",
+      "line": 70,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre7 == collectedFees)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "NO_EFFECT",
+      "line": 74,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre6 == payoutToSend)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "NO_EFFECT",
+      "line": 77,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre5 == balance)",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "NO_EFFECT",
+      "line": 78,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre4 == payoutOrder)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "NO_EFFECT",
+      "line": 92,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre12 == _amt)",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "NO_EFFECT",
+      "line": 98,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre11 == collectedFees)",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "NO_EFFECT",
+      "line": 104,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre14 == feesToCollect)",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "NO_EFFECT",
+      "line": 107,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre13 == collectedFees)",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "NO_EFFECT",
+      "line": 112,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre15 == creator)",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "NO_EFFECT",
+      "line": 118,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeMultiplier",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre16 == pyramidMultiplier)",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "NO_EFFECT",
+      "line": 124,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeFeePercentage",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre17 == feePercent)",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "NO_EFFECT",
+      "line": 129,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "currentMultiplier",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre18 == multiplier)",
+      "status": "unproven"
+    },
+    {
+      "no": "19",
+      "kind": "NO_EFFECT",
+      "line": 134,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "currentFeePercentage",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre19 == fee)",
+      "status": "unproven"
+    },
+    {
+      "no": "20",
+      "kind": "NO_EFFECT",
+      "line": 139,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "currentPyramidBalanceApproximately",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre20 == pyramidBalance)",
+      "status": "unproven"
+    },
+    {
+      "no": "21",
+      "kind": "NO_EFFECT",
+      "line": 144,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "nextPayoutWhenPyramidBalanceTotalsApproximately",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre21 == balancePayout)",
+      "status": "unproven"
+    },
+    {
+      "no": "22",
+      "kind": "NO_EFFECT",
+      "line": 148,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "feesSeperateFromBalanceApproximately",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre22 == fees)",
+      "status": "unproven"
+    },
+    {
+      "no": "23",
+      "kind": "NO_EFFECT",
+      "line": 152,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "totalParticipants",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre23 == count)",
+      "status": "unproven"
+    },
+    {
+      "no": "24",
+      "kind": "NO_EFFECT",
+      "line": 156,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "numberOfParticipantsWaitingForPayout",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre24 == count)",
+      "status": "unproven"
+    },
+    {
+      "no": "25",
+      "kind": "NO_EFFECT",
+      "line": 161,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "participantDetails",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre26 == Address)",
+      "status": "unproven"
+    },
+    {
+      "no": "26",
+      "kind": "NO_EFFECT",
+      "line": 162,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "participantDetails",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre25 == Payout)",
+      "status": "unproven"
+    },
+    {
+      "no": "27",
+      "kind": "ASSIGN_CONST",
+      "line": 48,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(collectedFees == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "28",
+      "kind": "ASSIGN_CONST",
+      "line": 69,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "29",
+      "kind": "ASSIGN_CONST",
+      "line": 70,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(collectedFees == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "30",
+      "kind": "ASSIGN_CONST",
+      "line": 77,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(balance == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "31",
+      "kind": "ASSIGN_CONST",
+      "line": 78,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(payoutOrder == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "32",
+      "kind": "ASSIGN_CONST",
+      "line": 98,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(collectedFees == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "33",
+      "kind": "ASSIGN_CONST",
+      "line": 107,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(collectedFees == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "34",
+      "kind": "ASSIGN_CONST",
+      "line": 156,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "numberOfParticipantsWaitingForPayout",
+          "argTypes": []
+        }
+      ],
+      "exp": "(count == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "35",
+      "kind": "DEAD",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeFeePercentage",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeMultiplier",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectAllFees",
+          "argTypes": []
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "36",
+      "kind": "DEAD",
+      "line": 40,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "37",
+      "kind": "DEAD",
+      "line": 46,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "38",
+      "kind": "DEAD",
+      "line": 47,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "39",
+      "kind": "DEAD",
+      "line": 54,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "40",
+      "kind": "DEAD",
+      "line": 56,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "41",
+      "kind": "DEAD",
+      "line": 65,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "42",
+      "kind": "DEAD",
+      "line": 66,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "addPayout",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "43",
+      "kind": "DEAD",
+      "line": 84,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectAllFees",
+          "argTypes": []
+        },
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "44",
+      "kind": "DEAD",
+      "line": 91,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "45",
+      "kind": "DEAD",
+      "line": 93,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "46",
+      "kind": "DEAD",
+      "line": 95,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectFeesInEther",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "47",
+      "kind": "DEAD",
+      "line": 102,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "48",
+      "kind": "DEAD",
+      "line": 106,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "collectPercentOfFees",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "49",
+      "kind": "DEAD",
+      "line": 116,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeMultiplier",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "50",
+      "kind": "DEAD",
+      "line": 122,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "changeFeePercentage",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "51",
+      "kind": "DEAD",
+      "line": 160,
+      "signatures": [
+        {
+          "contractName": "Rubixi",
+          "methodName": "participantDetails",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

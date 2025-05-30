@@ -1,0 +1,37 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 91
+[INFO] reachable : 13
+
+[INFO] Violate CEI: false
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (PausableToken/batchTransfer/[address[]_uint256]), 264, (uint256(cnt) * _value))
+
+[INFO] # of basic patch components : 1
+[INFO] extracted components
+[
+InsertLine (264, assume(((uint256(cnt) == 0) || (((uint256(cnt) * _value) / uint256(cnt)) == _value)));)
+]
+- New best candidate, iter 1, 156.6633389s : results/arithmetic/BECToken/candidates/cand_1/patch.sol
+- Solution found, iter 1, 156.6633389s : results/arithmetic/BECToken/candidates/cand_1/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 2
+# Alarm (orginal)         : 1
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 1, 1
+# Patch                   : 1
+- First solution          : results/arithmetic/BECToken/candidates/cand_1/patch.sol
+- First solution (iter)   : 1
+- First solution (time)   : 156.6633389
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 1., Edit: 1, Iter: 1, Time: 156.6633389, results/arithmetic/BECToken/candidates/cand_1/patch.sol
+
+Time Elapsed (Real) : 157.515785933
+Time Elapsed (CPU)  : 5.16707

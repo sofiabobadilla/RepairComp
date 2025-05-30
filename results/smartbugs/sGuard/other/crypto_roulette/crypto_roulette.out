@@ -1,0 +1,14 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/other/crypto_roulette.sol" "results/other/crypto_roulette" "CryptoRoulette"
+
+smartbugs/dataset/other/crypto_roulette.sol
+{ bugFixes:
+   { 'T}:E"";rRI5:djUK-o0': 'add_uint256(lastPlayed, 1 days)',
+     '_M:qCY6.w*618GoZW6qvABFs|Wfmz': ' function play(uint256 number) nonReentrant_ ',
+     'e@OYOQ\'^PjeMBHU-%|k5eu#n!yzy!V\\A"H4~AB},ur"OOb}\'IfQ!56B.Yw':
+      'add_uint8(uint8(sha3(now, block.blockhash(block.number-1))) % 20, 1)',
+     'cfrEZ=1\\1[<k5YbE~)kh.gsW': 'contract CryptoRoulette  is sGuard ' },
+  source:
+   '/*\n * @source: https://github.com/thec00n/smart-contract-honeypots/blob/master/CryptoRoulette.sol\n * @vulnerable_at_lines: 40,41,42\n */\n\n// CryptoRoulette\n//\n// Guess the number secretly stored in the blockchain and win the whole contract balance!\n// A new number is randomly chosen after each try.\n// https://www.reddit.com/r/ethdev/comments/7wp363/how_does_this_honeypot_work_it_seems_like_a/\n// To play, call the play() method with the guessed number (1-20).  Bet price: 0.1 ether\n\ncfrEZ=1\\1[<k5YbE~)kh.gsW{\n\n    uint256 private secretNumber;\n    uint256 public lastPlayed;\n    uint256 public betPrice = 0.1 ether;\n    address public ownerAddr;\n\n    struct Game {\n        address player;\n        uint256 number;\n    }\n    Game[] public gamesPlayed;\n\n    function CryptoRoulette() public {\n        ownerAddr = msg.sender;\n        shuffle();\n    }\n\n    function shuffle() internal {\n        // randomly set secretNumber with a value between 1 and 20\n        secretNumber = e@OYOQ\'^PjeMBHU-%|k5eu#n!yzy!V\\A"H4~AB},ur"OOb}\'IfQ!56B.Yw;\n    }\n\n    _M:qCY6.w*618GoZW6qvABFs|Wfmz payable public {\n        require(msg.value >= betPrice && number <= 10);\n        // <yes> <report> OTHER - uninitialized storage\n        Game game; //Uninitialized storage pointer\n        game.player = msg.sender;\n        game.number = number;\n        gamesPlayed.push(game);\n\n        if (number == secretNumber) {\n            // win!\n            msg.sender.transfer(this.balance);\n        }\n\n        shuffle();\n        lastPlayed = now;\n    }\n\n    function kill() public {\n        if (msg.sender == ownerAddr && now > T}:E"";rRI5:djUK-o0) {\n            suicide(msg.sender);\n        }\n    }\n\n    function() public payable { }\n}\n',
+  wrappers: Set { 'add_uint256', 'nonReentrant_', 'add_uint8' } }

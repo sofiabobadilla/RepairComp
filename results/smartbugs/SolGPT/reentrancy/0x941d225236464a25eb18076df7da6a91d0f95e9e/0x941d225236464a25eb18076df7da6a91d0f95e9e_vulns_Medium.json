@@ -1,0 +1,16 @@
+[
+    {
+        "description": "Log (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#56-81) contract sets array length with a user-controlled value:\n\t- History.push(LastMsg) (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#78)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#L56-L81"
+    },
+    {
+        "description": "Reentrancy in ETH_FUND.CashOut(uint256) (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#37-50):\n\tExternal calls:\n\t- msg.sender.call.value(_am)() (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#44)\n\tState variables written after the call(s):\n\t- balances[msg.sender] -= _am (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#46)\n\tETH_FUND.balances (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#11) can be used in cross function reentrancies:\n\t- ETH_FUND.CashOut(uint256) (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#37-50)\n\t- ETH_FUND.Deposit() (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#25-35)\n\t- ETH_FUND.balances (shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#11)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol#L37-L50"
+    }
+]

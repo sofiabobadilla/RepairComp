@@ -1,0 +1,23 @@
+[
+    {
+        "description": "Reentrancy in WalletLibrary.confirm(bytes32) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#192-204):\n\tExternal calls:\n\t- require(bool)(m_txs[_h].to.call.value(m_txs[_h].value)(m_txs[_h].data)) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#198)\n\tState variables written after the call(s):\n\t- delete m_txs[_h] (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#201)\n\tWalletLibrary.m_txs (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#281) can be used in cross function reentrancies:\n\t- WalletLibrary.clearPending() (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#259-267)\n\t- WalletLibrary.confirm(bytes32) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#192-204)\n\t- WalletLibrary.execute(address,uint256,bytes) (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#166-186)\n",
+        "check": "reentrancy-eth",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#L192-L204"
+    },
+    {
+        "description": "WalletLibrary.confirm(bytes32).created (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#194) is a local variable never initialized\n",
+        "check": "uninitialized-local",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#L194"
+    },
+    {
+        "description": "WalletLibrary.execute(address,uint256,bytes).created (shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#168) is a local variable never initialized\n",
+        "check": "uninitialized-local",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/access_control/parity_wallet_bug_2/parity_wallet_bug_2_4round.sol#L168"
+    }
+]

@@ -1,0 +1,954 @@
+{
+  "fileName": "results/unchecked_low_level_calls/etherpot_lotto/candidates/cand_6/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 798,
+  "time": 189.616062,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "land(eq(blockReward__@10:uint256,5000000000000000000),eq(blocksPerRound__@4:uint256,6800))"
+    },
+    {
+      "key": "34",
+      "formula": "land(land(geq(winningTicketIndex__@100:uint256,ticketIndex__@108:uint256),eq(blockReward__@10:uint256,5000000000000000000)),eq(blocksPerRound__@4:uint256,6800))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 62,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(buyerIndex + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 64,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(ticketIndex + rounds[roundIndex].ticketsCountByBuyer[buyer])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 73,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getDecisionBlockNumber",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(((roundIndex + 1) * blocksPerRound) + subpotIndex)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 73,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getDecisionBlockNumber",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "((roundIndex + 1) * blocksPerRound)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "IO",
+      "line": 73,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getDecisionBlockNumber",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(roundIndex + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "IO",
+      "line": 80,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpot",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpotsCount",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(subpotsCount + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "IO",
+      "line": 81,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpot",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpotsCount",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(subpotsCount + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "IO",
+      "line": 136,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(msg.value - (msg.value % ticketPrice))",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "IO",
+      "line": 142,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(msg.value - value)",
+      "status": "proven"
+    },
+    {
+      "no": "10",
+      "kind": "IO",
+      "line": 147,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].ticketsCount + ticketsCount)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "IO",
+      "line": 150,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].buyers.length + 1)",
+      "status": "proven"
+    },
+    {
+      "no": "12",
+      "kind": "IO",
+      "line": 154,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].ticketsCountByBuyer[msg.sender] + ticketsCount)",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "IO",
+      "line": 155,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].ticketsCount + ticketsCount)",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "IO",
+      "line": 158,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].pot + value)",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "ETH_LEAK",
+      "line": 110,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "winner.send(subpot);",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "ETH_LEAK",
+      "line": 142,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.send((msg.value - value));",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 57,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(@pre5 == winningTicketIndex)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 60,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(@pre4 == ticketIndex)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 62,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == buyerIndex)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 63,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == buyer)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "NO_EFFECT",
+      "line": 64,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == ticketIndex)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "NO_EFFECT",
+      "line": 77,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpot",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpotsCount",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre7 == subpotsCount)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "NO_EFFECT",
+      "line": 81,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpot",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpotsCount",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre6 == subpotsCount)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "NO_EFFECT",
+      "line": 136,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre17 == value)",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "NO_EFFECT",
+      "line": 146,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre16 == ticketsCount)",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "NO_EFFECT",
+      "line": 147,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre15 == rounds[roundIndex].ticketsCount)",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "NO_EFFECT",
+      "line": 150,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre12 == buyersLength)",
+      "status": "unproven"
+    },
+    {
+      "no": "12",
+      "kind": "NO_EFFECT",
+      "line": 150,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre13 == rounds[roundIndex].buyers.length)",
+      "status": "unproven"
+    },
+    {
+      "no": "13",
+      "kind": "NO_EFFECT",
+      "line": 150,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre14 == Tmp3)",
+      "status": "unproven"
+    },
+    {
+      "no": "14",
+      "kind": "NO_EFFECT",
+      "line": 151,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre11 == rounds[roundIndex].buyers[buyersLength])",
+      "status": "unproven"
+    },
+    {
+      "no": "15",
+      "kind": "NO_EFFECT",
+      "line": 154,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre10 == rounds[roundIndex].ticketsCountByBuyer[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "16",
+      "kind": "NO_EFFECT",
+      "line": 155,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre9 == rounds[roundIndex].ticketsCount)",
+      "status": "unproven"
+    },
+    {
+      "no": "17",
+      "kind": "NO_EFFECT",
+      "line": 158,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre8 == rounds[roundIndex].pot)",
+      "status": "unproven"
+    },
+    {
+      "no": "18",
+      "kind": "ASSIGN_CONST",
+      "line": 62,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(buyerIndex == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "19",
+      "kind": "ASSIGN_CONST",
+      "line": 64,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "(ticketIndex == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "20",
+      "kind": "ASSIGN_CONST",
+      "line": 81,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpot",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpotsCount",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(subpotsCount == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "21",
+      "kind": "ASSIGN_CONST",
+      "line": 136,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(value == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "22",
+      "kind": "ASSIGN_CONST",
+      "line": 147,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].ticketsCount == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "23",
+      "kind": "ASSIGN_CONST",
+      "line": 150,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].buyers.length == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "24",
+      "kind": "ASSIGN_CONST",
+      "line": 154,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].ticketsCountByBuyer[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "25",
+      "kind": "ASSIGN_CONST",
+      "line": 155,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].ticketsCount == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "26",
+      "kind": "ASSIGN_CONST",
+      "line": 158,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "(rounds[roundIndex].pot == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "27",
+      "kind": "DEAD",
+      "line": 50,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "28",
+      "kind": "DEAD",
+      "line": 52,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "29",
+      "kind": "DEAD",
+      "line": 56,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "30",
+      "kind": "DEAD",
+      "line": 66,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "calculateWinner",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "31",
+      "kind": "DEAD",
+      "line": 79,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpot",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpotsCount",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "32",
+      "kind": "DEAD",
+      "line": 80,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpot",
+          "argTypes": [ "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpotsCount",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "33",
+      "kind": "DEAD",
+      "line": 87,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        },
+        {
+          "contractName": "Lotto",
+          "methodName": "getSubpot",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "34",
+      "kind": "DEAD",
+      "line": 92,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "35",
+      "kind": "DEAD",
+      "line": 94,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "36",
+      "kind": "DEAD",
+      "line": 97,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "37",
+      "kind": "DEAD",
+      "line": 99,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "38",
+      "kind": "DEAD",
+      "line": 106,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "39",
+      "kind": "DEAD",
+      "line": 107,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "cash",
+          "argTypes": [ "uint256", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "40",
+      "kind": "DEAD",
+      "line": 135,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "41",
+      "kind": "DEAD",
+      "line": 138,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "42",
+      "kind": "DEAD",
+      "line": 140,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "43",
+      "kind": "DEAD",
+      "line": 149,
+      "signatures": [
+        {
+          "contractName": "Lotto",
+          "methodName": "@fallback",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

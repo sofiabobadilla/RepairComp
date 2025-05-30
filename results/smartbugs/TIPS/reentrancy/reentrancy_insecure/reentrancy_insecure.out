@@ -1,0 +1,45 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc /smartbugs/reentrancy/reentrancy_insecure.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/smartbugs/reentrancy' running
+Compilation warnings/errors on /smartbugs/reentrancy/reentrancy_insecure.sol:
+/smartbugs/reentrancy/reentrancy_insecure.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract Reentrancy_insecure {
+^ (Relevant source part starts here and spans across multiple lines).
+/smartbugs/reentrancy/reentrancy_insecure.sol:16:9: Warning: Different number of components on the left hand side (2) than on the right hand side (1).
+ ... (bool success, ) = msg.sender.call.value(amountToWithdraw)("") ... 
+     ^------------------------------------------------------------^
+
+
+Reentrancy in Reentrancy_insecure.withdrawBalance() (../../smartbugs/reentrancy/reentrancy_insecure.sol#13-19):
+	External calls:
+	- (success) = msg.sender.call.value(amountToWithdraw)() (../../smartbugs/reentrancy/reentrancy_insecure.sol#16)
+	State variables written after the call(s):
+	- userBalances[msg.sender] = 0 (../../smartbugs/reentrancy/reentrancy_insecure.sol#18)
+	Reentrancy_insecure.userBalances (../../smartbugs/reentrancy/reentrancy_insecure.sol#11) can be used in cross function reentrancies:
+	- Reentrancy_insecure.withdrawBalance() (../../smartbugs/reentrancy/reentrancy_insecure.sol#13-19)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+solc-0.4.26 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in Reentrancy_insecure.withdrawBalance() (../../smartbugs/reentrancy/reentrancy_insecure.sol#13-19):
+	- (success) = msg.sender.call.value(amountToWithdraw)() (../../smartbugs/reentrancy/reentrancy_insecure.sol#16)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Contract Reentrancy_insecure (../../smartbugs/reentrancy/reentrancy_insecure.sol#8-20) is not in CapWords
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+/smartbugs/reentrancy/reentrancy_insecure.sol analyzed (1 contracts with 93 detectors), 4 result(s) found
+
+Error running slither
+reentrancy_insecure.sol
+Getting Solidity AST...
+Running TIPS...
+reentrancy_insecure.sol
+0.0032753944396972656
+
+
+

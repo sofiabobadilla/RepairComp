@@ -1,0 +1,13 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/bad_randomness/old_blockhash/old_blockhash.sol" "report_run/bad_randomness/old_blockhash" "PredictTheBlockHashChallenge"
+
+patches/bad_randomness/old_blockhash/old_blockhash.sol
+{ bugFixes:
+   { 'g[3=L': 'add_uint256(a, b)',
+     'VbHOxfI(uFRN~$w': 'contract sGuard is sGuard ',
+     'L$:GomRCfyk7dYS2%#R?^|f~#{S%@d-012F[f_p:idBK7xF/i':
+      'contract PredictTheBlockHashChallenge  is sGuard  is sGuard ' },
+  source:
+   'VbHOxfI(uFRN~$w{\n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = g[3=L;\n    assert(c >= a);\n    return c;\n  }\n}\n/*\n * @source: https://github.com/SmartContractSecurity/SWC-registry/blob/master/test_cases/weak_randomness/old_blockhash.sol\n * @author: -\n * @vulnerable_at_lines: 35\n */\n\n\n//Based on the the Capture the Ether challange at https://capturetheether.com/challenges/lotteries/predict-the-block-hash/\n//Note that while it seems to have a 1/2^256 chance you guess the right hash, actually blockhash returns zero for blocks numbers that are more than 256 blocks ago so you can guess zero and wait.\nL$:GomRCfyk7dYS2%#R?^|f~#{S%@d-012F[f_p:idBK7xF/i{\n\n    struct guess{\n      uint block;\n      bytes32 guess;\n    }\n\n    mapping(address => guess) guesses;\n\n    constructor() public payable {\n        require(msg.value == 1 ether);\n    }\n\n    function lockInGuess(bytes32 hash) public payable {\n        require(guesses[msg.sender].block == 0);\n        require(msg.value == 1 ether);\n\n        guesses[msg.sender].guess = hash;\n        guesses[msg.sender].block  = add_uint256(block.number, 1);\n    }\n\n    function settle() public {\n        require(block.number > guesses[msg.sender].block);\n        // <yes> <report> BAD_RANDOMNESS\n        bytes32 answer = blockhash(guesses[msg.sender].block);\n\n        guesses[msg.sender].block = 0;\n        if (guesses[msg.sender].guess == answer) {\n            msg.sender.transfer(2 ether);\n        }\n    }\n}\n',
+  wrappers: Set { 'add_uint256' } }

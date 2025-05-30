@@ -1,0 +1,52 @@
+[INFO] compiled with solc ver. 0.4.25
+[INFO] all funcs : 7
+[INFO] reachable : 6
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: false
+[STEP] Run analyzer
+[STEP] Collect fix targets
+    (IO, (ETH_FUND/CashOut/[uint256]), 46, (balances[msg.sender] - _am)),
+    (IO, (ETH_FUND/Deposit/[]), 31, (balances[msg.sender] + msg.value)),
+    (ETH_LEAK, (ETH_FUND/CashOut/[uint256]), 44, msg.sender.call.value(_am)()),
+    (RE_EL, (ETH_FUND/CashOut/[uint256]), 44, msg.sender.call.value(_am)())
+
+[INFO] # of basic patch components : 5
+[INFO] extracted components
+[
+InsertLine (31, assume(((balances[msg.sender] + msg.value) >= balances[msg.sender]));),
+InsertLine (46, assume((balances[msg.sender] >= _am));),
+Replace (41, (_am <= balances[msg.sender]), (_am > balances[msg.sender])),
+AtomLst [
+Move ([46] -> 44)
+ElseRevert (line 48)
+],
+AtomLst [
+Add @nonReentrant to (ETH_FUND, Deposit, []) (line 25)
+Add @nonReentrant to (ETH_FUND, CashOut, [uint256]) (line 37)
+Add @nonReentrant to (ETH_FUND, @fallback, []) (line 52)
+]
+]
+- New best candidate, iter 1, 340.730543137s : results/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e/candidates/cand_4/patch.sol
+- New best candidate, iter 6, 1131.12713814s : results/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e/candidates/cand_6/patch.sol
+- Solution found, iter 6, 1131.12713814s : results/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e/candidates/cand_6/patch.sol
+[STEP] Enter Repair Loop
+
+========== Statistics ==========
+# Iter                    : 7
+# Alarm (orginal)         : 4
+# Alarm (patch)           : 0
+# Alarm wo leak (patch)   : 0
+# Edit (min,max)          : 2, 2
+# Patch                   : 1
+- First solution          : results/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e/candidates/cand_6/patch.sol
+- First solution (iter)   : 6
+- First solution (time)   : 1131.12713814
+# Uncompiled candidate    : 0
+# Verifier error          : 0
+
+========== Patch info ==========
+- 1, Size: 2., Edit: 2, Iter: 6, Time: 1131.12713814, results/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e/candidates/cand_6/patch.sol
+
+Time Elapsed (Real) : 1131.18994498
+Time Elapsed (CPU)  : 5.214249

@@ -1,0 +1,156 @@
+{
+  "fileName": "results/reentrancy/etherbank/candidates/cand_4/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 9,
+  "time": 38.122961,
+  "errMsg": null,
+  "invmap": [
+    { "key": "-1", "formula": "true" }, { "key": "0", "formula": "true" }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(userBalances[msg.sender] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(userBalances[msg.sender] + msg.value)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.call.value(amountToWithdraw)()",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "RE_EL",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.call.value(amountToWithdraw)()",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 14,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(EtherBank, addToBalance, [])",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "RE",
+      "line": 19,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(EtherBank, withdrawBalance, [])",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == userBalances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "withdrawBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == amountToWithdraw)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "(userBalances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "EtherBank",
+          "methodName": "addToBalance",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

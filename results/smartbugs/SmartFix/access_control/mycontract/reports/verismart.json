@@ -1,0 +1,75 @@
+{
+  "fileName": "smartbugs/dataset/access_control/mycontract.sol",
+  "baseName": "mycontract.sol",
+  "iter": 3,
+  "time": 0.33302899999999996,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),owner__@3:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "MyContract",
+          "methodName": "sendTo",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "receiver.transfer(amount);",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "TX_ORG",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "MyContract",
+          "methodName": "sendTo",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "assume((tx.origin == owner));",
+      "status": "unproven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "DEAD",
+      "line": 20,
+      "signatures": [
+        {
+          "contractName": "MyContract",
+          "methodName": "sendTo",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "DEAD",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "MyContract",
+          "methodName": "sendTo",
+          "argTypes": [ "address", "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

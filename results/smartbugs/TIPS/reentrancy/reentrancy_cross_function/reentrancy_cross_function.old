@@ -1,0 +1,51 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc /smartbugs/reentrancy/reentrancy_cross_function.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/smartbugs/reentrancy' running
+Compilation warnings/errors on /smartbugs/reentrancy/reentrancy_cross_function.sol:
+/smartbugs/reentrancy/reentrancy_cross_function.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract Reentrancy_cross_function {
+^ (Relevant source part starts here and spans across multiple lines).
+/smartbugs/reentrancy/reentrancy_cross_function.sol:23:9: Warning: Different number of components on the left hand side (2) than on the right hand side (1).
+        (bool success, ) = msg.sender.call.value(amountToWithdraw)(""); // At this point, the caller's code is executed, and can call transfer()
+        ^------------------------------------------------------------^
+/smartbugs/reentrancy/reentrancy_cross_function.sol:13:5: Warning: No visibility specified. Defaulting to "public". 
+    function transfer(address to, uint amount) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+Reentrancy in Reentrancy_cross_function.withdrawBalance() (../../smartbugs/reentrancy/reentrancy_cross_function.sol#20-26):
+	External calls:
+	- (success) = msg.sender.call.value(amountToWithdraw)() (../../smartbugs/reentrancy/reentrancy_cross_function.sol#23)
+	State variables written after the call(s):
+	- userBalances[msg.sender] = 0 (../../smartbugs/reentrancy/reentrancy_cross_function.sol#25)
+	Reentrancy_cross_function.userBalances (../../smartbugs/reentrancy/reentrancy_cross_function.sol#11) can be used in cross function reentrancies:
+	- Reentrancy_cross_function.transfer(address,uint256) (../../smartbugs/reentrancy/reentrancy_cross_function.sol#13-18)
+	- Reentrancy_cross_function.withdrawBalance() (../../smartbugs/reentrancy/reentrancy_cross_function.sol#20-26)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+Reentrancy_cross_function (../../smartbugs/reentrancy/reentrancy_cross_function.sol#8-27) has incorrect ERC20 function interface:Reentrancy_cross_function.transfer(address,uint256) (../../smartbugs/reentrancy/reentrancy_cross_function.sol#13-18)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-erc20-interface
+
+solc-0.4.26 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in Reentrancy_cross_function.withdrawBalance() (../../smartbugs/reentrancy/reentrancy_cross_function.sol#20-26):
+	- (success) = msg.sender.call.value(amountToWithdraw)() (../../smartbugs/reentrancy/reentrancy_cross_function.sol#23)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Contract Reentrancy_cross_function (../../smartbugs/reentrancy/reentrancy_cross_function.sol#8-27) is not in CapWords
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+/smartbugs/reentrancy/reentrancy_cross_function.sol analyzed (1 contracts with 93 detectors), 5 result(s) found
+
+
+Error running slither
+reentrancy_cross_function.sol
+Getting Solidity AST...
+Running TIPS...
+reentrancy_cross_function.sol
+0.003994464874267578
+

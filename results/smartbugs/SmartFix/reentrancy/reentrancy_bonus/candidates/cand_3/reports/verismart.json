@@ -1,0 +1,164 @@
+{
+  "fileName": "results/reentrancy/reentrancy_bonus/candidates/cand_3/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 4,
+  "time": 12.961031,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(eq(_locked__@3:bool,cond(true)),usum(@Invest_sum:uint256,rewardsForA__@36:mapping(address => uint256)))"
+    },
+    {
+      "key": "0",
+      "formula": "usum(@Invest_sum:uint256,rewardsForA__@36:mapping(address => uint256))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": true,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 37,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(rewardsForA[recipient] + 100)",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "withdrawReward",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(success,  ) = recipient.call.value(amountToWithdraw)(\"\");",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "RE_EL",
+      "line": 30,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "withdrawReward",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(success,  ) = recipient.call.value(amountToWithdraw)(\"\");",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "RE",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "withdrawReward",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(Reentrancy_bonus, withdrawReward, [address])",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE",
+      "line": 34,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(Reentrancy_bonus, getFirstWithdrawalBonus, [address])",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "withdrawReward",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre1 == amountToWithdraw)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 37,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre2 == rewardsForA[recipient])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ASSIGN_CONST",
+      "line": 37,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(rewardsForA[recipient] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 39,
+      "signatures": [
+        {
+          "contractName": "Reentrancy_bonus",
+          "methodName": "getFirstWithdrawalBonus",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "false",
+      "status": "proven"
+    }
+  ]
+}

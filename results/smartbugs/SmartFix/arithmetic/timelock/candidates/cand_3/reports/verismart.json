@@ -1,0 +1,243 @@
+{
+  "fileName": "results/arithmetic/timelock/candidates/cand_3/patch.sol",
+  "baseName": "patch.sol",
+  "iter": 45,
+  "time": 157.168027,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "usum(@Invest_sum:uint256,balances__@5:mapping(address => uint256))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] + msg.value)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(now + 604800)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "IO",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "increaseLockTime",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(lockTime[msg.sender] + _secondsToIncrease)",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "IO",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "increaseLockTime",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(lockTime[msg.sender] + _secondsToIncrease)",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "ETH_LEAK",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.transfer(transferValue);",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == balances[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == lockTime[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "increaseLockTime",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == lockTime[msg.sender])",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre4 == transferValue)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ASSIGN_CONST",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(balances[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "ASSIGN_CONST",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "deposit",
+          "argTypes": []
+        }
+      ],
+      "exp": "(lockTime[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "ASSIGN_CONST",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "increaseLockTime",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(lockTime[msg.sender] == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "increaseLockTime",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "DEAD",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "11",
+      "kind": "DEAD",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "TimeLock",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

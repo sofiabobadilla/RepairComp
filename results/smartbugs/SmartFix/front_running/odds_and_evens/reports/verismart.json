@@ -1,0 +1,243 @@
+{
+  "fileName": "smartbugs/dataset/front_running/odds_and_evens.sol",
+  "baseName": "odds_and_evens.sol",
+  "iter": 44,
+  "time": 12.615378,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "land(geq(1000000000000000000,tot__@12:uint8),eq(read(@TU:mapping(address => bool),owner__@14:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(tot + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "andTheWinnerIs",
+          "argTypes": []
+        }
+      ],
+      "exp": "(players[0].number + players[1].number)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 38,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "andTheWinnerIs",
+          "argTypes": []
+        }
+      ],
+      "exp": "res = players[0].addr.send(1800000000000000000);",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 41,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "andTheWinnerIs",
+          "argTypes": []
+        }
+      ],
+      "exp": "res = players[1].addr.send(1800000000000000000);",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ETH_LEAK",
+      "line": 50,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "getProfit",
+          "argTypes": []
+        }
+      ],
+      "exp": "res = msg.sender.send(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "TX_ORG",
+      "line": 49,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "getProfit",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender != owner));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre2 == players[tot].number)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 28,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre3 == players[tot].addr)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "NO_EFFECT",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(@pre1 == tot)",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "NO_EFFECT",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "andTheWinnerIs",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre4 == n)",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "ASSIGN_CONST",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "(tot == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "ASSIGN_CONST",
+      "line": 36,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "andTheWinnerIs",
+          "argTypes": []
+        }
+      ],
+      "exp": "((!(players[0].addr != players[1].addr)) || (n == 0))",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 26,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 31,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "play",
+          "argTypes": [ "uint256" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "9",
+      "kind": "DEAD",
+      "line": 37,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "andTheWinnerIs",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "10",
+      "kind": "DEAD",
+      "line": 49,
+      "signatures": [
+        {
+          "contractName": "OddsAndEvens",
+          "methodName": "getProfit",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

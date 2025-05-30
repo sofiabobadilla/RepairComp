@@ -1,0 +1,114 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/time_manipulation' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:16:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Governmental() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:18:28: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+    if (msg.value<1 ether) throw;
+                           ^---^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:22:30: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+    if (msg.value<jackpot/2) throw;
+                             ^---^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:31:7: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+      throw;
+      ^---^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:9:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract Governmental {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:33:5: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+    lastInvestor.send(jackpot);
+    ^------------------------^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:34:16: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+    owner.send(this.balance-1 ether);
+               ^----------^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:34:5: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+    owner.send(this.balance-1 ether);
+    ^------------------------------^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:16:3: Warning: No visibility specified. Defaulting to "public". 
+  function Governmental() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:18:9: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+    if (msg.value<1 ether) throw;
+        ^-------^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:21:3: Warning: No visibility specified. Defaulting to "public". 
+  function invest() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:22:9: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+    if (msg.value<jackpot/2) throw;
+        ^-------^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:24:16: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+    jackpot += msg.value/2;
+               ^-------^
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:29:3: Warning: No visibility specified. Defaulting to "public". 
+  function resetInvestment() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:44:3: Warning: No visibility specified. Defaulting to "public". 
+  function attack(address target, uint count) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol:46:23: Warning: "msg.gas" has been deprecated in favor of "gasleft()"
+      this.attack.gas(msg.gas-2000)(target, count+1);
+                      ^-----^
+
+
+Governmental.resetInvestment() (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#29-39) sends eth to arbitrary user
+	Dangerous calls:
+	- owner.send(this.balance - 1000000000000000000) (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#34)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+
+Attacker.attack(address,uint256) (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#44-51) contains a tautology or contradiction:
+	- 0 <= count && count < 1023 (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#45)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#tautology-or-contradiction
+
+Governmental.resetInvestment() (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#29-39) ignores return value by lastInvestor.send(jackpot) (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#33)
+Governmental.resetInvestment() (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#29-39) ignores return value by owner.send(this.balance - 1000000000000000000) (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#34)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-send
+
+Governmental.resetInvestment() (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#29-39) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < lastInvestmentTimestamp + ONE_MINUTE (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#30)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+Deprecated standard detected THROW (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#18):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#22):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected THROW (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#31):
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected this.attack.gas(msg.gas - 2000)(target,count + 1) (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#46):
+	- Usage of "msg.gas" should be replaced with "gasleft()"
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#deprecated-standards
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Variable Governmental.ONE_MINUTE (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#14) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Reentrancy in Governmental.resetInvestment() (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#29-39):
+	External calls:
+	- lastInvestor.send(jackpot) (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#33)
+	- owner.send(this.balance - 1000000000000000000) (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#34)
+	State variables written after the call(s):
+	- jackpot = 1000000000000000000 (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#37)
+	- lastInvestmentTimestamp = 0 (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#38)
+	- lastInvestor = 0 (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#36)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+
+Governmental.ONE_MINUTE (../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol#14) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+../smartbugs-curated/dataset/time_manipulation/governmental_survey.sol analyzed (2 contracts with 95 detectors), 13 result(s) found
+
+Error running slither
+governmental_survey.sol
+Getting Solidity AST...
+Running TIPS...
+governmental_survey.sol
+0.010379314422607422
+
+

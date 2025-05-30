@@ -1,0 +1,69 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/bad_randomness/etheraffle.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/bad_randomness' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:54:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Ethraffle_v4b() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:9:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract Ethraffle_v4b {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:81:13: Warning: Invoking events without "emit" prefix is deprecated.
+            TicketPurchase(raffleId, msg.sender, currTicket);
+            ^----------------------------------------------^
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:103:28: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 randHash = keccak256(seed1, seed2, seed3);
+                           ^----------------------------^
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:107:9: Warning: Invoking events without "emit" prefix is deprecated.
+        RaffleResult(raffleId, winningNumber, winningAddress, seed1, seed2, seed3, randHash);
+        ^----------------------------------------------------------------------------------^
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:132:17: Warning: Invoking events without "emit" prefix is deprecated.
+                TicketRefund(raffleId, msg.sender, i);
+                ^-----------------------------------^
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:148:21: Warning: Invoking events without "emit" prefix is deprecated.
+                    TicketRefund(raffleId, contestants[i].addr, i);
+                    ^--------------------------------------------^
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol:153:13: Warning: Invoking events without "emit" prefix is deprecated.
+            RaffleResult(raffleId, totalTickets, address(0), address(0), address(0), 0, 0);
+            ^----------------------------------------------------------------------------^
+
+
+Ethraffle_v4b.endRaffle() (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#142-160) has external calls inside a loop: contestants[i].addr.transfer(pricePerTicket) (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#149)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+
+Ethraffle_v4b.buyTickets() (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#63-94) has costly operations inside a loop:
+	- currTicket = nextTicket ++ (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#77)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#costly-operations-inside-a-loop
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Contract Ethraffle_v4b (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#9-173) is not in CapWords
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Reentrancy in Ethraffle_v4b.endRaffle() (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#142-160):
+	External calls:
+	- contestants[i].addr.transfer(pricePerTicket) (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#149)
+	State variables written after the call(s):
+	- blockNumber = block.number (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#157)
+	- gaps.length = 0 (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#158)
+	- nextTicket = 0 (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#155)
+	- raffleId ++ (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#154)
+	Event emitted after the call(s):
+	- RaffleResult(raffleId,totalTickets,address(0),address(0),address(0),0,0) (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#153)
+	- TicketRefund(raffleId,contestants[i].addr,i) (../smartbugs-curated/dataset/bad_randomness/etheraffle.sol#148)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+../smartbugs-curated/dataset/bad_randomness/etheraffle.sol analyzed (1 contracts with 95 detectors), 5 result(s) found
+
+Error running slither
+etheraffle.sol
+Getting Solidity AST...
+Running TIPS...
+etheraffle.sol
+0.006257295608520508
+
+

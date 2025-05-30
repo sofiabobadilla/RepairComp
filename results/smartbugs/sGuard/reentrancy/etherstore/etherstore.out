@@ -1,0 +1,18 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/reentrancy/etherstore.sol" "results/reentrancy/etherstore" "EtherStore"
+
+smartbugs/dataset/reentrancy/etherstore.sol
+{ bugFixes:
+   { 'Ah-+Vyo\']ct{|[EY~~iVM#\'eyM>z9-RM%:\'!J@':
+      'balances[msg.sender] = sub_uint256(balances[msg.sender], _weiToWithdraw)',
+     '}c3}I}YM>U$E]{Kwtajow-6kyaO[Wk@~i':
+      'balances[msg.sender] = add_uint256(balances[msg.sender], msg.value)',
+     'mg6gspGc:6OrS(i4Vqh@gL{': ' function depositFunds() nonReentrant_ ',
+     '=;6(7ve*B"#;cbqB-X"HfJqGn}~B6UZhJ-e36E': 'add_uint256(lastWithdrawTime[msg.sender], 1 weeks)',
+     '@|m>+>lOqR*U*l;7+oY"': 'contract EtherStore  is sGuard ',
+     'd#=oL7XGG\'s:~?(#^Xc)9cdn{p1oF9d9An_r+$PlW^%"<1)':
+      ' function withdrawFunds (uint256 _weiToWithdraw) nonReentrant_ ' },
+  source:
+   '/*\n * @source: https://github.com/sigp/solidity-security-blog\n * @author: Suhabe Bugrara\n * @vulnerable_at_lines: 27\n */\n\n//added pragma version\n\n@|m>+>lOqR*U*l;7+oY"{\n\n    uint256 public withdrawalLimit = 1 ether;\n    mapping(address => uint256) public lastWithdrawTime;\n    mapping(address => uint256) public balances;\n\n    mg6gspGc:6OrS(i4Vqh@gL{ public payable {\n        }c3}I}YM>U$E]{Kwtajow-6kyaO[Wk@~i;\n    }\n\n    d#=oL7XGG\'s:~?(#^Xc)9cdn{p1oF9d9An_r+$PlW^%"<1) public {\n        require(balances[msg.sender] >= _weiToWithdraw);\n        // limit the withdrawal\n        require(_weiToWithdraw <= withdrawalLimit);\n        // limit the time allowed to withdraw\n        require(now >= =;6(7ve*B"#;cbqB-X"HfJqGn}~B6UZhJ-e36E);\n        // <yes> <report> REENTRANCY\n        require(msg.sender.call.value(_weiToWithdraw)());\n        Ah-+Vyo\']ct{|[EY~~iVM#\'eyM>z9-RM%:\'!J@;\n        lastWithdrawTime[msg.sender] = now;\n    }\n }\n',
+  wrappers: Set { 'sub_uint256', 'add_uint256', 'nonReentrant_' } }

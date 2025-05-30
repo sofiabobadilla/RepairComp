@@ -1,0 +1,145 @@
+{
+  "fileName": "smartbugs/dataset/unchecked_low_level_calls/0x84d9ec85c9c568eb332b7226a8f826d897e0a4a8.sol",
+  "baseName": "0x84d9ec85c9c568eb332b7226a8f826d897e0a4a8.sol",
+  "iter": 4,
+  "time": 0.633373,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "land(eq(read(@TU:mapping(address => bool),newOwner__@25:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@14:address),cond(true)))"
+    },
+    {
+      "key": "0",
+      "formula": "land(eq(read(@TU:mapping(address => bool),newOwner__@25:address),cond(true)),eq(read(@TU:mapping(address => bool),owner__@14:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 56,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "execute",
+          "argTypes": [ "address", "uint256", "dbytes" ]
+        }
+      ],
+      "exp": "_dst.call.value(_value)(_data);",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "RE_EL",
+      "line": 56,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "execute",
+          "argTypes": [ "address", "uint256", "dbytes" ]
+        }
+      ],
+      "exp": "_dst.call.value(_value)(_data);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "TX_ORG",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Owned",
+          "methodName": "execute",
+          "argTypes": [ "address", "uint256", "dbytes" ]
+        }
+      ],
+      "exp": "assume((msg.sender == owner));",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "TX_ORG",
+      "line": 46,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "acceptOwnership",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == newOwner));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 39,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        }
+      ],
+      "exp": "(@pre1 == newOwner)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "NO_EFFECT",
+      "line": 47,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "acceptOwnership",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre2 == owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "changeOwner",
+          "argTypes": [ "address" ]
+        },
+        {
+          "contractName": "Owned",
+          "methodName": "execute",
+          "argTypes": [ "address", "uint256", "dbytes" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 46,
+      "signatures": [
+        {
+          "contractName": "Owned",
+          "methodName": "acceptOwnership",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

@@ -1,0 +1,289 @@
+{
+  "fileName": "smartbugs/dataset/unchecked_low_level_calls/0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4.sol",
+  "baseName": "0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4.sol",
+  "iter": 2,
+  "time": 2.995683,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "-1",
+      "formula": "eq(read(@TU:mapping(address => bool),Owner__@5:address),cond(true))"
+    },
+    {
+      "key": "0",
+      "formula": "eq(read(@TU:mapping(address => bool),Owner__@5:address),cond(true))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "ETH_LEAK",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "GetHoneyFromJar",
+          "argTypes": []
+        }
+      ],
+      "exp": "Owner.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "2",
+      "kind": "ETH_LEAK",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "GetHoneyFromJar",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "Owner.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "4",
+      "kind": "ETH_LEAK",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "Command",
+          "argTypes": [ "address", "dbytes" ]
+        }
+      ],
+      "exp": "adr.call.value(msg.value)(data);",
+      "status": "proven"
+    },
+    {
+      "no": "5",
+      "kind": "RE_EL",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "GetHoneyFromJar",
+          "argTypes": []
+        }
+      ],
+      "exp": "Owner.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "6",
+      "kind": "RE_EL",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "GetHoneyFromJar",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "7",
+      "kind": "RE_EL",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "Owner.transfer(this.balance);",
+      "status": "proven"
+    },
+    {
+      "no": "8",
+      "kind": "RE_EL",
+      "line": 29,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "Command",
+          "argTypes": [ "address", "dbytes" ]
+        }
+      ],
+      "exp": "adr.call.value(msg.value)(data);",
+      "status": "proven"
+    },
+    {
+      "no": "9",
+      "kind": "TX_ORG",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == address(270505938017529460771666562100699264921101603511)));",
+      "status": "proven"
+    },
+    {
+      "no": "10",
+      "kind": "TX_ORG",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "assume((msg.sender == Owner));",
+      "status": "proven"
+    },
+    {
+      "no": "11",
+      "kind": "TX_ORG",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "Command",
+          "argTypes": [ "address", "dbytes" ]
+        }
+      ],
+      "exp": "assume((msg.sender == Owner));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == Owner)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "DEAD",
+      "line": 15,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "GetHoneyFromJar",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 16,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "GetHoneyFromJar",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "4",
+      "kind": "DEAD",
+      "line": 17,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "GetHoneyFromJar",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "5",
+      "kind": "DEAD",
+      "line": 21,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "6",
+      "kind": "DEAD",
+      "line": 22,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "7",
+      "kind": "DEAD",
+      "line": 23,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    },
+    {
+      "no": "8",
+      "kind": "DEAD",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "HomeyJar",
+          "methodName": "Command",
+          "argTypes": [ "address", "dbytes" ]
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

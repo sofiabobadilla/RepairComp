@@ -1,0 +1,68 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/reentrancy' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol:
+../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol:16:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function ETH_VAULT(address _log)
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract ETH_VAULT
+^ (Relevant source part starts here and spans across multiple lines).
+
+
+Log (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#52-77) contract sets array length with a user-controlled value:
+	- History.push(LastMsg) (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#74)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#array-length-assignment
+
+Reentrancy in ETH_VAULT.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#33-46):
+	External calls:
+	- msg.sender.call.value(_am)() (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#40)
+	State variables written after the call(s):
+	- balances[msg.sender] -= _am (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#42)
+	ETH_VAULT.balances (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#10) can be used in cross function reentrancies:
+	- ETH_VAULT.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#33-46)
+	- ETH_VAULT.Deposit() (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#22-31)
+	- ETH_VAULT.balances (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#10)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Low level call in ETH_VAULT.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#33-46):
+	- msg.sender.call.value(_am)() (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#40)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Contract ETH_VAULT (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#8-50) is not in CapWords
+Function ETH_VAULT.Deposit() (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#22-31) is not in mixedCase
+Function ETH_VAULT.CashOut(uint256) (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#33-46) is not in mixedCase
+Parameter ETH_VAULT.CashOut(uint256)._am (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#33) is not in mixedCase
+Variable ETH_VAULT.MinDeposit (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#12) is not in mixedCase
+Variable ETH_VAULT.TransferLog (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#14) is not in mixedCase
+Function Log.AddMessage(address,uint256,string) (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#67-75) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._adr (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#67) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._val (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#67) is not in mixedCase
+Parameter Log.AddMessage(address,uint256,string)._data (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#67) is not in mixedCase
+Variable Log.History (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#63) is not in mixedCase
+Variable Log.LastMsg (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#65) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+ETH_VAULT.MinDeposit (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#12) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+
+AddMessage(address,uint256,string) should be declared external:
+	- Log.AddMessage(address,uint256,string) (../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol#67-75)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external
+../smartbugs-curated/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol analyzed (2 contracts with 95 detectors), 18 result(s) found
+
+Error running slither
+0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol
+Getting Solidity AST...
+Running TIPS...
+0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol
+0.007985591888427734
+
+

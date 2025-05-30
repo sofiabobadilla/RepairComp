@@ -1,0 +1,78 @@
+[CHECKER] Integer Over/Underflows
+[CHECKER] Suicidal
+[CHECKER] Re-Entrancy
+[CHECKER] Improper use of Tx.origin
+[CHECKER] Ether-Leaking
+
+[INFO] all funcs : 12
+[INFO] reachable : 5
+[INFO] Generating Paths ... took 0.000168s
+[INFO] # path : 11
+
+[INFO] Violate CEI: true
+[INFO] msg.sender = this possible: true
+[INFO] Performing Interval Analysis ... took 0.000249s
+Generating VCs ... took 0.002494s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 1 Total elapsed : 0.038428
+[
+-1 -> true
+0 -> true
+]
+[
+]
+1/3 ... [IO] line 27, (tokenBalance[msg.sender] + 20) ... proven
+2/3 ... [IO] line 28, (tokenBalance[msg.sender] + 20) ... proven
+3/3 ... [RE] line 26, (ModifierEntrancy, airDrop, []) ... unproven
+took 0.017169s
+
+Generating VCs ... took 0.001027s
+Checking validity of VCs ... 
+=============== Invariants Found ===============
+Iter: 2 Total elapsed : 0.064944
+[
+-1 -> (_locked__@3 == true)
+0 -> true
+]
+[
+]
+1/3 ... [IO] line 27, (tokenBalance[msg.sender] + 20) ... proven
+2/3 ... [IO] line 28, (tokenBalance[msg.sender] + 20) ... proven
+3/3 ... [RE] line 26, (ModifierEntrancy, airDrop, []) ... proven
+took 0.04661s
+
+Generating VCs ... took 0.000288s
+Checking validity of VCs ... 
+1/5 ... [NO_EFFECT] line 28, (@pre1 == tokenBalance[msg.sender]) ... unproven
+2/5 ... [ASSIGN_CONST] line 28, (tokenBalance[msg.sender] == 0) ... unproven
+3/5 ... [DEAD] line 27, false ... unproven
+4/5 ... [DEAD] line 33, false ... unproven
+5/5 ... [DEAD] line 38, false ... unproven
+took 0.216721s
+
+
+===== Vulnerability Report =====
+[1] [IO] line 27, (tokenBalance[msg.sender] + 20) : proven
+[2] [IO] line 28, (tokenBalance[msg.sender] + 20) : proven
+[3] [RE] line 26, (ModifierEntrancy, airDrop, []) : proven
+
+===== Regression Report =====
+[1] [NO_EFFECT] line 28, (@pre1 == tokenBalance[msg.sender]) : unproven
+[2] [ASSIGN_CONST] line 28, (tokenBalance[msg.sender] == 0) : unproven
+[3] [DEAD] line 27, false : unproven
+[4] [DEAD] line 33, false : unproven
+[5] [DEAD] line 38, false : unproven
+
+============ Statistics ============
+# Iter                    : 2
+# Alarm / Query           : 0 / 3
+- integer over/underflow  : 0 / 2
+- kill-anyone             : 0 / 0
+- ether-leaking           : 0 / 0
+- reentrancy-leaking      : 0 / 0
+- reentrancy              : 0 / 1
+- tx.origin               : 0 / 0
+
+Time Elapsed (Real) : 0.350790977478
+Time Elapsed (CPU)  : 0.319827

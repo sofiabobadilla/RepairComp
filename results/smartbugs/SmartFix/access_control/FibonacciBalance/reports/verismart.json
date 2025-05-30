@@ -1,0 +1,103 @@
+{
+  "fileName": "smartbugs/dataset/access_control/FibonacciBalance.sol",
+  "baseName": "FibonacciBalance.sol",
+  "iter": 279,
+  "time": 25.197388,
+  "errMsg": null,
+  "invmap": [
+    {
+      "key": "0",
+      "formula": "land(land(land(land(geq(start__@8:uint256,calculatedFibNumber__@5:uint256),geq(withdrawalCounter__@10:uint256,calculatedFibNumber__@5:uint256)),eq(calculatedFibNumber__@5:uint256,0)),eq(start__@8:uint256,3)),eq(read(@TU:mapping(address => bool),fibonacciLibrary__@3:address),cond(true)))"
+    }
+  ],
+  "specmap": [],
+  "cei_violated": false,
+  "vul_result": [
+    {
+      "no": "1",
+      "kind": "IO",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "FibonacciBalance",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "(withdrawalCounter + 1)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "IO",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "FibonacciBalance",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "(calculatedFibNumber * 1000000000000000000)",
+      "status": "proven"
+    },
+    {
+      "no": "3",
+      "kind": "ETH_LEAK",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "FibonacciBalance",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "msg.sender.transfer((calculatedFibNumber * 1000000000000000000));",
+      "status": "proven"
+    }
+  ],
+  "reg_result": [
+    {
+      "no": "1",
+      "kind": "NO_EFFECT",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "FibonacciBalance",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "(@pre1 == withdrawalCounter)",
+      "status": "unproven"
+    },
+    {
+      "no": "2",
+      "kind": "ASSIGN_CONST",
+      "line": 27,
+      "signatures": [
+        {
+          "contractName": "FibonacciBalance",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "(withdrawalCounter == 0)",
+      "status": "unproven"
+    },
+    {
+      "no": "3",
+      "kind": "DEAD",
+      "line": 32,
+      "signatures": [
+        {
+          "contractName": "FibonacciBalance",
+          "methodName": "withdraw",
+          "argTypes": []
+        }
+      ],
+      "exp": "false",
+      "status": "unproven"
+    }
+  ]
+}

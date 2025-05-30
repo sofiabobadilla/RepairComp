@@ -1,0 +1,14 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/reentrancy_dao/reentrancy_dao.sol" "report_run/reentrancy/reentrancy_dao" "ReentrancyDAO"
+
+patches/reentrancy/reentrancy_dao/reentrancy_dao.sol
+{ bugFixes:
+   { 'zk3:e': 'add_uint256(a, b)',
+     'KS|OdXzsmko8sbL}\'D': ' function deposit() nonReentrant_ ',
+     'BIfPg1<t}^a%%?+': 'contract sGuard is sGuard ',
+     '~pC@<oi%4Y9BNV",)9|++)': ' function withdrawAll() nonReentrant_ ',
+     'Bh58\'1(p]-<B\'~^@_,ut`-V^xO:mxf>V8L': 'contract ReentrancyDAO  is sGuard  is sGuard ' },
+  source:
+   'BIfPg1<t}^a%%?+{\n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = zk3:e;\n    assert(c >= a);\n    return c;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n}\n/*\n * @source: https://github.com/ConsenSys/evm-analyzer-benchmark-suite\n * @author: Suhabe Bugrara\n * @vulnerable_at_lines: 18\n */\n\n\nBh58\'1(p]-<B\'~^@_,ut`-V^xO:mxf>V8L{\n    mapping (address => uint) credit;\n    uint balance;\n\n     ~pC@<oi%4Y9BNV",)9|++) nonReentrant_  public {\n        uint oCredit = credit[msg.sender];\n        if (oCredit > 0) {\n            balance -= oCredit;\n            // <yes> <report> REENTRANCY\n            bool callResult = msg.sender.call.value(oCredit)();\n            require (callResult);\n            credit[msg.sender] = 0;\n        }\n    }\n\n     KS|OdXzsmko8sbL}\'D nonReentrant_  public payable {\n        credit[msg.sender] = add_uint256(credit[msg.sender], msg.value);\n        balance += msg.value;\n    }\n}\n',
+  wrappers: Set { 'add_uint256', 'nonReentrant_' } }

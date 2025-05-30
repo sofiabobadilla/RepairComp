@@ -1,0 +1,47 @@
+Getting Slither report...
+Switched global version to 0.4.26
+
+
+
+'solc --version' running
+'solc ../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes,compact-format --allow-paths .,/home/mokita/sc_study/temp/smartbugs-curated/dataset/front_running' running
+Compilation warnings/errors on ../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol:
+../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol:13:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function EthTxOrderDependenceMinimal() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol:8:1: Warning: Source file does not specify required compiler version!Consider adding "pragma solidity ^0.4.26;"
+contract EthTxOrderDependenceMinimal {
+^ (Relevant source part starts here and spans across multiple lines).
+../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol:26:5: Warning: No visibility specified. Defaulting to "public". 
+    function claimReward(uint256 submission) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+EthTxOrderDependenceMinimal.setReward() (../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol#17-24) should emit an event for: 
+	- reward = msg.value (../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol#23) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-arithmetic
+
+solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Reentrancy in EthTxOrderDependenceMinimal.claimReward(uint256) (../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol#26-32):
+	External calls:
+	- msg.sender.transfer(reward) (../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol#30)
+	State variables written after the call(s):
+	- claimed = true (../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol#31)
+Reentrancy in EthTxOrderDependenceMinimal.setReward() (../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol#17-24):
+	External calls:
+	- owner.transfer(reward) (../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol#22)
+	State variables written after the call(s):
+	- reward = msg.value (../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol#23)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+../smartbugs-curated/dataset/front_running/eth_tx_order_dependence_minimal.sol analyzed (1 contracts with 95 detectors), 4 result(s) found
+
+Error running slither
+eth_tx_order_dependence_minimal.sol
+Getting Solidity AST...
+Running TIPS...
+eth_tx_order_dependence_minimal.sol
+0.0008647441864013672
+
+

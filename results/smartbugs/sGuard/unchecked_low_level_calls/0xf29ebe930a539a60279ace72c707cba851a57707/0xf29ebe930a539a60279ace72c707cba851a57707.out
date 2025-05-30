@@ -1,0 +1,9 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol" "results/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707" "B"
+
+smartbugs/dataset/unchecked_low_level_calls/0xf29ebe930a539a60279ace72c707cba851a57707.sol
+{ bugFixes: {},
+  source:
+   '/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 16\n */\n\n\n\ncontract B {\n    address public owner = msg.sender;\n    \n    function go() public payable {\n        address target = 0xC8A60C51967F4022BF9424C337e9c6F0bD220E1C;\n        // <yes> <report> UNCHECKED_LL_CALLS\n        target.call.value(msg.value)();\n        owner.transfer(address(this).balance);\n    }\n    \n    function() public payable {\n    }\n}',
+  wrappers: Set {} }

@@ -1,0 +1,11 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "smartbugs/dataset/unchecked_low_level_calls/lotto.sol" "results/unchecked_low_level_calls/lotto" "Lotto"
+
+smartbugs/dataset/unchecked_low_level_calls/lotto.sol
+{ bugFixes:
+   { 'NH+6l@boD!<}l.hjxzYAG9v': ' function sendToWinner() nonReentrant_ ',
+     ':KbOgZD?W9h5Pt^': 'contract Lotto  is sGuard ' },
+  source:
+   '/*\n * @source: https://github.com/sigp/solidity-security-blog\n * @author: Suhabe Bugrara\n * @vulnerable_at_lines: 20,27\n */\n\n \n :KbOgZD?W9h5Pt^{\n\n     bool public payedOut = false;\n     address public winner;\n     uint public winAmount;\n\n     // ... extra functionality here\n\n     NH+6l@boD!<}l.hjxzYAG9v public {\n         require(!payedOut);\n         // <yes> <report> UNCHECKED_LL_CALLS\n         winner.send(winAmount);\n         payedOut = true;\n     }\n\n     function withdrawLeftOver() public {\n         require(payedOut);\n         // <yes> <report> UNCHECKED_LL_CALLS\n         msg.sender.send(this.balance);\n     }\n }\n',
+  wrappers: Set { 'nonReentrant_' } }

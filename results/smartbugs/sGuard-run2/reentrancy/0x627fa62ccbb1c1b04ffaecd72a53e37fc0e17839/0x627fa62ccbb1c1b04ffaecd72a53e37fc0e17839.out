@@ -1,0 +1,23 @@
+
+> symEvm@1.0.0 dev /sGuard
+> node src/index.js "patches/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol" "report_run/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839" "TokenBank"
+
+patches/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol
+{ bugFixes:
+   { 'k8=+j': 'add_uint256(a, b)',
+     '.&FP2{=]vb}!4V^3A3@7L~K#19v8#RB7vKB(zZCn9VTf~:XJ8zK':
+      ' function WithdrawToHolder(address _addr, uint _wei) nonReentrant_ ',
+     '1(WN2*E7m%mhFNGD)l5-`uwtNHLpEaz8w{+N"D|sDI/.vpz1{_w?Zq\\AfA%N-}7^sRR6a?':
+      ' function WitdrawTokenToHolder(address _to,address _token,uint _amount) nonReentrant_ ',
+     '^%+!B.TEh$Wq+lfCv5': ' function Deposit() nonReentrant_ ',
+     'dMg$GNgXI,OmnXH>bZ`?5': 'contract TokenBank is sGuard, ',
+     'LF[Luf:kCaG$Vg*<l(A\\&,swC/T}': 'contract Ownable\n is sGuard  is sGuard ',
+     XtQTJ: 'sub_uint256(a, b)',
+     '*z8n,\'#DO4xFrKcSgP%oU"-h$`t%bkk=P(': ' function changeOwner(address addr) nonReentrant_ ',
+     '8aA|cd%"rr2r$~`PE': 'contract Token is sGuard, ',
+     'Hw?_ubCw[d-2-%zoOi*(H*!': ' function confirmOwner() nonReentrant_ ',
+     'Dp2Tft9`,,tGo+t': 'contract sGuard is sGuard ',
+     'GdX(.2fl|,,H&BK\'d.cqGLj3': ' function initTokenBank() nonReentrant_ ' },
+  source:
+   'Dp2Tft9`,,tGo+t{\n  function sub_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    assert(b <= a);\n    return XtQTJ;\n  }\n  \n  bool internal locked_;\n  constructor() internal {\n    locked_ = false;\n  }\n  modifier nonReentrant_() {\n    require(!locked_);\n    locked_ = true;\n    _;\n    locked_ = false;\n  }\n  \n  function add_uint256(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = k8=+j;\n    assert(c >= a);\n    return c;\n  }\n}\n/*\n * @source: etherscan.io \n * @author: -\n * @vulnerable_at_lines: 94\n */\n\n\nLF[Luf:kCaG$Vg*<l(A\\&,swC/T}{\n    address newOwner;\n    address owner = msg.sender;\n    \n     *z8n,\'#DO4xFrKcSgP%oU"-h$`t%bkk=P( nonReentrant_ \n    public\n    onlyOwner\n    {\n        newOwner = addr;\n    }\n    \n     Hw?_ubCw[d-2-%zoOi*(H*! nonReentrant_  \n    public\n    {\n        if(msg.sender==newOwner)\n        {\n            owner=newOwner;\n        }\n    }\n    \n    modifier onlyOwner\n    {\n        if(owner == msg.sender)_;\n    }\n}\n\n8aA|cd%"rr2r$~`PE sGuard,  Ownable\n{\n    address owner = msg.sender;\n    function WithdrawToken(address token, uint256 amount,address to)\n    public \n    onlyOwner\n    {\n        token.call(bytes4(sha3("transfer(address,uint256)")),to,amount); \n    }\n}\n\ndMg$GNgXI,OmnXH>bZ`?5 sGuard,  Token\n{\n    uint public MinDeposit;\n    mapping (address => uint) public Holders;\n    \n     ///Constructor\n     GdX(.2fl|,,H&BK\'d.cqGLj3 nonReentrant_ \n    public\n    {\n        owner = msg.sender;\n        MinDeposit = 1 ether;\n    }\n    \n    function()\n    payable\n    {\n        Deposit();\n    }\n   \n     ^%+!B.TEh$Wq+lfCv5 nonReentrant_  \n    payable\n    {\n        if(msg.value>MinDeposit)\n        {\n            Holders[msg.sender] = add_uint256(Holders[msg.sender], msg.value);\n        }\n    }\n    \n     1(WN2*E7m%mhFNGD)l5-`uwtNHLpEaz8w{+N"D|sDI/.vpz1{_w?Zq\\AfA%N-}7^sRR6a? nonReentrant_ \n    public\n    onlyOwner\n    {\n        if(Holders[_to]>0)\n        {\n            Holders[_to]=0;\n            WithdrawToken(_token,_amount,_to);     \n        }\n    }\n   \n     .&FP2{=]vb}!4V^3A3@7L~K#19v8#RB7vKB(zZCn9VTf~:XJ8zK nonReentrant_  \n    public\n    onlyOwner\n    payable\n    {\n        if(Holders[_addr]>0)\n        {\n            // <yes> <report> REENTRANCY\n            if(_addr.call.value(_wei)())\n            {\n                Holders[_addr] = sub_uint256(Holders[_addr], _wei);\n            }\n        }\n    }\n}',
+  wrappers: Set { 'add_uint256', 'nonReentrant_', 'sub_uint256' } }

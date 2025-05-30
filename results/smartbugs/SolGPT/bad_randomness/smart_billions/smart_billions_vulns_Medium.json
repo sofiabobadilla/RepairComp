@@ -1,0 +1,135 @@
+[
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) contract sets array length with a user-controlled value:\n\t- dividends.push(0) (shared/bad_randomness/smart_billions.sol#187)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) contract sets array length with a user-controlled value:\n\t- dividends.push(0) (shared/bad_randomness/smart_billions.sol#346)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) contract sets array length with a user-controlled value:\n\t- dividends.push(0) (shared/bad_randomness/smart_billions.sol#186)\n",
+        "check": "controlled-array-length",
+        "impact": "High",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions.commitDividend(address) (shared/bad_randomness/smart_billions.sol#459-478) performs a multiplication on the result of a division:\n\t- share = balances[_who] * 0xffffffff / totalSupply (shared/bad_randomness/smart_billions.sol#468)\n\t- balance += share * dividends[last] (shared/bad_randomness/smart_billions.sol#471)\n",
+        "check": "divide-before-multiply",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L459-L478"
+    },
+    {
+        "description": "SmartBillions.invest(address) (shared/bad_randomness/smart_billions.sol#399-431) performs a multiplication on the result of a division:\n\t- walletBalance += (investing * 5 / 100) * 2 (shared/bad_randomness/smart_billions.sol#416)\n",
+        "check": "divide-before-multiply",
+        "impact": "Medium",
+        "confidence": "Medium",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L399-L431"
+    },
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) has incorrect ERC20 function interface:ERC20Basic.transfer(address,uint256) (shared/bad_randomness/smart_billions.sol#26)\n",
+        "check": "erc20-interface",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) has incorrect ERC20 function interface:BasicToken.transfer(address,uint256) (shared/bad_randomness/smart_billions.sol#51-64)\n",
+        "check": "erc20-interface",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) has incorrect ERC20 function interface:StandardToken.approve(address,uint256) (shared/bad_randomness/smart_billions.sol#98-103)\n",
+        "check": "erc20-interface",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) has incorrect ERC20 function interface:ERC20.approve(address,uint256) (shared/bad_randomness/smart_billions.sol#34)\n",
+        "check": "erc20-interface",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) has incorrect ERC20 function interface:StandardToken.transferFrom(address,address,uint256) (shared/bad_randomness/smart_billions.sol#84-92)\n",
+        "check": "erc20-interface",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions (shared/bad_randomness/smart_billions.sol#118-771) has incorrect ERC20 function interface:ERC20.transferFrom(address,address,uint256) (shared/bad_randomness/smart_billions.sol#33)\n",
+        "check": "erc20-interface",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L118-L771"
+    },
+    {
+        "description": "SmartBillions.betPrize(SmartBillions.Bet,uint24) (shared/bad_randomness/smart_billions.sol#482-508) uses a dangerous strict equality:\n\t- (hit & 0xF00000) == 0 (shared/bad_randomness/smart_billions.sol#485-491)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L482-L508"
+    },
+    {
+        "description": "SmartBillions.won() (shared/bad_randomness/smart_billions.sol#540-591) uses a dangerous strict equality:\n\t- (player.value == 0) || (player.blockNum == 1) (shared/bad_randomness/smart_billions.sol#546)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L540-L591"
+    },
+    {
+        "description": "SmartBillions.betOf(address) (shared/bad_randomness/smart_billions.sol#513-535) uses a dangerous strict equality:\n\t- (player.value == 0) || (player.blockNum <= 1) || (block.number < player.blockNum) || (block.number >= player.blockNum + (10 * hashesSize)) (shared/bad_randomness/smart_billions.sol#515-518)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L513-L535"
+    },
+    {
+        "description": "SmartBillions.putHash() (shared/bad_randomness/smart_billions.sol#735-756) uses a dangerous strict equality:\n\t- lastb == 0 || block.number <= lastb + 10 (shared/bad_randomness/smart_billions.sol#737)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L735-L756"
+    },
+    {
+        "description": "SmartBillions.won() (shared/bad_randomness/smart_billions.sol#540-591) uses a dangerous strict equality:\n\t- player.blockNum == 0 (shared/bad_randomness/smart_billions.sol#542)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L540-L591"
+    },
+    {
+        "description": "SmartBillions.won() (shared/bad_randomness/smart_billions.sol#540-591) uses a dangerous strict equality:\n\t- hash == 0x1000000 (shared/bad_randomness/smart_billions.sol#566)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L540-L591"
+    },
+    {
+        "description": "SmartBillions.betOf(address) (shared/bad_randomness/smart_billions.sol#513-535) uses a dangerous strict equality:\n\t- hash == 0x1000000 (shared/bad_randomness/smart_billions.sol#527)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L513-L535"
+    },
+    {
+        "description": "SmartBillions.addHashes(uint256) (shared/bad_randomness/smart_billions.sol#672-689) uses a dangerous strict equality:\n\t- require(bool)(hashFirst == 0 && _sadd > 0 && _sadd <= hashesSize) (shared/bad_randomness/smart_billions.sol#673)\n",
+        "check": "incorrect-equality",
+        "impact": "Medium",
+        "confidence": "High",
+        "first_markdown_element": "shared/bad_randomness/smart_billions.sol#L672-L689"
+    }
+]
